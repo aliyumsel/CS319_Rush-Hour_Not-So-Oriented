@@ -9,5 +9,5 @@ Group Members:
 - Deniz Dalkılıç
 - Ahmet Ayrancıoğlu
 - Sina Şahan
-- Ali Yümsel
+- Ali Yümsel 21601841
 - Kaan Gönç
