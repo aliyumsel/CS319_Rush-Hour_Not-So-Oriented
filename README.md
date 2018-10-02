@@ -6,7 +6,7 @@ Class: CS319 - Object-Oriented Software Engineering
 Section: 2  
 Group: 2.C - Not So Oriented  
 Group Members:  
-- Deniz Dalkılıç
+- Deniz Dalkılıç 21601896
 - Ahmet Ayrancıoğlu
 - Sina Şahan
 - Ali Yümsel 21601841
