@@ -13,4 +13,4 @@ Group Members:
 - Ahmet Ayrancıoğlu 21601206
 - Sina Şahan
 - Ali Yümsel 21601841
-- Kaan Gönç
+- Kaan Gönç 21602670
