@@ -8,6 +8,6 @@ Group: 2.C - Not So Oriented
 Group Members:  
 - Deniz Dalkılıç 21601896
 - Ahmet Ayrancıoğlu
-- Sina Şahan
+- Sina Şahan 21602609
 - Ali Yümsel 21601841
 - Kaan Gönç
