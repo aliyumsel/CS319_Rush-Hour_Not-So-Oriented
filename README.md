@@ -11,6 +11,6 @@ Description: Rush Hour is a sliding block logic game, which is considered as one
 Group Members:  
 - Deniz Dalkılıç 21601896
 - Ahmet Ayrancıoğlu 21601206
-- Sina Şahan
+- Sina Şahan 21602609
 - Ali Yümsel 21601841
 - Kaan Gönç 21602670
