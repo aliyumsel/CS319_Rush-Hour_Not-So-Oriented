@@ -1,47 +1,87 @@
 package source.model;
 
-public class Vehicle extends GameObject
-{
-    private String type; //we may not need this
-    private boolean isChosen; //we may not need this
-    private boolean player;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-    public Vehicle()
-    {
-        super();
-    }
+import javax.imageio.ImageIO;
 
-    public Vehicle(int x, int y, int length, String direction, boolean player)
-    {
-        super(x, y, length, direction);
-        this.player = player;
-    }
+import interfaces.Drawable;
 
-    public void move(int moveAxis) {
+public class Vehicle extends GameObject implements Drawable {
+	private String type; // we may not need this
+	private boolean isChosen; // we may not need this
+	private boolean player;
+	private BufferedImage vehicle;
 
-        if (transform.axis.equals("Vertical"))
-        {
-            transform.position.y -= moveAxis;
-        }
-        else if (transform.axis.equals("Horizontal"))
-        {
-            transform.position.x += moveAxis;
-        }
-        findOccupiedCells();
-    }
+	// AffineTransform at;
+	public Vehicle() {
+		super();
+	}
 
-    public String getType()
-    {
-        return type;
-    }
+	public Vehicle(int x, int y, int length, String direction, boolean player) {
+		super(x, y, length, direction);
+		this.player = player;
 
-    public void setType(String type)
-    {
-        this.type = type;
-    }
-    
-    public boolean isPlayer()
-    {
-    	return player;
-    }
+		if (!player && length == 2) {
+			vehicle = LoadImage("src/image/Car.png");
+		} else if (!player && length == 3)
+			vehicle = LoadImage("src/image/Truck.png");
+		else if (player)
+			vehicle = LoadImage("src/image/Player.png");
+	}
+
+	public void move(int moveAxis) {
+
+		if (transform.axis.equals("Vertical")) {
+			transform.position.y -= moveAxis;
+		} else if (transform.axis.equals("Horizontal")) {
+			transform.position.x += moveAxis;
+		}
+		findOccupiedCells();
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public boolean isPlayer() {
+		return player;
+	}
+
+	@Override
+	public void draw(Graphics graphics) {
+
+		Graphics2D graphics2d = (Graphics2D) graphics;
+		// Tek parça image geldiðinde kullanýlacak
+		// at =
+		// AffineTransform.getTranslateInstance(transform.position.x*50,transform.position.y*50);
+		// at.rotate(Math.toRadians(90), car.getWidth()/2,car.getHeight()/2);
+		// graphics2d.drawImage(car,at,null);
+		for (int i = 0; i < transform.length; i++) {
+			graphics2d.drawImage(vehicle, occupiedTransforms[i].position.x * 50, occupiedTransforms[i].position.y * 50,
+					null);
+
+			// Arabanýn parçalarýný belli etmek için
+			graphics2d.drawString("-" + i + "-", occupiedTransforms[i].position.x * 50 + 15,
+					occupiedTransforms[i].position.y * 50 + 25);
+		}
+
+		// System.out.println(transform.position.x + " " + transform.position.y);
+	}
+
+	public BufferedImage LoadImage(String FileName) {
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File(FileName));
+		} catch (IOException e) {
+		}
+		return image;
+	}
 }

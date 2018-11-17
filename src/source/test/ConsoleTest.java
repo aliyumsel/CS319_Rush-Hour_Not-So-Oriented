@@ -3,6 +3,8 @@ package source.test;
 import java.util.Scanner;
 import source.controller.*;
 import source.model.*;
+import source.view.GuiPanelManager;
+
 import java.io.FileNotFoundException;
 
 public class ConsoleTest {
@@ -10,7 +12,8 @@ public class ConsoleTest {
 	public static void main(String[] args) throws FileNotFoundException {
 		Scanner scan = new Scanner(System.in);
 		MapExtractor me = new MapExtractor(2);
-		Map map = me.getMap();
+		Map map = me.getMap(); 
+		GuiPanelManager guiManager = new GuiPanelManager();
 		int x, y, option;
 		Vehicle selectedVehicle;
 		VehicleController vc = new VehicleController(map);
@@ -85,6 +88,7 @@ public class ConsoleTest {
 				if (successfulMove)
 				{
 					map.updateMap(map.getVehicleArray());
+					guiManager.getCurrentPanel().updatePanel(map.getVehicleArray());
 				}
 			}
 		} while (option != 0 && !mapFinished);

@@ -19,7 +19,7 @@ public class MapExtractor {
 
 		scanLevel = new Scanner(new File("src/data/level" + level + ".txt"));
 		int x = 0;
-		int y = 0;
+		int y = 0; 
 
 		while (scanLevel.hasNext()) {
 			String row = scanLevel.nextLine();
