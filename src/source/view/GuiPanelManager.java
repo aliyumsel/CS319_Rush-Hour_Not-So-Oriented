@@ -25,7 +25,6 @@ public class GuiPanelManager extends JFrame {
 	}
 	
 	public void setGamePanelVisible(int level) {
-		
 
 		try {
 			newPanel = new GamePanel(level);
