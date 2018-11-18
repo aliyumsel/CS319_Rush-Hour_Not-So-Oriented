@@ -1,1 +1,1 @@
-This is the folder that keeps all the source code and assets to our project.
+This is the folder that keeps all the source code to our project.
