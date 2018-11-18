@@ -1,59 +1,87 @@
 package source.controller;
+import interfaces.Updatable;
 import source.model.*;
 
-public class VehicleController {
-	
-	Map map; 
-	Vehicle selectedVehicle;
-	public VehicleController (Map map)
+public class VehicleController implements Updatable
+{
+	private MapController mapController; 
+	private Vehicle selectedVehicle;
+	private SoundManager soundManager;
+	public VehicleController ()
 	{
-		this.map = map;
-			
+		this.mapController = MapController.instance;
+		soundManager = new SoundManager(); //created in game engine, should be reference
 	}
-	
-	/*
+
+	//executed every frame write the functionality needed to here
 	public void Update()
 	{
-		if ( input.getMouseButtonDown() )
+		//Map map = mapController.getMap();
+		if (Input.getMouseButtonPressed(0))
 		{
-			ýnput.mouseLocatýon
-			setSelectedVehýcle();
-		}
-		
-		if (ýnput.getDýrectýon)
-		{
-			ýnput.gert
-			if (trymove)
-				move;
-				map.formMap();
+			//System.out.println( "Gonna pick the vehicle at: " + Input.getMouseMatrixPosition()[0] + ", " + Input.getMouseMatrixPosition()[1] );
+			Vehicle temp = mapController.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
+			if (temp != null)
+			{
+				setSelectedVehicle(temp); // bu null testini yapiyoruz cunku bosa tiklaninca selected vehicle in null olmasiini istemiyoruz eski vehicle olarak kalmali
+				// ilerde kenara bi tus koyariz vehicle i deselect etmek icin belki
+				//System.out.println("Selected vehicle");
+			}
 		}
-		
+
+		if (selectedVehicle != null)
+		{
+			if (selectedVehicle.isPlayer() && mapController.isPlayerAtLast())
+			{
+				//GameManager.instance.endMap();
+				mapController.setMapFinished(true);
+				return;
+			}
+
+			boolean moved = false;
+			if (Input.getKeyPressed("w"))
+			{
+				System.out.println("Gonna move up");
+				moved = tryMove("Upwards");
+			}
+			else if (Input.getKeyPressed("a"))
+			{
+				System.out.println("Gonna move left");
+				moved = tryMove("Left");
+			}
+			else if (Input.getKeyPressed("s"))
+			{
+				System.out.println("Gonna move down");
+				moved = tryMove("Downwards");
+			}
+			else if (Input.getKeyPressed("d"))
+			{
+				System.out.println("Gonna move right");
+				moved = tryMove("Right");
+			}
+
+			if (moved)
+			{
+				mapController.updateMap(mapController.getMap().getVehicleArray());
+			}
+		}
 	}
-	*/
+
 	
 	public void setSelectedVehicle(Vehicle selectedVehicle)
 	{
 		this.selectedVehicle = selectedVehicle;
+		soundManager.vehicleHorn(selectedVehicle.getType());
 	}
 	
 	public boolean tryMove(String direction)
 	{
+		Map map = mapController.getMap();
 		String vehicleAxis = selectedVehicle.transform.axis;
 		int moveAmount = 0;
 		int moveCheck = 0;
-		/*
-		if (direction.equals("Left") || direction.equals("Upwards"))
-		{	
-			moveAmount = -1;
-			moveCheck = -1;
-		}
-		if (direction.equals("Right") || direction.equals("Downwards"))
-		{	
-			moveAmount = 1; 
-			moveCheck = selectedVehicle.transform.length;
-		}
-		*/
+	
 		if (vehicleAxis.equals("Horizontal"))
 		{
 			if (direction.equals("Left"))
@@ -63,7 +91,7 @@ public class VehicleController {
 			}
 			else if (direction.equals("Right"))
 			{	
-				moveAmount = 1; 
+				moveAmount = 1;
 				moveCheck = selectedVehicle.transform.length;
 			}
 			if (selectedVehicle.transform.position.x + moveCheck < 0 || selectedVehicle.transform.position.x + moveCheck >= map.getMapSize())
@@ -88,7 +116,7 @@ public class VehicleController {
 			}
 			else if (direction.equals("Downwards"))
 			{	
-				moveAmount = -1; 
+				moveAmount = -1;
 				moveCheck = selectedVehicle.transform.length;
 			}
 			if (selectedVehicle.transform.position.y + moveCheck < 0 || selectedVehicle.transform.position.y + moveCheck >= map.getMapSize())

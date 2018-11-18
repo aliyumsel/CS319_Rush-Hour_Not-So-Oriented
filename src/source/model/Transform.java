@@ -1,5 +1,7 @@
 package source.model;
 
+import source.model.Transform.Position;
+
 public class Transform
 {
 	public class Position
