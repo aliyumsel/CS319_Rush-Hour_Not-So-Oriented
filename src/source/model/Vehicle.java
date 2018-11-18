@@ -43,20 +43,24 @@ public class Vehicle extends GameObject implements Drawable {
 		findOccupiedCells();
 	}
 
-	public String getType() {
+	public String getType()
+	{
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(String type)
+	{
 		this.type = type;
 	}
 
-	public boolean isPlayer() {
+	public boolean isPlayer()
+	{
 		return player;
 	}
 
 	@Override
-	public void draw(Graphics graphics) {
+	public void draw(Graphics graphics)
+	{
 
 		Graphics2D graphics2d = (Graphics2D) graphics;
 		// Tek parça image geldiðinde kullanýlacak
@@ -65,7 +69,7 @@ public class Vehicle extends GameObject implements Drawable {
 		// at.rotate(Math.toRadians(90), car.getWidth()/2,car.getHeight()/2);
 		// graphics2d.drawImage(car,at,null);
 		for (int i = 0; i < transform.length; i++) {
-			graphics2d.drawImage(vehicle, occupiedTransforms[i].position.x * 50, occupiedTransforms[i].position.y * 50,
+			graphics2d.drawImage(vehicle,occupiedTransforms[i].position.x * 50,occupiedTransforms[i].position.y * 50,
 					null);
 
 			// Arabanýn parçalarýný belli etmek için
@@ -76,7 +80,7 @@ public class Vehicle extends GameObject implements Drawable {
 		// System.out.println(transform.position.x + " " + transform.position.y);
 	}
 
-	public BufferedImage LoadImage(String FileName) {
+	private BufferedImage LoadImage(String FileName) {
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(new File(FileName));

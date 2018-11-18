@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class Input
 {
-    public static boolean[] mouseButtons = new boolean[5];
+    private static boolean[] mouseButtons = new boolean[5];
 
-    public static java.util.Map<String, Boolean> keys = new HashMap<String, Boolean>()
+    private static java.util.Map<String, Boolean> keys = new HashMap<String, Boolean>()
     {
         {
             put("w", false);
@@ -19,26 +19,26 @@ public class Input
         }
     };
 
-    public static int mouseX;
-    public static int mouseY;
+    private static int mouseX;
+    private static int mouseY;
 
-    public static boolean getKeyPressed(String keyID)
+    static boolean getKeyPressed(String keyID)
     {
         return keys.get(keyID);
     }
 
-    public static boolean getMouseButtonPressed(int buttonID)
+    static boolean getMouseButtonPressed(int buttonID)
     {
         return mouseButtons[buttonID];
     }
 
-    public static double getMousePositionX()
+    static double getMousePositionX()
     {
         return mouseX;
         //return MouseInfo.getPointerInfo().getLocation().getX();
     }
 
-    public static double getMousePositionY()
+    static double getMousePositionY()
     {
         return mouseY;
         //return MouseInfo.getPointerInfo().getLocation().y;
@@ -54,7 +54,7 @@ public class Input
         return new KeyEventHandler();
     }
 
-    public static void reset()
+    static void reset()
     {
         for (int i  = 0; i < mouseButtons.length; i++)
         {
@@ -65,6 +65,15 @@ public class Input
         {
             keys.put(entry.getKey(), false);
         }
+    }
+
+    static int[] getMouseMatrixPosition()
+    {
+        int[] mousePos = new int[2];
+        mousePos[0] = mouseX / 50;
+        mousePos[1] = mouseY / 50;
+
+        return mousePos;
     }
 
     private static class MouseEventHandler extends MouseAdapter

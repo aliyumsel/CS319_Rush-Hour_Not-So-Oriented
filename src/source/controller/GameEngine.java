@@ -1,35 +1,55 @@
 package source.controller;
+
+import java.io.FileNotFoundException;
 import java.util.TimerTask;
 
-public class GameEngine extends TimerTask
-{
-    public void run()
-    {
-        if (Input.getMouseButtonPressed(0))
-        {
-            System.out.println( "Gonna pick the vehicle at: " + Input.getMousePositionX() + ", " + Input.getMousePositionY());
-        }
+import source.view.*;
 
-        if (Input.getKeyPressed("w"))
-        {
-            System.out.println( "Gonna move up" );
-        }
+public class GameEngine extends TimerTask {
+	public static GameEngine instance; // extremely simple singleton to access gameEngine with ease
 
-        if (Input.getKeyPressed("a"))
-        {
-            System.out.println( "Gonna move left" );
-        }
+	private GuiPanelManager guiPanelManager;
+	private SoundManager soundManager;
+	private MapExtractor mapExtractor;
+	private Map map;
+	private VehicleController vehicleController;
+	private GameManager gameManager;
 
-        if (Input.getKeyPressed("s"))
-        {
-            System.out.println( "Gonna move down" );
-        }
+	public GameEngine() {
+		instance = this; // extremely simple singleton to access gameEngine with ease
 
-        if (Input.getKeyPressed("d"))
-        {
-            System.out.println( "Gonna move right" );
-        }
+		try {
+			mapExtractor = new MapExtractor(2);
+		} catch (FileNotFoundException e) {
 
-        Input.reset();
-    }
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		map = mapExtractor.getMap();
+		vehicleController = new VehicleController(map);
+		gameManager = new GameManager();
+		soundManager = new SoundManager();
+		soundManager.background(); //theme song is started when the game is intialized
+	}
+
+	public Map getMap() {
+		return map;
+	}
+
+	public void setGUI(GuiPanelManager guiManager) {
+		guiPanelManager = guiManager;
+	}
+
+	// this method is executed over and over from main
+	// calls the update method of other classes that needs to be updated
+
+	public void run() {
+
+		vehicleController.Update();
+		gameManager.Update();
+
+		Input.reset();
+		guiPanelManager.getCurrentPanel().updatePanel(guiPanelManager.getCurrentPanel().map.getVehicleArray());
+	}
 }
