@@ -4,12 +4,17 @@ import interfaces.Updatable;
 public class GameManager implements Updatable
 {
     static GameManager instance;
+    
+    
 
     private boolean mapFinished = false;
 
-    GameManager()
+    public GameManager()
     {
-        instance = this;
+    	if (instance == null)
+    	{    		
+    		instance = this;
+    	}
     }
 
     public void Update()

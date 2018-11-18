@@ -4,22 +4,23 @@ import source.model.*;
 
 public class VehicleController implements Updatable
 {
-	private Map map; 
+	private MapController mapController; 
 	private Vehicle selectedVehicle;
 	private SoundManager soundManager;
-	public VehicleController (Map map)
+	public VehicleController ()
 	{
-		this.map = map;
-		soundManager = new SoundManager();
+		this.mapController = MapController.instance;
+		soundManager = new SoundManager(); //created in game engine, should be reference
 	}
 
 	//executed every frame write the functionality needed to here
 	public void Update()
 	{
+		//Map map = mapController.getMap();
 		if (Input.getMouseButtonPressed(0))
 		{
 			//System.out.println( "Gonna pick the vehicle at: " + Input.getMouseMatrixPosition()[0] + ", " + Input.getMouseMatrixPosition()[1] );
-			Vehicle temp = map.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+			Vehicle temp = mapController.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
 			if (temp != null)
 			{
@@ -31,9 +32,10 @@ public class VehicleController implements Updatable
 
 		if (selectedVehicle != null)
 		{
-			if (selectedVehicle.isPlayer() && map.isPlayerAtLast())
+			if (selectedVehicle.isPlayer() && mapController.isPlayerAtLast())
 			{
-				GameManager.instance.endMap();
+				//GameManager.instance.endMap();
+				mapController.setMapFinished(true);
 				return;
 			}
 
@@ -61,7 +63,7 @@ public class VehicleController implements Updatable
 
 			if (moved)
 			{
-				map.updateMap(map.getVehicleArray());
+				mapController.updateMap(mapController.getMap().getVehicleArray());
 			}
 		}
 	}
@@ -75,6 +77,7 @@ public class VehicleController implements Updatable
 	
 	public boolean tryMove(String direction)
 	{
+		Map map = mapController.getMap();
 		String vehicleAxis = selectedVehicle.transform.axis;
 		int moveAmount = 0;
 		int moveCheck = 0;
