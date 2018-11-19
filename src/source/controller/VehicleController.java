@@ -4,38 +4,36 @@ import source.model.*;
 
 public class VehicleController implements Updatable
 {
-	private MapController mapController; 
+	private Map map; 
 	private Vehicle selectedVehicle;
 	private SoundManager soundManager;
-	public VehicleController ()
+	public VehicleController (Map map)
 	{
-		this.mapController = MapController.instance;
-		soundManager = new SoundManager(); //created in game engine, should be reference
+		this.map = map;
+		soundManager = new SoundManager();
 	}
 
 	//executed every frame write the functionality needed to here
 	public void Update()
 	{
-		//Map map = mapController.getMap();
 		if (Input.getMouseButtonPressed(0))
 		{
 			//System.out.println( "Gonna pick the vehicle at: " + Input.getMouseMatrixPosition()[0] + ", " + Input.getMouseMatrixPosition()[1] );
-			Vehicle temp = mapController.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+			Vehicle temp = map.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
 			if (temp != null)
 			{
 				setSelectedVehicle(temp); // bu null testini yapiyoruz cunku bosa tiklaninca selected vehicle in null olmasiini istemiyoruz eski vehicle olarak kalmali
 				// ilerde kenara bi tus koyariz vehicle i deselect etmek icin belki
-				//System.out.println("Selected vehicle");
+				System.out.println("Selected vehicle");
 			}
 		}
 
 		if (selectedVehicle != null)
 		{
-			if (selectedVehicle.isPlayer() && mapController.isPlayerAtLast())
+			if (selectedVehicle.isPlayer() && map.isPlayerAtLast())
 			{
-				//GameManager.instance.endMap();
-				mapController.setMapFinished(true);
+				GameManager.instance.endMap();
 				return;
 			}
 
@@ -63,7 +61,7 @@ public class VehicleController implements Updatable
 
 			if (moved)
 			{
-				mapController.updateMap(mapController.getMap().getVehicleArray());
+				map.updateMap(map.getVehicleArray());
 			}
 		}
 	}
@@ -77,7 +75,6 @@ public class VehicleController implements Updatable
 	
 	public boolean tryMove(String direction)
 	{
-		Map map = mapController.getMap();
 		String vehicleAxis = selectedVehicle.transform.axis;
 		int moveAmount = 0;
 		int moveCheck = 0;

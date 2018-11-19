@@ -19,7 +19,7 @@ public class MapExtractorTest {
 	
 		//mapExtracter.getMap().getVehicleArray().get(1).move(-1);
 		mapExtracter.getMap().updateMap(mapExtracter.getMap().getVehicleArray());
-		System.out.println("\n");
+		//System.out.println("\n");
 		mapExtracter.getMap().printMap();
 	}
 }

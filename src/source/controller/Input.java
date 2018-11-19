@@ -81,7 +81,7 @@ public class Input
         @Override
         public void mousePressed(MouseEvent e)
         {
-            //System.out.println("mousePressed");
+            System.out.println("mousePressed");
             if (e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0)
             {
                 mouseButtons[e.getButton() - 1] = true;
@@ -96,10 +96,12 @@ public class Input
         @Override
         public void keyReleased(KeyEvent e)
         {
-            if (keys.containsKey(e.getKeyChar() + ""))
-            {
-                keys.put(e.getKeyChar() + "", true);
-            }
+           System.out.println("keyPressed");
+           if (keys.containsKey(e.getKeyChar() + ""))
+           {
+              //System.out.println("keyPressed");
+              keys.put(e.getKeyChar() + "", true);
+           }
         }
     }
 }

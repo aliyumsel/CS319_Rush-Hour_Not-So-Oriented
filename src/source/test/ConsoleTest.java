@@ -26,7 +26,7 @@ public class ConsoleTest {
 			successfulMove = false;
 			map.printMap();
 			
-			System.out.println("");
+			//System.out.println("");
 			System.out.println("\nEnter 1 to select vehicle");
 			System.out.println("Enter 0 to exit");
 			option = scan.nextInt();
@@ -88,7 +88,7 @@ public class ConsoleTest {
 				if (successfulMove)
 				{
 					map.updateMap(map.getVehicleArray());
-					guiManager.getCurrentPanel().updatePanel(map.getVehicleArray());
+					//guiManager.getGamePanel().updatePanel(map.getVehicleArray());
 				}
 			}
 		} while (option != 0 && !mapFinished);
