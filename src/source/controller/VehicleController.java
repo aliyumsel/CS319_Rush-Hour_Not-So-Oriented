@@ -1,17 +1,26 @@
 package source.controller;
 import interfaces.Updatable;
 import source.model.*;
+import source.view.GuiPanelManager;
 
 public class VehicleController implements Updatable
 {
 	private Map map; 
 	private Vehicle selectedVehicle;
 	private SoundManager soundManager;
+	private int numberOfMoves;
+
 	public VehicleController (Map map)
 	{
 		this.map = map;
 		soundManager = new SoundManager();
+		numberOfMoves = 0;
 	}
+
+	public void setMap(Map _map)
+   {
+      map = _map;
+   }
 
 	//executed every frame write the functionality needed to here
 	public void Update()
@@ -62,6 +71,8 @@ public class VehicleController implements Updatable
 			if (moved)
 			{
 				map.updateMap(map.getVehicleArray());
+				numberOfMoves++;
+            GuiPanelManager.instance.getPlayGamePanel().updateNumberOfMoves();
 			}
 		}
 	}
@@ -126,14 +137,20 @@ public class VehicleController implements Updatable
 				selectedVehicle.move(moveAmount);
 				return true;
 			}
-			
-			
-			
+
 		}
 		return false;
 	}
 	 
-	
+	public int getNumberOfMoves()
+   {
+      return numberOfMoves;
+   }
+
+   public void setNumberOfMoves(int _moves)
+   {
+      numberOfMoves = _moves;
+   }
 	
 
 }

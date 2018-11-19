@@ -12,7 +12,7 @@ public class GameEngine extends TimerTask {
 	private SoundManager soundManager;
 	private MapExtractor mapExtractor;
 	private Map map;
-	private VehicleController vehicleController;
+	public VehicleController vehicleController;
 	private GameManager gameManager;
 
 	public GameEngine() {
@@ -43,7 +43,9 @@ public class GameEngine extends TimerTask {
 		}
 
 		map = mapExtractor.getMap();
-		vehicleController = new VehicleController(map);
+		//vehicleController = new VehicleController(map);
+      vehicleController.setMap(map);
+      vehicleController.setNumberOfMoves(0);
 	}
 	public Map getMap()
    {

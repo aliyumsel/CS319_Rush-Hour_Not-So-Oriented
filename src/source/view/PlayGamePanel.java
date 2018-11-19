@@ -41,6 +41,7 @@ public class PlayGamePanel extends JPanel {
 		setGamePanelVisible();
 		setBoundsOfComponents();
 		this.setVisible(true);
+		setOpaque(false);
 	}
 
 	private void createComponents() {
@@ -50,7 +51,9 @@ public class PlayGamePanel extends JPanel {
 		pause.setPreferredSize(new Dimension(48, 48));
 		timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
 		timerIcon.setPreferredSize(new Dimension(32, 32));
+
 		moveLabel = new JLabel("Number of Moves:");
+
 		moveLabel.setFont(new Font("Calibri", Font.PLAIN, 13));
 		moveLabel.setPreferredSize(new Dimension(107, 21));
 		numberLabel = new JLabel("0", SwingConstants.CENTER);
@@ -58,6 +61,10 @@ public class PlayGamePanel extends JPanel {
 		numberLabel.setFont(new Font("Calibri", Font.BOLD, 60));
 		timer = new JProgressBar(SwingConstants.VERTICAL);
 		timer.setPreferredSize(new Dimension(30, 300));
+
+		pause.addActionListener(actionListener);
+		pause.setFocusable(false);
+		back.setFocusable(false);
 	}
 
 	private void setBoundsOfComponents() {
@@ -80,6 +87,19 @@ public class PlayGamePanel extends JPanel {
         
 	}
 
+	ActionListener actionListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			System.out.println("In ActionListener");
+			if (e.getSource() == pause)
+			{
+				GameEngine.instance.updateLevel();
+				GuiPanelManager.instance.updatePlayGamePanel();
+			}
+		}
+	};
+
 	private void setGamePanelVisible() {
 
 		try {
@@ -100,6 +120,8 @@ public class PlayGamePanel extends JPanel {
 	}
 
 	public void updatePanel() {
+	   game.updatePanel();
+	   updateNumberOfMoves();
 		repaint();
 	}
 
@@ -117,4 +139,9 @@ public class PlayGamePanel extends JPanel {
 	void setListeners() {
 		game.setListeners();
 	}
+
+	public void updateNumberOfMoves()
+   {
+      numberLabel.setText(GameEngine.instance.vehicleController.getNumberOfMoves() + "");
+   }
 }

@@ -17,10 +17,10 @@ public class GameManager implements Updatable
     {
         if (mapFinished)
         {
-        	GameEngine.instance.level++;
-        	GameEngine.instance.updateLevel();
-        	GuiPanelManager.instance.updatePlayGamePanel();
-        	mapFinished = false;
+        	   GameEngine.instance.level++;
+        	   GameEngine.instance.updateLevel();
+        	   GuiPanelManager.instance.updatePlayGamePanel();
+        	   mapFinished = false;
             System.out.println("Map is finished");
         }
     }

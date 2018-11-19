@@ -56,7 +56,8 @@ public class MainMenuPanel extends JPanel{
                     System.out.println("In IF");
                     guiManager.setPanelVisible();
                     GameEngine.instance.updateLevel();
-                	GuiPanelManager.instance.updatePlayGamePanel();
+                	  GuiPanelManager.instance.updatePlayGamePanel();
+
                 }
             }
         };
