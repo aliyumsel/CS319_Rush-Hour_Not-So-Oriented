@@ -36,11 +36,10 @@ public class Map {
 			}
 		}
 	}
-	/*
+	
 	public void updateMap(ArrayList<Vehicle> vehicleArray) {
 		formMap(vehicleArray);
 	}
-	*/
 	
 	public ArrayList<Vehicle> getVehicleArray(){
 		return vehicleArray;
@@ -51,7 +50,7 @@ public class Map {
 	}
 	public void printMap() {
 		for(int i = 0; i < mapSize;i++) {
-			System.out.println("\n");
+			//System.out.println("\n");
 			for(int j = 0; j < mapSize;j++)
 			{
 				System.out.print(map[i][j] + " ");
@@ -67,7 +66,48 @@ public class Map {
 		this.mapSize = mapSize;
 	}
 	
+	public Vehicle getVehicleBySelectedCell(int x, int y)
+	{
+		int[] occupiedCells;
+		int cellNumber = (mapSize * y) + x;
+		for (Vehicle vehicle : vehicleArray)
+		{
+			occupiedCells = vehicle.getOccupiedCells();
+			for (int i = 0; i < occupiedCells.length; i++)
+			{
+				if (cellNumber == occupiedCells[i])
+				{
+					return vehicle;
+				}
+			}
+		}
+		return null;
+	}
 	
+	//This method checks if the player is at the last cell he can go
+	//One more move will make him get out of the map and finish the game
+	public boolean isPlayerAtLast()
+	{
+		Vehicle player = null;
+		
+		for (Vehicle v : vehicleArray)
+		{
+			if (v.isPlayer())
+			{
+				player = v;
+				break;
+			}
+		}
+		if (player == null)
+		{
+			return false;
+		}
+		if (player.transform.position.x + player.transform.length == mapSize)
+		{
+			return true;
+		}
+		return false;
+	}
 	
 	
 }

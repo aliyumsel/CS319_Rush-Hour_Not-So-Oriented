@@ -2,8 +2,12 @@ package source.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainMenuPanel extends JPanel{
+
+    private GuiPanelManager guiManager;
 
     private int index;
     private JLabel heading;
@@ -16,8 +20,11 @@ public class MainMenuPanel extends JPanel{
     private  JButton exit;
     private  JButton help;
 
-    public MainMenuPanel(int index){
+    public MainMenuPanel(int index, GuiPanelManager _guiManager){
         super(null);
+
+        guiManager = _guiManager;
+
         setPreferredSize(new Dimension(763,468));
         this.index = index;
         createComponents();
@@ -35,6 +42,20 @@ public class MainMenuPanel extends JPanel{
     }
 
     private void createComponents() {
+
+        ActionListener actionListener = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println("In ActionListener");
+                if (e.getSource() == play)
+                {
+                    System.out.println("In IF");
+                    guiManager.setPanelVisible(1);
+                }
+            }
+        };
+
         Font stdFont = new Font("Calibri",Font.PLAIN,13);
         Dimension stdDimension = new Dimension(170,36);
         heading = new JLabel("RUSH HOUR", SwingConstants.CENTER);
@@ -46,7 +67,11 @@ public class MainMenuPanel extends JPanel{
         cPlayer = new JButton("Change Player");
         cPlayer.setPreferredSize(stdDimension);
         cPlayer.setFont(stdFont);
+
         play = new JButton("PLAY");
+        play.addActionListener(actionListener);
+
+
         play.setPreferredSize(new Dimension(294, 72));
         play.setFont(new Font("Calibri", Font.BOLD,28));
         credits = new JButton("Credits");
@@ -85,5 +110,4 @@ public class MainMenuPanel extends JPanel{
         size = settings.getPreferredSize();
         settings.setBounds(558 + insets.left, 388 + insets.top, size.width, size.height);
     }
-
 }

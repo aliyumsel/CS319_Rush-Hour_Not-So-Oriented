@@ -19,7 +19,7 @@ public class SoundManager {
 	private boolean isEffectsEnabled = true;
 
 	public void background() {
-		if (isThemeEnabled) { //java fx kullandým, swing loop a alýrken hata veriyodu
+		if (isThemeEnabled) { //java fx kullandï¿½m, swing loop a alï¿½rken hata veriyodu
 			try {
 
 				AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(trafficThemeSong));
@@ -32,13 +32,13 @@ public class SoundManager {
 		}
 	}
 
-	public void vehicleHorn(String vehicle) { // Vehicle Controller ýn set selected Methodun da çaðýrýlýyo yani user bi
-												// obje seçtiði zaman
+	public void vehicleHorn(String vehicle) { // Vehicle Controller ï¿½n set selected Methodun da ï¿½aï¿½ï¿½rï¿½lï¿½yo yani user bi
+												// obje seï¿½tiï¿½i zaman
 		if (isEffectsEnabled) {
 			try {
 				inputStream = new FileInputStream("src/sounds/" + vehicle + ".wav"); // Sound eklerken buradaki isme
-																						// dikkat edin vehicle'ýn TYPE
-																						// ile ayný olmasý lazým
+																						// dikkat edin vehicle'ï¿½n TYPE
+																						// ile aynï¿½ olmasï¿½ lazï¿½m
 				audioStream = new AudioStream(inputStream);
 				AudioPlayer.player.start(audioStream);
 			} catch (IOException a) {

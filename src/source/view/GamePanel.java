@@ -16,28 +16,20 @@ import source.controller.Input;
 import source.controller.Map;
 
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel{
-	//private GuiPanelManager guiPanelManager;
-	//private MapExtractor mapExtractor;
+public class GamePanel extends JPanel
+{
 	private GameEngine gameEngine;
 	private ArrayList<Vehicle> vehicleArray;
 	public Map map;
 
-	public GamePanel(int level) throws FileNotFoundException {
+	public GamePanel(int level) throws FileNotFoundException
+	{
 		setPreferredSize(new Dimension(450,450));
-		//this.guiPanelManager = guiPanelManager;
-		//mapExtractor = new MapExtractor(level);
-		//map = mapExtractor.getMap();
-		//vehicleArray = map.getVehicleArray();
+
 		gameEngine = GameEngine.instance;
 		map = gameEngine.getMap();
 		vehicleArray = map.getVehicleArray();
 
-	}
-
-	public void updatePanel(ArrayList<Vehicle> vehicleArray) {
-		this.vehicleArray = vehicleArray;
-		repaint();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -46,13 +38,5 @@ public class GamePanel extends JPanel{
 		for (Vehicle vehicle : vehicleArray) {
 			vehicle.draw(g);
 		}
-		System.out.println("\n");
-	}
-	void setListeners()
-	{
-		KeyListener keyListener = Input.getKeyListener();
-		MouseListener mouseListener = Input.getMouseListener();
-		addKeyListener(keyListener);
-		addMouseListener(mouseListener);
 	}
 }

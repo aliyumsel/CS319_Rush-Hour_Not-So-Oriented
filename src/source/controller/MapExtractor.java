@@ -7,31 +7,17 @@ import java.util.Scanner;
 
 import source.model.Car;
 import source.model.GameObject;
-import source.model.Player;
 import source.model.Truck;
 import source.model.Vehicle;
 
 public class MapExtractor {
 
-	//private Scanner scanLevel, scanRow;
-	//private ArrayList<Vehicle> vehicleArray = new ArrayList<Vehicle>();
-	//private Map map;
-	//public MapExtractor(int level) throws FileNotFoundException { 
-	public static Map extractMap(Player palyer, int level) throws FileNotFoundException {
-		Scanner scanLevel, scanRow;
-		ArrayList<Vehicle> vehicleArray = new ArrayList<Vehicle>();
-		Map map;
-		
-		if (player.getLevels()[level - 1].getStatus().equals("inProgress"))
-		{
-			scanLevel = new Scanner(new File("src/data/players/" + player.getName() + "/inProgress.txt"));
-		}
-		else
-		{
-			scanLevel = new Scanner(new File("src/data/levels/level" + level + ".txt"));
-		}
-		
-		//scanLevel = new Scanner(new File("src/data/level" + level + ".txt"));
+	private Scanner scanLevel, scanRow;
+	private ArrayList<Vehicle> vehicleArray = new ArrayList<Vehicle>();
+	private Map map;
+	public MapExtractor(int level) throws FileNotFoundException {
+
+		scanLevel = new Scanner(new File("src/data/level" + level + ".txt"));
 		int x = 0;
 		int y = 0; 
 
@@ -75,10 +61,40 @@ public class MapExtractor {
 			x = 0;
 		}
 		map = new Map(vehicleArray);
-		return map;
 	}
 
+	public ArrayList<Vehicle> getVehicleArray() {
+		return vehicleArray;
+	}
 
-	
+	public Map getMap() {
+		return map;
+	}
+	public void printVehicleArray() {
+		int i = 0;
+		for (Vehicle vehicle : vehicleArray) {
+			System.out.println("Vehicle " + ++i);
+			System.out.println("Type: " + vehicle.getType());
+			System.out.println("X Coordinate: " + vehicle.transform.position.x);
+			System.out.println("Y Coordinate: " + vehicle.transform.position.y);
+			System.out.println("Direction:  " + vehicle.transform.direction);
+			System.out.println("Axis:  " + vehicle.transform.axis);
+			//System.out.println("Color: " + vehicle.getColor());
+			System.out.println("Length: " + vehicle.transform.length);
+			System.out.print("Occupied Cells: ");
+
+			for (int a = 0; a < vehicle.transform.length; a++)
+				System.out.print(vehicle.getOccupiedCells()[a] + " ");
+
+			System.out.print("\nOccupied Coordinates: ");
+
+			for (int a = 0; a < vehicle.transform.length; a++)
+			{
+				System.out.print("(" + vehicle.getOccupiedTransforms()[a].position.x + "," + vehicle.getOccupiedTransforms()[a].position.y + ")" + " ");
+			}
+
+			//System.out.println("\n");
+		}
+	}
 }
 

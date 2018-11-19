@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 
 import source.controller.*;
 
-class PlayGamePanel extends JPanel{
+public class PlayGamePanel extends JPanel{
+
+	GuiPanelManager guiManager;
 
 	private int index;
 	private GamePanel game;
@@ -18,8 +20,11 @@ class PlayGamePanel extends JPanel{
 	private JLabel numberLabel;
 	private JProgressBar timer;
 
-	public PlayGamePanel(int index, int level){
+	public PlayGamePanel(int index, int level, GuiPanelManager _guiManager){
 		super(null);
+
+		guiManager = _guiManager;
+
 		setPreferredSize(new Dimension(763,468));
 		this.index = index;
 		createComponents();
@@ -39,7 +44,9 @@ class PlayGamePanel extends JPanel{
 	private void createComponents(){
 		back = new JButton(new ImageIcon("src/image/back.png"));
 		back.setPreferredSize(new Dimension(48,48));
+		back.setFocusable(false);
 		pause = new JButton(new ImageIcon("src/image/pause.png"));
+		pause.setFocusable(false);
 		pause.setPreferredSize(new Dimension(48,48));
 		timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
 		timerIcon.setPreferredSize(new Dimension(32,32));
@@ -70,8 +77,7 @@ class PlayGamePanel extends JPanel{
 		game.setBounds(156 + insets.left, 9 + insets.top, size.width, size.height);
 	}
 
-	private void setGamePanelVisible(int level) {
-
+	public void setGamePanelVisible(int level) {
 
 		try {
 			game = new GamePanel(level);
@@ -93,11 +99,9 @@ class PlayGamePanel extends JPanel{
 	public int getIndex() {
 		return index;
 	}
+
 	public GamePanel getGamePanel(){
 		return game;
 	}
 
-	void setListeners(){
-		game.setListeners();
-	}
 }
