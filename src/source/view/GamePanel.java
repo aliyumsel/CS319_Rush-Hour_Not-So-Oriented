@@ -87,19 +87,16 @@ public class GamePanel extends JPanel {
 		innerGamePanel.setBounds(156 + insets.left, 9 + insets.top, size.width, size.height);
 	}
 
-	ActionListener actionListener = new ActionListener(){
+	ActionListener actionListener = new ActionListener() {
 		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			if (e.getSource() == reset )
-			{
-			   GameEngine.instance.gameManager.resetLevel();
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == reset) {
+				GameEngine.instance.gameManager.resetLevel();
 			}
 
-			if (e.getSource() == back)
-         {
-            guiManager.setPanelVisible("MainMenu");
-         }
+			if (e.getSource() == back) {
+				guiManager.setPanelVisible("MainMenu");
+			}
 		}
 	};
 
@@ -110,11 +107,10 @@ public class GamePanel extends JPanel {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-      setVisible(false);
+		setVisible(false);
 	}
 
-	public void updatePanel()
-   {
+	public void updatePanel() {
 		innerGamePanel.updatePanel();
 
 		updateNumberOfMoves();
@@ -129,8 +125,7 @@ public class GamePanel extends JPanel {
 		return innerGamePanel;
 	}
 
-	public void updateNumberOfMoves()
-   {
-      numberLabel.setText(GameEngine.instance.vehicleController.getNumberOfMoves() + "");
-   }
+	public void updateNumberOfMoves() {
+		numberLabel.setText(GameEngine.instance.vehicleController.getNumberOfMoves() + "");
+	}
 }
