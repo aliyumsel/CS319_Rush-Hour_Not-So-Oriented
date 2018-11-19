@@ -62,6 +62,8 @@ public class PlayGamePanel extends JPanel {
 		timer = new JProgressBar(SwingConstants.VERTICAL);
 		timer.setPreferredSize(new Dimension(30, 300));
 
+		back.addActionListener(actionListener);
+
 		pause.addActionListener(actionListener);
 		pause.setFocusable(false);
 		back.setFocusable(false);
@@ -97,6 +99,11 @@ public class PlayGamePanel extends JPanel {
 				GameEngine.instance.updateLevel();
 				GuiPanelManager.instance.updatePlayGamePanel();
 			}
+
+			if (e.getSource() == back)
+         {
+            System.out.println("In IF");
+            guiManager.setMainMenuVisible();         }
 		}
 	};
 

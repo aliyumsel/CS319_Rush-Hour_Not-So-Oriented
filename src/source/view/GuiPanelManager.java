@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GuiPanelManager extends JFrame {
 	public static GuiPanelManager instance; // extremely simple singleton to access gameEngine with ease
+	private GameEngine gameEngine;
 	private int currentPanelIndex;
 	private PlayGamePanel playGame;
 	private MainMenuPanel mainMenu;
@@ -60,15 +61,22 @@ public class GuiPanelManager extends JFrame {
 
 	public void setPanelVisible()
 	{
-		playGame.setVisible(true); //panel deðiþirken false yapýlmalý
+		playGame.setVisible(true); //panel deï¿½iï¿½irken false yapï¿½lmalï¿½
 		setContentPane(playGame);
 		
 	}
+
+	public void setMainMenuVisible()
+	{
+		playGame.setVisible(false);
+		mainMenu.setVisible(true);
+		setContentPane(mainMenu);
+	}
 	
 	public void updatePlayGamePanel() {
-		//content pane zaten playgame olduðu için ve visible olduðu için alttaki ikisine gerek yok ama baþka bir panelden geçerken bunlarla oynamak lazým
+		//content pane zaten playgame olduï¿½u iï¿½in ve visible olduï¿½u iï¿½in alttaki ikisine gerek yok ama baï¿½ka bir panelden geï¿½erken bunlarla oynamak lazï¿½m
 		playGame.updateGamePanel();
-		setContentPane(playGame); //ama koymazsak paneldeki hata düzelmiyo
+		setContentPane(playGame); //ama koymazsak paneldeki hata dï¿½zelmiyo
 		//playGame.setVisible(true);
 	}
 
