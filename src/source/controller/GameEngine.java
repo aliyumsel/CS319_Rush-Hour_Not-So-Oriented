@@ -7,7 +7,7 @@ import source.view.*;
 
 public class GameEngine extends TimerTask {
 	public static GameEngine instance; // extremely simple singleton to access gameEngine with ease
-	public int level = 2;
+	public int level = 1;
 	private GuiPanelManager guiPanelManager;
 	private SoundManager soundManager;
 	private MapExtractor mapExtractor;
