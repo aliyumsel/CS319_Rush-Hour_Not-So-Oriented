@@ -8,9 +8,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import source.controller.GameEngine;
+import source.controller.Input;
 
 //import source.controller.Controller;
 //import source.controller.Sound;
@@ -28,10 +32,18 @@ public class GuiPanelManager extends JFrame {
 	public  GuiPanelManager()
 	{
 		super("Rush Hour");
-		setLayout(new CardLayout());
-		currentPanelIndex = 0;
+		setGamePanelVisible(2);
+		setSize(500,500);
 		setResizable(false);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+	}
+	
+	public void setGamePanelVisible(int level)
+	{
+		newPanel = new GamePanel(level);
+		setContentPane(newPanel);
+		currentPanel = newPanel;
 
 		mainMenu = new MainMenuPanel(0, this);
 		playGame = new PlayGamePanel(1,1, this);
@@ -46,7 +58,6 @@ public class GuiPanelManager extends JFrame {
 
 		instance = this;
 	}
-
 	
 	public JPanel getCurrentPanel()
 	{
