@@ -10,13 +10,22 @@ public class Map {
 	private ArrayList<Vehicle> vehicleArray;
 	private String[][] map;
 	private int mapSize = 6;
-	
-	public Map(ArrayList<Vehicle> vehicleArray) {
+
+	public Map()
+   {
+
+   }
+
+	public Map(ArrayList<Vehicle> vehicleArray)
+	{
 		this.vehicleArray = vehicleArray;
 		formMap(vehicleArray);
 	}
 	
-	public void formMap(ArrayList<Vehicle> vehicleArray) {
+	public void formMap(ArrayList<Vehicle> vehicleArray)
+   {
+      this.vehicleArray = vehicleArray;
+
 		map = new String[mapSize][mapSize];
 		
 		for (Vehicle vehicle: vehicleArray) {
@@ -48,6 +57,7 @@ public class Map {
 	public String[][] getMap(){
 		return map;
 	}
+
 	public void printMap() {
 		for(int i = 0; i < mapSize;i++) {
 			//System.out.println("\n");

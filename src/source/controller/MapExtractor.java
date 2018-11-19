@@ -15,53 +15,62 @@ public class MapExtractor {
 	private Scanner scanLevel, scanRow;
 	private ArrayList<Vehicle> vehicleArray = new ArrayList<Vehicle>();
 	private Map map;
-	public MapExtractor(int level) throws FileNotFoundException {
 
-		scanLevel = new Scanner(new File("src/data/level" + level + ".txt"));
-		int x = 0;
-		int y = 0; 
+	public MapExtractor()
+   {
+      map = new Map();
+	}
 
-		while (scanLevel.hasNext()) {
-			String row = scanLevel.nextLine();
-			scanRow = new Scanner(row);
-			scanRow.useDelimiter(" ");
+	public Map extractLevel(int level) throws FileNotFoundException
+   {
+      vehicleArray.clear();
+
+      scanLevel = new Scanner(new File("src/data/level" + level + ".txt"));
+      int x = 0;
+      int y = 0;
+
+      while (scanLevel.hasNext()) {
+         String row = scanLevel.nextLine();
+         scanRow = new Scanner(row);
+         scanRow.useDelimiter(" ");
 
 			/*
 			 * Object Codes are TU TD TR TL CU CD CR CL SS
 			 */
 
-			while (scanRow.hasNext()) {
+         while (scanRow.hasNext()) {
 
-				String objectCode = scanRow.next();
+            String objectCode = scanRow.next();
 
-				if (objectCode.equals("TU")) {
-					vehicleArray.add(new Truck(x, y, "Upwards", false));
-				} else if (objectCode.equals("TD")) {
-					vehicleArray.add(new Truck(x, y, "Downwards", false));
-				} else if (objectCode.equals("TR")) {
-					vehicleArray.add(new Truck(x, y, "Right", false));
-				} else if (objectCode.equals("TL")) {
-					vehicleArray.add(new Truck(x, y, "Left", false));
-				} else if (objectCode.equals("CU")) {
-					vehicleArray.add(new Car(x, y, "Upwards", false));
-				} else if (objectCode.equals("CD")) {
-					vehicleArray.add(new Car(x, y, "Downwards", false));
-				} else if (objectCode.equals("CR")) {
-					vehicleArray.add(new Car(x, y, "Right", false));
-				} else if (objectCode.equals("CL")) {
-					vehicleArray.add(new Car(x, y, "Left", false));
-				} else if (objectCode.equals("PC")) {
-					vehicleArray.add(new Car(x, y, "Right", true));
-				} else if (objectCode.equals("PT")) {
-					vehicleArray.add(new Truck(x, y, "Right", true));
-				}
-				x++;
-			}
-			y++;
-			x = 0;
-		}
-		map = new Map(vehicleArray);
-	}
+            if (objectCode.equals("TU")) {
+               vehicleArray.add(new Truck(x, y, "Upwards", false));
+            } else if (objectCode.equals("TD")) {
+               vehicleArray.add(new Truck(x, y, "Downwards", false));
+            } else if (objectCode.equals("TR")) {
+               vehicleArray.add(new Truck(x, y, "Right", false));
+            } else if (objectCode.equals("TL")) {
+               vehicleArray.add(new Truck(x, y, "Left", false));
+            } else if (objectCode.equals("CU")) {
+               vehicleArray.add(new Car(x, y, "Upwards", false));
+            } else if (objectCode.equals("CD")) {
+               vehicleArray.add(new Car(x, y, "Downwards", false));
+            } else if (objectCode.equals("CR")) {
+               vehicleArray.add(new Car(x, y, "Right", false));
+            } else if (objectCode.equals("CL")) {
+               vehicleArray.add(new Car(x, y, "Left", false));
+            } else if (objectCode.equals("PC")) {
+               vehicleArray.add(new Car(x, y, "Right", true));
+            } else if (objectCode.equals("PT")) {
+               vehicleArray.add(new Truck(x, y, "Right", true));
+            }
+            x++;
+         }
+         y++;
+         x = 0;
+      }
+      map.formMap(vehicleArray);
+      return map;
+   }
 
 	public ArrayList<Vehicle> getVehicleArray() {
 		return vehicleArray;
@@ -70,7 +79,9 @@ public class MapExtractor {
 	public Map getMap() {
 		return map;
 	}
-	public void printVehicleArray() {
+
+	public void printVehicleArray()
+   {
 		int i = 0;
 		for (Vehicle vehicle : vehicleArray) {
 			System.out.println("Vehicle " + ++i);

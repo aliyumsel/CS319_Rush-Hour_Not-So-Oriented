@@ -16,6 +16,7 @@ public class Input
             put("a", false);
             put("s", false);
             put("d", false);
+            put("n", false);
         }
     };
 
