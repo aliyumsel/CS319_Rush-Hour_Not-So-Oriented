@@ -3,11 +3,13 @@ package source.view;
 import source.model.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 import source.controller.*;
 
-public class PlayGamePanel extends JPanel{
+public class PlayGamePanel extends JPanel {
 
 	GuiPanelManager guiManager;
 
@@ -20,12 +22,12 @@ public class PlayGamePanel extends JPanel{
 	private JLabel numberLabel;
 	private JProgressBar timer;
 
-	public PlayGamePanel(int index, int level, GuiPanelManager _guiManager){
+	public PlayGamePanel(int index, GuiPanelManager _guiManager) {
 		super(null);
 
 		guiManager = _guiManager;
 
-		setPreferredSize(new Dimension(763,468));
+		setPreferredSize(new Dimension(763, 468));
 		this.index = index;
 		createComponents();
 
@@ -36,30 +38,29 @@ public class PlayGamePanel extends JPanel{
 		add(timerIcon);
 		add(timer);
 
-		setGamePanelVisible(level);
+		setGamePanelVisible();
 		setBoundsOfComponents();
 		this.setVisible(true);
 	}
 
-	private void createComponents(){
+	private void createComponents() {
 		back = new JButton(new ImageIcon("src/image/back.png"));
-		back.setPreferredSize(new Dimension(48,48));
-		back.setFocusable(false);
+		back.setPreferredSize(new Dimension(48, 48));
 		pause = new JButton(new ImageIcon("src/image/pause.png"));
-		pause.setFocusable(false);
-		pause.setPreferredSize(new Dimension(48,48));
+		pause.setPreferredSize(new Dimension(48, 48));
 		timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
-		timerIcon.setPreferredSize(new Dimension(32,32));
+		timerIcon.setPreferredSize(new Dimension(32, 32));
 		moveLabel = new JLabel("Number of Moves:");
 		moveLabel.setFont(new Font("Calibri", Font.PLAIN, 13));
-		moveLabel.setPreferredSize(new Dimension(107,21));
-		numberLabel = new JLabel("0",SwingConstants.CENTER);
-		numberLabel.setPreferredSize(new Dimension(107,68));
+		moveLabel.setPreferredSize(new Dimension(107, 21));
+		numberLabel = new JLabel("0", SwingConstants.CENTER);
+		numberLabel.setPreferredSize(new Dimension(107, 68));
 		numberLabel.setFont(new Font("Calibri", Font.BOLD, 60));
 		timer = new JProgressBar(SwingConstants.VERTICAL);
-		timer.setPreferredSize(new Dimension(30,300));
+		timer.setPreferredSize(new Dimension(30, 300));
 	}
-	private void setBoundsOfComponents(){
+
+	private void setBoundsOfComponents() {
 		Insets insets = getInsets();
 		Dimension size = back.getPreferredSize();
 		back.setBounds(32 + insets.left, 46 + insets.top, size.width, size.height);
@@ -75,16 +76,25 @@ public class PlayGamePanel extends JPanel{
 		timer.setBounds(71 + insets.left, 160 + insets.top, size.width, size.height);
 		size = game.getPreferredSize();
 		game.setBounds(156 + insets.left, 9 + insets.top, size.width, size.height);
+		
+        
 	}
 
-	public void setGamePanelVisible(int level) {
+	private void setGamePanelVisible() {
 
 		try {
-			game = new GamePanel(level);
+			game = new GamePanel();
 			add(game);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
+		game.setVisible(true);
+	}
+
+	public void updateGamePanel() {
+
+		game.updatePanel();
 
 		game.setVisible(true);
 	}
@@ -100,8 +110,11 @@ public class PlayGamePanel extends JPanel{
 		return index;
 	}
 
-	public GamePanel getGamePanel(){
+	public GamePanel getGamePanel() {
 		return game;
 	}
 
+	void setListeners() {
+		game.setListeners();
+	}
 }

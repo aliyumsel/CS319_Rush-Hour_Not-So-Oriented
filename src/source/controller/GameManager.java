@@ -7,7 +7,6 @@ public class GameManager implements Updatable
     static GameManager instance;
 
     private boolean mapFinished = false;
-    public int currentLevel;
 
     GameManager()
     {
@@ -16,16 +15,18 @@ public class GameManager implements Updatable
 
     public void Update()
     {
-
+        if (mapFinished)
+        {
+        	GameEngine.instance.level = 2;
+        	GameEngine.instance.updateLevel();
+        	GuiPanelManager.instance.updatePlayGamePanel();
+        	mapFinished = false;
+            System.out.println("Map is finished");
+        }
     }
 
     void endMap()
     {
-       mapFinished = true;
-       currentLevel++;
-       mapFinished = false;
-       System.out.println("level to be loaded: " + currentLevel);
-       // pop up window for level change
-       GuiPanelManager.instance.setPanelVisible(currentLevel);
+        mapFinished = true;
     }
 }

@@ -7,19 +7,19 @@ import source.view.*;
 
 public class GameEngine extends TimerTask {
 	public static GameEngine instance; // extremely simple singleton to access gameEngine with ease
-
+	public int level = 2;
 	private GuiPanelManager guiPanelManager;
 	private SoundManager soundManager;
 	private MapExtractor mapExtractor;
 	private Map map;
 	private VehicleController vehicleController;
-	public GameManager gameManager;
+	private GameManager gameManager;
 
 	public GameEngine() {
 		instance = this; // extremely simple singleton to access gameEngine with ease
 
 		try {
-			mapExtractor = new MapExtractor(2);
+			mapExtractor = new MapExtractor(level);
 		} catch (FileNotFoundException e) {
 
 			// TODO Auto-generated catch block
@@ -33,8 +33,21 @@ public class GameEngine extends TimerTask {
 		soundManager.background(); //theme song is started when the game is intialized
 	}
 
+	public void updateLevel() {
+		try {
+			mapExtractor = new MapExtractor(level);
+		} catch (FileNotFoundException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		map = mapExtractor.getMap();
+		vehicleController = new VehicleController(map);
+	}
 	public Map getMap()
    {
+
 	   return map;
 	}
 
@@ -50,7 +63,7 @@ public class GameEngine extends TimerTask {
 		vehicleController.Update();
 		gameManager.Update();
 
-		guiPanelManager.getGamePanel().updatePanel();
+		guiPanelManager.getPlayGamePanel().updatePanel();
 
       Input.reset();
 	}

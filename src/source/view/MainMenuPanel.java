@@ -1,6 +1,9 @@
 package source.view;
 
 import javax.swing.*;
+
+import source.controller.GameEngine;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +54,9 @@ public class MainMenuPanel extends JPanel{
                 if (e.getSource() == play)
                 {
                     System.out.println("In IF");
-                    guiManager.setPanelVisible(1);
+                    guiManager.setPanelVisible();
+                    GameEngine.instance.updateLevel();
+                	GuiPanelManager.instance.updatePlayGamePanel();
                 }
             }
         };

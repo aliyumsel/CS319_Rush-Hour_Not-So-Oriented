@@ -33,7 +33,6 @@ public class VehicleController implements Updatable
 		{
 			if (selectedVehicle.isPlayer() && map.isPlayerAtLast())
 			{
-				selectedVehicle = null;
 				GameManager.instance.endMap();
 				return;
 			}
