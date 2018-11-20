@@ -22,6 +22,7 @@ public class InnerGamePanel extends JPanel {
 	private EndOfLevelPanel endOfLevelPanel;
 
 	public InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
+		super(null);
 		this.guiPanelManager = guiManager;
 		setPreferredSize(new Dimension(450, 450));
 		createEndOfLevelPanel();
@@ -67,6 +68,6 @@ public class InnerGamePanel extends JPanel {
 		endOfLevelPanel.setVisible(false);
 		Insets insets = getInsets();
 		Dimension size = endOfLevelPanel.getPreferredSize();
-		//endOfLevelPanel.setBounds(50 + insets.left, 100 + insets.top, size.width, size.height);
+		endOfLevelPanel.setBounds(100 + insets.left, 100 + insets.top, size.width, size.height);
 	}
 }
