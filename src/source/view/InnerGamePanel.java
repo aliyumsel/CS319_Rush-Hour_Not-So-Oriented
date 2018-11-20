@@ -26,11 +26,9 @@ public class InnerGamePanel extends JPanel {
 		this.guiPanelManager = guiManager;
 		setPreferredSize(new Dimension(450, 450));
 		createEndOfLevelPanel();
-		
-		
-		
+
 		setVisible(true);
-		//setOpaque(false);
+		// setOpaque(false);
 
 	}
 
