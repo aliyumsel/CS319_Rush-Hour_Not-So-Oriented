@@ -39,7 +39,7 @@ public class MapController
       if (map != null)
       {
          System.out.println("Map Loaded");
-         map.printMap();
+         //map.printMap();
       }
    }
 

@@ -63,7 +63,7 @@ public class Vehicle extends GameObject implements Drawable {
 	{
 
 		Graphics2D graphics2d = (Graphics2D) graphics;
-		// Tek parça image geldiðinde kullanýlacak
+		// Tek parï¿½a image geldiï¿½inde kullanï¿½lacak
 		// at =
 		// AffineTransform.getTranslateInstance(transform.position.x*50,transform.position.y*50);
 		// at.rotate(Math.toRadians(90), car.getWidth()/2,car.getHeight()/2);
@@ -72,7 +72,7 @@ public class Vehicle extends GameObject implements Drawable {
 			graphics2d.drawImage(vehicle,occupiedTransforms[i].position.x * 50,occupiedTransforms[i].position.y * 50,
 					null);
 
-			// Arabanýn parçalarýný belli etmek için
+			// Arabanï¿½n parï¿½alarï¿½nï¿½ belli etmek iï¿½in
 			graphics2d.drawString("-" + i + "-", occupiedTransforms[i].position.x * 50 + 15,
 					occupiedTransforms[i].position.y * 50 + 25);
 		}

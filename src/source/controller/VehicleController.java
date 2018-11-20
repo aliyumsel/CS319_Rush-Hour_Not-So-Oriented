@@ -24,8 +24,8 @@ public class VehicleController implements Updatable
 	public void setMap(Map _map)
    {
       map = _map;
-      System.out.println("\n");
-      map.printMap();
+      //System.out.println("\n");
+      //map.printMap();
    }
 
 	//executed every frame write the functionality needed to here
