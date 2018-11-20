@@ -17,9 +17,10 @@ public class GameEngine extends TimerTask {
 		instance = this; // extremely simple singleton to access gameEngine with ease
 
       soundManager = new SoundManager();
+      mapController = new MapController();
 		vehicleController = new VehicleController();
 		gameManager = new GameManager();
-		mapController = new MapController();
+
 	}
 
 	// this method is executed over and over from main
