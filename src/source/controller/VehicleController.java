@@ -47,7 +47,7 @@ public class VehicleController implements Updatable
 
 		if (selectedVehicle != null)
 		{
-			if (selectedVehicle.isPlayer() && map.isPlayerAtLast())
+			if (selectedVehicle.isPlayer() && map.isPlayerAtExit())
 			{
 				GameManager.instance.endMap();
 				selectedVehicle = null;
@@ -119,7 +119,7 @@ public class VehicleController implements Updatable
 				return false;
 			}
 			
-			if (map.getMap()[selectedVehicle.transform.position.y][selectedVehicle.transform.position.x + moveCheck].equals("Space"))
+			if (map.getGrid()[selectedVehicle.transform.position.y][selectedVehicle.transform.position.x + moveCheck].equals("Space"))
 			{
 				selectedVehicle.move(moveAmount);
 				return true;
@@ -144,7 +144,7 @@ public class VehicleController implements Updatable
 				return false;
 			}
 			
-			if (map.getMap()[ (selectedVehicle.transform.position.y) + moveCheck][selectedVehicle.transform.position.x].equals("Space"))
+			if (map.getGrid()[ (selectedVehicle.transform.position.y) + moveCheck][selectedVehicle.transform.position.x].equals("Space"))
 			{
 				selectedVehicle.move(moveAmount);
 				return true;

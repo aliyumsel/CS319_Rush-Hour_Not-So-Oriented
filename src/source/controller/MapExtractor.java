@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import source.model.Map;
 import source.model.Car;
-import source.model.GameObject;
 import source.model.Truck;
 import source.model.Vehicle;
 
