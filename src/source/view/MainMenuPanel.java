@@ -93,6 +93,7 @@ public class MainMenuPanel extends JPanel {
 													//// loadImage methoduyla oluþturuluyo hedef butonun sizeýný buna
 													//// göre ayarlayýp setIcon methoduna da ýmage ý attýktan sonra
 													//// buttonu transparan yapmalýsýnýz!!!!
+		play.setRolloverIcon(new ImageIcon(background));  //rollover icon will be added here
 		play.setOpaque(false);
 		play.setContentAreaFilled(false);
 		play.setBorderPainted(false);
