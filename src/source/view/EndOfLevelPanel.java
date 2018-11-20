@@ -17,7 +17,8 @@ public class EndOfLevelPanel extends JPanel
 
    public EndOfLevelPanel(GuiPanelManager _guiManager)
    {
-      setPreferredSize(new Dimension(500, 500));
+	  guiManager = _guiManager;
+      setPreferredSize(new Dimension(250, 250));
       createComponents();
       addComponents();
       setBoundsOfComponents();

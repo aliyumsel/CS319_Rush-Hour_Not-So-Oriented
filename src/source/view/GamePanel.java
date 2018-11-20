@@ -14,7 +14,7 @@ public class GamePanel extends JPanel {
 
 	private int index;
 	private InnerGamePanel innerGamePanel;
-	//private EndOfLevelPanel endOfLevelPanel;
+
 	private JButton back;
 	private JButton reset;
 	private JLabel timerIcon;
@@ -22,8 +22,7 @@ public class GamePanel extends JPanel {
 	private JLabel numberLabel;
 	private JProgressBar timer;
 
-	public GamePanel(int index, GuiPanelManager _guiManager)
-   {
+	public GamePanel(int index, GuiPanelManager _guiManager) {
 		super(null);
 
 		guiManager = _guiManager;
@@ -40,27 +39,24 @@ public class GamePanel extends JPanel {
 		add(timer);
 
 		createInnerGamePanel();
-		//createEndOfLevelPanel();
+
 		setBoundsOfComponents();
 
 		setVisible(true);
 		setOpaque(false);
 	}
 
-   public void updatePanel()
-   {
-      if (!isShowing())
-      {
-         return;
-      }
+	public void updatePanel() {
+		if (!isShowing()) {
+			return;
+		}
 
-      innerGamePanel.updatePanel();
-      //endOfLevelPanel.updatePanel();
+		innerGamePanel.updatePanel();
 
-      updateNumberOfMoves();
+		updateNumberOfMoves();
 
-      repaint();
-   }
+		repaint();
+	}
 
 	private void createComponents() {
 		back = new JButton(new ImageIcon("src/image/back.png"));
@@ -104,9 +100,6 @@ public class GamePanel extends JPanel {
 		size = innerGamePanel.getPreferredSize();
 		innerGamePanel.setBounds(156 + insets.left, 9 + insets.top, size.width, size.height);
 
-
-		//size = endOfLevelPanel.getPreferredSize();
-      //endOfLevelPanel.setBounds(156 + insets.left, 9 + insets.top, size.width, size.height);
 	}
 
 	ActionListener actionListener = new ActionListener() {
@@ -122,22 +115,19 @@ public class GamePanel extends JPanel {
 		}
 	};
 
-//	public void setEndOfLevelPanelVisible()
-//   {
-//      System.out.println("Should have shown end of level panel");
-//      endOfLevelPanel.setVisible(true);
-//   }
+	public void setEndOfLevelPanelVisible() {
+		innerGamePanel.setEndOfLevelPanelVisible(true);
+	}
 
-//	private void createEndOfLevelPanel()
-//   {
-//      endOfLevelPanel = new EndOfLevelPanel(guiManager);
-//      add(endOfLevelPanel);
-//      setVisible(false);
-//   }
+	public void setLevelPanelVisible() {
+		System.out.println("Should have shown end of level panel");
+		innerGamePanel.setVisible(true);
+		innerGamePanel.setEndOfLevelPanelVisible(false);
+	}
 
 	private void createInnerGamePanel() {
 		try {
-			innerGamePanel = new InnerGamePanel();
+			innerGamePanel = new InnerGamePanel(guiManager);
 			add(innerGamePanel);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -148,13 +138,11 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 	}
 
-	public InnerGamePanel getInnerGamePanel()
-   {
+	public InnerGamePanel getInnerGamePanel() {
 		return innerGamePanel;
 	}
 
-	public void updateNumberOfMoves()
-   {
+	public void updateNumberOfMoves() {
 		numberLabel.setText(GameEngine.instance.vehicleController.getNumberOfMoves() + "");
 	}
 }
