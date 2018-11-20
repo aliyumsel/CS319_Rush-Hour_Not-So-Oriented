@@ -10,13 +10,22 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class SoundManager {
+public class SoundManager
+{
+	public static SoundManager instance;
+
 	// Traffic Theme
 	private String trafficThemeSong = "src/sounds/theme.wav";
 	private AudioStream audioStream = null;
 	private InputStream inputStream = null;
 	private boolean isThemeEnabled = true;
 	private boolean isEffectsEnabled = true;
+
+	public SoundManager()
+	{
+		instance = this;
+		background();
+	}
 
 	public void background() {
 		if (isThemeEnabled) { //java fx kulland�m, swing loop a al�rken hata veriyodu

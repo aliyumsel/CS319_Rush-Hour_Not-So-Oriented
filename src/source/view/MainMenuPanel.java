@@ -46,18 +46,12 @@ public class MainMenuPanel extends JPanel{
 
     private void createComponents() {
 
-        ActionListener actionListener = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e)
+        ActionListener actionListener = e ->
+        {
+            if (e.getSource() == play)
             {
-                System.out.println("In ActionListener");
-                if (e.getSource() == play)
-                {
-                    System.out.println("In IF");
-                    guiManager.setPanelVisible();
-                    GameEngine.instance.updateLevel();
-                	GuiPanelManager.instance.updatePlayGamePanel();
-                }
+                GameEngine.instance.gameManager.loadLastLevel();
+                guiManager.setPanelVisible("Game");
             }
         };
 

@@ -6,8 +6,7 @@ import source.controller.Input;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,65 +17,72 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class GuiPanelManager extends JFrame {
-	public static GuiPanelManager instance; // extremely simple singleton to access gameEngine with ease
-	private int currentPanelIndex;
-	private PlayGamePanel playGame;
-	private MainMenuPanel mainMenu;
+	public static GuiPanelManager instance;
 
-	public  GuiPanelManager()
-	{
-		
+	// private GameEngine gameEngine;
+
+	private int currentPanelIndex;
+	private GamePanel gamePanel;
+	private MainMenuPanel mainMenuPanel;
+
+	public GuiPanelManager() {
 		super("Rush Hour");
 		instance = this;
+
 		setLayout(new CardLayout());
-		currentPanelIndex = 0;
-		setResizable(false);	
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		mainMenu = new MainMenuPanel(0, this);
-		playGame = new PlayGamePanel(1, this);
-		add(mainMenu);
-		add(playGame);
+		mainMenuPanel = new MainMenuPanel(0, this);
+		gamePanel = new GamePanel(1, this);
+		add(mainMenuPanel);
+		add(gamePanel);
 
-		
-		this.setVisible(true);
+		currentPanelIndex = 0;
+
 		setListeners();
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		pack();
-		
+
+		mainMenuPanel.setVisible(true);
+		gamePanel.setVisible(false);
+
+		setVisible(true);
 	}
 
-	
-	public JPanel getCurrentPanel()
-	{
-		return (JPanel)getComponent(currentPanelIndex);
+	public JPanel getCurrentPanel() {
+		return (JPanel) getComponent(currentPanelIndex);
 	}
 
-	public PlayGamePanel getPlayGamePanel()
-	{
-		return playGame;
+	public GamePanel getGamePanel() {
+		return gamePanel;
 	}
 
-	public void setPanelVisible()
-	{
-		playGame.setVisible(true); //panel deðiþirken false yapýlmalý
-		setContentPane(playGame);
-		
-	}
-	
-	public void updatePlayGamePanel() {
-		//content pane zaten playgame olduðu için ve visible olduðu için alttaki ikisine gerek yok ama baþka bir panelden geçerken bunlarla oynamak lazým
-		playGame.updateGamePanel();
-		setContentPane(playGame); //ama koymazsak paneldeki hata düzelmiyo
-		//playGame.setVisible(true);
+	public MainMenuPanel getMainMenuPanel() {
+		return mainMenuPanel;
 	}
 
-	void setListeners()
-	{
+	public void setPanelVisible(String panelName) {
+		if (panelName == "MainMenu") {
+			mainMenuPanel.setVisible(true);
+			setContentPane(mainMenuPanel);
+		} else if (panelName == "Game") {
+			gamePanel.setVisible(true);
+			setContentPane(gamePanel);
+		} else {
+			return;
+		}
+	}
+
+	public void updatePanels() {
+		gamePanel.updatePanel();
+	}
+
+	private void setListeners() {
 		KeyListener keyListener = Input.getKeyListener();
 		MouseListener mouseListener = Input.getMouseListener();
 		addKeyListener(keyListener);
-		playGame.getGamePanel().addMouseListener(mouseListener);
+		gamePanel.getInnerGamePanel().addMouseListener(mouseListener);
 	}
 }

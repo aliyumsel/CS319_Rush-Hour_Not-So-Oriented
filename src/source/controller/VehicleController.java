@@ -1,21 +1,37 @@
 package source.controller;
 import interfaces.Updatable;
 import source.model.*;
+import source.view.GuiPanelManager;
 
 public class VehicleController implements Updatable
 {
+   public static VehicleController instance;
+
 	private Map map; 
 	private Vehicle selectedVehicle;
 	private SoundManager soundManager;
-	public VehicleController (Map map)
+	private int numberOfMoves;
+
+	public VehicleController()
 	{
-		this.map = map;
-		soundManager = new SoundManager();
+	   instance = this;
+		numberOfMoves = 0;
+		soundManager = SoundManager.instance;
 	}
+
+	public void setMap(Map _map)
+   {
+      map = _map;
+   }
 
 	//executed every frame write the functionality needed to here
 	public void Update()
 	{
+	   if (!GameManager.instance.isGameActive)
+      {
+         return;
+      }
+
 		if (Input.getMouseButtonPressed(0))
 		{
 			//System.out.println( "Gonna pick the vehicle at: " + Input.getMouseMatrixPosition()[0] + ", " + Input.getMouseMatrixPosition()[1] );
@@ -34,42 +50,49 @@ public class VehicleController implements Updatable
 			if (selectedVehicle.isPlayer() && map.isPlayerAtLast())
 			{
 				GameManager.instance.endMap();
+				selectedVehicle = null;
 				return;
 			}
 
 			boolean moved = false;
 			if (Input.getKeyPressed("w"))
 			{
-				System.out.println("Gonna move up");
+				//System.out.println("Gonna move up");
 				moved = tryMove("Upwards");
 			}
 			else if (Input.getKeyPressed("a"))
 			{
-				System.out.println("Gonna move left");
+				//System.out.println("Gonna move left");
 				moved = tryMove("Left");
 			}
 			else if (Input.getKeyPressed("s"))
 			{
-				System.out.println("Gonna move down");
+				//System.out.println("Gonna move down");
 				moved = tryMove("Downwards");
 			}
 			else if (Input.getKeyPressed("d"))
 			{
-				System.out.println("Gonna move right");
+				//System.out.println("Gonna move right");
 				moved = tryMove("Right");
 			}
 
 			if (moved)
 			{
 				map.updateMap(map.getVehicleArray());
+				numberOfMoves++;
+            //GuiPanelManager.instance.getGamePanel().updateNumberOfMoves();
 			}
 		}
 	}
 
-	
-	public void setSelectedVehicle(Vehicle selectedVehicle)
+	public void setSelectedVehicle(Vehicle _selectedVehicle)
 	{
-		this.selectedVehicle = selectedVehicle;
+		selectedVehicle = _selectedVehicle;
+		if (soundManager == null)
+      {
+         //System.out.println("Nullmis amk");
+         return;
+      }
 		soundManager.vehicleHorn(selectedVehicle.getType());
 	}
 	
@@ -126,14 +149,20 @@ public class VehicleController implements Updatable
 				selectedVehicle.move(moveAmount);
 				return true;
 			}
-			
-			
-			
+
 		}
 		return false;
 	}
 	 
-	
+	public int getNumberOfMoves()
+   {
+      return numberOfMoves;
+   }
+
+   public void setNumberOfMoves(int _moves)
+   {
+      numberOfMoves = _moves;
+   }
 	
 
 }

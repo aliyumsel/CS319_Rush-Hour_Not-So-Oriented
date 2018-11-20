@@ -1,32 +1,62 @@
 package source.controller;
+
 import interfaces.Updatable;
 import source.view.GuiPanelManager;
 
 public class GameManager implements Updatable
 {
-    static GameManager instance;
+   static GameManager instance;
 
-    private boolean mapFinished = false;
+   public int level = 1;
 
-    GameManager()
-    {
-        instance = this;
-    }
+   public boolean isGameActive = false;
+   public boolean mapFinished = false;
 
-    public void Update()
-    {
-        if (mapFinished)
-        {
-        	GameEngine.instance.level++;
-        	GameEngine.instance.updateLevel();
-        	GuiPanelManager.instance.updatePlayGamePanel();
-        	mapFinished = false;
-            System.out.println("Map is finished");
-        }
-    }
+   GameManager()
+   {
+      instance = this;
+   }
 
-    void endMap()
-    {
-        mapFinished = true;
-    }
+   public void Update()
+   {
+      if (!isGameActive && Input.getKeyPressed("n"))
+      {
+         nextLevel();
+      }
+   }
+
+   void endMap()
+   {
+      System.out.println("Map Finished");
+      isGameActive = false;
+   }
+
+   public void loadLastLevel()
+   {
+      //TO BE CHANGED
+      loadLevel(1);
+      level = 1;
+   }
+
+   public void loadLevel(int _level)
+   {
+      MapController.instance.loadLevel(_level);
+      VehicleController.instance.setMap(MapController.instance.getMap());
+      VehicleController.instance.setNumberOfMoves(0);
+      level = _level;
+      //mapFinished = false;
+
+      isGameActive = true;
+   }
+
+   public void nextLevel()
+   {
+      level++;
+      loadLevel(level);
+   }
+
+   public void resetLevel()
+   {
+      loadLevel(level);
+   }
 }
