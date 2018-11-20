@@ -75,7 +75,7 @@ public class GuiPanelManager extends JFrame {
 		}
 	}
 
-	public void updatePanels() {
+	public void updatePanels() {// burda bi manasýzlýk var main aslýnda hangi panel active se o olmasý gerekiyo sadece gibi ismi	
 		gamePanel.updatePanel();
 	}
 
