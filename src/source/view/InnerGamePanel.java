@@ -18,7 +18,6 @@ import source.model.Map;
 @SuppressWarnings("serial")
 public class InnerGamePanel extends JPanel
 {
-	//private ArrayList<Vehicle> vehicleArray;
 	private Map map;
 
 	public InnerGamePanel() throws FileNotFoundException
@@ -26,7 +25,7 @@ public class InnerGamePanel extends JPanel
 		setPreferredSize(new Dimension(450,450));
 	}
 
-	public void updatePanel()
+	void updatePanel()
 	{
 	   if (!isShowing())
       {
