@@ -13,14 +13,13 @@ import javax.swing.JPanel;
 import interfaces.*;
 import source.controller.Input;
 
-import source.controller.Map;
+import source.model.Map;
 
 @SuppressWarnings("serial")
 public class InnerGamePanel extends JPanel
 {
-
-	private ArrayList<Vehicle> vehicleArray;
-	public Map map;
+	//private ArrayList<Vehicle> vehicleArray;
+	private Map map;
 
 	public InnerGamePanel() throws FileNotFoundException
    {
@@ -34,7 +33,7 @@ public class InnerGamePanel extends JPanel
          return;
       }
       map = GameEngine.instance.mapController.getMap();
-      vehicleArray = map.getVehicleArray();
+      //vehicleArray = map.getVehicleArray();
       repaint();
 	}
 
@@ -42,12 +41,13 @@ public class InnerGamePanel extends JPanel
 		super.paintComponent(g);
 		setBackground(Color.WHITE);
 
-		if (vehicleArray == null)
+		if (map == null)
       {
          return;
       }
 
-		for (Vehicle vehicle : vehicleArray) {
+		for (Vehicle vehicle : map.getVehicleArray())
+		{
 			vehicle.draw(g);
 		}
 	}

@@ -7,6 +7,8 @@ public class VehicleController implements Updatable
 {
    public static VehicleController instance;
 
+   private MapController mapController;
+
 	private Map map; 
 	private Vehicle selectedVehicle;
 	private SoundManager soundManager;
@@ -22,6 +24,8 @@ public class VehicleController implements Updatable
 	public void setMap(Map _map)
    {
       map = _map;
+      //System.out.println("\n");
+      //map.printMap();
    }
 
 	//executed every frame write the functionality needed to here
@@ -35,7 +39,7 @@ public class VehicleController implements Updatable
 		if (Input.getMouseButtonPressed(0))
 		{
 			//System.out.println( "Gonna pick the vehicle at: " + Input.getMouseMatrixPosition()[0] + ", " + Input.getMouseMatrixPosition()[1] );
-			Vehicle temp = map.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+			Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
 			if (temp != null)
 			{
@@ -47,7 +51,7 @@ public class VehicleController implements Updatable
 
 		if (selectedVehicle != null)
 		{
-			if (selectedVehicle.isPlayer() && map.isPlayerAtLast())
+			if (selectedVehicle.isPlayer() && MapController.instance.isPlayerAtExit())
 			{
 				GameManager.instance.endMap();
 				selectedVehicle = null;
@@ -78,7 +82,7 @@ public class VehicleController implements Updatable
 
 			if (moved)
 			{
-				map.updateMap(map.getVehicleArray());
+				MapController.instance.updateMap(map.getVehicleArray());
 				numberOfMoves++;
             //GuiPanelManager.instance.getGamePanel().updateNumberOfMoves();
 			}
@@ -119,7 +123,7 @@ public class VehicleController implements Updatable
 				return false;
 			}
 			
-			if (map.getMap()[selectedVehicle.transform.position.y][selectedVehicle.transform.position.x + moveCheck].equals("Space"))
+			if (map.getGrid()[selectedVehicle.transform.position.y][selectedVehicle.transform.position.x + moveCheck].equals("Space"))
 			{
 				selectedVehicle.move(moveAmount);
 				return true;
@@ -144,7 +148,7 @@ public class VehicleController implements Updatable
 				return false;
 			}
 			
-			if (map.getMap()[ (selectedVehicle.transform.position.y) + moveCheck][selectedVehicle.transform.position.x].equals("Space"))
+			if (map.getGrid()[ (selectedVehicle.transform.position.y) + moveCheck][selectedVehicle.transform.position.x].equals("Space"))
 			{
 				selectedVehicle.move(moveAmount);
 				return true;
