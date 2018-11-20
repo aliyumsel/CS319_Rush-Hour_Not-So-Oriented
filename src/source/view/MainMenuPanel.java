@@ -89,10 +89,10 @@ public class MainMenuPanel extends JPanel {
 		play.setPreferredSize(new Dimension(147, 147));
 		play.setFont(new Font("Calibri", Font.BOLD, 28));
 
-		play.setIcon(new ImageIcon(playButton)); //// playbutton bir buffered image o buffered image da aþaðýdaki
-													//// loadImage methoduyla oluþturuluyo hedef butonun sizeýný buna
-													//// göre ayarlayýp setIcon methoduna da ýmage ý attýktan sonra
-													//// buttonu transparan yapmalýsýnýz!!!!
+		play.setIcon(new ImageIcon(playButton)); //// playbutton bir buffered image o buffered image da aï¿½aï¿½ï¿½daki
+													//// loadImage methoduyla oluï¿½turuluyo hedef butonun sizeï¿½nï¿½ buna
+													//// gï¿½re ayarlayï¿½p setIcon methoduna da ï¿½mage ï¿½ attï¿½ktan sonra
+													//// buttonu transparan yapmalï¿½sï¿½nï¿½z!!!!
 		play.setRolloverIcon(new ImageIcon(background));  //rollover icon will be added here
 		play.setOpaque(false);
 		play.setContentAreaFilled(false);
