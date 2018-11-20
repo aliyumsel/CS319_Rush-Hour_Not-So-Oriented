@@ -81,7 +81,7 @@ public class MainMenuPanel extends JPanel {
 
 	private void loadImages()
    {
-      background = LoadImage("src/image/goldImage.png");
+      background = LoadImage("src/image/orange.png");
 
       title = LoadImage("src/image/icons/title.png");
 
@@ -175,23 +175,23 @@ public class MainMenuPanel extends JPanel {
 	private void setBoundsOfComponents() {
 		Insets insets = getInsets();
 		Dimension size = help.getPreferredSize();
-		help.setBounds(32 + insets.left, 46 + insets.top, size.width, size.height);
+		help.setBounds(18 + insets.left, 46 + insets.top, size.width, size.height);
 		size = exit.getPreferredSize();
-		exit.setBounds(680 + insets.left, 46 + insets.top, size.width, size.height);
+		exit.setBounds(665 + insets.left, 46 + insets.top, size.width, size.height);
 		size = heading.getPreferredSize();
-		heading.setBounds(234 + insets.left, 67 + insets.top, size.width, size.height);
+		heading.setBounds(238 + insets.left, 50 + insets.top, size.width, size.height);
 		size = player.getPreferredSize();
-		player.setBounds(80 + insets.left, 145 + insets.top, size.width, size.height);
+		player.setBounds(82 + insets.left, 130 + insets.top, size.width, size.height);
 		size = changePlayer.getPreferredSize();
-		changePlayer.setBounds(296 + insets.left, 189 + insets.top, size.width, size.height);
+		changePlayer.setBounds(281 + insets.left, 175 + insets.top, size.width, size.height);
 		size = play.getPreferredSize();
-		play.setBounds(305 + insets.left, 230 + insets.top, size.width, size.height);
+		play.setBounds(300 + insets.left, 230 + insets.top, size.width, size.height);
 		size = credits.getPreferredSize();
-		credits.setBounds(32 + insets.left, 388 + insets.top, size.width, size.height);
+		credits.setBounds(18 + insets.left, 395 + insets.top, size.width, size.height);
 		size = levels.getPreferredSize();
-		levels.setBounds(296 + insets.left, 388 + insets.top, size.width, size.height);
+		levels.setBounds(280 + insets.left, 395 + insets.top, size.width, size.height);
 		size = settings.getPreferredSize();
-		settings.setBounds(558 + insets.left, 388 + insets.top, size.width, size.height);
+		settings.setBounds(538 + insets.left, 395 + insets.top, size.width, size.height);
 	}
 
 	public void paintComponent(Graphics g) {
