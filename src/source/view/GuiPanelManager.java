@@ -30,6 +30,7 @@ public class GuiPanelManager extends JFrame
 	private MainMenuPanel mainMenuPanel;
 	private CreditsPanel creditsPanel;
 	private SettingsPanel settingsPanel;
+	private HelpPanel helpPanel;
 
 	public Font odinRounded;
 
@@ -64,10 +65,12 @@ public class GuiPanelManager extends JFrame
 		gamePanel = new GamePanel(1, this);
 		creditsPanel = new CreditsPanel(this);
 		settingsPanel = new SettingsPanel(this);
+		helpPanel = new HelpPanel(this);
 		add(mainMenuPanel);
 		add(gamePanel);
 		add(creditsPanel);
 		add(settingsPanel);
+		add(helpPanel);
 
 		currentPanelIndex = 0;
 
@@ -112,6 +115,11 @@ public class GuiPanelManager extends JFrame
       {
          settingsPanel.setVisible(true);
          setContentPane(settingsPanel);
+      }
+      else if (panelName.equals("Help"))
+      {
+         helpPanel.setVisible(true);
+         setContentPane(helpPanel);
       }
       else
       {

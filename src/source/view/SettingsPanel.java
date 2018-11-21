@@ -26,6 +26,7 @@ public class SettingsPanel extends JPanel
    private JButton space;
 
    private BufferedImage background;
+   private BufferedImage title;
    private BufferedImage backButtonImage;
    private BufferedImage backButtonHighlightedImage;
    private BufferedImage musicImage;
@@ -58,6 +59,7 @@ public class SettingsPanel extends JPanel
    private void loadImages()
    {
       background = guiManager.LoadImage("src/image/orange.png");
+      title = guiManager.LoadImage("src/image/icons/settingsTitle.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
       musicImage = guiManager.LoadImage("src/image/icons/musicon.png");
@@ -88,10 +90,9 @@ public class SettingsPanel extends JPanel
       guiManager.setupButton(music,musicImage,musicHighlightedImage,"square",actionListener);
       guiManager.setupButton(sfx,sfxImage,sfxHighlightedImage,"square",actionListener);
 
-      heading = new JLabel("Settings", SwingConstants.CENTER);
-      heading.setPreferredSize(new Dimension(300, 90));
-      heading.setFont(new Font("Odin Rounded", Font.PLAIN, 75));
-      heading.setForeground(Color.white);
+      heading = new JLabel();
+      heading.setIcon(new ImageIcon(title));
+      heading.setPreferredSize(new Dimension(263, 81));
 
       volume = new JLabel("Volume", SwingConstants.CENTER);
       volume.setPreferredSize(new Dimension(150, 30));
@@ -150,6 +151,7 @@ public class SettingsPanel extends JPanel
 
    private ActionListener actionListener = e ->
    {
+      SoundManager.instance.buttonClick();
       if (e.getSource() == back)
       {
          GameEngine.instance.gameManager.loadLastLevel();

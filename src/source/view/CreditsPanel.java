@@ -26,6 +26,7 @@ public class CreditsPanel extends JPanel
    private JButton back;
 
    private BufferedImage background;
+   private BufferedImage title;
    private BufferedImage backButtonImage;
    private BufferedImage backButtonHighlightedImage;
 
@@ -50,6 +51,7 @@ public class CreditsPanel extends JPanel
    private void loadImages()
    {
       background = guiManager.LoadImage("src/image/orange.png");
+      title = guiManager.LoadImage("src/image/icons/creditsTitle.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
    }
@@ -59,10 +61,9 @@ public class CreditsPanel extends JPanel
       back = new JButton();
       guiManager.setupButton(back,backButtonImage,backButtonHighlightedImage,"square",actionListener);
 
-      heading = new JLabel("Credits", SwingConstants.CENTER);
-      heading.setPreferredSize(new Dimension(300, 75));
-      heading.setFont(new Font("Odin Rounded", Font.PLAIN, 75));
-      heading.setForeground(Color.white);
+      heading = new JLabel();
+      heading.setIcon(new ImageIcon(title));
+      heading.setPreferredSize(new Dimension(233, 65));
 
       subHeading = new JLabel("Developers", SwingConstants.CENTER);
       subHeading.setPreferredSize(new Dimension(300, 50));
@@ -71,7 +72,7 @@ public class CreditsPanel extends JPanel
       //subHeading.setBorder(BorderFactory.createLineBorder(Color.cyan, 2));
 
       name1 = new JLabel("Ahmet Ayrancioglu", SwingConstants.CENTER);
-      name1.setPreferredSize(new Dimension(300, 30));
+      name1.setPreferredSize(new Dimension(300, 35));
       name1.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
       name1.setForeground(Color.white);
 

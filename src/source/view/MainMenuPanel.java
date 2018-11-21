@@ -108,30 +108,6 @@ public class MainMenuPanel extends JPanel {
       settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsH.png");
    }
 
-   private ActionListener actionListener = e ->
-   {
-	   SoundManager.instance.buttonClick();
-      if (e.getSource() == play) {
-         GameEngine.instance.gameManager.loadLastLevel();
-         guiManager.setPanelVisible("Game");
-      }
-
-      if (e.getSource() == credits)
-      {
-         guiManager.setPanelVisible("Credits");
-      }
-
-      if (e.getSource() == settings)
-      {
-         guiManager.setPanelVisible("Settings");
-      }
-
-      if (e.getSource() == exit)
-      {
-         System.exit(0);
-      }
-   };
-
 	private void createComponents()
    {
 		heading = new JLabel();
@@ -226,4 +202,33 @@ public class MainMenuPanel extends JPanel {
       graphics2d.drawImage(background, 0, 0, null);
 
    }
+
+   private ActionListener actionListener = e ->
+   {
+      SoundManager.instance.buttonClick();
+      if (e.getSource() == play) {
+         GameEngine.instance.gameManager.loadLastLevel();
+         guiManager.setPanelVisible("Game");
+      }
+
+      if (e.getSource() == credits)
+      {
+         guiManager.setPanelVisible("Credits");
+      }
+
+      if (e.getSource() == settings)
+      {
+         guiManager.setPanelVisible("Settings");
+      }
+
+      if (e.getSource() == help)
+      {
+         guiManager.setPanelVisible("Help");
+      }
+
+      if (e.getSource() == exit)
+      {
+         System.exit(0);
+      }
+   };
 }
