@@ -4,6 +4,7 @@ import source.controller.GameEngine;
 import source.controller.Input;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -15,6 +16,8 @@ import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 
 //import source.controller.Controller;
 //import source.controller.Sound;
@@ -31,7 +34,9 @@ public class GuiPanelManager extends JFrame
 	private CreditsPanel creditsPanel;
 	private SettingsPanel settingsPanel;
 	private HelpPanel helpPanel;
-
+	private int panelWidth = 468;
+	private boolean transition = false;
+	private JPanel targetPanel;
 	public Font odinRounded;
 
    private Dimension longButtonDimension;
@@ -78,11 +83,13 @@ public class GuiPanelManager extends JFrame
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		pack();
-
+		
 		mainMenuPanel.setVisible(true);
 		gamePanel.setVisible(false);
-
+		
+		
 		setVisible(true);
+		pack();
 	}
 
 	public JPanel getCurrentPanel()
@@ -101,34 +108,58 @@ public class GuiPanelManager extends JFrame
 	void setPanelVisible(String panelName) {
 		if (panelName.equals("MainMenu")) {
 			mainMenuPanel.setVisible(true);
-			setContentPane(mainMenuPanel);
+			mainMenuPanel.setDoubleBuffered(true);
+			targetPanel = mainMenuPanel;
 		} else if (panelName.equals("Game")) {
 			gamePanel.setVisible(true);
-			setContentPane(gamePanel);
+			gamePanel.setDoubleBuffered(true);
+			targetPanel = gamePanel;
 		}
 		else if (panelName.equals("Credits"))
       {
          creditsPanel.setVisible(true);
-         setContentPane(creditsPanel);
+        
+         targetPanel = creditsPanel;
       }
       else if (panelName.equals("Settings"))
       {
          settingsPanel.setVisible(true);
-         setContentPane(settingsPanel);
+        
+         targetPanel = settingsPanel;
       }
       else if (panelName.equals("Help"))
       {
          helpPanel.setVisible(true);
-         setContentPane(helpPanel);
+        
+         targetPanel = helpPanel;
       }
       else
       {
          System.out.println("Error: Enter valid name");
 		}
+		//setContentPane(targetPanel);
+		transition = true;
 	}
-
+	int i = 0;
+	int a = 0;
 	void updatePanels() {// burda bi manas�zl�k var main asl�nda hangi panel active se o olmas� gerekiyo sadece gibi ismi
 		gamePanel.updatePanel();
+		Insets insets = getInsets();
+		Dimension size = gamePanel.getPreferredSize();
+		i+=7;
+		if(transition) {
+
+	        if (i % 7 == 0)
+	        	a -=3;
+			targetPanel.setBounds(0, panelWidth+a, size.width, size.height);
+			mainMenuPanel.setBounds(0, 0+a, size.width, size.height);
+			
+			if(panelWidth+a <= 0) {
+				transition = false;
+				mainMenuPanel.setVisible(false);
+			}
+		}
+		
 	}
 
 	private void setListeners() {
@@ -180,4 +211,6 @@ public class GuiPanelManager extends JFrame
    {
       return (_panelWidth - _component.getPreferredSize().width) / 2;
    }
+   
+  
 }

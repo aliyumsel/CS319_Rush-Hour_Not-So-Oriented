@@ -2,6 +2,9 @@ package source.view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +21,7 @@ public class GamePanel extends JPanel {
 
 	private int index;
 	private InnerGamePanel innerGamePanel;
-
+	private BufferedImage background;
 	private JButton menu;
 	private JButton reset;
 	private JLabel timerIcon;
@@ -28,20 +31,20 @@ public class GamePanel extends JPanel {
 
 	private BufferedImage menuButtonImage;
 	private BufferedImage menuButtonHighlightedImage;
-   private BufferedImage resetButtonImage;
-   private BufferedImage resetButtonHighlightedImage;
-   private BufferedImage pauseButtonImage;
-   private BufferedImage pauseButtonHighlightedImage;
+	private BufferedImage resetButtonImage;
+	private BufferedImage resetButtonHighlightedImage;
+	private BufferedImage pauseButtonImage;
+	private BufferedImage pauseButtonHighlightedImage;
 
-   private Dimension squareButtonDimension;
+	private Dimension squareButtonDimension;
 
-   private int panelWidth = 764;
-   private int panelHeight = 468;
+	private int panelWidth = 764;
+	private int panelHeight = 468;
 
 	public GamePanel(int index, GuiPanelManager _guiManager) {
 		super(null);
-
 		guiManager = _guiManager;
+		background = guiManager.LoadImage("src/image/orange.png");
 
 		setPreferredSize(new Dimension(panelWidth, panelHeight));
 		this.index = index;
@@ -63,15 +66,16 @@ public class GamePanel extends JPanel {
 
 		setVisible(true);
 		setOpaque(false);
-
-      squareButtonDimension = new Dimension(49,55); // evet kare degil biliyom ellemeyin
+		
+		squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
 	}
 
 	public void updatePanel() {
+		repaint();
 		if (!isShowing()) {
 			return;
 		}
-
+	
 		innerGamePanel.updatePanel();
 
 		updateNumberOfMoves();
@@ -79,25 +83,23 @@ public class GamePanel extends JPanel {
 		repaint();
 	}
 
-   private void loadImages()
-   {
-      menuButtonImage = LoadImage("src/image/icons/menu.png");
-      menuButtonHighlightedImage = LoadImage("src/image/icons/menuH.png");
+	private void loadImages() {
+		menuButtonImage = LoadImage("src/image/icons/menu.png");
+		menuButtonHighlightedImage = LoadImage("src/image/icons/menuH.png");
 
-      resetButtonImage = LoadImage("src/image/icons/reset.png");
-      resetButtonHighlightedImage = LoadImage("src/image/icons/resetH.png");
+		resetButtonImage = LoadImage("src/image/icons/reset.png");
+		resetButtonHighlightedImage = LoadImage("src/image/icons/resetH.png");
 
-      pauseButtonImage = LoadImage("src/image/icons/pause.png");
-      pauseButtonHighlightedImage = LoadImage("src/image/icons/pauseH.png");
-   }
+		pauseButtonImage = LoadImage("src/image/icons/pause.png");
+		pauseButtonHighlightedImage = LoadImage("src/image/icons/pauseH.png");
+	}
 
-	private void createComponents()
-   {
-      menu = new JButton();
-      reset = new JButton();
+	private void createComponents() {
+		menu = new JButton();
+		reset = new JButton();
 
-      setupButton(menu,menuButtonImage,menuButtonHighlightedImage);
-      setupButton(reset,resetButtonImage,resetButtonHighlightedImage);
+		setupButton(menu, menuButtonImage, menuButtonHighlightedImage);
+		setupButton(reset, resetButtonImage, resetButtonHighlightedImage);
 
 		timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
 		timerIcon.setPreferredSize(new Dimension(32, 32));
@@ -118,36 +120,42 @@ public class GamePanel extends JPanel {
 	private void setBoundsOfComponents() {
 		Insets insets = getInsets();
 
-		menu.setBounds(30 + insets.left, 30 + insets.top, menu.getPreferredSize().width, menu.getPreferredSize().height);
+		menu.setBounds(30 + insets.left, 30 + insets.top, menu.getPreferredSize().width,
+				menu.getPreferredSize().height);
 
-		reset.setBounds(panelWidth - 30 - reset.getPreferredSize().width + insets.left, 30 + insets.top, reset.getPreferredSize().width, reset.getPreferredSize().height);
+		reset.setBounds(panelWidth - 30 - reset.getPreferredSize().width + insets.left, 30 + insets.top,
+				reset.getPreferredSize().width, reset.getPreferredSize().height);
 
-		moveLabel.setBounds(635 + insets.left, 164 + insets.top, moveLabel.getPreferredSize().width, moveLabel.getPreferredSize().height);
+		moveLabel.setBounds(635 + insets.left, 164 + insets.top, moveLabel.getPreferredSize().width,
+				moveLabel.getPreferredSize().height);
 
-		numberLabel.setBounds(635 + insets.left, 200 + insets.top, numberLabel.getPreferredSize().width,  numberLabel.getPreferredSize().height);
+		numberLabel.setBounds(635 + insets.left, 200 + insets.top, numberLabel.getPreferredSize().width,
+				numberLabel.getPreferredSize().height);
 
-		timerIcon.setBounds(70 + insets.left, 116 + insets.top, timerIcon.getPreferredSize().width, timerIcon.getPreferredSize().height);
+		timerIcon.setBounds(70 + insets.left, 116 + insets.top, timerIcon.getPreferredSize().width,
+				timerIcon.getPreferredSize().height);
 
-		timer.setBounds(71 + insets.left, 160 + insets.top, timer.getPreferredSize().width, timer.getPreferredSize().height);
+		timer.setBounds(71 + insets.left, 160 + insets.top, timer.getPreferredSize().width,
+				timer.getPreferredSize().height);
 
-		innerGamePanel.setBounds(156 + insets.left, 9 + insets.top, innerGamePanel.getPreferredSize().width, innerGamePanel.getPreferredSize().height);
+		innerGamePanel.setBounds(156 + insets.left, 9 + insets.top, innerGamePanel.getPreferredSize().width,
+				innerGamePanel.getPreferredSize().height);
 
 	}
 
-   private void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage)
-   {
-      button.addActionListener(actionListener);
-      button.setPreferredSize(squareButtonDimension);
+	private void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage) {
+		button.addActionListener(actionListener);
+		button.setPreferredSize(squareButtonDimension);
 
-      button.setIcon(new ImageIcon(normalImage));
-      button.setRolloverIcon(new ImageIcon(highlightedImage));
-      button.setPressedIcon(new ImageIcon(highlightedImage));
+		button.setIcon(new ImageIcon(normalImage));
+		button.setRolloverIcon(new ImageIcon(highlightedImage));
+		button.setPressedIcon(new ImageIcon(highlightedImage));
 
-      button.setOpaque(false);
-      button.setContentAreaFilled(false);
-      button.setBorderPainted(false);
-      button.setFocusable(false);
-   }
+		button.setOpaque(false);
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.setFocusable(false);
+	}
 
 	private ActionListener actionListener = new ActionListener() {
 		@Override
@@ -157,7 +165,7 @@ public class GamePanel extends JPanel {
 				GameEngine.instance.gameManager.resetLevel();
 			}
 
-			if (e.getSource() == menu ) {
+			if (e.getSource() == menu) {
 				guiManager.setPanelVisible("MainMenu");
 			}
 		}
@@ -184,6 +192,18 @@ public class GamePanel extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		//drawBackground(g); // change the bacground png for changing the background
+		// setBackground(Color.WHITE);
+	}
+
+	private void drawBackground(Graphics graphics) {
+
+		Graphics2D graphics2d = (Graphics2D) graphics;
+
+		graphics2d.drawImage(background, 0, 0, null);
+
 	}
 
 	public InnerGamePanel getInnerGamePanel() {
@@ -194,12 +214,12 @@ public class GamePanel extends JPanel {
 		numberLabel.setText(GameEngine.instance.vehicleController.getNumberOfMoves() + "");
 	}
 
-   private BufferedImage LoadImage(String FileName) {
-      BufferedImage image = null;
-      try {
-         image = ImageIO.read(new File(FileName));
-      } catch (IOException e) {
-      }
-      return image;
-   }
+	private BufferedImage LoadImage(String FileName) {
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File(FileName));
+		} catch (IOException e) {
+		}
+		return image;
+	}
 }
