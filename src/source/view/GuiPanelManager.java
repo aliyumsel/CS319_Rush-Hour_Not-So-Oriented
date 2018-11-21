@@ -137,28 +137,28 @@ public class GuiPanelManager extends JFrame
       {
          System.out.println("Error: Enter valid name");
 		}
-		//setContentPane(targetPanel);
+		setContentPane(targetPanel);
 		transition = true;
 	}
 	int i = 0;
 	int a = 0;
 	void updatePanels() {// burda bi manas�zl�k var main asl�nda hangi panel active se o olmas� gerekiyo sadece gibi ismi
 		gamePanel.updatePanel();
-		Insets insets = getInsets();
-		Dimension size = gamePanel.getPreferredSize();
-		i+=7;
-		if(transition) {
-
-	        if (i % 7 == 0)
-	        	a -=3;
-			targetPanel.setBounds(0, panelWidth+a, size.width, size.height);
-			mainMenuPanel.setBounds(0, 0+a, size.width, size.height);
-			
-			if(panelWidth+a <= 0) {
-				transition = false;
-				mainMenuPanel.setVisible(false);
-			}
-		}
+//		Insets insets = getInsets();
+//		Dimension size = gamePanel.getPreferredSize();
+//		i+=7;
+//		if(transition) {
+//
+//	        if (i % 7 == 0)
+//	        	a -=3;
+//			targetPanel.setBounds(0, panelWidth+a, size.width, size.height);
+//			mainMenuPanel.setBounds(0, 0+a, size.width, size.height);
+//			
+//			if(panelWidth+a <= 0) {
+//				transition = false;
+//				mainMenuPanel.setVisible(false);
+//			}
+//		}
 		
 	}
 
