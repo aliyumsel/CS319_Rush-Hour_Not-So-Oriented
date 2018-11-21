@@ -35,12 +35,15 @@ public class GamePanel extends JPanel {
 
    private Dimension squareButtonDimension;
 
+   private int panelWidth = 764;
+   private int panelHeight = 468;
+
 	public GamePanel(int index, GuiPanelManager _guiManager) {
 		super(null);
 
 		guiManager = _guiManager;
 
-		setPreferredSize(new Dimension(763, 468));
+		setPreferredSize(new Dimension(panelWidth, panelHeight));
 		this.index = index;
 
 		loadImages();
@@ -99,13 +102,13 @@ public class GamePanel extends JPanel {
 		timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
 		timerIcon.setPreferredSize(new Dimension(32, 32));
 
-		moveLabel = new JLabel("Number of Moves:");
-		moveLabel.setFont(new Font("Calibri", Font.PLAIN, 13));
-		moveLabel.setPreferredSize(new Dimension(107, 21));
+		moveLabel = new JLabel("Moves", SwingConstants.CENTER);
+		moveLabel.setFont(new Font("Odin Rounded", Font.BOLD, 35));
+		moveLabel.setPreferredSize(new Dimension(107, 25));
 
 		numberLabel = new JLabel("0", SwingConstants.CENTER);
 		numberLabel.setPreferredSize(new Dimension(107, 68));
-		numberLabel.setFont(new Font("Calibri", Font.BOLD, 60));
+		numberLabel.setFont(new Font("Odin Rounded", Font.BOLD, 60));
 
 		timer = new JProgressBar(SwingConstants.VERTICAL);
 		timer.setPreferredSize(new Dimension(30, 300));
@@ -114,20 +117,20 @@ public class GamePanel extends JPanel {
 
 	private void setBoundsOfComponents() {
 		Insets insets = getInsets();
-		Dimension size = back.getPreferredSize();
-		back.setBounds(32 + insets.left, 46 + insets.top, size.width, size.height);
-		size = reset.getPreferredSize();
-		reset.setBounds(680 + insets.left, 46 + insets.top, size.width, size.height);
-		size = moveLabel.getPreferredSize();
-		moveLabel.setBounds(635 + insets.left, 164 + insets.top, size.width, size.height);
-		size = numberLabel.getPreferredSize();
-		numberLabel.setBounds(635 + insets.left, 200 + insets.top, size.width, size.height);
-		size = timerIcon.getPreferredSize();
-		timerIcon.setBounds(70 + insets.left, 116 + insets.top, size.width, size.height);
-		size = timer.getPreferredSize();
-		timer.setBounds(71 + insets.left, 160 + insets.top, size.width, size.height);
-		size = innerGamePanel.getPreferredSize();
-		innerGamePanel.setBounds(156 + insets.left, 9 + insets.top, size.width, size.height);
+
+		back.setBounds(30 + insets.left, 30 + insets.top, back.getPreferredSize().width, back.getPreferredSize().height);
+
+		reset.setBounds(panelWidth - 30 - reset.getPreferredSize().width + insets.left, 30 + insets.top, reset.getPreferredSize().width, reset.getPreferredSize().height);
+
+		moveLabel.setBounds(635 + insets.left, 164 + insets.top, moveLabel.getPreferredSize().width, moveLabel.getPreferredSize().height);
+
+		numberLabel.setBounds(635 + insets.left, 200 + insets.top, numberLabel.getPreferredSize().width,  numberLabel.getPreferredSize().height);
+
+		timerIcon.setBounds(70 + insets.left, 116 + insets.top, timerIcon.getPreferredSize().width, timerIcon.getPreferredSize().height);
+
+		timer.setBounds(71 + insets.left, 160 + insets.top, timer.getPreferredSize().width, timer.getPreferredSize().height);
+
+		innerGamePanel.setBounds(156 + insets.left, 9 + insets.top, innerGamePanel.getPreferredSize().width, innerGamePanel.getPreferredSize().height);
 
 	}
 

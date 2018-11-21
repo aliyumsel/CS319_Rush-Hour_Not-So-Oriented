@@ -2,6 +2,7 @@ package source.view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -66,6 +67,6 @@ public class InnerGamePanel extends JPanel {
 		endOfLevelPanel.setVisible(false);
 		Insets insets = getInsets();
 		Dimension size = endOfLevelPanel.getPreferredSize();
-		endOfLevelPanel.setBounds(100 + insets.left, 100 + insets.top, size.width, size.height);
+		endOfLevelPanel.setBounds(25 + insets.left, 100 + insets.top, size.width, size.height);
 	}
 }

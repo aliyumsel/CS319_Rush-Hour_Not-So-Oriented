@@ -4,12 +4,17 @@ import source.controller.GameEngine;
 import source.controller.Input;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.TimerTask;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 //import source.controller.Controller;
 //import source.controller.Sound;
@@ -25,11 +30,32 @@ public class GuiPanelManager extends JFrame {
 	private GamePanel gamePanel;
 	private MainMenuPanel mainMenuPanel;
 
+	public Font odinRounded;
+
+   private Dimension longButtonDimension;
+   private Dimension squareButtonDimension;
+   private Dimension playButtonDimension;
+
 	public GuiPanelManager() {
 		super("Rush Hour");
 		instance = this;
 
-		setLayout(new CardLayout());
+      File fontFile = new File("src/fonts/odin.ttf");
+      try
+      {
+         odinRounded = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+         ge.registerFont(odinRounded);
+      } catch (FontFormatException | IOException e)
+      {
+         e.printStackTrace();
+      }
+
+      longButtonDimension = new Dimension(171, 37);
+      squareButtonDimension = new Dimension(49,55); // evet kare degil biliyom ellemeyin
+      playButtonDimension = new Dimension(131,147);
+
+      setLayout(new CardLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -51,7 +77,8 @@ public class GuiPanelManager extends JFrame {
 		setVisible(true);
 	}
 
-	public JPanel getCurrentPanel() {
+	public JPanel getCurrentPanel()
+	{
 		return (JPanel) getComponent(currentPanelIndex);
 	}
 
@@ -75,7 +102,7 @@ public class GuiPanelManager extends JFrame {
 		}
 	}
 
-	public void updatePanels() {// burda bi manasýzlýk var main aslýnda hangi panel active se o olmasý gerekiyo sadece gibi ismi	
+	public void updatePanels() {// burda bi manasï¿½zlï¿½k var main aslï¿½nda hangi panel active se o olmasï¿½ gerekiyo sadece gibi ismi	
 		gamePanel.updatePanel();
 	}
 
@@ -85,4 +112,47 @@ public class GuiPanelManager extends JFrame {
 		addKeyListener(keyListener);
 		gamePanel.getInnerGamePanel().addMouseListener(mouseListener);
 	}
+
+   void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage, String buttonType, ActionListener actionListener)
+   {
+      button.addActionListener(actionListener);
+      if ( buttonType.equals("long") )
+      {
+         button.setPreferredSize(longButtonDimension);
+      }
+      else if (buttonType.equals("square"))
+      {
+         button.setPreferredSize(squareButtonDimension);
+      }
+      else if (buttonType.equals("play"))
+      {
+         button.setPreferredSize(playButtonDimension);
+      }
+      else
+      {
+         System.out.println("Error: Enter valid String");
+      }
+
+      button.setIcon(new ImageIcon(normalImage));
+      button.setRolloverIcon(new ImageIcon(highlightedImage));
+      button.setPressedIcon(new ImageIcon(highlightedImage));
+      button.setOpaque(false);
+      button.setContentAreaFilled(false);
+      button.setBorderPainted(false);
+      button.setFocusable(false);
+   }
+
+   BufferedImage LoadImage(String FileName) {
+      BufferedImage image = null;
+      try {
+         image = ImageIO.read(new File(FileName));
+      } catch (IOException e) {
+      }
+      return image;
+   }
+
+   public int findCenterHorizontal(int _panelWidth, Component _component)
+   {
+      return (_panelWidth - _component.getPreferredSize().width) / 2;
+   }
 }
