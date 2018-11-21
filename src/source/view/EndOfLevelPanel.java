@@ -43,15 +43,16 @@ public class EndOfLevelPanel extends JPanel {
 		setBoundsOfComponents();
 	}
 
-	private void loadImages() {
-		menuButtonImage = guiManager.LoadImage("src/image/icons/back.png");
-		menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
+   private void loadImages()
+   {
+      menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
+      menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
 
 		retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
 		retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
 
-		nextLevelButtonImage = guiManager.LoadImage("src/image/icons/help.png");
-		nextLevelButtonHighlightedImage = guiManager.LoadImage("src/image/icons/helpH.png");
+      nextLevelButtonImage = guiManager.LoadImage("src/image/icons/next.png");
+      nextLevelButtonHighlightedImage = guiManager.LoadImage("src/image/icons/nextH.png");
 
 		starImage = guiManager.LoadImage("src/image/icons/star.png");
 		starLockedImage = guiManager.LoadImage("src/image/icons/starLocked.png");

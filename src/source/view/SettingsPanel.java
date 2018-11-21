@@ -8,9 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-/**
- * Created by ASTOD on 11/21/2018.
- */
 public class SettingsPanel extends JPanel
 {
    private GuiPanelManager guiManager;
@@ -18,6 +15,9 @@ public class SettingsPanel extends JPanel
    private JLabel heading;
    private JLabel volume;
    private JLabel theme;
+
+   private JButton music;
+   private JButton sfx;
 
    private JButton back;
    private JButton simple;
@@ -28,6 +28,14 @@ public class SettingsPanel extends JPanel
    private BufferedImage background;
    private BufferedImage backButtonImage;
    private BufferedImage backButtonHighlightedImage;
+   private BufferedImage musicImage;
+   private BufferedImage musicHighlightedImage;
+   private BufferedImage musicOffImage;
+   private BufferedImage musicOffHighlightedImage;
+   private BufferedImage sfxImage;
+   private BufferedImage sfxHighlightedImage;
+   private BufferedImage sfxOffImage;
+   private BufferedImage sfxOffHighlightedImage;
 
    private int panelWidth = 764;
    private int panelHeight = 468;
@@ -52,10 +60,20 @@ public class SettingsPanel extends JPanel
       background = guiManager.LoadImage("src/image/orange.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
+      musicImage = guiManager.LoadImage("src/image/icons/musicon.png");
+      musicHighlightedImage = guiManager.LoadImage("src/image/icons/musiconH.png");
+      musicOffImage = guiManager.LoadImage("src/image/icons/musicoff.png");
+      musicOffHighlightedImage = guiManager.LoadImage("src/image/icons/musicoffH.png");
+      sfxImage = guiManager.LoadImage("src/image/icons/soundon.png");
+      sfxHighlightedImage = guiManager.LoadImage("src/image/icons/soundonH.png");
+      sfxOffImage = guiManager.LoadImage("src/image/icons/soundoff.png");
+      sfxOffHighlightedImage = guiManager.LoadImage("src/image/icons/soundoffH.png");
    }
 
    private void createComponents()
    {
+      music = new JButton();
+      sfx = new JButton();
       back = new JButton();
       simple = new JButton();
       classic = new JButton();
@@ -67,6 +85,8 @@ public class SettingsPanel extends JPanel
       guiManager.setupButton(classic,backButtonImage,backButtonHighlightedImage,"square",actionListener);
       guiManager.setupButton(safari,backButtonImage,backButtonHighlightedImage,"square",actionListener);
       guiManager.setupButton(space,backButtonImage,backButtonHighlightedImage,"square",actionListener);
+      guiManager.setupButton(music,musicImage,musicHighlightedImage,"square",actionListener);
+      guiManager.setupButton(sfx,sfxImage,sfxHighlightedImage,"square",actionListener);
 
       heading = new JLabel("Settings", SwingConstants.CENTER);
       heading.setPreferredSize(new Dimension(300, 90));
@@ -89,6 +109,9 @@ public class SettingsPanel extends JPanel
       System.out.print("");
       add(back);
 
+      add(music);
+      add(sfx);
+
       add(heading);
       add(volume);
       add(theme);
@@ -102,6 +125,10 @@ public class SettingsPanel extends JPanel
    private void setBoundsOfComponents()
    {
       Insets insets = getInsets();
+
+      music.setBounds(75 + insets.left, 200 + insets.top, music.getPreferredSize().width, music.getPreferredSize().height);
+
+      sfx.setBounds(175 + insets.left, 200 + insets.top, sfx.getPreferredSize().width, sfx.getPreferredSize().height);
 
       back.setBounds(30 + insets.left, 30 + insets.top, back.getPreferredSize().width, back.getPreferredSize().height);
 
@@ -121,11 +148,24 @@ public class SettingsPanel extends JPanel
 
    }
 
-   private ActionListener actionListener = e -> {
-	   SoundManager.instance.buttonClick();
-      if (e.getSource() == back) {
+   private ActionListener actionListener = e ->
+   {
+      if (e.getSource() == back)
+      {
          GameEngine.instance.gameManager.loadLastLevel();
          guiManager.setPanelVisible("MainMenu");
+      }
+      else if (e.getSource() == music)
+      {
+         //change the icon according to the music state which will be stored in somewhere in controllers
+         music.setIcon(new ImageIcon(musicOffImage));
+         music.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
+      }
+      else if (e.getSource() == sfx)
+      {
+         //change the icon according to the music state which will be stored in somewhere in controllers
+         sfx.setIcon(new ImageIcon(sfxOffImage));
+         sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
       }
    };
 
