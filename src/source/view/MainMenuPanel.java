@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import source.controller.GameEngine;
+import source.controller.SoundManager;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -109,6 +110,7 @@ public class MainMenuPanel extends JPanel {
 
    private ActionListener actionListener = e ->
    {
+	   SoundManager.instance.buttonClick();
       if (e.getSource() == play) {
          GameEngine.instance.gameManager.loadLastLevel();
          guiManager.setPanelVisible("Game");

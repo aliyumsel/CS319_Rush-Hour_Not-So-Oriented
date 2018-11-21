@@ -1,6 +1,7 @@
 package source.view;
 
 import source.controller.GameEngine;
+import source.controller.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,23 +17,22 @@ public class EndOfLevelPanel extends JPanel {
 	private JButton nextLevel;
 	private JLabel heading;
 	private JLabel star1;
-   private JLabel star2;
-   private JLabel star3;
+	private JLabel star2;
+	private JLabel star3;
 
-   private BufferedImage menuButtonImage;
-   private BufferedImage menuButtonHighlightedImage;
-   private BufferedImage retryButtonImage;
-   private BufferedImage retryButtonHighlightedImage;
-   private BufferedImage nextLevelButtonImage;
-   private BufferedImage nextLevelButtonHighlightedImage;
-   private BufferedImage starImage;
-   private BufferedImage starLockedImage;
+	private BufferedImage menuButtonImage;
+	private BufferedImage menuButtonHighlightedImage;
+	private BufferedImage retryButtonImage;
+	private BufferedImage retryButtonHighlightedImage;
+	private BufferedImage nextLevelButtonImage;
+	private BufferedImage nextLevelButtonHighlightedImage;
+	private BufferedImage starImage;
+	private BufferedImage starLockedImage;
 
-   private int panelWidth = 400;
-   private int panelHeight = 250;
+	private int panelWidth = 400;
+	private int panelHeight = 250;
 
-	public EndOfLevelPanel(GuiPanelManager _guiManager)
-   {
+	public EndOfLevelPanel(GuiPanelManager _guiManager) {
 		super(null);
 		guiManager = _guiManager;
 		setPreferredSize(new Dimension(panelWidth, panelHeight));
@@ -43,20 +43,19 @@ public class EndOfLevelPanel extends JPanel {
 		setBoundsOfComponents();
 	}
 
-   private void loadImages()
-   {
-      menuButtonImage = guiManager.LoadImage("src/image/icons/back.png");
-      menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
+	private void loadImages() {
+		menuButtonImage = guiManager.LoadImage("src/image/icons/back.png");
+		menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
 
-      retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
-      retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
+		retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
+		retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
 
-      nextLevelButtonImage = guiManager.LoadImage("src/image/icons/help.png");
-      nextLevelButtonHighlightedImage = guiManager.LoadImage("src/image/icons/helpH.png");
+		nextLevelButtonImage = guiManager.LoadImage("src/image/icons/help.png");
+		nextLevelButtonHighlightedImage = guiManager.LoadImage("src/image/icons/helpH.png");
 
-      starImage = guiManager.LoadImage("src/image/icons/star.png");
-      starLockedImage = guiManager.LoadImage("src/image/icons/starLocked.png");
-   }
+		starImage = guiManager.LoadImage("src/image/icons/star.png");
+		starLockedImage = guiManager.LoadImage("src/image/icons/starLocked.png");
+	}
 
 	void updatePanel() {
 		if (!isShowing()) {
@@ -70,29 +69,28 @@ public class EndOfLevelPanel extends JPanel {
 		setBackground(Color.orange);
 	}
 
-	private void createComponents()
-   {
+	private void createComponents() {
 		heading = new JLabel("Level Completed!", SwingConstants.CENTER);
 		heading.setPreferredSize(new Dimension(300, 60));
 		heading.setFont(new Font("Odin Rounded", Font.PLAIN, 35));
 		heading.setForeground(Color.white);
 
 		star1 = new JLabel();
-      star2 = new JLabel();
-      star3 = new JLabel();
+		star2 = new JLabel();
+		star3 = new JLabel();
 
-      star1.setIcon(new ImageIcon(starImage));
-      star2.setIcon(new ImageIcon(starImage));
-      star3.setIcon(new ImageIcon(starLockedImage));
-
+		star1.setIcon(new ImageIcon(starImage));
+		star2.setIcon(new ImageIcon(starImage));
+		star3.setIcon(new ImageIcon(starLockedImage));
 
 		menu = new JButton();
 		retry = new JButton();
 		nextLevel = new JButton();
 
-		guiManager.setupButton(menu,menuButtonImage,menuButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(retry,retryButtonImage,retryButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(nextLevel,nextLevelButtonImage,nextLevelButtonHighlightedImage,"square",actionListener);
+		guiManager.setupButton(menu, menuButtonImage, menuButtonHighlightedImage, "square", actionListener);
+		guiManager.setupButton(retry, retryButtonImage, retryButtonHighlightedImage, "square", actionListener);
+		guiManager.setupButton(nextLevel, nextLevelButtonImage, nextLevelButtonHighlightedImage, "square",
+				actionListener);
 
 	}
 
@@ -102,8 +100,8 @@ public class EndOfLevelPanel extends JPanel {
 		add(nextLevel);
 		add(heading);
 		add(star1);
-      add(star2);
-      add(star3);
+		add(star2);
+		add(star3);
 	}
 
 	private void setBoundsOfComponents() {
@@ -112,11 +110,15 @@ public class EndOfLevelPanel extends JPanel {
 		Dimension size;
 		size = retry.getPreferredSize();
 
-		heading.setBounds(50 + insets.left, 20 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
+		heading.setBounds(50 + insets.left, 20 + insets.top, heading.getPreferredSize().width,
+				heading.getPreferredSize().height);
 
-		star1.setBounds(guiManager.findCenterHorizontal(panelWidth,star1) - 85 + insets.left, 80 + insets.top, star1.getPreferredSize().width, star1.getPreferredSize().height);
-      star2.setBounds(guiManager.findCenterHorizontal(panelWidth,star2) + insets.left, 80 + insets.top, star1.getPreferredSize().width, star1.getPreferredSize().height);
-      star3.setBounds(guiManager.findCenterHorizontal(panelWidth,star3) + 85 + insets.left, 80 + insets.top, star1.getPreferredSize().width, star1.getPreferredSize().height);
+		star1.setBounds(guiManager.findCenterHorizontal(panelWidth, star1) - 85 + insets.left, 80 + insets.top,
+				star1.getPreferredSize().width, star1.getPreferredSize().height);
+		star2.setBounds(guiManager.findCenterHorizontal(panelWidth, star2) + insets.left, 80 + insets.top,
+				star1.getPreferredSize().width, star1.getPreferredSize().height);
+		star3.setBounds(guiManager.findCenterHorizontal(panelWidth, star3) + 85 + insets.left, 80 + insets.top,
+				star1.getPreferredSize().width, star1.getPreferredSize().height);
 
 		menu.setBounds(105 + insets.left, 170 + insets.top, size.width, size.height);
 		retry.setBounds(175 + insets.left, 170 + insets.top, size.width, size.height);
@@ -126,6 +128,7 @@ public class EndOfLevelPanel extends JPanel {
 	private ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			SoundManager.instance.buttonClick();
 			if (e.getSource() == retry) {
 				GameEngine.instance.gameManager.resetLevel();
 			}

@@ -152,6 +152,7 @@ public class GamePanel extends JPanel {
 	private ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			SoundManager.instance.buttonClick();
 			if (e.getSource() == reset) {
 				GameEngine.instance.gameManager.resetLevel();
 			}
