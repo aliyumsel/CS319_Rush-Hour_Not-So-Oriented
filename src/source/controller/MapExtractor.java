@@ -25,8 +25,8 @@ public class MapExtractor {
 	public Map extractLevel(int level, Player player) throws FileNotFoundException
    {
       vehicleArray.clear();
-      
-      if (player != null && player.getLevels().get(level - 1).getStatus().equals("inProgress"))
+      //inside of the if condition will be revised
+      if (player != null && player.getLevels().size() >= level && player.getLevels().get(level - 1).getStatus().equals("inProgress"))
 	  {
     	  scanLevel = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
     	  boolean trace = true;
