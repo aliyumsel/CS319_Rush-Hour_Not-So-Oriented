@@ -1,0 +1,6 @@
+<NumberOfPlayers>
+	1
+<NumberOfPlayers/>
+<LastActivePlayer>
+	Kaan
+<LastActivePlayer/>

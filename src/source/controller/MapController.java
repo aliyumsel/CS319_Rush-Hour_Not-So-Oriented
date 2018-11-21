@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import source.model.Map;
+import source.model.Player;
 import source.model.Vehicle;
 
 /**
@@ -19,7 +20,7 @@ public class MapController
    public boolean mapFinished;
 
    public MapController()
-   {
+   {  
       instance = this;
       mapExtractor = new MapExtractor();
       //map = new Map();
@@ -29,7 +30,12 @@ public class MapController
    {
       try
       {
-         map = mapExtractor.extractLevel(level);
+    	 //For testing
+    	 PlayerManager pm = PlayerManager.instance;
+    	 pm.extractPlayers();
+    	 pm.setCurrentPlayer(pm.getPlayers().get(0));
+    	 Player currentPlayer = pm.getCurrentPlayer();
+         map = mapExtractor.extractLevel(level, currentPlayer);
       }
       catch (FileNotFoundException e)
       {

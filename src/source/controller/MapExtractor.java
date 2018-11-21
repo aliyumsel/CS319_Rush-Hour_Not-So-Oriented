@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import source.model.Map;
+import source.model.Player;
 import source.model.Car;
 import source.model.Truck;
 import source.model.Vehicle;
@@ -21,16 +22,36 @@ public class MapExtractor {
       map = new Map();
 	}
 
-	public Map extractLevel(int level) throws FileNotFoundException
+	public Map extractLevel(int level, Player player) throws FileNotFoundException
    {
       vehicleArray.clear();
-
-      scanLevel = new Scanner(new File("src/data/level" + level + ".txt"));
+      
+      if (player != null && player.getLevels().get(level - 1).getStatus().equals("inProgress"))
+	  {
+    	  scanLevel = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
+    	  boolean trace = true;
+    	  while (trace)
+    	  {
+    		  if (scanLevel.nextLine().trim().equals("<LevelNo>"))
+    		  {
+    			  if (scanLevel.nextLine().trim().equals(level + ""))
+    			  {
+    				  trace = false;
+    			  }
+    		  }
+    	  }
+	  }
+      else
+      {
+    	  scanLevel = new Scanner(new File("src/data/levels/level" + level + ".txt"));
+      }
       int x = 0;
       int y = 0;
-
-      while (scanLevel.hasNext()) {
-         String row = scanLevel.nextLine();
+      
+      while (!scanLevel.nextLine().trim().equals("<Map>"));
+      String row = scanLevel.nextLine();
+      do {
+         
          scanRow = new Scanner(row);
          scanRow.useDelimiter(" ");
 
@@ -67,7 +88,8 @@ public class MapExtractor {
          }
          y++;
          x = 0;
-      }
+         row = scanLevel.nextLine();
+      } while (!row.trim().equals("<Map/>"));
       map.formMap(vehicleArray);
       return map;
    }
