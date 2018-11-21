@@ -19,15 +19,15 @@ public class GamePanel extends JPanel {
 	private int index;
 	private InnerGamePanel innerGamePanel;
 
-	private JButton back;
+	private JButton menu;
 	private JButton reset;
 	private JLabel timerIcon;
 	private JLabel moveLabel;
 	private JLabel numberLabel;
 	private JProgressBar timer;
 
-	private BufferedImage backButtonImage;
-	private BufferedImage backButtonHighlightedImage;
+	private BufferedImage menuButtonImage;
+	private BufferedImage menuButtonHighlightedImage;
    private BufferedImage resetButtonImage;
    private BufferedImage resetButtonHighlightedImage;
    private BufferedImage pauseButtonImage;
@@ -50,7 +50,7 @@ public class GamePanel extends JPanel {
 
 		createComponents();
 
-		add(back);
+		add(menu);
 		add(reset);
 		add(moveLabel);
 		add(numberLabel);
@@ -81,8 +81,8 @@ public class GamePanel extends JPanel {
 
    private void loadImages()
    {
-      backButtonImage = LoadImage("src/image/icons/back.png");
-      backButtonHighlightedImage = LoadImage("src/image/icons/backH.png");
+      menuButtonImage = LoadImage("src/image/icons/menu.png");
+      menuButtonHighlightedImage = LoadImage("src/image/icons/menuH.png");
 
       resetButtonImage = LoadImage("src/image/icons/reset.png");
       resetButtonHighlightedImage = LoadImage("src/image/icons/resetH.png");
@@ -93,10 +93,10 @@ public class GamePanel extends JPanel {
 
 	private void createComponents()
    {
-      back = new JButton();
+      menu = new JButton();
       reset = new JButton();
 
-      setupButton(back,backButtonImage,backButtonHighlightedImage);
+      setupButton(menu,menuButtonImage,menuButtonHighlightedImage);
       setupButton(reset,resetButtonImage,resetButtonHighlightedImage);
 
 		timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
@@ -118,7 +118,7 @@ public class GamePanel extends JPanel {
 	private void setBoundsOfComponents() {
 		Insets insets = getInsets();
 
-		back.setBounds(30 + insets.left, 30 + insets.top, back.getPreferredSize().width, back.getPreferredSize().height);
+		menu.setBounds(30 + insets.left, 30 + insets.top, menu.getPreferredSize().width, menu.getPreferredSize().height);
 
 		reset.setBounds(panelWidth - 30 - reset.getPreferredSize().width + insets.left, 30 + insets.top, reset.getPreferredSize().width, reset.getPreferredSize().height);
 
@@ -156,7 +156,7 @@ public class GamePanel extends JPanel {
 				GameEngine.instance.gameManager.resetLevel();
 			}
 
-			if (e.getSource() == back) {
+			if (e.getSource() == menu ) {
 				guiManager.setPanelVisible("MainMenu");
 			}
 		}
