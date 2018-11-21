@@ -45,13 +45,13 @@ public class InnerGamePanel extends JPanel {
 
    private void loadImages()
    {
-      background = guiManager.LoadImage("src/image/asphalt.png");
+      background = guiManager.LoadImage("src/image/roadBackground.png");
    }
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setBackground(Color.WHITE);
-//      drawBackground(g);
+      	drawBackground(g);
 
 		if (map == null) {
 			return;

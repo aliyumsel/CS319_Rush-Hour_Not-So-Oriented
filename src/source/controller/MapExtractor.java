@@ -80,7 +80,7 @@ public class MapExtractor {
             } else if (objectCode.equals("CL")) {
                vehicleArray.add(new Car(x, y, "Left", false));
             } else if (objectCode.equals("PC")) {
-               vehicleArray.add(new Car(x, y, "Right", true));
+               vehicleArray.add(new Car(x, y, "Left", true));
             } else if (objectCode.equals("PT")) {
                vehicleArray.add(new Truck(x, y, "Right", true));
             }
