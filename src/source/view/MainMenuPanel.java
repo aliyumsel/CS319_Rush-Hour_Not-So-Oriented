@@ -54,13 +54,13 @@ public class MainMenuPanel extends JPanel {
    private int panelWidth = 764;
    private int panelHeight = 468;
 
-   MainMenuPanel(int index, GuiPanelManager _guiManager) {
+   MainMenuPanel(int index, GuiPanelManager _guiManager)
+   {
 		super(null);
 
 		guiManager = _guiManager;
 
 		setPreferredSize(new Dimension(panelWidth, panelHeight));
-		//this.index = index;
 
 		loadImages();
 
@@ -76,10 +76,6 @@ public class MainMenuPanel extends JPanel {
 		add(exit);
 		setBoundsOfComponents();
 		this.setVisible(true);
-
-//      longButtonDimension = new Dimension(171, 37);
-//      squareButtonDimension = new Dimension(49,55); // evet kare degil biliyom ellemeyin
-//      playButtonDimension = new Dimension(131,147);
 
 	}
 
@@ -111,17 +107,31 @@ public class MainMenuPanel extends JPanel {
       settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsH.png");
    }
 
-   private ActionListener actionListener = e -> {
+   private ActionListener actionListener = e ->
+   {
       if (e.getSource() == play) {
          GameEngine.instance.gameManager.loadLastLevel();
          guiManager.setPanelVisible("Game");
+      }
+
+      if (e.getSource() == credits)
+      {
+         guiManager.setPanelVisible("Credits");
+      }
+
+      if (e.getSource() == settings)
+      {
+         guiManager.setPanelVisible("Settings");
+      }
+
+      if (e.getSource() == exit)
+      {
+         System.exit(0);
       }
    };
 
 	private void createComponents()
    {
-		//Font stdFont = new Font("Calibri", Font.PLAIN, 13);
-
 		heading = new JLabel();
 		heading.setIcon(new ImageIcon(title));
 		heading.setPreferredSize(new Dimension(295, 58));
@@ -207,11 +217,11 @@ public class MainMenuPanel extends JPanel {
 		// setBackground(Color.WHITE);
 	}
 
-	private void drawBackground(Graphics graphics) {
+   private void drawBackground(Graphics graphics) {
 
-		Graphics2D graphics2d = (Graphics2D) graphics;
+      Graphics2D graphics2d = (Graphics2D) graphics;
 
-		graphics2d.drawImage(background, 0, 0, null);
+      graphics2d.drawImage(background, 0, 0, null);
 
-	}
+   }
 }
