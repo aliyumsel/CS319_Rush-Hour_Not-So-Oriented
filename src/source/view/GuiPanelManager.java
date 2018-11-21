@@ -21,14 +21,15 @@ import javax.swing.*;
 //import source.model.GameEngine;
 
 @SuppressWarnings("serial")
-public class GuiPanelManager extends JFrame {
+public class GuiPanelManager extends JFrame
+{
 	public static GuiPanelManager instance;
-
-	// private GameEngine gameEngine;
 
 	private int currentPanelIndex;
 	private GamePanel gamePanel;
 	private MainMenuPanel mainMenuPanel;
+	private CreditsPanel creditsPanel;
+	private SettingsPanel settingsPanel;
 
 	public Font odinRounded;
 
@@ -61,8 +62,12 @@ public class GuiPanelManager extends JFrame {
 
 		mainMenuPanel = new MainMenuPanel(0, this);
 		gamePanel = new GamePanel(1, this);
+		creditsPanel = new CreditsPanel(this);
+		settingsPanel = new SettingsPanel(this);
 		add(mainMenuPanel);
 		add(gamePanel);
+		add(creditsPanel);
+		add(settingsPanel);
 
 		currentPanelIndex = 0;
 
@@ -90,19 +95,31 @@ public class GuiPanelManager extends JFrame {
 		return mainMenuPanel;
 	}
 
-	public void setPanelVisible(String panelName) {
-		if (panelName == "MainMenu") {
+	void setPanelVisible(String panelName) {
+		if (panelName.equals("MainMenu")) {
 			mainMenuPanel.setVisible(true);
 			setContentPane(mainMenuPanel);
-		} else if (panelName == "Game") {
+		} else if (panelName.equals("Game")) {
 			gamePanel.setVisible(true);
 			setContentPane(gamePanel);
-		} else {
-			return;
+		}
+		else if (panelName.equals("Credits"))
+      {
+         creditsPanel.setVisible(true);
+         setContentPane(creditsPanel);
+      }
+      else if (panelName.equals("Settings"))
+      {
+         settingsPanel.setVisible(true);
+         setContentPane(settingsPanel);
+      }
+      else
+      {
+         System.out.println("Error: Enter valid name");
 		}
 	}
 
-	public void updatePanels() {// burda bi manas�zl�k var main asl�nda hangi panel active se o olmas� gerekiyo sadece gibi ismi	
+	void updatePanels() {// burda bi manas�zl�k var main asl�nda hangi panel active se o olmas� gerekiyo sadece gibi ismi
 		gamePanel.updatePanel();
 	}
 
