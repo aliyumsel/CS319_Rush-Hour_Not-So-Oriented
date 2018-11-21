@@ -127,13 +127,13 @@ public class SettingsPanel extends JPanel
    {
       Insets insets = getInsets();
 
+      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) + insets.left, 25 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
+
       music.setBounds(75 + insets.left, 200 + insets.top, music.getPreferredSize().width, music.getPreferredSize().height);
 
       sfx.setBounds(175 + insets.left, 200 + insets.top, sfx.getPreferredSize().width, sfx.getPreferredSize().height);
 
       back.setBounds(30 + insets.left, 30 + insets.top, back.getPreferredSize().width, back.getPreferredSize().height);
-
-      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) + insets.left, 25 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
 
       volume.setBounds(50 + insets.left, 150 + insets.top, volume.getPreferredSize().width, volume.getPreferredSize().height);
 

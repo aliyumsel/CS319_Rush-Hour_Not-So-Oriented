@@ -1,4 +1,6 @@
 package source.view;
 
-public class PauseMenuPanel {
+public class PauseMenuPanel
+{
+
 }

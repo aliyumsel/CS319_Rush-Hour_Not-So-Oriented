@@ -173,7 +173,7 @@ public class MainMenuPanel extends JPanel {
 
 		exit.setBounds(panelWidth - 30 - exit.getPreferredSize().width + insets.left, 30 + insets.top, exit.getPreferredSize().width, exit.getPreferredSize().height);
 
-		heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) + insets.left, 50 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
+		heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) + insets.left, 25 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
 
 		player.setBounds(guiManager.findCenterHorizontal(panelWidth,player) + insets.left, 130 + insets.top, player.getPreferredSize().width, player.getPreferredSize().height);
 

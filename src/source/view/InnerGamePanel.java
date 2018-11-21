@@ -1,31 +1,31 @@
 package source.view;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import source.controller.GameEngine;
 import source.model.*;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
 import javax.swing.JPanel;
-import interfaces.*;
-import source.controller.Input;
 
 import source.model.Map;
 
 @SuppressWarnings("serial")
 public class InnerGamePanel extends JPanel {
-	private GuiPanelManager guiPanelManager;
+	private GuiPanelManager guiManager;
 	private Map map;
 	private EndOfLevelPanel endOfLevelPanel;
 
-	public InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
+   private BufferedImage background;
+
+   InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
 		super(null);
-		this.guiPanelManager = guiManager;
+		this.guiManager = guiManager;
 		setPreferredSize(new Dimension(450, 450));
+
+		loadImages();
+
 		createEndOfLevelPanel();
 
 		setVisible(true);
@@ -43,9 +43,15 @@ public class InnerGamePanel extends JPanel {
 		repaint();
 	}
 
+   private void loadImages()
+   {
+      background = guiManager.LoadImage("src/image/asphalt.png");
+   }
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setBackground(Color.WHITE);
+//      drawBackground(g);
 
 		if (map == null) {
 			return;
@@ -56,13 +62,21 @@ public class InnerGamePanel extends JPanel {
 		}
 	}
 
+   private void drawBackground(Graphics graphics) {
+
+      Graphics2D graphics2d = (Graphics2D) graphics;
+
+      graphics2d.drawImage(background, 0, 0, null);
+
+   }
+
 	public void setEndOfLevelPanelVisible(boolean bool) {
 		endOfLevelPanel.setVisible(bool);
 	}
 
 	private void createEndOfLevelPanel() {
 
-		endOfLevelPanel = new EndOfLevelPanel(guiPanelManager);
+		endOfLevelPanel = new EndOfLevelPanel(guiManager);
 		add(endOfLevelPanel);
 		endOfLevelPanel.setVisible(false);
 		Insets insets = getInsets();
