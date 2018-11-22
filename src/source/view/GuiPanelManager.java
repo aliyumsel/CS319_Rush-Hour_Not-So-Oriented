@@ -50,6 +50,7 @@ public class GuiPanelManager extends JFrame {
 		setUndecorated(true);
 		
 		//AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(0, 0, 748, 470, 50, 50));
+		//setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
 		
 		instance = this;
 
@@ -83,7 +84,7 @@ public class GuiPanelManager extends JFrame {
 		add(levelSelectionPanel);
 		add(settingsPanel);
 		add(helpPanel);
-		
+		add(new JPanel());
 		currentPanelIndex = 0;
 
 		setListeners();
