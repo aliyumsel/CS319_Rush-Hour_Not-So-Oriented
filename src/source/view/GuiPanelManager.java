@@ -24,8 +24,7 @@ import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 //import source.model.GameEngine;
 
 @SuppressWarnings("serial")
-public class GuiPanelManager extends JFrame
-{
+public class GuiPanelManager extends JFrame {
 	public static GuiPanelManager instance;
 
 	private int currentPanelIndex;
@@ -33,36 +32,36 @@ public class GuiPanelManager extends JFrame
 	private MainMenuPanel mainMenuPanel;
 	private CreditsPanel creditsPanel;
 	private SettingsPanel settingsPanel;
+	private LevelSelectionPanel levelSelectionPanel;
 	private HelpPanel helpPanel;
 	private int panelWidth = 468;
 	private boolean transition = false;
 	private JPanel targetPanel;
 	public Font odinRounded;
 
-   private Dimension longButtonDimension;
-   private Dimension squareButtonDimension;
-   private Dimension playButtonDimension;
+	private Dimension longButtonDimension;
+	private Dimension arrowButtonDimension;
+	private Dimension squareButtonDimension;
+	private Dimension playButtonDimension;
 
 	public GuiPanelManager() {
 		super("Rush Hour");
 		instance = this;
 
-      File fontFile = new File("src/fonts/odin.ttf");
-      try
-      {
-         odinRounded = Font.createFont(Font.TRUETYPE_FONT, fontFile);
-         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-         ge.registerFont(odinRounded);
-      } catch (FontFormatException | IOException e)
-      {
-         e.printStackTrace();
-      }
+		File fontFile = new File("src/fonts/odin.ttf");
+		try {
+			odinRounded = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(odinRounded);
+		} catch (FontFormatException | IOException e) {
+			e.printStackTrace();
+		}
 
-      longButtonDimension = new Dimension(171, 37);
-      squareButtonDimension = new Dimension(49,55); // evet kare degil biliyom ellemeyin
-      playButtonDimension = new Dimension(131,147);
-
-      setLayout(new CardLayout());
+		longButtonDimension = new Dimension(171, 37);
+		squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
+		playButtonDimension = new Dimension(131, 147);
+		arrowButtonDimension = new Dimension(160,150);
+		setLayout(new CardLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -71,29 +70,28 @@ public class GuiPanelManager extends JFrame
 		creditsPanel = new CreditsPanel(this);
 		settingsPanel = new SettingsPanel(this);
 		helpPanel = new HelpPanel(this);
+		levelSelectionPanel = new LevelSelectionPanel(this);
 		add(mainMenuPanel);
 		add(gamePanel);
 		add(creditsPanel);
 		add(settingsPanel);
 		add(helpPanel);
-
+		add(levelSelectionPanel);
 		currentPanelIndex = 0;
 
 		setListeners();
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		pack();
-		
+
 		mainMenuPanel.setVisible(true);
 		gamePanel.setVisible(false);
-		
-		
+
 		setVisible(true);
 		pack();
 	}
 
-	public JPanel getCurrentPanel()
-	{
+	public JPanel getCurrentPanel() {
 		return (JPanel) getComponent(currentPanelIndex);
 	}
 
@@ -107,42 +105,36 @@ public class GuiPanelManager extends JFrame
 
 	void setPanelVisible(String panelName) {
 		if (panelName.equals("MainMenu")) {
-			mainMenuPanel.setVisible(true);
-			mainMenuPanel.setDoubleBuffered(true);
+
 			targetPanel = mainMenuPanel;
 		} else if (panelName.equals("Game")) {
-			gamePanel.setVisible(true);
-			gamePanel.setDoubleBuffered(true);
+
 			targetPanel = gamePanel;
+		} else if (panelName.equals("Credits")) {
+
+			targetPanel = creditsPanel;
+		} else if (panelName.equals("Settings")) {
+
+			targetPanel = settingsPanel;
+		} else if (panelName.equals("Help")) {
+
+			targetPanel = helpPanel;
+		} else if (panelName.equals("LevelSelection")) {
+			System.out.println("------");
+			targetPanel = levelSelectionPanel;
+		} else {
+			System.out.println("Error: Enter valid name");
 		}
-		else if (panelName.equals("Credits"))
-      {
-         creditsPanel.setVisible(true);
-        
-         targetPanel = creditsPanel;
-      }
-      else if (panelName.equals("Settings"))
-      {
-         settingsPanel.setVisible(true);
-        
-         targetPanel = settingsPanel;
-      }
-      else if (panelName.equals("Help"))
-      {
-         helpPanel.setVisible(true);
-        
-         targetPanel = helpPanel;
-      }
-      else
-      {
-         System.out.println("Error: Enter valid name");
-		}
+		targetPanel.setVisible(true);
 		setContentPane(targetPanel);
-		transition = true;
+	//	transition = true;
 	}
-	int i = 0;
-	int a = 0;
-	void updatePanels() {// burda bi manas�zl�k var main asl�nda hangi panel active se o olmas� gerekiyo sadece gibi ismi
+
+	//int i = 0;
+	//int a = 0;
+
+	void updatePanels() {// burda bi manas�zl�k var main asl�nda hangi panel active se o olmas�
+							// gerekiyo sadece gibi ismi
 		gamePanel.updatePanel();
 //		Insets insets = getInsets();
 //		Dimension size = gamePanel.getPreferredSize();
@@ -159,7 +151,7 @@ public class GuiPanelManager extends JFrame
 //				mainMenuPanel.setVisible(false);
 //			}
 //		}
-		
+
 	}
 
 	private void setListeners() {
@@ -169,48 +161,41 @@ public class GuiPanelManager extends JFrame
 		gamePanel.getInnerGamePanel().addMouseListener(mouseListener);
 	}
 
-   void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage, String buttonType, ActionListener actionListener)
-   {
-      button.addActionListener(actionListener);
-      if ( buttonType.equals("long") )
-      {
-         button.setPreferredSize(longButtonDimension);
-      }
-      else if (buttonType.equals("square"))
-      {
-         button.setPreferredSize(squareButtonDimension);
-      }
-      else if (buttonType.equals("play"))
-      {
-         button.setPreferredSize(playButtonDimension);
-      }
-      else
-      {
-         System.out.println("Error: Enter valid String");
-      }
+	void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage, String buttonType,
+			ActionListener actionListener) {
+		button.addActionListener(actionListener);
+		if (buttonType.equals("long")) {
+			button.setPreferredSize(longButtonDimension);
+		} else if (buttonType.equals("square")) {
+			button.setPreferredSize(squareButtonDimension);
+		} else if (buttonType.equals("play")) {
+			button.setPreferredSize(playButtonDimension);
+		}  else if (buttonType.equals("arrow")) {
+			button.setPreferredSize(arrowButtonDimension);
+		} else {
+			System.out.println("Error: Enter valid String");
+		}
 
-      button.setIcon(new ImageIcon(normalImage));
-      button.setRolloverIcon(new ImageIcon(highlightedImage));
-      button.setPressedIcon(new ImageIcon(highlightedImage));
-      button.setOpaque(false);
-      button.setContentAreaFilled(false);
-      button.setBorderPainted(false);
-      button.setFocusable(false);
-   }
+		button.setIcon(new ImageIcon(normalImage));
+		button.setRolloverIcon(new ImageIcon(highlightedImage));
+		button.setPressedIcon(new ImageIcon(highlightedImage));
+		button.setOpaque(false);
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.setFocusable(false);
+	}
 
-   BufferedImage LoadImage(String FileName) {
-      BufferedImage image = null;
-      try {
-         image = ImageIO.read(new File(FileName));
-      } catch (IOException e) {
-      }
-      return image;
-   }
+	BufferedImage LoadImage(String FileName) {
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File(FileName));
+		} catch (IOException e) {
+		}
+		return image;
+	}
 
-   public int findCenterHorizontal(int _panelWidth, Component _component)
-   {
-      return (_panelWidth - _component.getPreferredSize().width) / 2;
-   }
-   
-  
+	public int findCenterHorizontal(int _panelWidth, Component _component) {
+		return (_panelWidth - _component.getPreferredSize().width) / 2;
+	}
+
 }

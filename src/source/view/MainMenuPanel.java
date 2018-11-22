@@ -136,34 +136,7 @@ public class MainMenuPanel extends JPanel {
       guiManager.setupButton(exit,exitButtonImage,exitButtonHighlightedImage,"square",actionListener);
 	}
 
-//	private void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage, String buttonType)
-//   {
-//      button.addActionListener(actionListener);
-//      if ( buttonType.equals("long") )
-//      {
-//         button.setPreferredSize(longButtonDimension);
-//      }
-//      else if (buttonType.equals("square"))
-//      {
-//         button.setPreferredSize(squareButtonDimension);
-//      }
-//      else if (buttonType.equals("play"))
-//      {
-//         button.setPreferredSize(playButtonDimension);
-//      }
-//      else
-//      {
-//         System.out.println("Error: Enter valid String");
-//      }
-//
-//      button.setIcon(new ImageIcon(normalImage));
-//      button.setRolloverIcon(new ImageIcon(highlightedImage));
-//      button.setPressedIcon(new ImageIcon(highlightedImage));
-//      button.setOpaque(false);
-//      button.setContentAreaFilled(false);
-//      button.setBorderPainted(false);
-//      button.setFocusable(false);
-//   }
+
 
 	private void setBoundsOfComponents()
    {
@@ -214,6 +187,10 @@ public class MainMenuPanel extends JPanel {
       if (e.getSource() == credits)
       {
          guiManager.setPanelVisible("Credits");
+      }
+      if (e.getSource() == levels)
+      {
+         guiManager.setPanelVisible("LevelSelection");
       }
 
       if (e.getSource() == settings)
