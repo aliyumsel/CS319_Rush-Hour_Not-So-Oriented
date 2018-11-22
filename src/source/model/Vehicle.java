@@ -25,21 +25,22 @@ public class Vehicle extends GameObject implements Drawable {
 
 	public Vehicle(int x, int y, int length, String direction, boolean player) {
 		super(x, y, length, direction);
+		String theme = "traffic";
 		this.player = player;
 		vehicleImages = new BufferedImage[length];
-		String path = "src/image/";
+		String path = "src/image/theme_" + theme + "/";
+		int carType = (int) (Math.random()*2);
 
 		if (!player && length == 2)
-			path += "car";
+			path += "small";
 		else if (!player && length == 3)
-			path += "bus";
+			path += "large";
 		else if (player)
-			path += "pcar";
+			path += "player";
 
 		if (direction == "Upwards" || direction == "Right"){
 			for(int i = 0; i < length; i++){
 				if(!player){
-					int carType = (int) Math.random()*2;
 					vehicleImages[i] = LoadImage(path + carType + "-" + i + ".png");
 				}
 				else
@@ -49,7 +50,6 @@ public class Vehicle extends GameObject implements Drawable {
 		else{
 			for(int i = 0; i < length; i++){
 				if(!player){
-					int carType = (int) Math.random()*2;
 					vehicleImages[i] = LoadImage(path + carType + "-" + (length - i - 1) + ".png");
 				}
 				else
