@@ -44,7 +44,7 @@ public class GuiPanelManager extends JFrame {
 
 	public GuiPanelManager() {
 		super("Rush Hour");
-		//setUndecorated(true);
+		setUndecorated(true);
 		instance = this;
 
 		File fontFile = new File("src/fonts/odin.ttf");
@@ -84,6 +84,8 @@ public class GuiPanelManager extends JFrame {
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		pack();
+		setLocationRelativeTo(null);
+		
 
 		mainMenuPanel.setVisible(true);
 		gamePanel.setVisible(false);
