@@ -1,112 +1,209 @@
 package source.view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import source.controller.GameEngine;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
+
+import source.controller.GameEngine;
+import source.controller.SoundManager;
+
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
 
-public class MainMenuPanel extends JPanel{
+public class MainMenuPanel extends JPanel {
 
-    private GuiPanelManager guiManager;
+	private GuiPanelManager guiManager;
 
-    private int index;
-    private JLabel heading;
-    private JLabel player;
-    private  JButton cPlayer;
-    private  JButton play;
-    private  JButton credits;
-    private  JButton levels;
-    private  JButton settings;
-    private  JButton exit;
-    private  JButton help;
+	//private int index;
+	private JLabel heading;
+	private JLabel player;
+	private JButton changePlayer;
+	private JButton play;
+	private JButton credits;
+	private JButton levels;
+	private JButton settings;
+	private JButton exit;
+	private JButton help;
+	//
+	private BufferedImage background;
+	private BufferedImage title;
+	private BufferedImage playButtonImage;
+   private BufferedImage playButtonImageHighlighted;
+	private BufferedImage creditsButtonImage;
+	private BufferedImage creditsButtonHighlightedImage;
+   private BufferedImage changePlayerButtonImage;
+   private BufferedImage changePlayerButtonHighlightedImage;
+   private BufferedImage helpButtonImage;
+   private BufferedImage helpButtonHighlightedImage;
+   private BufferedImage levelsButtonImage;
+   private BufferedImage levelsButtonHighlightedImage;
+   private BufferedImage exitButtonImage;
+   private BufferedImage exitButtonHighlightedImage;
+   private BufferedImage settingsButtonImage;
+   private BufferedImage settingsButtonHighlightedImage;
 
-    public MainMenuPanel(int index, GuiPanelManager _guiManager){
-        super(null);
+   private int panelWidth = 764;
+   private int panelHeight = 468;
 
-        guiManager = _guiManager;
+   MainMenuPanel(int index, GuiPanelManager _guiManager)
+   {
+		super(null);
 
-        setPreferredSize(new Dimension(763,468));
-        this.index = index;
-        createComponents();
-        add(heading);
-        add(player);
-        add(cPlayer);
-        add(play);
-        add(credits);
-        add(levels);
-        add(settings);
-        add(help);
-        add(exit);
-        setBoundsOfComponents();
-        this.setVisible(true);
-    }
+		guiManager = _guiManager;
 
-    private void createComponents() {
+		setPreferredSize(new Dimension(panelWidth, panelHeight));
 
-        ActionListener actionListener = e ->
-        {
-            if (e.getSource() == play)
-            {
-                GameEngine.instance.gameManager.loadLastLevel();
-                guiManager.setPanelVisible("Game");
-            }
-        };
+		loadImages();
 
-        Font stdFont = new Font("Calibri",Font.PLAIN,13);
-        Dimension stdDimension = new Dimension(170,36);
-        heading = new JLabel("RUSH HOUR", SwingConstants.CENTER);
-        heading.setPreferredSize(new Dimension(294, 65));
-        heading.setFont(new Font("Calibri", Font.BOLD+Font.ITALIC, 57));
-        player = new JLabel("Player0", SwingConstants.CENTER);
-        player.setPreferredSize(new Dimension(600, 32));
-        player.setFont(new Font("Calibri",Font.ITALIC,24));
-        cPlayer = new JButton("Change Player");
-        cPlayer.setPreferredSize(stdDimension);
-        cPlayer.setFont(stdFont);
+		createComponents();
+		add(heading);
+		add(player);
+		add(changePlayer);
+		add(play);
+		add(credits);
+		add(levels);
+		add(settings);
+		add(help);
+		add(exit);
+		setBoundsOfComponents();
+		this.setVisible(true);
 
-        play = new JButton("PLAY");
-        play.addActionListener(actionListener);
+	}
+
+	private void loadImages()
+   {
+      background = guiManager.LoadImage("src/image/background.png");
+
+      title = guiManager.LoadImage("src/image/icons/title.png");
+
+      playButtonImage = guiManager.LoadImage("src/image/icons/play.png");
+      playButtonImageHighlighted = guiManager.LoadImage("src/image/icons/playH.png");
+
+      creditsButtonImage = guiManager.LoadImage("src/image/icons/credits.png");
+      creditsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/creditsH.png");
+
+      changePlayerButtonImage = guiManager.LoadImage("src/image/icons/changePlayer.png");
+      changePlayerButtonHighlightedImage = guiManager.LoadImage("src/image/icons/changePlayerH.png");
+
+      helpButtonImage = guiManager.LoadImage("src/image/icons/help.png");
+      helpButtonHighlightedImage = guiManager.LoadImage("src/image/icons/helpH.png");
+
+      levelsButtonImage = guiManager.LoadImage("src/image/icons/levels.png");
+      levelsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/levelsH.png");
+
+      exitButtonImage = guiManager.LoadImage("src/image/icons/quit.png");
+      exitButtonHighlightedImage = guiManager.LoadImage("src/image/icons/quitH.png");
+
+      settingsButtonImage = guiManager.LoadImage("src/image/icons/settings.png");
+      settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsH.png");
+   }
+
+	private void createComponents()
+   {
+		heading = new JLabel();
+		heading.setIcon(new ImageIcon(title));
+		heading.setPreferredSize(new Dimension(295, 58));
+
+		player = new JLabel("Player1", SwingConstants.CENTER);
+		player.setPreferredSize(new Dimension(100, 32));
+		player.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
+		player.setForeground(Color.white);
+
+      changePlayer = new JButton();
+      play = new JButton();
+      credits = new JButton();
+      levels = new JButton();
+      settings = new JButton();
+      help = new JButton();
+      exit = new JButton();
+
+      guiManager.setupButton(changePlayer,changePlayerButtonImage,changePlayerButtonHighlightedImage,"long",actionListener);
+      guiManager.setupButton(play,playButtonImage,playButtonImageHighlighted,"play",actionListener);
+      guiManager.setupButton(credits,creditsButtonImage,creditsButtonHighlightedImage,"long",actionListener);
+      guiManager.setupButton(levels,levelsButtonImage,levelsButtonHighlightedImage,"long",actionListener);
+      guiManager.setupButton(settings,settingsButtonImage,settingsButtonHighlightedImage,"long",actionListener);
+      guiManager.setupButton(help,helpButtonImage,helpButtonHighlightedImage,"square",actionListener);
+      guiManager.setupButton(exit,exitButtonImage,exitButtonHighlightedImage,"square",actionListener);
+	}
 
 
-        play.setPreferredSize(new Dimension(294, 72));
-        play.setFont(new Font("Calibri", Font.BOLD,28));
-        credits = new JButton("Credits");
-        credits.setPreferredSize(stdDimension);
-        credits.setFont(stdFont);
-        levels = new JButton("Levels");
-        levels.setPreferredSize(stdDimension);
-        levels.setFont(stdFont);
-        settings = new JButton("Settings");
-        settings.setPreferredSize(stdDimension);
-        settings.setFont(stdFont);
-        help = new JButton(new ImageIcon("src/image/info.png"));
-        help.setPreferredSize(new Dimension(48, 48));
-        exit = new JButton(new ImageIcon("src/image/exit.png"));
-        exit.setPreferredSize(new Dimension(48, 48));
-    }
 
-    private void setBoundsOfComponents(){
-        Insets insets = getInsets();
-        Dimension size = help.getPreferredSize();
-        help.setBounds(32 + insets.left, 46 + insets.top, size.width, size.height);
-        size = exit.getPreferredSize();
-        exit.setBounds(680 + insets.left, 46 + insets.top, size.width, size.height);
-        size = heading.getPreferredSize();
-        heading.setBounds(234 + insets.left, 67 + insets.top, size.width, size.height);
-        size = player.getPreferredSize();
-        player.setBounds(80 + insets.left, 145 + insets.top, size.width, size.height);
-        size = cPlayer.getPreferredSize();
-        cPlayer.setBounds(296 + insets.left, 189 + insets.top, size.width, size.height);
-        size = play.getPreferredSize();
-        play.setBounds(240 + insets.left, 268 + insets.top, size.width, size.height);
-        size = credits.getPreferredSize();
-        credits.setBounds(32 + insets.left, 388 + insets.top, size.width, size.height);
-        size = levels.getPreferredSize();
-        levels.setBounds(296 + insets.left, 388 + insets.top, size.width, size.height);
-        size = settings.getPreferredSize();
-        settings.setBounds(558 + insets.left, 388 + insets.top, size.width, size.height);
-    }
+	private void setBoundsOfComponents()
+   {
+
+
+		help.setBounds(30 , 30 , help.getPreferredSize().width, help.getPreferredSize().height);
+
+		exit.setBounds(panelWidth - 30 - exit.getPreferredSize().width , 30 , exit.getPreferredSize().width, exit.getPreferredSize().height);
+
+		heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
+
+		player.setBounds(guiManager.findCenterHorizontal(panelWidth,player) , 130 , player.getPreferredSize().width, player.getPreferredSize().height);
+
+		changePlayer.setBounds(guiManager.findCenterHorizontal(panelWidth,changePlayer) , 175 , changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
+
+		play.setBounds(guiManager.findCenterHorizontal(panelWidth, play) , 230 , play.getPreferredSize().width, play.getPreferredSize().height);
+
+		credits.setBounds(guiManager.findCenterHorizontal(panelWidth, credits) - 225 , 395 , credits.getPreferredSize().width, credits.getPreferredSize().height);
+
+		levels.setBounds(guiManager.findCenterHorizontal(panelWidth, levels) , 395 , levels.getPreferredSize().width, levels.getPreferredSize().height);
+
+		settings.setBounds(guiManager.findCenterHorizontal(panelWidth, settings) + 225 , 395 , settings.getPreferredSize().width, settings.getPreferredSize().height);
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		drawBackground(g); // change the bacground png for changing the background
+		// setBackground(Color.WHITE);
+	}
+
+   private void drawBackground(Graphics graphics) {
+
+      Graphics2D graphics2d = (Graphics2D) graphics;
+
+      graphics2d.drawImage(background, 0, 0, null);
+
+   }
+
+   private ActionListener actionListener = e ->
+   {
+      SoundManager.instance.buttonClick();
+      if (e.getSource() == play) {
+         GameEngine.instance.gameManager.loadLastLevel();
+         guiManager.setPanelVisible("Game");
+      }
+
+      if (e.getSource() == credits)
+      {
+         guiManager.setPanelVisible("Credits");
+      }
+      if (e.getSource() == levels)
+      {
+         guiManager.setPanelVisible("LevelSelection");
+      }
+
+      if (e.getSource() == settings)
+      {
+         guiManager.setPanelVisible("Settings");
+      }
+
+      if (e.getSource() == help)
+      {
+         guiManager.setPanelVisible("Help");
+      }
+      if (e.getSource() == changePlayer)
+      {
+         guiManager.setPanelVisible("ChangePlayer");
+      }
+      if (e.getSource() == exit)
+      {
+         System.exit(0);
+      }
+   };
 }

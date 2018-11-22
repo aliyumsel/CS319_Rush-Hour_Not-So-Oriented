@@ -3,6 +3,7 @@ package source.model;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,23 +15,59 @@ public class Vehicle extends GameObject implements Drawable {
 	private String type; // we may not need this
 	private boolean isChosen; // we may not need this
 	private boolean player;
-	private BufferedImage vehicle;
+	//private BufferedImage vehicle;
+	private BufferedImage[] vehicleImages;
 
 	// AffineTransform at;
 	public Vehicle() {
 		super();
 	}
 
-	public Vehicle(int x, int y, int length, String direction, boolean player) {
+	public Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme) {
 		super(x, y, length, direction);
 		this.player = player;
+		vehicleImages = new BufferedImage[length];
+		String path = "src/image/theme_" + theme + "/";
+		int carType = (int) (Math.random()*2);
 
-		if (!player && length == 2) {
+		if (!player && length == 2)
+			path += "small";
+		else if (!player && length == 3)
+			path += "large";
+		else if (player && !special)
+			path += "player";
+		else if(player && special)
+			path += "police";
+
+		if (direction.equals("Upwards") || direction.equals("Right")){
+			for(int i = 0; i < length; i++){
+				if(!player){
+					vehicleImages[i] = LoadImage(path + carType + "-" + i + ".png");
+				}
+				else
+					vehicleImages[i] = LoadImage(path + "-" + i + ".png");
+			}
+		}
+		else{
+			for(int i = 0; i < length; i++){
+				if(!player){
+					vehicleImages[i] = LoadImage(path + carType + "-" + (length - i - 1) + ".png");
+				}
+				else
+					vehicleImages[i] = LoadImage(path + "-" + (length - i - 1) + ".png");
+			}
+		}
+
+
+
+		/*
+		if (!player && length == 2)
 			vehicle = LoadImage("src/image/Car.png");
-		} else if (!player && length == 3)
+		else if (!player && length == 3)
 			vehicle = LoadImage("src/image/Truck.png");
 		else if (player)
 			vehicle = LoadImage("src/image/Player.png");
+		*/
 	}
 
 	public void move(int moveAxis) {
@@ -63,18 +100,33 @@ public class Vehicle extends GameObject implements Drawable {
 	{
 
 		Graphics2D graphics2d = (Graphics2D) graphics;
-		// Tek par�a image geldi�inde kullan�lacak
+		// Tek parça image geldiğinde kullanılacak
 		// at =
-		// AffineTransform.getTranslateInstance(transform.position.x*50,transform.position.y*50);
+		// AffineTransform.getTranslateInstance(transform.position.x*75,transform.position.y*75);
 		// at.rotate(Math.toRadians(90), car.getWidth()/2,car.getHeight()/2);
 		// graphics2d.drawImage(car,at,null);
 		for (int i = 0; i < transform.length; i++) {
-			graphics2d.drawImage(vehicle,occupiedTransforms[i].position.x * 50,occupiedTransforms[i].position.y * 50,
-					null);
+			AffineTransform at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x*75,occupiedTransforms[i].position.y*75);
+			if(transform.direction.equals("Upwards"))
+				graphics2d.drawImage(vehicleImages[i],at,null);
+			else if(transform.direction.equals("Downwards")){
+				at.rotate(Math.toRadians(180), vehicleImages[i].getWidth()/2.0,vehicleImages[i].getHeight()/2.0);
+				graphics2d.drawImage(vehicleImages[i],at,null);
+			}
+			else if(transform.direction.equals("Left")){
+				at.rotate(Math.toRadians(90), vehicleImages[i].getWidth()/2.0,vehicleImages[i].getHeight()/2.0);
+				graphics2d.drawImage(vehicleImages[i],at,null);
+			}
+			else {
+				at.rotate(Math.toRadians(270), vehicleImages[i].getWidth()/2.0,vehicleImages[i].getHeight()/2.0);
+				graphics2d.drawImage(vehicleImages[i],at,null);
+			}
+			//graphics2d.drawImage(vehicleImages[i],occupiedTransforms[i].position.x * 75,occupiedTransforms[i].position.y * 75,
+			//		null);
 
-			// Araban�n par�alar�n� belli etmek i�in
-			graphics2d.drawString("-" + i + "-", occupiedTransforms[i].position.x * 50 + 15,
-					occupiedTransforms[i].position.y * 50 + 25);
+			// Arabanın parçalarını belli etmek için
+			//graphics2d.drawString("-" + i + "-", occupiedTransforms[i].position.x * 75 + 27,
+			//		occupiedTransforms[i].position.y * 75 + 37);
 		}
 
 		// System.out.println(transform.position.x + " " + transform.position.y);

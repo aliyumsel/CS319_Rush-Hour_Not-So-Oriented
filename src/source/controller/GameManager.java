@@ -10,7 +10,6 @@ public class GameManager implements Updatable
    public int level = 1;
 
    public boolean isGameActive = false;
-   public boolean mapFinished = false;
 
    GameManager()
    {
@@ -29,6 +28,8 @@ public class GameManager implements Updatable
    {
       System.out.println("Map Finished");
       isGameActive = false;
+
+      GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible();
    }
 
    public void loadLastLevel()
@@ -43,6 +44,7 @@ public class GameManager implements Updatable
       MapController.instance.loadLevel(_level);
       VehicleController.instance.setMap(MapController.instance.getMap());
       VehicleController.instance.setNumberOfMoves(0);
+      GuiPanelManager.instance.getGamePanel().setLevelPanelVisible();
       level = _level;
       //mapFinished = false;
 
