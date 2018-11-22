@@ -1,47 +1,49 @@
 package source.view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 
-import source.controller.GameEngine;
 import source.controller.SoundManager;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class LevelSelectionPanel extends JPanel {
 
+   private GuiPanelManager guiManager;
+
 	private JButton[] buttonArray;
-	private JButton rightArrowbutton;
-	private JButton leftArrowbutton;
+	private JButton rightArrowButton;
+	private JButton leftArrowButton;
 	private JButton menuButton;
-	private GuiPanelManager guiManager;
+
 	private BufferedImage background;
 	private BufferedImage levelBackground;
+   private BufferedImage levelBackgroundHighlighted;
 	private BufferedImage rightArrow;
+   private BufferedImage rightArrowHighlighted;
 	private BufferedImage leftArrow;
+   private BufferedImage leftArrowHighlighted;
 	private BufferedImage title;
 	private BufferedImage back;
 	private BufferedImage backHighlighted;
+
 	private JButton button = new JButton("-");
+
 	private int panelWidth = 764;
 	private int panelHeight = 468;
 	private int page = 0;
 	private int numberOfLevels = 40;
+
 	private LevelSelectionPopUp popUp;
 
 	public LevelSelectionPanel(GuiPanelManager guiPanelManager) {
 
 		super(null);
 		buttonArray = new JButton[40];
-		rightArrowbutton = new JButton();
-		leftArrowbutton = new JButton();
+		rightArrowButton = new JButton();
+		leftArrowButton = new JButton();
 		menuButton = new JButton();
 		popUp = new LevelSelectionPopUp(guiPanelManager);
 		guiManager = guiPanelManager;
@@ -50,8 +52,8 @@ public class LevelSelectionPanel extends JPanel {
 		loadImages();
 		add(popUp);
 		createComponents();
-		add(leftArrowbutton);
-		add(rightArrowbutton);
+		add(leftArrowButton);
+		add(rightArrowButton);
 		add(menuButton);
 
 		setBoundsOfComponents(page);
@@ -59,24 +61,28 @@ public class LevelSelectionPanel extends JPanel {
 
 	}
 
-	private void loadImages() {
-		background = guiManager.LoadImage("src/image/orange.png");
+	private void loadImages()
+   {
+		background = guiManager.LoadImage("src/image/background.png");
 		levelBackground = guiManager.LoadImage("src/image/icons/levelbackground.png");
-		rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
-		leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
-		back = guiManager.LoadImage("src/image/icons/back.png");
+      levelBackgroundHighlighted = guiManager.LoadImage("src/image/icons/levelbackgroundH.png");
+      rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
+      rightArrowHighlighted = guiManager.LoadImage("src/image/icons/rightarrowH.png");
+      leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
+      leftArrowHighlighted = guiManager.LoadImage("src/image/icons/leftarrowH.png");
+      back = guiManager.LoadImage("src/image/icons/back.png");
 		backHighlighted = guiManager.LoadImage("src/image/icons/backH.png");
 		title = guiManager.LoadImage("src/image/icons/title.png");
 
 	}
 
 	private void createComponents() {
-		guiManager.setupButton(rightArrowbutton, rightArrow, rightArrow, "arrow", actionListener);
-		guiManager.setupButton(leftArrowbutton, leftArrow, leftArrow, "arrow", actionListener);
+		guiManager.setupButton(rightArrowButton, rightArrow, rightArrowHighlighted, "arrow", actionListener);
+		guiManager.setupButton(leftArrowButton, leftArrow, leftArrowHighlighted, "arrow", actionListener);
 		guiManager.setupButton(menuButton, back, backHighlighted, "square", actionListener);
 		for (int i = 0; i < buttonArray.length; i++) {
 			buttonArray[i] = new JButton("" + (1 + i));
-			guiManager.setupButton(buttonArray[i], levelBackground, levelBackground, "level", actionListener);
+			guiManager.setupButton(buttonArray[i], levelBackground, levelBackgroundHighlighted, "level", actionListener);
 			buttonArray[i].setVerticalTextPosition(SwingConstants.CENTER);
 			buttonArray[i].setHorizontalTextPosition(SwingConstants.CENTER);
 			buttonArray[i].setFont(new Font("Odin Rounded", Font.PLAIN, 25));
@@ -118,11 +124,11 @@ public class LevelSelectionPanel extends JPanel {
 
 		}
 
-		leftArrowbutton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowbutton) + insets.top,
-				leftArrowbutton.getPreferredSize().width, leftArrowbutton.getPreferredSize().height);
-		rightArrowbutton.setBounds(panelWidth - 135,
-				guiManager.findCenterHorizontal(panelHeight, rightArrowbutton) + insets.top,
-				rightArrowbutton.getPreferredSize().width, rightArrowbutton.getPreferredSize().height);
+		leftArrowButton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowButton) + insets.top,
+				leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
+		rightArrowButton.setBounds(panelWidth - 135,
+				guiManager.findCenterHorizontal(panelHeight, rightArrowButton) + insets.top,
+				rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
 		menuButton.setBounds(30 + insets.left, 30 + insets.top, menuButton.getPreferredSize().width,
 				menuButton.getPreferredSize().height);
 
@@ -133,14 +139,14 @@ public class LevelSelectionPanel extends JPanel {
 
 	private ActionListener actionListener = e -> {
 		SoundManager.instance.buttonClick();
-		if (e.getSource() == leftArrowbutton) {
+		if (e.getSource() == leftArrowButton ) {
 			if (page == 0)
 				page = 3;
 			else
 				page -= 1;
 
 			setBoundsOfComponents(page);
-		} else if (e.getSource() == rightArrowbutton) {
+		} else if (e.getSource() == rightArrowButton ) {
 			if (page == 3)
 				page = 0;
 			else

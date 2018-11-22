@@ -21,8 +21,10 @@ public class HelpPanel extends JPanel
    private BufferedImage backButtonImage;
    private BufferedImage backButtonHighlightedImage;
 
+//   private int panelWidth = 764;
+//   private int panelHeight = 468;
    private int panelWidth = 764;
-   private int panelHeight = 468;
+   private int panelHeight = 492;
 
    HelpPanel(GuiPanelManager _guiManager)
    {
@@ -41,7 +43,8 @@ public class HelpPanel extends JPanel
 
    private void loadImages()
    {
-      background = guiManager.LoadImage("src/image/orange.png");
+//      background = guiManager.LoadImage("src/image/orange.png");
+      background = guiManager.LoadImage("src/image/background.png");
       title = guiManager.LoadImage("src/image/icons/howToPlayTitle.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
@@ -83,7 +86,7 @@ public class HelpPanel extends JPanel
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
 
-      drawBackground(g); // change the bacground png for changing the background
+      drawBackground(g); // change the background png for changing the background
       // setBackground(Color.WHITE);
    }
 

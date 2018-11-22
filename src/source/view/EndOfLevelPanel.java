@@ -48,7 +48,7 @@ public class EndOfLevelPanel extends JPanel {
 
    private void loadImages()
    {
-      background = guiManager.LoadImage("src/image/icons/endOfLevelBackground.png");
+      background = guiManager.LoadImage("src/image/endOfLevelPanelBackground.png");
 
       menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
       menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");

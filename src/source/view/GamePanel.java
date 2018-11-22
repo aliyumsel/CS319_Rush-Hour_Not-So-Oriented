@@ -44,7 +44,6 @@ public class GamePanel extends JPanel {
 	public GamePanel(int index, GuiPanelManager _guiManager) {
 		super(null);
 		guiManager = _guiManager;
-		background = guiManager.LoadImage("src/image/orange.png");
 
 		setPreferredSize(new Dimension(panelWidth, panelHeight));
 		this.index = index;
@@ -84,7 +83,11 @@ public class GamePanel extends JPanel {
 	}
 
 	private void loadImages() {
-		menuButtonImage = LoadImage("src/image/icons/menu.png");
+
+      background = guiManager.LoadImage("src/image/background.png");
+
+
+      menuButtonImage = LoadImage("src/image/icons/menu.png");
 		menuButtonHighlightedImage = LoadImage("src/image/icons/menuH.png");
 
 		resetButtonImage = LoadImage("src/image/icons/reset.png");
@@ -194,7 +197,7 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		//drawBackground(g); // change the bacground png for changing the background
+		drawBackground(g); // change the bacground png for changing the background
 		// setBackground(Color.WHITE);
 	}
 

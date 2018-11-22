@@ -58,7 +58,7 @@ public class SettingsPanel extends JPanel
 
    private void loadImages()
    {
-      background = guiManager.LoadImage("src/image/orange.png");
+      background = guiManager.LoadImage("src/image/background.png");
       title = guiManager.LoadImage("src/image/icons/settingsTitle.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");

@@ -48,7 +48,7 @@ public class LevelSelectionPopUp extends JPanel {
 	}
 
 	private void loadImages() {
-		background = guiManager.LoadImage("src/image/icons/endOfLevelBackground.png");
+		background = guiManager.LoadImage("src/image/endOfLevelPanelBackground.png");
 
 		backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
 		backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
@@ -56,8 +56,8 @@ public class LevelSelectionPopUp extends JPanel {
 		retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
 		retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
 
-		playButtonImage = guiManager.LoadImage("src/image/icons/next.png");
-		playButtonHighlightedImage = guiManager.LoadImage("src/image/icons/nextH.png");
+		playButtonImage = guiManager.LoadImage("src/image/icons/miniPlay.png");
+		playButtonHighlightedImage = guiManager.LoadImage("src/image/icons/miniPlayH.png");
 
 		starImage = guiManager.LoadImage("src/image/icons/star.png");
 		starLockedImage = guiManager.LoadImage("src/image/icons/starLocked.png");

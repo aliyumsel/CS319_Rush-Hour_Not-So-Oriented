@@ -77,7 +77,7 @@ public class MainMenuPanel extends JPanel {
 
 	private void loadImages()
    {
-      background = guiManager.LoadImage("src/image/orange.png");
+      background = guiManager.LoadImage("src/image/background.png");
 
       title = guiManager.LoadImage("src/image/icons/title.png");
 

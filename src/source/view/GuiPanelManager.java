@@ -37,9 +37,12 @@ public class GuiPanelManager extends JFrame {
 	private SettingsPanel settingsPanel;
 	private LevelSelectionPanel levelSelectionPanel;
 	private HelpPanel helpPanel;
-	private int panelWidth = 468;
-	private boolean transition = false;
-	private JPanel targetPanel;
+   private JPanel targetPanel;
+	//private int panelWidth = 468;
+	//private boolean transition = false;
+
+   private BufferedImage cursorImage;
+
 	public Font odinRounded;
 
 	private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
@@ -48,6 +51,12 @@ public class GuiPanelManager extends JFrame {
 	public GuiPanelManager() {
 		super("Rush Hour");
 		setUndecorated(true);
+
+		setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
+
+      //Toolkit toolkit = Toolkit.getDefaultToolkit();
+      //cursorImage = LoadImage("src/image/icons/cursor1.png");
+      //Cursor cursor = toolkit.createCustomCursor(cursorImage, new Point(getX(),getY()),"custom");
 		Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
 		setCursor(cursor);
 		// AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(0, 0, 748, 470,
