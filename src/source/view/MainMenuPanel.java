@@ -197,7 +197,10 @@ public class MainMenuPanel extends JPanel {
       {
          guiManager.setPanelVisible("Help");
       }
-
+      if (e.getSource() == changePlayer)
+      {
+         guiManager.setPanelVisible("ChangePlayer");
+      }
       if (e.getSource() == exit)
       {
          System.exit(0);

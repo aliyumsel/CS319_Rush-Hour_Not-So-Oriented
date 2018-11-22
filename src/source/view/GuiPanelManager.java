@@ -37,26 +37,28 @@ public class GuiPanelManager extends JFrame {
 	private SettingsPanel settingsPanel;
 	private LevelSelectionPanel levelSelectionPanel;
 	private HelpPanel helpPanel;
-   private JPanel targetPanel;
-	//private int panelWidth = 468;
-	//private boolean transition = false;
+	private ChangePlayerPanel playerPanel;
+	private JPanel targetPanel;
+	// private int panelWidth = 468;
+	// private boolean transition = false;
 
-   private BufferedImage cursorImage;
+	private BufferedImage cursorImage;
 
 	public Font odinRounded;
 
 	private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
-			levelButtonDimension;
+			levelButtonDimension, playerButtonDimension;
 
 	public GuiPanelManager() {
 		super("Rush Hour");
 		setUndecorated(true);
 
-		//setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
+		// setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
 
-      //Toolkit toolkit = Toolkit.getDefaultToolkit();
-      //cursorImage = LoadImage("src/image/icons/cursor1.png");
-      //Cursor cursor = toolkit.createCustomCursor(cursorImage, new Point(getX(),getY()),"custom");
+		// Toolkit toolkit = Toolkit.getDefaultToolkit();
+		// cursorImage = LoadImage("src/image/icons/cursor1.png");
+		// Cursor cursor = toolkit.createCustomCursor(cursorImage, new
+		// Point(getX(),getY()),"custom");
 		Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
 		setCursor(cursor);
 		// AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(0, 0, 748, 470,
@@ -79,6 +81,7 @@ public class GuiPanelManager extends JFrame {
 		playButtonDimension = new Dimension(131, 147);
 		arrowButtonDimension = new Dimension(130, 150);
 		levelButtonDimension = new Dimension(105, 120);
+		playerButtonDimension = new Dimension(300, 120);
 		setLayout(new CardLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,12 +92,14 @@ public class GuiPanelManager extends JFrame {
 		settingsPanel = new SettingsPanel(this);
 		helpPanel = new HelpPanel(this);
 		levelSelectionPanel = new LevelSelectionPanel(this);
+		playerPanel = new ChangePlayerPanel(this);
 		add(mainMenuPanel);
 		add(gamePanel);
 		add(creditsPanel);
 		add(levelSelectionPanel);
 		add(settingsPanel);
 		add(helpPanel);
+		add(playerPanel);
 		add(new JPanel());
 		currentPanelIndex = 0;
 
@@ -134,6 +139,7 @@ public class GuiPanelManager extends JFrame {
 		} else if (panelName.equals("Credits")) {
 
 			targetPanel = creditsPanel;
+
 		} else if (panelName.equals("LevelSelection")) {
 
 			targetPanel = levelSelectionPanel;
@@ -144,6 +150,11 @@ public class GuiPanelManager extends JFrame {
 		} else if (panelName.equals("Help")) {
 
 			targetPanel = helpPanel;
+		} else if (panelName.equals("ChangePlayer")) {
+			playerPanel.reset();
+			targetPanel = (ChangePlayerPanel)playerPanel;
+			
+			
 		} else {
 			System.out.println("Error: Enter valid name");
 		}
@@ -197,6 +208,8 @@ public class GuiPanelManager extends JFrame {
 			button.setPreferredSize(arrowButtonDimension);
 		} else if (buttonType.equals("level")) {
 			button.setPreferredSize(levelButtonDimension);
+		} else if (buttonType.equals("player")) {
+			button.setPreferredSize(playerButtonDimension);
 		} else {
 			System.out.println("Error: Enter valid String");
 		}
