@@ -25,7 +25,6 @@ public class LevelSelectionPanel extends JPanel {
    private BufferedImage rightArrowHighlighted;
 	private BufferedImage leftArrow;
    private BufferedImage leftArrowHighlighted;
-	private BufferedImage title;
 	private BufferedImage back;
 	private BufferedImage backHighlighted;
 
@@ -36,7 +35,7 @@ public class LevelSelectionPanel extends JPanel {
 
 	private LevelSelectionPopUp popUp;
 
-	public LevelSelectionPanel(GuiPanelManager guiPanelManager) {
+   LevelSelectionPanel(GuiPanelManager guiPanelManager) {
 
 		super(null);
 		buttonArray = new JButton[40];
@@ -70,14 +69,13 @@ public class LevelSelectionPanel extends JPanel {
       leftArrowHighlighted = guiManager.LoadImage("src/image/icons/leftarrowH.png");
       back = guiManager.LoadImage("src/image/icons/back.png");
 		backHighlighted = guiManager.LoadImage("src/image/icons/backH.png");
-		title = guiManager.LoadImage("src/image/icons/title.png");
-
 	}
 
 	private void createComponents() {
 		guiManager.setupButton(rightArrowButton, rightArrow, rightArrowHighlighted, "arrow", actionListener);
 		guiManager.setupButton(leftArrowButton, leftArrow, leftArrowHighlighted, "arrow", actionListener);
 		guiManager.setupButton(menuButton, back, backHighlighted, "square", actionListener);
+
 		for (int i = 0; i < buttonArray.length; i++) {
 			buttonArray[i] = new JButton("" + (1 + i));
 			guiManager.setupButton(buttonArray[i], levelBackground, levelBackgroundHighlighted, "level", actionListener);
@@ -98,7 +96,7 @@ public class LevelSelectionPanel extends JPanel {
 
 		for (int i = 0; i < numberOfLevels; i++)
 			buttonArray[i].setVisible(false);
-		for (int i = 0 + limit; i < 12 + limit && i < numberOfLevels; i++) {
+		for (int i = limit; i < 12 + limit && i < numberOfLevels; i++) {
 
 			if (i % 4 == 0)
 				gap = 0;
@@ -119,7 +117,6 @@ public class LevelSelectionPanel extends JPanel {
 						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
 			}
 			buttonArray[i].setVisible(true);
-
 		}
 
 		leftArrowButton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowButton) ,
@@ -132,7 +129,6 @@ public class LevelSelectionPanel extends JPanel {
 
 		Dimension size = popUp.getPreferredSize();
 		popUp.setBounds(guiManager.findCenterHorizontal(panelWidth, popUp), 100 , size.width, size.height);
-		//popUp.setVisible(true); in order to test pop up panel design remove the comment
 	}
 
 	private ActionListener actionListener = e -> {
@@ -156,7 +152,9 @@ public class LevelSelectionPanel extends JPanel {
 		} else {
 			for (int index = 0; index < numberOfLevels; index++) {
 				if (e.getSource() == buttonArray[index])
-					popUp.initialize(index + 1); // buna player objesi de eklenecek
+            {
+               popUp.initialize(index + 1); // buna player objesi de eklenecek
+            }
 				// GameEngine.instance.gameManager.loadLevel(index+1);;
 
 				popUp.setVisible(true);

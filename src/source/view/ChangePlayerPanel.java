@@ -1,27 +1,21 @@
 package source.view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 
-import source.controller.GameEngine;
 import source.controller.SoundManager;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class ChangePlayerPanel extends JPanel {
 
 	// private JButton[] buttonArray;
 	private ArrayList<JButton> buttonArray;
-	private JButton rightArrowbutton;
-	private JButton leftArrowbutton;
+	private JButton rightArrowButton;
+	private JButton leftArrowButton;
 	private JButton menuButton;
 	private JButton addButton;
 	private JButton deleteButton1;
@@ -44,7 +38,6 @@ public class ChangePlayerPanel extends JPanel {
 	private BufferedImage editH;
 	private BufferedImage delete;
 	private BufferedImage deleteH;
-	private BufferedImage title;
 	private BufferedImage back;
 	private BufferedImage backHighlighted;
 	private int panelWidth = 764;
@@ -58,8 +51,8 @@ public class ChangePlayerPanel extends JPanel {
 
 		super(null);
 		buttonArray = new ArrayList<JButton>();
-		rightArrowbutton = new JButton();
-		leftArrowbutton = new JButton();
+		rightArrowButton = new JButton();
+		leftArrowButton = new JButton();
 		addButton = new JButton();
 		deleteButton1 = new JButton();
 		deleteButton2 = new JButton();
@@ -75,8 +68,8 @@ public class ChangePlayerPanel extends JPanel {
 		loadImages();
 		add(popUp);
 		createComponents();
-		add(leftArrowbutton);
-		add(rightArrowbutton);
+		add(leftArrowButton);
+		add(rightArrowButton);
 		add(menuButton);
 		add(addButton);
 		add(deleteButton1);
@@ -91,7 +84,7 @@ public class ChangePlayerPanel extends JPanel {
 	}
 
 	private void loadImages() {
-		background = guiManager.LoadImage("src/image/orange.png");
+		background = guiManager.LoadImage("src/image/background.png");
 		levelBackground = guiManager.LoadImage("src/image/icons/playerSelection.png");
 		levelBackgroundH = guiManager.LoadImage("src/image/icons/playerSelectionH.png");
 		rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
@@ -100,7 +93,6 @@ public class ChangePlayerPanel extends JPanel {
 		leftArrowH = guiManager.LoadImage("src/image/icons/leftarrowH.png");
 		back = guiManager.LoadImage("src/image/icons/back.png");
 		backHighlighted = guiManager.LoadImage("src/image/icons/backH.png");
-		title = guiManager.LoadImage("src/image/icons/title.png");
 		add = guiManager.LoadImage("src/image/icons/addPlayer.png");
 		addH = guiManager.LoadImage("src/image/icons/addPlayerH.png");
 		delete = guiManager.LoadImage("src/image/icons/quit.png");
@@ -111,8 +103,8 @@ public class ChangePlayerPanel extends JPanel {
 	}
 
 	private void createComponents() {
-		guiManager.setupButton(rightArrowbutton, rightArrow, rightArrowH, "arrow", actionListener);
-		guiManager.setupButton(leftArrowbutton, leftArrow, leftArrowH, "arrow", actionListener);
+		guiManager.setupButton(rightArrowButton, rightArrow, rightArrowH, "arrow", actionListener);
+		guiManager.setupButton(leftArrowButton, leftArrow, leftArrowH, "arrow", actionListener);
 		guiManager.setupButton(menuButton, back, backHighlighted, "square", actionListener);
 		guiManager.setupButton(addButton, add, addH, "square", actionListener);
 		guiManager.setupButton(deleteButton1, delete, deleteH, "square", actionListener);
@@ -121,7 +113,7 @@ public class ChangePlayerPanel extends JPanel {
 		guiManager.setupButton(editButton1, edit, editH, "square", actionListener);
 		guiManager.setupButton(editButton2, edit, editH, "square", actionListener);
 		guiManager.setupButton(editButton3,edit, editH, "square", actionListener);
-		for (int i = 0; i < numberOfPlayers; i++) {//bu gidecek her player eklendiðinde addmethodu caðýrýlacak
+		for (int i = 0; i < numberOfPlayers; i++) {//bu gidecek her player eklendiï¿½inde addmethodu caï¿½ï¿½rï¿½lacak
 			buttonArray.add(new JButton(""+ "ddalkilic10"));
 			guiManager.setupButton(buttonArray.get(i), levelBackground, levelBackgroundH, "player", actionListener);
 			buttonArray.get(i).setVerticalTextPosition(SwingConstants.CENTER);
@@ -190,11 +182,11 @@ public class ChangePlayerPanel extends JPanel {
 
 		}
 
-		leftArrowbutton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowbutton) + insets.top,
-				leftArrowbutton.getPreferredSize().width, leftArrowbutton.getPreferredSize().height);
-		rightArrowbutton.setBounds(panelWidth - 135,
-				guiManager.findCenterHorizontal(panelHeight, rightArrowbutton) + insets.top,
-				rightArrowbutton.getPreferredSize().width, rightArrowbutton.getPreferredSize().height);
+		leftArrowButton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowButton) + insets.top,
+				leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
+		rightArrowButton.setBounds(panelWidth - 135,
+				guiManager.findCenterHorizontal(panelHeight, rightArrowButton) + insets.top,
+				rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
 		menuButton.setBounds(30 + insets.left, 30 + insets.top, menuButton.getPreferredSize().width,
 				menuButton.getPreferredSize().height);
 		addButton.setBounds(panelWidth - 30 - addButton.getPreferredSize().width, 30 + insets.top, addButton.getPreferredSize().width,
@@ -208,14 +200,14 @@ public class ChangePlayerPanel extends JPanel {
 
 	private ActionListener actionListener = e -> {
 		SoundManager.instance.buttonClick();
-		if (e.getSource() == leftArrowbutton) {
+		if (e.getSource() == leftArrowButton ) {
 			if (page == 0)
 				page = numberOfPlayers / 3;
 			else
 				page -= 1;
 
 			setBoundsOfComponents(page);
-		} else if (e.getSource() == rightArrowbutton) {
+		} else if (e.getSource() == rightArrowButton ) {
 			if (page == numberOfPlayers / 3)
 				page = 0;
 			else
