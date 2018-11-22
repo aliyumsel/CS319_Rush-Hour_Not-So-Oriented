@@ -48,10 +48,12 @@ public class GuiPanelManager extends JFrame {
 	public GuiPanelManager() {
 		super("Rush Hour");
 		setUndecorated(true);
-		
-		//AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(0, 0, 748, 470, 50, 50));
-		//setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
-		
+		Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+		setCursor(cursor);
+		// AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(0, 0, 748, 470,
+		// 50, 50));
+		// setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
+
 		instance = this;
 
 		File fontFile = new File("src/fonts/odin.ttf");
@@ -92,14 +94,13 @@ public class GuiPanelManager extends JFrame {
 		setFocusTraversalKeysEnabled(false);
 		pack();
 		setLocationRelativeTo(null);
-		
 
 		mainMenuPanel.setVisible(true);
 		gamePanel.setVisible(false);
 
 		setVisible(true);
 		pack();
-		
+
 	}
 
 	public JPanel getCurrentPanel() {
