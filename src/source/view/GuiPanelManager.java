@@ -44,6 +44,7 @@ public class GuiPanelManager extends JFrame {
 
 	public GuiPanelManager() {
 		super("Rush Hour");
+		//setUndecorated(true);
 		instance = this;
 
 		File fontFile = new File("src/fonts/odin.ttf");
@@ -89,6 +90,7 @@ public class GuiPanelManager extends JFrame {
 
 		setVisible(true);
 		pack();
+		
 	}
 
 	public JPanel getCurrentPanel() {
