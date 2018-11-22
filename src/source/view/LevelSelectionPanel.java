@@ -17,7 +17,6 @@ import java.util.Objects;
 
 public class LevelSelectionPanel extends JPanel {
 
-	private static final long serialVersionUID = 1L;
 	private JButton[] buttonArray;
 	private JButton rightArrowbutton;
 	private JButton leftArrowbutton;
@@ -53,7 +52,7 @@ public class LevelSelectionPanel extends JPanel {
 		add(rightArrowbutton);
 		add(menuButton);
 		setBoundsOfComponents(page);
-		this.setVisible(true);
+		this.setVisible(false);
 
 	}
 
@@ -136,15 +135,15 @@ public class LevelSelectionPanel extends JPanel {
 
 			setBoundsOfComponents(page);
 		}
-		if (e.getSource() == rightArrowbutton) {
+		else if (e.getSource() == rightArrowbutton) {
 			if (page == 3)
 				page = 0;
 			else
 				page += 1;
 			setBoundsOfComponents(page);
 		}
-		if (e.getSource() == menuButton) {
-			this.setVisible(false);
+		else if (e.getSource() == menuButton) {
+			//this.setVisible(false);
 			guiManager.setPanelVisible("MainMenu");
 		}
 		else {

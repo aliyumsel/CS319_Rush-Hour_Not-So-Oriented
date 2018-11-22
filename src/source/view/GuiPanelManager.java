@@ -39,8 +39,8 @@ public class GuiPanelManager extends JFrame {
 	private JPanel targetPanel;
 	public Font odinRounded;
 
-	private Dimension longButtonDimension, arrowButtonDimension,squareButtonDimension,playButtonDimension,levelButtonDimension;
-	
+	private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
+			levelButtonDimension;
 
 	public GuiPanelManager() {
 		super("Rush Hour");
@@ -58,8 +58,8 @@ public class GuiPanelManager extends JFrame {
 		longButtonDimension = new Dimension(171, 37);
 		squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
 		playButtonDimension = new Dimension(131, 147);
-		arrowButtonDimension = new Dimension(130,150);
-		levelButtonDimension = new Dimension(105,120);
+		arrowButtonDimension = new Dimension(130, 150);
+		levelButtonDimension = new Dimension(105, 120);
 		setLayout(new CardLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,9 +73,10 @@ public class GuiPanelManager extends JFrame {
 		add(mainMenuPanel);
 		add(gamePanel);
 		add(creditsPanel);
+		add(levelSelectionPanel);
 		add(settingsPanel);
 		add(helpPanel);
-		add(levelSelectionPanel);
+		
 		currentPanelIndex = 0;
 
 		setListeners();
@@ -112,29 +113,31 @@ public class GuiPanelManager extends JFrame {
 		} else if (panelName.equals("Credits")) {
 
 			targetPanel = creditsPanel;
+		} else if (panelName.equals("LevelSelection")) {
+
+			targetPanel = levelSelectionPanel;
+
 		} else if (panelName.equals("Settings")) {
 
 			targetPanel = settingsPanel;
 		} else if (panelName.equals("Help")) {
 
 			targetPanel = helpPanel;
-		} else if (panelName.equals("LevelSelection")) {
-			System.out.println("------");
-			targetPanel = levelSelectionPanel;
 		} else {
 			System.out.println("Error: Enter valid name");
 		}
 		targetPanel.setVisible(true);
 		setContentPane(targetPanel);
-	//	transition = true;
+		// transition = true;
 	}
 
-	//int i = 0;
-	//int a = 0;
+	// int i = 0;
+	// int a = 0;
 
 	void updatePanels() {// burda bi manas�zl�k var main asl�nda hangi panel active se o olmas�
 							// gerekiyo sadece gibi ismi
 		gamePanel.updatePanel();
+
 //		Insets insets = getInsets();
 //		Dimension size = gamePanel.getPreferredSize();
 //		i+=7;
@@ -169,11 +172,11 @@ public class GuiPanelManager extends JFrame {
 			button.setPreferredSize(squareButtonDimension);
 		} else if (buttonType.equals("play")) {
 			button.setPreferredSize(playButtonDimension);
-		}  else if (buttonType.equals("arrow")) {
+		} else if (buttonType.equals("arrow")) {
 			button.setPreferredSize(arrowButtonDimension);
 		} else if (buttonType.equals("level")) {
 			button.setPreferredSize(levelButtonDimension);
-		}else {
+		} else {
 			System.out.println("Error: Enter valid String");
 		}
 
