@@ -34,6 +34,7 @@ public class LevelSelectionPanel extends JPanel {
 	private int panelHeight = 468;
 	private int page = 0;
 	private int numberOfLevels = 40;
+	private LevelSelectionPopUp popUp;
 
 	public LevelSelectionPanel(GuiPanelManager guiPanelManager) {
 
@@ -42,15 +43,17 @@ public class LevelSelectionPanel extends JPanel {
 		rightArrowbutton = new JButton();
 		leftArrowbutton = new JButton();
 		menuButton = new JButton();
+		popUp = new LevelSelectionPopUp(guiPanelManager);
 		guiManager = guiPanelManager;
 		setPreferredSize(new Dimension(panelWidth, panelHeight));
 
 		loadImages();
-
+		add(popUp);
 		createComponents();
 		add(leftArrowbutton);
 		add(rightArrowbutton);
 		add(menuButton);
+
 		setBoundsOfComponents(page);
 		this.setVisible(false);
 
@@ -88,11 +91,11 @@ public class LevelSelectionPanel extends JPanel {
 		int gap = 0;
 		int pageLength = 12;
 		int limit = page * pageLength;
-		
+
 		for (int i = 0; i < numberOfLevels; i++)
 			buttonArray[i].setVisible(false);
 		for (int i = 0 + limit; i < 12 + limit && i < numberOfLevels; i++) {
-			
+
 			if (i % 4 == 0)
 				gap = 0;
 			if (i > -1 + limit && i < 4 + limit) {
@@ -123,6 +126,9 @@ public class LevelSelectionPanel extends JPanel {
 		menuButton.setBounds(30 + insets.left, 30 + insets.top, menuButton.getPreferredSize().width,
 				menuButton.getPreferredSize().height);
 
+		Dimension size = popUp.getPreferredSize();
+		popUp.setBounds(guiManager.findCenterHorizontal(panelWidth, popUp), 100 + insets.top, size.width, size.height);
+		//popUp.setVisible(true); in order to test pop up panel design remove the comment
 	}
 
 	private ActionListener actionListener = e -> {
@@ -134,26 +140,24 @@ public class LevelSelectionPanel extends JPanel {
 				page -= 1;
 
 			setBoundsOfComponents(page);
-		}
-		else if (e.getSource() == rightArrowbutton) {
+		} else if (e.getSource() == rightArrowbutton) {
 			if (page == 3)
 				page = 0;
 			else
 				page += 1;
 			setBoundsOfComponents(page);
-		}
-		else if (e.getSource() == menuButton) {
-			//this.setVisible(false);
+		} else if (e.getSource() == menuButton) {
+			// this.setVisible(false);
 			guiManager.setPanelVisible("MainMenu");
-		}
-		else {
-			for(int index = 0; index < numberOfLevels;index++) {
-				if(e.getSource() == buttonArray[index])
-					GameEngine.instance.gameManager.loadLevel(index+1);;
-					
-				this.setVisible(false);
+		} else {
+			for (int index = 0; index < numberOfLevels; index++) {
+				if (e.getSource() == buttonArray[index])
+					popUp.initialize(index + 1); // buna player objesi de eklenecek
+				// GameEngine.instance.gameManager.loadLevel(index+1);;
 
-				guiManager.setPanelVisible("Game");
+				popUp.setVisible(true);
+
+				// guiManager.setPanelVisible("Game");
 			}
 		}
 

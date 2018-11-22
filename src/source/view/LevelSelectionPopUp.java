@@ -13,21 +13,21 @@ public class LevelSelectionPopUp extends JPanel {
 	private GuiPanelManager guiManager;
 
 	private JButton retry;
-	private JButton menu;
-	private JButton nextLevel;
+	private JButton back;
+	private JButton play;
 	private JLabel heading;
 	private JLabel star1;
 	private JLabel star2;
 	private JLabel star3;
-
+	private int destinationLevel;
 	private BufferedImage background;
 
-	private BufferedImage menuButtonImage;
-	private BufferedImage menuButtonHighlightedImage;
+	private BufferedImage backButtonImage;
+	private BufferedImage backButtonHighlightedImage;
 	private BufferedImage retryButtonImage;
 	private BufferedImage retryButtonHighlightedImage;
-	private BufferedImage nextLevelButtonImage;
-	private BufferedImage nextLevelButtonHighlightedImage;
+	private BufferedImage playButtonImage;
+	private BufferedImage playButtonHighlightedImage;
 	private BufferedImage starImage;
 	private BufferedImage starLockedImage;
 
@@ -44,20 +44,20 @@ public class LevelSelectionPopUp extends JPanel {
 		addComponents();
 		setBoundsOfComponents();
 		setOpaque(false);
+		setVisible(false);
 	}
 
-   private void loadImages()
-   {
-      background = guiManager.LoadImage("src/image/icons/endOfLevelBackground.png");
+	private void loadImages() {
+		background = guiManager.LoadImage("src/image/icons/endOfLevelBackground.png");
 
-      menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
-      menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
+		backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
+		backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
 
 		retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
 		retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
 
-      nextLevelButtonImage = guiManager.LoadImage("src/image/icons/next.png");
-      nextLevelButtonHighlightedImage = guiManager.LoadImage("src/image/icons/nextH.png");
+		playButtonImage = guiManager.LoadImage("src/image/icons/next.png");
+		playButtonHighlightedImage = guiManager.LoadImage("src/image/icons/nextH.png");
 
 		starImage = guiManager.LoadImage("src/image/icons/star.png");
 		starLockedImage = guiManager.LoadImage("src/image/icons/starLocked.png");
@@ -73,16 +73,20 @@ public class LevelSelectionPopUp extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-      drawBackground(g);
+		drawBackground(g);
 	}
 
-   private void drawBackground(Graphics graphics) {
+	private void drawBackground(Graphics graphics) {
 
-      Graphics2D graphics2d = (Graphics2D) graphics;
+		Graphics2D graphics2d = (Graphics2D) graphics;
 
-      graphics2d.drawImage(background, 0, 0, null);
+		graphics2d.drawImage(background, 0, 0, null);
 
-   }
+	}
+
+	public void initialize(int level) {
+		this.destinationLevel = level;
+	}
 
 	private void createComponents() {
 		heading = new JLabel("Level Completed!", SwingConstants.CENTER);
@@ -98,21 +102,20 @@ public class LevelSelectionPopUp extends JPanel {
 		star2.setIcon(new ImageIcon(starImage));
 		star3.setIcon(new ImageIcon(starLockedImage));
 
-		menu = new JButton();
+		back = new JButton();
 		retry = new JButton();
-		nextLevel = new JButton();
+		play = new JButton();
 
-		guiManager.setupButton(menu, menuButtonImage, menuButtonHighlightedImage, "square", actionListener);
+		guiManager.setupButton(back, backButtonImage, backButtonHighlightedImage, "square", actionListener);
 		guiManager.setupButton(retry, retryButtonImage, retryButtonHighlightedImage, "square", actionListener);
-		guiManager.setupButton(nextLevel, nextLevelButtonImage, nextLevelButtonHighlightedImage, "square",
-				actionListener);
+		guiManager.setupButton(play, playButtonImage, playButtonHighlightedImage, "square", actionListener);
 
 	}
 
 	private void addComponents() {
-		add(retry);
-		add(menu);
-		add(nextLevel);
+		// add(retry);
+		add(back);
+		add(play);
 		add(heading);
 		add(star1);
 		add(star2);
@@ -135,9 +138,10 @@ public class LevelSelectionPopUp extends JPanel {
 		star3.setBounds(guiManager.findCenterHorizontal(panelWidth, star3) + 85 + insets.left, 60 + insets.top,
 				star1.getPreferredSize().width, star1.getPreferredSize().height);
 
-		menu.setBounds(105 + insets.left, 150 + insets.top, size.width, size.height);
-		retry.setBounds(175 + insets.left, 150 + insets.top, size.width, size.height);
-		nextLevel.setBounds(245 + insets.left, 150 + insets.top, size.width, size.height);
+		back.setBounds(105 + insets.left, 150 + insets.top, size.width, size.height);
+		// retry.setBounds(175 + insets.left, 150 + insets.top, size.width,
+		// size.height);
+		play.setBounds(245 + insets.left, 150 + insets.top, size.width, size.height);
 	}
 
 	private ActionListener actionListener = new ActionListener() {
@@ -148,12 +152,15 @@ public class LevelSelectionPopUp extends JPanel {
 				GameEngine.instance.gameManager.resetLevel();
 			}
 
-			if (e.getSource() == menu) {
-				guiManager.setPanelVisible("MainMenu");
+			if (e.getSource() == back) {
+				setVisible(false);
 			}
 
-			if (e.getSource() == nextLevel) {
-				GameEngine.instance.gameManager.nextLevel();
+			if (e.getSource() == play) {
+				setVisible(false);
+				GameEngine.instance.gameManager.loadLevel(destinationLevel);
+				guiManager.setPanelVisible("Game");
+
 			}
 		}
 	};
