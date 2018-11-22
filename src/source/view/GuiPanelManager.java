@@ -50,7 +50,7 @@ public class GuiPanelManager extends JFrame {
 	public Font odinRounded;
 
 	private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
-			levelButtonDimension, playerButtonDimension;
+			levelButtonDimension, playerButtonDimension, miniStarDimension;
 
 	public GuiPanelManager() {
 		super("Rush Hour");
@@ -88,6 +88,7 @@ public class GuiPanelManager extends JFrame {
 		arrowButtonDimension = new Dimension(130, 150);
 		levelButtonDimension = new Dimension(105, 120);
 		playerButtonDimension = new Dimension(300, 120);
+		miniStarDimension = new Dimension(26, 26);
 		setLayout(new CardLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -175,22 +176,6 @@ public class GuiPanelManager extends JFrame {
 							// gerekiyo sadece gibi ismi
 		gamePanel.updatePanel();
 
-//
-//		Dimension size = gamePanel.getPreferredSize();
-//		i+=7;
-//		if(transition) {
-//
-//	        if (i % 7 == 0)
-//	        	a -=3;
-//			targetPanel.setBounds(0, panelWidth+a, size.width, size.height);
-//			mainMenuPanel.setBounds(0, 0+a, size.width, size.height);
-//			
-//			if(panelWidth+a <= 0) {
-//				transition = false;
-//				mainMenuPanel.setVisible(false);
-//			}
-//		}
-
 	}
 
 	private void setListeners() {
@@ -215,6 +200,8 @@ public class GuiPanelManager extends JFrame {
 			button.setPreferredSize(levelButtonDimension);
 		} else if (buttonType.equals("player")) {
 			button.setPreferredSize(playerButtonDimension);
+		} else if (buttonType.equals("miniStar")) {
+			button.setPreferredSize(miniStarDimension);
 		} else {
 			System.out.println("Error: Enter valid String");
 		}
@@ -242,6 +229,8 @@ public class GuiPanelManager extends JFrame {
 			label.setPreferredSize(levelButtonDimension);
 		} else if (labelType.equals("player")) {
 			label.setPreferredSize(playerButtonDimension);
+		} else if (labelType.equals("miniStar")) {
+			label.setPreferredSize(miniStarDimension);
 		} else {
 			System.out.println("Error: Enter valid String");
 		}
