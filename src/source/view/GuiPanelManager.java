@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import com.sun.awt.AWTUtilities;
 
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 
@@ -45,6 +48,9 @@ public class GuiPanelManager extends JFrame {
 	public GuiPanelManager() {
 		super("Rush Hour");
 		setUndecorated(true);
+		
+		//AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(0, 0, 748, 470, 50, 50));
+		
 		instance = this;
 
 		File fontFile = new File("src/fonts/odin.ttf");
