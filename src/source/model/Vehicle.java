@@ -23,9 +23,8 @@ public class Vehicle extends GameObject implements Drawable {
 		super();
 	}
 
-	public Vehicle(int x, int y, int length, String direction, boolean player) {
+	public Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme) {
 		super(x, y, length, direction);
-		String theme = "traffic";
 		this.player = player;
 		vehicleImages = new BufferedImage[length];
 		String path = "src/image/theme_" + theme + "/";
@@ -35,10 +34,12 @@ public class Vehicle extends GameObject implements Drawable {
 			path += "small";
 		else if (!player && length == 3)
 			path += "large";
-		else if (player)
+		else if (player && !special)
 			path += "player";
+		else if(player && special)
+			path += "police";
 
-		if (direction == "Upwards" || direction == "Right"){
+		if (direction.equals("Upwards") || direction.equals("Right")){
 			for(int i = 0; i < length; i++){
 				if(!player){
 					vehicleImages[i] = LoadImage(path + carType + "-" + i + ".png");
@@ -106,13 +107,13 @@ public class Vehicle extends GameObject implements Drawable {
 		// graphics2d.drawImage(car,at,null);
 		for (int i = 0; i < transform.length; i++) {
 			AffineTransform at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x*75,occupiedTransforms[i].position.y*75);
-			if(transform.direction == "Upwards")
+			if(transform.direction.equals("Upwards"))
 				graphics2d.drawImage(vehicleImages[i],at,null);
-			else if(transform.direction == "Downwards"){
+			else if(transform.direction.equals("Downwards")){
 				at.rotate(Math.toRadians(180), vehicleImages[i].getWidth()/2.0,vehicleImages[i].getHeight()/2.0);
 				graphics2d.drawImage(vehicleImages[i],at,null);
 			}
-			else if(transform.direction == "Left"){
+			else if(transform.direction.equals("Left")){
 				at.rotate(Math.toRadians(90), vehicleImages[i].getWidth()/2.0,vehicleImages[i].getHeight()/2.0);
 				graphics2d.drawImage(vehicleImages[i],at,null);
 			}

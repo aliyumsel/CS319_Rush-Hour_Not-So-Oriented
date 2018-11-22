@@ -17,8 +17,8 @@ public class GameEngine extends TimerTask {
 	public GameEngine() {
 		instance = this; // extremely simple singleton to access gameEngine with ease
 
-      soundManager = new SoundManager();
-      mapController = new MapController();
+      	soundManager = new SoundManager();
+      	mapController = new MapController();
 		vehicleController = new VehicleController();
 		gameManager = new GameManager();
 		playerManager = new PlayerManager();
@@ -29,9 +29,9 @@ public class GameEngine extends TimerTask {
 	// calls the update method of other classes that needs to be updated
 	public void run()
    {
-      gameManager.Update();
-		vehicleController.Update();
+      	gameManager.Update();
+      	vehicleController.Update();
 
-      Input.reset();
+      	Input.reset();
 	}
 }

@@ -15,9 +15,9 @@ import interfaces.Drawable;
 
 public class Car extends Vehicle {
 
-	public Car(int x, int y, String direction, boolean player)
+	public Car(int x, int y, String direction, boolean player, boolean special, String theme)
 	{
-		super(x, y, 2, direction, player);
+		super(x, y, 2, direction, player, special, theme);
 		if (player)
 		{
 			super.setType("Player");
