@@ -12,22 +12,25 @@ import java.awt.image.BufferedImage;
 
 public class LevelSelectionPanel extends JPanel {
 
-   private GuiPanelManager guiManager;
-   
+	private GuiPanelManager guiManager;
+
 	private JButton[] buttonArray;
+	private JLabel[] starsArray;
 	private JButton rightArrowButton;
 	private JButton leftArrowButton;
 	private JButton menuButton;
 
 	private BufferedImage background;
 	private BufferedImage levelBackground;
-   private BufferedImage levelBackgroundHighlighted;
+	private BufferedImage levelBackgroundHighlighted;
 	private BufferedImage rightArrow;
-   private BufferedImage rightArrowHighlighted;
+	private BufferedImage rightArrowHighlighted;
 	private BufferedImage leftArrow;
-   private BufferedImage leftArrowHighlighted;
+	private BufferedImage leftArrowHighlighted;
 	private BufferedImage back;
 	private BufferedImage backHighlighted;
+	private BufferedImage starActive;
+	private BufferedImage starInActive;
 
 	private int panelWidth = 764;
 	private int panelHeight = 468;
@@ -36,10 +39,11 @@ public class LevelSelectionPanel extends JPanel {
 
 	private LevelSelectionPopUp popUp;
 
-   LevelSelectionPanel(GuiPanelManager guiPanelManager) {
+	LevelSelectionPanel(GuiPanelManager guiPanelManager) {
 
 		super(null);
-		buttonArray = new JButton[40];
+		buttonArray = new JButton[40]; // variable a at 40 ý
+		starsArray = new JLabel[40 * 3]; // variable a at 3 ü
 		rightArrowButton = new JButton();
 		leftArrowButton = new JButton();
 		menuButton = new JButton();
@@ -59,27 +63,35 @@ public class LevelSelectionPanel extends JPanel {
 
 	}
 
-	private void loadImages()
-   {
+	private void loadImages() {
 		background = guiManager.LoadImage("src/image/background.png");
 		levelBackground = guiManager.LoadImage("src/image/icons/levelbackground.png");
-      levelBackgroundHighlighted = guiManager.LoadImage("src/image/icons/levelbackgroundH.png");
-      rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
-      rightArrowHighlighted = guiManager.LoadImage("src/image/icons/rightarrowH.png");
-      leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
-      leftArrowHighlighted = guiManager.LoadImage("src/image/icons/leftarrowH.png");
-      back = guiManager.LoadImage("src/image/icons/back.png");
+		levelBackgroundHighlighted = guiManager.LoadImage("src/image/icons/levelbackgroundH.png");
+		rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
+		rightArrowHighlighted = guiManager.LoadImage("src/image/icons/rightarrowH.png");
+		leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
+		leftArrowHighlighted = guiManager.LoadImage("src/image/icons/leftarrowH.png");
+		back = guiManager.LoadImage("src/image/icons/back.png");
 		backHighlighted = guiManager.LoadImage("src/image/icons/backH.png");
+		starActive = guiManager.LoadImage("src/image/icons/miniStar.png");
+		starInActive = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
 	}
 
 	private void createComponents() {
 		guiManager.setupButton(rightArrowButton, rightArrow, rightArrowHighlighted, "arrow", actionListener);
 		guiManager.setupButton(leftArrowButton, leftArrow, leftArrowHighlighted, "arrow", actionListener);
 		guiManager.setupButton(menuButton, back, backHighlighted, "square", actionListener);
-
+		
+		//Baðlantý burdan yapýlacak// updatelerken de bunu levelýnfo ya göre çaðýrýp sonra setBounds çaðýrýcaz
+		for (int i = 0; i < starsArray.length; i++) {
+			starsArray[i] = new JLabel();
+			guiManager.setupLabelIcon(starsArray[i], starInActive, "miniStar");
+			add(starsArray[i]);
+		}
 		for (int i = 0; i < buttonArray.length; i++) {
 			buttonArray[i] = new JButton("" + (1 + i));
-			guiManager.setupButton(buttonArray[i], levelBackground, levelBackgroundHighlighted, "level", actionListener);
+			guiManager.setupButton(buttonArray[i], levelBackground, levelBackgroundHighlighted, "level",
+					actionListener);
 			buttonArray[i].setVerticalTextPosition(SwingConstants.CENTER);
 			buttonArray[i].setHorizontalTextPosition(SwingConstants.CENTER);
 			buttonArray[i].setFont(new Font("Odin Rounded", Font.PLAIN, 25));
@@ -94,7 +106,9 @@ public class LevelSelectionPanel extends JPanel {
 		int gap = 0;
 		int pageLength = 12;
 		int limit = page * pageLength;
-		
+		int starCount = 0;
+		for (int i = 0; i < numberOfLevels * 3; i++)
+			starsArray[i].setVisible(false);
 		for (int i = 0; i < numberOfLevels; i++)
 			buttonArray[i].setVisible(false);
 		for (int i = limit; i < 12 + limit && i < numberOfLevels; i++) {
@@ -103,45 +117,77 @@ public class LevelSelectionPanel extends JPanel {
 				gap = 0;
 			if (i > -1 + limit && i < 4 + limit) {
 				gap += 133;
-				buttonArray[i].setBounds(gap ,
-						guiManager.findCenterHorizontal(panelHeight, buttonArray[i])  - 135,
+				buttonArray[i].setBounds(gap, guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) - 135,
 						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
+				int horizontalStarGap = 10;
+				for (int a = 0; a < 3; a++) {
+					if (a == 0) {
+						//starsArray[starCount].setIcon(new ImageIcon(starActive));;
+					}
+					starsArray[starCount].setBounds(gap + horizontalStarGap,
+							guiManager.findCenterHorizontal(panelHeight, starsArray[i]) - 160,
+							starsArray[starCount].getPreferredSize().width,
+							starsArray[starCount].getPreferredSize().height);
+					starsArray[starCount].setVisible(true);
+					starCount++;
+					horizontalStarGap += 30;
+				}
+
 			} else if (i > 3 + limit && i < 8 + limit) {
 				gap += 133;
-				buttonArray[i].setBounds(gap ,
-						guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) ,
+				buttonArray[i].setBounds(gap, guiManager.findCenterHorizontal(panelHeight, buttonArray[i]),
 						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
+				int horizontalStarGap = 10;
+				for (int a = 0; a < 3; a++) {
+					starsArray[starCount].setBounds(gap + horizontalStarGap,
+							guiManager.findCenterHorizontal(panelHeight, starsArray[i]) - 25,
+							starsArray[starCount].getPreferredSize().width,
+							starsArray[starCount].getPreferredSize().height);
+					starsArray[starCount].setVisible(true);
+					starCount++;
+					horizontalStarGap += 30;
+				}
+
 			} else if (i > 7 + limit && i < 12 + limit) {
 				gap += 133;
-				buttonArray[i].setBounds(gap ,
-						135 + guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) ,
+				buttonArray[i].setBounds(gap, 135 + guiManager.findCenterHorizontal(panelHeight, buttonArray[i]),
 						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
+				int horizontalStarGap = 10;
+				for (int a = 0; a < 3; a++) {
+					starsArray[starCount].setBounds(gap + horizontalStarGap,
+							guiManager.findCenterHorizontal(panelHeight, starsArray[i]) + 110,
+							starsArray[starCount].getPreferredSize().width,
+							starsArray[starCount].getPreferredSize().height);
+					starsArray[starCount].setVisible(true);
+					starCount++;
+					horizontalStarGap += 30;
+				}
+
 			}
 			buttonArray[i].setVisible(true);
 		}
+		System.out.println(starCount);
 
-		leftArrowButton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowButton) ,
+		leftArrowButton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowButton),
 				leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
-		rightArrowButton.setBounds(panelWidth - 135,
-				guiManager.findCenterHorizontal(panelHeight, rightArrowButton) ,
+		rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenterHorizontal(panelHeight, rightArrowButton),
 				rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
-		menuButton.setBounds(30 , 30 , menuButton.getPreferredSize().width,
-				menuButton.getPreferredSize().height);
+		menuButton.setBounds(30, 30, menuButton.getPreferredSize().width, menuButton.getPreferredSize().height);
 
 		Dimension size = popUp.getPreferredSize();
-		popUp.setBounds(guiManager.findCenterHorizontal(panelWidth, popUp), 100 , size.width, size.height);
+		popUp.setBounds(guiManager.findCenterHorizontal(panelWidth, popUp), 100, size.width, size.height);
 	}
 
 	private ActionListener actionListener = e -> {
 		SoundManager.instance.buttonClick();
-		if (e.getSource() == leftArrowButton ) {
+		if (e.getSource() == leftArrowButton) {
 			if (page == 0)
 				page = 3;
 			else
 				page -= 1;
 
 			setBoundsOfComponents(page);
-		} else if (e.getSource() == rightArrowButton ) {
+		} else if (e.getSource() == rightArrowButton) {
 			if (page == 3)
 				page = 0;
 			else
