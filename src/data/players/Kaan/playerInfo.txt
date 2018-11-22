@@ -1,0 +1,96 @@
+<Player>
+	<Name>
+		Kaan
+	<Name/>
+	<StarAmount>
+		0
+	<StarAmount/>
+	<Levels>
+		<Level>
+			<LevelNo>
+				1
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				inProgress
+			<Status/>
+			<Map>
+SS SS CD CU CU SS
+SS SS SS SS SS CU
+PC SS SS SS TD SS
+SS SS TU TD SS TD
+SS SS SS SS SS SS
+SS SS SS SS SS SS
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				2
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				3
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				4
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				5
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Map>
+			<Map/>
+		<Level/>
+	<Levels/>
+<Player/>
