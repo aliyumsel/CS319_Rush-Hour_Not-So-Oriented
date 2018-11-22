@@ -24,7 +24,9 @@ public class MapExtractor {
 
 	public Map extractLevel(int level, Player player) throws FileNotFoundException
    {
-      vehicleArray.clear();
+   	  String theme = "minimalistic";
+   	  boolean special = true;
+   	  vehicleArray.clear();
       //inside of the if condition will be revised
       if (player != null && player.getLevels().size() >= level && player.getLevels().get(level - 1).getStatus().equals("inProgress"))
 	  {
@@ -45,9 +47,10 @@ public class MapExtractor {
       {
     	  scanLevel = new Scanner(new File("src/data/levels/level" + level + ".txt"));
       }
+
       int x = 0;
       int y = 0;
-      
+
       while (!scanLevel.nextLine().trim().equals("<Map>"));
       String row = scanLevel.nextLine();
       do {
@@ -64,25 +67,25 @@ public class MapExtractor {
             String objectCode = scanRow.next();
 
             if (objectCode.equals("TU")) {
-               vehicleArray.add(new Truck(x, y, "Upwards", false));
+               vehicleArray.add(new Truck(x, y, "Upwards", false, special, theme));
             } else if (objectCode.equals("TD")) {
-               vehicleArray.add(new Truck(x, y, "Downwards", false));
+               vehicleArray.add(new Truck(x, y, "Downwards", false, special, theme));
             } else if (objectCode.equals("TR")) {
-               vehicleArray.add(new Truck(x, y, "Right", false));
+               vehicleArray.add(new Truck(x, y, "Right", false, special, theme));
             } else if (objectCode.equals("TL")) {
-               vehicleArray.add(new Truck(x, y, "Left", false));
+               vehicleArray.add(new Truck(x, y, "Left", false, special, theme));
             } else if (objectCode.equals("CU")) {
-               vehicleArray.add(new Car(x, y, "Upwards", false));
+               vehicleArray.add(new Car(x, y, "Upwards", false, special, theme));
             } else if (objectCode.equals("CD")) {
-               vehicleArray.add(new Car(x, y, "Downwards", false));
+               vehicleArray.add(new Car(x, y, "Downwards", false, special, theme));
             } else if (objectCode.equals("CR")) {
-               vehicleArray.add(new Car(x, y, "Right", false));
+               vehicleArray.add(new Car(x, y, "Right", false, special, theme));
             } else if (objectCode.equals("CL")) {
-               vehicleArray.add(new Car(x, y, "Left", false));
+               vehicleArray.add(new Car(x, y, "Left", false, special, theme));
             } else if (objectCode.equals("PC")) {
-               vehicleArray.add(new Car(x, y, "Left", true));
+               vehicleArray.add(new Car(x, y, "Left", true, special, theme));
             } else if (objectCode.equals("PT")) {
-               vehicleArray.add(new Truck(x, y, "Right", true));
+               vehicleArray.add(new Truck(x, y, "Right", true, special, theme));
             }
             x++;
          }
