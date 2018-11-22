@@ -39,10 +39,8 @@ public class GuiPanelManager extends JFrame {
 	private JPanel targetPanel;
 	public Font odinRounded;
 
-	private Dimension longButtonDimension;
-	private Dimension arrowButtonDimension;
-	private Dimension squareButtonDimension;
-	private Dimension playButtonDimension;
+	private Dimension longButtonDimension, arrowButtonDimension,squareButtonDimension,playButtonDimension,levelButtonDimension;
+	
 
 	public GuiPanelManager() {
 		super("Rush Hour");
@@ -60,7 +58,8 @@ public class GuiPanelManager extends JFrame {
 		longButtonDimension = new Dimension(171, 37);
 		squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
 		playButtonDimension = new Dimension(131, 147);
-		arrowButtonDimension = new Dimension(160,150);
+		arrowButtonDimension = new Dimension(130,150);
+		levelButtonDimension = new Dimension(105,120);
 		setLayout(new CardLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -172,7 +171,9 @@ public class GuiPanelManager extends JFrame {
 			button.setPreferredSize(playButtonDimension);
 		}  else if (buttonType.equals("arrow")) {
 			button.setPreferredSize(arrowButtonDimension);
-		} else {
+		} else if (buttonType.equals("level")) {
+			button.setPreferredSize(levelButtonDimension);
+		}else {
 			System.out.println("Error: Enter valid String");
 		}
 

@@ -74,6 +74,64 @@ public class LevelSelectionPanel extends JPanel {
 
 	}
 
+	private void createComponents() {
+		guiManager.setupButton(rightArrowbutton, rightArrow, rightArrow, "arrow", actionListener);
+		guiManager.setupButton(leftArrowbutton, leftArrow, leftArrow, "arrow", actionListener);
+		guiManager.setupButton(menuButton, back, backHighlighted, "square", actionListener);
+		for (int i = 0; i < buttonArray.length; i++) {
+			buttonArray[i] = new JButton("" + (1 + i));
+			guiManager.setupButton(buttonArray[i], levelBackground, levelBackground, "level", actionListener);
+			buttonArray[i].setVerticalTextPosition(SwingConstants.CENTER);
+			buttonArray[i].setHorizontalTextPosition(SwingConstants.CENTER);
+			buttonArray[i].setFont(new Font("Odin Rounded", Font.PLAIN, 25));
+			buttonArray[i].revalidate();
+			add(buttonArray[i]);
+		}
+
+	}
+
+	private void setBoundsOfComponents(int page) {
+		Insets insets = getInsets();
+		int gap = 0;
+		int pageLength = 12;
+		int limit = page * pageLength;
+		
+		for (int i = 0; i < numberOfLevels; i++)
+			buttonArray[i].setVisible(false);
+		for (int i = 0 + limit; i < 12 + limit && i < numberOfLevels; i++) {
+			
+			if (i % 4 == 0)
+				gap = 0;
+			if (i > -1 + limit && i < 4 + limit) {
+				gap += 133;
+				buttonArray[i].setBounds(gap + insets.left,
+						guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) + insets.top - 135,
+						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
+			} else if (i > 3 + limit && i < 8 + limit) {
+				gap += 133;
+				buttonArray[i].setBounds(gap + insets.left,
+						guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) + insets.top,
+						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
+			} else if (i > 7 + limit && i < 12 + limit) {
+				gap += 133;
+				buttonArray[i].setBounds(gap + insets.left,
+						135 + guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) + insets.top,
+						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
+			}
+			buttonArray[i].setVisible(true);
+
+		}
+
+		leftArrowbutton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowbutton) + insets.top,
+				leftArrowbutton.getPreferredSize().width, leftArrowbutton.getPreferredSize().height);
+		rightArrowbutton.setBounds(panelWidth - 135,
+				guiManager.findCenterHorizontal(panelHeight, rightArrowbutton) + insets.top,
+				rightArrowbutton.getPreferredSize().width, rightArrowbutton.getPreferredSize().height);
+		menuButton.setBounds(30 + insets.left, 30 + insets.top, menuButton.getPreferredSize().width,
+				menuButton.getPreferredSize().height);
+
+	}
+
 	private ActionListener actionListener = e -> {
 		SoundManager.instance.buttonClick();
 		if (e.getSource() == leftArrowbutton) {
@@ -95,71 +153,18 @@ public class LevelSelectionPanel extends JPanel {
 			this.setVisible(false);
 			guiManager.setPanelVisible("MainMenu");
 		}
+		else {
+			this.setVisible(false);
+			guiManager.setPanelVisible("Game");
+		}
 
 	};
-
-	private void createComponents() {
-		guiManager.setupButton(rightArrowbutton, rightArrow, rightArrow, "arrow", actionListener);
-		guiManager.setupButton(leftArrowbutton, leftArrow, leftArrow, "arrow", actionListener);
-		guiManager.setupButton(menuButton, back,backHighlighted, "square", actionListener);
-		for (int i = 0; i < buttonArray.length; i++) {
-			buttonArray[i] = new JButton("" + (1 + i));
-			guiManager.setupButton(buttonArray[i], levelBackground, levelBackground, "arrow", actionListener);
-			buttonArray[i].setVerticalTextPosition(SwingConstants.CENTER);
-			buttonArray[i].setHorizontalTextPosition(SwingConstants.CENTER);
-			buttonArray[i].setFont(new Font("Odin Rounded", Font.PLAIN, 25));
-			buttonArray[i].revalidate();
-			add(buttonArray[i]);
-		}
-
-	}
-
-	private void setBoundsOfComponents(int page) {
-		Insets insets = getInsets();
-		int gap = 0;
-		int pageLength = 12;
-		int limit = page * pageLength;
-		int buttons = 0;
-		for(int i = 0; i<numberOfLevels;i++)
-			buttonArray[i].setVisible(false);
-		for (int i = 0 + limit; i < 12 + limit && i<numberOfLevels; i++) {
-			buttons++;
-			
-			if (i % 4 == 0)
-				gap = 0;
-			if (i > -1 + limit && i < 4 + limit) {
-				gap += 122;
-				buttonArray[i].setBounds(gap + insets.left, 20 + insets.top, buttonArray[i].getPreferredSize().width,
-						buttonArray[i].getPreferredSize().height);
-			} else if (i > 3 + limit && i < 8 + limit) {
-				gap += 122;
-				buttonArray[i].setBounds(gap + insets.left,
-						guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) + insets.top,
-						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
-			} else if (i > 7 + limit && i < 12 + limit) {
-				gap += 122;
-				buttonArray[i].setBounds(gap + insets.left,
-						135 + guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) + insets.top,
-						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
-			}
-			buttonArray[i].setVisible(true);
-			
-		}
-		
-		leftArrowbutton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowbutton) + insets.top,
-				leftArrowbutton.getPreferredSize().width, leftArrowbutton.getPreferredSize().height);
-		rightArrowbutton.setBounds(600, guiManager.findCenterHorizontal(panelHeight, rightArrowbutton) + insets.top,
-				rightArrowbutton.getPreferredSize().width, rightArrowbutton.getPreferredSize().height);
-		menuButton.setBounds(30 + insets.left, 30 +insets.top,
-				menuButton.getPreferredSize().width, menuButton.getPreferredSize().height);
-
-	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		drawBackground(g); // change the background png for changing the background
-		// setBackground(Color.WHITE);
+
 	}
 
 	private void drawBackground(Graphics graphics) {
