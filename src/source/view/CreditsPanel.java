@@ -16,7 +16,7 @@ public class CreditsPanel extends JPanel
    private GuiPanelManager guiManager;
 
    private JLabel heading;
-   private JLabel subHeading;
+//   private JLabel subHeading;
    private JLabel name1;
    private JLabel name2;
    private JLabel name3;
@@ -65,11 +65,11 @@ public class CreditsPanel extends JPanel
       heading.setIcon(new ImageIcon(title));
       heading.setPreferredSize(new Dimension(233, 65));
 
-      subHeading = new JLabel("Developers", SwingConstants.CENTER);
-      subHeading.setPreferredSize(new Dimension(300, 50));
-      subHeading.setFont(new Font("Odin Rounded", Font.PLAIN, 50));
-      subHeading.setForeground(Color.white);
-      //subHeading.setBorder(BorderFactory.createLineBorder(Color.cyan, 2));
+//      subHeading = new JLabel("Developers", SwingConstants.CENTER);
+//      subHeading.setPreferredSize(new Dimension(300, 50));
+//      subHeading.setFont(new Font("Odin Rounded", Font.PLAIN, 50));
+//      subHeading.setForeground(Color.white);
+//      //subHeading.setBorder(BorderFactory.createLineBorder(Color.cyan, 2));
 
       name1 = new JLabel("Ahmet Ayrancioglu", SwingConstants.CENTER);
       name1.setPreferredSize(new Dimension(300, 35));
@@ -99,8 +99,8 @@ public class CreditsPanel extends JPanel
 
    private void addComponents()
    {
-      add(heading);
-      add(subHeading);
+      this.add(heading);
+//      add(subHeading);
       add(name1);
       add(name2);
       add(name3);
@@ -111,23 +111,23 @@ public class CreditsPanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-      Insets insets = getInsets();
 
-      back.setBounds(30 + insets.left, 30 + insets.top, back.getPreferredSize().width, back.getPreferredSize().height);
 
-      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) + insets.left, 25 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
+      back.setBounds(30 , 30 , back.getPreferredSize().width, back.getPreferredSize().height);
 
-      subHeading.setBounds(guiManager.findCenterHorizontal(panelWidth, subHeading) + insets.left, 100 + insets.top, subHeading.getPreferredSize().width, subHeading.getPreferredSize().height);
+      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
-      name1.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) + insets.left, 175 + insets.top, name1.getPreferredSize().width, name1.getPreferredSize().height);
+//      subHeading.setBounds(guiManager.findCenterHorizontal(panelWidth, subHeading) , 100 , subHeading.getPreferredSize().width, subHeading.getPreferredSize().height);
 
-      name2.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) + insets.left, 225 + insets.top, name2.getPreferredSize().width, name2.getPreferredSize().height);
+      name1.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) , 150 , name1.getPreferredSize().width, name1.getPreferredSize().height);
 
-      name3.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) + insets.left, 275 + insets.top, name3.getPreferredSize().width, name3.getPreferredSize().height);
+      name2.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) , 200 , name2.getPreferredSize().width, name2.getPreferredSize().height);
 
-      name4.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) + insets.left, 325 + insets.top, name4.getPreferredSize().width, name4.getPreferredSize().height);
+      name3.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) , 250 , name3.getPreferredSize().width, name3.getPreferredSize().height);
 
-      name5.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) + insets.left, 375 + insets.top, name5.getPreferredSize().width, name5.getPreferredSize().height);
+      name4.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) , 300 , name4.getPreferredSize().width, name4.getPreferredSize().height);
+
+      name5.setBounds(guiManager.findCenterHorizontal(panelWidth, name1) , 350 , name5.getPreferredSize().width, name5.getPreferredSize().height);
 
    }
 

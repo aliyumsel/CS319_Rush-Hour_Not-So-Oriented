@@ -107,7 +107,6 @@ public class SettingsPanel extends JPanel
 
    private void addComponents()
    {
-      System.out.print("");
       add(back);
 
       add(music);
@@ -125,28 +124,23 @@ public class SettingsPanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-      Insets insets = getInsets();
+      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
-      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) + insets.left, 25 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
+      volume.setBounds(50, 125, volume.getPreferredSize().width, volume.getPreferredSize().height);
+      music.setBounds(75, 175, music.getPreferredSize().width, music.getPreferredSize().height);
+      sfx.setBounds(175, 175, sfx.getPreferredSize().width, sfx.getPreferredSize().height);
 
-      music.setBounds(75 + insets.left, 200 + insets.top, music.getPreferredSize().width, music.getPreferredSize().height);
+      back.setBounds(30, 30, back.getPreferredSize().width, back.getPreferredSize().height);
 
-      sfx.setBounds(175 + insets.left, 200 + insets.top, sfx.getPreferredSize().width, sfx.getPreferredSize().height);
+      theme.setBounds(50, 300, theme.getPreferredSize().width, theme.getPreferredSize().height);
 
-      back.setBounds(30 + insets.left, 30 + insets.top, back.getPreferredSize().width, back.getPreferredSize().height);
+      simple.setBounds(75, 350, simple.getPreferredSize().width, simple.getPreferredSize().height);
 
-      volume.setBounds(50 + insets.left, 150 + insets.top, volume.getPreferredSize().width, volume.getPreferredSize().height);
+      classic.setBounds(175, 350, classic.getPreferredSize().width, classic.getPreferredSize().height);
 
-      theme.setBounds(50 + insets.left, 300 + insets.top, theme.getPreferredSize().width, theme.getPreferredSize().height);
+      safari.setBounds(275, 350, safari.getPreferredSize().width, safari.getPreferredSize().height);
 
-      simple.setBounds(75 + insets.left, 350 + insets.top, simple.getPreferredSize().width, simple.getPreferredSize().height);
-
-      classic.setBounds(175 + insets.left, 350 + insets.top, classic.getPreferredSize().width, classic.getPreferredSize().height);
-
-      safari.setBounds(275 + insets.left, 350 + insets.top, safari.getPreferredSize().width, safari.getPreferredSize().height);
-
-      space.setBounds(375 + insets.left, 350 + insets.top, space.getPreferredSize().width, space.getPreferredSize().height);
-
+      space.setBounds(375, 350, space.getPreferredSize().width, space.getPreferredSize().height);
    }
 
    private ActionListener actionListener = e ->

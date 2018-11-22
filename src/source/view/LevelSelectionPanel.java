@@ -29,8 +29,6 @@ public class LevelSelectionPanel extends JPanel {
 	private BufferedImage back;
 	private BufferedImage backHighlighted;
 
-	private JButton button = new JButton("-");
-
 	private int panelWidth = 764;
 	private int panelHeight = 468;
 	private int page = 0;
@@ -93,7 +91,7 @@ public class LevelSelectionPanel extends JPanel {
 	}
 
 	private void setBoundsOfComponents(int page) {
-		Insets insets = getInsets();
+
 		int gap = 0;
 		int pageLength = 12;
 		int limit = page * pageLength;
@@ -106,34 +104,34 @@ public class LevelSelectionPanel extends JPanel {
 				gap = 0;
 			if (i > -1 + limit && i < 4 + limit) {
 				gap += 133;
-				buttonArray[i].setBounds(gap + insets.left,
-						guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) + insets.top - 135,
+				buttonArray[i].setBounds(gap ,
+						guiManager.findCenterHorizontal(panelHeight, buttonArray[i])  - 135,
 						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
 			} else if (i > 3 + limit && i < 8 + limit) {
 				gap += 133;
-				buttonArray[i].setBounds(gap + insets.left,
-						guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) + insets.top,
+				buttonArray[i].setBounds(gap ,
+						guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) ,
 						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
 			} else if (i > 7 + limit && i < 12 + limit) {
 				gap += 133;
-				buttonArray[i].setBounds(gap + insets.left,
-						135 + guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) + insets.top,
+				buttonArray[i].setBounds(gap ,
+						135 + guiManager.findCenterHorizontal(panelHeight, buttonArray[i]) ,
 						buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
 			}
 			buttonArray[i].setVisible(true);
 
 		}
 
-		leftArrowButton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowButton) + insets.top,
+		leftArrowButton.setBounds(5, guiManager.findCenterHorizontal(panelHeight, leftArrowButton) ,
 				leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
 		rightArrowButton.setBounds(panelWidth - 135,
-				guiManager.findCenterHorizontal(panelHeight, rightArrowButton) + insets.top,
+				guiManager.findCenterHorizontal(panelHeight, rightArrowButton) ,
 				rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
-		menuButton.setBounds(30 + insets.left, 30 + insets.top, menuButton.getPreferredSize().width,
+		menuButton.setBounds(30 , 30 , menuButton.getPreferredSize().width,
 				menuButton.getPreferredSize().height);
 
 		Dimension size = popUp.getPreferredSize();
-		popUp.setBounds(guiManager.findCenterHorizontal(panelWidth, popUp), 100 + insets.top, size.width, size.height);
+		popUp.setBounds(guiManager.findCenterHorizontal(panelWidth, popUp), 100 , size.width, size.height);
 		//popUp.setVisible(true); in order to test pop up panel design remove the comment
 	}
 

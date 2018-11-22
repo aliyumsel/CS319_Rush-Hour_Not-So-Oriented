@@ -42,18 +42,24 @@ public class GuiPanelManager extends JFrame {
 	// private int panelWidth = 468;
 	// private boolean transition = false;
 
-	private BufferedImage cursorImage;
+   int panelWidth;
+   int panelHeight;
+
+   private BufferedImage cursorImage;
 
 	public Font odinRounded;
 
 	private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
 			levelButtonDimension, playerButtonDimension;
 
-	public GuiPanelManager() {
+	public GuiPanelManager()
+   {
 		super("Rush Hour");
 		setUndecorated(true);
 
-		// setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
+      instance = this;
+
+		//setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
 
 		// Toolkit toolkit = Toolkit.getDefaultToolkit();
 		// cursorImage = LoadImage("src/image/icons/cursor1.png");
@@ -65,7 +71,7 @@ public class GuiPanelManager extends JFrame {
 		// 50, 50));
 		// setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
 
-		instance = this;
+
 
 		File fontFile = new File("src/fonts/odin.ttf");
 		try {
@@ -75,6 +81,9 @@ public class GuiPanelManager extends JFrame {
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 		}
+
+		panelWidth = 764;
+		panelHeight = 468;
 
 		longButtonDimension = new Dimension(171, 37);
 		squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
@@ -110,7 +119,7 @@ public class GuiPanelManager extends JFrame {
 		setLocationRelativeTo(null);
 
 		mainMenuPanel.setVisible(true);
-		gamePanel.setVisible(false);
+		//gamePanel.setVisible(false);
 
 		setVisible(true);
 		pack();
@@ -170,7 +179,7 @@ public class GuiPanelManager extends JFrame {
 							// gerekiyo sadece gibi ismi
 		gamePanel.updatePanel();
 
-//		Insets insets = getInsets();
+//
 //		Dimension size = gamePanel.getPreferredSize();
 //		i+=7;
 //		if(transition) {

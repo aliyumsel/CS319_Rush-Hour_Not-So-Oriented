@@ -82,8 +82,8 @@ public class InnerGamePanel extends JPanel {
 		endOfLevelPanel = new EndOfLevelPanel(guiManager);
 		add(endOfLevelPanel);
 		endOfLevelPanel.setVisible(false);
-		Insets insets = getInsets();
+
 		Dimension size = endOfLevelPanel.getPreferredSize();
-		endOfLevelPanel.setBounds(25 + insets.left, 100 + insets.top, size.width, size.height);
+		endOfLevelPanel.setBounds(25 , 100 , size.width, size.height);
 	}
 }
