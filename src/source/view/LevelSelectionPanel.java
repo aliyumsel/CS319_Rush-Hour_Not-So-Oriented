@@ -3,6 +3,7 @@ package source.view;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import com.sun.glass.ui.TouchInputSupport;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.sun.org.apache.xalan.internal.utils.XMLSecurityManager.Limit;
 
@@ -26,16 +27,20 @@ public class LevelSelectionPanel extends JPanel {
 	private JButton[] buttonArray;
 	private JButton rightArrowbutton;
 	private JButton leftArrowbutton;
+	private JButton menuButton;
 	private GuiPanelManager guiManager;
 	private BufferedImage background;
 	private BufferedImage levelBackground;
 	private BufferedImage rightArrow;
 	private BufferedImage leftArrow;
 	private BufferedImage title;
+	private BufferedImage back;
+	private BufferedImage backHighlighted;
 	private JButton button = new JButton("-");
 	private int panelWidth = 764;
 	private int panelHeight = 468;
 	private int page = 0;
+	private int numberOfLevels = 40;
 
 	public LevelSelectionPanel(GuiPanelManager guiPanelManager) {
 
@@ -43,6 +48,7 @@ public class LevelSelectionPanel extends JPanel {
 		buttonArray = new JButton[40];
 		rightArrowbutton = new JButton();
 		leftArrowbutton = new JButton();
+		menuButton = new JButton();
 		guiManager = guiPanelManager;
 		setPreferredSize(new Dimension(panelWidth, panelHeight));
 
@@ -51,6 +57,7 @@ public class LevelSelectionPanel extends JPanel {
 		createComponents();
 		add(leftArrowbutton);
 		add(rightArrowbutton);
+		add(menuButton);
 		setBoundsOfComponents(page);
 		this.setVisible(true);
 
@@ -61,6 +68,8 @@ public class LevelSelectionPanel extends JPanel {
 		levelBackground = guiManager.LoadImage("src/image/icons/levelbackground.png");
 		rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
 		leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
+		back = guiManager.LoadImage("src/image/icons/back.png");
+		backHighlighted = guiManager.LoadImage("src/image/icons/backH.png");
 		title = guiManager.LoadImage("src/image/icons/title.png");
 
 	}
@@ -69,18 +78,22 @@ public class LevelSelectionPanel extends JPanel {
 		SoundManager.instance.buttonClick();
 		if (e.getSource() == leftArrowbutton) {
 			if (page == 0)
-				page = 2;
+				page = 3;
 			else
 				page -= 1;
 
 			setBoundsOfComponents(page);
 		}
 		if (e.getSource() == rightArrowbutton) {
-			if (page == 2)
+			if (page == 3)
 				page = 0;
 			else
 				page += 1;
 			setBoundsOfComponents(page);
+		}
+		if (e.getSource() == menuButton) {
+			this.setVisible(false);
+			guiManager.setPanelVisible("MainMenu");
 		}
 
 	};
@@ -88,6 +101,7 @@ public class LevelSelectionPanel extends JPanel {
 	private void createComponents() {
 		guiManager.setupButton(rightArrowbutton, rightArrow, rightArrow, "arrow", actionListener);
 		guiManager.setupButton(leftArrowbutton, leftArrow, leftArrow, "arrow", actionListener);
+		guiManager.setupButton(menuButton, back,backHighlighted, "square", actionListener);
 		for (int i = 0; i < buttonArray.length; i++) {
 			buttonArray[i] = new JButton("" + (1 + i));
 			guiManager.setupButton(buttonArray[i], levelBackground, levelBackground, "arrow", actionListener);
@@ -106,13 +120,12 @@ public class LevelSelectionPanel extends JPanel {
 		int pageLength = 12;
 		int limit = page * pageLength;
 		int buttons = 0;
-		for(int i = 0; i<40;i++)
+		for(int i = 0; i<numberOfLevels;i++)
 			buttonArray[i].setVisible(false);
-		for (int i = 0 + limit; i < 12 + limit; i++) {
+		for (int i = 0 + limit; i < 12 + limit && i<numberOfLevels; i++) {
 			buttons++;
 			
-			if (i == 4 || i == 8 || i == 12 || i == 16 || i == 20 || i == 24 || i == 28 || i == 32 || i == 36
-					|| i == 40)
+			if (i % 4 == 0)
 				gap = 0;
 			if (i > -1 + limit && i < 4 + limit) {
 				gap += 122;
@@ -137,6 +150,8 @@ public class LevelSelectionPanel extends JPanel {
 				leftArrowbutton.getPreferredSize().width, leftArrowbutton.getPreferredSize().height);
 		rightArrowbutton.setBounds(600, guiManager.findCenterHorizontal(panelHeight, rightArrowbutton) + insets.top,
 				rightArrowbutton.getPreferredSize().width, rightArrowbutton.getPreferredSize().height);
+		menuButton.setBounds(30 + insets.left, 30 +insets.top,
+				menuButton.getPreferredSize().width, menuButton.getPreferredSize().height);
 
 	}
 
