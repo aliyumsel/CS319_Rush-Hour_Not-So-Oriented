@@ -3,12 +3,6 @@ package source.view;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import com.sun.glass.ui.TouchInputSupport;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import com.sun.org.apache.xalan.internal.utils.XMLSecurityManager.Limit;
-
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
-
 import java.awt.*;
 
 import source.controller.GameEngine;
@@ -154,8 +148,14 @@ public class LevelSelectionPanel extends JPanel {
 			guiManager.setPanelVisible("MainMenu");
 		}
 		else {
-			this.setVisible(false);
-			guiManager.setPanelVisible("Game");
+			for(int index = 0; index < numberOfLevels;index++) {
+				if(e.getSource() == buttonArray[index])
+					GameEngine.instance.gameManager.loadLevel(index+1);;
+					
+				this.setVisible(false);
+
+				guiManager.setPanelVisible("Game");
+			}
 		}
 
 	};

@@ -46,11 +46,6 @@ public class MainMenuPanel extends JPanel {
    private BufferedImage exitButtonHighlightedImage;
    private BufferedImage settingsButtonImage;
    private BufferedImage settingsButtonHighlightedImage;
-   //
-   //   private Dimension longButtonDimension;
-   //   private Dimension squareButtonDimension;
-   //   private Dimension playButtonDimension;
-	//
 
    private int panelWidth = 764;
    private int panelHeight = 468;
