@@ -21,10 +21,8 @@ public class HelpPanel extends JPanel
    private BufferedImage backButtonImage;
    private BufferedImage backButtonHighlightedImage;
 
-//   private int panelWidth = 764;
-//   private int panelHeight = 468;
    private int panelWidth = 764;
-   private int panelHeight = 492;
+   private int panelHeight = 468;
 
    HelpPanel(GuiPanelManager _guiManager)
    {

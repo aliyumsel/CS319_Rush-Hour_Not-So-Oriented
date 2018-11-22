@@ -52,7 +52,7 @@ public class GuiPanelManager extends JFrame {
 		super("Rush Hour");
 		setUndecorated(true);
 
-		setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
+		//setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
 
       //Toolkit toolkit = Toolkit.getDefaultToolkit();
       //cursorImage = LoadImage("src/image/icons/cursor1.png");
