@@ -1,6 +1,7 @@
 package source.view;
 
 import javax.swing.*;
+import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 import java.awt.*;
 
@@ -12,7 +13,7 @@ import java.awt.image.BufferedImage;
 public class LevelSelectionPanel extends JPanel {
 
    private GuiPanelManager guiManager;
-
+   
 	private JButton[] buttonArray;
 	private JButton rightArrowButton;
 	private JButton leftArrowButton;
@@ -93,7 +94,7 @@ public class LevelSelectionPanel extends JPanel {
 		int gap = 0;
 		int pageLength = 12;
 		int limit = page * pageLength;
-
+		
 		for (int i = 0; i < numberOfLevels; i++)
 			buttonArray[i].setVisible(false);
 		for (int i = limit; i < 12 + limit && i < numberOfLevels; i++) {
@@ -151,10 +152,9 @@ public class LevelSelectionPanel extends JPanel {
 			guiManager.setPanelVisible("MainMenu");
 		} else {
 			for (int index = 0; index < numberOfLevels; index++) {
-				if (e.getSource() == buttonArray[index])
-            {
-               popUp.initialize(index + 1); // buna player objesi de eklenecek
-            }
+				if (e.getSource() == buttonArray[index]) {
+					popUp.initialize(index + 1); // buna player objesi de eklenecek
+				}
 				// GameEngine.instance.gameManager.loadLevel(index+1);;
 
 				popUp.setVisible(true);
