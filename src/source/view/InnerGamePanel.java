@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
 import source.controller.GameEngine;
+import source.controller.SoundManager;
 import source.model.*;
 
 import javax.swing.JPanel;
@@ -71,6 +72,8 @@ public class InnerGamePanel extends JPanel {
    }
 
 	public void setEndOfLevelPanelVisible(boolean bool) {
+		if(bool)
+			SoundManager.instance.successSound();
 		endOfLevelPanel.setVisible(bool);
 	}
 

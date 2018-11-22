@@ -16,6 +16,7 @@ public class SoundManager {
 	// Traffic Theme
 	private String trafficThemeSong = "src/sounds/theme.wav";
 	private String buttonClick = "src/sounds/buttonClick.wav";
+	private String success = "src/sounds/success.wav";
 	private AudioStream audioStream = null;
 	private InputStream inputStream = null;
 	private boolean isThemeEnabled = true;
@@ -64,6 +65,20 @@ public class SoundManager {
 				inputStream = new FileInputStream("src/sounds/buttonClick.wav"); // Sound eklerken buradaki isme
 				// dikkat edin vehicle'�n TYPE
 				// ile ayn� olmas� laz�m
+				audioStream = new AudioStream(inputStream);
+				AudioPlayer.player.start(audioStream);
+			} catch (IOException a) {
+				System.out.println("Not Found");
+			}
+		}
+	}
+
+	public void successSound() { // Vehicle Controller �n set selected Methodun da �a��r�l�yo yani
+
+		if (isEffectsEnabled) {
+			try {
+				inputStream = new FileInputStream("src/sounds/success.wav"); // Sound eklerken buradaki isme
+
 				audioStream = new AudioStream(inputStream);
 				AudioPlayer.player.start(audioStream);
 			} catch (IOException a) {
