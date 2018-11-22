@@ -42,24 +42,23 @@ public class GuiPanelManager extends JFrame {
 	// private int panelWidth = 468;
 	// private boolean transition = false;
 
-   int panelWidth;
-   int panelHeight;
+	int panelWidth;
+	int panelHeight;
 
-   private BufferedImage cursorImage;
+	private BufferedImage cursorImage;
 
 	public Font odinRounded;
 
 	private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
 			levelButtonDimension, playerButtonDimension;
 
-	public GuiPanelManager()
-   {
+	public GuiPanelManager() {
 		super("Rush Hour");
 		setUndecorated(true);
 
-      instance = this;
+		instance = this;
 
-		//setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
+		// setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
 
 		// Toolkit toolkit = Toolkit.getDefaultToolkit();
 		// cursorImage = LoadImage("src/image/icons/cursor1.png");
@@ -70,8 +69,6 @@ public class GuiPanelManager extends JFrame {
 		// AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(0, 0, 748, 470,
 		// 50, 50));
 		// setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
-
-
 
 		File fontFile = new File("src/fonts/odin.ttf");
 		try {
@@ -119,7 +116,7 @@ public class GuiPanelManager extends JFrame {
 		setLocationRelativeTo(null);
 
 		mainMenuPanel.setVisible(true);
-		//gamePanel.setVisible(false);
+		// gamePanel.setVisible(false);
 
 		setVisible(true);
 		pack();
@@ -161,9 +158,8 @@ public class GuiPanelManager extends JFrame {
 			targetPanel = helpPanel;
 		} else if (panelName.equals("ChangePlayer")) {
 			playerPanel.reset();
-			targetPanel = (ChangePlayerPanel)playerPanel;
-			
-			
+			targetPanel = (ChangePlayerPanel) playerPanel;
+
 		} else {
 			System.out.println("Error: Enter valid name");
 		}
@@ -230,6 +226,31 @@ public class GuiPanelManager extends JFrame {
 		button.setContentAreaFilled(false);
 		button.setBorderPainted(false);
 		button.setFocusable(false);
+	}
+
+	void setupLabelIcon(JLabel label, BufferedImage image, String labelType) {
+
+		if (labelType.equals("long")) {
+			label.setPreferredSize(longButtonDimension);
+		} else if (labelType.equals("square")) {
+			label.setPreferredSize(squareButtonDimension);
+		} else if (labelType.equals("play")) {
+			label.setPreferredSize(playButtonDimension);
+		} else if (labelType.equals("arrow")) {
+			label.setPreferredSize(arrowButtonDimension);
+		} else if (labelType.equals("level")) {
+			label.setPreferredSize(levelButtonDimension);
+		} else if (labelType.equals("player")) {
+			label.setPreferredSize(playerButtonDimension);
+		} else {
+			System.out.println("Error: Enter valid String");
+		}
+
+		label.setIcon(new ImageIcon(image));
+
+		label.setOpaque(false);
+
+		label.setFocusable(false);
 	}
 
 	BufferedImage LoadImage(String FileName) {
