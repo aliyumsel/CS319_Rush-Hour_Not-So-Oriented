@@ -41,6 +41,9 @@ public class GuiPanelManager extends JFrame {
 	//private int panelWidth = 468;
 	//private boolean transition = false;
 
+   int panelWidth;
+   int panelHeight;
+
    private BufferedImage cursorImage;
 
 	public Font odinRounded;
@@ -48,9 +51,12 @@ public class GuiPanelManager extends JFrame {
 	private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
 			levelButtonDimension;
 
-	public GuiPanelManager() {
+	public GuiPanelManager()
+   {
 		super("Rush Hour");
 		setUndecorated(true);
+
+      instance = this;
 
 		//setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
 
@@ -63,7 +69,7 @@ public class GuiPanelManager extends JFrame {
 		// 50, 50));
 		// setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
 
-		instance = this;
+
 
 		File fontFile = new File("src/fonts/odin.ttf");
 		try {
@@ -74,11 +80,15 @@ public class GuiPanelManager extends JFrame {
 			e.printStackTrace();
 		}
 
+		panelWidth = 764;
+		panelHeight = 468;
+
 		longButtonDimension = new Dimension(171, 37);
 		squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
 		playButtonDimension = new Dimension(131, 147);
 		arrowButtonDimension = new Dimension(130, 150);
 		levelButtonDimension = new Dimension(105, 120);
+
 		setLayout(new CardLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,7 +105,7 @@ public class GuiPanelManager extends JFrame {
 		add(levelSelectionPanel);
 		add(settingsPanel);
 		add(helpPanel);
-		add(new JPanel());
+		add(new JPanel()); //dont delete this
 		currentPanelIndex = 0;
 
 		setListeners();
@@ -105,7 +115,7 @@ public class GuiPanelManager extends JFrame {
 		setLocationRelativeTo(null);
 
 		mainMenuPanel.setVisible(true);
-		gamePanel.setVisible(false);
+		//gamePanel.setVisible(false);
 
 		setVisible(true);
 		pack();
@@ -159,7 +169,7 @@ public class GuiPanelManager extends JFrame {
 							// gerekiyo sadece gibi ismi
 		gamePanel.updatePanel();
 
-//		Insets insets = getInsets();
+//
 //		Dimension size = gamePanel.getPreferredSize();
 //		i+=7;
 //		if(transition) {

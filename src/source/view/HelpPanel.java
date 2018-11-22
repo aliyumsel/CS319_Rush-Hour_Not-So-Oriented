@@ -66,11 +66,11 @@ public class HelpPanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-      Insets insets = getInsets();
 
-      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) + insets.left, 25 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
 
-      back.setBounds(30 + insets.left, 30 + insets.top, back.getPreferredSize().width, back.getPreferredSize().height);
+      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
+
+      back.setBounds(30 , 30 , back.getPreferredSize().width, back.getPreferredSize().height);
    }
 
    private ActionListener actionListener = e -> {

@@ -120,24 +120,24 @@ public class EndOfLevelPanel extends JPanel {
 	}
 
 	private void setBoundsOfComponents() {
-		Insets insets = getInsets();
+
 
 		Dimension size;
 		size = retry.getPreferredSize();
 
-		heading.setBounds(50 + insets.left, insets.top, heading.getPreferredSize().width,
+		heading.setBounds(50 , 0, heading.getPreferredSize().width,
 				heading.getPreferredSize().height);
 
-		star1.setBounds(guiManager.findCenterHorizontal(panelWidth, star1) - 85 + insets.left, 60 + insets.top,
+		star1.setBounds(guiManager.findCenterHorizontal(panelWidth, star1) - 85 , 60 ,
 				star1.getPreferredSize().width, star1.getPreferredSize().height);
-		star2.setBounds(guiManager.findCenterHorizontal(panelWidth, star2) + insets.left, 60 + insets.top,
+		star2.setBounds(guiManager.findCenterHorizontal(panelWidth, star2) , 60 ,
 				star1.getPreferredSize().width, star1.getPreferredSize().height);
-		star3.setBounds(guiManager.findCenterHorizontal(panelWidth, star3) + 85 + insets.left, 60 + insets.top,
+		star3.setBounds(guiManager.findCenterHorizontal(panelWidth, star3) + 85 , 60 ,
 				star1.getPreferredSize().width, star1.getPreferredSize().height);
 
-		menu.setBounds(105 + insets.left, 150 + insets.top, size.width, size.height);
-		retry.setBounds(175 + insets.left, 150 + insets.top, size.width, size.height);
-		nextLevel.setBounds(245 + insets.left, 150 + insets.top, size.width, size.height);
+		menu.setBounds(105 , 150 , size.width, size.height);
+		retry.setBounds(175 , 150 , size.width, size.height);
+		nextLevel.setBounds(245 , 150 , size.width, size.height);
 	}
 
 	private ActionListener actionListener = new ActionListener() {

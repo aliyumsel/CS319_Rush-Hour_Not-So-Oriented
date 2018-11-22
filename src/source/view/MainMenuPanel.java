@@ -135,25 +135,25 @@ public class MainMenuPanel extends JPanel {
 
 	private void setBoundsOfComponents()
    {
-		Insets insets = getInsets();
 
-		help.setBounds(30 + insets.left, 30 + insets.top, help.getPreferredSize().width, help.getPreferredSize().height);
 
-		exit.setBounds(panelWidth - 30 - exit.getPreferredSize().width + insets.left, 30 + insets.top, exit.getPreferredSize().width, exit.getPreferredSize().height);
+		help.setBounds(30 , 30 , help.getPreferredSize().width, help.getPreferredSize().height);
 
-		heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) + insets.left, 25 + insets.top, heading.getPreferredSize().width, heading.getPreferredSize().height);
+		exit.setBounds(panelWidth - 30 - exit.getPreferredSize().width , 30 , exit.getPreferredSize().width, exit.getPreferredSize().height);
 
-		player.setBounds(guiManager.findCenterHorizontal(panelWidth,player) + insets.left, 130 + insets.top, player.getPreferredSize().width, player.getPreferredSize().height);
+		heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
-		changePlayer.setBounds(guiManager.findCenterHorizontal(panelWidth,changePlayer) + insets.left, 175 + insets.top, changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
+		player.setBounds(guiManager.findCenterHorizontal(panelWidth,player) , 130 , player.getPreferredSize().width, player.getPreferredSize().height);
 
-		play.setBounds(guiManager.findCenterHorizontal(panelWidth, play) + insets.left, 230 + insets.top, play.getPreferredSize().width, play.getPreferredSize().height);
+		changePlayer.setBounds(guiManager.findCenterHorizontal(panelWidth,changePlayer) , 175 , changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
 
-		credits.setBounds(guiManager.findCenterHorizontal(panelWidth, credits) - 225 + insets.left, 395 + insets.top, credits.getPreferredSize().width, credits.getPreferredSize().height);
+		play.setBounds(guiManager.findCenterHorizontal(panelWidth, play) , 230 , play.getPreferredSize().width, play.getPreferredSize().height);
 
-		levels.setBounds(guiManager.findCenterHorizontal(panelWidth, levels) + insets.left, 395 + insets.top, levels.getPreferredSize().width, levels.getPreferredSize().height);
+		credits.setBounds(guiManager.findCenterHorizontal(panelWidth, credits) - 225 , 395 , credits.getPreferredSize().width, credits.getPreferredSize().height);
 
-		settings.setBounds(guiManager.findCenterHorizontal(panelWidth, settings) + 225 + insets.left, 395 + insets.top, settings.getPreferredSize().width, settings.getPreferredSize().height);
+		levels.setBounds(guiManager.findCenterHorizontal(panelWidth, levels) , 395 , levels.getPreferredSize().width, levels.getPreferredSize().height);
+
+		settings.setBounds(guiManager.findCenterHorizontal(panelWidth, settings) + 225 , 395 , settings.getPreferredSize().width, settings.getPreferredSize().height);
 	}
 
 	public void paintComponent(Graphics g) {
