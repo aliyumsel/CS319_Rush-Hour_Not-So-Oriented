@@ -25,7 +25,7 @@ class UIFactory
    public static JButton createPlayerButton(BufferedImage normalImage, BufferedImage highlightedImage, String playerName,
                                             ActionListener actionListener)
    {
-      JButton _button = createButton(normalImage, highlightedImage,  playerName, actionListener);
+      JButton _button = createButton(normalImage, highlightedImage,  "player", actionListener);
       _button.setText(playerName);
       _button.setVerticalTextPosition(SwingConstants.CENTER);
       _button.setHorizontalTextPosition(SwingConstants.CENTER);
