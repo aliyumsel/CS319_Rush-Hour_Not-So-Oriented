@@ -45,7 +45,7 @@ public class GamePanel extends JPanel {
 	private int panelWidth;
 	private int panelHeight;
 
-	public GamePanel(int index, GuiPanelManager _guiManager) {
+	public GamePanel(GuiPanelManager _guiManager) {
 		super(null);
 		guiManager = _guiManager;
 
@@ -103,15 +103,10 @@ public class GamePanel extends JPanel {
 
 	private void createComponents()
    {
-		menu = new JButton();
-		reset = new JButton();
-		pause = new JButton();
-		hint = new JButton();
-
-		guiManager.setupButton(menu, menuButtonImage, menuButtonHighlightedImage,"square",actionListener);
-		guiManager.setupButton(reset, resetButtonImage, resetButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(pause, pauseButtonImage, pauseButtonHighlightedImage, "square",actionListener);
-      guiManager.setupButton(hint, hintButtonImage,hintButtonHighlightedImage,"square",actionListener);
+		menu = UIFactory.createButton(menuButtonImage, menuButtonHighlightedImage,"square",actionListener);
+		reset = UIFactory.createButton(resetButtonImage, resetButtonHighlightedImage,"square",actionListener);
+		pause = UIFactory.createButton(pauseButtonImage, pauseButtonHighlightedImage, "square",actionListener);
+		hint = UIFactory.createButton(hintButtonImage,hintButtonHighlightedImage,"square",actionListener);
 
 		//timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
 		//timerIcon.setPreferredSize(new Dimension(32, 32));
@@ -126,7 +121,6 @@ public class GamePanel extends JPanel {
 
 		//timer = new JProgressBar(SwingConstants.VERTICAL);
 		//timer.setPreferredSize(new Dimension(30, 300));
-
 	}
 
 	private void addComponents()

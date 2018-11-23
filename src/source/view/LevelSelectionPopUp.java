@@ -16,9 +16,7 @@ public class LevelSelectionPopUp extends JPanel {
 	private JButton back;
 	private JButton play;
 	private JLabel heading;
-	private JLabel star1;
-	private JLabel star2;
-	private JLabel star3;
+   private JLabel[] stars;
 	private int destinationLevel;
 	private BufferedImage background;
 
@@ -96,54 +94,56 @@ public class LevelSelectionPopUp extends JPanel {
 		heading.setFont(new Font("Odin Rounded", Font.PLAIN, 35));
 		heading.setForeground(Color.white);
 
-		star1 = new JLabel();
-		star2 = new JLabel();
-		star3 = new JLabel();
+      stars = new JLabel[3];
+      for ( int i = 0; i < stars.length; i++ )
+      {
+         stars[i] = new JLabel();
+         stars[i].setIcon(new ImageIcon(starLockedImage));
+      }
 
-		star1.setIcon(new ImageIcon(starImage));
-		star2.setIcon(new ImageIcon(starImage));
-		star3.setIcon(new ImageIcon(starLockedImage));
-
-		back = new JButton();
-		retry = new JButton();
-		play = new JButton();
-
-		guiManager.setupButton(back, backButtonImage, backButtonHighlightedImage, "square", actionListener);
-		guiManager.setupButton(retry, retryButtonImage, retryButtonHighlightedImage, "square", actionListener);
-		guiManager.setupButton(play, playButtonImage, playButtonHighlightedImage, "square", actionListener);
+		back = UIFactory.createButton(backButtonImage, backButtonHighlightedImage, "square", actionListener);
+		retry = UIFactory.createButton(retryButtonImage, retryButtonHighlightedImage, "square", actionListener);
+		play = UIFactory.createButton(playButtonImage, playButtonHighlightedImage, "square", actionListener);
 	}
 
 	private void addComponents() {
-		// add(retry);
 		add(back);
 		add(play);
 		add(heading);
-		add(star1);
-		add(star2);
-		add(star3);
+
+      for ( int i = 0; i < stars.length; i++ )
+      {
+         add(stars[i]);
+      }
 	}
 
 	private void setBoundsOfComponents() {
-
-
 		Dimension size;
-		size = retry.getPreferredSize();
+		size = play.getPreferredSize();
 
 		heading.setBounds(50 , 0, heading.getPreferredSize().width,
 				heading.getPreferredSize().height);
 
-		star1.setBounds(guiManager.findCenterHorizontal(panelWidth, star1) - 85 , 60 ,
-				star1.getPreferredSize().width, star1.getPreferredSize().height);
-		star2.setBounds(guiManager.findCenterHorizontal(panelWidth, star2) , 60 ,
-				star1.getPreferredSize().width, star1.getPreferredSize().height);
-		star3.setBounds(guiManager.findCenterHorizontal(panelWidth, star3) + 85 , 60 ,
-				star1.getPreferredSize().width, star1.getPreferredSize().height);
-
 		back.setBounds(105 , 150 , size.width, size.height);
-		// retry.setBounds(175 , 150 , size.width,
-		// size.height);
+
 		play.setBounds(245 , 150 , size.width, size.height);
+
+      for ( int i = 0; i < stars.length; i++ )
+      {
+         stars[i].setBounds(guiManager.findCenter(panelWidth, stars[i]) + ( 85 * ( i - 1 ) ), 60, stars[i].getPreferredSize().width, stars[i].getPreferredSize().height);
+      }
 	}
+
+   private void showStars(int starAmount)
+   {
+      for (int i = 0; i < stars.length; i++)
+      {
+         if (i < starAmount)
+         {
+            stars[i].setIcon(new ImageIcon(starImage));
+         }
+      }
+   }
 
 	private ActionListener actionListener = new ActionListener() {
 		@Override
@@ -161,7 +161,6 @@ public class LevelSelectionPopUp extends JPanel {
 				setVisible(false);
 				GameEngine.instance.gameManager.loadLevel(destinationLevel);
 				guiManager.setPanelVisible("Game");
-
 			}
 		}
 	};

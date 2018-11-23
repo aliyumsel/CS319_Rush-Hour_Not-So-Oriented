@@ -21,14 +21,17 @@ public class HelpPanel extends JPanel
    private BufferedImage backButtonImage;
    private BufferedImage backButtonHighlightedImage;
 
-   private int panelWidth = 764;
-   private int panelHeight = 468;
+   private int panelWidth;
+   private int panelHeight;
 
    HelpPanel(GuiPanelManager _guiManager)
    {
       super(null);
 
       guiManager = _guiManager;
+
+      panelWidth = guiManager.panelWidth;
+      panelHeight = guiManager.panelHeight;
 
       setPreferredSize(new Dimension(panelWidth, panelHeight));
 
@@ -41,7 +44,6 @@ public class HelpPanel extends JPanel
 
    private void loadImages()
    {
-//      background = guiManager.LoadImage("src/image/orange.png");
       background = guiManager.LoadImage("src/image/background.png");
       title = guiManager.LoadImage("src/image/icons/howToPlayTitle.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
@@ -50,8 +52,7 @@ public class HelpPanel extends JPanel
 
    private void createComponents()
    {
-      back = new JButton();
-      guiManager.setupButton(back,backButtonImage,backButtonHighlightedImage,"square",actionListener);
+      back = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
 
       heading = new JLabel();
       heading.setIcon(new ImageIcon(title));
@@ -66,9 +67,7 @@ public class HelpPanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-
-
-      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
+      heading.setBounds(guiManager.findCenter(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
       back.setBounds(30 , 30 , back.getPreferredSize().width, back.getPreferredSize().height);
    }
@@ -84,7 +83,7 @@ public class HelpPanel extends JPanel
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
 
-      drawBackground(g); // change the background png for changing the background
+      drawBackground(g);
       // setBackground(Color.WHITE);
    }
 

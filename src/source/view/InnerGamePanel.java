@@ -13,12 +13,15 @@ import javax.swing.JPanel;
 import source.model.Map;
 
 @SuppressWarnings("serial")
-public class InnerGamePanel extends JPanel {
+public class InnerGamePanel extends JPanel
+{
 	private GuiPanelManager guiManager;
-	private Map map;
-	private EndOfLevelPanel endOfLevelPanel;
+
+   private EndOfLevelPanel endOfLevelPanel;
 
    private BufferedImage background;
+
+   private Map map;
 
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
 		super(null);
@@ -26,12 +29,8 @@ public class InnerGamePanel extends JPanel {
 		setPreferredSize(new Dimension(450, 450));
 
 		loadImages();
-
 		createEndOfLevelPanel();
-
 		setVisible(true);
-		// setOpaque(false);
-
 	}
 
 	void updatePanel() {
@@ -40,7 +39,6 @@ public class InnerGamePanel extends JPanel {
 		}
 		map = GameEngine.instance.mapController.getMap();
 		endOfLevelPanel.updatePanel();
-		// vehicleArray = map.getVehicleArray();
 		repaint();
 	}
 
@@ -71,9 +69,12 @@ public class InnerGamePanel extends JPanel {
 
    }
 
-	public void setEndOfLevelPanelVisible(boolean bool) {
-		if(bool)
-			SoundManager.instance.successSound();
+	void setEndOfLevelPanelVisible(boolean bool)
+   {
+		if(bool) //bool ne ????????????????????????????????????????????????????????????? bool ne
+      {
+         SoundManager.instance.successSound();
+      }
 		endOfLevelPanel.setVisible(bool);
 	}
 
