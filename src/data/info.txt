@@ -1,7 +1,7 @@
 <NumberOfPlayers>
 	2<NumberOfPlayers/>
 <LastActivePlayer>
-	hour
+	Ahmet
 <NumberOfMaps>
 	5
 <NumberOfMaps/>

@@ -63,7 +63,7 @@ public class LevelButton extends JButton
    {
       levelBackground = guiManager.LoadImage("src/image/icons/levelbackground.png");
       levelBackgroundHighlighted = guiManager.LoadImage("src/image/icons/levelbackgroundH.png");
-      lockedBackground = guiManager.LoadImage("src/image/icons/play.png");
+      lockedBackground = guiManager.LoadImage("src/image/backgroundGrey.png");
       starActive = guiManager.LoadImage("src/image/icons/miniStar.png");
       starInactive = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
    }

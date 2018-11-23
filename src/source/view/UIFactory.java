@@ -83,7 +83,7 @@ class UIFactory
       }
       else
       {
-         System.out.println("Error: Enter valid String");
+         System.out.println("Error: Enter valid String for button dimension");
       }
 
       button.setIcon(new ImageIcon(normalImage));
