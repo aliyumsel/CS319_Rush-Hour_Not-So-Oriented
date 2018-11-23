@@ -1,6 +1,6 @@
 <Player>
 	<Name>
-		ahmet
+		oyyy
 	<Name/>
 	<StarAmount>
 		0

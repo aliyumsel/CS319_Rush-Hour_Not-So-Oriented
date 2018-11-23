@@ -2,6 +2,7 @@ package source.view;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
+import source.model.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -147,15 +148,49 @@ public class SettingsPanel extends JPanel
       }
       else if (e.getSource() == music)
       {
-         //change the icon according to the music state which will be stored in somewhere in controllers
-         music.setIcon(new ImageIcon(musicOffImage));
-         music.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
+         boolean currentMusic = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setMusic(!currentMusic);
+         if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic())
+         {
+            music.setIcon(new ImageIcon(musicOffImage));
+            music.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
+         }
+         else
+         {
+            music.setIcon(new ImageIcon(musicImage));
+            music.setRolloverIcon(new ImageIcon(musicHighlightedImage));
+         }
       }
       else if (e.getSource() == sfx)
       {
-         //change the icon according to the music state which will be stored in somewhere in controllers
-         sfx.setIcon(new ImageIcon(sfxOffImage));
-         sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
+         boolean currentSFX = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setSfx(!currentSFX);
+         if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx())
+         {
+            sfx.setIcon(new ImageIcon(sfxOffImage));
+            sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
+         }
+         else
+         {
+            sfx.setIcon(new ImageIcon(sfxImage));
+            sfx.setRolloverIcon(new ImageIcon(sfxHighlightedImage));
+         }
+      }
+      else if (e.getSource() == simple)
+      {
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SIMPLE);
+      }
+      else if (e.getSource() == classic)
+      {
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.CLASSIC);
+      }
+      else if (e.getSource() == safari)
+      {
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SAFARI);
+      }
+      else if (e.getSource() == space)
+      {
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SPACE);
       }
    };
 

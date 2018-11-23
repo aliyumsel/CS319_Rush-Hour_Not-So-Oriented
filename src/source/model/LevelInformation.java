@@ -33,6 +33,11 @@ public class LevelInformation {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public int getCurrentNumberOfMoves()
+	{
+		return currentNumberOfMoves;
+	}
 	
 
 }

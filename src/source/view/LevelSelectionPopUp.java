@@ -2,6 +2,7 @@ package source.view;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
+import source.model.LevelInformation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +16,12 @@ public class LevelSelectionPopUp extends JPanel {
 	private JButton retry;
 	private JButton back;
 	private JButton play;
-	private JLabel heading;
-   private JLabel[] stars;
-	private int destinationLevel;
-	private BufferedImage background;
 
+	private JLabel heading;
+	private JLabel moveCount;
+   private JLabel[] stars;
+
+	private BufferedImage background;
 	private BufferedImage backButtonImage;
 	private BufferedImage backButtonHighlightedImage;
 	private BufferedImage retryButtonImage;
@@ -28,6 +30,8 @@ public class LevelSelectionPopUp extends JPanel {
 	private BufferedImage playButtonHighlightedImage;
 	private BufferedImage starImage;
 	private BufferedImage starLockedImage;
+
+   private int destinationLevel;
 
 	private int panelWidth = 400;
 	private int panelHeight = 250;
@@ -82,8 +86,25 @@ public class LevelSelectionPopUp extends JPanel {
 
 	}
 
-	public void initialize(int level) {
+	public void initialize(int level)
+   {
 		this.destinationLevel = level;
+//      LevelInformation currentLevelInfo = GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(destinationLevel);
+//		if (currentLevelInfo.getStatus().equals("notStarted"))
+//      {
+//         showStars(-1);
+//         showNumberOfMoves(-1);
+//      }
+//      else if (currentLevelInfo.getStatus().equals("inProgress"))
+//      {
+//         showStars(-1);
+//         showNumberOfMoves(currentLevelInfo.getCurrentNumberOfMoves());
+//      }
+//      else if (currentLevelInfo.getStatus().equals("finished"))
+//      {
+//         showStars(currentLevelInfo.getStars());
+//         showNumberOfMoves(currentLevelInfo.getCurrentNumberOfMoves());
+//      }
 	}
 
 	private void createComponents()
@@ -93,6 +114,12 @@ public class LevelSelectionPopUp extends JPanel {
 		heading.setPreferredSize(new Dimension(300, 60));
 		heading.setFont(new Font("Odin Rounded", Font.PLAIN, 35));
 		heading.setForeground(Color.white);
+
+		moveCount = new JLabel("Moves: 0", SwingConstants.CENTER);
+      moveCount.setPreferredSize(new Dimension(150, 30));
+      moveCount.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
+      moveCount.setForeground(Color.white);
+
 
       stars = new JLabel[3];
       for ( int i = 0; i < stars.length; i++ )
@@ -107,9 +134,10 @@ public class LevelSelectionPopUp extends JPanel {
 	}
 
 	private void addComponents() {
-		add(back);
+		this.add(back);
 		add(play);
 		add(heading);
+      add(moveCount);
 
       for ( int i = 0; i < stars.length; i++ )
       {
@@ -124,9 +152,11 @@ public class LevelSelectionPopUp extends JPanel {
 		heading.setBounds(50 , 0, heading.getPreferredSize().width,
 				heading.getPreferredSize().height);
 
-		back.setBounds(105 , 150 , size.width, size.height);
+		moveCount.setBounds(guiManager.findCenter(panelWidth, moveCount), 162, moveCount.getPreferredSize().width, moveCount.getPreferredSize().height);
 
-		play.setBounds(245 , 150 , size.width, size.height);
+		back.setBounds(55 , 150 , size.width, size.height);
+
+		play.setBounds(295 , 150 , size.width, size.height);
 
       for ( int i = 0; i < stars.length; i++ )
       {
@@ -143,6 +173,17 @@ public class LevelSelectionPopUp extends JPanel {
             stars[i].setIcon(new ImageIcon(starImage));
          }
       }
+   }
+
+   private void showNumberOfMoves(int _moveCount)
+   {
+      if (_moveCount == -1)
+      {
+         moveCount.setVisible(false);
+         return;
+      }
+      moveCount.setText("Moves: " + _moveCount);
+      moveCount.setVisible(true);
    }
 
 	private ActionListener actionListener = new ActionListener() {

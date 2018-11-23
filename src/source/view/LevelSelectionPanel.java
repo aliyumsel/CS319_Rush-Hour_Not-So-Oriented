@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
+import source.controller.GameEngine;
 import source.controller.SoundManager;
 
 import java.awt.event.ActionListener;
@@ -79,7 +80,7 @@ public class LevelSelectionPanel extends JPanel
       {
          buttonArray[i] = UIFactory.createLevelButton(actionListener);
          buttonArray[i].setLevelNo(i);
-         buttonArray[i].showStars(0); // from controllers player info
+         buttonArray[i].showStars(2);//GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
          add(buttonArray[i]);
       }
    }
@@ -182,7 +183,7 @@ public class LevelSelectionPanel extends JPanel
          {
             if ( e.getSource() == buttonArray[index] )
             {
-               buttonArray[index].toggleLock();
+//               buttonArray[index].toggleLock();
                popUp.initialize(index + 1); // buna player objesi de eklenecek
             }
             popUp.setVisible(true);
