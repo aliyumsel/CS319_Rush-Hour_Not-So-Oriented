@@ -9,42 +9,44 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public class EndOfLevelPanel extends JPanel {
-	private GuiPanelManager guiManager;
+public class EndOfLevelPanel extends JPanel
+{
+   private GuiPanelManager guiManager;
 
-	private JButton retry;
-	private JButton menu;
-	private JButton nextLevel;
-	private JLabel heading;
-	private JLabel star1;
-	private JLabel star2;
-	private JLabel star3;
+   private JButton retry;
+   private JButton menu;
+   private JButton nextLevel;
+   private JLabel heading;
+   private JLabel[] stars;
 
-	private BufferedImage background;
+   private BufferedImage background;
 
-	private BufferedImage menuButtonImage;
-	private BufferedImage menuButtonHighlightedImage;
-	private BufferedImage retryButtonImage;
-	private BufferedImage retryButtonHighlightedImage;
-	private BufferedImage nextLevelButtonImage;
-	private BufferedImage nextLevelButtonHighlightedImage;
-	private BufferedImage starImage;
-	private BufferedImage starLockedImage;
+   private BufferedImage menuButtonImage;
+   private BufferedImage menuButtonHighlightedImage;
+   private BufferedImage retryButtonImage;
+   private BufferedImage retryButtonHighlightedImage;
+   private BufferedImage nextLevelButtonImage;
+   private BufferedImage nextLevelButtonHighlightedImage;
+   private BufferedImage starImage;
+   private BufferedImage starLockedImage;
 
-	private int panelWidth = 400;
-	private int panelHeight = 250;
+   private int panelWidth = 400;
+   private int panelHeight = 250;
 
-	public EndOfLevelPanel(GuiPanelManager _guiManager) {
-		super(null);
-		guiManager = _guiManager;
-		setPreferredSize(new Dimension(panelWidth, panelHeight));
+   public EndOfLevelPanel(GuiPanelManager _guiManager)
+   {
+      super(null);
+      guiManager = _guiManager;
+      setPreferredSize(new Dimension(panelWidth, panelHeight));
 
-		loadImages();
-		createComponents();
-		addComponents();
-		setBoundsOfComponents();
-		setOpaque(false);
-	}
+      loadImages();
+      createComponents();
+      addComponents();
+      setBoundsOfComponents();
+      setOpaque(false);
+
+//      showStars(2); for testing the showStars method it works
+   }
 
    private void loadImages()
    {
@@ -53,30 +55,34 @@ public class EndOfLevelPanel extends JPanel {
       menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
       menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
 
-		retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
-		retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
+      retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
+      retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
 
       nextLevelButtonImage = guiManager.LoadImage("src/image/icons/next.png");
       nextLevelButtonHighlightedImage = guiManager.LoadImage("src/image/icons/nextH.png");
 
-		starImage = guiManager.LoadImage("src/image/icons/star.png");
-		starLockedImage = guiManager.LoadImage("src/image/icons/starLocked.png");
-	}
+      starImage = guiManager.LoadImage("src/image/icons/star.png");
+      starLockedImage = guiManager.LoadImage("src/image/icons/starLocked.png");
+   }
 
-	void updatePanel() {
-		if (!isShowing()) {
-			return;
-		}
-		repaint();
-	}
+   void updatePanel()
+   {
+      if ( !isShowing() )
+      {
+         return;
+      }
+      repaint();
+   }
 
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+   public void paintComponent(Graphics g)
+   {
+      super.paintComponent(g);
 
       drawBackground(g);
-	}
+   }
 
-   private void drawBackground(Graphics graphics) {
+   private void drawBackground(Graphics graphics)
+   {
 
       Graphics2D graphics2d = (Graphics2D) graphics;
 
@@ -84,77 +90,85 @@ public class EndOfLevelPanel extends JPanel {
 
    }
 
-	private void createComponents() {
-		heading = new JLabel("Level Completed!", SwingConstants.CENTER);
-		heading.setPreferredSize(new Dimension(300, 60));
-		heading.setFont(new Font("Odin Rounded", Font.PLAIN, 35));
-		heading.setForeground(Color.white);
+   private void createComponents()
+   {
+      heading = new JLabel("Level Completed!", SwingConstants.CENTER);
+      heading.setPreferredSize(new Dimension(300, 60));
+      heading.setFont(new Font("Odin Rounded", Font.PLAIN, 35));
+      heading.setForeground(Color.white);
 
-		star1 = new JLabel();
-		star2 = new JLabel();
-		star3 = new JLabel();
+      stars = new JLabel[3];
+      for ( int i = 0; i < stars.length; i++ )
+      {
+         stars[i] = new JLabel();
+         stars[i].setIcon(new ImageIcon(starLockedImage));
+      }
 
-		star1.setIcon(new ImageIcon(starImage));
-		star2.setIcon(new ImageIcon(starImage));
-		star3.setIcon(new ImageIcon(starLockedImage));
+      menu = UIFactory.createButton(menuButtonImage, menuButtonHighlightedImage, "square", actionListener);
+      retry = UIFactory.createButton(retryButtonImage, retryButtonHighlightedImage, "square", actionListener);
+      nextLevel = UIFactory.createButton(nextLevelButtonImage, nextLevelButtonHighlightedImage, "square", actionListener);
+   }
 
-		menu = new JButton();
-		retry = new JButton();
-		nextLevel = new JButton();
+   private void addComponents()
+   {
+      add(retry);
+      add(menu);
+      add(nextLevel);
+      add(heading);
 
-		guiManager.setupButton(menu, menuButtonImage, menuButtonHighlightedImage, "square", actionListener);
-		guiManager.setupButton(retry, retryButtonImage, retryButtonHighlightedImage, "square", actionListener);
-		guiManager.setupButton(nextLevel, nextLevelButtonImage, nextLevelButtonHighlightedImage, "square",
-				actionListener);
+      for ( int i = 0; i < stars.length; i++ )
+      {
+         add(stars[i]);
+      }
+   }
 
-	}
+   private void setBoundsOfComponents()
+   {
+      heading.setBounds(50, 0, heading.getPreferredSize().width,
+              heading.getPreferredSize().height);
 
-	private void addComponents() {
-		add(retry);
-		add(menu);
-		add(nextLevel);
-		add(heading);
-		add(star1);
-		add(star2);
-		add(star3);
-	}
+      menu.setBounds(105, 150, menu.getPreferredSize().width, menu.getPreferredSize().height);
+      retry.setBounds(175, 150, retry.getPreferredSize().width, retry.getPreferredSize().height);
+      nextLevel.setBounds(245, 150, nextLevel.getPreferredSize().width, nextLevel.getPreferredSize().height);
 
-	private void setBoundsOfComponents() {
+      for ( int i = 0; i < stars.length; i++ )
+      {
+         stars[i].setBounds(guiManager.findCenter(panelWidth, stars[i]) + ( 85 * ( i - 1 ) ), 60, stars[i].getPreferredSize().width, stars[i].getPreferredSize().height);
+      }
 
+   }
 
-		Dimension size;
-		size = retry.getPreferredSize();
+   private void showStars(int starAmount)
+   {
+      for (int i = 0; i < stars.length; i++)
+      {
+         if (i < starAmount)
+         {
+            stars[i].setIcon(new ImageIcon(starImage));
+         }
+      }
+   }
 
-		heading.setBounds(50 , 0, heading.getPreferredSize().width,
-				heading.getPreferredSize().height);
+   private ActionListener actionListener = new ActionListener()
+   {
+      @Override
+      public void actionPerformed(ActionEvent e)
+      {
+         SoundManager.instance.buttonClick();
+         if ( e.getSource() == retry )
+         {
+            GameEngine.instance.gameManager.resetLevel();
+         }
 
-		star1.setBounds(guiManager.findCenterHorizontal(panelWidth, star1) - 85 , 60 ,
-				star1.getPreferredSize().width, star1.getPreferredSize().height);
-		star2.setBounds(guiManager.findCenterHorizontal(panelWidth, star2) , 60 ,
-				star1.getPreferredSize().width, star1.getPreferredSize().height);
-		star3.setBounds(guiManager.findCenterHorizontal(panelWidth, star3) + 85 , 60 ,
-				star1.getPreferredSize().width, star1.getPreferredSize().height);
+         if ( e.getSource() == menu )
+         {
+            guiManager.setPanelVisible("MainMenu");
+         }
 
-		menu.setBounds(105 , 150 , size.width, size.height);
-		retry.setBounds(175 , 150 , size.width, size.height);
-		nextLevel.setBounds(245 , 150 , size.width, size.height);
-	}
-
-	private ActionListener actionListener = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			SoundManager.instance.buttonClick();
-			if (e.getSource() == retry) {
-				GameEngine.instance.gameManager.resetLevel();
-			}
-
-			if (e.getSource() == menu) {
-				guiManager.setPanelVisible("MainMenu");
-			}
-
-			if (e.getSource() == nextLevel) {
-				GameEngine.instance.gameManager.nextLevel();
-			}
-		}
-	};
+         if ( e.getSource() == nextLevel )
+         {
+            GameEngine.instance.gameManager.nextLevel();
+         }
+      }
+   };
 }

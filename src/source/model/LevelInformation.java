@@ -7,6 +7,7 @@ public class LevelInformation {
 	int maxNumberOfMovesForThreeStars;
 	int maxNumberOfMovesForTwoStars;
 	int currentNumberOfMoves;
+	boolean unlocked;
 	
 	public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves)
 	{
@@ -32,6 +33,22 @@ public class LevelInformation {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public int getCurrentNumberOfMoves() {
+		return currentNumberOfMoves;
+	}
+
+	public void setCurrentNumberOfMoves(int currentNumberOfMoves) {
+		this.currentNumberOfMoves = currentNumberOfMoves;
+	}
+
+	public boolean isUnlocked() {
+		return unlocked;
+	}
+
+	public void setUnlocked(boolean unlocked) {
+		this.unlocked = unlocked;
 	}
 	
 

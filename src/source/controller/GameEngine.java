@@ -10,9 +10,9 @@ public class GameEngine extends TimerTask {
 
 	private SoundManager soundManager;
 	public VehicleController vehicleController;
-	public GameManager gameManager;
 	public MapController mapController;
 	public PlayerManager playerManager;
+	public GameManager gameManager;
 
 	public GameEngine() {
 		instance = this; // extremely simple singleton to access gameEngine with ease
@@ -20,9 +20,8 @@ public class GameEngine extends TimerTask {
       	soundManager = new SoundManager();
       	mapController = new MapController();
 		vehicleController = new VehicleController();
-		gameManager = new GameManager();
 		playerManager = new PlayerManager();
-
+		gameManager = new GameManager();
 	}
 
 	// this method is executed over and over from main

@@ -2,6 +2,7 @@ package source.view;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
+import source.model.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,14 +39,17 @@ public class SettingsPanel extends JPanel
    private BufferedImage sfxOffImage;
    private BufferedImage sfxOffHighlightedImage;
 
-   private int panelWidth = 764;
-   private int panelHeight = 468;
+   private int panelWidth;
+   private int panelHeight;
 
    SettingsPanel(GuiPanelManager _guiManager)
    {
       super(null);
 
       guiManager = _guiManager;
+
+      panelWidth = guiManager.panelWidth;
+      panelHeight = guiManager.panelHeight;
 
       setPreferredSize(new Dimension(panelWidth, panelHeight));
 
@@ -74,21 +78,13 @@ public class SettingsPanel extends JPanel
 
    private void createComponents()
    {
-      music = new JButton();
-      sfx = new JButton();
-      back = new JButton();
-      simple = new JButton();
-      classic = new JButton();
-      safari = new JButton();
-      space = new JButton();
-
-      guiManager.setupButton(back,backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(simple,backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(classic,backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(safari,backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(space,backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(music,musicImage,musicHighlightedImage,"square",actionListener);
-      guiManager.setupButton(sfx,sfxImage,sfxHighlightedImage,"square",actionListener);
+      music = UIFactory.createButton(musicImage,musicHighlightedImage,"square",actionListener);
+      sfx = UIFactory.createButton(sfxImage,sfxHighlightedImage,"square",actionListener);
+      back = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
+      simple = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
+      classic = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
+      safari = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
+      space = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
 
       heading = new JLabel();
       heading.setIcon(new ImageIcon(title));
@@ -124,7 +120,7 @@ public class SettingsPanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-      heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
+      heading.setBounds(guiManager.findCenter(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
       volume.setBounds(50, 125, volume.getPreferredSize().width, volume.getPreferredSize().height);
       music.setBounds(75, 175, music.getPreferredSize().width, music.getPreferredSize().height);
@@ -148,27 +144,60 @@ public class SettingsPanel extends JPanel
       SoundManager.instance.buttonClick();
       if (e.getSource() == back)
       {
-         GameEngine.instance.gameManager.loadLastLevel();
          guiManager.setPanelVisible("MainMenu");
       }
       else if (e.getSource() == music)
       {
-         //change the icon according to the music state which will be stored in somewhere in controllers
-         music.setIcon(new ImageIcon(musicOffImage));
-         music.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
+         boolean currentMusic = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setMusic(!currentMusic);
+         if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic())
+         {
+            music.setIcon(new ImageIcon(musicOffImage));
+            music.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
+         }
+         else
+         {
+            music.setIcon(new ImageIcon(musicImage));
+            music.setRolloverIcon(new ImageIcon(musicHighlightedImage));
+         }
       }
       else if (e.getSource() == sfx)
       {
-         //change the icon according to the music state which will be stored in somewhere in controllers
-         sfx.setIcon(new ImageIcon(sfxOffImage));
-         sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
+         boolean currentSFX = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setSfx(!currentSFX);
+         if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx())
+         {
+            sfx.setIcon(new ImageIcon(sfxOffImage));
+            sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
+         }
+         else
+         {
+            sfx.setIcon(new ImageIcon(sfxImage));
+            sfx.setRolloverIcon(new ImageIcon(sfxHighlightedImage));
+         }
+      }
+      else if (e.getSource() == simple)
+      {
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SIMPLE);
+      }
+      else if (e.getSource() == classic)
+      {
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.CLASSIC);
+      }
+      else if (e.getSource() == safari)
+      {
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SAFARI);
+      }
+      else if (e.getSource() == space)
+      {
+         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SPACE);
       }
    };
 
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
 
-      drawBackground(g); // change the background png for changing the background
+      drawBackground(g);
       // setBackground(Color.WHITE);
    }
 

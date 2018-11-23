@@ -8,8 +8,11 @@ public class Player {
 	private ArrayList<LevelInformation> levels;
 	private int starAmount;
 	private String path;
-	
-	public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path) {
+
+	private Settings settings;
+
+	public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path)
+   {
 		this.playerName = playerName;
 		this.starAmount = starAmount;
 		this.path = path;
@@ -18,6 +21,8 @@ public class Player {
 		{
 			this.levels.add(levels.get(i));
 		}
+
+		settings = new Settings(true,false);
 	}
 
 	public String getPath() {
@@ -43,6 +48,11 @@ public class Player {
 	public void setStarAmount(int starAmount) {
 		this.starAmount = starAmount;
 	}
+
+	public Settings getSettings()
+   {
+      return settings;
+   }
 
 	public ArrayList<LevelInformation> getLevels() {
 		return levels;

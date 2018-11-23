@@ -17,7 +17,9 @@ public class VehicleController implements Updatable
 	public VehicleController()
 	{
 	   instance = this;
-		numberOfMoves = 0;
+	   //int currentLevelNo = GameManager.instance.getLevel();
+		//numberOfMoves = PlayerManager.instance.getCurrentPlayer().getLevels().get(currentLevelNo - 1).getCurrentNumberOfMoves();
+	   numberOfMoves = 0;
 		soundManager = SoundManager.instance;
 	}
 
@@ -83,7 +85,12 @@ public class VehicleController implements Updatable
 			if (moved)
 			{
 				MapController.instance.updateMap(map.getVehicleArray());
+				//PlayerManager.instance.updateLevelForPlayer(levelNo, status);
+				//MapController.instance.autosave(map.getVehicleArray());
+				PlayerManager.instance.setLevelStatus(GameManager.instance.level, "inProgress");
+				
 				numberOfMoves++;
+				GameManager.instance.autosave(numberOfMoves, map.getVehicleArray());
             //GuiPanelManager.instance.getGamePanel().updateNumberOfMoves();
 			}
 		}

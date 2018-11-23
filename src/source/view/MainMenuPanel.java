@@ -1,25 +1,23 @@
 package source.view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 
 import source.controller.GameEngine;
+import source.controller.GameManager;
+import source.controller.PlayerManager;
 import source.controller.SoundManager;
+import source.model.Player;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class MainMenuPanel extends JPanel {
 
 	private GuiPanelManager guiManager;
-
-	//private int index;
+	private GameManager gameManager;
+	private PlayerManager playerManager;
 	private JLabel heading;
 	private JLabel player;
 	private JButton changePlayer;
@@ -47,32 +45,27 @@ public class MainMenuPanel extends JPanel {
    private BufferedImage settingsButtonImage;
    private BufferedImage settingsButtonHighlightedImage;
 
-   private int panelWidth = 764;
-   private int panelHeight = 468;
+   private int panelWidth;
+   private int panelHeight;
 
-   MainMenuPanel(int index, GuiPanelManager _guiManager)
+   MainMenuPanel(GuiPanelManager _guiManager)
    {
 		super(null);
 
 		guiManager = _guiManager;
+		gameManager = GameManager.instance;
+		playerManager = GameEngine.instance.playerManager;
+		panelWidth = guiManager.panelWidth;
+		panelHeight = guiManager.panelHeight;
 
 		setPreferredSize(new Dimension(panelWidth, panelHeight));
 
 		loadImages();
-
 		createComponents();
-		add(heading);
-		add(player);
-		add(changePlayer);
-		add(play);
-		add(credits);
-		add(levels);
-		add(settings);
-		add(help);
-		add(exit);
+		addComponents();
 		setBoundsOfComponents();
-		this.setVisible(true);
 
+		this.setVisible(true);
 	}
 
 	private void loadImages()
@@ -108,67 +101,71 @@ public class MainMenuPanel extends JPanel {
 		heading = new JLabel();
 		heading.setIcon(new ImageIcon(title));
 		heading.setPreferredSize(new Dimension(295, 58));
-
-		player = new JLabel("Player1", SwingConstants.CENTER);
+		String playerName = playerManager.getCurrentPlayer().getPlayerName();
+		player = new JLabel(playerName, SwingConstants.CENTER);
 		player.setPreferredSize(new Dimension(100, 32));
 		player.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
 		player.setForeground(Color.white);
 
-      changePlayer = new JButton();
-      play = new JButton();
-      credits = new JButton();
-      levels = new JButton();
-      settings = new JButton();
-      help = new JButton();
-      exit = new JButton();
-
-      guiManager.setupButton(changePlayer,changePlayerButtonImage,changePlayerButtonHighlightedImage,"long",actionListener);
-      guiManager.setupButton(play,playButtonImage,playButtonImageHighlighted,"play",actionListener);
-      guiManager.setupButton(credits,creditsButtonImage,creditsButtonHighlightedImage,"long",actionListener);
-      guiManager.setupButton(levels,levelsButtonImage,levelsButtonHighlightedImage,"long",actionListener);
-      guiManager.setupButton(settings,settingsButtonImage,settingsButtonHighlightedImage,"long",actionListener);
-      guiManager.setupButton(help,helpButtonImage,helpButtonHighlightedImage,"square",actionListener);
-      guiManager.setupButton(exit,exitButtonImage,exitButtonHighlightedImage,"square",actionListener);
+      changePlayer = UIFactory.createButton(changePlayerButtonImage,changePlayerButtonHighlightedImage,"long",actionListener);
+      play = UIFactory.createButton(playButtonImage,playButtonImageHighlighted,"play",actionListener);
+      credits = UIFactory.createButton(creditsButtonImage,creditsButtonHighlightedImage,"long",actionListener);
+      levels = UIFactory.createButton(levelsButtonImage,levelsButtonHighlightedImage,"long",actionListener);
+      settings = UIFactory.createButton(settingsButtonImage,settingsButtonHighlightedImage,"long",actionListener);
+      help = UIFactory.createButton(helpButtonImage,helpButtonHighlightedImage,"square",actionListener);
+      exit = UIFactory.createButton(exitButtonImage,exitButtonHighlightedImage,"square",actionListener);
 	}
 
-
+	public void updatePlayerName() {
+		String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
+		player.setText(playerName);
+		System.out.println("Player selected and Player Name Updated " + playerName);
+	}
+   private void addComponents()
+   {
+      add(heading);
+      add(player);
+      add(changePlayer);
+      add(play);
+      add(credits);
+      add(levels);
+      add(settings);
+      add(help);
+      add(exit);
+   }
 
 	private void setBoundsOfComponents()
    {
-
-
 		help.setBounds(30 , 30 , help.getPreferredSize().width, help.getPreferredSize().height);
 
 		exit.setBounds(panelWidth - 30 - exit.getPreferredSize().width , 30 , exit.getPreferredSize().width, exit.getPreferredSize().height);
 
-		heading.setBounds(guiManager.findCenterHorizontal(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
+		heading.setBounds(guiManager.findCenter(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
-		player.setBounds(guiManager.findCenterHorizontal(panelWidth,player) , 130 , player.getPreferredSize().width, player.getPreferredSize().height);
+		player.setBounds(guiManager.findCenter(panelWidth,player) , 130 , player.getPreferredSize().width, player.getPreferredSize().height);
 
-		changePlayer.setBounds(guiManager.findCenterHorizontal(panelWidth,changePlayer) , 175 , changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
+		changePlayer.setBounds(guiManager.findCenter(panelWidth,changePlayer) , 175 , changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
 
-		play.setBounds(guiManager.findCenterHorizontal(panelWidth, play) , 230 , play.getPreferredSize().width, play.getPreferredSize().height);
+		play.setBounds(guiManager.findCenter(panelWidth, play) , 230 , play.getPreferredSize().width, play.getPreferredSize().height);
 
-		credits.setBounds(guiManager.findCenterHorizontal(panelWidth, credits) - 225 , 395 , credits.getPreferredSize().width, credits.getPreferredSize().height);
+		credits.setBounds(guiManager.findCenter(panelWidth, credits) - 225 , 395 , credits.getPreferredSize().width, credits.getPreferredSize().height);
 
-		levels.setBounds(guiManager.findCenterHorizontal(panelWidth, levels) , 395 , levels.getPreferredSize().width, levels.getPreferredSize().height);
+		levels.setBounds(guiManager.findCenter(panelWidth, levels) , 395 , levels.getPreferredSize().width, levels.getPreferredSize().height);
 
-		settings.setBounds(guiManager.findCenterHorizontal(panelWidth, settings) + 225 , 395 , settings.getPreferredSize().width, settings.getPreferredSize().height);
+		settings.setBounds(guiManager.findCenter(panelWidth, settings) + 225 , 395 , settings.getPreferredSize().width, settings.getPreferredSize().height);
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		drawBackground(g); // change the bacground png for changing the background
+		drawBackground(g);
 		// setBackground(Color.WHITE);
 	}
 
-   private void drawBackground(Graphics graphics) {
-
+   private void drawBackground(Graphics graphics)
+   {
       Graphics2D graphics2d = (Graphics2D) graphics;
-
       graphics2d.drawImage(background, 0, 0, null);
-
    }
 
    private ActionListener actionListener = e ->
@@ -178,7 +175,6 @@ public class MainMenuPanel extends JPanel {
          GameEngine.instance.gameManager.loadLastLevel();
          guiManager.setPanelVisible("Game");
       }
-
       if (e.getSource() == credits)
       {
          guiManager.setPanelVisible("Credits");
@@ -187,12 +183,10 @@ public class MainMenuPanel extends JPanel {
       {
          guiManager.setPanelVisible("LevelSelection");
       }
-
       if (e.getSource() == settings)
       {
          guiManager.setPanelVisible("Settings");
       }
-
       if (e.getSource() == help)
       {
          guiManager.setPanelVisible("Help");
