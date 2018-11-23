@@ -175,12 +175,14 @@ public class LevelSelectionPanel extends JPanel
       {
          guiManager.setPanelVisible("MainMenu");
       }
+      //clicked one of the level buttons
       else
       {
          for ( int index = 0; index < numberOfLevels; index++ )
          {
             if ( e.getSource() == buttonArray[index] )
             {
+               buttonArray[index].toggleLock();
                popUp.initialize(index + 1); // buna player objesi de eklenecek
             }
             popUp.setVisible(true);

@@ -15,11 +15,15 @@ public class LevelButton extends JButton
    private BufferedImage starActive;
    private BufferedImage starInactive;
 
+   private BufferedImage lockedBackground;
+
    private static Dimension levelButtonDimension = new Dimension(105, 120);
 
    private JLabel[] stars;
 
    private int levelNo;
+
+   private boolean isLocked;
 
    LevelButton(GuiPanelManager _guiManager)
    {
@@ -27,6 +31,7 @@ public class LevelButton extends JButton
       guiManager = _guiManager;
 
       levelNo = 0;
+      isLocked = false;
 
       setLayout(null);
       loadImages();
@@ -58,6 +63,7 @@ public class LevelButton extends JButton
    {
       levelBackground = guiManager.LoadImage("src/image/icons/levelbackground.png");
       levelBackgroundHighlighted = guiManager.LoadImage("src/image/icons/levelbackgroundH.png");
+      lockedBackground = guiManager.LoadImage("src/image/icons/play.png");
       starActive = guiManager.LoadImage("src/image/icons/miniStar.png");
       starInactive = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
    }
@@ -95,13 +101,50 @@ public class LevelButton extends JButton
 
    void showStars(int starAmount)
    {
+      if (starAmount == - 1)
+      {
+         for (int i = 0; i < stars.length; i++)
+         {
+            stars[i].setVisible(false);
+         }
+         return;
+      }
+
       for (int i = 0; i < stars.length; i++)
       {
+         stars[i].setVisible(true);
          if (i < starAmount)
          {
             stars[i].setIcon(new ImageIcon(starActive));
          }
       }
+   }
+
+   void toggleLock()
+   {
+      System.out.println("wow");
+      isLocked = !isLocked;
+      System.out.println("isLocked: " + isLocked);
+
+      BufferedImage temp;
+      BufferedImage tempH;
+      if (isLocked)
+      {
+         temp = lockedBackground;
+         tempH = lockedBackground;
+         setEnabled(false);
+         showStars(-1);
+      }
+      else
+      {
+         temp = levelBackground;
+         tempH = levelBackgroundHighlighted;
+         setEnabled(true);
+         showStars(0);
+      }
+
+      setIcon(new ImageIcon(temp));
+      setRolloverIcon(new ImageIcon(tempH));
    }
 }
 
