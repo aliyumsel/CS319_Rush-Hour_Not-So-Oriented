@@ -15,6 +15,25 @@ class UIFactory
    private static Dimension playerButtonDimension = new Dimension(300, 120);
    private static Dimension miniStarDimension = new Dimension(26, 26);
 
+   public static LevelButton createLevelButton(ActionListener actionListener)
+   {
+      LevelButton _button = new LevelButton(GuiPanelManager.instance);
+      _button.addActionListener(actionListener);
+      return _button;
+   }
+
+   public static JButton createPlayerButton(BufferedImage normalImage, BufferedImage highlightedImage, String playerName,
+                                            ActionListener actionListener)
+   {
+      JButton _button = createButton(normalImage, highlightedImage,  "player", actionListener);
+      _button.setText(playerName);
+      _button.setVerticalTextPosition(SwingConstants.CENTER);
+      _button.setHorizontalTextPosition(SwingConstants.CENTER);
+      _button.setFont(new Font("Odin Rounded", Font.PLAIN, 25));
+      _button.revalidate();
+      return _button;
+   }
+
    public static JButton createButton(BufferedImage normalImage, BufferedImage highlightedImage, String buttonType,
                                       ActionListener actionListener)
    {

@@ -39,8 +39,8 @@ public class GuiPanelManager extends JFrame
 
    public Font odinRounded;
 
-   private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
-           levelButtonDimension, playerButtonDimension, miniStarDimension;
+//   private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
+//           levelButtonDimension, playerButtonDimension, miniStarDimension;
 
    public GuiPanelManager()
    {
@@ -71,13 +71,13 @@ public class GuiPanelManager extends JFrame
       panelWidth = 764;
       panelHeight = 468;
 
-      longButtonDimension = new Dimension(171, 37);
-      squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
-      playButtonDimension = new Dimension(131, 147);
-      arrowButtonDimension = new Dimension(130, 150);
-      levelButtonDimension = new Dimension(105, 120);
-      playerButtonDimension = new Dimension(300, 120);
-      miniStarDimension = new Dimension(26, 26);
+//      longButtonDimension = new Dimension(171, 37);
+//      squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
+//      playButtonDimension = new Dimension(131, 147);
+//      arrowButtonDimension = new Dimension(130, 150);
+//      levelButtonDimension = new Dimension(105, 120);
+//      playerButtonDimension = new Dimension(300, 120);
+//      miniStarDimension = new Dimension(26, 26);
       setLayout(new CardLayout());
       setResizable(false);
       setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -178,46 +178,6 @@ public class GuiPanelManager extends JFrame
       addKeyListener(keyListener);
       gamePanel.getInnerGamePanel().addMouseListener(mouseListener);
    }
-
-//   void setupLabelIcon(JLabel label, BufferedImage image, String labelType)
-//   {
-//      if ( labelType.equals("long") )
-//      {
-//         label.setPreferredSize(longButtonDimension);
-//      }
-//      else if ( labelType.equals("square") )
-//      {
-//         label.setPreferredSize(squareButtonDimension);
-//      }
-//      else if ( labelType.equals("play") )
-//      {
-//         label.setPreferredSize(playButtonDimension);
-//      }
-//      else if ( labelType.equals("arrow") )
-//      {
-//         label.setPreferredSize(arrowButtonDimension);
-//      }
-//      else if ( labelType.equals("level") )
-//      {
-//         label.setPreferredSize(levelButtonDimension);
-//      }
-//      else if ( labelType.equals("player") )
-//      {
-//         label.setPreferredSize(playerButtonDimension);
-//      }
-//      else if ( labelType.equals("miniStar") )
-//      {
-//         label.setPreferredSize(miniStarDimension);
-//      }
-//      else
-//      {
-//         System.out.println("Error: Enter valid String For Label");
-//      }
-//
-//      label.setIcon(new ImageIcon(image));
-//      label.setOpaque(false);
-//      label.setFocusable(false);
-//   }
 
    BufferedImage LoadImage(String FileName)
    {

@@ -29,8 +29,8 @@ public class ChangePlayerPanel extends JPanel
    private JButton editButton3;
 
    private BufferedImage background;
-   private BufferedImage levelBackground;
-   private BufferedImage levelBackgroundH;
+   private BufferedImage playerBackground;
+   private BufferedImage playerBackgroundH;
    private BufferedImage rightArrow;
    private BufferedImage leftArrow;
    private BufferedImage leftArrowH;
@@ -73,8 +73,8 @@ public class ChangePlayerPanel extends JPanel
    private void loadImages()
    {
       background = guiManager.LoadImage("src/image/background.png");
-      levelBackground = guiManager.LoadImage("src/image/icons/playerSelection.png");
-      levelBackgroundH = guiManager.LoadImage("src/image/icons/playerSelectionH.png");
+      playerBackground = guiManager.LoadImage("src/image/icons/playerSelection.png");
+      playerBackgroundH = guiManager.LoadImage("src/image/icons/playerSelectionH.png");
       rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
       leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
       rightArrowH = guiManager.LoadImage("src/image/icons/rightarrowH.png");
@@ -106,7 +106,7 @@ public class ChangePlayerPanel extends JPanel
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          //sanirim bu methodu kullanabilirz player button yaratmak icin sey yapariz string degilde Player objesi alir
-         JButton temp = createPlayerButton("denizDalkilic");
+         JButton temp = UIFactory.createPlayerButton(playerBackground,playerBackgroundH, "DD10", actionListener);
          buttonArray.add(temp);
          add(buttonArray.get(i));
       }
@@ -150,7 +150,7 @@ public class ChangePlayerPanel extends JPanel
          {
             gap = 0;
          }
-         if ( i == 0 + limit )
+         if ( i == limit )
          {
             gap = 50;
             buttonArray.get(i).setBounds(235 + insets.left, gap, buttonArray.get(i).getPreferredSize().width,
@@ -204,17 +204,6 @@ public class ChangePlayerPanel extends JPanel
       Dimension size = popUp.getPreferredSize();
       popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100 + insets.top, size.width, size.height);
       // popUp.setVisible(true); in order to test pop up panel design remove the
-   }
-
-   private JButton createPlayerButton(String playerName)
-   {
-      JButton temp = UIFactory.createButton(levelBackground, levelBackgroundH,  "player", actionListener);
-      temp.setText(playerName);
-      temp.setVerticalTextPosition(SwingConstants.CENTER);
-      temp.setHorizontalTextPosition(SwingConstants.CENTER);
-      temp.setFont(new Font("Odin Rounded", Font.PLAIN, 25));
-      temp.revalidate();
-      return temp;
    }
 
    private ActionListener actionListener = e ->
