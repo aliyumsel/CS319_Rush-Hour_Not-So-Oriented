@@ -1,6 +1,8 @@
 package source.view;
 
 import source.controller.GameEngine;
+import source.controller.GameManager;
+import source.controller.PlayerManager;
 import source.controller.SoundManager;
 import source.model.LevelInformation;
 
@@ -200,7 +202,11 @@ public class LevelSelectionPopUp extends JPanel {
 
 			if (e.getSource() == play) {
 				setVisible(false);
+				System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(0).getStatus());
+				
 				GameEngine.instance.gameManager.loadLevel(destinationLevel);
+				GameEngine.instance.gameManager.setLevel(destinationLevel);
+				
 				guiManager.setPanelVisible("Game");
 			}
 		}

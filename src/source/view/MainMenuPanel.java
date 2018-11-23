@@ -6,7 +6,9 @@ import java.awt.*;
 
 import source.controller.GameEngine;
 import source.controller.GameManager;
+import source.controller.PlayerManager;
 import source.controller.SoundManager;
+import source.model.Player;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -15,6 +17,7 @@ public class MainMenuPanel extends JPanel {
 
 	private GuiPanelManager guiManager;
 	private GameManager gameManager;
+	private PlayerManager playerManager;
 	private JLabel heading;
 	private JLabel player;
 	private JButton changePlayer;
@@ -51,8 +54,9 @@ public class MainMenuPanel extends JPanel {
 
 		guiManager = _guiManager;
 		gameManager = GameManager.instance;
-      panelWidth = guiManager.panelWidth;
-      panelHeight = guiManager.panelHeight;
+		playerManager = GameEngine.instance.playerManager;
+		panelWidth = guiManager.panelWidth;
+		panelHeight = guiManager.panelHeight;
 
 		setPreferredSize(new Dimension(panelWidth, panelHeight));
 
@@ -97,7 +101,7 @@ public class MainMenuPanel extends JPanel {
 		heading = new JLabel();
 		heading.setIcon(new ImageIcon(title));
 		heading.setPreferredSize(new Dimension(295, 58));
-		String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
+		String playerName = playerManager.getCurrentPlayer().getPlayerName();
 		player = new JLabel(playerName, SwingConstants.CENTER);
 		player.setPreferredSize(new Dimension(100, 32));
 		player.setFont(new Font("Odin Rounded", Font.PLAIN, 30));

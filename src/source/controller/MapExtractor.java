@@ -24,12 +24,19 @@ public class MapExtractor {
 
 	public Map extractLevel(int level, Player player) throws FileNotFoundException
    {
+		System.out.println("Inside extract level");
    	  String theme = "minimalistic";
    	  boolean special = true;
    	  vehicleArray.clear();
       //inside of the if condition will be revised
+		System.out.println("Player: " + player.getPlayerName());
+		System.out.println("Player level size: " + player.getLevels().size());
+		System.out.println("Level: " + level);
+		System.out.println("Status: " + player.getLevels().get(level - 1).getStatus());
+
       if (player != null && player.getLevels().size() >= level && player.getLevels().get(level - 1).getStatus().equals("inProgress"))
 	  {
+    	  System.out.println("Inside inprogress if");
     	  scanLevel = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
     	  boolean trace = true;
     	  while (trace)
@@ -45,6 +52,7 @@ public class MapExtractor {
 	  }
       else
       {
+    	  System.out.println("Inside else");
     	  scanLevel = new Scanner(new File("src/data/levels/level" + level + ".txt"));
       }
 
@@ -54,7 +62,7 @@ public class MapExtractor {
       while (!scanLevel.nextLine().trim().equals("<Map>"));
       String row = scanLevel.nextLine();
       do {
-         
+    	  System.out.println("Inside do while");
          scanRow = new Scanner(row);
          scanRow.useDelimiter(" ");
 
@@ -94,6 +102,7 @@ public class MapExtractor {
          row = scanLevel.nextLine();
       } while (!row.trim().equals("<Map/>"));
       map.formMap(vehicleArray);
+      printVehicleArray();
       return map;
    }
 
