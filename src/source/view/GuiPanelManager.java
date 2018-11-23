@@ -131,6 +131,7 @@ public class GuiPanelManager extends JFrame
    {
       if ( panelName.equals("MainMenu") )
       {
+    	  mainMenuPanel.updatePlayerName();
          targetPanel = mainMenuPanel;
       }
       else if ( panelName.equals("Game") )
