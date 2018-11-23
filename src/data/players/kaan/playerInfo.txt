@@ -1,12 +1,11 @@
 <Player>
 	<Name>
-		denyoz
+		kaan
 	<Name/>
 	<StarAmount>
 		0
 	<StarAmount/>
 	<Levels>
-		<Level>
 		<Level>
 			<LevelNo>
 				1
@@ -15,18 +14,12 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				2
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Map>
-SS SS CD SS CU CU
-SS SS SS CU SS SS
-PC SS TU SS SS SS
-SS SS SS TD TD TD
-SS SS SS SS SS SS
-SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 		<Level>

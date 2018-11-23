@@ -80,7 +80,15 @@ public class LevelSelectionPanel extends JPanel
       {
          buttonArray[i] = UIFactory.createLevelButton(actionListener);
          buttonArray[i].setLevelNo(i);
-         buttonArray[i].showStars(2);//GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+         //System.out.println("current Player: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
+         if (i < 5)
+         {
+            buttonArray[i].showStars( GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+         }
+         else
+         {
+            buttonArray[i].showStars(-1);
+         }
          add(buttonArray[i]);
       }
    }

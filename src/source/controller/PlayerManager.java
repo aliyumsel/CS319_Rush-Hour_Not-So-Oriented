@@ -13,7 +13,7 @@ import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Vehicle;
 
-//TODO info dosyasýndaki last active player her method için düzenle
+//TODO info dosyasï¿½ndaki last active player her method iï¿½in dï¿½zenle
 public class PlayerManager {
 	
 	public static PlayerManager instance;
@@ -268,13 +268,14 @@ public class PlayerManager {
 		return 0;
 	}
 	
-	public boolean deletePlayer(String name)
+	public int deletePlayer(String name)
 	{
 		if (players.size() == 1)
 		{
-			return false;
+			return - 1;
 		}
 		boolean deleted = false;
+		int deleteIndex = 0;
 		for (int i = 0; i < players.size(); i++)
 		{
 			if (players.get(i).getPlayerName().equals(name) && currentPlayer != players.get(i))
@@ -287,6 +288,7 @@ public class PlayerManager {
 					players.remove(i);
 					deleted = true;
 				}
+				deleteIndex = i;
 				break;
 			}
 		}
@@ -294,10 +296,10 @@ public class PlayerManager {
 		{
 			//decrementPlayerNumber();
 			
-	        return true;
+	        return deleteIndex;
 					
 		}
-		return false;
+		return -1;
 	}
 	
 	public boolean selectPlayer(String name)
@@ -478,7 +480,7 @@ public class PlayerManager {
 		return level;
 	}
 	
-	//saveMape kadar oln kýsmý MapController da bir methodla çaðrýlabilir
+	//saveMape kadar oln kï¿½smï¿½ MapController da bir methodla ï¿½aï¿½rï¿½labilir
 	public void updateLevel(int levelNo, int moveAmount, ArrayList<Vehicle> vehicleList)
 	{
 		currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(moveAmount);

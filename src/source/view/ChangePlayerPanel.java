@@ -2,10 +2,9 @@ package source.view;
 
 import javax.swing.*;
 
-import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
-
 import java.awt.*;
 
+import source.controller.GameEngine;
 import source.controller.GameManager;
 import source.controller.SoundManager;
 
@@ -31,7 +30,7 @@ public class ChangePlayerPanel extends JPanel
    private JButton editButton1;
    private JButton editButton2;
    private JButton editButton3;
-   private String[] playerNameArray;
+   private ArrayList<String> playerNameArray;
    private BufferedImage background;
    private BufferedImage levelBackground;
    private BufferedImage levelBackgroundH;
@@ -50,7 +49,8 @@ public class ChangePlayerPanel extends JPanel
 
    private int panelWidth = 764;
    private int panelHeight = 468;
-   private int page = 0;
+   private int pageCount;
+   private int currentPage = 0;
    private int numberOfPlayers;
 
    public ChangePlayerPanel(GuiPanelManager _guiManager)
@@ -62,7 +62,7 @@ public class ChangePlayerPanel extends JPanel
       panelWidth = guiManager.panelWidth;
       panelHeight = guiManager.panelHeight;
       numberOfPlayers = gameManager.playerManager.numberOfPlayers;
-      playerNameArray = new String[numberOfPlayers];
+      playerNameArray = new ArrayList<>();
       setPreferredSize(new Dimension(panelWidth, panelHeight));
 
       popUp = new LevelSelectionPopUp(_guiManager);
@@ -96,7 +96,6 @@ public class ChangePlayerPanel extends JPanel
 
    private void createComponents()
    {
-      playerNameArray = new String[numberOfPlayers];
       rightArrowButton = UIFactory.createButton(rightArrow, rightArrowH, "arrow", actionListener);
       leftArrowButton = UIFactory.createButton(leftArrow, leftArrowH, "arrow", actionListener);
       menuButton = UIFactory.createButton(back, backHighlighted, "square", actionListener);
@@ -110,14 +109,10 @@ public class ChangePlayerPanel extends JPanel
 
       buttonArray = new ArrayList<JButton>();
       gameManager.playerManager.extractPlayers();
-      // System.out.println(gameManager.playerManager.numberOfPlayers);
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
-         // sanirim bu methodu kullanabilirz player button yaratmak icin sey yapariz
-         // string degilde Player objesi alir
-
          JButton temp = UIFactory.createPlayerButton(levelBackground, levelBackgroundH, gameManager.playerManager.getPlayers().get(i).getPlayerName(), actionListener);
-         playerNameArray[i] = gameManager.playerManager.getPlayers().get(i).getPlayerName();
+         playerNameArray.add( gameManager.playerManager.getPlayers().get(i).getPlayerName());
          buttonArray.add(temp);
          add(buttonArray.get(i));
       }
@@ -139,11 +134,7 @@ public class ChangePlayerPanel extends JPanel
 
    private void setBoundsOfComponents(int page)
    {
-      Insets insets = getInsets();
-      int gap = 0;
-      int pageLength = 3;
-      int limit = page * pageLength;
-
+      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          buttonArray.get(i).setVisible(false);
@@ -154,6 +145,14 @@ public class ChangePlayerPanel extends JPanel
       editButton1.setVisible(false);
       editButton2.setVisible(false);
       editButton3.setVisible(false);
+
+      Insets insets = getInsets();
+
+      currentPage = page;
+
+      int gap = 0;
+      int pageLength = 3; //amount of buttons in one page
+      int limit = page * pageLength;
 
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
@@ -216,9 +215,21 @@ public class ChangePlayerPanel extends JPanel
       // popUp.setVisible(true); in order to test pop up panel design remove the
    }
 
+   private void calculatePageCount()
+   {
+      if (GameEngine.instance.playerManager.getPlayers().size() % 3 == 0)
+      {
+         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3;
+      }
+      else
+      {
+         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3 + 1;
+      }
+   }
+
    private void update()
    {
-      setBoundsOfComponents(page);
+      setBoundsOfComponents(currentPage);
       repaint();
    }
 
@@ -233,54 +244,76 @@ public class ChangePlayerPanel extends JPanel
       {
          numberOfPlayers++;
          JButton temp = UIFactory.createPlayerButton(levelBackground, levelBackgroundH, name, actionListener);
-         String[] tempArray = new String[numberOfPlayers];
-         for ( int i = 0; i < numberOfPlayers - 2; i++ )
-         {
-            tempArray[i] = playerNameArray[i];
-         }
-         tempArray[numberOfPlayers - 1] = name;
-         playerNameArray = tempArray;
+         playerNameArray.add(name);
          buttonArray.add(temp);
          add(temp);
       }
    }
 
-//	private JButton createPlayerButton(String playerName) {
-//		JButton temp = UIFactory.createButton(levelBackground, levelBackgroundH, "player", actionListener);
-//		temp.setText(playerName);
-//		temp.setVerticalTextPosition(SwingConstants.CENTER);
-//		temp.setHorizontalTextPosition(SwingConstants.CENTER);
-//		temp.setFont(new Font("Odin Rounded", Font.PLAIN, 25));
-//		temp.revalidate();
-//		return temp;
-//	}
+   private void deletePlayer(String name)
+   {
+      int deleteIndex = gameManager.playerManager.deletePlayer(name);
+      if (deleteIndex == -1)
+      {
+         return;
+      }
+      remove(buttonArray.get(buttonArray.size() - 1));
+      buttonArray.remove(buttonArray.size() - 1);
+      playerNameArray.remove(deleteIndex);
+      calculatePageCount();
+      updatePages();
+   }
 
    private ActionListener actionListener = e ->
    {
       SoundManager.instance.buttonClick();
+
       if ( e.getSource() == leftArrowButton )
       {
-         if ( page == 0 )
+         if (currentPage == 0)
          {
-            page = numberOfPlayers / 3;
+            if (numberOfPlayers % 3 == 0)
+            {
+               currentPage = numberOfPlayers / 3 - 1;
+            }
+            else
+            {
+               currentPage = numberOfPlayers / 3;
+            }
          }
          else
          {
-            page -= 1;
+            currentPage--;
          }
-         setBoundsOfComponents(page);
+         System.out.println("currentPage: " + currentPage);
+         setBoundsOfComponents(currentPage);
       }
       else if ( e.getSource() == rightArrowButton )
       {
-         if ( page == numberOfPlayers / 3 )
+         if (numberOfPlayers % 3 == 0)
          {
-            page = 0;
+            if (currentPage == numberOfPlayers / 3 - 1)
+            {
+               currentPage = 0;
+            }
+            else
+            {
+               currentPage++;
+            }
          }
          else
          {
-            page += 1;
+            if (currentPage == numberOfPlayers / 3)
+            {
+               currentPage = 0;
+            }
+            else
+            {
+               currentPage++;
+            }
          }
-         setBoundsOfComponents(page);
+         System.out.println("currentPage: " + currentPage);
+         setBoundsOfComponents(currentPage);
       }
       else if ( e.getSource() == menuButton )
       {
@@ -288,10 +321,17 @@ public class ChangePlayerPanel extends JPanel
       }
       else if ( e.getSource() == addButton )
       {
-         addPlayer("denyoz");
-         selectPlayer("denyoz");
+         Scanner scan = new Scanner(System.in);
+         String temp = scan.nextLine();
+         addPlayer(temp);
+         selectPlayer(temp);
          guiManager.setPanelVisible("MainMenu");
-         //popUp.setVisible(true);
+      }
+      else if (e.getSource() == deleteButton1)
+      {
+         Scanner scan = new Scanner(System.in);
+         String temp = scan.nextLine();
+         deletePlayer(temp);
       }
       // If the user clicks one of the level buttons
       else
@@ -300,18 +340,53 @@ public class ChangePlayerPanel extends JPanel
          {
             if ( e.getSource() == buttonArray.get(i) )
             {
-               selectPlayer(playerNameArray[i]);
+               selectPlayer(playerNameArray.get(i));
                guiManager.setPanelVisible("MainMenu");
             }
          }
-
       }
    };
 
    public void reset()
    {
-      this.page = 0;
-      setBoundsOfComponents(page);
+      this.currentPage = 0;
+      setBoundsOfComponents(currentPage);
+   }
+
+   public void updatePages()
+   {
+      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
+      updateButtons();
+
+      if (numberOfPlayers % 3 == 0)
+      {
+         if (currentPage == 0)
+         {
+            setBoundsOfComponents(currentPage);
+         }
+         else if (currentPage == numberOfPlayers / 3 - 1)
+         {
+            setBoundsOfComponents(currentPage - 1);
+         }
+         else
+         {
+            setBoundsOfComponents(currentPage);
+         }
+
+      }
+      else
+      {
+         setBoundsOfComponents(currentPage);
+      }
+      repaint();
+   }
+
+   public void updateButtons()
+   {
+      for ( int i = 0; i < numberOfPlayers; i++ )
+      {
+         buttonArray.get(i).setText(playerNameArray.get(i));
+      }
    }
 
    public void paintComponent(Graphics g)
