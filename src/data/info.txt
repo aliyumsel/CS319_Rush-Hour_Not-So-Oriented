@@ -1,7 +1,7 @@
 <NumberOfPlayers>
 	2<NumberOfPlayers/>
 <LastActivePlayer>
-	Ahmet
+	Kaan
 <NumberOfMaps>
 	5
 <NumberOfMaps/>

@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,7 +23,8 @@ public class GuiPanelManager extends JFrame
 {
    public static GuiPanelManager instance;
 
-   private int currentPanelIndex;
+//   private int currentPanelIndex;
+   private ArrayList<JPanel> panels;
    private GamePanel gamePanel;
    private MainMenuPanel mainMenuPanel;
    private CreditsPanel creditsPanel;
@@ -35,18 +37,17 @@ public class GuiPanelManager extends JFrame
    int panelWidth;
    int panelHeight;
 
-   private BufferedImage cursorImage;
+//   private BufferedImage cursorImage;
 
-   public Font odinRounded;
-
-//   private Dimension longButtonDimension, arrowButtonDimension, squareButtonDimension, playButtonDimension,
-//           levelButtonDimension, playerButtonDimension, miniStarDimension;
+   private Font odinRounded;
 
    public GuiPanelManager()
    {
       super("Rush Hour");
       setUndecorated(true);
       instance = this;
+
+      panels = new ArrayList<>();
 
       // setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
 
@@ -71,17 +72,29 @@ public class GuiPanelManager extends JFrame
       panelWidth = 764;
       panelHeight = 468;
 
-//      longButtonDimension = new Dimension(171, 37);
-//      squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
-//      playButtonDimension = new Dimension(131, 147);
-//      arrowButtonDimension = new Dimension(130, 150);
-//      levelButtonDimension = new Dimension(105, 120);
-//      playerButtonDimension = new Dimension(300, 120);
-//      miniStarDimension = new Dimension(26, 26);
       setLayout(new CardLayout());
       setResizable(false);
       setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+      addPanels();
+      add(new JLabel()); // do not delete this very IMPORTANT!
+//      currentPanelIndex = 0;
+
+      setListeners();
+      setFocusable(true);
+      setFocusTraversalKeysEnabled(false);
+      pack();
+      setLocationRelativeTo(null);
+
+      setPanelVisible("MainMenu");
+
+      setVisible(true);
+      pack();
+
+   }
+
+   public void addPanels()
+   {
       mainMenuPanel = new MainMenuPanel(this);
       gamePanel = new GamePanel(this);
       creditsPanel = new CreditsPanel(this);
@@ -96,42 +109,40 @@ public class GuiPanelManager extends JFrame
       add(settingsPanel);
       add(helpPanel);
       add(changePlayerPanel);
-      add(new JPanel());
-      currentPanelIndex = 0;
-
-      setListeners();
-      setFocusable(true);
-      setFocusTraversalKeysEnabled(false);
-      pack();
-      setLocationRelativeTo(null);
-
-      mainMenuPanel.setVisible(true);
-
-      setVisible(true);
-      pack();
-
+      panels.add(mainMenuPanel);
+      panels.add(gamePanel);
+      panels.add(creditsPanel);
+      panels.add(levelSelectionPanel);
+      panels.add(settingsPanel);
+      panels.add(helpPanel);
+      panels.add(changePlayerPanel);
    }
 
-   public JPanel getCurrentPanel()
-   {
-      return (JPanel) getComponent(currentPanelIndex);
-   }
+//   public JPanel getCurrentPanel()
+//   {
+//      return (JPanel) getComponent(currentPanelIndex);
+//   }
 
    public GamePanel getGamePanel()
    {
       return gamePanel;
    }
 
-   public MainMenuPanel getMainMenuPanel()
-   {
-      return mainMenuPanel;
-   }
+//   public MainMenuPanel getMainMenuPanel()
+//   {
+//      return mainMenuPanel;
+//   }
 
    void setPanelVisible(String panelName)
    {
+      for ( JPanel panel: panels )
+      {
+         panel.setVisible(false);
+      }
+
       if ( panelName.equals("MainMenu") )
       {
-    	  mainMenuPanel.updatePlayerName();
+    	   mainMenuPanel.updatePlayerName();
          targetPanel = mainMenuPanel;
       }
       else if ( panelName.equals("Game") )

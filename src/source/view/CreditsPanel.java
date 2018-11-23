@@ -124,7 +124,6 @@ public class CreditsPanel extends JPanel
    private ActionListener actionListener = e -> {
 	   SoundManager.instance.buttonClick();
       if (e.getSource() == back) {
-         GameEngine.instance.gameManager.loadLastLevel();
          guiManager.setPanelVisible("MainMenu");
       }
    };

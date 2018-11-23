@@ -143,7 +143,6 @@ public class SettingsPanel extends JPanel
       SoundManager.instance.buttonClick();
       if (e.getSource() == back)
       {
-         GameEngine.instance.gameManager.loadLastLevel();
          guiManager.setPanelVisible("MainMenu");
       }
       else if (e.getSource() == music)

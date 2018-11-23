@@ -62,15 +62,13 @@ public class GamePanel extends JPanel {
 
 		setBoundsOfComponents();
 
-		setVisible(true);
 		setOpaque(false);
-		
-		//squareButtonDimension = new Dimension(49, 55); // evet kare degil biliyom ellemeyin
-	}
+   }
 
 	public void updatePanel() {
 		repaint();
 		if (!isShowing()) {
+		   //System.out.println("game panel not showing");
 			return;
 		}
 	
@@ -170,8 +168,8 @@ public class GamePanel extends JPanel {
 		innerGamePanel.setEndOfLevelPanelVisible(true);
 	}
 
-	public void setLevelPanelVisible() {
-		System.out.println("Should have shown end of level panel");
+	public void setInnerGamePanelVisible() {
+		System.out.println("Should have shown inner game panel");
 		innerGamePanel.setVisible(true);
 		innerGamePanel.setEndOfLevelPanelVisible(false);
 	}
@@ -207,7 +205,7 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		drawBackground(g); // change the bacground png for changing the background
+		drawBackground(g);
 		// setBackground(Color.WHITE);
 	}
 

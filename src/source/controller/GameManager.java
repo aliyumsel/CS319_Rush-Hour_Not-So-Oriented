@@ -1,7 +1,6 @@
 package source.controller;
 
 import interfaces.Updatable;
-import source.model.Player;
 import source.view.GuiPanelManager;
 
 public class GameManager implements Updatable
@@ -47,7 +46,7 @@ public class GameManager implements Updatable
       MapController.instance.loadLevel(_level);
       VehicleController.instance.setMap(MapController.instance.getMap());
       VehicleController.instance.setNumberOfMoves(0);
-      GuiPanelManager.instance.getGamePanel().setLevelPanelVisible();
+      GuiPanelManager.instance.getGamePanel().setInnerGamePanelVisible();
       level = _level;
       //mapFinished = false;
 
