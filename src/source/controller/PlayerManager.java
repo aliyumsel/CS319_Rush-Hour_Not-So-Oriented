@@ -17,7 +17,7 @@ public class PlayerManager {
 	
 	private Player currentPlayer;
 	private ArrayList<Player> players = new ArrayList<Player>();
-	
+	public int numberOfPlayers;
 	public static PlayerManager instance;
 	
 	public PlayerManager()
@@ -58,16 +58,16 @@ public class PlayerManager {
 			e1.printStackTrace();
 		}
 		
-		while (!info.nextLine().trim().equals("<NumberOfPlayers>"));
-		tmp = info.nextLine().trim();
-		System.out.println(tmp);
-		numberOfPlayers = Integer.parseInt(tmp);
+//		while (!info.nextLine().trim().equals("<NumberOfPlayers>"));
+//		tmp = info.nextLine().trim();
+//		System.out.println(tmp);
+		//numberOfPlayers = Integer.parseInt(tmp);
 		
-		if ( numberOfPlayers == 0)
-		{
-			info.close();
-			return;
-		}
+//		if ( numberOfPlayers == 0)
+//		{
+//			info.close();
+//			return;
+//		}
 
 		//extracts last active player
 		while (!info.nextLine().trim().equals("<LastActivePlayer>"));
@@ -137,14 +137,20 @@ public class PlayerManager {
 			}
 			Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName);
 			
+			//System.out.println(numberOfPlayers);
 			if (playerName.equals(lastPlayerName))
 			{
 				currentPlayer = player;
 			}
 			players.add(player);
 			playerInfo.close();
+			this.numberOfPlayers = players.size();
+			if(this.numberOfPlayers == 1)
+				currentPlayer = player;
 		} 
+		
 		info.close();
+		
 	}
 	
 	/* returns 0 if creation successful
@@ -266,7 +272,7 @@ public class PlayerManager {
         players.add(newPlayer);
         currentPlayer = newPlayer;
         setLastActivePlayer(playerName);
-        incrementPlayerNumber();
+      //  incrementPlayerNumber();
         scanInfo.close();
         
 		return 0;

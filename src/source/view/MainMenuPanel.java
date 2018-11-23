@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import source.controller.GameEngine;
+import source.controller.GameManager;
 import source.controller.SoundManager;
 
 import java.awt.event.ActionListener;
@@ -13,7 +14,7 @@ import java.awt.image.BufferedImage;
 public class MainMenuPanel extends JPanel {
 
 	private GuiPanelManager guiManager;
-
+	private GameManager gameManager;
 	private JLabel heading;
 	private JLabel player;
 	private JButton changePlayer;
@@ -49,7 +50,7 @@ public class MainMenuPanel extends JPanel {
 		super(null);
 
 		guiManager = _guiManager;
-
+		gameManager = GameManager.instance;
       panelWidth = guiManager.panelWidth;
       panelHeight = guiManager.panelHeight;
 
@@ -96,8 +97,8 @@ public class MainMenuPanel extends JPanel {
 		heading = new JLabel();
 		heading.setIcon(new ImageIcon(title));
 		heading.setPreferredSize(new Dimension(295, 58));
-
-		player = new JLabel("Player1", SwingConstants.CENTER);
+		String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
+		player = new JLabel(playerName, SwingConstants.CENTER);
 		player.setPreferredSize(new Dimension(100, 32));
 		player.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
 		player.setForeground(Color.white);
@@ -111,6 +112,11 @@ public class MainMenuPanel extends JPanel {
       exit = UIFactory.createButton(exitButtonImage,exitButtonHighlightedImage,"square",actionListener);
 	}
 
+	public void updatePlayerName() {
+		String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
+		player.setText(playerName);
+		System.out.println("Player selected and Player Name Updated " + playerName);
+	}
    private void addComponents()
    {
       add(heading);

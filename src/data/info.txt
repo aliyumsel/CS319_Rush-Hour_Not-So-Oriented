@@ -1,8 +1,7 @@
 <NumberOfPlayers>
-	1
-<NumberOfPlayers/>
+	2<NumberOfPlayers/>
 <LastActivePlayer>
-	Kaan
+	hour
 <NumberOfMaps>
 	5
 <NumberOfMaps/>

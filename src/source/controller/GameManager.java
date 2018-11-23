@@ -1,11 +1,13 @@
 package source.controller;
 
 import interfaces.Updatable;
+import source.model.Player;
 import source.view.GuiPanelManager;
 
 public class GameManager implements Updatable
 {
-   static GameManager instance;
+	public static GameManager instance;
+   public PlayerManager playerManager;
 
    public int level = 1;
 
@@ -13,6 +15,7 @@ public class GameManager implements Updatable
 
    GameManager()
    {
+	   playerManager = new PlayerManager();
       instance = this;
    }
 
