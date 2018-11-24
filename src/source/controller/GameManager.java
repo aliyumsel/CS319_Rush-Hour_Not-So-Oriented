@@ -72,7 +72,8 @@ public class GameManager implements Updatable
 
    public void resetLevel()
    {
-      loadLevel(level);
+      MapController.instance.loadOriginalLevel(level);
+      autosave(0, MapController.instance.getMap().getVehicleArray());
    }
 
    public int getLevel() {

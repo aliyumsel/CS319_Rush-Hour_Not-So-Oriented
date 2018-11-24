@@ -45,7 +45,16 @@ public class MapController {
 			// map.printMap();
 		}
 	}
-
+	
+	public void loadOriginalLevel(int level)
+	{
+		try {
+			map = mapExtractor.extractLevel(level, null);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public Map getMap() {
 		return map;
 	}

@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 import source.model.LevelInformation;
 import source.model.Player;
+import source.model.Settings;
+import source.model.Settings.Theme;
 import source.model.Vehicle;
 
 //TODO info dosyas�ndaki last active player her method i�in d�zenle
@@ -55,6 +57,9 @@ public class PlayerManager {
 		String playerName, tmp, status, lastPlayerName;
 		int starAmount, numberOfPlayers, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars;
 		ArrayList<LevelInformation> levels = new ArrayList<LevelInformation>();
+		Settings settings;
+		boolean music = true, sfx = true;
+		Theme theme = Theme.CLASSIC;
 		
 		try {
 			info = new Scanner(new File("src/data/info.txt"));
@@ -139,7 +144,39 @@ public class PlayerManager {
 				
 				while (!playerInfo.nextLine().trim().equals("<Level/>"));
 			}
-			Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName);
+			
+			while (!playerInfo.nextLine().trim().equals("<Music>"));
+			tmp = playerInfo.nextLine().trim();
+			if(tmp.equals("false"))
+			{
+				music = false;
+			}
+			
+			while (!playerInfo.nextLine().trim().equals("<Sfx>"));
+			tmp = playerInfo.nextLine().trim();
+			if(tmp.equals("false"))
+			{
+				music = false;
+			}
+			
+			while (!playerInfo.nextLine().trim().equals("<Theme>"));
+			tmp = playerInfo.nextLine().trim();
+			if (tmp.trim().equals("SPACE"))
+			{
+				theme = Theme.SPACE;
+			}			
+			else if (tmp.trim().equals("SAFARI"))
+			{
+				theme = Theme.SAFARI;
+			}
+			else if (tmp.trim().equals("SIMPLE"))
+			{
+				theme = Theme.SIMPLE;
+			}
+			
+			settings = new Settings(music, sfx, theme);
+			
+			Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName, settings);
 			
 			//System.out.println(numberOfPlayers);
 			if (playerName.equals(lastPlayerName))
@@ -244,6 +281,17 @@ public class PlayerManager {
 		}
 		playerInfo = playerInfo +
 				"\t<Levels/>\n" +
+				"\t<Settings>\n" +
+				"\t\t<Music>\n" +
+				"\t\t\ttrue\n" +
+				"\t\t<Music/>\n" +
+				"\t\t<Sfx>\n" +
+				"\t\t\ttrue\n" +
+				"\t\t<Sfx/>\n" +
+				"\t\t<Theme>\n" +
+				"\t\t\tCLASSIC\n" +
+				"\t\t<Theme/>\n" +
+				"\t<Settings>\n" +
 				"<Player/>\n";
 		
 		FileWriter fileOut = null;
@@ -258,7 +306,7 @@ public class PlayerManager {
 		}
         
         //adds the new player to players and sets it as curent player
-        Player newPlayer = new Player(playerName, 0, levels, playerPath);
+        Player newPlayer = new Player(playerName, 0, levels, playerPath, new Settings(true, true));
         players.add(newPlayer);
         currentPlayer = newPlayer;
         setLastActivePlayer(playerName);

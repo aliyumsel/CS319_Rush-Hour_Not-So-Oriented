@@ -7,6 +7,7 @@
 	<StarAmount/>
 	<Levels>
 		<Level>
+		<Level>
 			<LevelNo>
 				1
 			<LevelNo/>
@@ -14,12 +15,18 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				1
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Map>
+SS SS CD CU CU SS
+SS SS SS SS SS CU
+PC SS TU SS TD SS
+SS SS SS TD SS TD
+SS SS SS SS SS SS
+SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 		<Level>
@@ -87,4 +94,15 @@
 			<Map/>
 		<Level/>
 	<Levels/>
+	<Settings>
+		<Music>
+			true
+		<Music/>
+		<Sfx>
+			true
+		<Sfx/>
+		<Theme>
+			CLASSIC
+		<Theme/>
+	<Settings/>
 <Player/>

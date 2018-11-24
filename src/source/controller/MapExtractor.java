@@ -29,10 +29,10 @@ public class MapExtractor {
    	  boolean special = true;
    	  vehicleArray.clear();
       //inside of the if condition will be revised
-		System.out.println("Player: " + player.getPlayerName());
-		System.out.println("Player level size: " + player.getLevels().size());
-		System.out.println("Level: " + level);
-		System.out.println("Status: " + player.getLevels().get(level - 1).getStatus());
+		//System.out.println("Player: " + player.getPlayerName());
+		//System.out.println("Player level size: " + player.getLevels().size());
+		//System.out.println("Level: " + level);
+		//System.out.println("Status: " + player.getLevels().get(level - 1).getStatus());
 
       if (player != null && player.getLevels().size() >= level && player.getLevels().get(level - 1).getStatus().equals("inProgress"))
 	  {
