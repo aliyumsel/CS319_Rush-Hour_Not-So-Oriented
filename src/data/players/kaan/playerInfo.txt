@@ -7,50 +7,8 @@
 	<StarAmount/>
 	<Levels>
 		<Level>
-		<Level>
-		<Level>
 			<LevelNo>
-				2
-			<LevelNo/>
-			<Stars>
-				0
-			<Stars/>
-			<CurrentNumberOfMoves>
-				9
-			<CurrentNumberOfMoves>
-			<Status>
-				finished
-			<Status/>
-			<Map>
-			<Map/>
-		<Level/>
-		<Level>
-		<Level>
-			<LevelNo>
-				4
-			<LevelNo/>
-			<Stars>
-				0
-			<Stars/>
-			<CurrentNumberOfMoves>
-				38
-			<CurrentNumberOfMoves>
-			<Status>
-				inProgress
-			<Status/>
-			<Map>
-CD SS SS CU TD SS
-SS SS SS SS SS CD
-SS SS PC SS SS SS
-CR SS SS SS CR SS
-SS CU CD TL SS SS
-SS SS SS CL SS SS
-			<Map/>
-		<Level/>
-		<Level>
-		<Level>
-			<LevelNo>
-				5
+				1
 			<LevelNo/>
 			<Stars>
 				0
@@ -62,12 +20,44 @@ SS SS SS CL SS SS
 				inProgress
 			<Status/>
 			<Map>
-CD SS CR SS SS CU
-SS TL SS SS CD SS
-PC SS SS TD SS SS
-CL SS SS SS CD SS
-SS CU SS SS SS CU
-SS SS TR SS SS SS
+SS SS CD CU CU SS
+SS SS SS SS SS CU
+PC SS TU SS SS SS
+SS SS SS TD TD TD
+SS SS SS SS SS SS
+SS SS SS SS SS SS
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				2
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				3
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Map>
 			<Map/>
 		<Level/>
 		<Level>
@@ -113,5 +103,5 @@ SS SS TR SS SS SS
 		<Theme>
 			CLASSIC
 		<Theme/>
-	<Settings/>
+	<Settings>
 <Player/>

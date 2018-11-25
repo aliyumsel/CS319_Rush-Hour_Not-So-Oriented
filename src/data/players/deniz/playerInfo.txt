@@ -7,7 +7,6 @@
 	<StarAmount/>
 	<Levels>
 		<Level>
-		<Level>
 			<LevelNo>
 				1
 			<LevelNo/>
@@ -15,16 +14,16 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				20
+				2
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
 			<Status/>
 			<Map>
-SS SS CD CU CU CU
-SS SS SS SS SS SS
-PC SS SS SS SS SS
-SS SS TU TD TD TD
+SS SS CD CU CU SS
+SS SS SS SS SS CU
+PC SS TU SS SS SS
+SS SS SS TD TD TD
 SS SS SS SS SS SS
 SS SS SS SS SS SS
 			<Map/>

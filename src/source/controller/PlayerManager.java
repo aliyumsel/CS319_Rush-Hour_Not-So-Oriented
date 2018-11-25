@@ -597,10 +597,11 @@ public class PlayerManager {
 			line = scan.nextLine();
 			text = text + line + "\n";	
 		}
-		line = scan.nextLine();
-		text = text + line + "\n";
+		//line = scan.nextLine();
+		//text = text + line + "\n";
 		while (!line.trim().equals("<Levels/>"))
 		{
+			line = scan.nextLine();
 			if (line.trim().equals("<Level>") && checkLevel)
 			{
 				levelCounter++;
@@ -612,8 +613,11 @@ public class PlayerManager {
 				}
 				
 			}
-			line = scan.nextLine();
-			text = text + line + "\n";
+			else
+			{
+				text = text + line + "\n";
+			}
+			
 		}
 		while (scan.hasNext())
 		{
