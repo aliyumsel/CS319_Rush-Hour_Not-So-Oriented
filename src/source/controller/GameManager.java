@@ -24,13 +24,10 @@ public class GameManager implements Updatable
 
    public void Update()
    {
-      if (!isGameActive && Input.getKeyPressed("n"))
-      {
-         nextLevel();
-      }
+
    }
    
-   public void autosave(int moveAmount, ArrayList<Vehicle> vehicleList)
+   public void autoSave(int moveAmount, ArrayList<Vehicle> vehicleList)
    {
 	   PlayerManager.instance.updateLevel(level, moveAmount, vehicleList);
    }
@@ -46,20 +43,27 @@ public class GameManager implements Updatable
    public void loadLastLevel()
    {
       //TO BE CHANGED
-      loadLevel(1);
+      loadLevel(1, false);
       level = 1;
    }
 
-   public void loadLevel(int _level)
+   public void loadLevel(int _level, boolean original)
    {
-	   System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(0).getStatus());
-      MapController.instance.loadLevel(_level);
-      
+      System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(0).getStatus());
+
+      if (original)
+      {
+         MapController.instance.loadOriginalLevel(_level);
+      }
+      else
+      {
+         MapController.instance.loadLevel(_level);
+      }
+
       VehicleController.instance.setMap(MapController.instance.getMap());
       VehicleController.instance.setNumberOfMoves(0);
       GuiPanelManager.instance.getGamePanel().setInnerGamePanelVisible();
       level = _level;
-      //mapFinished = false;
 
       isGameActive = true;
    }
@@ -67,13 +71,13 @@ public class GameManager implements Updatable
    public void nextLevel()
    {
       level++;
-      loadLevel(level);
+      loadLevel(level,false);
    }
 
    public void resetLevel()
    {
-      MapController.instance.loadOriginalLevel(level);
-      autosave(0, MapController.instance.getMap().getVehicleArray());
+      loadLevel(level,true);
+      autoSave(0, MapController.instance.getMap().getVehicleArray());
    }
 
    public int getLevel() {

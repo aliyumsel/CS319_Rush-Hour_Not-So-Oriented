@@ -33,7 +33,7 @@ public class VehicleController implements Updatable
 	//executed every frame write the functionality needed to here
 	public void Update()
 	{
-	   if (!GameManager.instance.isGameActive)
+		if (!GameManager.instance.isGameActive)
       {
          return;
       }
@@ -90,7 +90,7 @@ public class VehicleController implements Updatable
 				PlayerManager.instance.setLevelStatus(GameManager.instance.level, "inProgress");
 				
 				numberOfMoves++;
-				GameManager.instance.autosave(numberOfMoves, map.getVehicleArray());
+				GameManager.instance.autoSave(numberOfMoves, map.getVehicleArray());
             //GuiPanelManager.instance.getGamePanel().updateNumberOfMoves();
 			}
 		}

@@ -169,6 +169,7 @@ public class EndOfLevelPanel extends JPanel
          {
             GameEngine.instance.gameManager.nextLevel();
          }
+         setVisible(false);
       }
    };
 }
