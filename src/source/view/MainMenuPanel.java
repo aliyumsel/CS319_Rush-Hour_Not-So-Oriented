@@ -44,6 +44,7 @@ public class MainMenuPanel extends JPanel {
    private BufferedImage exitButtonHighlightedImage;
    private BufferedImage settingsButtonImage;
    private BufferedImage settingsButtonHighlightedImage;
+   private BufferedImage starAmountImage;
 
    private int panelWidth;
    private int panelHeight;
@@ -94,6 +95,8 @@ public class MainMenuPanel extends JPanel {
 
       settingsButtonImage = guiManager.LoadImage("src/image/icons/settings.png");
       settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsH.png");
+
+      starAmountImage = guiManager.LoadImage("src/image/icons/")
    }
 
 	private void createComponents()

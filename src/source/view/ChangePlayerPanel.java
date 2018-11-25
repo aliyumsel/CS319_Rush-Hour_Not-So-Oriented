@@ -30,7 +30,9 @@ public class ChangePlayerPanel extends JPanel
    private JButton editButton1;
    private JButton editButton2;
    private JButton editButton3;
+
    private ArrayList<String> playerNameArray;
+
    private BufferedImage background;
    private BufferedImage levelBackground;
    private BufferedImage levelBackgroundH;
@@ -49,7 +51,7 @@ public class ChangePlayerPanel extends JPanel
 
    private int panelWidth = 764;
    private int panelHeight = 468;
-   private int pageCount;
+//   private int pageCount;
    private int currentPage = 0;
    private int numberOfPlayers;
 
@@ -215,17 +217,17 @@ public class ChangePlayerPanel extends JPanel
       // popUp.setVisible(true); in order to test pop up panel design remove the
    }
 
-   private void calculatePageCount()
-   {
-      if (GameEngine.instance.playerManager.getPlayers().size() % 3 == 0)
-      {
-         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3;
-      }
-      else
-      {
-         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3 + 1;
-      }
-   }
+//   private void calculatePageCount()
+//   {
+//      if (GameEngine.instance.playerManager.getPlayers().size() % 3 == 0)
+//      {
+//         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3;
+//      }
+//      else
+//      {
+//         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3 + 1;
+//      }
+//   }
 
    private void update()
    {
@@ -260,7 +262,7 @@ public class ChangePlayerPanel extends JPanel
       remove(buttonArray.get(buttonArray.size() - 1));
       buttonArray.remove(buttonArray.size() - 1);
       playerNameArray.remove(deleteIndex);
-      calculatePageCount();
+//      calculatePageCount();
       updatePages();
    }
 
