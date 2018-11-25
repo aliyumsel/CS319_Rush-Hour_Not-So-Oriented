@@ -112,59 +112,49 @@ public class VehicleController implements Updatable
 		String vehicleAxis = selectedVehicle.transform.axis;
 		int moveAmount = 0;
 		int moveCheck = 0;
-	
-		if (vehicleAxis.equals("Horizontal"))
-		{
-			if (direction.equals("Left"))
-			{	
-				moveAmount = -1;
-				moveCheck = -1;
-			}
-			else if (direction.equals("Right"))
-			{	
-				moveAmount = 1;
-				moveCheck = selectedVehicle.transform.length;
-			}
-			if (selectedVehicle.transform.position.x + moveCheck < 0 || selectedVehicle.transform.position.x + moveCheck >= map.getMapSize())
-			{
-				return false;
-			}
-			
-			if (map.getGrid()[selectedVehicle.transform.position.y][selectedVehicle.transform.position.x + moveCheck].equals("Space"))
-			{
-				selectedVehicle.move(moveAmount);
-				selectedVehicle.isMoving = true;
-				return true;
-			}
-			
-			
-		}
-		if (vehicleAxis.equals("Vertical"))
-		{
-			if (direction.equals("Upwards"))
-			{	
-				moveAmount = 1;
-				moveCheck = -1;
-			}
-			else if (direction.equals("Downwards"))
-			{	
-				moveAmount = -1;
-				moveCheck = selectedVehicle.transform.length;
-			}
-			if (selectedVehicle.transform.position.y + moveCheck < 0 || selectedVehicle.transform.position.y + moveCheck >= map.getMapSize())
-			{
-				return false;
-			}
-			
-			if (map.getGrid()[ (selectedVehicle.transform.position.y) + moveCheck][selectedVehicle.transform.position.x].equals("Space"))
-			{
-				selectedVehicle.move(moveAmount);
-				selectedVehicle.isMoving = true;
-				return true;
-			}
+		if(!selectedVehicle.isMoving) {
+			if (vehicleAxis.equals("Horizontal")) {
+				if (direction.equals("Left")) {
+					moveAmount = -1;
+					moveCheck = -1;
+				} else if (direction.equals("Right")) {
+					moveAmount = 1;
+					moveCheck = selectedVehicle.transform.length;
+				}
+				if (selectedVehicle.transform.position.x + moveCheck < 0 || selectedVehicle.transform.position.x + moveCheck >= map.getMapSize()) {
+					return false;
+				}
 
+				if (map.getGrid()[selectedVehicle.transform.position.y][selectedVehicle.transform.position.x + moveCheck].equals("Space")) {
+					selectedVehicle.move(moveAmount);
+					selectedVehicle.isMoving = true;
+					return true;
+				}
+
+
+			}
+			if (vehicleAxis.equals("Vertical")) {
+				if (direction.equals("Upwards")) {
+					moveAmount = 1;
+					moveCheck = -1;
+				} else if (direction.equals("Downwards")) {
+					moveAmount = -1;
+					moveCheck = selectedVehicle.transform.length;
+				}
+				if (selectedVehicle.transform.position.y + moveCheck < 0 || selectedVehicle.transform.position.y + moveCheck >= map.getMapSize()) {
+					return false;
+				}
+
+				if (map.getGrid()[(selectedVehicle.transform.position.y) + moveCheck][selectedVehicle.transform.position.x].equals("Space")) {
+					selectedVehicle.move(moveAmount);
+					selectedVehicle.isMoving = true;
+					return true;
+				}
+
+			}
 		}
 		return false;
+
 	}
 	 
 	public int getNumberOfMoves()
