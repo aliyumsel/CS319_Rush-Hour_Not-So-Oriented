@@ -78,14 +78,16 @@ public class Vehicle extends GameObject implements Drawable {
 	}
 
 	public void move(int moveAxis) {
-		if (transform.axis.equals("Vertical")) {
-			transform.position.y -= moveAxis;
-			verticaleMoveAxis = moveAxis; // if moveaxis == -1 vehicle goes downwards
-		} else if (transform.axis.equals("Horizontal")) {
-			transform.position.x += moveAxis;
-			horizontalMoveAxis = moveAxis; // if moveaxis == -1 vehicle goes left
+		if(!isMoving) {
+			if (transform.axis.equals("Vertical")) {
+				transform.position.y -= moveAxis;
+				verticaleMoveAxis = moveAxis; // if moveaxis == -1 vehicle goes downwards
+			} else if (transform.axis.equals("Horizontal")) {
+				transform.position.x += moveAxis;
+				horizontalMoveAxis = moveAxis; // if moveaxis == -1 vehicle goes left
+			}
+			findOccupiedCells();
 		}
-		findOccupiedCells();
 	}
 
 	public String getType()

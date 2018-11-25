@@ -132,8 +132,8 @@ public class VehicleController implements Updatable
 			
 			if (map.getGrid()[selectedVehicle.transform.position.y][selectedVehicle.transform.position.x + moveCheck].equals("Space"))
 			{
-				selectedVehicle.isMoving = true;
 				selectedVehicle.move(moveAmount);
+				selectedVehicle.isMoving = true;
 				return true;
 			}
 			
@@ -158,8 +158,8 @@ public class VehicleController implements Updatable
 			
 			if (map.getGrid()[ (selectedVehicle.transform.position.y) + moveCheck][selectedVehicle.transform.position.x].equals("Space"))
 			{
-				selectedVehicle.isMoving = true;
 				selectedVehicle.move(moveAmount);
+				selectedVehicle.isMoving = true;
 				return true;
 			}
 

@@ -1,6 +1,6 @@
 <Player>
 	<Name>
-		kaan
+		deniz
 	<Name/>
 	<StarAmount>
 		0
@@ -8,15 +8,14 @@
 	<Levels>
 		<Level>
 		<Level>
-		<Level>
 			<LevelNo>
-				2
+				1
 			<LevelNo/>
 			<Stars>
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				9
+				18
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -25,49 +24,35 @@
 			<Map/>
 		<Level/>
 		<Level>
-		<Level>
 			<LevelNo>
-				4
+				2
 			<LevelNo/>
 			<Stars>
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				38
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Map>
-CD SS SS CU TD SS
-SS SS SS SS SS CD
-SS SS PC SS SS SS
-CR SS SS SS CR SS
-SS CU CD TL SS SS
-SS SS SS CL SS SS
 			<Map/>
 		<Level/>
 		<Level>
-		<Level>
 			<LevelNo>
-				5
+				3
 			<LevelNo/>
 			<Stars>
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				2
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Map>
-CD SS CR SS SS CU
-SS TL SS SS CD SS
-PC SS SS TD SS SS
-CL SS SS SS CD SS
-SS CU SS SS SS CU
-SS SS TR SS SS SS
 			<Map/>
 		<Level/>
 		<Level>
@@ -113,5 +98,5 @@ SS SS TR SS SS SS
 		<Theme>
 			CLASSIC
 		<Theme/>
-	<Settings/>
+	<Settings>
 <Player/>
