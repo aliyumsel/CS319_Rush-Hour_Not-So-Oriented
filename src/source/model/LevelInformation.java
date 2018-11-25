@@ -9,7 +9,7 @@ public class LevelInformation {
 	int currentNumberOfMoves;
 	boolean unlocked;
 	
-	public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves)
+	public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked)
 	{
 		this.levelNo = levelNo;
 		this.maxNumberOfMovesForThreeStars = maxNumberOfMovesForThreeStars;
@@ -17,6 +17,7 @@ public class LevelInformation {
 		this.currentNumberOfMoves = currentNumberOfMoves;
 		this.stars = stars;
 		this.status = status;
+		this.unlocked = unlocked;
 	}
 
 	public int getStars() {

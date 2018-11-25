@@ -14,18 +14,15 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				2
+				8
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
 			<Map>
-SS SS CD CU CU SS
-SS SS SS SS SS CU
-PC SS TU SS SS SS
-SS SS SS TD TD TD
-SS SS SS SS SS SS
-SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 		<Level>
@@ -41,6 +38,9 @@ SS SS SS SS SS SS
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -57,6 +57,9 @@ SS SS SS SS SS SS
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -73,6 +76,9 @@ SS SS SS SS SS SS
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -89,6 +95,9 @@ SS SS SS SS SS SS
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
