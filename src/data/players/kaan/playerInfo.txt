@@ -41,19 +41,26 @@
 			<Map/>
 		<Level/>
 		<Level>
+		<Level>
 			<LevelNo>
-				3
+				5
 			<LevelNo/>
 			<Stars>
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Map>
+CD SS CR SS SS CU
+SS TL SS SS CD SS
+PC SS SS TD SS SS
+CL SS SS SS CD SS
+SS CU SS SS SS CU
+SS SS TR SS SS SS
 			<Map/>
 		<Level/>
 		<Level>
