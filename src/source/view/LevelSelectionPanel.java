@@ -83,11 +83,17 @@ public class LevelSelectionPanel extends JPanel
          //System.out.println("current Player: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
          if (i < 5)
          {
-            buttonArray[i].showStars( GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+            buttonArray[i].toggleLock(false);
+            buttonArray[i].showStars( 3);//GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+         }
+         else if (i == 5)
+         {
+            buttonArray[i].toggleLock(false);
+            buttonArray[i].showStars(0);
          }
          else
          {
-            buttonArray[i].showStars(-1);
+            buttonArray[i].toggleLock(true);
          }
          add(buttonArray[i]);
       }
@@ -191,7 +197,6 @@ public class LevelSelectionPanel extends JPanel
          {
             if ( e.getSource() == buttonArray[index] )
             {
-//               buttonArray[index].toggleLock();
                popUp.initialize(index + 1); // buna player objesi de eklenecek
             }
             popUp.setVisible(true);

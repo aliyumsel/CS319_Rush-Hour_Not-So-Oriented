@@ -92,8 +92,8 @@ public class ChangePlayerPanel extends JPanel
       addH = guiManager.LoadImage("src/image/icons/addPlayerH.png");
       delete = guiManager.LoadImage("src/image/icons/quit.png");
       deleteH = guiManager.LoadImage("src/image/icons/quitH.png");
-      edit = guiManager.LoadImage("src/image/icons/help.png");
-      editH = guiManager.LoadImage("src/image/icons/helpH.png");
+      edit = guiManager.LoadImage("src/image/icons/edit.png");
+      editH = guiManager.LoadImage("src/image/icons/editH.png");
    }
 
    private void createComponents()

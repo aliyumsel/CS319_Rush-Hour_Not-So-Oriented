@@ -14,15 +14,16 @@ class UIFactory
    private static Dimension levelButtonDimension = new Dimension(105, 120);
    private static Dimension playerButtonDimension = new Dimension(300, 120);
    private static Dimension miniStarDimension = new Dimension(26, 26);
+   private static Dimension movesCarDimension = new Dimension(137, 55);
 
-   public static LevelButton createLevelButton(ActionListener actionListener)
+   static LevelButton createLevelButton(ActionListener actionListener)
    {
       LevelButton _button = new LevelButton(GuiPanelManager.instance);
       _button.addActionListener(actionListener);
       return _button;
    }
 
-   public static JButton createPlayerButton(BufferedImage normalImage, BufferedImage highlightedImage, String playerName,
+   static JButton createPlayerButton(BufferedImage normalImage, BufferedImage highlightedImage, String playerName,
                                             ActionListener actionListener)
    {
       JButton _button = createButton(normalImage, highlightedImage,  "player", actionListener);
@@ -34,7 +35,7 @@ class UIFactory
       return _button;
    }
 
-   public static JButton createButton(BufferedImage normalImage, BufferedImage highlightedImage, String buttonType,
+   static JButton createButton(BufferedImage normalImage, BufferedImage highlightedImage, String buttonType,
                                       ActionListener actionListener)
    {
       JButton _button = new JButton();
@@ -42,14 +43,14 @@ class UIFactory
       return _button;
    }
 
-   public static JLabel createLabelIcon(BufferedImage image, String labelType)
+   static JLabel createLabelIcon(BufferedImage image, String labelType)
    {
       JLabel _label = new JLabel();
       setupLabelIcon(_label,image,labelType);
       return _label;
    }
 
-   static void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage, String buttonType,
+   private static void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage, String buttonType,
                     ActionListener actionListener)
    {
       button.addActionListener(actionListener);
@@ -95,7 +96,7 @@ class UIFactory
       button.setFocusable(false);
    }
 
-   static void setupLabelIcon(JLabel label, BufferedImage image, String labelType)
+   private static void setupLabelIcon(JLabel label, BufferedImage image, String labelType)
    {
       if ( labelType.equals("long") )
       {
@@ -124,6 +125,10 @@ class UIFactory
       else if ( labelType.equals("miniStar") )
       {
          label.setPreferredSize(miniStarDimension);
+      }
+      else if (labelType.equals("movesCar"))
+      {
+         label.setPreferredSize(movesCarDimension);
       }
       else
       {

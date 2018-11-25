@@ -1,21 +1,17 @@
 package source.view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import source.controller.*;
 
 public class GamePanel extends JPanel {
+
 
 	GuiPanelManager guiManager;
 
@@ -23,7 +19,7 @@ public class GamePanel extends JPanel {
 
 	private JButton menu;
 	private JButton reset;
-	private JButton pause;
+	private JButton settings;
 	private JButton hint;
 
 	private JLabel timerIcon;
@@ -37,10 +33,11 @@ public class GamePanel extends JPanel {
 	private BufferedImage menuButtonHighlightedImage;
 	private BufferedImage resetButtonImage;
 	private BufferedImage resetButtonHighlightedImage;
-	private BufferedImage pauseButtonImage;
-	private BufferedImage pauseButtonHighlightedImage;
+	private BufferedImage settingsButtonImage;
+	private BufferedImage settingsButtonHighlightedImage;
    private BufferedImage hintButtonImage;
    private BufferedImage hintButtonHighlightedImage;
+   private BufferedImage movesImage;
 
 	private int panelWidth;
 	private int panelHeight;
@@ -68,7 +65,6 @@ public class GamePanel extends JPanel {
 	public void updatePanel() {
 		repaint();
 		if (!isShowing()) {
-		   //System.out.println("game panel not showing");
 			return;
 		}
 	
@@ -86,36 +82,38 @@ public class GamePanel extends JPanel {
       menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
 		menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
 
-		pauseButtonImage = guiManager.LoadImage("src/image/icons/pause.png");
-      pauseButtonImage = guiManager.LoadImage("src/image/icons/pauseH.png");
+		settingsButtonImage = guiManager.LoadImage("src/image/icons/settingsIcon.png");
+      settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsIconH.png");
 
       resetButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
 		resetButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
 
-		pauseButtonImage = guiManager.LoadImage("src/image/icons/pause.png");
-		pauseButtonHighlightedImage = guiManager.LoadImage("src/image/icons/pauseH.png");
-
 		hintButtonImage = guiManager.LoadImage("src/image/icons/hint.png");
 		hintButtonHighlightedImage = guiManager.LoadImage("src/image/icons/hintH.png");
+
+		movesImage = guiManager.LoadImage("src/image/icons/movesCar.png");
 	}
 
 	private void createComponents()
    {
 		menu = UIFactory.createButton(menuButtonImage, menuButtonHighlightedImage,"square",actionListener);
 		reset = UIFactory.createButton(resetButtonImage, resetButtonHighlightedImage,"square",actionListener);
-		pause = UIFactory.createButton(pauseButtonImage, pauseButtonHighlightedImage, "square",actionListener);
+		settings = UIFactory.createButton(settingsButtonImage, settingsButtonHighlightedImage, "square",actionListener);
 		hint = UIFactory.createButton(hintButtonImage,hintButtonHighlightedImage,"square",actionListener);
 
 		//timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
 		//timerIcon.setPreferredSize(new Dimension(32, 32));
 
-		moveLabel = new JLabel("Moves", SwingConstants.CENTER);
-		moveLabel.setFont(new Font("Odin Rounded", Font.BOLD, 35));
-		moveLabel.setPreferredSize(new Dimension(107, 25));
+//		moveLabel = new JLabel("Moves", SwingConstants.CENTER);
+//		moveLabel.setFont(new Font("Odin Rounded", Font.BOLD, 35));
+//		moveLabel.setPreferredSize(new Dimension(107, 25));
+
+      moveLabel = UIFactory.createLabelIcon(movesImage,"movesCar");
 
 		numberLabel = new JLabel("0", SwingConstants.CENTER);
 		numberLabel.setPreferredSize(new Dimension(107, 68));
 		numberLabel.setFont(new Font("Odin Rounded", Font.BOLD, 60));
+		numberLabel.setForeground(Color.white);
 
 		//timer = new JProgressBar(SwingConstants.VERTICAL);
 		//timer.setPreferredSize(new Dimension(30, 300));
@@ -130,7 +128,7 @@ public class GamePanel extends JPanel {
       add(numberLabel);
       //add(timerIcon);
       //add(timer);
-      add(pause);
+      add(settings);
    }
 
 	private void setBoundsOfComponents()
@@ -138,8 +136,8 @@ public class GamePanel extends JPanel {
 		menu.setBounds(30 , 30 , menu.getPreferredSize().width,
 				menu.getPreferredSize().height);
 
-      pause.setBounds(panelWidth - 30 - pause.getPreferredSize().width, 30,
-              pause.getPreferredSize().width, pause.getPreferredSize().height);
+      settings.setBounds(panelWidth - 30 - settings.getPreferredSize().width, 30,
+              settings.getPreferredSize().width, settings.getPreferredSize().height);
 
 		reset.setBounds(panelWidth - 30 - reset.getPreferredSize().width, panelHeight - 30 - reset.getPreferredSize().height,
 				reset.getPreferredSize().width, reset.getPreferredSize().height);
@@ -147,7 +145,7 @@ public class GamePanel extends JPanel {
       hint.setBounds(30, panelHeight - 30 - hint.getPreferredSize().height,
               hint.getPreferredSize().width, hint.getPreferredSize().height);
 
-		moveLabel.setBounds(635, 164, moveLabel.getPreferredSize().width,
+		moveLabel.setBounds(610, 150, moveLabel.getPreferredSize().width,
 				moveLabel.getPreferredSize().height);
 
 		numberLabel.setBounds(635, 200, numberLabel.getPreferredSize().width,
@@ -206,7 +204,6 @@ public class GamePanel extends JPanel {
 		super.paintComponent(g);
 
 		drawBackground(g);
-		// setBackground(Color.WHITE);
 	}
 
 	private void drawBackground(Graphics graphics) {
