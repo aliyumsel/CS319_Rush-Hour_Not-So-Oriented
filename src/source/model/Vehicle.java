@@ -122,19 +122,19 @@ public class Vehicle extends GameObject implements Drawable {
 
 			if (isMoving && transform.axis.equals("Vertical") && verticaleMoveAxis == -1){
 				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x *75, occupiedTransforms[i].position.y *75- drawingIndexForMoving);
-				drawingIndexForMoving--;
+				drawingIndexForMoving -=2;
 			}
 			else if (isMoving && transform.axis.equals("Vertical") && verticaleMoveAxis == 1){
 				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x *75, occupiedTransforms[i].position.y *75+ drawingIndexForMoving);
-				drawingIndexForMoving--;
+				drawingIndexForMoving-= 2;
 			}
 			else if (isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == -1){
 				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x *75+drawingIndexForMoving, occupiedTransforms[i].position.y *75);
-				drawingIndexForMoving--;
+				drawingIndexForMoving-=2;
 			}
 			else if (isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == 1){
 				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x *75-drawingIndexForMoving, occupiedTransforms[i].position.y *75);
-				drawingIndexForMoving--;
+				drawingIndexForMoving-=2;
 			}
 			else
 				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x*75,occupiedTransforms[i].position.y*75);

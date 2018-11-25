@@ -15,16 +15,16 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				20
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Map>
-SS SS CD SS CU SS
-SS SS SS CU SS CU
-PC SS TU SS TD SS
-SS SS SS TD SS TD
+SS SS CD CU CU CU
+SS SS SS SS SS SS
+PC SS SS SS SS SS
+SS SS TU TD TD TD
 SS SS SS SS SS SS
 SS SS SS SS SS SS
 			<Map/>
