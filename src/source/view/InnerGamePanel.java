@@ -30,6 +30,7 @@ public class InnerGamePanel extends JPanel
 
 		loadImages();
 		createEndOfLevelPanel();
+		setOpaque(false);
 		setVisible(true);
 	}
 
@@ -49,8 +50,8 @@ public class InnerGamePanel extends JPanel
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		setBackground(Color.WHITE);
-      	drawBackground(g);
+		//setBackground(Color.WHITE);
+      	//drawBackground(g);
 
 		if (map == null) {
 			return;

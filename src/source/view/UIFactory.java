@@ -14,7 +14,9 @@ class UIFactory
    private static Dimension levelButtonDimension = new Dimension(105, 120);
    private static Dimension playerButtonDimension = new Dimension(300, 120);
    private static Dimension miniStarDimension = new Dimension(26, 26);
-   private static Dimension movesCarDimension = new Dimension(137, 55);
+   private static Dimension movesCarDimension = new Dimension(121, 41);
+   private static Dimension starAmountDimension = new Dimension(101, 37);
+
 
    static LevelButton createLevelButton(ActionListener actionListener)
    {
@@ -129,6 +131,10 @@ class UIFactory
       else if (labelType.equals("movesCar"))
       {
          label.setPreferredSize(movesCarDimension);
+      }
+      else if (labelType.equals("starAmount"))
+      {
+         label.setPreferredSize(starAmountDimension);
       }
       else
       {

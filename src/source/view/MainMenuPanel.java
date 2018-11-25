@@ -20,6 +20,8 @@ public class MainMenuPanel extends JPanel {
 	private PlayerManager playerManager;
 	private JLabel heading;
 	private JLabel player;
+	private JLabel starAmount;
+
 	private JButton changePlayer;
 	private JButton play;
 	private JButton credits;
@@ -96,7 +98,7 @@ public class MainMenuPanel extends JPanel {
       settingsButtonImage = guiManager.LoadImage("src/image/icons/settings.png");
       settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsH.png");
 
-      starAmountImage = guiManager.LoadImage("src/image/icons/")
+      starAmountImage = guiManager.LoadImage("src/image/icons/numberOfStars.png");
    }
 
 	private void createComponents()
@@ -104,11 +106,18 @@ public class MainMenuPanel extends JPanel {
 		heading = new JLabel();
 		heading.setIcon(new ImageIcon(title));
 		heading.setPreferredSize(new Dimension(295, 58));
-		String playerName = playerManager.getCurrentPlayer().getPlayerName();
-		player = new JLabel(playerName, SwingConstants.CENTER);
+
+		player = new JLabel(playerManager.getCurrentPlayer().getPlayerName(), SwingConstants.CENTER);
 		player.setPreferredSize(new Dimension(100, 32));
 		player.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
 		player.setForeground(Color.white);
+
+		starAmount = UIFactory.createLabelIcon(starAmountImage, "starAmount");
+		starAmount.setText("     15/120");
+      starAmount.setFont(new Font("Odin Rounded", Font.PLAIN, 22));
+      starAmount.setForeground(Color.black);
+      starAmount.setHorizontalTextPosition(JLabel.CENTER);
+      starAmount.setVerticalTextPosition(JLabel.CENTER);
 
       changePlayer = UIFactory.createButton(changePlayerButtonImage,changePlayerButtonHighlightedImage,"long",actionListener);
       play = UIFactory.createButton(playButtonImage,playButtonImageHighlighted,"play",actionListener);
@@ -126,8 +135,9 @@ public class MainMenuPanel extends JPanel {
 	}
    private void addComponents()
    {
-      add(heading);
-      add(player);
+      this.add(heading);
+      this.add(player);
+      add(starAmount);
       add(changePlayer);
       add(play);
       add(credits);
@@ -146,6 +156,8 @@ public class MainMenuPanel extends JPanel {
 		heading.setBounds(guiManager.findCenter(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
 		player.setBounds(guiManager.findCenter(panelWidth,player) , 130 , player.getPreferredSize().width, player.getPreferredSize().height);
+
+		starAmount.setBounds(100, 38, starAmount.getPreferredSize().width, starAmount.getPreferredSize().height);
 
 		changePlayer.setBounds(guiManager.findCenter(panelWidth,changePlayer) , 175 , changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
 

@@ -38,6 +38,14 @@ public class SettingsPanel extends JPanel
    private BufferedImage sfxHighlightedImage;
    private BufferedImage sfxOffImage;
    private BufferedImage sfxOffHighlightedImage;
+   private BufferedImage simpleImage;
+   private BufferedImage simpleHighlightedImage;
+   private BufferedImage classicImage;
+   private BufferedImage classicHighlightedImage;
+   private BufferedImage safariImage;
+   private BufferedImage safariHighlightedImage;
+   private BufferedImage spaceImage;
+   private BufferedImage spaceHighlightedImage;
 
    private int panelWidth;
    private int panelHeight;
@@ -74,6 +82,14 @@ public class SettingsPanel extends JPanel
       sfxHighlightedImage = guiManager.LoadImage("src/image/icons/soundonH.png");
       sfxOffImage = guiManager.LoadImage("src/image/icons/soundoff.png");
       sfxOffHighlightedImage = guiManager.LoadImage("src/image/icons/soundoffH.png");
+      simpleImage = guiManager.LoadImage("src/image/icons/simple.png");
+      simpleHighlightedImage = guiManager.LoadImage("src/image/icons/simpleH.png");
+      classicImage = guiManager.LoadImage("src/image/icons/classic.png");
+      classicHighlightedImage = guiManager.LoadImage("src/image/icons/classicH.png");
+      safariImage = guiManager.LoadImage("src/image/icons/safari.png");
+      safariHighlightedImage = guiManager.LoadImage("src/image/icons/safariH.png");
+      spaceImage = guiManager.LoadImage("src/image/icons/space.png");
+      spaceHighlightedImage = guiManager.LoadImage("src/image/icons/spaceH.png");
    }
 
    private void createComponents()
@@ -81,10 +97,11 @@ public class SettingsPanel extends JPanel
       music = UIFactory.createButton(musicImage,musicHighlightedImage,"square",actionListener);
       sfx = UIFactory.createButton(sfxImage,sfxHighlightedImage,"square",actionListener);
       back = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      simple = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      classic = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      safari = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      space = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
+
+      simple = UIFactory.createButton(simpleImage,simpleHighlightedImage,"square",actionListener);
+      classic = UIFactory.createButton(classicImage,classicHighlightedImage,"square",actionListener);
+      safari = UIFactory.createButton(safariImage,safariHighlightedImage,"square",actionListener);
+      space = UIFactory.createButton(spaceImage,spaceHighlightedImage,"square",actionListener);
 
       heading = new JLabel();
       heading.setIcon(new ImageIcon(title));

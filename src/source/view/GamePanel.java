@@ -77,7 +77,7 @@ public class GamePanel extends JPanel {
 
 	private void loadImages() {
 
-      background = guiManager.LoadImage("src/image/background.png");
+      background = guiManager.LoadImage("src/image/gameBackground.png");
 
       menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
 		menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
@@ -145,10 +145,10 @@ public class GamePanel extends JPanel {
       hint.setBounds(30, panelHeight - 30 - hint.getPreferredSize().height,
               hint.getPreferredSize().width, hint.getPreferredSize().height);
 
-		moveLabel.setBounds(610, 150, moveLabel.getPreferredSize().width,
+		moveLabel.setBounds(610, 180, moveLabel.getPreferredSize().width,
 				moveLabel.getPreferredSize().height);
 
-		numberLabel.setBounds(635, 200, numberLabel.getPreferredSize().width,
+		numberLabel.setBounds(635, 230, numberLabel.getPreferredSize().width,
 				numberLabel.getPreferredSize().height);
 
 //		timerIcon.setBounds(70, 116, timerIcon.getPreferredSize().width,
@@ -157,7 +157,7 @@ public class GamePanel extends JPanel {
 //		timer.setBounds(71, 160, timer.getPreferredSize().width,
 //				timer.getPreferredSize().height);
 
-		innerGamePanel.setBounds(156, 9, innerGamePanel.getPreferredSize().width,
+		innerGamePanel.setBounds(guiManager.findCenter(panelWidth,innerGamePanel), guiManager.findCenter(panelHeight,innerGamePanel), innerGamePanel.getPreferredSize().width,
 				innerGamePanel.getPreferredSize().height);
 
 	}
