@@ -8,14 +8,15 @@
 	<Levels>
 		<Level>
 		<Level>
+		<Level>
 			<LevelNo>
-				1
+				2
 			<LevelNo/>
 			<Stars>
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				8
+				13
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
