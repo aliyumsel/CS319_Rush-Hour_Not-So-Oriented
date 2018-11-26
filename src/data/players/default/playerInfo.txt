@@ -71,15 +71,21 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+CD SS SS CU TD SS
+SS SS SS SS SS CD
+SS PC SS SS SS SS
+CR SS CR SS SS SS
+SS CU CD TL SS SS
+SS SS SS CL SS SS
 			<Map/>
 		<Level/>
 		<Level>

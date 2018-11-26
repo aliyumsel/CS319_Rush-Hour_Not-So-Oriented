@@ -67,7 +67,7 @@ public class GameManager implements Updatable
       }
 
       VehicleController.instance.setMap(MapController.instance.getMap());
-      VehicleController.instance.setNumberOfMoves(0);
+      VehicleController.instance.setNumberOfMoves(playerManager.getCurrentPlayer().getLevels().get(_level - 1).getCurrentNumberOfMoves());
       GuiPanelManager.instance.getGamePanel().setInnerGamePanelVisible();
       level = _level;
 
