@@ -53,6 +53,7 @@ public class PlayerManager {
 	public void extractPlayers()
 	{
 		players.clear();
+		
 		Scanner info = null, playerInfo = null, levelInfo = null;
 		String playerName, tmp, status, lastPlayerName;
 		int starAmount, numberOfPlayers, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars;
