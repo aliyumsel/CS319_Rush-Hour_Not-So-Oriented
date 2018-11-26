@@ -56,7 +56,7 @@ public class PlayerManager {
 		Scanner info = null, playerInfo = null, levelInfo = null;
 		String playerName, tmp, status, lastPlayerName;
 		int starAmount, numberOfPlayers, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars;
-		ArrayList<LevelInformation> levels = new ArrayList<LevelInformation>();
+		ArrayList<LevelInformation> levels;
 		Settings settings;
 		boolean music, sfx, unlocked;
 		Theme theme;
@@ -99,6 +99,7 @@ public class PlayerManager {
 		
 		for (int i = 0; i < list.length; i++)
 		{
+		   levels = new ArrayList<>();
 			try {
 				playerInfo = new Scanner(new File (list[i].getPath() + "/playerInfo.txt"));
 			} catch (FileNotFoundException e) {
