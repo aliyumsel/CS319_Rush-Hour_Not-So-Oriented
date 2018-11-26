@@ -36,7 +36,11 @@ public class GameManager implements Updatable
    {
       System.out.println("Map Finished");
       isGameActive = false;
-      PlayerManager.instance.setLevelStatus(level, "finished");
+      PlayerManager.instance.setLevelStatusFinished(level);
+      if (isNextLevelLocked())
+      {
+    	  unlockNextLevel();
+      }
       GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible();
    }
 
@@ -86,6 +90,20 @@ public class GameManager implements Updatable
 
    public void setLevel(int level) {
 	   this.level = level;
+   }
+   
+   public boolean isNextLevelLocked()
+   {
+	   if (level < PlayerManager.instance.getCurrentPlayer().getLevels().size())
+	   {
+		   return !PlayerManager.instance.getCurrentPlayer().getLevels().get(level).isUnlocked();
+	   }
+	   return false;
+   }
+   
+   public void unlockNextLevel()
+   {
+	   PlayerManager.instance.unlockLevel(level + 1);
    }
    
 }

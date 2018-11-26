@@ -58,8 +58,8 @@ public class PlayerManager {
 		int starAmount, numberOfPlayers, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars;
 		ArrayList<LevelInformation> levels = new ArrayList<LevelInformation>();
 		Settings settings;
-		boolean music = true, sfx = true;
-		Theme theme = Theme.CLASSIC;
+		boolean music, sfx, unlocked;
+		Theme theme;
 		
 		try {
 			info = new Scanner(new File("src/data/info.txt"));
@@ -124,6 +124,16 @@ public class PlayerManager {
 				while (!playerInfo.nextLine().trim().equals("<Status>"));
 				status = playerInfo.nextLine().trim();
 				
+				while (!playerInfo.nextLine().trim().equals("<Unlocked>"));
+				tmp = playerInfo.nextLine().trim();
+				if(tmp.equals("false"))
+				{
+					unlocked = false;
+				}
+				else 
+				{
+					unlocked = true;
+				}
 				try {
 					levelInfo = new Scanner(new File("src/data/levels/level" + levelNo + ".txt"));
 				} catch (FileNotFoundException e) {
@@ -140,7 +150,7 @@ public class PlayerManager {
 				
 				levelInfo.close();
 				
-				levels.add(new LevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves));
+				levels.add(new LevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked));
 				
 				while (!playerInfo.nextLine().trim().equals("<Level/>"));
 			}
@@ -151,12 +161,20 @@ public class PlayerManager {
 			{
 				music = false;
 			}
+			else
+			{
+				music = true;
+			}
 			
 			while (!playerInfo.nextLine().trim().equals("<Sfx>"));
 			tmp = playerInfo.nextLine().trim();
 			if(tmp.equals("false"))
 			{
-				music = false;
+				sfx = false;
+			}
+			else
+			{
+				sfx = true;
 			}
 			
 			while (!playerInfo.nextLine().trim().equals("<Theme>"));
@@ -172,6 +190,10 @@ public class PlayerManager {
 			else if (tmp.trim().equals("SIMPLE"))
 			{
 				theme = Theme.SIMPLE;
+			}
+			else
+			{
+				theme = Theme.CLASSIC;
 			}
 			
 			settings = new Settings(music, sfx, theme);
@@ -273,11 +295,18 @@ public class PlayerManager {
 			movesForTwoStars = Integer.parseInt(tmp);
 			
 			levelInfo.close();
-			
-			LevelInformation level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0);
+			LevelInformation level; 		
+			if (i == 1)
+			{
+				playerInfo = playerInfo + levelToString(i, 0, 0, "notStarted", true, "");
+				level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, true);
+			}
+			else
+			{
+				playerInfo = playerInfo + levelToString(i, 0, 0, "notStarted", false, "");
+				level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, false);
+			}
 			levels.add(level);
-			
-			playerInfo = playerInfo + levelToString(i, 0, 0, "notStarted", "");
 		}
 		playerInfo = playerInfo +
 				"\t<Levels/>\n" +
@@ -506,7 +535,7 @@ public class PlayerManager {
 	}
 	*/
 	
-	private String levelToString(int levelNo, int stars, int currentNumberOfMoves, String status, String map)
+	private String levelToString(int levelNo, int stars, int currentNumberOfMoves, String status, boolean unlocked, String map)
 	{
 		String level = "\t\t<Level>\n" +
 				"\t\t\t<LevelNo>\n" +
@@ -521,6 +550,9 @@ public class PlayerManager {
 				"\t\t\t<Status>\n" +
 				"\t\t\t\t" + status + "\n" +
 				"\t\t\t<Status/>\n" +
+				"\t\t\t<Unlocked>\n" +
+				"\t\t\t\t" + unlocked + "\n" +
+				"\t\t\t<Unlocked/>\n" +
 				"\t\t\t<Map>\n" +
 				map +
 				"\t\t\t<Map/>\n" +
@@ -531,6 +563,7 @@ public class PlayerManager {
 	//saveMape kadar oln k�sm� MapController da bir methodla �a�r�labilir
 	public void updateLevel(int levelNo, int moveAmount, ArrayList<Vehicle> vehicleList)
 	{
+		setLevelStatus(levelNo, "inProgress");
 		currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(moveAmount);
 		
 		String map = "";
@@ -566,14 +599,14 @@ public class PlayerManager {
 			map = map + "\n";
 		}
 		
-		saveLevel(levelNo, currentPlayer.getLevels().get(levelNo -1).getStars(), moveAmount, currentPlayer.getLevels().get(levelNo -1).getStatus(), map);
+		saveLevel(levelNo, currentPlayer.getLevels().get(levelNo -1).getStars(), moveAmount, currentPlayer.getLevels().get(levelNo -1).getStatus(), true, map);
 	}
 	
 	public void updateLevelAtTheEnd(int levelNo, int stars, int moveAmount)
 	{
 		
 	}
-	private void saveLevel(int levelNo, int stars, int currentNumberOfMoves, String status, String map)
+	private void saveLevel(int levelNo, int stars, int currentNumberOfMoves, String status, boolean unlocked, String map)
 	{
 		Scanner scan = null;
 		try {
@@ -586,7 +619,7 @@ public class PlayerManager {
 		String line, text;
 		int no;
 		
-		String levelStr = levelToString(levelNo, stars, currentNumberOfMoves, status, map);
+		String levelStr = levelToString(levelNo, stars, currentNumberOfMoves, status, unlocked, map);
 		int levelCounter = 0;
 		boolean checkLevel = true;
 		
@@ -610,6 +643,10 @@ public class PlayerManager {
 					text = text + levelStr;
 					checkLevel = false;
 					while(!scan.nextLine().trim().equals("<Level/>"));
+				}
+				else
+				{
+					text = text + line + "\n";
 				}
 				
 			}
@@ -645,8 +682,24 @@ public class PlayerManager {
 			stars = currentPlayer.getLevels().get(levelNo - 1).getStars();
 			currentNumberOfMoves = currentPlayer.getLevels().get(levelNo - 1).getCurrentNumberOfMoves();
 			currentPlayer.getLevels().get(levelNo -1).setStatus(status);
-			saveLevel(levelNo, stars, currentNumberOfMoves, status, "");
+			//saveLevel(levelNo, stars, currentNumberOfMoves, status, "");
 		}
+	}
+	
+	public void setLevelStatusFinished(int levelNo)
+	{
+		setLevelStatus(levelNo, "finished");
+		int stars, currentNumberOfMoves;
+		stars = currentPlayer.getLevels().get(levelNo - 1).getStars();
+		currentNumberOfMoves = currentPlayer.getLevels().get(levelNo - 1).getCurrentNumberOfMoves();
+		saveLevel(levelNo, stars, currentNumberOfMoves, "finished", true, "");
+		
+	}
+	
+	public void unlockLevel(int levelNo)
+	{
+		currentPlayer.getLevels().get(levelNo - 1).setUnlocked(true);
+		saveLevel(levelNo, 0, 0, "notStarted", true, "");
 	}
 
 }

@@ -8,6 +8,7 @@ public class Player {
 	private ArrayList<LevelInformation> levels;
 	private int starAmount;
 	private String path;
+	private int lastUnlockedLevelNo;
 
 	private Settings settings;
 
@@ -67,6 +68,19 @@ public class Player {
 
 	public void setSettings(Settings settings) {
 		this.settings = settings;
+	}
+
+	public int getLastUnlockedLevelNo() {
+		return lastUnlockedLevelNo;
+	}
+
+	public void setLastUnlockedLevelNo(int lastUnlockedLevelNo) {
+		this.lastUnlockedLevelNo = lastUnlockedLevelNo;
+	}
+	
+	public void incrementLastUnlockedLevelNo()
+	{
+		lastUnlockedLevelNo++;
 	}
 	
 	

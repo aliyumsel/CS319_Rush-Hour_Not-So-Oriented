@@ -87,7 +87,7 @@ public class VehicleController implements Updatable
 				MapController.instance.updateMap(map.getVehicleArray());
 				//PlayerManager.instance.updateLevelForPlayer(levelNo, status);
 				//MapController.instance.autosave(map.getVehicleArray());
-				PlayerManager.instance.setLevelStatus(GameManager.instance.level, "inProgress");
+				//PlayerManager.instance.setLevelStatus(GameManager.instance.level, "inProgress");
 				
 				numberOfMoves++;
 				GameManager.instance.autoSave(numberOfMoves, map.getVehicleArray());
