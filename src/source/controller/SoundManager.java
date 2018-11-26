@@ -19,6 +19,7 @@ public class SoundManager {
 	private String success = "src/sounds/success.wav";
 	private AudioStream audioStream = null;
 	private InputStream inputStream = null;
+	private Clip clip;
 	private boolean isThemeEnabled = true;
 	private boolean isEffectsEnabled = true;
 
@@ -32,7 +33,7 @@ public class SoundManager {
 			try {
 
 				AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(trafficThemeSong));
-				Clip clip = AudioSystem.getClip();
+				clip = AudioSystem.getClip();
 				clip.open(inputStream);
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
 			} catch (Exception a) {
@@ -89,6 +90,12 @@ public class SoundManager {
 
 	public void themeSongToggle() { // Toggle Button a eklicez settingsde
 		isThemeEnabled = !isThemeEnabled;
+		if(isThemeEnabled)
+			clip.start();
+		else
+			clip.stop();
+		System.out.println(isThemeEnabled);
+		
 	}
 
 	public void effectsToggle() {

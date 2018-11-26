@@ -177,6 +177,7 @@ public class SettingsPanel extends JPanel
             music.setIcon(new ImageIcon(musicImage));
             music.setRolloverIcon(new ImageIcon(musicHighlightedImage));
          }
+         SoundManager.instance.themeSongToggle();
       }
       else if (e.getSource() == sfx)
       {
@@ -184,14 +185,17 @@ public class SettingsPanel extends JPanel
          GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setSfx(!currentSFX);
          if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx())
          {
+
             sfx.setIcon(new ImageIcon(sfxOffImage));
             sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
          }
          else
          {
+
             sfx.setIcon(new ImageIcon(sfxImage));
             sfx.setRolloverIcon(new ImageIcon(sfxHighlightedImage));
          }
+         SoundManager.instance.effectsToggle();
       }
       else if (e.getSource() == simple)
       {
