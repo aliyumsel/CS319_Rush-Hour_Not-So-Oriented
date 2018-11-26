@@ -15,6 +15,8 @@ public class Vehicle extends GameObject implements Drawable {
 	private String type; // we may not need this
 	public boolean isMoving; // we may not need this
 	private boolean player;
+    private int drawIndex;
+    private int threshold;
 	private int verticaleMoveAxis;
 	private int horizontalMoveAxis;
 	private int drawingIndexForMoving;
@@ -117,45 +119,60 @@ public class Vehicle extends GameObject implements Drawable {
 			horizontalMoveAxis = 0;
 		}
 
-		for (int i = 0; i < transform.length; i++) {
+		if (isMoving && (verticaleMoveAxis == -1 || horizontalMoveAxis == 1)) {
+            drawIndex = transform.length - 1;
+            threshold = -1;
+        }
+		else {
+            drawIndex = 0;
+            threshold = transform.length;
+        }
+		while(drawIndex != threshold) {
 
-
+		    if(isMoving)
+                System.out.println(occupiedTransforms[drawIndex].position.x +" , "+ occupiedTransforms[drawIndex].position.y);
 			if (isMoving && transform.axis.equals("Vertical") && verticaleMoveAxis == -1){
-				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x *75, occupiedTransforms[i].position.y *75- drawingIndexForMoving);
+				at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x *75, occupiedTransforms[drawIndex].position.y *75- drawingIndexForMoving);
 				drawingIndexForMoving -=2;
 			}
 			else if (isMoving && transform.axis.equals("Vertical") && verticaleMoveAxis == 1){
-				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x *75, occupiedTransforms[i].position.y *75+ drawingIndexForMoving);
+				at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x *75, occupiedTransforms[drawIndex].position.y *75+ drawingIndexForMoving);
 				drawingIndexForMoving-= 2;
 			}
 			else if (isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == -1){
-				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x *75+drawingIndexForMoving, occupiedTransforms[i].position.y *75);
+				at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x *75+drawingIndexForMoving, occupiedTransforms[drawIndex].position.y *75);
 				drawingIndexForMoving-=2;
 			}
 			else if (isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == 1){
-				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x *75-drawingIndexForMoving, occupiedTransforms[i].position.y *75);
+				at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x *75-drawingIndexForMoving, occupiedTransforms[drawIndex].position.y *75);
 				drawingIndexForMoving-=2;
 			}
 			else
-				at = AffineTransform.getTranslateInstance(occupiedTransforms[i].position.x*75,occupiedTransforms[i].position.y*75);
-
+				at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x*75,occupiedTransforms[drawIndex].position.y*75);
 
 
 			if(transform.direction.equals("Upwards"))
-				graphics2d.drawImage(vehicleImages[i],at,null);
+				graphics2d.drawImage(vehicleImages[drawIndex],at,null);
 			else if(transform.direction.equals("Downwards")){
-				at.rotate(Math.toRadians(180), vehicleImages[i].getWidth()/2.0,vehicleImages[i].getHeight()/2.0);
-				graphics2d.drawImage(vehicleImages[i],at,null);
+				at.rotate(Math.toRadians(180), vehicleImages[drawIndex].getWidth()/2.0,vehicleImages[drawIndex].getHeight()/2.0);
+				graphics2d.drawImage(vehicleImages[drawIndex],at,null);
 			}
 			else if(transform.direction.equals("Left")){
-				at.rotate(Math.toRadians(90), vehicleImages[i].getWidth()/2.0,vehicleImages[i].getHeight()/2.0);
-				graphics2d.drawImage(vehicleImages[i],at,null);
+				at.rotate(Math.toRadians(90), vehicleImages[drawIndex].getWidth()/2.0,vehicleImages[drawIndex].getHeight()/2.0);
+				graphics2d.drawImage(vehicleImages[drawIndex],at,null);
 			}
 			else {
-				at.rotate(Math.toRadians(270), vehicleImages[i].getWidth()/2.0,vehicleImages[i].getHeight()/2.0);
-				graphics2d.drawImage(vehicleImages[i],at,null);
+				at.rotate(Math.toRadians(270), vehicleImages[drawIndex].getWidth()/2.0,vehicleImages[drawIndex].getHeight()/2.0);
+				graphics2d.drawImage(vehicleImages[drawIndex],at,null);
 			}
+            if (isMoving && (verticaleMoveAxis == -1 || horizontalMoveAxis == 1)) {
+                drawIndex--;
+            }
+            else {
+                drawIndex++;
+            }
 		}
+
 
 		// System.out.println(transform.position.x + " " + transform.position.y);
 	}
