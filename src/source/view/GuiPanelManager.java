@@ -3,7 +3,6 @@ package source.view;
 import source.controller.Input;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -118,20 +117,10 @@ public class GuiPanelManager extends JFrame
       panels.add(changePlayerPanel);
    }
 
-//   public JPanel getCurrentPanel()
-//   {
-//      return (JPanel) getComponent(currentPanelIndex);
-//   }
-
    public GamePanel getGamePanel()
    {
       return gamePanel;
    }
-
-//   public MainMenuPanel getMainMenuPanel()
-//   {
-//      return mainMenuPanel;
-//   }
 
    void setPanelVisible(String panelName)
    {
@@ -142,7 +131,7 @@ public class GuiPanelManager extends JFrame
 
       if ( panelName.equals("MainMenu") )
       {
-    	   mainMenuPanel.updatePlayerName();
+    	   mainMenuPanel.updatePanel();
          targetPanel = mainMenuPanel;
       }
       else if ( panelName.equals("Game") )
@@ -155,12 +144,12 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("LevelSelection") )
       {
-    	  //For testing... An update method can be enough
-    	 levelSelectionPanel = new LevelSelectionPanel(this);
+    	   levelSelectionPanel.updatePanel();
          targetPanel = levelSelectionPanel;
       }
       else if ( panelName.equals("Settings") )
       {
+         settingsPanel.updateSoundButtons();
          targetPanel = settingsPanel;
       }
       else if ( panelName.equals("Help") )
@@ -169,7 +158,7 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("ChangePlayer") )
       {
-         changePlayerPanel.reset();
+         changePlayerPanel.updatePanel();
          targetPanel = changePlayerPanel;
       }
       else

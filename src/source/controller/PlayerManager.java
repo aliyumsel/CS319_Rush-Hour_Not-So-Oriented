@@ -85,6 +85,13 @@ public class PlayerManager {
 		//initiates the players
 		File folder = new File("src/data/players");
 		File[] list = folder.listFiles();
+
+		if (list.length == 0)
+      {
+         System.out.println("no players");
+         createPlayer("default");
+      }
+
 		for (int i = 0; i < list.length; i++)
 		{
 			System.out.println(list[i].getPath());

@@ -1,6 +1,6 @@
 <Player>
 	<Name>
-		deniz
+		default
 	<Name/>
 	<StarAmount>
 		0
@@ -14,11 +14,14 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				8
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -30,11 +33,14 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				7
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -51,6 +57,9 @@
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -67,6 +76,9 @@
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -83,6 +95,9 @@
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>

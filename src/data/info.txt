@@ -2,7 +2,7 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-	kaan
+	default
 <LastActivePlayer/>
 <NumberOfMaps>
 	5
