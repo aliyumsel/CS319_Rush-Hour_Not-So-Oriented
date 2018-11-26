@@ -40,6 +40,7 @@ public class GameManager implements Updatable
       if (isNextLevelLocked())
       {
     	  unlockNextLevel();
+    	  PlayerManager.instance.incrementLastUnlockedLevelNoOfCurrentPlayer();
       }
       GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible();
    }
@@ -47,8 +48,9 @@ public class GameManager implements Updatable
    public void loadLastLevel()
    {
       //TO BE CHANGED
-      loadLevel(1, false);
-      level = 1;
+	  level = PlayerManager.instance.getCurrentPlayer().getLastUnlockedLevelNo();
+      loadLevel(level, false);
+      //level = 1;
    }
 
    public void loadLevel(int _level, boolean original)
@@ -96,7 +98,7 @@ public class GameManager implements Updatable
    {
 	   if (level < PlayerManager.instance.getCurrentPlayer().getLevels().size())
 	   {
-		   return !PlayerManager.instance.getCurrentPlayer().getLevels().get(level).isUnlocked();
+		   return PlayerManager.instance.isLevelLocked( level + 1);
 	   }
 	   return false;
    }

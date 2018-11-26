@@ -199,6 +199,7 @@ public class PlayerManager {
 			settings = new Settings(music, sfx, theme);
 			
 			Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName, settings);
+			player.configureLastUnlockedLevelNo();
 			
 			//System.out.println(numberOfPlayers);
 			if (playerName.equals(lastPlayerName))
@@ -336,6 +337,7 @@ public class PlayerManager {
         
         //adds the new player to players and sets it as curent player
         Player newPlayer = new Player(playerName, 0, levels, playerPath, new Settings(true, true));
+        newPlayer.setLastUnlockedLevelNo(1);
         players.add(newPlayer);
         currentPlayer = newPlayer;
         setLastActivePlayer(playerName);
@@ -701,5 +703,13 @@ public class PlayerManager {
 		currentPlayer.getLevels().get(levelNo - 1).setUnlocked(true);
 		saveLevel(levelNo, 0, 0, "notStarted", true, "");
 	}
-
+	public void incrementLastUnlockedLevelNoOfCurrentPlayer()
+	{
+		currentPlayer.incrementLastUnlockedLevelNo();
+	}
+	
+	public boolean isLevelLocked( int levelNo)
+	{
+		return !currentPlayer.getLevels().get(levelNo - 1).isUnlocked();
+	}
 }
