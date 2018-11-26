@@ -644,6 +644,10 @@ public class PlayerManager {
 					checkLevel = false;
 					while(!scan.nextLine().trim().equals("<Level/>"));
 				}
+				else
+				{
+					text = text + line + "\n";
+				}
 				
 			}
 			else
