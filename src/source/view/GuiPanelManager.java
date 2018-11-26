@@ -118,20 +118,10 @@ public class GuiPanelManager extends JFrame
       panels.add(changePlayerPanel);
    }
 
-//   public JPanel getCurrentPanel()
-//   {
-//      return (JPanel) getComponent(currentPanelIndex);
-//   }
-
    public GamePanel getGamePanel()
    {
       return gamePanel;
    }
-
-//   public MainMenuPanel getMainMenuPanel()
-//   {
-//      return mainMenuPanel;
-//   }
 
    void setPanelVisible(String panelName)
    {
@@ -155,8 +145,7 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("LevelSelection") )
       {
-    	  //For testing... An update method can be enough
-    	 levelSelectionPanel = new LevelSelectionPanel(this);
+    	   levelSelectionPanel.updatePanel();
          targetPanel = levelSelectionPanel;
       }
       else if ( panelName.equals("Settings") )

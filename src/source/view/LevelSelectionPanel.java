@@ -81,33 +81,11 @@ public class LevelSelectionPanel extends JPanel
          buttonArray[i] = UIFactory.createLevelButton(actionListener);
          buttonArray[i].setLevelNo(i);
          //System.out.println("current Player: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
-         
+
          //For initial testing, not final
-         if (i < 5)
-         {
-        	if (GameEngine.instance.playerManager.isLevelLocked(i + 1))
-        	{
-        		buttonArray[i].toggleLock(true);
-        	}
-        	else
-        	{
-        		buttonArray[i].toggleLock(false);
-        		buttonArray[i].showStars( 3);//GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
-        	}
-         }
-         /*
-         else if (i == 5)
-         {
-            buttonArray[i].toggleLock(false);
-            buttonArray[i].showStars(0);
-         }
-         */
-         else
-         {
-            buttonArray[i].toggleLock(true);
-         }
          add(buttonArray[i]);
       }
+      updateButtons();
    }
 
    private void addComponents()
@@ -128,7 +106,7 @@ public class LevelSelectionPanel extends JPanel
 
       popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, popUp.getPreferredSize().width, popUp.getPreferredSize().height);
 
-      for (int i = 0; i < buttonArray.length; i++)
+      for ( int i = 0; i < buttonArray.length; i++ )
       {
          buttonArray[i].setBounds(10, guiManager.findCenter(panelHeight, buttonArray[i]) - 135,
                  buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
@@ -167,6 +145,34 @@ public class LevelSelectionPanel extends JPanel
          }
          buttonArray[i].setVisible(true);
       }
+   }
+
+   private void updateButtons()
+   {
+      for ( int i = 0; i < buttonArray.length; i++ )
+      {
+         if ( i < 5 )
+         {
+            if ( GameEngine.instance.playerManager.isLevelLocked(i + 1) )
+            {
+               buttonArray[i].toggleLock(true);
+            }
+            else
+            {
+               buttonArray[i].toggleLock(false);
+               buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+            }
+         }
+         else
+         {
+            buttonArray[i].toggleLock(true);
+         }
+      }
+   }
+
+   void updatePanel()
+   {
+      updateButtons();
    }
 
    private ActionListener actionListener = e ->
