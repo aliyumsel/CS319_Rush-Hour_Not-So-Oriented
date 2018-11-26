@@ -81,16 +81,27 @@ public class LevelSelectionPanel extends JPanel
          buttonArray[i] = UIFactory.createLevelButton(actionListener);
          buttonArray[i].setLevelNo(i);
          //System.out.println("current Player: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
+         
+         //For initial testing, not final
          if (i < 5)
          {
-            buttonArray[i].toggleLock(false);
-            buttonArray[i].showStars( 3);//GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+        	if (GameEngine.instance.playerManager.isLevelLocked(i + 1))
+        	{
+        		buttonArray[i].toggleLock(true);
+        	}
+        	else
+        	{
+        		buttonArray[i].toggleLock(false);
+        		buttonArray[i].showStars( 3);//GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+        	}
          }
+         /*
          else if (i == 5)
          {
             buttonArray[i].toggleLock(false);
             buttonArray[i].showStars(0);
          }
+         */
          else
          {
             buttonArray[i].toggleLock(true);

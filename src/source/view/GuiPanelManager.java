@@ -155,6 +155,8 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("LevelSelection") )
       {
+    	  //For testing... An update method can be enough
+    	 levelSelectionPanel = new LevelSelectionPanel(this);
          targetPanel = levelSelectionPanel;
       }
       else if ( panelName.equals("Settings") )
