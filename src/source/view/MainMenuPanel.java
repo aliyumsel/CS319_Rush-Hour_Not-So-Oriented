@@ -128,11 +128,6 @@ public class MainMenuPanel extends JPanel {
       exit = UIFactory.createButton(exitButtonImage,exitButtonHighlightedImage,"square",actionListener);
 	}
 
-	public void updatePlayerName() {
-		String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
-		player.setText(playerName);
-		System.out.println("Player selected and Player Name Updated " + playerName);
-	}
    private void addComponents()
    {
       this.add(heading);
@@ -145,6 +140,17 @@ public class MainMenuPanel extends JPanel {
       add(settings);
       add(help);
       add(exit);
+   }
+
+   void updatePanel()
+   {
+      updatePlayerName();
+   }
+
+   void updatePlayerName() {
+      String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
+      player.setText(playerName);
+      System.out.println("Player selected and Player Name Updated " + playerName);
    }
 
 	private void setBoundsOfComponents()

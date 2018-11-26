@@ -349,7 +349,7 @@ public class ChangePlayerPanel extends JPanel
       }
    };
 
-   public void reset()
+   public void updatePanel()
    {
       this.currentPage = 0;
       setBoundsOfComponents(currentPage);

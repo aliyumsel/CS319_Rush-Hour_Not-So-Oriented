@@ -52,7 +52,7 @@ public class CreditsPanel extends JPanel
 
    private void loadImages()
    {
-      background = guiManager.LoadImage("src/image/background.png");
+      background = guiManager.LoadImage("src/image/creditsBackground.png");
       title = guiManager.LoadImage("src/image/icons/creditsTitle.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
