@@ -166,13 +166,13 @@ public class SettingsPanel extends JPanel
       boolean currentMusic = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
       if (currentMusic)
       {
-         music.setIcon(new ImageIcon(musicOffImage));
-         music.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
+         music.setIcon(new ImageIcon(musicImage));
+         music.setRolloverIcon(new ImageIcon(musicHighlightedImage));
       }
       else
       {
-         music.setIcon(new ImageIcon(musicImage));
-         music.setRolloverIcon(new ImageIcon(musicHighlightedImage));
+         music.setIcon(new ImageIcon(musicOffImage));
+         music.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
       }
    }
 
@@ -197,14 +197,14 @@ public class SettingsPanel extends JPanel
          if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx())
          {
 
-            sfx.setIcon(new ImageIcon(sfxOffImage));
-            sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
+            sfx.setIcon(new ImageIcon(sfxImage));
+            sfx.setRolloverIcon(new ImageIcon(sfxHighlightedImage));
          }
          else
          {
 
-            sfx.setIcon(new ImageIcon(sfxImage));
-            sfx.setRolloverIcon(new ImageIcon(sfxHighlightedImage));
+            sfx.setIcon(new ImageIcon(sfxOffImage));
+            sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
          }
          SoundManager.instance.effectsToggle();
       }
