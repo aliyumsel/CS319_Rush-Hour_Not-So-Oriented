@@ -711,7 +711,7 @@ public class PlayerManager {
 		currentPlayer.getLevels().get(levelNo - 1).setUnlocked(true);
 		saveLevel(levelNo, 0, 0, "notStarted", true, "");
 	}
-	public void incrementLastUnlockedLevelNoOfCurrentPlayer()
+	public void incrementLastUnlockedLevelNo()
 	{
 		currentPlayer.incrementLastUnlockedLevelNo();
 	}
