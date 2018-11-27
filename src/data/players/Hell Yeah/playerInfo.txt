@@ -1,6 +1,6 @@
 <Player>
 	<Name>
-		deniz
+		Hell Yeah
 	<Name/>
 	<StarAmount>
 		0

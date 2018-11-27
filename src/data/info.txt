@@ -2,7 +2,7 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-	am ahmet
+	Hell Yeah
 
 <LastActivePlayer/>
 <NumberOfMaps>

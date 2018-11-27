@@ -6,7 +6,7 @@ import source.controller.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 
@@ -58,13 +58,25 @@ public class CreatePlayerPopUp extends JPanel
    void createComponents()
    {
       playerName = new JTextField();
-      playerName.setPreferredSize(new Dimension(300,100));
+      playerName.setPreferredSize(new Dimension(300, 100));
       playerName.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
-      playerName.setForeground(Color.white);
+      playerName.setHorizontalAlignment(JTextField.CENTER);
+      playerName.setForeground(Color.gray);
       playerName.setBorder(BorderFactory.createEmptyBorder());
       playerName.setOpaque(false);
+      playerName.setText("Enter Player name...");
+      playerName.addMouseListener(new MouseAdapter()
+      {
+         @Override
+         public void mouseClicked(MouseEvent e)
+         {
+            playerName.setText("");
+            playerName.setForeground(Color.WHITE);
+         }
 
-      close = UIFactory.createButton(closeImage, closeHighlightedImage,"square", actionListener);
+      });
+
+      close = UIFactory.createButton(closeImage, closeHighlightedImage, "square", actionListener);
       confirm = UIFactory.createButton(confirmImage, confirmHighlightedImage, "square", actionListener);
    }
 
@@ -79,8 +91,8 @@ public class CreatePlayerPopUp extends JPanel
    {
       playerName.setBounds(guiManager.findCenter(panelWidth, playerName), 20, playerName.getPreferredSize().width, playerName.getPreferredSize().height);
 
-      close.setBounds(guiManager.findCenter(panelWidth,close) - 120, 150, close.getPreferredSize().width,close.getPreferredSize().height);
-      confirm.setBounds(guiManager.findCenter(panelWidth,close) + 120, 150, close.getPreferredSize().width,close.getPreferredSize().height);
+      close.setBounds(guiManager.findCenter(panelWidth, close) - 120, 150, close.getPreferredSize().width, close.getPreferredSize().height);
+      confirm.setBounds(guiManager.findCenter(panelWidth, close) + 120, 150, close.getPreferredSize().width, close.getPreferredSize().height);
    }
 
    void updatePanel()
@@ -106,13 +118,22 @@ public class CreatePlayerPopUp extends JPanel
    private ActionListener actionListener = e ->
    {
       SoundManager.instance.buttonClick();
-      if (e.getSource() == close)
+      if ( e.getSource() == close )
       {
          setVisible(false);
       }
 
-      if (e.getSource() == confirm)
+      if ( e.getSource() == confirm )
       {
+         if (playerName.getText().equals(""))
+         {
+            return;
+         }
+
+         if (playerName.getText().equals("Enter Player name..."))
+         {
+            return;
+         }
          changePlayerPanel.addPlayer(playerName.getText());
          setVisible(false);
          guiManager.setPanelVisible("MainMenu");

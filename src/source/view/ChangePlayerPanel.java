@@ -218,7 +218,7 @@ public class ChangePlayerPanel extends JPanel
               addButton.getPreferredSize().width, menuButton.getPreferredSize().height);
 
       Dimension size = popUp.getPreferredSize();
-      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, size.width, size.height);
+      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 120, size.width, size.height);
    }
 
 
