@@ -150,10 +150,10 @@ public class GamePanel extends JPanel {
       hint.setBounds(30, panelHeight - 30 - hint.getPreferredSize().height,
               hint.getPreferredSize().width, hint.getPreferredSize().height);
 
-		moveLabel.setBounds(610, 180, moveLabel.getPreferredSize().width,
+		moveLabel.setBounds(panelWidth - moveLabel.getPreferredSize().width - 30, 200, moveLabel.getPreferredSize().width,
 				moveLabel.getPreferredSize().height);
 
-		numberLabel.setBounds(635, 230, numberLabel.getPreferredSize().width,
+		numberLabel.setBounds(panelWidth - numberLabel.getPreferredSize().width - 15, 265, numberLabel.getPreferredSize().width,
 				numberLabel.getPreferredSize().height);
 
 //		timerIcon.setBounds(70, 116, timerIcon.getPreferredSize().width,

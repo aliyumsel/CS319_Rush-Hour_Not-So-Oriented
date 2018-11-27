@@ -101,21 +101,22 @@ public class LevelButton extends JButton
 
    void showStars(int starAmount)
    {
-      if (starAmount == - 1)
+      if (starAmount == -1)
       {
-         for (int i = 0; i < stars.length; i++)
+         for ( int i = 0; i < stars.length; i++ )
          {
             stars[i].setVisible(false);
          }
-         return;
       }
-
-      for (int i = 0; i < stars.length; i++)
+      for ( int i = 0; i < stars.length; i++ )
       {
-         stars[i].setVisible(true);
-         if (i < starAmount)
+         if ( i < starAmount )
          {
             stars[i].setIcon(new ImageIcon(starActive));
+         }
+         else
+         {
+            stars[i].setIcon(new ImageIcon(starInactive));
          }
       }
    }

@@ -17,7 +17,7 @@ public class ChangePlayerPanel extends JPanel
 {
    private GuiPanelManager guiManager;
    private GameManager gameManager;
-   private LevelSelectionPopUp popUp;
+   private CreatePlayerPopUp popUp;
 
    private ArrayList<JButton> buttonArray;
    private JButton rightArrowButton;
@@ -51,12 +51,12 @@ public class ChangePlayerPanel extends JPanel
 
    private int panelWidth = 764;
    private int panelHeight = 468;
-//   private int pageCount;
+
    private int currentPage = 0;
    private int numberOfPlayers;
    private int limit;
 
-   public ChangePlayerPanel(GuiPanelManager _guiManager)
+   ChangePlayerPanel(GuiPanelManager _guiManager)
    {
       super(null);
 
@@ -68,7 +68,7 @@ public class ChangePlayerPanel extends JPanel
       playerNameArray = new ArrayList<>();
       setPreferredSize(new Dimension(panelWidth, panelHeight));
 
-      popUp = new LevelSelectionPopUp(_guiManager);
+      popUp = new CreatePlayerPopUp(_guiManager, this);
       add(popUp);
 
       loadImages();
@@ -227,7 +227,7 @@ public class ChangePlayerPanel extends JPanel
       gameManager.playerManager.selectPlayer(name);
    }
 
-   private void addPlayer(String name)
+   void addPlayer(String name)
    {
       if ( gameManager.playerManager.createPlayer(name) == 0 )
       {
@@ -309,11 +309,12 @@ public class ChangePlayerPanel extends JPanel
       }
       else if ( e.getSource() == addButton )
       {
-         Scanner scan = new Scanner(System.in);
-         String temp = scan.nextLine();
-         addPlayer(temp);
-         selectPlayer(temp);
-         guiManager.setPanelVisible("MainMenu");
+//         Scanner scan = new Scanner(System.in);
+//         String temp = scan.nextLine();
+//         addPlayer(temp);
+//         selectPlayer(temp);
+         popUp.setVisible(true);
+         //guiManager.setPanelVisible("MainMenu");
       }
       else if (e.getSource() == deleteButton1)
       {
