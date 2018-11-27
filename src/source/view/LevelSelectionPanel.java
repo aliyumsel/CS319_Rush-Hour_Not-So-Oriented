@@ -61,6 +61,12 @@ public class LevelSelectionPanel extends JPanel
    private void loadImages()
    {
       background = guiManager.LoadImage("src/image/background.png");
+      Image scaledImage = background.getScaledInstance(panelWidth,panelHeight,Image.SCALE_DEFAULT);
+      background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D bGr = background.createGraphics();
+      bGr.drawImage(scaledImage, 0, 0, null);
+      bGr.dispose();
+
       rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
       rightArrowHighlighted = guiManager.LoadImage("src/image/icons/rightarrowH.png");
       leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
@@ -115,6 +121,7 @@ public class LevelSelectionPanel extends JPanel
       int gap = 0;
       int pageLength = 12;
       int limit = page * pageLength;
+      int gapValue = 140;
       for ( int i = 0; i < numberOfLevels; i++ )
       {
          buttonArray[i].setVisible(false);
@@ -127,19 +134,19 @@ public class LevelSelectionPanel extends JPanel
          }
          if ( i > -1 + limit && i < 4 + limit )
          {
-            gap += 133;
+            gap += gapValue;
             buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]) - 135,
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
          else if ( i > 3 + limit && i < 8 + limit )
          {
-            gap += 133;
+            gap += gapValue;
             buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]),
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
          else if ( i > 7 + limit && i < 12 + limit )
          {
-            gap += 133;
+            gap += gapValue;
             buttonArray[i].setBounds(gap, 135 + guiManager.findCenter(panelHeight, buttonArray[i]),
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }

@@ -78,8 +78,6 @@ public class MainMenuPanel extends JPanel {
       background = guiManager.LoadImage("src/image/background.png");
       Image scaledImage = background.getScaledInstance(panelWidth,panelHeight,Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-      // Draw the image on to the buffered image
       Graphics2D bGr = background.createGraphics();
       bGr.drawImage(scaledImage, 0, 0, null);
       bGr.dispose();
@@ -185,21 +183,21 @@ public class MainMenuPanel extends JPanel {
 
 		heading.setBounds(guiManager.findCenter(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
-		player.setBounds(guiManager.findCenter(panelWidth,player) , 130 , player.getPreferredSize().width, player.getPreferredSize().height);
+		player.setBounds(guiManager.findCenter(panelWidth,player) , 140 , player.getPreferredSize().width, player.getPreferredSize().height);
 
 		starAmount.setBounds(100, 38, starAmount.getPreferredSize().width, starAmount.getPreferredSize().height);
 
-		changePlayer.setBounds(guiManager.findCenter(panelWidth,changePlayer) , 175 , changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
+		changePlayer.setBounds(guiManager.findCenter(panelWidth,changePlayer) , 180 , changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
 
-		play.setBounds(guiManager.findCenter(panelWidth, play) , 230 , play.getPreferredSize().width, play.getPreferredSize().height);
+		play.setBounds(guiManager.findCenter(panelWidth, play) , 240 , play.getPreferredSize().width, play.getPreferredSize().height);
 
-		lastlevel.setBounds(guiManager.findCenter(panelWidth, lastlevel), 310, lastlevel.getPreferredSize().width, lastlevel.getPreferredSize().height);
+		lastlevel.setBounds(guiManager.findCenter(panelWidth, lastlevel), 320, lastlevel.getPreferredSize().width, lastlevel.getPreferredSize().height);
 
-		credits.setBounds(guiManager.findCenter(panelWidth, credits) - 225 , 395 , credits.getPreferredSize().width, credits.getPreferredSize().height);
+		credits.setBounds(guiManager.findCenter(panelWidth, credits) - 225 , 430 , credits.getPreferredSize().width, credits.getPreferredSize().height);
 
-		levels.setBounds(guiManager.findCenter(panelWidth, levels) , 395 , levels.getPreferredSize().width, levels.getPreferredSize().height);
+		levels.setBounds(guiManager.findCenter(panelWidth, levels) , 430 , levels.getPreferredSize().width, levels.getPreferredSize().height);
 
-		settings.setBounds(guiManager.findCenter(panelWidth, settings) + 225 , 395 , settings.getPreferredSize().width, settings.getPreferredSize().height);
+		settings.setBounds(guiManager.findCenter(panelWidth, settings) + 225 , 430 , settings.getPreferredSize().width, settings.getPreferredSize().height);
 	}
 
 	public void paintComponent(Graphics g) {

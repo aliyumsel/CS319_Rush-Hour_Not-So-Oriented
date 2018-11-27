@@ -80,6 +80,12 @@ public class ChangePlayerPanel extends JPanel
    private void loadImages()
    {
       background = guiManager.LoadImage("src/image/background.png");
+      Image scaledImage = background.getScaledInstance(panelWidth,panelHeight,Image.SCALE_DEFAULT);
+      background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D bGr = background.createGraphics();
+      bGr.drawImage(scaledImage, 0, 0, null);
+      bGr.dispose();
+
       levelBackground = guiManager.LoadImage("src/image/icons/playerSelection.png");
       levelBackgroundH = guiManager.LoadImage("src/image/icons/playerSelectionH.png");
       rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
@@ -148,8 +154,6 @@ public class ChangePlayerPanel extends JPanel
       editButton2.setVisible(false);
       editButton3.setVisible(false);
 
-      Insets insets = getInsets();
-
       currentPage = page;
 
       int gap = 0;
@@ -165,55 +169,55 @@ public class ChangePlayerPanel extends JPanel
          if ( i == 0 + limit )
          {
             gap = 50;
-            buttonArray.get(i).setBounds(235 + insets.left, gap, buttonArray.get(i).getPreferredSize().width,
+            buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
             deleteButton1.setVisible(true);
-            deleteButton1.setBounds(565 + insets.left, gap + 30 + insets.top,
+            deleteButton1.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
                     deleteButton1.getPreferredSize().width, deleteButton1.getPreferredSize().height);
             editButton1.setVisible(true);
-            editButton1.setBounds(160 + insets.left, gap + 30 + insets.top, editButton1.getPreferredSize().width,
+            editButton1.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) - 75, gap + 30, editButton1.getPreferredSize().width,
                     editButton1.getPreferredSize().height);
          }
          else if ( i == 1 + limit )
          {
             gap = 180;
-            buttonArray.get(i).setBounds(235 + insets.left, gap, buttonArray.get(i).getPreferredSize().width,
+            buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
             deleteButton2.setVisible(true);
-            deleteButton2.setBounds(565 + insets.left, gap + 30 + insets.top,
+            deleteButton2.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25 , gap + 30,
                     deleteButton2.getPreferredSize().width, deleteButton2.getPreferredSize().height);
             editButton2.setVisible(true);
-            editButton2.setBounds(160 + insets.left, gap + 30 + insets.top, editButton2.getPreferredSize().width,
+            editButton2.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) - 75, gap + 30, editButton2.getPreferredSize().width,
                     editButton2.getPreferredSize().height);
          }
          else if ( i == 2 + limit )
          {
             gap = 310;
-            buttonArray.get(i).setBounds(235 + insets.left, gap, buttonArray.get(i).getPreferredSize().width,
+            buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
             deleteButton3.setVisible(true);
-            deleteButton3.setBounds(565 + insets.left, gap + 30 + insets.top,
+            deleteButton3.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
                     deleteButton3.getPreferredSize().width, deleteButton3.getPreferredSize().height);
             editButton3.setVisible(true);
-            editButton3.setBounds(160 + insets.left, gap + 30 + insets.top, editButton3.getPreferredSize().width,
+            editButton3.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) - 75, gap + 30, editButton3.getPreferredSize().width,
                     editButton3.getPreferredSize().height);
          }
 
       }
-      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton) + insets.top,
+      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
               leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
-      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton) + insets.top,
+      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton),
               rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
-      menuButton.setBounds(30 + insets.left, 30 + insets.top, menuButton.getPreferredSize().width,
+      menuButton.setBounds(30, 30, menuButton.getPreferredSize().width,
               menuButton.getPreferredSize().height);
-      addButton.setBounds(panelWidth - 30 - addButton.getPreferredSize().width, 30 + insets.top,
+      addButton.setBounds(panelWidth - 30 - addButton.getPreferredSize().width, 30,
               addButton.getPreferredSize().width, menuButton.getPreferredSize().height);
 
       Dimension size = popUp.getPreferredSize();
-      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100 + insets.top, size.width, size.height);
+      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, size.width, size.height);
       // popUp.setVisible(true); in order to test pop up panel design remove the
    }
 

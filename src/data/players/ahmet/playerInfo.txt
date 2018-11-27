@@ -1,6 +1,6 @@
 <Player>
 	<Name>
-		default
+		ahmet
 	<Name/>
 	<StarAmount>
 		0
@@ -11,13 +11,13 @@
 				1
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				18
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
 				true
@@ -33,13 +33,13 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				21
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -58,7 +58,7 @@
 				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>

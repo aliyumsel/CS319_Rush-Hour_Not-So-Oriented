@@ -78,6 +78,11 @@ public class GamePanel extends JPanel {
 	private void loadImages() {
 
       background = guiManager.LoadImage("src/image/gameBackground.png");
+		Image scaledImage = background.getScaledInstance(panelWidth,panelHeight,Image.SCALE_DEFAULT);
+		background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D bGr = background.createGraphics();
+      bGr.drawImage(scaledImage, 0, 0, null);
+      bGr.dispose();
 
       menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
 		menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");

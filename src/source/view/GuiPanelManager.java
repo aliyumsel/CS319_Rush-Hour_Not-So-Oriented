@@ -68,8 +68,8 @@ public class GuiPanelManager extends JFrame
          e.printStackTrace();
       }
 
-      panelWidth = 980; //764
-      panelHeight = 600; //468
+      panelWidth = 800; //764
+      panelHeight = 520; //468
 
       setLayout(new CardLayout());
       setResizable(false);
