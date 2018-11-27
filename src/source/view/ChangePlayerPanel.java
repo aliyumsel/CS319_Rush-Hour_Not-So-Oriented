@@ -220,11 +220,6 @@ public class ChangePlayerPanel extends JPanel
       popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, size.width, size.height);
    }
 
-//   private void update()
-//   {
-//      setBoundsOfComponents(currentPage);
-//      repaint();
-//   }
 
    private void selectPlayer(String name)
    {
