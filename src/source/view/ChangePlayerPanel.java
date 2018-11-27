@@ -54,6 +54,7 @@ public class ChangePlayerPanel extends JPanel
 //   private int pageCount;
    private int currentPage = 0;
    private int numberOfPlayers;
+   private int limit;
 
    public ChangePlayerPanel(GuiPanelManager _guiManager)
    {
@@ -158,7 +159,7 @@ public class ChangePlayerPanel extends JPanel
 
       int gap = 0;
       int pageLength = 3; //amount of buttons in one page
-      int limit = page * pageLength;
+      limit = page * pageLength;
 
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
@@ -316,11 +317,16 @@ public class ChangePlayerPanel extends JPanel
       }
       else if (e.getSource() == deleteButton1)
       {
-         Scanner scan = new Scanner(System.in);
-         String temp = scan.nextLine();
-         deletePlayer(temp);
+         deletePlayer(playerNameArray.get(limit));
       }
-      // If the user clicks one of the level buttons
+      else if (e.getSource() == deleteButton2)
+      {
+         deletePlayer(playerNameArray.get(limit+1));
+      }
+      else if (e.getSource() == deleteButton3)
+      {
+         deletePlayer(playerNameArray.get(limit+2));
+      }
       else
       {
          for ( int i = 0; i < numberOfPlayers; i++ )
@@ -351,7 +357,7 @@ public class ChangePlayerPanel extends JPanel
          {
             setBoundsOfComponents(currentPage);
          }
-         else if (currentPage == numberOfPlayers / 3 - 1)
+         else if (currentPage == numberOfPlayers / 3)
          {
             setBoundsOfComponents(currentPage - 1);
          }
