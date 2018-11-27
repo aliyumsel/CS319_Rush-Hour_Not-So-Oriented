@@ -123,7 +123,7 @@ public class LevelButton extends JButton
    void toggleLock(boolean state)
    {
       isLocked = state;
-      System.out.println("isLocked: " + isLocked);
+      //System.out.println("isLocked: " + isLocked);
 
       BufferedImage temp;
       BufferedImage tempH;

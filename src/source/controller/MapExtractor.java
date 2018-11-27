@@ -102,7 +102,7 @@ public class MapExtractor {
          row = scanLevel.nextLine();
       } while (!row.trim().equals("<Map/>"));
       map.formMap(vehicleArray);
-      printVehicleArray();
+      //printVehicleArray();
       return map;
    }
 
@@ -114,7 +114,7 @@ public class MapExtractor {
 		return map;
 	}
 
-	public void printVehicleArray()
+	private void printVehicleArray()
    {
 		int i = 0;
 		for (Vehicle vehicle : vehicleArray) {

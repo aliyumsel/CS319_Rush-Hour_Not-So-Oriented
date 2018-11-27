@@ -163,13 +163,13 @@ public class MainMenuPanel extends JPanel {
       updateLastLevel();
    }
 
-   void updateLastLevel()
+   private void updateLastLevel()
    {
-      System.out.println(lastlevel.getText());
+      //System.out.println(lastlevel.getText());
       lastlevel.setText(playerManager.getCurrentPlayer().getLastUnlockedLevelNo() + "");
    }
 
-   void updatePlayerName() {
+   private void updatePlayerName() {
       String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
       player.setText(playerName);
       System.out.println("Player selected and Player Name Updated " + playerName);

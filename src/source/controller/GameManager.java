@@ -46,6 +46,7 @@ public class GameManager implements Updatable
       }
 
       int starsCollected = calculateStars(level);
+      System.out.println("Stars Collected: " + starsCollected);
       PlayerManager.instance.getCurrentPlayer().getLevels().get(level - 1).setStars(starsCollected);
       GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible(starsCollected);
    }
@@ -77,7 +78,8 @@ public class GameManager implements Updatable
 
    public void loadLevel(int _level, boolean original)
    {
-      System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(0).getStatus());
+      System.out.println("Loaded level: " + _level);
+      System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
 
       if (original)
       {

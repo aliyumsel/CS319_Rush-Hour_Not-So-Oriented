@@ -97,14 +97,15 @@ public class LevelSelectionPopUp extends JPanel
          return;
       }
       LevelInformation currentLevelInfo = GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(destinationLevel - 1);
+      System.out.println(currentLevelInfo.getStatus());
       if ( currentLevelInfo.getStatus().equals("notStarted") )
       {
-         showStars(-1);
+         showStars(0);
          showNumberOfMoves(0);
       }
       else if ( currentLevelInfo.getStatus().equals("inProgress") )
       {
-         showStars(-1);
+         showStars(0);
          showNumberOfMoves(currentLevelInfo.getCurrentNumberOfMoves());
       }
       else if ( currentLevelInfo.getStatus().equals("finished") )
@@ -174,11 +175,22 @@ public class LevelSelectionPopUp extends JPanel
 
    private void showStars(int starAmount)
    {
+      if (starAmount == -1)
+      {
+         for ( int i = 0; i < stars.length; i++ )
+         {
+            stars[i].setVisible(false);
+         }
+      }
       for ( int i = 0; i < stars.length; i++ )
       {
          if ( i < starAmount )
          {
             stars[i].setIcon(new ImageIcon(starImage));
+         }
+         else
+         {
+            stars[i].setIcon(new ImageIcon(starLockedImage));
          }
       }
    }
@@ -207,9 +219,9 @@ public class LevelSelectionPopUp extends JPanel
          if ( e.getSource() == play )
          {
             setVisible(false);
-            System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(0).getStatus());
+            System.out.println("Destinationlevel: " + destinationLevel);
 
-            if (PlayerManager.instance.getCurrentPlayer().getLevels().get(0).getStatus().equals("inProgress"))
+            if (PlayerManager.instance.getCurrentPlayer().getLevels().get(destinationLevel).getStatus().equals("inProgress"))
             {
                GameEngine.instance.gameManager.loadLevel(destinationLevel, false);
             }

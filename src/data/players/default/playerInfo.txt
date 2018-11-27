@@ -11,10 +11,10 @@
 				1
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				18
+				22
 			<CurrentNumberOfMoves>
 			<Status>
 				finished

@@ -79,13 +79,16 @@ public class PlayerManager {
 		}
 	}
 
-
-	
 	/* returns 0 if creation successful
 	 * returns 1 if the name already exists
 	 */
 	public int createPlayer(String playerName)
 	{
+	   if (players == null)
+      {
+         players = new ArrayList<>();
+      }
+
 		//checks if a player with the same name exists
 		for (int i = 0; i < players.size(); i++)
 		{

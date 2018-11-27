@@ -166,7 +166,7 @@ public class ChangePlayerPanel extends JPanel
          {
             gap = 0;
          }
-         if ( i == 0 + limit )
+         if ( i == limit )
          {
             gap = 50;
             buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
@@ -218,26 +218,13 @@ public class ChangePlayerPanel extends JPanel
 
       Dimension size = popUp.getPreferredSize();
       popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, size.width, size.height);
-      // popUp.setVisible(true); in order to test pop up panel design remove the
    }
 
-//   private void calculatePageCount()
+//   private void update()
 //   {
-//      if (GameEngine.instance.playerManager.getPlayers().size() % 3 == 0)
-//      {
-//         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3;
-//      }
-//      else
-//      {
-//         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3 + 1;
-//      }
+//      setBoundsOfComponents(currentPage);
+//      repaint();
 //   }
-
-   private void update()
-   {
-      setBoundsOfComponents(currentPage);
-      repaint();
-   }
 
    private void selectPlayer(String name)
    {
@@ -266,7 +253,6 @@ public class ChangePlayerPanel extends JPanel
       remove(buttonArray.get(buttonArray.size() - 1));
       buttonArray.remove(buttonArray.size() - 1);
       playerNameArray.remove(deleteIndex);
-//      calculatePageCount();
       updatePages();
    }
 
@@ -359,7 +345,7 @@ public class ChangePlayerPanel extends JPanel
       setBoundsOfComponents(currentPage);
    }
 
-   public void updatePages()
+   private void updatePages()
    {
       numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
       updateButtons();
@@ -387,7 +373,7 @@ public class ChangePlayerPanel extends JPanel
       repaint();
    }
 
-   public void updateButtons()
+   private void updateButtons()
    {
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
