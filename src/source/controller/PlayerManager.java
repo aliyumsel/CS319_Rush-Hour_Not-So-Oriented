@@ -4,15 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
-import source.model.Settings.Theme;
 import source.model.Vehicle;
 
 //TODO info dosyas�ndaki last active player her method i�in d�zenle
@@ -21,7 +18,7 @@ public class PlayerManager
 
    public static PlayerManager instance;
 
-   public PlayerExtractor playerExtractor;
+   private PlayerExtractor playerExtractor;
 
    private Player currentPlayer;
    private ArrayList<Player> players;
@@ -602,7 +599,7 @@ public class PlayerManager
 
    void unlockLevel(int levelNo)
    {
-      currentPlayer.getLevels().get(levelNo - 1).setUnlocked(true);
+      currentPlayer.getLevels().get(levelNo - 1).unlock();
       saveLevel(levelNo, 0, 0, "notStarted", true, "");
    }
 

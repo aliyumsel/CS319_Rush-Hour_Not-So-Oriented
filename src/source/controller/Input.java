@@ -27,6 +27,7 @@ public class Input
         return keys.get(keyID);
     }
 
+    @SuppressWarnings("SameParameterValue")
     static boolean getMouseButtonPressed(int buttonID)
     {
         return mouseButtons[buttonID];

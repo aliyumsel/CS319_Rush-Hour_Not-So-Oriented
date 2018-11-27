@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 class PlayerExtractor
 {
+   @SuppressWarnings("StatementWithEmptyBody")
    String extractLastPlayerName()
    {
       Scanner info = null;
@@ -25,38 +26,18 @@ class PlayerExtractor
       return info.nextLine().trim();
    }
 
+   @SuppressWarnings({"StatementWithEmptyBody", "ForLoopReplaceableByForEach"})
    ArrayList<Player> extractPlayers()
    {
       ArrayList<Player> players = new ArrayList<>();
 
-      Scanner info = null, playerInfo = null, levelInfo = null;
-      String playerName, tmp, status, lastPlayerName;
-      int starAmount, numberOfPlayers, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars;
+      Scanner playerInfo = null, levelInfo = null;
+      String playerName, tmp, status;
+      int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars;
       ArrayList<LevelInformation> levels;
       Settings settings;
       boolean music, sfx, unlocked;
       Settings.Theme theme;
-
-//      try {
-//         info = new Scanner(new File("src/data/info.txt"));
-//      } catch (FileNotFoundException e1) {
-//         e1.printStackTrace();
-//      }
-
-//		while (!info.nextLine().trim().equals("<NumberOfPlayers>"));
-//		tmp = info.nextLine().trim();
-//		System.out.println(tmp);
-      //numberOfPlayers = Integer.parseInt(tmp);
-
-//		if ( numberOfPlayers == 0)
-//		{
-//			info.close();
-//			return;
-//		}
-
-      //extracts last active player
-//      while (!info.nextLine().trim().equals("<LastActivePlayer>"));
-//      lastPlayerName = info.nextLine().trim();
 
       //initiates the players
       File folder = new File("src/data/players");
@@ -112,14 +93,9 @@ class PlayerExtractor
 
             while (!playerInfo.nextLine().trim().equals("<Unlocked>"));
             tmp = playerInfo.nextLine().trim();
-            if(tmp.equals("false"))
-            {
-               unlocked = false;
-            }
-            else
-            {
-               unlocked = true;
-            }
+
+            unlocked = !tmp.equals("false");
+
             try {
                levelInfo = new Scanner(new File("src/data/levels/level" + levelNo + ".txt"));
             } catch (FileNotFoundException e) {
@@ -143,25 +119,13 @@ class PlayerExtractor
 
          while (!playerInfo.nextLine().trim().equals("<Music>"));
          tmp = playerInfo.nextLine().trim();
-         if(tmp.equals("false"))
-         {
-            music = false;
-         }
-         else
-         {
-            music = true;
-         }
+
+         music = !tmp.equals("false");
 
          while (!playerInfo.nextLine().trim().equals("<Sfx>"));
          tmp = playerInfo.nextLine().trim();
-         if(tmp.equals("false"))
-         {
-            sfx = false;
-         }
-         else
-         {
-            sfx = true;
-         }
+
+         sfx = !tmp.equals("false");
 
          while (!playerInfo.nextLine().trim().equals("<Theme>"));
          tmp = playerInfo.nextLine().trim();
@@ -187,19 +151,9 @@ class PlayerExtractor
          Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName, settings);
          player.configureLastUnlockedLevelNo();
 
-         //System.out.println(numberOfPlayers);
-//         if (playerName.equals(lastPlayerName))
-//         {
-//            currentPlayer = player;
-//         }
          players.add(player);
          playerInfo.close();
       }
-//      this.numberOfPlayers = players.size();
-//      if(this.numberOfPlayers == 1)
-//         currentPlayer = players.get(0);
-
-//      info.close();
 
       return players;
    }

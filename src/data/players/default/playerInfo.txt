@@ -14,28 +14,15 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-<<<<<<< Updated upstream:src/data/players/default/playerInfo.txt
 				8
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
-=======
-				3
-			<CurrentNumberOfMoves>
-			<Status>
-				inProgress
->>>>>>> Stashed changes:src/data/players/deniz/playerInfo.txt
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-SS SS CD CU CU CU
-SS SS SS SS SS SS
-PC SS TU SS SS SS
-SS SS SS TD TD TD
-SS SS SS SS SS SS
-SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 		<Level>
@@ -46,7 +33,7 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				21
+				7
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -65,10 +52,10 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				30
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
@@ -84,13 +71,13 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				39
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -109,7 +96,7 @@ SS SS SS SS SS SS
 				notStarted
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>

@@ -17,11 +17,7 @@ public class Player {
 		this.playerName = playerName;
 		this.starAmount = starAmount;
 		this.path = path;
-		this.levels = new ArrayList<LevelInformation>();
-		for (int i = 0; i < levels.size(); i++)
-		{
-			this.levels.add(levels.get(i));
-		}
+		this.levels = levels;
 
 		this.settings = settings;
 	}
@@ -59,16 +55,16 @@ public class Player {
 		return levels;
 	}
 
-	public void setLevels(ArrayList<LevelInformation> levels) {
-		for (int i = 0; i < levels.size(); i++)
-		{
-			this.levels.set(i, levels.get(i));
-		}
-	}
+//	public void setLevels(ArrayList<LevelInformation> levels) {
+//		for (int i = 0; i < levels.size(); i++)
+//		{
+//			this.levels.set(i, levels.get(i));
+//		}
+//	}
 
-	public void setSettings(Settings settings) {
-		this.settings = settings;
-	}
+//	public void setSettings(Settings settings) {
+//		this.settings = settings;
+//	}
 
 	public int getLastUnlockedLevelNo() {
 		return lastUnlockedLevelNo;

@@ -3,22 +3,22 @@ package source.model;
 public class GameObject
 {
 	public Transform transform;
-	private int[] occupiedCellNumbers; // Kaan gonc special
-	public Transform[] occupiedTransforms;
+	private int[] occupiedCellNumbers;
+	Transform[] occupiedTransforms;
 
-	public GameObject()
+	GameObject()
 	{
 		transform = new Transform();
 		findOccupiedCells();
 	}
 
-	public GameObject(int x, int y, int length, String direction)
+	GameObject(int x, int y, int length, String direction)
 	{
 		transform = new Transform(x, y, length, direction);
 		findOccupiedCells();
 	}
 
-	public void findOccupiedCells()
+	void findOccupiedCells()
 	{
 		occupiedCellNumbers = new int[transform.length];
 		occupiedCellNumbers[0] = transform.position.y * 6 + transform.position.x;
@@ -41,7 +41,7 @@ public class GameObject
 		findPivotPointsOfOccupiedCells();
 	}
 
-	public void findPivotPointsOfOccupiedCells()
+	private void findPivotPointsOfOccupiedCells()
 	{
 		occupiedTransforms = new Transform[transform.length];
 		occupiedTransforms[0] = new Transform(transform.position.x, transform.position.y, 1, transform.direction);

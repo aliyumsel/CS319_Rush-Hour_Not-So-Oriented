@@ -3,11 +3,11 @@ package source.model;
 public class LevelInformation {
 	private int stars; 
 	private String status; //notStarted, inProgress, finished
-	int levelNo;
-	int maxNumberOfMovesForThreeStars;
-	int maxNumberOfMovesForTwoStars;
-	int currentNumberOfMoves;
-	boolean unlocked;
+	private int levelNo;
+	private int maxNumberOfMovesForThreeStars;
+	private int maxNumberOfMovesForTwoStars;
+	private int currentNumberOfMoves;
+	private boolean unlocked;
 	
 	public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked)
 	{
@@ -48,8 +48,8 @@ public class LevelInformation {
 		return unlocked;
 	}
 
-	public void setUnlocked(boolean unlocked) {
-		this.unlocked = unlocked;
+	public void unlock() {
+		this.unlocked = true;
 	}
 
 	public int getMaxNumberOfMovesForThreeStars()
