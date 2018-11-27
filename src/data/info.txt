@@ -2,7 +2,7 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-<<<<<<< Updated upstream
+	default
 	deniz
 =======
 	aaaa
