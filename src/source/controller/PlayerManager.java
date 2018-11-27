@@ -19,6 +19,8 @@ public class PlayerManager
    public static PlayerManager instance;
 
    private PlayerExtractor playerExtractor;
+   
+   private PlayerSaver playerSaver;
 
    private Player currentPlayer;
    private ArrayList<Player> players;
@@ -29,6 +31,7 @@ public class PlayerManager
       instance = this;
 
       playerExtractor = new PlayerExtractor();
+      playerSaver = new PlayerSaver();
       extractPlayers();
    }
 
@@ -181,13 +184,15 @@ public class PlayerManager
          LevelInformation level;
          if ( i == 1 )
          {
-            playerInfo = playerInfo + levelToString(i, 0, 0, "notStarted", true, "");
-            level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, true);
+        	level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, true, "");
+            playerInfo = playerInfo + level.levelToString(i, 0, 0, "notStarted", true, "");
+            
          }
          else
          {
-            playerInfo = playerInfo + levelToString(i, 0, 0, "notStarted", false, "");
-            level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, false);
+        	level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, false, "");
+            playerInfo = playerInfo + level.levelToString(i, 0, 0, "notStarted", false, "");
+            
          }
          levels.add(level);
       }
@@ -328,7 +333,8 @@ public class PlayerManager
          e.printStackTrace();
       }
    }
-
+   //not used
+   /*
    private void decrementPlayerNumber()
    {
       String text, line, tmp;
@@ -422,185 +428,50 @@ public class PlayerManager
          e.printStackTrace();
       }
    }
-	/*
-	//moveCount will be added as well
-	public void updateLevelForPlayer(int levelNo, String status)
-	{
-		if (!currentPlayer.getLevels().get(levelNo -1).getStatus().equals(status))
-		{
-			currentPlayer.getLevels().get(levelNo -1).setStatus(status);
-		}
-	}
 	*/
-
-   private String levelToString(int levelNo, int stars, int currentNumberOfMoves, String status, boolean unlocked, String map)
+   
+   public void updateLevelAtTheEnd(int levelNo, int starAmount)
    {
-      String level = "\t\t<Level>\n" +
-              "\t\t\t<LevelNo>\n" +
-              "\t\t\t\t" + levelNo + "\n" +
-              "\t\t\t<LevelNo/>\n" +
-              "\t\t\t<Stars>\n" +
-              "\t\t\t\t" + stars + "\n" +
-              "\t\t\t<Stars/>\n" +
-              "\t\t\t<CurrentNumberOfMoves>\n" +
-              "\t\t\t\t" + currentNumberOfMoves + "\n" +
-              "\t\t\t<CurrentNumberOfMoves>\n" +
-              "\t\t\t<Status>\n" +
-              "\t\t\t\t" + status + "\n" +
-              "\t\t\t<Status/>\n" +
-              "\t\t\t<Unlocked>\n" +
-              "\t\t\t\t" + unlocked + "\n" +
-              "\t\t\t<Unlocked/>\n" +
-              "\t\t\t<Map>\n" +
-              map +
-              "\t\t\t<Map/>\n" +
-              "\t\t<Level/>\n";
-      return level;
+	   LevelInformation currentLevel = currentPlayer.getLevels().get(levelNo - 1);
+	   setLevelStatus(levelNo, "finished");
+	   currentLevel.setMap("");
+	   currentLevel.setStars(starAmount);
+	   currentPlayer.setStarAmount(currentPlayer.getStarAmount() + starAmount);
+	   playerSaver.saveLevel(levelNo, currentPlayer);
+	   playerSaver.saveStarAmount(currentPlayer);
+	   
    }
-
    //saveMape kadar oln k�sm� MapController da bir methodla �a�r�labilir
-   void updateLevel(int levelNo, int moveAmount, ArrayList<Vehicle> vehicleList)
+   void updateLevel(int levelNo, int moveAmount)
    {
       setLevelStatus(levelNo, "inProgress");
+      
+      String map = MapController.instance.mapStrToString();
       currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(moveAmount);
+      currentPlayer.getLevels().get(levelNo - 1).setMap(map);
 
-      String map = "";
-      boolean found;
-      int mapSize = MapController.instance.getMap().getMapSize();
-      for ( int i = 0; i < mapSize; i++ )
-      {
-         for ( int j = 0; j < mapSize; j++ )
-         {
-            found = false;
-            for ( Vehicle vehicle : vehicleList )
-            {
-               if ( vehicle.transform.getPosition().y == i && vehicle.transform.getPosition().x == j )
-               {
-                  if ( vehicle.isPlayer() )
-                  {
-                     map = map + "PC ";
-                  }
-                  else
-                  {
-                     map = map + vehicle.getType().substring(0, 1).toUpperCase() + vehicle.transform.getDirection().substring(0, 1).toUpperCase() + " ";
-                  }
-                  found = true;
-                  break;
-               }
-            }
-            if ( !found )
-            {
-               map = map + "SS ";
-            }
-         }
-         map = map.substring(0, map.length() - 1);
-         map = map + "\n";
-      }
-
-      saveLevel(levelNo, currentPlayer.getLevels().get(levelNo - 1).getStars(), moveAmount, currentPlayer.getLevels().get(levelNo - 1).getStatus(), true, map);
-   }
-
-   public void updateLevelAtTheEnd(int levelNo, int stars, int moveAmount)
-   {
-
-   }
-
-   private void saveLevel(int levelNo, int stars, int currentNumberOfMoves, String status, boolean unlocked, String map)
-   {
-      Scanner scan = null;
-      try
-      {
-         scan = new Scanner(new File(currentPlayer.getPath() + "/playerInfo.txt"));
-      } catch (FileNotFoundException e1)
-      {
-         // TODO Auto-generated catch block
-         e1.printStackTrace();
-      }
-
-      String line, text;
-      int no;
-
-      String levelStr = levelToString(levelNo, stars, currentNumberOfMoves, status, unlocked, map);
-      int levelCounter = 0;
-      boolean checkLevel = true;
-
-      line = scan.nextLine();
-      text = line + "\n";
-      while ( !line.trim().equals("<Levels>") )
-      {
-         line = scan.nextLine();
-         text = text + line + "\n";
-      }
-      //line = scan.nextLine();
-      //text = text + line + "\n";
-      while ( !line.trim().equals("<Levels/>") )
-      {
-         line = scan.nextLine();
-         if ( line.trim().equals("<Level>") && checkLevel )
-         {
-            levelCounter++;
-            if ( levelCounter == levelNo )
-            {
-               text = text + levelStr;
-               checkLevel = false;
-               while ( !scan.nextLine().trim().equals("<Level/>") );
-            }
-            else
-            {
-               text = text + line + "\n";
-            }
-         }
-         else
-         {
-            text = text + line + "\n";
-         }
-      }
-      while ( scan.hasNext() )
-      {
-         line = scan.nextLine();
-         text = text + line + "\n";
-      }
-
-      FileWriter fileOut = null;
-      try
-      {
-         fileOut = new FileWriter(currentPlayer.getPath() + "/playerInfo.txt");
-         fileOut.write(text);
-         fileOut.flush();
-         fileOut.close();
-      } catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
+      playerSaver.saveLevel(levelNo, currentPlayer);
    }
 
    private void setLevelStatus(int levelNo, String status)
    {
       if ( !currentPlayer.getLevels().get(levelNo - 1).getStatus().equals(status) )
       {
-         int stars, currentNumberOfMoves;
-         stars = currentPlayer.getLevels().get(levelNo - 1).getStars();
-         currentNumberOfMoves = currentPlayer.getLevels().get(levelNo - 1).getCurrentNumberOfMoves();
          currentPlayer.getLevels().get(levelNo - 1).setStatus(status);
-         //saveLevel(levelNo, stars, currentNumberOfMoves, status, "");
       }
    }
 
    void setLevelStatusFinished(int levelNo)
    {
       setLevelStatus(levelNo, "finished");
-      int stars, currentNumberOfMoves;
-      stars = currentPlayer.getLevels().get(levelNo - 1).getStars();
-      currentNumberOfMoves = currentPlayer.getLevels().get(levelNo - 1).getCurrentNumberOfMoves();
-      saveLevel(levelNo, stars, currentNumberOfMoves, "finished", true, "");
+      playerSaver.saveLevel(levelNo, currentPlayer);
 
    }
 
    void unlockLevel(int levelNo)
    {
       currentPlayer.getLevels().get(levelNo - 1).unlock();
-      saveLevel(levelNo, 0, 0, "notStarted", true, "");
+      playerSaver.saveLevel(levelNo, currentPlayer);
    }
 
    void incrementLastUnlockedLevelNo()

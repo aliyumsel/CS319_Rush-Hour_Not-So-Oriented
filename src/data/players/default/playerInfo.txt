@@ -11,34 +11,18 @@
 				1
 			<LevelNo/>
 			<Stars>
-				3
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-<<<<<<< HEAD
-				2
-			<CurrentNumberOfMoves>
-			<Status>
-				inProgress
-=======
-				8
+				20
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
->>>>>>> unstable
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-<<<<<<< HEAD
-SS SS CD CU CU SS
-SS SS SS SS SS CU
-PC SS SS SS TD SS
-SS SS TU TD SS TD
-SS SS SS SS SS SS
-SS SS SS SS SS SS
-=======
->>>>>>> unstable
 			<Map/>
 		<Level/>
 		<Level>
@@ -49,15 +33,7 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-<<<<<<< HEAD
-				9
-=======
-<<<<<<< HEAD
 				0
-=======
-				7
->>>>>>> unstable
->>>>>>> unstable
 			<CurrentNumberOfMoves>
 			<Status>
 				notStarted
@@ -76,10 +52,10 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				30
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
 				false
@@ -95,13 +71,13 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				39
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -114,23 +90,15 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				57
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-SS CR SS TD CD CU SS SS
-TL SS SS SS SS SS SS SS
-SS PC SS SS CD SS SS SS
-SS CL SS SS SS CU SS SS
-SS SS SS SS SS SS SS SS
-SS SS TR SS SS SS SS SS
-CD CU SS SS SS SS SS SS
-SS SS SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 	<Levels/>

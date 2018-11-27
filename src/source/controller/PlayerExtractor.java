@@ -32,7 +32,7 @@ class PlayerExtractor
       ArrayList<Player> players = new ArrayList<>();
 
       Scanner playerInfo = null, levelInfo = null;
-      String playerName, tmp, status;
+      String playerName, tmp, status, mapLine, map = "";
       int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars;
       ArrayList<LevelInformation> levels;
       Settings settings;
@@ -95,6 +95,19 @@ class PlayerExtractor
             tmp = playerInfo.nextLine().trim();
 
             unlocked = !tmp.equals("false");
+            
+            while (!playerInfo.nextLine().trim().equals("<Map>"));
+            mapLine = playerInfo.nextLine().trim();
+            if (!mapLine.equals("<Map/>"))
+            {
+            	map = map + mapLine;
+            	mapLine = playerInfo.nextLine().trim();
+            	while (!mapLine.equals("<Map/>"))
+            	{
+            		map = map + mapLine;
+                	mapLine = playerInfo.nextLine().trim();
+            	}
+            }
 
             try {
                levelInfo = new Scanner(new File("src/data/levels/level" + levelNo + ".txt"));
@@ -112,7 +125,7 @@ class PlayerExtractor
 
             levelInfo.close();
 
-            levels.add(new LevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked));
+            levels.add(new LevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked, map));
 
             while (!playerInfo.nextLine().trim().equals("<Level/>"));
          }

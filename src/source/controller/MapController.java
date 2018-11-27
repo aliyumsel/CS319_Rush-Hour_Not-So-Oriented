@@ -105,6 +105,43 @@ public class MapController
       }
       return false;
    }
+   
+   public String mapStrToString()
+   {
+	      String mapStr = "";
+	      boolean found;
+	      int mapStrSize = map.getMapSize();
+	   	  for ( int i = 0; i < mapStrSize; i++ )
+	      {
+	         for ( int j = 0; j < mapStrSize; j++ )
+	         {
+	            found = false;
+	            for ( Vehicle vehicle : map.getVehicleArray() )
+	            {
+	               if ( vehicle.transform.getPosition().y == i && vehicle.transform.getPosition().x == j )
+	               {
+	                  if ( vehicle.isPlayer() )
+	                  {
+	                     mapStr = mapStr + "PC ";
+	                  }
+	                  else
+	                  {
+	                     mapStr = mapStr + vehicle.getType().substring(0, 1).toUpperCase() + vehicle.transform.getDirection().substring(0, 1).toUpperCase() + " ";
+	                  }
+	                  found = true;
+	                  break;
+	               }
+	            }
+	            if ( !found )
+	            {
+	               mapStr = mapStr + "SS ";
+	            }
+	         }
+	         mapStr = mapStr.substring(0, mapStr.length() - 1);
+	         mapStr = mapStr + "\n";
+	      }
+	   	  return mapStr;
+   }
 
 //	public void autosave(ArrayList<Vehicle> vehicleList)
 //	{
