@@ -32,7 +32,7 @@ public class GuiPanelManager extends JFrame
    private HelpPanel helpPanel;
    private ChangePlayerPanel changePlayerPanel;
    private JPanel targetPanel;
-
+   private BufferedImage cursorImage;
    int panelWidth;
    int panelHeight;
 
@@ -45,17 +45,12 @@ public class GuiPanelManager extends JFrame
       super("Rush Hour");
       setUndecorated(true);
       instance = this;
+      Toolkit toolkit = Toolkit.getDefaultToolkit();
+      BufferedImage image = LoadImage("src/image/icons/cursor3.png");
+      Cursor c = toolkit.createCustomCursor(image , new Point(0, 0), "img");
+      this.setCursor (c);
 
       panels = new ArrayList<>();
-
-      // setShape(new RoundRectangle2D.Double(0, 0, 764, 492, 51, 51));
-
-      // Toolkit toolkit = Toolkit.getDefaultToolkit();
-      // cursorImage = LoadImage("src/image/icons/cursor1.png");
-      // Cursor cursor = toolkit.createCustomCursor(cursorImage, new
-      // Point(getX(),getY()),"custom");
-      Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-      setCursor(cursor);
 
       File fontFile = new File("src/fonts/odin.ttf");
       try
@@ -77,7 +72,6 @@ public class GuiPanelManager extends JFrame
 
       addPanels();
       add(new JLabel()); // do not delete this very IMPORTANT!
-//      currentPanelIndex = 0;
 
       setListeners();
       setFocusable(true);
@@ -101,13 +95,13 @@ public class GuiPanelManager extends JFrame
       helpPanel = new HelpPanel(this);
       levelSelectionPanel = new LevelSelectionPanel(this);
       changePlayerPanel = new ChangePlayerPanel(this);
-      add(mainMenuPanel);
-      add(gamePanel);
-      add(creditsPanel);
-      add(levelSelectionPanel);
-      add(settingsPanel);
-      add(helpPanel);
-      add(changePlayerPanel);
+      this.add(mainMenuPanel);
+      this.add(gamePanel);
+      this.add(creditsPanel);
+      this.add(levelSelectionPanel);
+      this.add(settingsPanel);
+      this.add(helpPanel);
+      this.add(changePlayerPanel);
       panels.add(mainMenuPanel);
       panels.add(gamePanel);
       panels.add(creditsPanel);

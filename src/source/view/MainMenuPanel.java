@@ -204,6 +204,7 @@ public class MainMenuPanel extends JPanel {
 		super.paintComponent(g);
 
 		drawBackground(g);
+		//GuiPanelManager.instance.drawCursor(g);
 		// setBackground(Color.WHITE);
 	}
 
