@@ -1,6 +1,6 @@
 <Player>
 	<Name>
-		deniz
+		aaaa
 	<Name/>
 	<StarAmount>
 		0
@@ -14,10 +14,10 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				8
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
@@ -30,20 +30,16 @@
 				2
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-<<<<<<< Updated upstream:src/data/players/deniz/playerInfo.txt
-				0
-=======
-				13
->>>>>>> Stashed changes:src/data/players/default/playerInfo.txt
+				7
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -62,7 +58,7 @@
 				notStarted
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>

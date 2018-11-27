@@ -18,9 +18,11 @@ public class MainMenuPanel extends JPanel {
 	private GuiPanelManager guiManager;
 	private GameManager gameManager;
 	private PlayerManager playerManager;
+
 	private JLabel heading;
 	private JLabel player;
 	private JLabel starAmount;
+   private JLabel lastlevel;
 
 	private JButton changePlayer;
 	private JButton play;
@@ -29,7 +31,7 @@ public class MainMenuPanel extends JPanel {
 	private JButton settings;
 	private JButton exit;
 	private JButton help;
-	//
+
 	private BufferedImage background;
 	private BufferedImage title;
 	private BufferedImage playButtonImage;
@@ -119,6 +121,13 @@ public class MainMenuPanel extends JPanel {
       starAmount.setHorizontalTextPosition(JLabel.CENTER);
       starAmount.setVerticalTextPosition(JLabel.CENTER);
 
+      lastlevel = new JLabel();
+      lastlevel.setText(playerManager.getCurrentPlayer().getLastUnlockedLevelNo() + "");
+      lastlevel.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
+      lastlevel.setForeground(Color.black);
+      lastlevel.setHorizontalTextPosition(JLabel.CENTER);
+      lastlevel.setVerticalTextPosition(JLabel.CENTER);
+
       changePlayer = UIFactory.createButton(changePlayerButtonImage,changePlayerButtonHighlightedImage,"long",actionListener);
       play = UIFactory.createButton(playButtonImage,playButtonImageHighlighted,"play",actionListener);
       credits = UIFactory.createButton(creditsButtonImage,creditsButtonHighlightedImage,"long",actionListener);
@@ -134,6 +143,7 @@ public class MainMenuPanel extends JPanel {
       this.add(player);
       add(starAmount);
       add(changePlayer);
+      add(lastlevel);
       add(play);
       add(credits);
       add(levels);
@@ -145,6 +155,13 @@ public class MainMenuPanel extends JPanel {
    void updatePanel()
    {
       updatePlayerName();
+      updateLastLevel();
+   }
+
+   void updateLastLevel()
+   {
+      System.out.println(lastlevel.getText());
+      lastlevel.setText(playerManager.getCurrentPlayer().getLastUnlockedLevelNo() + "");
    }
 
    void updatePlayerName() {
@@ -168,6 +185,8 @@ public class MainMenuPanel extends JPanel {
 		changePlayer.setBounds(guiManager.findCenter(panelWidth,changePlayer) , 175 , changePlayer.getPreferredSize().width, changePlayer.getPreferredSize().height);
 
 		play.setBounds(guiManager.findCenter(panelWidth, play) , 230 , play.getPreferredSize().width, play.getPreferredSize().height);
+
+		lastlevel.setBounds(guiManager.findCenter(panelWidth, lastlevel), 310, lastlevel.getPreferredSize().width, lastlevel.getPreferredSize().height);
 
 		credits.setBounds(guiManager.findCenter(panelWidth, credits) - 225 , 395 , credits.getPreferredSize().width, credits.getPreferredSize().height);
 

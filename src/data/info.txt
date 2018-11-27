@@ -2,7 +2,11 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
+<<<<<<< Updated upstream
 	deniz
+=======
+	aaaa
+>>>>>>> Stashed changes
 <LastActivePlayer/>
 <NumberOfMaps>
 	5
