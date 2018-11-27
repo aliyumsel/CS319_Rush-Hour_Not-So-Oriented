@@ -14,21 +14,31 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
+<<<<<<< HEAD
 				2
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
+=======
+				8
+			<CurrentNumberOfMoves>
+			<Status>
+				finished
+>>>>>>> unstable
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+<<<<<<< HEAD
 SS SS CD CU CU SS
 SS SS SS SS SS CU
 PC SS SS SS TD SS
 SS SS TU TD SS TD
 SS SS SS SS SS SS
 SS SS SS SS SS SS
+=======
+>>>>>>> unstable
 			<Map/>
 		<Level/>
 		<Level>
@@ -39,7 +49,11 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
+<<<<<<< HEAD
 				0
+=======
+				7
+>>>>>>> unstable
 			<CurrentNumberOfMoves>
 			<Status>
 				notStarted
@@ -58,10 +72,10 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				30
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				false
@@ -77,13 +91,13 @@ SS SS SS SS SS SS
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				39
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -102,7 +116,7 @@ SS SS SS SS SS SS
 				notStarted
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
