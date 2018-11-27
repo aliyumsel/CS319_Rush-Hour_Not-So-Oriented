@@ -21,13 +21,13 @@ public class GameObject
 	void findOccupiedCells()
 	{
 		occupiedCellNumbers = new int[transform.length];
-		occupiedCellNumbers[0] = transform.position.y * 6 + transform.position.x;
+		occupiedCellNumbers[0] = transform.position.y * 8 + transform.position.x;
 
 		if (transform.axis.equals("Vertical") )
 		{
 			for(int i = 1; i < transform.length; i++)
 			{
-				occupiedCellNumbers[i] = occupiedCellNumbers[i-1] + 6;
+				occupiedCellNumbers[i] = occupiedCellNumbers[i-1] + 8;
 			}
 		}
 		else if (transform.axis.equals("Horizontal") )
@@ -48,7 +48,7 @@ public class GameObject
 
 		for(int i = 1; i< transform.length;i++)
 		{
-			occupiedTransforms[i] = new Transform(occupiedCellNumbers[i] % 6, occupiedCellNumbers[i] / 6, 1, transform.direction);
+			occupiedTransforms[i] = new Transform(occupiedCellNumbers[i] % 8, occupiedCellNumbers[i] / 8, 1, transform.direction);
 		}
 	}
 

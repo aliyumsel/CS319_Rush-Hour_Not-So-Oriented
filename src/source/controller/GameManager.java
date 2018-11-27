@@ -48,6 +48,8 @@ public class GameManager implements Updatable
       System.out.println("Stars Collected: " + starsCollected);
       PlayerManager.instance.getCurrentPlayer().getLevels().get(level - 1).setStars(starsCollected);
       GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible(starsCollected);
+
+
    }
 
    private int calculateStars(int _level)

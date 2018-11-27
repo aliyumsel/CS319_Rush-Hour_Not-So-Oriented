@@ -6,7 +6,7 @@ public class Map {
 	
 	private ArrayList<Vehicle> vehicleArray;
 	private String[][] grid;
-	private int mapSize = 6;
+	private int mapSize = 8;
 
 	public Map()
    {

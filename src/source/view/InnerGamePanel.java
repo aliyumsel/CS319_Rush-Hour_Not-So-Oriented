@@ -26,7 +26,7 @@ public class InnerGamePanel extends JPanel
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
 		super(null);
 		this.guiManager = guiManager;
-		setPreferredSize(new Dimension(450, 450));
+		setPreferredSize(new Dimension(480, 480));
 
 		loadImages();
 		createEndOfLevelPanel();

@@ -33,7 +33,7 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				7
+				9
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -90,15 +90,23 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				57
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+SS CR SS TD CD CU SS SS
+TL SS SS SS SS SS SS SS
+SS PC SS SS CD SS SS SS
+SS CL SS SS SS CU SS SS
+SS SS SS SS SS SS SS SS
+SS SS TR SS SS SS SS SS
+CD CU SS SS SS SS SS SS
+SS SS SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 	<Levels/>

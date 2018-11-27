@@ -71,8 +71,8 @@ public class Input
     static int[] getMouseMatrixPosition()
     {
         int[] mousePos = new int[2];
-        mousePos[0] = mouseX / 75;
-        mousePos[1] = mouseY / 75;
+        mousePos[0] = mouseX / 60;
+        mousePos[1] = mouseY / 60;
 
         return mousePos;
     }

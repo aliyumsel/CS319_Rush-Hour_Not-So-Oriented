@@ -1,7 +1,6 @@
 package source.model;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.io.File;
@@ -35,7 +34,7 @@ public class Vehicle extends GameObject implements Drawable
       super(x, y, length, direction);
       this.player = player;
       isMoving = false;
-      this.drawingIndexForMoving = 75;
+      this.drawingIndexForMoving = 60;
       verticalMoveAxis = 0;
       horizontalMoveAxis = 0;
       vehicleImages = new BufferedImage[length];
@@ -88,6 +87,7 @@ public class Vehicle extends GameObject implements Drawable
          }
       }
 
+      rescaleImages();
 
 
 		/*
@@ -98,6 +98,18 @@ public class Vehicle extends GameObject implements Drawable
 		else if (player)
 			vehicle = LoadImage("src/image/Player.png");
 		*/
+   }
+
+   public void rescaleImages()
+   {
+      for ( int i = 0; i < vehicleImages.length; i++ )
+      {
+         Image scaledImage = vehicleImages[i].getScaledInstance(60,60,Image.SCALE_DEFAULT);
+         vehicleImages[i] = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+         Graphics2D bGr = vehicleImages[i].createGraphics();
+         bGr.drawImage(scaledImage, 0, 0, null);
+         bGr.dispose();
+      }
    }
 
    public void move(int moveAxis)
@@ -136,11 +148,12 @@ public class Vehicle extends GameObject implements Drawable
    @Override
    public void draw(Graphics graphics)
    {
+      int gridPixelSize = 60;
       AffineTransform at;
       Graphics2D graphics2d = (Graphics2D) graphics;
       if ( drawingIndexForMoving <= 0 )
       {
-         drawingIndexForMoving = 75;
+         drawingIndexForMoving = gridPixelSize;
          isMoving = false;
          verticalMoveAxis = 0;
          horizontalMoveAxis = 0;
@@ -165,27 +178,27 @@ public class Vehicle extends GameObject implements Drawable
          }
          if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == -1 )
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * 75, occupiedTransforms[drawIndex].position.y * 75 - drawingIndexForMoving);
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize, occupiedTransforms[drawIndex].position.y * gridPixelSize - drawingIndexForMoving);
             drawingIndexForMoving -= 2;
          }
          else if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == 1 )
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * 75, occupiedTransforms[drawIndex].position.y * 75 + drawingIndexForMoving);
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize, occupiedTransforms[drawIndex].position.y * gridPixelSize + drawingIndexForMoving);
             drawingIndexForMoving -= 2;
          }
          else if ( isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == -1 )
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * 75 + drawingIndexForMoving, occupiedTransforms[drawIndex].position.y * 75);
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize + drawingIndexForMoving, occupiedTransforms[drawIndex].position.y * gridPixelSize);
             drawingIndexForMoving -= 2;
          }
          else if ( isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == 1 )
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * 75 - drawingIndexForMoving, occupiedTransforms[drawIndex].position.y * 75);
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize - drawingIndexForMoving, occupiedTransforms[drawIndex].position.y * gridPixelSize);
             drawingIndexForMoving -= 2;
          }
          else
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * 75, occupiedTransforms[drawIndex].position.y * 75);
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize, occupiedTransforms[drawIndex].position.y * gridPixelSize);
          }
 
 
