@@ -149,7 +149,7 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("Settings") )
       {
-         settingsPanel.updateSoundButtons();
+         settingsPanel.updatePanel();
          targetPanel = settingsPanel;
       }
       else if ( panelName.equals("Help") )
