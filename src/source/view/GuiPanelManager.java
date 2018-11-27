@@ -68,8 +68,8 @@ public class GuiPanelManager extends JFrame
          e.printStackTrace();
       }
 
-      panelWidth = 764;
-      panelHeight = 468;
+      panelWidth = 980; //764
+      panelHeight = 600; //468
 
       setLayout(new CardLayout());
       setResizable(false);
@@ -149,7 +149,7 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("Settings") )
       {
-         settingsPanel.updateSoundButtons();
+         settingsPanel.updatePanel();
          targetPanel = settingsPanel;
       }
       else if ( panelName.equals("Help") )

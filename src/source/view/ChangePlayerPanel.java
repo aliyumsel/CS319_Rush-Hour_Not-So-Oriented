@@ -109,8 +109,8 @@ public class ChangePlayerPanel extends JPanel
       editButton2 = UIFactory.createButton(edit, editH, "square", actionListener);
       editButton3 = UIFactory.createButton(edit, editH, "square", actionListener);
 
-      buttonArray = new ArrayList<JButton>();
-      gameManager.playerManager.extractPlayers();
+      buttonArray = new ArrayList<>();
+      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          JButton temp = UIFactory.createPlayerButton(levelBackground, levelBackgroundH, gameManager.playerManager.getPlayers().get(i).getPlayerName(), actionListener);

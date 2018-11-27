@@ -14,10 +14,10 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				8
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
 				true
@@ -33,13 +33,13 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				7
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -52,13 +52,13 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				28
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -71,21 +71,15 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				2
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-CD SS SS CU TD SS
-SS SS SS SS SS CD
-SS PC SS SS SS SS
-CR SS CR SS SS SS
-SS CU CD TL SS SS
-SS SS SS CL SS SS
 			<Map/>
 		<Level/>
 		<Level>

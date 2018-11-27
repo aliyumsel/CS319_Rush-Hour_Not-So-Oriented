@@ -3,6 +3,10 @@
 <NumberOfPlayers/>
 <LastActivePlayer>
 	default
+	deniz
+=======
+	aaaa
+>>>>>>> Stashed changes
 <LastActivePlayer/>
 <NumberOfMaps>
 	5

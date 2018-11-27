@@ -1,10 +1,11 @@
 package source.controller;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import interfaces.Updatable;
+import source.model.LevelInformation;
 import source.model.Vehicle;
-import source.model.Player;
 import source.view.GuiPanelManager;
 
 public class GameManager implements Updatable
@@ -37,18 +38,39 @@ public class GameManager implements Updatable
       System.out.println("Map Finished");
       isGameActive = false;
       PlayerManager.instance.setLevelStatusFinished(level);
+
       if (isNextLevelLocked())
       {
     	  unlockNextLevel();
-    	  PlayerManager.instance.incrementLastUnlockedLevelNoOfCurrentPlayer();
+    	  PlayerManager.instance.incrementLastUnlockedLevelNo();
       }
-      GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible();
+
+      int starsCollected = calculateStars(level);
+      PlayerManager.instance.getCurrentPlayer().getLevels().get(level - 1).setStars(starsCollected);
+      GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible(starsCollected);
+   }
+
+   private int calculateStars(int _level)
+   {
+      LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
+      if (currentLevel.getCurrentNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars())
+      {
+         return 3;
+      }
+      else if (currentLevel.getCurrentNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForTwoStars())
+      {
+         return 2;
+      }
+      else
+      {
+         return 1;
+      }
    }
 
    public void loadLastLevel()
    {
-      //TO BE CHANGED
-	  level = PlayerManager.instance.getCurrentPlayer().getLastUnlockedLevelNo();
+      //TO BE CHANGED - Neden ?
+	   level = PlayerManager.instance.getCurrentPlayer().getLastUnlockedLevelNo();
       loadLevel(level, false);
       //level = 1;
    }
@@ -60,14 +82,16 @@ public class GameManager implements Updatable
       if (original)
       {
          MapController.instance.loadOriginalLevel(_level);
+         VehicleController.instance.setMap(MapController.instance.getMap());
+         VehicleController.instance.setNumberOfMoves(0);
       }
       else
       {
          MapController.instance.loadLevel(_level);
+         VehicleController.instance.setMap(MapController.instance.getMap());
+         VehicleController.instance.setNumberOfMoves(playerManager.getCurrentPlayer().getLevels().get(_level - 1).getCurrentNumberOfMoves());
       }
 
-      VehicleController.instance.setMap(MapController.instance.getMap());
-      VehicleController.instance.setNumberOfMoves(playerManager.getCurrentPlayer().getLevels().get(_level - 1).getCurrentNumberOfMoves());
       GuiPanelManager.instance.getGamePanel().setInnerGamePanelVisible();
       level = _level;
 
@@ -89,12 +113,8 @@ public class GameManager implements Updatable
    public int getLevel() {
 	   return level;
    }
-
-   public void setLevel(int level) {
-	   this.level = level;
-   }
    
-   public boolean isNextLevelLocked()
+   private boolean isNextLevelLocked()
    {
 	   if (level < PlayerManager.instance.getCurrentPlayer().getLevels().size())
 	   {
@@ -103,7 +123,7 @@ public class GameManager implements Updatable
 	   return false;
    }
    
-   public void unlockNextLevel()
+   private void unlockNextLevel()
    {
 	   PlayerManager.instance.unlockLevel(level + 1);
    }

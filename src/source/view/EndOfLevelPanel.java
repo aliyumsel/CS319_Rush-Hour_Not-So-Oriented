@@ -138,7 +138,7 @@ public class EndOfLevelPanel extends JPanel
 
    }
 
-   private void showStars(int starAmount)
+   void showStars(int starAmount)
    {
       for (int i = 0; i < stars.length; i++)
       {

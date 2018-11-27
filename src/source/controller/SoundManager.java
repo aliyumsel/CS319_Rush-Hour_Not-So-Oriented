@@ -20,8 +20,8 @@ public class SoundManager {
 	private AudioStream audioStream = null;
 	private InputStream inputStream = null;
 	private Clip clip;
-	private boolean isThemeEnabled = true;
-	private boolean isEffectsEnabled = true;
+	public boolean isThemeEnabled = true;
+	public boolean isEffectsEnabled = true;
 
 	public SoundManager() {
 		instance = this;

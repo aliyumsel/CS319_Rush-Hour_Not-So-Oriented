@@ -51,6 +51,14 @@ public class LevelInformation {
 	public void setUnlocked(boolean unlocked) {
 		this.unlocked = unlocked;
 	}
-	
 
+	public int getMaxNumberOfMovesForThreeStars()
+	{
+		return maxNumberOfMovesForThreeStars;
+	}
+
+	public int getMaxNumberOfMovesForTwoStars()
+	{
+		return maxNumberOfMovesForTwoStars;
+	}
 }
