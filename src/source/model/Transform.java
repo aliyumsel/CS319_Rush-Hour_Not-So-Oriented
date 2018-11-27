@@ -1,7 +1,5 @@
 package source.model;
 
-import source.model.Transform.Position;
-
 public class Transform
 {
 	public class Position
@@ -9,13 +7,13 @@ public class Transform
 		public int x;
 		public int y;
 
-		public Position(int x, int y)
+		Position(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
 		}
 
-		public Position()
+		Position()
 		{
 			this.x = 0;
 			this.y = 0;
@@ -27,7 +25,7 @@ public class Transform
 	public String axis;
 	public String direction;
 
-	public Transform(int x, int y, int length, String direction)
+	Transform(int x, int y, int length, String direction)
 	{
 		String _axis;
 		if (direction.equals("Upwards") || direction.equals("Downwards"))
@@ -49,7 +47,7 @@ public class Transform
 		this.direction = direction;
 	}
 
-	public Transform()
+	Transform()
 	{
 		position = new Position();
 		length = 1;

@@ -63,7 +63,7 @@ public class LevelButton extends JButton
    {
       levelBackground = guiManager.LoadImage("src/image/icons/levelbackground.png");
       levelBackgroundHighlighted = guiManager.LoadImage("src/image/icons/levelbackgroundH.png");
-      lockedBackground = guiManager.LoadImage("src/image/backgroundGrey.png");
+      lockedBackground = guiManager.LoadImage("src/image/icons/levelBackgroundLocked.png");
       starActive = guiManager.LoadImage("src/image/icons/miniStar.png");
       starInactive = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
    }
@@ -101,30 +101,30 @@ public class LevelButton extends JButton
 
    void showStars(int starAmount)
    {
-      if (starAmount == - 1)
+      if (starAmount == -1)
       {
-         for (int i = 0; i < stars.length; i++)
+         for ( int i = 0; i < stars.length; i++ )
          {
             stars[i].setVisible(false);
          }
-         return;
       }
-
-      for (int i = 0; i < stars.length; i++)
+      for ( int i = 0; i < stars.length; i++ )
       {
-         stars[i].setVisible(true);
-         if (i < starAmount)
+         if ( i < starAmount )
          {
             stars[i].setIcon(new ImageIcon(starActive));
+         }
+         else
+         {
+            stars[i].setIcon(new ImageIcon(starInactive));
          }
       }
    }
 
-   void toggleLock()
+   void toggleLock(boolean state)
    {
-      System.out.println("wow");
-      isLocked = !isLocked;
-      System.out.println("isLocked: " + isLocked);
+      isLocked = state;
+      //System.out.println("isLocked: " + isLocked);
 
       BufferedImage temp;
       BufferedImage tempH;
@@ -145,6 +145,12 @@ public class LevelButton extends JButton
 
       setIcon(new ImageIcon(temp));
       setRolloverIcon(new ImageIcon(tempH));
+      setDisabledIcon(new ImageIcon(lockedBackground));
+   }
+
+   boolean getIsLocked()
+   {
+      return isLocked;
    }
 }
 

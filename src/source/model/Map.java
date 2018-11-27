@@ -6,7 +6,7 @@ public class Map {
 	
 	private ArrayList<Vehicle> vehicleArray;
 	private String[][] grid;
-	private int mapSize = 6;
+	private int mapSize = 8;
 
 	public Map()
    {
@@ -60,21 +60,19 @@ public class Map {
       return mapSize;
    }
 
-	public void printMap()
-   {
-      System.out.println("Vehicle Array: " + vehicleArray);
-
-		for(int i = 0; i < mapSize;i++)
-		{
-			//System.out.println("\n");
-			for(int j = 0; j < mapSize;j++)
-			{
-				System.out.print(grid[i][j] + " ");
-			}
-		}
-	}
-
-
+//	public void printMap()
+//   {
+//      System.out.println("Vehicle Array: " + vehicleArray);
+//
+//		for(int i = 0; i < mapSize;i++)
+//		{
+//			//System.out.println("\n");
+//			for(int j = 0; j < mapSize;j++)
+//			{
+//				System.out.print(grid[i][j] + " ");
+//			}
+//		}
+//	}
 
 	//public void setMapSize(int mapSize) {
 	//  	this.mapSize = mapSize;

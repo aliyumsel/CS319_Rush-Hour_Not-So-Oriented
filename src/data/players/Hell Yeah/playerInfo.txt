@@ -1,6 +1,6 @@
 <Player>
 	<Name>
-		ali
+		Hell Yeah
 	<Name/>
 	<StarAmount>
 		0
@@ -19,6 +19,9 @@
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -35,6 +38,9 @@
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -51,6 +57,9 @@
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -67,6 +76,9 @@
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
@@ -83,8 +95,22 @@
 			<Status>
 				notStarted
 			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
 			<Map>
 			<Map/>
 		<Level/>
 	<Levels/>
+	<Settings>
+		<Music>
+			true
+		<Music/>
+		<Sfx>
+			true
+		<Sfx/>
+		<Theme>
+			CLASSIC
+		<Theme/>
+	<Settings>
 <Player/>

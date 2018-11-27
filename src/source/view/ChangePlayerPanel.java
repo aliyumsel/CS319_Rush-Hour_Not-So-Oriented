@@ -17,7 +17,7 @@ public class ChangePlayerPanel extends JPanel
 {
    private GuiPanelManager guiManager;
    private GameManager gameManager;
-   private LevelSelectionPopUp popUp;
+   private CreatePlayerPopUp popUp;
 
    private ArrayList<JButton> buttonArray;
    private JButton rightArrowButton;
@@ -30,7 +30,9 @@ public class ChangePlayerPanel extends JPanel
    private JButton editButton1;
    private JButton editButton2;
    private JButton editButton3;
+
    private ArrayList<String> playerNameArray;
+
    private BufferedImage background;
    private BufferedImage levelBackground;
    private BufferedImage levelBackgroundH;
@@ -49,11 +51,12 @@ public class ChangePlayerPanel extends JPanel
 
    private int panelWidth = 764;
    private int panelHeight = 468;
-   private int pageCount;
+
    private int currentPage = 0;
    private int numberOfPlayers;
+   private int limit;
 
-   public ChangePlayerPanel(GuiPanelManager _guiManager)
+   ChangePlayerPanel(GuiPanelManager _guiManager)
    {
       super(null);
 
@@ -65,7 +68,7 @@ public class ChangePlayerPanel extends JPanel
       playerNameArray = new ArrayList<>();
       setPreferredSize(new Dimension(panelWidth, panelHeight));
 
-      popUp = new LevelSelectionPopUp(_guiManager);
+      popUp = new CreatePlayerPopUp(_guiManager, this);
       add(popUp);
 
       loadImages();
@@ -78,6 +81,12 @@ public class ChangePlayerPanel extends JPanel
    private void loadImages()
    {
       background = guiManager.LoadImage("src/image/background.png");
+      Image scaledImage = background.getScaledInstance(panelWidth,panelHeight,Image.SCALE_DEFAULT);
+      background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D bGr = background.createGraphics();
+      bGr.drawImage(scaledImage, 0, 0, null);
+      bGr.dispose();
+
       levelBackground = guiManager.LoadImage("src/image/icons/playerSelection.png");
       levelBackgroundH = guiManager.LoadImage("src/image/icons/playerSelectionH.png");
       rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
@@ -90,8 +99,8 @@ public class ChangePlayerPanel extends JPanel
       addH = guiManager.LoadImage("src/image/icons/addPlayerH.png");
       delete = guiManager.LoadImage("src/image/icons/quit.png");
       deleteH = guiManager.LoadImage("src/image/icons/quitH.png");
-      edit = guiManager.LoadImage("src/image/icons/help.png");
-      editH = guiManager.LoadImage("src/image/icons/helpH.png");
+      edit = guiManager.LoadImage("src/image/icons/edit.png");
+      editH = guiManager.LoadImage("src/image/icons/editH.png");
    }
 
    private void createComponents()
@@ -107,8 +116,8 @@ public class ChangePlayerPanel extends JPanel
       editButton2 = UIFactory.createButton(edit, editH, "square", actionListener);
       editButton3 = UIFactory.createButton(edit, editH, "square", actionListener);
 
-      buttonArray = new ArrayList<JButton>();
-      gameManager.playerManager.extractPlayers();
+      buttonArray = new ArrayList<>();
+      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          JButton temp = UIFactory.createPlayerButton(levelBackground, levelBackgroundH, gameManager.playerManager.getPlayers().get(i).getPlayerName(), actionListener);
@@ -146,13 +155,11 @@ public class ChangePlayerPanel extends JPanel
       editButton2.setVisible(false);
       editButton3.setVisible(false);
 
-      Insets insets = getInsets();
-
       currentPage = page;
 
       int gap = 0;
       int pageLength = 3; //amount of buttons in one page
-      int limit = page * pageLength;
+      limit = page * pageLength;
 
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
@@ -160,85 +167,67 @@ public class ChangePlayerPanel extends JPanel
          {
             gap = 0;
          }
-         if ( i == 0 + limit )
+         if ( i == limit )
          {
             gap = 50;
-            buttonArray.get(i).setBounds(235 + insets.left, gap, buttonArray.get(i).getPreferredSize().width,
+            buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
             deleteButton1.setVisible(true);
-            deleteButton1.setBounds(565 + insets.left, gap + 30 + insets.top,
+            deleteButton1.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
                     deleteButton1.getPreferredSize().width, deleteButton1.getPreferredSize().height);
             editButton1.setVisible(true);
-            editButton1.setBounds(160 + insets.left, gap + 30 + insets.top, editButton1.getPreferredSize().width,
+            editButton1.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) - 75, gap + 30, editButton1.getPreferredSize().width,
                     editButton1.getPreferredSize().height);
          }
          else if ( i == 1 + limit )
          {
             gap = 180;
-            buttonArray.get(i).setBounds(235 + insets.left, gap, buttonArray.get(i).getPreferredSize().width,
+            buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
             deleteButton2.setVisible(true);
-            deleteButton2.setBounds(565 + insets.left, gap + 30 + insets.top,
+            deleteButton2.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25 , gap + 30,
                     deleteButton2.getPreferredSize().width, deleteButton2.getPreferredSize().height);
             editButton2.setVisible(true);
-            editButton2.setBounds(160 + insets.left, gap + 30 + insets.top, editButton2.getPreferredSize().width,
+            editButton2.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) - 75, gap + 30, editButton2.getPreferredSize().width,
                     editButton2.getPreferredSize().height);
          }
          else if ( i == 2 + limit )
          {
             gap = 310;
-            buttonArray.get(i).setBounds(235 + insets.left, gap, buttonArray.get(i).getPreferredSize().width,
+            buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
             deleteButton3.setVisible(true);
-            deleteButton3.setBounds(565 + insets.left, gap + 30 + insets.top,
+            deleteButton3.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
                     deleteButton3.getPreferredSize().width, deleteButton3.getPreferredSize().height);
             editButton3.setVisible(true);
-            editButton3.setBounds(160 + insets.left, gap + 30 + insets.top, editButton3.getPreferredSize().width,
+            editButton3.setBounds(guiManager.findCenter(panelWidth,buttonArray.get(i)) - 75, gap + 30, editButton3.getPreferredSize().width,
                     editButton3.getPreferredSize().height);
          }
 
       }
-      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton) + insets.top,
+      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
               leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
-      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton) + insets.top,
+      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton),
               rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
-      menuButton.setBounds(30 + insets.left, 30 + insets.top, menuButton.getPreferredSize().width,
+      menuButton.setBounds(30, 30, menuButton.getPreferredSize().width,
               menuButton.getPreferredSize().height);
-      addButton.setBounds(panelWidth - 30 - addButton.getPreferredSize().width, 30 + insets.top,
+      addButton.setBounds(panelWidth - 30 - addButton.getPreferredSize().width, 30,
               addButton.getPreferredSize().width, menuButton.getPreferredSize().height);
 
       Dimension size = popUp.getPreferredSize();
-      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100 + insets.top, size.width, size.height);
-      // popUp.setVisible(true); in order to test pop up panel design remove the
+      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 120, size.width, size.height);
    }
 
-   private void calculatePageCount()
-   {
-      if (GameEngine.instance.playerManager.getPlayers().size() % 3 == 0)
-      {
-         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3;
-      }
-      else
-      {
-         pageCount = GameEngine.instance.playerManager.getPlayers().size() / 3 + 1;
-      }
-   }
-
-   private void update()
-   {
-      setBoundsOfComponents(currentPage);
-      repaint();
-   }
 
    private void selectPlayer(String name)
    {
       gameManager.playerManager.selectPlayer(name);
    }
 
-   private void addPlayer(String name)
+   void addPlayer(String name)
    {
       if ( gameManager.playerManager.createPlayer(name) == 0 )
       {
@@ -260,7 +249,6 @@ public class ChangePlayerPanel extends JPanel
       remove(buttonArray.get(buttonArray.size() - 1));
       buttonArray.remove(buttonArray.size() - 1);
       playerNameArray.remove(deleteIndex);
-      calculatePageCount();
       updatePages();
    }
 
@@ -321,19 +309,25 @@ public class ChangePlayerPanel extends JPanel
       }
       else if ( e.getSource() == addButton )
       {
-         Scanner scan = new Scanner(System.in);
-         String temp = scan.nextLine();
-         addPlayer(temp);
-         selectPlayer(temp);
-         guiManager.setPanelVisible("MainMenu");
+//         Scanner scan = new Scanner(System.in);
+//         String temp = scan.nextLine();
+//         addPlayer(temp);
+//         selectPlayer(temp);
+         popUp.setVisible(true);
+         //guiManager.setPanelVisible("MainMenu");
       }
       else if (e.getSource() == deleteButton1)
       {
-         Scanner scan = new Scanner(System.in);
-         String temp = scan.nextLine();
-         deletePlayer(temp);
+         deletePlayer(playerNameArray.get(limit));
       }
-      // If the user clicks one of the level buttons
+      else if (e.getSource() == deleteButton2)
+      {
+         deletePlayer(playerNameArray.get(limit+1));
+      }
+      else if (e.getSource() == deleteButton3)
+      {
+         deletePlayer(playerNameArray.get(limit+2));
+      }
       else
       {
          for ( int i = 0; i < numberOfPlayers; i++ )
@@ -347,13 +341,13 @@ public class ChangePlayerPanel extends JPanel
       }
    };
 
-   public void reset()
+   public void updatePanel()
    {
       this.currentPage = 0;
       setBoundsOfComponents(currentPage);
    }
 
-   public void updatePages()
+   private void updatePages()
    {
       numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
       updateButtons();
@@ -364,7 +358,7 @@ public class ChangePlayerPanel extends JPanel
          {
             setBoundsOfComponents(currentPage);
          }
-         else if (currentPage == numberOfPlayers / 3 - 1)
+         else if (currentPage == numberOfPlayers / 3)
          {
             setBoundsOfComponents(currentPage - 1);
          }
@@ -381,7 +375,7 @@ public class ChangePlayerPanel extends JPanel
       repaint();
    }
 
-   public void updateButtons()
+   private void updateButtons()
    {
       for ( int i = 0; i < numberOfPlayers; i++ )
       {

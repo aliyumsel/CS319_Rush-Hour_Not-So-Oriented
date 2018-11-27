@@ -38,6 +38,14 @@ public class SettingsPanel extends JPanel
    private BufferedImage sfxHighlightedImage;
    private BufferedImage sfxOffImage;
    private BufferedImage sfxOffHighlightedImage;
+   private BufferedImage simpleImage;
+   private BufferedImage simpleHighlightedImage;
+   private BufferedImage classicImage;
+   private BufferedImage classicHighlightedImage;
+   private BufferedImage safariImage;
+   private BufferedImage safariHighlightedImage;
+   private BufferedImage spaceImage;
+   private BufferedImage spaceHighlightedImage;
 
    private int panelWidth;
    private int panelHeight;
@@ -63,6 +71,12 @@ public class SettingsPanel extends JPanel
    private void loadImages()
    {
       background = guiManager.LoadImage("src/image/background.png");
+      Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
+      background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D bGr = background.createGraphics();
+      bGr.drawImage(scaledImage, 0, 0, null);
+      bGr.dispose();
+
       title = guiManager.LoadImage("src/image/icons/settingsTitle.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
@@ -74,17 +88,27 @@ public class SettingsPanel extends JPanel
       sfxHighlightedImage = guiManager.LoadImage("src/image/icons/soundonH.png");
       sfxOffImage = guiManager.LoadImage("src/image/icons/soundoff.png");
       sfxOffHighlightedImage = guiManager.LoadImage("src/image/icons/soundoffH.png");
+      simpleImage = guiManager.LoadImage("src/image/icons/simple.png");
+      simpleHighlightedImage = guiManager.LoadImage("src/image/icons/simpleH.png");
+      classicImage = guiManager.LoadImage("src/image/icons/classic.png");
+      classicHighlightedImage = guiManager.LoadImage("src/image/icons/classicH.png");
+      safariImage = guiManager.LoadImage("src/image/icons/safari.png");
+      safariHighlightedImage = guiManager.LoadImage("src/image/icons/safariH.png");
+      spaceImage = guiManager.LoadImage("src/image/icons/space.png");
+      spaceHighlightedImage = guiManager.LoadImage("src/image/icons/spaceH.png");
    }
 
+   @SuppressWarnings("Duplicates")
    private void createComponents()
    {
-      music = UIFactory.createButton(musicImage,musicHighlightedImage,"square",actionListener);
-      sfx = UIFactory.createButton(sfxImage,sfxHighlightedImage,"square",actionListener);
-      back = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      simple = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      classic = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      safari = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
-      space = UIFactory.createButton(backButtonImage,backButtonHighlightedImage,"square",actionListener);
+      music = UIFactory.createButton(musicImage, musicHighlightedImage, "square", actionListener);
+      sfx = UIFactory.createButton(sfxImage, sfxHighlightedImage, "square", actionListener);
+      back = UIFactory.createButton(backButtonImage, backButtonHighlightedImage, "square", actionListener);
+
+      simple = UIFactory.createButton(simpleImage, simpleHighlightedImage, "square", actionListener);
+      classic = UIFactory.createButton(classicImage, classicHighlightedImage, "square", actionListener);
+      safari = UIFactory.createButton(safariImage, safariHighlightedImage, "square", actionListener);
+      space = UIFactory.createButton(spaceImage, spaceHighlightedImage, "square", actionListener);
 
       heading = new JLabel();
       heading.setIcon(new ImageIcon(title));
@@ -120,7 +144,7 @@ public class SettingsPanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-      heading.setBounds(guiManager.findCenter(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
+      heading.setBounds(guiManager.findCenter(panelWidth, heading), 25, heading.getPreferredSize().width, heading.getPreferredSize().height);
 
       volume.setBounds(50, 125, volume.getPreferredSize().width, volume.getPreferredSize().height);
       music.setBounds(75, 175, music.getPreferredSize().width, music.getPreferredSize().height);
@@ -139,69 +163,115 @@ public class SettingsPanel extends JPanel
       space.setBounds(375, 350, space.getPreferredSize().width, space.getPreferredSize().height);
    }
 
+   void updatePanel()
+   {
+      updateSoundButtons("SFX");
+      updateSoundButtons("Music");
+   }
+
+   @SuppressWarnings("Duplicates")
+   void updateSoundButtons(String type)
+   {
+      boolean enabled;
+      JButton button;
+
+      if ( type.equals("Music") )
+      {
+         enabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+      }
+      else if ( type.equals("SFX") )
+      {
+         enabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
+      }
+      else
+      {
+         enabled = false;
+      }
+
+      if ( type.equals("Music") )
+      {
+         button = music;
+         if ( enabled )
+         {
+            button.setIcon(new ImageIcon(musicImage));
+            button.setRolloverIcon(new ImageIcon(musicHighlightedImage));
+            button.setPressedIcon(new ImageIcon(musicHighlightedImage));
+         }
+         else
+         {
+            button.setIcon(new ImageIcon(musicOffImage));
+            button.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
+            button.setPressedIcon(new ImageIcon(musicOffHighlightedImage));
+         }
+      }
+      else if ( type.equals("SFX") )
+      {
+         button = sfx;
+         if ( enabled )
+         {
+            button.setIcon(new ImageIcon(sfxImage));
+            button.setRolloverIcon(new ImageIcon(sfxHighlightedImage));
+            button.setPressedIcon(new ImageIcon(sfxHighlightedImage));
+         }
+         else
+         {
+            button.setIcon(new ImageIcon(sfxOffImage));
+            button.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
+            button.setPressedIcon(new ImageIcon(sfxOffHighlightedImage));
+         }
+      }
+
+   }
+
    private ActionListener actionListener = e ->
    {
       SoundManager.instance.buttonClick();
-      if (e.getSource() == back)
+      if ( e.getSource() == back )
       {
          guiManager.setPanelVisible("MainMenu");
       }
-      else if (e.getSource() == music)
+      else if ( e.getSource() == music )
       {
          boolean currentMusic = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
          GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setMusic(!currentMusic);
-         if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic())
-         {
-            music.setIcon(new ImageIcon(musicOffImage));
-            music.setRolloverIcon(new ImageIcon(musicOffHighlightedImage));
-         }
-         else
-         {
-            music.setIcon(new ImageIcon(musicImage));
-            music.setRolloverIcon(new ImageIcon(musicHighlightedImage));
-         }
+         updateSoundButtons("Music");
+         SoundManager.instance.themeSongToggle();
       }
-      else if (e.getSource() == sfx)
+      else if ( e.getSource() == sfx )
       {
          boolean currentSFX = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
          GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setSfx(!currentSFX);
-         if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx())
-         {
-            sfx.setIcon(new ImageIcon(sfxOffImage));
-            sfx.setRolloverIcon(new ImageIcon(sfxOffHighlightedImage));
-         }
-         else
-         {
-            sfx.setIcon(new ImageIcon(sfxImage));
-            sfx.setRolloverIcon(new ImageIcon(sfxHighlightedImage));
-         }
+         updateSoundButtons("SFX");
+         SoundManager.instance.effectsToggle();
       }
-      else if (e.getSource() == simple)
+      else if ( e.getSource() == simple )
       {
          GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SIMPLE);
       }
-      else if (e.getSource() == classic)
+      else if ( e.getSource() == classic )
       {
          GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.CLASSIC);
       }
-      else if (e.getSource() == safari)
+      else if ( e.getSource() == safari )
       {
          GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SAFARI);
       }
-      else if (e.getSource() == space)
+      else if ( e.getSource() == space )
       {
          GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SPACE);
       }
    };
 
-   public void paintComponent(Graphics g) {
+   public void paintComponent(Graphics g)
+   {
       super.paintComponent(g);
 
       drawBackground(g);
       // setBackground(Color.WHITE);
    }
 
-   private void drawBackground(Graphics graphics) {
+   private void drawBackground(Graphics graphics)
+   {
 
       Graphics2D graphics2d = (Graphics2D) graphics;
 

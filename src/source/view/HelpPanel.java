@@ -13,6 +13,8 @@ public class HelpPanel extends JPanel
    private GuiPanelManager guiManager;
 
    private JLabel heading;
+   private JLabel help1;
+   private JLabel help2;
 
    private JButton back;
 
@@ -20,6 +22,8 @@ public class HelpPanel extends JPanel
    private BufferedImage title;
    private BufferedImage backButtonImage;
    private BufferedImage backButtonHighlightedImage;
+   private BufferedImage help1Image;
+   private BufferedImage help2Image;
 
    private int panelWidth;
    private int panelHeight;
@@ -45,9 +49,17 @@ public class HelpPanel extends JPanel
    private void loadImages()
    {
       background = guiManager.LoadImage("src/image/background.png");
+      Image scaledImage = background.getScaledInstance(panelWidth,panelHeight,Image.SCALE_DEFAULT);
+      background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D bGr = background.createGraphics();
+      bGr.drawImage(scaledImage, 0, 0, null);
+      bGr.dispose();
+
       title = guiManager.LoadImage("src/image/icons/howToPlayTitle.png");
       backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
+      help1Image = guiManager.LoadImage("src/image/help1.png");
+      help2Image = guiManager.LoadImage("src/image/help2.png");
    }
 
    private void createComponents()
@@ -57,12 +69,22 @@ public class HelpPanel extends JPanel
       heading = new JLabel();
       heading.setIcon(new ImageIcon(title));
       heading.setPreferredSize(new Dimension(355, 78));
+
+      help1 = new JLabel();
+      help1.setIcon(new ImageIcon(help1Image));
+      help1.setPreferredSize(new Dimension(244, 192));
+
+      help2 = new JLabel();
+      help2.setIcon(new ImageIcon(help2Image));
+      help2.setPreferredSize(new Dimension(204, 238));
    }
 
    private void addComponents()
    {
       add(heading);
       add(back);
+      add(help1);
+      add(help2);
    }
 
    private void setBoundsOfComponents()
@@ -70,6 +92,10 @@ public class HelpPanel extends JPanel
       heading.setBounds(guiManager.findCenter(panelWidth, heading) , 25 , heading.getPreferredSize().width, heading.getPreferredSize().height);
 
       back.setBounds(30 , 30 , back.getPreferredSize().width, back.getPreferredSize().height);
+
+      help1.setBounds(guiManager.findCenter(panelWidth, help1) - 160,180, help1.getPreferredSize().width,help1.getPreferredSize().height);
+
+      help2.setBounds(guiManager.findCenter(panelWidth, help1) + 200,180, help2.getPreferredSize().width,help2.getPreferredSize().height);
    }
 
    private ActionListener actionListener = e -> {

@@ -8,21 +8,18 @@ public class Player {
 	private ArrayList<LevelInformation> levels;
 	private int starAmount;
 	private String path;
+	private int lastUnlockedLevelNo;
 
 	private Settings settings;
 
-	public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path)
+	public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path, Settings settings)
    {
 		this.playerName = playerName;
 		this.starAmount = starAmount;
 		this.path = path;
-		this.levels = new ArrayList<LevelInformation>();
-		for (int i = 0; i < levels.size(); i++)
-		{
-			this.levels.add(levels.get(i));
-		}
+		this.levels = levels;
 
-		settings = new Settings(true,false);
+		this.settings = settings;
 	}
 
 	public String getPath() {
@@ -58,14 +55,41 @@ public class Player {
 		return levels;
 	}
 
-	public void setLevels(ArrayList<LevelInformation> levels) {
-		for (int i = 0; i < levels.size(); i++)
-		{
-			this.levels.set(i, levels.get(i));
-		}
+//	public void setLevels(ArrayList<LevelInformation> levels) {
+//		for (int i = 0; i < levels.size(); i++)
+//		{
+//			this.levels.set(i, levels.get(i));
+//		}
+//	}
+
+//	public void setSettings(Settings settings) {
+//		this.settings = settings;
+//	}
+
+	public int getLastUnlockedLevelNo() {
+		return lastUnlockedLevelNo;
+	}
+
+	public void setLastUnlockedLevelNo(int lastUnlockedLevelNo) {
+		this.lastUnlockedLevelNo = lastUnlockedLevelNo;
 	}
 	
+	public void incrementLastUnlockedLevelNo()
+	{
+		lastUnlockedLevelNo++;
+	}
 	
+	public void configureLastUnlockedLevelNo()
+	{
+		for (int i = levels.size() - 1; i >= 0; i--)
+		{
+			if (levels.get(i).isUnlocked())
+			{
+				lastUnlockedLevelNo = i + 1;
+				break;
+			}
+		}
+	}
 	
 
 }

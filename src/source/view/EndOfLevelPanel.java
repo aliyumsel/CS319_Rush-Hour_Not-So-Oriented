@@ -138,13 +138,24 @@ public class EndOfLevelPanel extends JPanel
 
    }
 
-   private void showStars(int starAmount)
+   void showStars(int starAmount)
    {
-      for (int i = 0; i < stars.length; i++)
+      if (starAmount == -1)
       {
-         if (i < starAmount)
+         for ( int i = 0; i < stars.length; i++ )
+         {
+            stars[i].setVisible(false);
+         }
+      }
+      for ( int i = 0; i < stars.length; i++ )
+      {
+         if ( i < starAmount )
          {
             stars[i].setIcon(new ImageIcon(starImage));
+         }
+         else
+         {
+            stars[i].setIcon(new ImageIcon(starLockedImage));
          }
       }
    }
@@ -169,6 +180,7 @@ public class EndOfLevelPanel extends JPanel
          {
             GameEngine.instance.gameManager.nextLevel();
          }
+         setVisible(false);
       }
    };
 }

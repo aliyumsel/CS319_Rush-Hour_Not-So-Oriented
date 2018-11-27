@@ -26,10 +26,11 @@ public class InnerGamePanel extends JPanel
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
 		super(null);
 		this.guiManager = guiManager;
-		setPreferredSize(new Dimension(450, 450));
+		setPreferredSize(new Dimension(480, 480));
 
 		loadImages();
 		createEndOfLevelPanel();
+		setOpaque(false);
 		setVisible(true);
 	}
 
@@ -49,8 +50,8 @@ public class InnerGamePanel extends JPanel
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		setBackground(Color.WHITE);
-      	drawBackground(g);
+		//setBackground(Color.WHITE);
+      	//drawBackground(g);
 
 		if (map == null) {
 			return;
@@ -69,12 +70,13 @@ public class InnerGamePanel extends JPanel
 
    }
 
-	void setEndOfLevelPanelVisible(boolean bool)
+	void setEndOfLevelPanelVisible(boolean bool, int starAmount)
    {
 		if(bool) //bool ne ????????????????????????????????????????????????????????????? bool ne
       {
          SoundManager.instance.successSound();
       }
+		endOfLevelPanel.showStars(starAmount);
 		endOfLevelPanel.setVisible(bool);
 	}
 
