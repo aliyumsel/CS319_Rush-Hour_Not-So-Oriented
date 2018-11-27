@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PlayerExtractor
+class PlayerExtractor
 {
    String extractLastPlayerName()
    {
@@ -22,8 +22,7 @@ public class PlayerExtractor
       }
 
       while (!info.nextLine().trim().equals("<LastActivePlayer>"));
-      String lastPlayerName = info.nextLine().trim();
-      return lastPlayerName;
+      return info.nextLine().trim();
    }
 
    ArrayList<Player> extractPlayers()

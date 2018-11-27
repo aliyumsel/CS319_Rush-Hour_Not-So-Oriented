@@ -11,24 +11,18 @@
 				1
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				6
+				8
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-SS SS CD CU CU CU
-SS SS SS SS SS SS
-PC SS SS SS SS SS
-SS SS TU TD TD TD
-SS SS SS SS SS SS
-SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 		<Level>

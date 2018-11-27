@@ -11,11 +11,6 @@ import source.model.Player;
 import source.model.Vehicle;
 
 public class MapSaver {
-
-	public MapSaver()
-	{
-		
-	}
 	
 	public void saveMap(ArrayList<Vehicle> vehicleList, int mapSize, int levelNo, Player player)
 	{

@@ -17,12 +17,12 @@ public class MapExtractor {
 	private ArrayList<Vehicle> vehicleArray = new ArrayList<Vehicle>();
 	private Map map;
 
-	public MapExtractor()
+	MapExtractor()
    {
       map = new Map();
 	}
 
-	public Map extractLevel(int level, Player player) throws FileNotFoundException
+	Map extractLevel(int level, Player player) throws FileNotFoundException
    {
 		System.out.println("Inside extract level");
    	  String theme = "minimalistic";

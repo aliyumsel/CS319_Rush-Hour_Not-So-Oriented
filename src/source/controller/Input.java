@@ -1,6 +1,5 @@
 package source.controller;
 
-import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,17 +32,17 @@ public class Input
         return mouseButtons[buttonID];
     }
 
-    static double getMousePositionX()
-    {
-        return mouseX;
-        //return MouseInfo.getPointerInfo().getLocation().getX();
-    }
-
-    static double getMousePositionY()
-    {
-        return mouseY;
-        //return MouseInfo.getPointerInfo().getLocation().y;
-    }
+//    static double getMousePositionX()
+//    {
+//        return mouseX;
+//        //return MouseInfo.getPointerInfo().getLocation().getX();
+//    }
+//
+//    static double getMousePositionY()
+//    {
+//        return mouseY;
+//        //return MouseInfo.getPointerInfo().getLocation().y;
+//    }
 
     public static MouseListener getMouseListener()
     {
@@ -100,7 +99,6 @@ public class Input
            System.out.println("keyPressed");
            if (keys.containsKey(e.getKeyChar() + ""))
            {
-              //System.out.println("keyPressed");
               keys.put(e.getKeyChar() + "", true);
            }
         }
