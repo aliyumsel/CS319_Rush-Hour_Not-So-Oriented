@@ -28,7 +28,7 @@ public class GameManager implements Updatable
 
    }
    
-   public void autoSave(int moveAmount, ArrayList<Vehicle> vehicleList)
+   void autoSave( int moveAmount, ArrayList<Vehicle> vehicleList)
    {
 	   PlayerManager.instance.updateLevel(level, moveAmount, vehicleList);
    }

@@ -14,15 +14,21 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				22
+				6
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+SS SS CD CU CU CU
+SS SS SS SS SS SS
+PC SS SS SS SS SS
+SS SS TU TD TD TD
+SS SS SS SS SS SS
+SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 		<Level>

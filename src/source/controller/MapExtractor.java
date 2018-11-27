@@ -137,8 +137,6 @@ public class MapExtractor {
 			{
 				System.out.print("(" + vehicle.getOccupiedTransforms()[a].position.x + "," + vehicle.getOccupiedTransforms()[a].position.y + ")" + " ");
 			}
-
-			//System.out.println("\n");
 		}
 	}
 }
