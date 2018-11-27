@@ -8,8 +8,9 @@ public class LevelInformation {
 	private int maxNumberOfMovesForTwoStars;
 	private int currentNumberOfMoves;
 	private boolean unlocked;
+	private String map;
 	
-	public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked)
+	public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked, String map)
 	{
 		this.levelNo = levelNo;
 		this.maxNumberOfMovesForThreeStars = maxNumberOfMovesForThreeStars;
@@ -18,6 +19,7 @@ public class LevelInformation {
 		this.stars = stars;
 		this.status = status;
 		this.unlocked = unlocked;
+		this.map = map;
 	}
 
 	public int getStars() {
@@ -61,4 +63,36 @@ public class LevelInformation {
 	{
 		return maxNumberOfMovesForTwoStars;
 	}
+
+	public String getMap() {
+		return map;
+	}
+
+	public void setMap(String map) {
+		this.map = map;
+	}
+	public String levelToString(int levelNo, int stars, int currentNumberOfMoves, String status, boolean unlocked, String map)
+	   {
+	      String level = "\t\t<Level>\n" +
+	              "\t\t\t<LevelNo>\n" +
+	              "\t\t\t\t" + levelNo + "\n" +
+	              "\t\t\t<LevelNo/>\n" +
+	              "\t\t\t<Stars>\n" +
+	              "\t\t\t\t" + stars + "\n" +
+	              "\t\t\t<Stars/>\n" +
+	              "\t\t\t<CurrentNumberOfMoves>\n" +
+	              "\t\t\t\t" + currentNumberOfMoves + "\n" +
+	              "\t\t\t<CurrentNumberOfMoves>\n" +
+	              "\t\t\t<Status>\n" +
+	              "\t\t\t\t" + status + "\n" +
+	              "\t\t\t<Status/>\n" +
+	              "\t\t\t<Unlocked>\n" +
+	              "\t\t\t\t" + unlocked + "\n" +
+	              "\t\t\t<Unlocked/>\n" +
+	              "\t\t\t<Map>\n" +
+	              map +
+	              "\t\t\t<Map/>\n" +
+	              "\t\t<Level/>\n";
+	      return level;
+	   }
 }

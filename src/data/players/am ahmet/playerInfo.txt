@@ -11,6 +11,7 @@
 				1
 			<LevelNo/>
 			<Stars>
+<<<<<<< HEAD:src/data/players/am ahmet/playerInfo.txt
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
@@ -18,6 +19,15 @@
 			<CurrentNumberOfMoves>
 			<Status>
 				notStarted
+=======
+				1
+			<Stars/>
+			<CurrentNumberOfMoves>
+				20
+			<CurrentNumberOfMoves>
+			<Status>
+				finished
+>>>>>>> unstable:src/data/players/default/playerInfo.txt
 			<Status/>
 			<Unlocked>
 				true

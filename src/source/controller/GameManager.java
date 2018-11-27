@@ -27,9 +27,9 @@ public class GameManager implements Updatable
 
    }
 
-   void autoSave(int moveAmount, ArrayList<Vehicle> vehicleList)
+   void autoSave(int moveAmount)
    {
-      PlayerManager.instance.updateLevel(level, moveAmount, vehicleList);
+      PlayerManager.instance.updateLevel(level, moveAmount);
    }
 
    void endMap()
@@ -46,7 +46,7 @@ public class GameManager implements Updatable
 
       int starsCollected = calculateStars(level);
       System.out.println("Stars Collected: " + starsCollected);
-      PlayerManager.instance.getCurrentPlayer().getLevels().get(level - 1).setStars(starsCollected);
+      PlayerManager.instance.updateLevelAtTheEnd(level, starsCollected);
       GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible(starsCollected);
 
 
@@ -108,7 +108,7 @@ public class GameManager implements Updatable
    public void resetLevel()
    {
       loadLevel(level, true);
-      autoSave(0, MapController.instance.getMap().getVehicleArray());
+      autoSave(0);
    }
 
    public int getLevel()

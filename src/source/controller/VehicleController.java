@@ -80,7 +80,7 @@ public class VehicleController implements Updatable
          {
             MapController.instance.updateMap(map.getVehicleArray());
             numberOfMoves++;
-            GameManager.instance.autoSave(numberOfMoves, map.getVehicleArray());
+            GameManager.instance.autoSave(numberOfMoves);
          }
       }
    }
