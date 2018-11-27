@@ -1,0 +1,138 @@
+<Player>
+	<Name>
+		ahmet
+	<Name/>
+	<StarAmount>
+		0
+	<StarAmount/>
+	<Levels>
+		<Level>
+			<LevelNo>
+				1
+			<LevelNo/>
+			<Stars>
+<<<<<<< Updated upstream:src/data/players/ahmet/playerInfo.txt
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+=======
+				1
+			<Stars/>
+			<CurrentNumberOfMoves>
+				9
+			<CurrentNumberOfMoves>
+			<Status>
+				finished
+>>>>>>> Stashed changes:src/data/players/default/playerInfo.txt
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				2
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+<<<<<<< Updated upstream:src/data/players/ahmet/playerInfo.txt
+				0
+=======
+				1
+>>>>>>> Stashed changes:src/data/players/default/playerInfo.txt
+			<CurrentNumberOfMoves>
+			<Status>
+				inProgress
+			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
+			<Map>
+TD CR SS TD SS SS SS SS
+SS SS SS SS SS SS SS SS
+SS PC SS SS SS SS SS SS
+CU SS SS SS SS TU SS SS
+SS CR SS SS SS SS SS SS
+SS SS TR SS SS SS SS SS
+SS SS SS SS SS SS SS SS
+SS SS SS SS SS SS SS SS
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				3
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				4
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				5
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+	<Levels/>
+	<Settings>
+		<Music>
+			true
+		<Music/>
+		<Sfx>
+			true
+		<Sfx/>
+		<Theme>
+			CLASSIC
+		<Theme/>
+	<Settings>
+<Player/>
