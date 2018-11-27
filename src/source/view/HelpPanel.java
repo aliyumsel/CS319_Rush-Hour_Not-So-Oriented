@@ -93,9 +93,9 @@ public class HelpPanel extends JPanel
 
       back.setBounds(30 , 30 , back.getPreferredSize().width, back.getPreferredSize().height);
 
-      help1.setBounds(guiManager.findCenter(panelWidth, help1) - 180,180, help1.getPreferredSize().width,help1.getPreferredSize().height);
+      help1.setBounds(guiManager.findCenter(panelWidth, help1) - 160,180, help1.getPreferredSize().width,help1.getPreferredSize().height);
 
-      help2.setBounds(guiManager.findCenter(panelWidth, help1) + 180,180, help2.getPreferredSize().width,help2.getPreferredSize().height);
+      help2.setBounds(guiManager.findCenter(panelWidth, help1) + 200,180, help2.getPreferredSize().width,help2.getPreferredSize().height);
    }
 
    private ActionListener actionListener = e -> {
