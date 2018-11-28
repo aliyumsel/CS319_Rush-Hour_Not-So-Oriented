@@ -12,6 +12,7 @@ import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
 
+@SuppressWarnings("StatementWithEmptyBody")
 class PlayerDaoImpl implements PlayerDao {
 
 	@Override
@@ -194,10 +195,7 @@ class PlayerDaoImpl implements PlayerDao {
 			playerAmount = Integer.parseInt(tmp);
 			*/
 
-	      while ( !scanInfo.nextLine().equals("<NumberOfMaps>") )
-	      {
-	         ;
-	      }
+	      while ( !scanInfo.nextLine().equals("<NumberOfMaps>") );
 	      tmp = scanInfo.nextLine().trim();
 	      mapAmount = Integer.parseInt(tmp);
 
@@ -237,17 +235,11 @@ class PlayerDaoImpl implements PlayerDao {
 	            e.printStackTrace();
 	         }
 
-	         while ( !levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>") )
-	         {
-	            ;
-	         }
+	         while ( !levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>") );
 	         tmp = levelInfo.nextLine().trim();
 	         movesForThreeStars = Integer.parseInt(tmp);
 
-	         while ( !levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>") )
-	         {
-	            ;
-	         }
+	         while ( !levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>") );
 	         tmp = levelInfo.nextLine().trim();
 	         movesForTwoStars = Integer.parseInt(tmp);
 

@@ -14,8 +14,9 @@ import source.model.Vehicle;
 
 class MapDaoImpl implements MapDao {
 	
-	ArrayList<Vehicle> vehicleArray = new ArrayList<>();
+	private ArrayList<Vehicle> vehicleArray = new ArrayList<>();
 	
+	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public Map extractMap(int level, Player player) {
 		Map map = new Map();
@@ -59,10 +60,7 @@ class MapDaoImpl implements MapDao {
 	      int x = 0;
 	      int y = 0;
 
-	      while ( !scanLevel.nextLine().trim().equals("<Map>") )
-	      {
-	         ;
-	      }
+	      while ( !scanLevel.nextLine().trim().equals("<Map>") );
 	      String row = scanLevel.nextLine();
 	      do
 	      {

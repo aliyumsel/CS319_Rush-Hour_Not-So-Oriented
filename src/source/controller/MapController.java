@@ -1,6 +1,5 @@
 package source.controller;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import interfaces.MapDao;
@@ -15,13 +14,10 @@ public class MapController
    private MapDao mapDao;
    private Map map;
 
-//	public boolean mapFinished;
-
    MapController()
    {
       instance = this;
       mapDao = new MapDaoImpl();
-      // map = new Map();
    }
 
    void loadLevel(int level)
@@ -93,7 +89,7 @@ public class MapController
       return false;
    }
    
-   public String mapToString()
+   String mapToString()
    {
 	      String mapStr = "";
 	      boolean found;

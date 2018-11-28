@@ -1,23 +1,14 @@
 package source.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
-import source.model.Settings;
-import source.model.Vehicle;
 
 public class PlayerManager
 {
-
    public static PlayerManager instance;
-
 
    private Player currentPlayer;
    private ArrayList<Player> players;
@@ -160,7 +151,7 @@ public class PlayerManager
    }
 
    
-   public void updateLevelAtTheEnd(int levelNo, int starAmount)
+   void updateLevelAtTheEnd(int levelNo, int starAmount)
    {
 	   LevelInformation currentLevel = currentPlayer.getLevels().get(levelNo - 1);
 	   setLevelStatus(levelNo, "finished");

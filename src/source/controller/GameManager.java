@@ -1,10 +1,7 @@
 package source.controller;
 
-import java.util.ArrayList;
-
 import interfaces.Updatable;
 import source.model.LevelInformation;
-import source.model.Vehicle;
 import source.view.GuiPanelManager;
 
 public class GameManager implements Updatable
