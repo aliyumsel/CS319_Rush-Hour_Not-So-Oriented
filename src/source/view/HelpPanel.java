@@ -16,6 +16,8 @@ public class HelpPanel extends JPanel
    private JLabel help1;
    private JLabel help2;
 
+   private JButton rightArrowButton;
+   private JButton leftArrowButton;
    private JButton back;
 
    private BufferedImage background;
@@ -24,6 +26,10 @@ public class HelpPanel extends JPanel
    private BufferedImage backButtonHighlightedImage;
    private BufferedImage help1Image;
    private BufferedImage help2Image;
+   private BufferedImage rightArrow;
+   private BufferedImage rightArrowHighlighted;
+   private BufferedImage leftArrow;
+   private BufferedImage leftArrowHighlighted;
 
    private int panelWidth;
    private int panelHeight;
@@ -60,6 +66,11 @@ public class HelpPanel extends JPanel
       backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
       help1Image = guiManager.LoadImage("src/image/help1.png");
       help2Image = guiManager.LoadImage("src/image/help2.png");
+
+      rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
+      rightArrowHighlighted = guiManager.LoadImage("src/image/icons/rightarrowH.png");
+      leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
+      leftArrowHighlighted = guiManager.LoadImage("src/image/icons/leftarrowH.png");
    }
 
    private void createComponents()
@@ -77,6 +88,9 @@ public class HelpPanel extends JPanel
       help2 = new JLabel();
       help2.setIcon(new ImageIcon(help2Image));
       help2.setPreferredSize(new Dimension(204, 238));
+
+      rightArrowButton = UIFactory.createButton(rightArrow, rightArrowHighlighted, "arrow", actionListener);
+      leftArrowButton = UIFactory.createButton(leftArrow, leftArrowHighlighted, "arrow", actionListener);
    }
 
    private void addComponents()
@@ -85,6 +99,9 @@ public class HelpPanel extends JPanel
       add(back);
       add(help1);
       add(help2);
+
+      add(rightArrowButton);
+      add(leftArrowButton);
    }
 
    private void setBoundsOfComponents()
@@ -93,9 +110,14 @@ public class HelpPanel extends JPanel
 
       back.setBounds(30 , 30 , back.getPreferredSize().width, back.getPreferredSize().height);
 
-      help1.setBounds(guiManager.findCenter(panelWidth, help1) - 160,180, help1.getPreferredSize().width,help1.getPreferredSize().height);
+      help1.setBounds(guiManager.findCenter(panelWidth, help1) - 150,180, help1.getPreferredSize().width,help1.getPreferredSize().height);
 
-      help2.setBounds(guiManager.findCenter(panelWidth, help1) + 200,180, help2.getPreferredSize().width,help2.getPreferredSize().height);
+      help2.setBounds(guiManager.findCenter(panelWidth, help1) + 190,180, help2.getPreferredSize().width,help2.getPreferredSize().height);
+
+      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
+              leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
+      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton),
+              rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
    }
 
    private ActionListener actionListener = e -> {

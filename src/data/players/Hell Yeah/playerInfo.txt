@@ -11,13 +11,13 @@
 				1
 			<LevelNo/>
 			<Stars>
-				0
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				11
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
@@ -30,16 +30,16 @@
 				2
 			<LevelNo/>
 			<Stars>
-				0
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				10
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -58,7 +58,7 @@
 				notStarted
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>

@@ -26,7 +26,7 @@ public class MapExtractor
    {
       System.out.println("Inside extract level");
       String theme = "minimalistic";
-      boolean special = true;
+      boolean special = false;
       vehicleArray.clear();
       //inside of the if condition will be revised
       //System.out.println("Player: " + player.getPlayerName());
