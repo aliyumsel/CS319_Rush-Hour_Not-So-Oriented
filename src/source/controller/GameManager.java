@@ -29,7 +29,7 @@ public class GameManager implements Updatable
 
    void autoSave(int moveAmount)
    {
-      PlayerManager.instance.updateLevel(level, moveAmount);
+      PlayerManager.instance.updateLevelDuringGame(level, moveAmount);
    }
 
    void endMap()
