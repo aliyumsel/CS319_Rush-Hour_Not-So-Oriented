@@ -3,6 +3,7 @@ package source.controller;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import interfaces.MapDao;
 import source.model.Map;
 import source.model.Player;
 import source.model.Vehicle;
@@ -11,8 +12,7 @@ public class MapController
 {
    public static MapController instance;
 
-   private MapExtractor mapExtractor;
-   private MapSaver mapSaver;
+   private MapDao mapDao;
    private Map map;
 
 //	public boolean mapFinished;
@@ -20,21 +20,14 @@ public class MapController
    MapController()
    {
       instance = this;
-      mapExtractor = new MapExtractor();
-      mapSaver = new MapSaver();
+      mapDao = new MapDaoImpl();
       // map = new Map();
    }
 
    void loadLevel(int level)
    {
-      try
-      {
-         Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
-         map = mapExtractor.extractLevel(level, currentPlayer);
-      } catch (FileNotFoundException e)
-      {
-         e.printStackTrace();
-      }
+	   Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
+       map = mapDao.extractMap(level, currentPlayer);
 
       if ( map != null )
       {
@@ -44,13 +37,7 @@ public class MapController
 
    void loadOriginalLevel(int level)
    {
-      try
-      {
-         map = mapExtractor.extractLevel(level, null);
-      } catch (FileNotFoundException e)
-      {
-         e.printStackTrace();
-      }
+	   map = mapDao.extractMap(level, null);
    }
 
    public Map getMap()
@@ -106,7 +93,7 @@ public class MapController
       return false;
    }
    
-   public String mapStrToString()
+   public String mapToString()
    {
 	      String mapStr = "";
 	      boolean found;
@@ -143,8 +130,4 @@ public class MapController
 	   	  return mapStr;
    }
 
-//	public void autosave(ArrayList<Vehicle> vehicleList)
-//	{
-//		mapSaver.saveMap(vehicleList, map.getMapSize(), GameManager.instance.getLevel(), PlayerManager.instance.getCurrentPlayer());
-//	}
 }
