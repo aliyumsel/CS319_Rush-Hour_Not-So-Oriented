@@ -70,8 +70,8 @@ public class Player {
 		return lastUnlockedLevelNo;
 	}
 
-	public void setLastUnlockedLevelNo(int lastUnlockedLevelNo) {
-		this.lastUnlockedLevelNo = lastUnlockedLevelNo;
+	public void resetLastUnlockedLevelNo() {
+		this.lastUnlockedLevelNo = 1;
 	}
 	
 	public void incrementLastUnlockedLevelNo()

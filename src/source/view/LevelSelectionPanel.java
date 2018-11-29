@@ -6,11 +6,9 @@ import java.awt.*;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
-import source.model.LevelInformation;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.util.logging.Level;
 
 public class LevelSelectionPanel extends JPanel
 {

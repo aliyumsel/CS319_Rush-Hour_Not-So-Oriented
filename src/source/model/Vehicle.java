@@ -8,15 +8,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import interfaces.Drawable;
-
 public class Vehicle extends GameObject// implements Drawable
 {
    private String type; // we may not need this
    public boolean isMoving; // we may not need this
    private boolean player;
-   private int drawIndex;
-   private int threshold;
    private int verticalMoveAxis;
    private int horizontalMoveAxis;
    private int drawingIndexForMoving;
@@ -24,12 +20,12 @@ public class Vehicle extends GameObject// implements Drawable
    private BufferedImage[] vehicleImages;
 
    // AffineTransform at;
-   public Vehicle()
-   {
-      super();
-   }
+//   Vehicle()
+//   {
+//      super();
+//   }
 
-   public Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme)
+   Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme)
    {
       super(x, y, length, direction);
       this.player = player;
@@ -100,7 +96,7 @@ public class Vehicle extends GameObject// implements Drawable
 		*/
    }
 
-   public void rescaleImages()
+   private void rescaleImages()
    {
       for ( int i = 0; i < vehicleImages.length; i++ )
       {
@@ -159,6 +155,8 @@ public class Vehicle extends GameObject// implements Drawable
          horizontalMoveAxis = 0;
       }
 
+      int drawIndex;
+      int threshold;
       if ( isMoving && ( verticalMoveAxis == -1 || horizontalMoveAxis == 1 ) )
       {
          drawIndex = transform.length - 1;
@@ -172,10 +170,10 @@ public class Vehicle extends GameObject// implements Drawable
       while ( drawIndex != threshold )
       {
 
-         if ( isMoving )
-         {
-            //System.out.println(occupiedTransforms[drawIndex].position.x + " , " + occupiedTransforms[drawIndex].position.y);
-         }
+//         if ( isMoving )
+//         {
+//            //System.out.println(occupiedTransforms[drawIndex].position.x + " , " + occupiedTransforms[drawIndex].position.y);
+//         }
          if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == -1 )
          {
             at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize, occupiedTransforms[drawIndex].position.y * gridPixelSize - drawingIndexForMoving);

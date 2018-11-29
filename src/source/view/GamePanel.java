@@ -22,11 +22,11 @@ public class GamePanel extends JPanel {
 	private JButton settings;
 	private JButton hint;
 
-	private JLabel timerIcon;
+	//private JLabel timerIcon;
 	private JLabel moveLabel;
 	private JLabel numberLabel;
 
-	private JProgressBar timer;
+	//private JProgressBar timer;
 
    private BufferedImage background;
 	private BufferedImage menuButtonImage;
@@ -42,7 +42,7 @@ public class GamePanel extends JPanel {
 	private int panelWidth;
 	private int panelHeight;
 
-	public GamePanel(GuiPanelManager _guiManager) {
+	GamePanel(GuiPanelManager _guiManager) {
 		super(null);
 		guiManager = _guiManager;
 
@@ -220,11 +220,11 @@ public class GamePanel extends JPanel {
 
 	}
 
-	public InnerGamePanel getInnerGamePanel() {
+	InnerGamePanel getInnerGamePanel() {
 		return innerGamePanel;
 	}
 
-	public void updateNumberOfMoves() {
+	private void updateNumberOfMoves() {
 		numberLabel.setText(GameEngine.instance.vehicleController.getNumberOfMoves() + "");
 	}
 }

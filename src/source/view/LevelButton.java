@@ -150,9 +150,9 @@ class LevelButton extends JButton
       setDisabledIcon(new ImageIcon(lockedBackground));
    }
 
-   boolean getIsLocked()
-   {
-      return isLocked;
-   }
+//   boolean getIsLocked()
+//   {
+//      return isLocked;
+//   }
 }
 

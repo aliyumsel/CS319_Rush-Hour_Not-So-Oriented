@@ -1,6 +1,5 @@
 package source.view;
 
-import source.controller.GameEngine;
 import source.controller.SoundManager;
 
 import javax.swing.*;
@@ -8,9 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-/**
- * Created by ASTOD on 11/21/2018.
- */
 public class CreditsPanel extends JPanel
 {
    private GuiPanelManager guiManager;

@@ -32,13 +32,11 @@ public class GuiPanelManager extends JFrame
    private HelpPanel helpPanel;
    private ChangePlayerPanel changePlayerPanel;
    private JPanel targetPanel;
-   private BufferedImage cursorImage;
+   //private BufferedImage cursorImage;
    int panelWidth;
    int panelHeight;
 
 //   private BufferedImage cursorImage;
-
-   private Font odinRounded;
 
    public GuiPanelManager()
    {
@@ -55,7 +53,7 @@ public class GuiPanelManager extends JFrame
       File fontFile = new File("src/fonts/odin.ttf");
       try
       {
-         odinRounded = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+         Font odinRounded = Font.createFont(Font.TRUETYPE_FONT, fontFile);
          GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
          ge.registerFont(odinRounded);
       } catch (FontFormatException | IOException e)
@@ -86,7 +84,7 @@ public class GuiPanelManager extends JFrame
 
    }
 
-   public void addPanels()
+   private void addPanels()
    {
       mainMenuPanel = new MainMenuPanel(this);
       gamePanel = new GamePanel(this);

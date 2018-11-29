@@ -33,7 +33,7 @@ public class EndOfLevelPanel extends JPanel
    private int panelWidth = 400;
    private int panelHeight = 250;
 
-   public EndOfLevelPanel(GuiPanelManager _guiManager)
+   EndOfLevelPanel(GuiPanelManager _guiManager)
    {
       super(null);
       guiManager = _guiManager;

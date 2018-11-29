@@ -11,7 +11,6 @@ import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
-import source.model.Settings.Theme;
 
 @SuppressWarnings("StatementWithEmptyBody")
 class PlayerDaoImpl implements PlayerDao {
@@ -291,7 +290,7 @@ class PlayerDaoImpl implements PlayerDao {
 	      scanInfo.close();
 	      
 	      Player newPlayer = new Player(playerName, 0, levels, playerPath, new Settings(true, true));
-	      newPlayer.setLastUnlockedLevelNo(1);
+	      newPlayer.resetLastUnlockedLevelNo();
 	      
 	      return newPlayer;
 		

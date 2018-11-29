@@ -170,7 +170,7 @@ public class SettingsPanel extends JPanel
    }
 
    @SuppressWarnings("Duplicates")
-   void updateSoundButtons(String type)
+   private void updateSoundButtons(String type)
    {
       boolean enabled;
       JButton button;

@@ -62,13 +62,13 @@ public class InnerGamePanel extends JPanel
 		}
 	}
 
-   private void drawBackground(Graphics graphics) {
-
-      Graphics2D graphics2d = (Graphics2D) graphics;
-
-      graphics2d.drawImage(background, 0, 0, null);
-
-   }
+//   private void drawBackground(Graphics graphics) {
+//
+//      Graphics2D graphics2d = (Graphics2D) graphics;
+//
+//      graphics2d.drawImage(background, 0, 0, null);
+//
+//   }
 
 	void setEndOfLevelPanelVisible(boolean bool, int starAmount)
    {

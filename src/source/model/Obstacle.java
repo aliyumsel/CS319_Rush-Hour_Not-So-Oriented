@@ -4,10 +4,10 @@ import java.awt.*;
 
 public class Obstacle extends GameObject
 {
-   public Obstacle()
-   {
-      super();
-   }
+//   public Obstacle()
+//   {
+//      super();
+//   }
 
    public Obstacle(int x, int y, int length, String direction)
    {

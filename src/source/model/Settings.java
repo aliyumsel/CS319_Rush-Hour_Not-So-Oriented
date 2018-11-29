@@ -82,16 +82,15 @@ public class Settings
 	   {
 		   themeStr = "CLASSIC";
 	   }
-	   String settingsStr = "\t\t<Music>\n" +
-			   "\t\t\t" + music + "\n" +
-			   "\t\t<Music/>\n" +
-			   "\t\t<Sfx>\n" +
-			   "\t\t\t" + sfx + "\n" +
-			   "\t\t<Sfx/>\n" +
-			   "\t\t<Theme>\n" +
-			   "\t\t\t" + themeStr + "\n" +
-			   "\t\t<Theme/>\n";
-	   return settingsStr;
+      return "\t\t<Music>\n" +
+            "\t\t\t" + music + "\n" +
+            "\t\t<Music/>\n" +
+            "\t\t<Sfx>\n" +
+            "\t\t\t" + sfx + "\n" +
+            "\t\t<Sfx/>\n" +
+            "\t\t<Theme>\n" +
+            "\t\t\t" + themeStr + "\n" +
+            "\t\t<Theme/>\n";
 			   			
    }
 }

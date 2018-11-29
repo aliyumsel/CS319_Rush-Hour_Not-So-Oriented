@@ -20,7 +20,7 @@ public class Main {
    {
       GuiPanelManager GUIManager;
       GameEngine gameEngine;
-      public MyThread(GuiPanelManager _GUIManager, GameEngine _gameEngine)
+      MyThread(GuiPanelManager _GUIManager, GameEngine _gameEngine)
       {
          GUIManager = _GUIManager;
          gameEngine = _gameEngine;

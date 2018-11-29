@@ -1,6 +1,5 @@
 package source.view;
 
-import source.controller.GameEngine;
 import source.controller.SoundManager;
 
 import javax.swing.*;

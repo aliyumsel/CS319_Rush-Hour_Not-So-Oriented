@@ -36,7 +36,7 @@ public class LevelSelectionPopUp extends JPanel
    private int panelWidth = 400;
    private int panelHeight = 250;
 
-   public LevelSelectionPopUp(GuiPanelManager _guiManager)
+   LevelSelectionPopUp(GuiPanelManager _guiManager)
    {
       super(null);
       guiManager = _guiManager;
