@@ -57,8 +57,8 @@ public class InnerGamePanel extends JPanel
 			return;
 		}
 
-		for (Vehicle vehicle : map.getVehicleArray()) {
-			vehicle.draw(g);
+		for (GameObject gameObject : map.getGameObjects()) {
+         gameObject.draw(g);
 		}
 	}
 

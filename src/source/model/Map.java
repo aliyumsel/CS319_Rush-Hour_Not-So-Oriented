@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Map {
 	
-	private ArrayList<Vehicle> vehicleArray;
+	private ArrayList<GameObject> gameObjects;
 	private String[][] grid;
 	private int mapSize = 8;
 
@@ -13,24 +13,24 @@ public class Map {
 
    }
 
-	public Map(ArrayList<Vehicle> vehicleArray)
+	public Map(ArrayList<GameObject> gameObjects)
 	{
-		this.vehicleArray = vehicleArray;
-		formMap(vehicleArray);
+		this.gameObjects = gameObjects;
+		formMap(gameObjects);
 	}
 	
-	public void formMap(ArrayList<Vehicle> _vehicleArray)
+	public void formMap(ArrayList<GameObject> _gameObjects)
    {
-      vehicleArray = _vehicleArray;
+      gameObjects = _gameObjects;
 
 		grid = new String[mapSize][mapSize];
 		
-		for (Vehicle vehicle: vehicleArray)
+		for (GameObject gameObject: gameObjects )
 		{
-			String name = vehicle.getType();
-			for(int i = 0; i < vehicle.transform.length;i++)
+			String name = gameObject.getType();
+			for(int i = 0; i < gameObject.transform.length;i++)
 			{
-				grid[vehicle.getOccupiedCells()[i]/mapSize][vehicle.getOccupiedCells()[i]%mapSize] = name;
+				grid[gameObject.getOccupiedCells()[i]/mapSize][gameObject.getOccupiedCells()[i]%mapSize] = name;
 			}
 		}
 		
@@ -46,9 +46,9 @@ public class Map {
 		}
 	}
 
-	public ArrayList<Vehicle> getVehicleArray()
+	public ArrayList<GameObject> getGameObjects()
    {
-	   return vehicleArray;
+	   return gameObjects;
 	}
 	
 	public String[][] getGrid()
@@ -59,24 +59,5 @@ public class Map {
    public int getMapSize() {
       return mapSize;
    }
-
-//	public void printMap()
-//   {
-//      System.out.println("Vehicle Array: " + vehicleArray);
-//
-//		for(int i = 0; i < mapSize;i++)
-//		{
-//			//System.out.println("\n");
-//			for(int j = 0; j < mapSize;j++)
-//			{
-//				System.out.print(grid[i][j] + " ");
-//			}
-//		}
-//	}
-
-	//public void setMapSize(int mapSize) {
-	//  	this.mapSize = mapSize;
-	//}
-	
 
 }

@@ -16,8 +16,6 @@ public class VehicleController extends Controller
    VehicleController()
    {
       instance = this;
-      //int currentLevelNo = GameManager.instance.getLevel();
-      //numberOfMoves = PlayerManager.instance.getCurrentPlayer().getLevels().get(currentLevelNo - 1).getCurrentNumberOfMoves();
       numberOfMoves = 0;
       soundManager = GameEngine.instance.soundManager;
    }
@@ -25,8 +23,6 @@ public class VehicleController extends Controller
    public void setMap(Map _map)
    {
       map = _map;
-      //System.out.println("\n");
-      //map.printMap();
    }
 
    //executed every frame write the functionality needed to here
@@ -77,7 +73,7 @@ public class VehicleController extends Controller
 
          if ( moved )
          {
-            MapController.instance.updateMap(map.getVehicleArray());
+            MapController.instance.updateMap(map.getGameObjects());
             numberOfMoves++;
             GameManager.instance.autoSave(numberOfMoves);
          }

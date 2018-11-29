@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 import interfaces.Drawable;
 
-public class Vehicle extends GameObject implements Drawable
+public class Vehicle extends GameObject// implements Drawable
 {
    private String type; // we may not need this
    public boolean isMoving; // we may not need this
@@ -174,7 +174,7 @@ public class Vehicle extends GameObject implements Drawable
 
          if ( isMoving )
          {
-            System.out.println(occupiedTransforms[drawIndex].position.x + " , " + occupiedTransforms[drawIndex].position.y);
+            //System.out.println(occupiedTransforms[drawIndex].position.x + " , " + occupiedTransforms[drawIndex].position.y);
          }
          if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == -1 )
          {

@@ -3,7 +3,7 @@
 		Player
 	<Name/>
 	<StarAmount>
-		7
+		11
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -33,15 +33,23 @@
 				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				11
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+TD CR SS SS SS SS SS SS
+SS SS SS TD SS SS SS SS
+SS PC SS SS SS SS SS SS
+CU SS SS SS SS TU SS SS
+SS CR SS SS SS SS SS SS
+SS SS TR SS SS SS SS SS
+SS SS SS SS SS SS SS SS
+SS SS SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 		<Level>
@@ -68,13 +76,13 @@
 				4
 			<LevelNo/>
 			<Stars>
-				0
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				20
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
@@ -93,12 +101,20 @@
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+CD SS CR SS SS SS SS SS
+SS TL SS SS CD CU SS SS
+PC SS SS TD SS SS SS SS
+CL SS SS SS CD CU SS SS
+SS CU SS SS SS SS SS SS
+SS SS TR SS SS SS SS SS
+SS SS SS SS SS SS SS SS
+SS SS SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 	<Levels/>
