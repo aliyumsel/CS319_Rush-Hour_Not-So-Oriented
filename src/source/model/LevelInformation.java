@@ -71,7 +71,7 @@ public class LevelInformation {
 	public void setMap(String map) {
 		this.map = map;
 	}
-	public String levelToString(int levelNo, int stars, int currentNumberOfMoves, String status, boolean unlocked, String map)
+	public String levelToString()
 	   {
 	      String level = "\t\t<Level>\n" +
 	              "\t\t\t<LevelNo>\n" +

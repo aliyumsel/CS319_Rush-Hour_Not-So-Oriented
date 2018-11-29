@@ -52,4 +52,36 @@ public class Settings
    {
       this.sfx = sfx;
    }
+   
+   public String settingsToString()
+   {
+	   String themeStr;
+	   if (theme == Theme.SIMPLE)
+	   {
+		   themeStr = "SIMPLE";
+	   }
+	   else if (theme == Theme.SAFARI)
+	   {
+		   themeStr = "SAFARI";
+	   }
+	   else if (theme == Theme.SPACE)
+	   {
+		   themeStr = "SPACE";
+	   }
+	   else
+	   {
+		   themeStr = "CLASSIC";
+	   }
+	   String settingsStr = "\t\t<Music>\n" +
+			   "\t\t\t" + music + "\n" +
+			   "\t\t<Music/>\n" +
+			   "\t\t<Sfx>\n" +
+			   "\t\t\t" + sfx + "\n" +
+			   "\t\t<Sfx/>\n" +
+			   "\t\t<Theme>\n" +
+			   "\t\t\t" + themeStr + "\n" +
+			   "\t\t<Theme/>\n";
+	   return settingsStr;
+			   			
+   }
 }

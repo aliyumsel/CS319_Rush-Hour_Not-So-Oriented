@@ -23,7 +23,7 @@ public class MapController extends Controller
    void loadLevel(int level)
    {
 	   Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
-       map = mapDao.extractMap(level, currentPlayer);
+       map = mapDao.extractMap(level, currentPlayer, false);
 
       if ( map != null )
       {
@@ -33,7 +33,7 @@ public class MapController extends Controller
 
    void loadOriginalLevel(int level)
    {
-	   map = mapDao.extractMap(level, null);
+	   map = mapDao.extractMap(level, null, true);
    }
 
    public Map getMap()

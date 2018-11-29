@@ -220,16 +220,7 @@ public class LevelSelectionPopUp extends JPanel
          {
             setVisible(false);
             System.out.println("Destinationlevel: " + destinationLevel);
-
-            if (PlayerManager.instance.getCurrentPlayer().getLevels().get(destinationLevel).getStatus().equals("inProgress"))
-            {
-               GameEngine.instance.gameManager.loadLevel(destinationLevel, false);
-            }
-            else
-            {
-               GameEngine.instance.gameManager.loadLevel(destinationLevel, true);
-            }
-
+            GameEngine.instance.gameManager.loadLevel(destinationLevel);
             guiManager.setPanelVisible("Game");
          }
       }

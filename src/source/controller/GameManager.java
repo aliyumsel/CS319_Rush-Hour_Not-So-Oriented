@@ -32,7 +32,7 @@ public class GameManager extends Controller
    {
       System.out.println("Map Finished");
       isGameActive = false;
-      PlayerManager.instance.setLevelStatusFinished(level);
+      //PlayerManager.instance.setLevelStatusFinished(level);
 
       if ( isNextLevelLocked() )
       {
@@ -68,17 +68,19 @@ public class GameManager extends Controller
    public void loadLastLevel()
    {
       level = PlayerManager.instance.getCurrentPlayer().getLastUnlockedLevelNo();
-      loadLevel(level, false);
+      loadLevel(level);
    }
 
-   public void loadLevel(int _level, boolean original)
+   public void loadLevel(int _level)
    {
       System.out.println("Loaded level: " + _level);
       System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
+      level = _level;
 
-      if ( original )
+      if ( !PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1).getStatus().equals("inProgress") )
       {
          MapController.instance.loadOriginalLevel(_level);
+         autoSave(0);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);
       }
@@ -90,7 +92,7 @@ public class GameManager extends Controller
       }
 
       GuiPanelManager.instance.getGamePanel().setInnerGamePanelVisible();
-      level = _level;
+      
 
       isGameActive = true;
    }
@@ -98,12 +100,12 @@ public class GameManager extends Controller
    public void nextLevel()
    {
       level++;
-      loadLevel(level, false);
+      loadLevel(level);
    }
 
    public void resetLevel()
    {
-      loadLevel(level, true);
+	   MapController.instance.loadOriginalLevel(level);
       autoSave(0);
    }
 

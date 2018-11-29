@@ -18,14 +18,14 @@ class MapDaoImpl implements MapDao {
 	
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
-	public Map extractMap(int level, Player player) {
+	public Map extractMap(int level, Player player, boolean original) {
 		Map map = new Map();
 		vehicleArray.clear();
 		String theme = "minimalistic";
 	    boolean special = true;
 	    
 	    Scanner scanLevel = null;
-	      if ( player != null && player.getLevels().size() >= level && player.getLevels().get(level - 1).getStatus().equals("inProgress") )
+	      if ( !original)
 	      {
 	         System.out.println("Inside inprogress if");
 	         try {

@@ -5,6 +5,6 @@ import source.model.Player;
 
 public interface MapDao {
 	
-	Map extractMap(int level, Player player);
+	Map extractMap(int level, Player player, boolean original);
 
 }

@@ -11,6 +11,7 @@ import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
+import source.model.Settings.Theme;
 
 @SuppressWarnings("StatementWithEmptyBody")
 class PlayerDaoImpl implements PlayerDao {
@@ -248,13 +249,13 @@ class PlayerDaoImpl implements PlayerDao {
 	         if ( i == 1 )
 	         {
 	        	level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, true, "");
-	            playerInfo = playerInfo + level.levelToString(i, 0, 0, "notStarted", true, "");
+	            playerInfo = playerInfo + level.levelToString();
 	            
 	         }
 	         else
 	         {
 	        	level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, false, "");
-	            playerInfo = playerInfo + level.levelToString(i, 0, 0, "notStarted", false, "");
+	            playerInfo = playerInfo + level.levelToString();
 	            
 	         }
 	         levels.add(level);
@@ -271,7 +272,7 @@ class PlayerDaoImpl implements PlayerDao {
 	              "\t\t<Theme>\n" +
 	              "\t\t\tCLASSIC\n" +
 	              "\t\t<Theme/>\n" +
-	              "\t<Settings>\n" +
+	              "\t<Settings/>\n" +
 	              "<Player/>\n";
 
 	      FileWriter fileOut = null;
@@ -356,12 +357,9 @@ class PlayerDaoImpl implements PlayerDao {
 	@Override
 	public void saveLevel(int levelNo, Player player) {
 		  Scanner scan = null;
+		  int totalStars = player.getStarAmount();
 		  LevelInformation levelToBeSaved = player.getLevels().get(levelNo - 1);
-		  int stars = levelToBeSaved.getStars();
-		  int currentNumberOfMoves =  levelToBeSaved.getCurrentNumberOfMoves();
-		  boolean unlocked =  levelToBeSaved.isUnlocked();
 		  String status =  levelToBeSaved.getStatus();
-		  String map =  levelToBeSaved.getMap();
 	      try
 	      {
 	         scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
@@ -374,12 +372,23 @@ class PlayerDaoImpl implements PlayerDao {
 	      String line, text;
 	      int no;
 
-	      String levelStr = levelToBeSaved.levelToString(levelNo, stars, currentNumberOfMoves, status, unlocked, map);
+	      String levelStr = levelToBeSaved.levelToString();
 	      int levelCounter = 0;
 	      boolean checkLevel = true;
 
 	      line = scan.nextLine();
 	      text = line + "\n";
+	      
+	      if (status.equals("finished"))
+	      {
+	    	  while (!line.trim().equals("<StarAmount>"))
+	    	  {
+	    		  line = scan.nextLine();
+	    	      text = text + line + "\n";
+	    	  }
+	    	  text = text + "\t\t" + totalStars + "\n";
+	    	  line = scan.nextLine();
+	      }
 	      while ( !line.trim().equals("<Levels>") )
 	      {
 	         line = scan.nextLine();
@@ -415,10 +424,54 @@ class PlayerDaoImpl implements PlayerDao {
 	         text = text + line + "\n";
 	      }
 
-	      FileWriter fileOut = null;
+	      writeFile(player.getPath() + "/playerInfo.txt", text);
+		
+	}
+
+	@Override
+	public void saveSettings(Player player) {
+		Scanner scan = null;
+		String line, text;
+		Settings settings = player.getSettings();
+		
+		try
+	    {
+	         scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
+	    } catch (FileNotFoundException e1)
+	    {
+	         // TODO Auto-generated catch block
+	         e1.printStackTrace();
+	    }
+		
+		line = scan.nextLine();
+		text = line + "\n";
+		
+		while(!line.trim().equals("<Settings>"))
+		{
+			line = scan.nextLine();
+			text = text + line + "\n";
+		}
+		text = text + settings.settingsToString();
+		while(!line.trim().equals("<Settings/>"))
+		{
+			line = scan.nextLine();
+		}
+		text = text + line + "\n";
+		
+		while (scan.hasNext())
+		{
+			 line = scan.nextLine();
+	         text = text + line + "\n";
+		}
+		writeFile(player.getPath() + "/playerInfo.txt", text);
+	}
+	
+	private void writeFile(String path, String text)
+	{
+		 FileWriter fileOut = null;
 	      try
 	      {
-	         fileOut = new FileWriter(player.getPath() + "/playerInfo.txt");
+	         fileOut = new FileWriter(path);
 	         fileOut.write(text);
 	         fileOut.flush();
 	         fileOut.close();
@@ -427,13 +480,6 @@ class PlayerDaoImpl implements PlayerDao {
 	         // TODO Auto-generated catch block
 	         e.printStackTrace();
 	      }
-		
-	}
-
-	@Override
-	public void saveSettings(Player player) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
