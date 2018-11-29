@@ -6,7 +6,7 @@ import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
 
-public class PlayerManager
+public class PlayerManager extends Controller
 {
    public static PlayerManager instance;
 

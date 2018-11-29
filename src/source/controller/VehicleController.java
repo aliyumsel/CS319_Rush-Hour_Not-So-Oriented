@@ -1,9 +1,8 @@
 package source.controller;
 
-import interfaces.Updatable;
 import source.model.*;
 
-public class VehicleController implements Updatable
+public class VehicleController extends Controller
 {
    public static VehicleController instance;
 
@@ -31,7 +30,7 @@ public class VehicleController implements Updatable
    }
 
    //executed every frame write the functionality needed to here
-   public void Update()
+   public void update()
    {
       if ( !GameManager.instance.isGameActive )
       {

@@ -1,10 +1,9 @@
 package source.controller;
 
-import interfaces.Updatable;
 import source.model.LevelInformation;
 import source.view.GuiPanelManager;
 
-public class GameManager implements Updatable
+public class GameManager extends Controller
 {
    public static GameManager instance;
    public PlayerManager playerManager;
@@ -19,7 +18,7 @@ public class GameManager implements Updatable
       instance = this;
    }
 
-   public void Update()
+   public void update()
    {
 
    }

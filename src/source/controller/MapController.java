@@ -7,7 +7,7 @@ import source.model.Map;
 import source.model.Player;
 import source.model.Vehicle;
 
-public class MapController
+public class MapController extends Controller
 {
    public static MapController instance;
 
