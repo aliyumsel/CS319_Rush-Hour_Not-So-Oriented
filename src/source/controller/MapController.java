@@ -135,7 +135,6 @@ public class MapController extends Controller
 
                   if (gameObject instanceof Obstacle)
                   {
-                     //System.out.println("Bunun icine girmiyomu");
                      mapStr = mapStr + "OO ";
                      found = true;
                      break;

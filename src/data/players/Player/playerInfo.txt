@@ -3,7 +3,7 @@
 		Player
 	<Name/>
 	<StarAmount>
-		11
+		12
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,10 +11,10 @@
 				1
 			<LevelNo/>
 			<Stars>
-				2
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				9
+				13
 			<CurrentNumberOfMoves>
 			<Status>
 				finished

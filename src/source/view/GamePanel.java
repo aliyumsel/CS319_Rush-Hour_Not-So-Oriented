@@ -193,6 +193,7 @@ public class GamePanel extends JPanel {
          SoundManager.instance.buttonClick();
          if (e.getSource() == reset) {
             GameEngine.instance.gameManager.resetLevel();
+				guiManager.setPanelVisible("Game");
          }
 
          if (e.getSource() == menu) {

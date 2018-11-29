@@ -40,7 +40,7 @@ public class VehicleController extends Controller
          if ( temp != null )
          {
             setSelectedVehicle(temp);
-            System.out.println("Selected vehicle");
+            System.out.println("Selected vehicle: " + selectedVehicle.transform.position.x + ", " + selectedVehicle.transform.position.y);
          }
       }
 
@@ -73,6 +73,7 @@ public class VehicleController extends Controller
 
          if ( moved )
          {
+            System.out.println("Moved");
             MapController.instance.updateMap(map.getGameObjects());
             numberOfMoves++;
             GameManager.instance.autoSave(numberOfMoves);
