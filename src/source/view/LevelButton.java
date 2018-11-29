@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 //Test
-public class LevelButton extends JButton
+class LevelButton extends JButton
 {
    private GuiPanelManager guiManager;
 
@@ -107,6 +107,7 @@ public class LevelButton extends JButton
          {
             stars[i].setVisible(false);
          }
+         return;
       }
       for ( int i = 0; i < stars.length; i++ )
       {
@@ -118,6 +119,7 @@ public class LevelButton extends JButton
          {
             stars[i].setIcon(new ImageIcon(starInactive));
          }
+         stars[i].setVisible(true);
       }
    }
 

@@ -6,6 +6,7 @@ import java.awt.*;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
+import source.model.LevelInformation;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -167,6 +168,7 @@ public class LevelSelectionPanel extends JPanel
             else
             {
                buttonArray[i].toggleLock(false);
+               System.out.println("starAmount: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
             }
          }
@@ -214,6 +216,7 @@ public class LevelSelectionPanel extends JPanel
       {
          guiManager.setPanelVisible("MainMenu");
       }
+
       //clicked one of the level buttons
       else
       {
@@ -221,9 +224,11 @@ public class LevelSelectionPanel extends JPanel
          {
             if ( e.getSource() == buttonArray[index] )
             {
-               popUp.initialize(index + 1); // buna player objesi de eklenecek
+               System.out.println("Destinationlevel: " + index + 1);
+               GameEngine.instance.gameManager.loadLevel(index + 1);
+               guiManager.setPanelVisible("Game");
+               break;
             }
-            popUp.setVisible(true);
          }
       }
 

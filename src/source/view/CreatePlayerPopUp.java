@@ -1,7 +1,5 @@
 package source.view;
 
-import source.controller.GameEngine;
-import source.controller.PlayerManager;
 import source.controller.SoundManager;
 
 import javax.swing.*;
@@ -113,6 +111,11 @@ public class CreatePlayerPopUp extends JPanel
 
       graphics2d.drawImage(background, 0, 0, null);
 
+   }
+
+   void requestFocusForTextField()
+   {
+      playerName.requestFocus();
    }
 
    private ActionListener actionListener = e ->

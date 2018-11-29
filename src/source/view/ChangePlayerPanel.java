@@ -309,12 +309,9 @@ public class ChangePlayerPanel extends JPanel
       }
       else if ( e.getSource() == addButton )
       {
-//         Scanner scan = new Scanner(System.in);
-//         String temp = scan.nextLine();
-//         addPlayer(temp);
-//         selectPlayer(temp);
          popUp.setVisible(true);
-         //guiManager.setPanelVisible("MainMenu");
+         //needs to be thought about
+         //popUp.requestFocusForTextField();
       }
       else if (e.getSource() == deleteButton1)
       {

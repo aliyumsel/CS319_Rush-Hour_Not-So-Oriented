@@ -3,7 +3,7 @@
 		Ahmet
 	<Name/>
 	<StarAmount>
-		0
+		9
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,13 +11,13 @@
 				1
 			<LevelNo/>
 			<Stars>
-				0
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				9
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
@@ -30,16 +30,16 @@
 				2
 			<LevelNo/>
 			<Stars>
-				0
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				9
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -49,16 +49,16 @@
 				3
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				7
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -68,16 +68,16 @@
 				4
 			<LevelNo/>
 			<Stars>
-				0
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				15
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -87,16 +87,16 @@
 				5
 			<LevelNo/>
 			<Stars>
-				0
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				13
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
