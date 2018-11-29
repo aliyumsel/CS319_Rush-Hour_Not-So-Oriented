@@ -232,33 +232,31 @@ public class SettingsPanel extends JPanel
       }
       else if ( e.getSource() == music )
       {
-         boolean currentMusic = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setMusic(!currentMusic);
+         GameEngine.instance.playerManager.toggleMusic();
          updateSoundButtons("Music");
          SoundManager.instance.themeSongToggle();
       }
       else if ( e.getSource() == sfx )
       {
-         boolean currentSFX = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setSfx(!currentSFX);
+         GameEngine.instance.playerManager.toggleSfx();
          updateSoundButtons("SFX");
          SoundManager.instance.effectsToggle();
       }
       else if ( e.getSource() == simple )
       {
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SIMPLE);
+         GameEngine.instance.playerManager.changeTheme(Settings.Theme.SIMPLE);
       }
       else if ( e.getSource() == classic )
       {
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.CLASSIC);
+         GameEngine.instance.playerManager.changeTheme(Settings.Theme.CLASSIC);
       }
       else if ( e.getSource() == safari )
       {
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SAFARI);
+         GameEngine.instance.playerManager.changeTheme(Settings.Theme.SAFARI);
       }
       else if ( e.getSource() == space )
       {
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SPACE);
+         GameEngine.instance.playerManager.changeTheme(Settings.Theme.SPACE);
       }
    };
 

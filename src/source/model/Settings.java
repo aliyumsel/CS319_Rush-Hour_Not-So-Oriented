@@ -53,6 +53,16 @@ public class Settings
       this.sfx = sfx;
    }
    
+   public void toggleMusic()
+   {
+	   music = !music;
+   }
+   
+   public void toggleSfx()
+   {
+	   sfx = !sfx;
+   }
+   
    public String settingsToString()
    {
 	   String themeStr;

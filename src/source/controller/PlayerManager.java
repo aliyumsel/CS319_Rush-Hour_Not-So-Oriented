@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
+import source.model.Settings.Theme;
 
 public class PlayerManager extends Controller
 {
@@ -203,5 +204,26 @@ public class PlayerManager extends Controller
    public boolean isLevelLocked(int levelNo)
    {
       return !currentPlayer.getLevels().get(levelNo - 1).isUnlocked();
+   }
+   
+   public void toggleMusic()
+   {
+	   currentPlayer.getSettings().toggleMusic();
+	   playerDao.saveSettings(currentPlayer);
+   }
+   
+   public void toggleSfx()
+   {
+	   currentPlayer.getSettings().toggleSfx();
+	   playerDao.saveSettings(currentPlayer);
+   }
+   
+   public void changeTheme(Theme theme)
+   {
+	   if (theme != currentPlayer.getSettings().getTheme())
+	   {
+		   currentPlayer.getSettings().setTheme(theme);
+		   playerDao.saveSettings(currentPlayer);
+	   }
    }
 }
