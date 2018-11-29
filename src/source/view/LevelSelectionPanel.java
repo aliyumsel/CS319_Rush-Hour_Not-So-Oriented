@@ -157,7 +157,7 @@ public class LevelSelectionPanel extends JPanel
    {
       for ( int i = 0; i < buttonArray.length; i++ )
       {
-         if ( i < 5 )
+         if ( i < GameEngine.instance.playerManager.getCurrentPlayer().getLevels().size() )
          {
             if ( GameEngine.instance.playerManager.isLevelLocked(i + 1) )
             {

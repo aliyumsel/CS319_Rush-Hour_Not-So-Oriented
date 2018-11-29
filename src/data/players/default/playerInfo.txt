@@ -1,9 +1,9 @@
 <Player>
 	<Name>
-		Ahmet
+		default
 	<Name/>
 	<StarAmount>
-		9
+		8
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,18 +11,26 @@
 				1
 			<LevelNo/>
 			<Stars>
-				2
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				9
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS SS CD SS CU SS OO
+OO SS SS SS CU SS CU OO
+OO PC SS TU SS TD SS SS
+OO SS SS SS TD SS TD OO
+OO SS SS SS SS SS SS OO
+OO SS SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -33,7 +41,7 @@
 				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				9
+				10
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -49,10 +57,10 @@
 				3
 			<LevelNo/>
 			<Stars>
-				3
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				7
+				10
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -71,7 +79,7 @@
 				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				15
+				13
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -101,6 +109,33 @@
 			<Map>
 			<Map/>
 		<Level/>
+		<Level>
+			<LevelNo>
+				6
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				214
+			<CurrentNumberOfMoves>
+			<Status>
+				inProgress
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+OO OO OO OO OO OO OO OO
+OO TD OO CR SS SS CD OO
+OO SS CL SS SS SS SS OO
+OO SS SS SS SS PC SS OO
+OO CL SS TD CD SS SS OO
+OO CR SS SS SS SS CD OO
+OO SS OO SS CL SS SS OO
+OO OO OO OO OO OO OO OO
+			<Map/>
+		<Level/>
 	<Levels/>
 	<Settings>
 		<Music>
@@ -112,5 +147,5 @@
 		<Theme>
 			CLASSIC
 		<Theme/>
-	<Settings>
+	<Settings/>
 <Player/>

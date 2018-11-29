@@ -93,6 +93,7 @@ public class VehicleController extends Controller
 
    private boolean tryMove(String direction)
    {
+      System.out.println("In here??");
       String vehicleAxis = selectedVehicle.transform.axis;
       int moveAmount = 0;
       int moveCheck = 0;

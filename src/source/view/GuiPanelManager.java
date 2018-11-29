@@ -44,8 +44,10 @@ public class GuiPanelManager extends JFrame
       setUndecorated(true);
       instance = this;
       Toolkit toolkit = Toolkit.getDefaultToolkit();
-      BufferedImage image = LoadImage("src/image/icons/cursor3.png");
+      Image image = LoadImage("src/image/icons/cursor3.png");
+      image = toolkit.getImage("src/image/icons/cursor.png");
       Cursor c = toolkit.createCustomCursor(image , new Point(0, 0), "img");
+      System.out.print("cursorthing: " + toolkit.getBestCursorSize(16,16));
       this.setCursor (c);
 
       panels = new ArrayList<>();
