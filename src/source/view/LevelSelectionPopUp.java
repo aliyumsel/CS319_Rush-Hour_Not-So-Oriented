@@ -98,21 +98,9 @@ public class LevelSelectionPopUp extends JPanel
       }
       LevelInformation currentLevelInfo = GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(destinationLevel - 1);
       System.out.println(currentLevelInfo.getStatus());
-      if ( currentLevelInfo.getStatus().equals("notStarted") )
-      {
-         showStars(0);
-         showNumberOfMoves(0);
-      }
-      else if ( currentLevelInfo.getStatus().equals("inProgress") )
-      {
-         showStars(0);
-         showNumberOfMoves(currentLevelInfo.getCurrentNumberOfMoves());
-      }
-      else if ( currentLevelInfo.getStatus().equals("finished") )
-      {
-         showStars(currentLevelInfo.getStars());
-         showNumberOfMoves(currentLevelInfo.getCurrentNumberOfMoves());
-      }
+      showStars(currentLevelInfo.getStars());
+      showNumberOfMoves(currentLevelInfo.getCurrentNumberOfMoves());
+
    }
 
    private void createComponents()
