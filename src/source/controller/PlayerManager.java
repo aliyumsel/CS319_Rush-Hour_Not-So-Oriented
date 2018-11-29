@@ -93,6 +93,7 @@ public class PlayerManager extends Controller
       }
     //adds the new player to players and sets it as current player
       Player newPlayer = playerDao.cratePlayer(playerName);
+      playerDao.saveLastActivePlayer(playerName);
       players.add(newPlayer);
       currentPlayer = newPlayer;
       
