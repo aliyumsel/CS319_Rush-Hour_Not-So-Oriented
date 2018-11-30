@@ -11,7 +11,7 @@ public class MapGenerator {
     public static String[] moves = new String[size];
 
     public static void main(String[] args) throws IOException {
-        File file = new File("src/data/levels/rush.txt");
+        File file = new File("C:\\Users\\asus\\Desktop\\rush.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
         String mapStr = "";
         char ch_V1;
