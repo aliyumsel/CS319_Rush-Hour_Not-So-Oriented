@@ -109,7 +109,11 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
+<<<<<<< HEAD
 				13
+=======
+				10
+>>>>>>> unstable
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
@@ -122,7 +126,11 @@ OO OO OO OO OO OO OO OO
 OO SS OO TD CD CR SS OO
 OO CL SS SS SS SS CD OO
 OO TD SS SS PC SS SS SS
+<<<<<<< HEAD
 OO SS SS CL SS SS SS OO
+=======
+OO SS SS SS SS CL SS OO
+>>>>>>> unstable
 OO SS CR SS SS SS CD OO
 OO SS OO CL SS SS SS OO
 OO OO OO OO OO OO OO OO

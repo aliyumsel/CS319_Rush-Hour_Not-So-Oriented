@@ -12,7 +12,7 @@ public class VehicleController extends Controller
    private Vehicle selectedVehicle;
    private SoundManager soundManager;
    private int numberOfMoves;
-
+   private boolean changed = false;
    VehicleController()
    {
       instance = this;
@@ -75,14 +75,22 @@ public class VehicleController extends Controller
          {
             System.out.println("Moved");
             MapController.instance.updateMap(map.getGameObjects());
-            numberOfMoves++;
-            GameManager.instance.autoSave(numberOfMoves);
+            changed = true;
+
+
          }
       }
    }
 
    private void setSelectedVehicle(Vehicle _selectedVehicle)
    {
+      if(_selectedVehicle != selectedVehicle) {
+         if (changed) {
+            numberOfMoves++;
+            GameManager.instance.autoSave(numberOfMoves);
+            changed = false;
+         }
+      }
       selectedVehicle = _selectedVehicle;
       if ( soundManager == null )
       {
