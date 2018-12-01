@@ -18,7 +18,7 @@ public class Obstacle extends GameObject
    public Obstacle(int x, int y, int length, String direction)
    {
       super(x, y, length, direction);
-      image = LoadImage("src/image/Player.png");
+      image = LoadImage("src/image/obstacle.png");
    }
 
    @Override
