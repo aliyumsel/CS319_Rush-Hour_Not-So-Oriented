@@ -3,6 +3,8 @@ package interfaces;
 import java.util.ArrayList;
 
 import source.model.Player;
+import source.model.Settings;
+
 
 public interface PlayerDao {
 	
@@ -10,7 +12,7 @@ public interface PlayerDao {
 	
 	String extractLastPlayerName();
 	
-	Player cratePlayer(String playerName);
+	Player cratePlayer(String playerName, Settings settings);
 	
 	boolean deletePlayer(Player player);
 	

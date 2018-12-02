@@ -174,7 +174,7 @@ class PlayerDaoImpl implements PlayerDao {
 	}
 
 	@Override
-	public Player cratePlayer(String playerName) {
+	public Player cratePlayer(String playerName, Settings settings) {
 		  Scanner scanInfo = null, levelInfo = null;
 	      int playerAmount, mapAmount, movesForThreeStars, movesForTwoStars;
 	      String tmp, playerPath, playerInfo;
@@ -262,34 +262,15 @@ class PlayerDaoImpl implements PlayerDao {
 	      playerInfo = playerInfo +
 	              "\t<Levels/>\n" +
 	              "\t<Settings>\n" +
-	              "\t\t<Music>\n" +
-	              "\t\t\ttrue\n" +
-	              "\t\t<Music/>\n" +
-	              "\t\t<Sfx>\n" +
-	              "\t\t\ttrue\n" +
-	              "\t\t<Sfx/>\n" +
-	              "\t\t<Theme>\n" +
-	              "\t\t\tCLASSIC\n" +
-	              "\t\t<Theme/>\n" +
+	              settings.settingsToString() +
 	              "\t<Settings/>\n" +
 	              "<Player/>\n";
 
-	      FileWriter fileOut = null;
-	      try
-	      {
-	         fileOut = new FileWriter(playerPath + "/playerInfo.txt");
-	         fileOut.write(playerInfo);
-	         fileOut.flush();
-	         fileOut.close();
-	      } catch (IOException e)
-	      {
-	         // TODO Auto-generated catch block
-	         e.printStackTrace();
-	      }
+	      writeFile(playerPath + "/playerInfo.txt", playerInfo);
 
 	      scanInfo.close();
 	      
-	      Player newPlayer = new Player(playerName, 0, levels, playerPath, new Settings(true, true));
+	      Player newPlayer = new Player(playerName, 0, levels, playerPath, settings);
 	      newPlayer.resetLastUnlockedLevelNo();
 	      
 	      return newPlayer;

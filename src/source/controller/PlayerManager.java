@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
+import source.model.Settings;
 import source.model.Settings.Theme;
 
 public class PlayerManager extends Controller
@@ -92,7 +93,10 @@ public class PlayerManager extends Controller
          }
       }
     //adds the new player to players and sets it as current player
-      Player newPlayer = playerDao.cratePlayer(playerName);
+      boolean initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
+      boolean initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
+      Settings settings = new Settings(initialMusic, initialSfx);
+      Player newPlayer = playerDao.cratePlayer(playerName, settings);
       playerDao.saveLastActivePlayer(playerName);
       players.add(newPlayer);
       currentPlayer = newPlayer;
@@ -145,6 +149,8 @@ public class PlayerManager extends Controller
       }
       if ( selected )
       {
+         GameEngine.instance.soundManager.setThemeSong(currentPlayer.getSettings().getMusic());
+         GameEngine.instance.soundManager.setEffects(currentPlayer.getSettings().getSfx());
          playerDao.saveLastActivePlayer(name);
          return true;
       }
