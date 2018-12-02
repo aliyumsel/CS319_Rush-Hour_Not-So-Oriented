@@ -2,9 +2,9 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-	default
+	Deniz
 
 <LastActivePlayer/>
 <NumberOfMaps>
-	6
+	50
 <NumberOfMaps/>
