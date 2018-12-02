@@ -164,8 +164,10 @@ public class PlayerManager extends Controller
 	   LevelInformation currentLevel = currentPlayer.getLevels().get(levelNo - 1);
 	   setLevelStatus(levelNo, "finished");
 	   currentLevel.setMap("");
-	   currentLevel.setStars(starAmount);
-	   currentPlayer.setStarAmount(currentPlayer.getStarAmount() + starAmount);
+	   if (starAmount > currentLevel.getStars()) {
+          currentPlayer.setStarAmount(currentPlayer.getStarAmount() + (starAmount - currentLevel.getStars()));
+          currentLevel.setStars(starAmount);
+       }
 	   playerDao.saveLevel(levelNo, currentPlayer);
 	   //playerDao.saveStarAmount(currentPlayer); will be added
 	   
