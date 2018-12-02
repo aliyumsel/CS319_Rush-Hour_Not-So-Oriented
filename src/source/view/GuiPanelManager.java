@@ -116,11 +116,6 @@ public class GuiPanelManager extends JFrame
 
    void setPanelVisible(String panelName)
    {
-      for ( JPanel panel: panels )
-      {
-         panel.setVisible(false);
-      }
-
       if ( panelName.equals("MainMenu") )
       {
     	   mainMenuPanel.updatePanel();
@@ -141,7 +136,10 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("Settings") )
       {
-         settingsPanel.updatePanel();
+         if (mainMenuPanel.isVisible())
+            settingsPanel.updatePanel("MainMenu");
+         else if (gamePanel.isVisible())
+            settingsPanel.updatePanel("Game");
          targetPanel = settingsPanel;
       }
       else if ( panelName.equals("Help") )
@@ -156,6 +154,10 @@ public class GuiPanelManager extends JFrame
       else
       {
          System.out.println("Error: Enter valid name");
+      }
+      for ( JPanel panel: panels )
+      {
+         panel.setVisible(false);
       }
       targetPanel.setVisible(true);
       setContentPane(targetPanel);
