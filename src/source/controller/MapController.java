@@ -44,7 +44,13 @@ public class MapController extends Controller
       map.formMap(gameObjects);
    }
 
-   Vehicle getVehicleBySelectedCell(int x, int y)
+   //Currently testing / May even crate a method called formMap() with no arguments
+   void updateMap()
+   {
+      map.formMap(map.getGameObjects());
+   }
+
+   private GameObject getGameObjectBySelectedCell(int x, int y)
    {
       int[] occupiedCells;
       int cellNumber = ( map.getMapSize() * y ) + x;
@@ -62,17 +68,45 @@ public class MapController extends Controller
          }
       }
 
-      if (selectedObject == null)
+      return selectedObject;
+   }
+
+   Vehicle getVehicleBySelectedCell(int x, int y)
+   {
+      GameObject temp = getGameObjectBySelectedCell(x,y);
+
+      if (temp instanceof Vehicle)
+      {
+         return (Vehicle) temp;
+      }
+      else
       {
          return null;
       }
+   }
 
-      if (selectedObject instanceof Vehicle)
+   Obstacle getObstacleBySelectedCell(int x, int y)
+   {
+      GameObject temp = getGameObjectBySelectedCell(x,y);
+
+      if (temp instanceof Obstacle)
       {
-         return (Vehicle)selectedObject;
+         return (Obstacle) temp;
       }
+      else
+      {
+         return null;
+      }
+   }
 
-      return null;
+   void removeGameObject(GameObject gameObject)
+   {
+      map.getGameObjects().remove(gameObject);
+   }
+
+   void addGameObject(GameObject gameObject)
+   {
+      map.getGameObjects().add(gameObject);
    }
 
    // This method checks if the player is at the last cell he can go

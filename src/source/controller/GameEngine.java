@@ -11,11 +11,12 @@ public class GameEngine extends TimerTask
 
    private ArrayList<Controller> controllers;
 
-   SoundManager soundManager;
+   public SoundManager soundManager;
    public VehicleController vehicleController;
    public MapController mapController;
    public PlayerManager playerManager;
    public GameManager gameManager;
+   public PowerUpManager powerUpManager;
 
    public GameEngine()
    {
@@ -23,6 +24,7 @@ public class GameEngine extends TimerTask
 
       soundManager = new SoundManager();
       mapController = new MapController();
+      powerUpManager = new PowerUpManager();
       vehicleController = new VehicleController();
       playerManager = new PlayerManager();
       gameManager = new GameManager();
@@ -34,6 +36,7 @@ public class GameEngine extends TimerTask
       controllers.add(vehicleController);
       controllers.add(playerManager);
       controllers.add(gameManager);
+      controllers.add(powerUpManager);
 
       for (Controller controller: controllers)
       {

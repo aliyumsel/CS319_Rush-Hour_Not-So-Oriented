@@ -33,18 +33,6 @@ public class Input
         return mouseButtons[buttonID];
     }
 
-//    static double getMousePositionX()
-//    {
-//        return mouseX;
-//        //return MouseInfo.getPointerInfo().getLocation().getX();
-//    }
-//
-//    static double getMousePositionY()
-//    {
-//        return mouseY;
-//        //return MouseInfo.getPointerInfo().getLocation().y;
-//    }
-
     public static MouseListener getMouseListener()
     {
         return new MouseEventHandler();

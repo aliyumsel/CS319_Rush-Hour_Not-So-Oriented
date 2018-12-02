@@ -1,7 +1,6 @@
 package source.view;
 
-import source.controller.SoundManager;
-
+import source.controller.GameEngine;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -124,7 +123,7 @@ public class CreditsPanel extends JPanel
    }
 
    private ActionListener actionListener = e -> {
-	   SoundManager.instance.buttonClick();
+	   GameEngine.instance.soundManager.buttonClick();
       if (e.getSource() == back) {
          guiManager.setPanelVisible("MainMenu");
       }

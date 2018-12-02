@@ -225,7 +225,7 @@ public class SettingsPanel extends JPanel
 
    private ActionListener actionListener = e ->
    {
-      SoundManager.instance.buttonClick();
+      GameEngine.instance.soundManager.buttonClick();
       if ( e.getSource() == back )
       {
          guiManager.setPanelVisible("MainMenu");
@@ -234,13 +234,13 @@ public class SettingsPanel extends JPanel
       {
          GameEngine.instance.playerManager.toggleMusic();
          updateSoundButtons("Music");
-         SoundManager.instance.themeSongToggle();
+         GameEngine.instance.soundManager.themeSongToggle();
       }
       else if ( e.getSource() == sfx )
       {
          GameEngine.instance.playerManager.toggleSfx();
          updateSoundButtons("SFX");
-         SoundManager.instance.effectsToggle();
+         GameEngine.instance.soundManager.effectsToggle();
       }
       else if ( e.getSource() == simple )
       {

@@ -1,5 +1,6 @@
 package source.view;
 
+import source.controller.GameEngine;
 import source.controller.SoundManager;
 
 import javax.swing.*;
@@ -120,7 +121,7 @@ public class CreatePlayerPopUp extends JPanel
 
    private ActionListener actionListener = e ->
    {
-      SoundManager.instance.buttonClick();
+      GameEngine.instance.soundManager.buttonClick();
       if ( e.getSource() == close )
       {
          setVisible(false);

@@ -25,6 +25,11 @@ public class Vehicle extends GameObject// implements Drawable
 //      super();
 //   }
 
+   public Vehicle(Vehicle templateVehicle, int length)
+   {
+      this(templateVehicle.transform.position.x, templateVehicle.transform.position.y, 2, templateVehicle.transform.direction, false, false, "traffic");
+   }
+
    Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme)
    {
       super(x, y, length, direction);

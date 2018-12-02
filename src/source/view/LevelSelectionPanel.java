@@ -184,7 +184,7 @@ public class LevelSelectionPanel extends JPanel
 
    private ActionListener actionListener = e ->
    {
-      SoundManager.instance.buttonClick();
+      GameEngine.instance.soundManager.buttonClick();
       if ( e.getSource() == leftArrowButton )
       {
          if ( page == 0 )

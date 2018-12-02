@@ -165,7 +165,7 @@ public class EndOfLevelPanel extends JPanel
       @Override
       public void actionPerformed(ActionEvent e)
       {
-         SoundManager.instance.buttonClick();
+         GameEngine.instance.soundManager.buttonClick();
          if ( e.getSource() == retry )
          {
             GameEngine.instance.gameManager.resetLevel();

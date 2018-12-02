@@ -33,6 +33,11 @@ public class VehicleController extends Controller
          return;
       }
 
+      if (PowerUpManager.instance.isPowerUpActive())
+      {
+         return;
+      }
+
       if ( Input.getMouseButtonPressed(0) )
       {
          Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
@@ -46,6 +51,7 @@ public class VehicleController extends Controller
 
       if ( selectedVehicle != null )
       {
+         //System.out.println("Selected vehicle: NOT NULL");
          if ( selectedVehicle.isPlayer() && MapController.instance.isPlayerAtExit() )
          {
             GameManager.instance.endMap();
@@ -56,6 +62,7 @@ public class VehicleController extends Controller
          boolean moved = false;
          if ( Input.getKeyPressed("w") )
          {
+            System.out.println("MOve Upwards");
             moved = tryMove("Upwards");
          }
          else if ( Input.getKeyPressed("a") )
@@ -76,8 +83,6 @@ public class VehicleController extends Controller
             System.out.println("Moved");
             MapController.instance.updateMap(map.getGameObjects());
             changed = true;
-
-
          }
       }
    }

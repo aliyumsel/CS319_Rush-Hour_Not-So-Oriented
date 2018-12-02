@@ -225,7 +225,7 @@ public class MainMenuPanel extends JPanel
 
    private ActionListener actionListener = e ->
    {
-      SoundManager.instance.buttonClick();
+      GameEngine.instance.soundManager.buttonClick();
       if ( e.getSource() == play )
       {
          GameEngine.instance.gameManager.loadLastLevel();
