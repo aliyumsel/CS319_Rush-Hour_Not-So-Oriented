@@ -46,7 +46,7 @@ public class SettingsPanel extends JPanel
    private BufferedImage safariHighlightedImage;
    private BufferedImage spaceImage;
    private BufferedImage spaceHighlightedImage;
-
+   public String previousPanel = "";
    private int panelWidth;
    private int panelHeight;
 
@@ -163,8 +163,9 @@ public class SettingsPanel extends JPanel
       space.setBounds(375, 350, space.getPreferredSize().width, space.getPreferredSize().height);
    }
 
-   void updatePanel()
+   void updatePanel(String previousPanel)
    {
+      this.previousPanel = previousPanel;
       updateSoundButtons("SFX");
       updateSoundButtons("Music");
    }
@@ -228,7 +229,7 @@ public class SettingsPanel extends JPanel
       GameEngine.instance.soundManager.buttonClick();
       if ( e.getSource() == back )
       {
-         guiManager.setPanelVisible("MainMenu");
+         guiManager.setPanelVisible(previousPanel);
       }
       else if ( e.getSource() == music )
       {

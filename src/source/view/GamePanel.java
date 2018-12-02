@@ -215,20 +215,25 @@ public class GamePanel extends JPanel
             GameEngine.instance.gameManager.resetLevel();
             guiManager.setPanelVisible("Game");
          }
-
-         if ( e.getSource() == menu )
+         else if ( e.getSource() == menu )
          {
             guiManager.setPanelVisible("MainMenu");
          }
-
-         if ( e.getSource() == shrink )
+         else if (e.getSource() == settings)
+         {
+            guiManager.setPanelVisible("Settings");
+         }
+         else if ( e.getSource() == shrink )
          {
             GameEngine.instance.powerUpManager.initializePowerUp(PowerUpManager.PowerUp.Shrink);
          }
-
-         if (e.getSource() == space)
+         else if (e.getSource() == space)
          {
             GameEngine.instance.powerUpManager.initializePowerUp(PowerUpManager.PowerUp.Space);
+         }
+         else if (e.getSource() == settings)
+         {
+            guiManager.setPanelVisible("MainMenu");
          }
       }
    };
