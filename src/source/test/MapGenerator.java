@@ -19,14 +19,14 @@ public class MapGenerator {
         char ch_H1;
         char ch_H2;
         int direction = 0; //RANDOM
-
+        int cell = 0;
         String st;
         int i = 0;
         int index = 0;
 
 
         while ((st = br.readLine()) != null ) {
-            if(i >= 966950 && i < 967000) {  //buradaki değerleri değiştirin sadece, "size" kadar fark olsun arada ve değişkene atabilirsiniz
+            if(i >= 1166950 && i < 1167000) {  //buradaki değerleri değiştirin sadece, "size" kadar fark olsun arada ve değişkene atabilirsiniz
                 moves[index] = st.split(" ")[0];
                 grid[index] = st.split(" ")[1];
                 index++;
@@ -41,13 +41,12 @@ public class MapGenerator {
             for (int a = -1; a < 7; a++) {
                 for (int j = -1; j < 7; j++) {
                     if (a >= 0 && a < 6 && j >= 0 && j < 6) {
-                        int cell = a * 6 + j;
-
+                        cell = a * 6 + j;
                         if (map.charAt(cell) == 'A') {
                             mapStr += "PC ";
                             map.setCharAt(cell + 1, 'o');
                         } else if (map.charAt(cell) == 'x') {
-                            mapStr += "OO ";
+                                mapStr += "OO ";
                         } else if (map.charAt(cell) == 'o') {
                             mapStr += "SS ";
                         } else {
@@ -104,8 +103,13 @@ public class MapGenerator {
                                 map.setCharAt(cell + 12, 'o');
                             }
                         }
-                    } else
-                        mapStr += "OO ";
+                    } else {
+                        if (a == 2 && j == 6) //4th row last cell
+                            mapStr += "SS ";
+                        else
+                            mapStr += "OO ";
+                    }
+
                 }
                 mapStr = mapStr.substring(0, mapStr.length() - 1); //removes space at the end of the line but there is no need for it
                 mapStr = mapStr + "\n";
