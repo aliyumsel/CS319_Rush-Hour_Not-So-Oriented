@@ -1,5 +1,6 @@
 package source.controller;
 
+import source.model.Car;
 import source.model.Obstacle;
 import source.model.Vehicle;
 
@@ -36,9 +37,10 @@ public class PowerUpManager extends Controller
                   MapController.instance.removeGameObject(temp);
 
                   //May move this to MapController or smt
-                  Vehicle newVehicle = new Vehicle(temp, 2);
-
+                  //Vehicle newVehicle = new Vehicle(temp, 2);
+                  Vehicle newVehicle = new Car(temp);
                   MapController.instance.addGameObject(newVehicle);
+
                   MapController.instance.updateMap();
                   shrinkActive = false;
                }
