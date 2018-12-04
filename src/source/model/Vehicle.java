@@ -1,5 +1,7 @@
 package source.model;
 
+import source.controller.GameManager;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
@@ -16,30 +18,33 @@ public class Vehicle extends GameObject// implements Drawable
    private int verticalMoveAxis;
    private int horizontalMoveAxis;
    private int drawingIndexForMoving;
-   //private BufferedImage vehicle;
    private BufferedImage[] vehicleImages;
+   public String theme;
+   private boolean special = false;
 
-   // AffineTransform at;
-//   Vehicle()
-//   {
-//      super();
-//   }
 
+   public Vehicle()
+   {
+
+   }
    public Vehicle(Vehicle templateVehicle, int length)
    {
       this(templateVehicle.transform.position.x, templateVehicle.transform.position.y, 2, templateVehicle.transform.direction, false, false, "traffic");
    }
 
-   Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme)
+   Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme) //theme i sil burdan
    {
       super(x, y, length, direction);
       this.player = player;
       isMoving = false;
+      this.special = special;
+      this.theme = theme;
+      this.theme = GameManager.instance.theme;
       this.drawingIndexForMoving = 60;
       verticalMoveAxis = 0;
       horizontalMoveAxis = 0;
       vehicleImages = new BufferedImage[length];
-      String path = "src/image/theme_" + theme + "/";
+      String path = "src/image/theme_" + this.theme + "/";
       int carType = (int) ( Math.random() * 2 );
 
       if ( !player && length == 2 )
@@ -50,7 +55,7 @@ public class Vehicle extends GameObject// implements Drawable
       {
          path += "large";
       }
-      else if ( player && !special )
+      else if ( player && !this.special )
       {
          path += "player";
       }
@@ -130,7 +135,59 @@ public class Vehicle extends GameObject// implements Drawable
          findOccupiedCells();
       }
    }
+   public void updateVehicleImages(){
+      String path = "src/image/theme_" + GameManager.instance.theme + "/";
+      int carType = (int) ( Math.random() * 2 );
 
+      if ( !player && transform.length == 2 )
+      {
+         path += "small";
+      }
+      else if ( !player && transform.length == 3 )
+      {
+         path += "large";
+      }
+      else if ( player && !this.special )
+      {
+         path += "player";
+      }
+      else if ( player )
+      {
+         path += "police";
+      }
+
+      if ( transform.direction.equals("Upwards") || transform.direction.equals("Right") )
+      {
+         for ( int i = 0; i < transform.length; i++ )
+         {
+            if ( !player )
+            {
+               vehicleImages[i] = LoadImage(path + carType + "-" + i + ".png");
+            }
+            else
+            {
+               vehicleImages[i] = LoadImage(path + "-" + i + ".png");
+            }
+         }
+      }
+      else
+      {
+         for ( int i = 0; i < transform.length; i++ )
+         {
+            if ( !player )
+            {
+               vehicleImages[i] = LoadImage(path + carType + "-" + ( transform.length - i - 1 ) + ".png");
+            }
+            else
+            {
+               vehicleImages[i] = LoadImage(path + "-" + ( transform.length - i - 1 ) + ".png");
+            }
+         }
+      }
+
+      rescaleImages();
+
+   }
    public String getType()
    {
       return type;
@@ -149,6 +206,7 @@ public class Vehicle extends GameObject// implements Drawable
    @Override
    public void draw(Graphics graphics)
    {
+
       int gridPixelSize = 60;
       AffineTransform at;
       Graphics2D graphics2d = (Graphics2D) graphics;
