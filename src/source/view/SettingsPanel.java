@@ -1,8 +1,12 @@
 package source.view;
 
 import source.controller.GameEngine;
+import source.controller.GameManager;
+import source.controller.MapController;
 import source.controller.SoundManager;
+import source.model.GameObject;
 import source.model.Settings;
+import source.model.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -246,18 +250,22 @@ public class SettingsPanel extends JPanel
       else if ( e.getSource() == simple )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SIMPLE);
+         GameManager.instance.changeTheme("minimalistic");
       }
       else if ( e.getSource() == classic )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.CLASSIC);
+         GameManager.instance.changeTheme("traffic");
       }
       else if ( e.getSource() == safari )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SAFARI);
+        // GameManager.instance.changeTheme("safari");
       }
       else if ( e.getSource() == space )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SPACE);
+        // GameManager.instance.changeTheme("space");
       }
    };
 
