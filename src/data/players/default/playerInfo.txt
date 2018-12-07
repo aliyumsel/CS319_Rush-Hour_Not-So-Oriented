@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		7
+		13
 	<StarAmount/>
 	<Levels>
 		<Level>

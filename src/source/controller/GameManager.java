@@ -109,6 +109,8 @@ public class GameManager extends Controller
       autoSave(0);
       VehicleController.instance.setMap(MapController.instance.getMap());
       VehicleController.instance.setNumberOfMoves(0);
+
+      isGameActive = true;
    }
 
    public int getLevel()

@@ -6,18 +6,26 @@ public class VehicleController extends Controller
 {
    public static VehicleController instance;
 
-   //private MapController mapController;
-
    private Map map;
    private Vehicle selectedVehicle;
    private SoundManager soundManager;
    private int numberOfMoves;
    private boolean changed = false;
+   private enum CONTROL{SLIDE, KEYBOARD}
+   private CONTROL currentControl;
+
+   private double[] vehicleOriginPosition;
+   private int[] mouseOriginPosition;
+
    VehicleController()
    {
       instance = this;
       numberOfMoves = 0;
       soundManager = GameEngine.instance.soundManager;
+      currentControl = CONTROL.SLIDE;
+
+      mouseOriginPosition = new int[2];
+      vehicleOriginPosition = new double[2];
    }
 
    public void setMap(Map _map)
@@ -38,51 +46,93 @@ public class VehicleController extends Controller
          return;
       }
 
-      if ( Input.getMouseButtonPressed(0) )
+      if (currentControl == CONTROL.SLIDE)
       {
-         Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
-
-         if ( temp != null )
+         if ( Input.getMouseButtonPressed(0) )
          {
-            setSelectedVehicle(temp);
-            System.out.println("Selected vehicle: " + selectedVehicle.transform.position.x + ", " + selectedVehicle.transform.position.y);
+            Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+
+            if ( temp != null )
+            {
+               setSelectedVehicle(temp);
+               vehicleOriginPosition[0] = selectedVehicle.transform.position.x;
+               vehicleOriginPosition[1] = selectedVehicle.transform.position.y;
+               mouseOriginPosition = Input.getMousePosition();
+            }
+         }
+
+         if ( Input.getMouseButtonReleased(0) )
+         {
+            if (selectedVehicle != null)
+            {
+               int gridPositionX = (int)(selectedVehicle.transform.position.x + 0.5);
+               int gridPositionY = (int)(selectedVehicle.transform.position.y + 0.5);
+               selectedVehicle.moveToPoint(gridPositionX,gridPositionY);
+            }
+
+            selectedVehicle = null;
+         }
+
+         if (selectedVehicle != null)
+         {
+            if (selectedVehicle.transform.axis.equals("Horizontal"))
+            {
+               selectedVehicle.transform.position.x = vehicleOriginPosition[0] + ((Input.getMousePosition()[0] - mouseOriginPosition[0]) / (double)60);
+            }
+            else
+            {
+               selectedVehicle.transform.position.y = vehicleOriginPosition[1] + ((Input.getMousePosition()[1] - mouseOriginPosition[1]) / (double)60);
+            }
          }
       }
 
-      if ( selectedVehicle != null )
+      else if (currentControl == CONTROL.KEYBOARD)
       {
-         //System.out.println("Selected vehicle: NOT NULL");
-         if ( selectedVehicle.isPlayer() && MapController.instance.isPlayerAtExit() )
+         if ( Input.getMouseButtonPressed(0) )
          {
-            GameManager.instance.endMap();
-            selectedVehicle = null;
-            return;
+            Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+
+            if ( temp != null )
+            {
+               setSelectedVehicle(temp);
+               System.out.println("Selected vehicle: " + selectedVehicle.transform.position.x + ", " + selectedVehicle.transform.position.y);
+            }
          }
 
-         boolean moved = false;
-         if ( Input.getKeyPressed("w") )
+         if ( selectedVehicle != null )
          {
-            System.out.println("MOve Upwards");
-            moved = tryMove("Upwards");
-         }
-         else if ( Input.getKeyPressed("a") )
-         {
-            moved = tryMove("Left");
-         }
-         else if ( Input.getKeyPressed("s") )
-         {
-            moved = tryMove("Downwards");
-         }
-         else if ( Input.getKeyPressed("d") )
-         {
-            moved = tryMove("Right");
-         }
+            //System.out.println("Selected vehicle: NOT NULL");
+            if ( selectedVehicle.isPlayer() && MapController.instance.isPlayerAtExit() )
+            {
+               GameManager.instance.endMap();
+               selectedVehicle = null;
+               return;
+            }
 
-         if ( moved )
-         {
-            System.out.println("Moved");
-            MapController.instance.updateMap(map.getGameObjects());
-            changed = true;
+            boolean moved = false;
+            if ( Input.getKeyPressed("w") )
+            {
+               moved = tryMove("Upwards");
+            }
+            else if ( Input.getKeyPressed("a") )
+            {
+               moved = tryMove("Left");
+            }
+            else if ( Input.getKeyPressed("s") )
+            {
+               moved = tryMove("Downwards");
+            }
+            else if ( Input.getKeyPressed("d") )
+            {
+               moved = tryMove("Right");
+            }
+
+            if ( moved )
+            {
+               System.out.println("Moved");
+               MapController.instance.updateMap(map.getGameObjects());
+               changed = true;
+            }
          }
       }
    }
@@ -129,7 +179,7 @@ public class VehicleController extends Controller
                return false;
             }
 
-            if ( map.getGrid()[selectedVehicle.transform.position.y][selectedVehicle.transform.position.x + moveCheck].equals("Space") )
+            if ( map.getGrid()[(int)selectedVehicle.transform.position.y][(int)selectedVehicle.transform.position.x + moveCheck].equals("Space") )
             {
                selectedVehicle.move(moveAmount);
                selectedVehicle.isMoving = true;
@@ -153,7 +203,7 @@ public class VehicleController extends Controller
                return false;
             }
 
-            if ( map.getGrid()[( selectedVehicle.transform.position.y ) + moveCheck][selectedVehicle.transform.position.x].equals("Space") )
+            if ( map.getGrid()[((int)selectedVehicle.transform.position.y ) + moveCheck][(int)selectedVehicle.transform.position.x].equals("Space") )
             {
                selectedVehicle.move(moveAmount);
                selectedVehicle.isMoving = true;

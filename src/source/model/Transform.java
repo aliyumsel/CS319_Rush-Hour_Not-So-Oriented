@@ -4,10 +4,10 @@ public class Transform
 {
 	public class Position
 	{
-		public int x;
-		public int y;
+		public double x;
+		public double y;
 
-		Position(int x, int y)
+		Position(double x, double y)
 		{
 			this.x = x;
 			this.y = y;
