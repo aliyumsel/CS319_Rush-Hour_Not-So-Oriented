@@ -239,10 +239,12 @@ public class PlayerManager extends Controller
    public void decrementRemaningShrinkPowerup()
    {
       currentPlayer.decrementRemaningShrinkPowerup();
+      playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
    }
    public void decrementRemaningSpacePowerup()
    {
       currentPlayer.decrementRemaningSpacePowerup();
+      playerDao.saveRemainingPowerupAmount("space", currentPlayer);
    }
 
    public void addShrinkPowerup(int amountToBeAdded)

@@ -1,9 +1,9 @@
 <Player>
 	<Name>
-		Deniz
+		default
 	<Name/>
 	<StarAmount>
-		6
+		0
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,18 +11,26 @@
 				1
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				4
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS SS CD SS CU SS OO
+OO SS SS SS CU SS CU OO
+OO PC SS TU SS TD SS SS
+OO SS SS SS TD SS TD OO
+OO SS SS SS SS SS SS OO
+OO SS SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -30,26 +38,18 @@
 				2
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO TD CR SS SS SS SS OO
-OO SS SS SS TD SS SS OO
-OO SS PC SS SS SS SS SS
-OO CU SS SS SS SS TU OO
-OO SS CR SS SS SS SS OO
-OO SS SS TR SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -60,23 +60,15 @@ OO OO OO OO OO OO OO OO
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO SS SS SS SS SS TU OO
-OO CL SS SS SS SS SS OO
-OO CU SS SS PC SS SS SS
-OO SS CU CR SS SS SS OO
-OO CU SS CL SS CR SS OO
-OO SS TR SS SS CR SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -975,7 +967,7 @@ OO OO OO OO OO OO OO OO
 	<Levels/>
 	<Settings>
 		<Music>
-			true
+			false
 		<Music/>
 		<Sfx>
 			false
@@ -984,4 +976,10 @@ OO OO OO OO OO OO OO OO
 			CLASSIC
 		<Theme/>
 	<Settings/>
+	<RemainingShrinkPowerups>
+		0
+	<RemainingShrinkPowerups/>
+	<RemainingSpacePowerups>
+		2
+	<RemainingSpacePowerups/>
 <Player/>

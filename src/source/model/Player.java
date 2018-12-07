@@ -14,13 +14,14 @@ public class Player {
 
 	private Settings settings;
 
-	public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path, Settings settings)
+	public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path, Settings settings, int remainingShrinkPowerup, int remainingSpacePowerup)
    {
 		this.playerName = playerName;
 		this.starAmount = starAmount;
 		this.path = path;
 		this.levels = levels;
-
+		this.remainingShrinkPowerup = remainingShrinkPowerup;
+		this.remainingSpacePowerup = remainingSpacePowerup;
 		this.settings = settings;
 	}
 
