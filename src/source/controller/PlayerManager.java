@@ -235,4 +235,23 @@ public class PlayerManager extends Controller
 		   playerDao.saveSettings(currentPlayer);
 	   }
    }
+
+   public void decrementRemaningShrinkPowerup()
+   {
+      currentPlayer.decrementRemaningShrinkPowerup();
+   }
+   public void decrementRemaningSpacePowerup()
+   {
+      currentPlayer.decrementRemaningSpacePowerup();
+   }
+
+   public void addShrinkPowerup(int amountToBeAdded)
+   {
+      currentPlayer.addShrinkPowerup(amountToBeAdded);
+   }
+
+   public void addSpacePowerup(int amountToBeAdded)
+   {
+      currentPlayer.addSpacePowerup(amountToBeAdded);
+   }
 }

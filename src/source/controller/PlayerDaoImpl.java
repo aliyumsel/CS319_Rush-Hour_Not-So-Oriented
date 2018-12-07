@@ -209,6 +209,7 @@ class PlayerDaoImpl implements PlayerDao {
 	      try
 	      {
 	         newFile.createNewFile();
+	         newFile.setReadOnly();
 	      } catch (IOException e)
 	      {
 	         // TODO Auto-generated catch block
