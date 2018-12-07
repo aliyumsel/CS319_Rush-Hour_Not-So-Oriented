@@ -1,16 +1,16 @@
 <ExpectedNumberOfMovesForThreeStars>
-	15
+	20
 <ExpectedNumberOfMovesForThreeStars/>
 <ExpectedNumberOfMovesForTwoStars>
-	20
+	30
 <ExpectedNumberOfMovesForTwoStars/>
 <Map>
 OO OO OO OO OO OO OO OO
-OO SS SS SS SS SS TU OO
-OO CL SS SS SS SS SS OO
-OO CU PC SS SS SS SS SS
-OO SS CU SS SS CR SS OO
-OO CU SS CL SS CR SS OO
-OO SS TR SS SS CR SS OO
+OO CU OO CR SS CL SS OO
+OO SS CL SS CD SS TD OO
+OO PC SS CU SS SS SS SS
+OO OO SS SS CL SS SS OO
+OO SS CU SS SS CU SS OO
+OO SS SS CR SS SS SS OO
 OO OO OO OO OO OO OO OO
 <Map/>

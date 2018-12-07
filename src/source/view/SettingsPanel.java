@@ -1,8 +1,12 @@
 package source.view;
 
 import source.controller.GameEngine;
+import source.controller.GameManager;
+import source.controller.MapController;
 import source.controller.SoundManager;
+import source.model.GameObject;
 import source.model.Settings;
+import source.model.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +50,7 @@ public class SettingsPanel extends JPanel
    private BufferedImage safariHighlightedImage;
    private BufferedImage spaceImage;
    private BufferedImage spaceHighlightedImage;
-
+   public String previousPanel = "";
    private int panelWidth;
    private int panelHeight;
 
@@ -163,8 +167,9 @@ public class SettingsPanel extends JPanel
       space.setBounds(375, 350, space.getPreferredSize().width, space.getPreferredSize().height);
    }
 
-   void updatePanel()
+   void updatePanel(String previousPanel)
    {
+      this.previousPanel = previousPanel;
       updateSoundButtons("SFX");
       updateSoundButtons("Music");
    }
@@ -228,7 +233,7 @@ public class SettingsPanel extends JPanel
       GameEngine.instance.soundManager.buttonClick();
       if ( e.getSource() == back )
       {
-         guiManager.setPanelVisible("MainMenu");
+         guiManager.setPanelVisible(previousPanel);
       }
       else if ( e.getSource() == music )
       {
@@ -245,18 +250,22 @@ public class SettingsPanel extends JPanel
       else if ( e.getSource() == simple )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SIMPLE);
+         GameManager.instance.changeTheme("minimalistic");
       }
       else if ( e.getSource() == classic )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.CLASSIC);
+         GameManager.instance.changeTheme("traffic");
       }
       else if ( e.getSource() == safari )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SAFARI);
+        // GameManager.instance.changeTheme("safari");
       }
       else if ( e.getSource() == space )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SPACE);
+        // GameManager.instance.changeTheme("space");
       }
    };
 

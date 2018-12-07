@@ -18,30 +18,36 @@ public class SoundManager extends Controller
    private AudioStream audioStream = null;
    private InputStream inputStream = null;
    private Clip clip;
-   private boolean isThemeEnabled = true;
-   private boolean isEffectsEnabled = true;
+   private boolean isThemeEnabled;
+   private boolean isEffectsEnabled;
 
    public SoundManager()
    {
+      //isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+      //isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
       instance = this;
-      background();
+   }
+
+   private void initializeClip()
+   {
+      try
+      {
+         String trafficThemeSong = "src/sounds/theme.wav";
+         AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(trafficThemeSong));
+         clip = AudioSystem.getClip();
+         clip.open(inputStream);
+         clip.loop(Clip.LOOP_CONTINUOUSLY);
+      } catch (Exception a)
+      {
+         System.out.println("Not Found");
+      }
    }
 
    public void background()
    {
       if ( isThemeEnabled )
       {
-         try
-         {
-            String trafficThemeSong = "src/sounds/theme.wav";
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(trafficThemeSong));
-            clip = AudioSystem.getClip();
-            clip.open(inputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-         } catch (Exception a)
-         {
-            System.out.println("Not Found");
-         }
+         initializeClip();
       }
    }
 
@@ -99,7 +105,13 @@ public class SoundManager extends Controller
       isThemeEnabled = !isThemeEnabled;
       if ( isThemeEnabled )
       {
-         clip.start();
+         if (clip == null)
+         {
+            initializeClip();
+         }
+         else {
+            clip.start();
+         }
       }
       else
       {
@@ -114,4 +126,35 @@ public class SoundManager extends Controller
       isEffectsEnabled = !isEffectsEnabled;
    }
 
+   public boolean isThemeSongEnabled()
+   {
+      return isThemeEnabled;
+   }
+
+   public boolean isEffectsEnabled()
+   {
+      return isEffectsEnabled;
+   }
+
+   public void setThemeSong(boolean themeEnabled) {
+      if (this.isThemeEnabled != themeEnabled)
+      {
+         themeSongToggle();
+      }
+
+   }
+
+   public void setEffects(boolean effectsEnabled) {
+      if (this.isEffectsEnabled != effectsEnabled)
+      {
+         effectsToggle();
+      }
+   }
+
+   public void start()
+   {
+      isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+      isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
+      background();
+   }
 }

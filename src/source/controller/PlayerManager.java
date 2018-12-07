@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
+import source.model.Settings;
 import source.model.Settings.Theme;
 
 public class PlayerManager extends Controller
@@ -92,7 +93,10 @@ public class PlayerManager extends Controller
          }
       }
     //adds the new player to players and sets it as current player
-      Player newPlayer = playerDao.cratePlayer(playerName);
+      boolean initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
+      boolean initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
+      Settings settings = new Settings(initialMusic, initialSfx);
+      Player newPlayer = playerDao.cratePlayer(playerName, settings);
       playerDao.saveLastActivePlayer(playerName);
       players.add(newPlayer);
       currentPlayer = newPlayer;
@@ -145,6 +149,8 @@ public class PlayerManager extends Controller
       }
       if ( selected )
       {
+         GameEngine.instance.soundManager.setThemeSong(currentPlayer.getSettings().getMusic());
+         GameEngine.instance.soundManager.setEffects(currentPlayer.getSettings().getSfx());
          playerDao.saveLastActivePlayer(name);
          return true;
       }
@@ -158,8 +164,10 @@ public class PlayerManager extends Controller
 	   LevelInformation currentLevel = currentPlayer.getLevels().get(levelNo - 1);
 	   setLevelStatus(levelNo, "finished");
 	   currentLevel.setMap("");
-	   currentLevel.setStars(starAmount);
-	   currentPlayer.setStarAmount(currentPlayer.getStarAmount() + starAmount);
+	   if (starAmount > currentLevel.getStars()) {
+          currentPlayer.setStarAmount(currentPlayer.getStarAmount() + (starAmount - currentLevel.getStars()));
+          currentLevel.setStars(starAmount);
+       }
 	   playerDao.saveLevel(levelNo, currentPlayer);
 	   //playerDao.saveStarAmount(currentPlayer); will be added
 	   
@@ -226,5 +234,26 @@ public class PlayerManager extends Controller
 		   currentPlayer.getSettings().setTheme(theme);
 		   playerDao.saveSettings(currentPlayer);
 	   }
+   }
+
+   public void decrementRemaningShrinkPowerup()
+   {
+      currentPlayer.decrementRemaningShrinkPowerup();
+      playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
+   }
+   public void decrementRemaningSpacePowerup()
+   {
+      currentPlayer.decrementRemaningSpacePowerup();
+      playerDao.saveRemainingPowerupAmount("space", currentPlayer);
+   }
+
+   public void addShrinkPowerup(int amountToBeAdded)
+   {
+      currentPlayer.addShrinkPowerup(amountToBeAdded);
+   }
+
+   public void addSpacePowerup(int amountToBeAdded)
+   {
+      currentPlayer.addSpacePowerup(amountToBeAdded);
    }
 }

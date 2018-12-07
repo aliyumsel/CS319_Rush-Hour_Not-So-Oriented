@@ -6,5 +6,5 @@
 
 <LastActivePlayer/>
 <NumberOfMaps>
-	6
+	50
 <NumberOfMaps/>

@@ -21,7 +21,7 @@ class PlayerDaoImpl implements PlayerDao {
 
 	      Scanner playerInfo = null, levelInfo = null;
 	      String playerName, tmp, status, mapLine, map = "";
-	      int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars;
+	      int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars, remainingShrinkPowerup, remainingSpacePowerup;
 	      ArrayList<LevelInformation> levels;
 	      Settings settings;
 	      boolean music, sfx, unlocked;
@@ -149,7 +149,13 @@ class PlayerDaoImpl implements PlayerDao {
 
 	         settings = new Settings(music, sfx, theme);
 
-	         Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName, settings);
+	         while (!playerInfo.nextLine().trim().equals("<RemainingShrinkPowerups>"));
+			 remainingShrinkPowerup =  Integer.parseInt(playerInfo.nextLine().trim());
+
+			  while (!playerInfo.nextLine().trim().equals("<RemainingSpacePowerups>"));
+			  remainingSpacePowerup =  Integer.parseInt(playerInfo.nextLine().trim());
+
+	         Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName, settings, remainingShrinkPowerup, remainingSpacePowerup);
 	         player.configureLastUnlockedLevelNo();
 
 	         players.add(player);
@@ -174,7 +180,7 @@ class PlayerDaoImpl implements PlayerDao {
 	}
 
 	@Override
-	public Player cratePlayer(String playerName) {
+	public Player cratePlayer(String playerName, Settings settings) {
 		  Scanner scanInfo = null, levelInfo = null;
 	      int playerAmount, mapAmount, movesForThreeStars, movesForTwoStars;
 	      String tmp, playerPath, playerInfo;
@@ -262,36 +268,23 @@ class PlayerDaoImpl implements PlayerDao {
 	      playerInfo = playerInfo +
 	              "\t<Levels/>\n" +
 	              "\t<Settings>\n" +
-	              "\t\t<Music>\n" +
-	              "\t\t\ttrue\n" +
-	              "\t\t<Music/>\n" +
-	              "\t\t<Sfx>\n" +
-	              "\t\t\ttrue\n" +
-	              "\t\t<Sfx/>\n" +
-	              "\t\t<Theme>\n" +
-	              "\t\t\tCLASSIC\n" +
-	              "\t\t<Theme/>\n" +
+	              settings.settingsToString() +
 	              "\t<Settings/>\n" +
+				  "\t<RemainingShrinkPowerups>\n" +
+				  "\t\t3\n" +
+				  "\t<RemainingShrinkPowerups/>\n" +
+				  "\t<RemainingSpacePowerups>\n" +
+				  "\t\t3\n" +
+				  "\t<RemainingSpacePowerups/>\n" +
 	              "<Player/>\n";
 
-	      FileWriter fileOut = null;
-	      try
-	      {
-	         fileOut = new FileWriter(playerPath + "/playerInfo.txt");
-	         fileOut.write(playerInfo);
-	         fileOut.flush();
-	         fileOut.close();
-	      } catch (IOException e)
-	      {
-	         // TODO Auto-generated catch block
-	         e.printStackTrace();
-	      }
+	      writeFile(playerPath + "/playerInfo.txt", playerInfo);
 
 	      scanInfo.close();
-	      
-	      Player newPlayer = new Player(playerName, 0, levels, playerPath, new Settings(true, true));
+
+	      Player newPlayer = new Player(playerName, 0, levels, playerPath, settings, 3, 3);
 	      newPlayer.resetLastUnlockedLevelNo();
-	      
+
 	      return newPlayer;
 		
 	}
@@ -464,7 +457,55 @@ class PlayerDaoImpl implements PlayerDao {
 		}
 		writeFile(player.getPath() + "/playerInfo.txt", text);
 	}
-	
+
+	@Override
+	public void saveRemainingPowerupAmount(String powerup, Player player) {
+		Scanner scan = null;
+		try
+		{
+			scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
+		} catch (FileNotFoundException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String powerupTag;
+		int newAmount;
+		String line, text;
+
+		if (powerup.equals("shrink"))
+		{
+			powerupTag = "<RemainingShrinkPowerups>";
+			newAmount = player.getRemainingShrinkPowerup();
+		}
+		else
+		{
+			powerupTag = "<RemainingSpacePowerups>";
+			newAmount = player.getRamainingSpacePowerup();
+		}
+
+		line = scan.nextLine();
+		text = line + "\n";
+
+		while(!line.trim().equals(powerupTag))
+		{
+			line = scan.nextLine();
+			text = text + line +  "\n";
+		}
+
+		scan.nextLine();
+		text = text + "\t\t" + newAmount + "\n";
+
+		while (scan.hasNext())
+		{
+			line = scan.nextLine();
+			text = text + line + "\n";
+		}
+		writeFile(player.getPath() + "/playerInfo.txt", text);
+
+	}
+
 	private void writeFile(String path, String text)
 	{
 		 FileWriter fileOut = null;

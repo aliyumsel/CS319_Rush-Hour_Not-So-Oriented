@@ -24,7 +24,8 @@ public class Obstacle extends GameObject
    @Override
    public void draw(Graphics graphics)
    {
-      graphics.drawImage(image, (int)transform.position.x * 60, (int)transform.position.y * 60, null);
+      Image scaledImage = image.getScaledInstance(58,58,Image.SCALE_DEFAULT);
+      graphics.drawImage(scaledImage, transform.position.x * 60, transform.position.y * 60, null);
    }
 
    @Override

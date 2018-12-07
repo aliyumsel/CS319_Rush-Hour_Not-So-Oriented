@@ -16,11 +16,7 @@ import source.model.Map;
 public class InnerGamePanel extends JPanel
 {
 	private GuiPanelManager guiManager;
-
    private EndOfLevelPanel endOfLevelPanel;
-
-   private BufferedImage background;
-
    private Map map;
 
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
@@ -28,7 +24,6 @@ public class InnerGamePanel extends JPanel
 		this.guiManager = guiManager;
 		setPreferredSize(new Dimension(480, 480));
 
-		loadImages();
 		createEndOfLevelPanel();
 		setOpaque(false);
 		setVisible(true);
@@ -43,16 +38,8 @@ public class InnerGamePanel extends JPanel
 		repaint();
 	}
 
-   private void loadImages()
-   {
-      background = guiManager.LoadImage("src/image/roadBackground.png");
-   }
-
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		//setBackground(Color.WHITE);
-      	//drawBackground(g);
-
 		if (map == null) {
 			return;
 		}
@@ -61,14 +48,6 @@ public class InnerGamePanel extends JPanel
          gameObject.draw(g);
 		}
 	}
-
-//   private void drawBackground(Graphics graphics) {
-//
-//      Graphics2D graphics2d = (Graphics2D) graphics;
-//
-//      graphics2d.drawImage(background, 0, 0, null);
-//
-//   }
 
 	void setEndOfLevelPanelVisible(boolean bool, int starAmount)
    {
