@@ -77,6 +77,12 @@ public class Input
     static int[] getMousePosition()
     {
         int[] mousePos = new int[2];
+
+        if (!gamePanel.isShowing())
+        {
+            return mousePos;
+        }
+
         mousePos[0] = (int)(MouseInfo.getPointerInfo().getLocation().getX() - gamePanel.getLocationOnScreen().getX());
         mousePos[1] = (int)(MouseInfo.getPointerInfo().getLocation().getY() - gamePanel.getLocationOnScreen().getY());
         return mousePos;

@@ -11,7 +11,12 @@ public class VehicleController extends Controller
    private SoundManager soundManager;
    private int numberOfMoves;
    private boolean changed = false;
-   private enum CONTROL{SLIDE, KEYBOARD}
+
+   private enum CONTROL
+   {
+      SLIDE, KEYBOARD
+   }
+
    private CONTROL currentControl;
 
    private double[] vehicleOriginPosition;
@@ -41,12 +46,12 @@ public class VehicleController extends Controller
          return;
       }
 
-      if (PowerUpManager.instance.isPowerUpActive())
+      if ( PowerUpManager.instance.isPowerUpActive() )
       {
          return;
       }
 
-      if (currentControl == CONTROL.SLIDE)
+      if ( currentControl == CONTROL.SLIDE )
       {
          if ( Input.getMouseButtonPressed(0) )
          {
@@ -63,30 +68,62 @@ public class VehicleController extends Controller
 
          if ( Input.getMouseButtonReleased(0) )
          {
-            if (selectedVehicle != null)
+            if ( selectedVehicle != null )
             {
-               int gridPositionX = (int)(selectedVehicle.transform.position.x + 0.5);
-               int gridPositionY = (int)(selectedVehicle.transform.position.y + 0.5);
-               selectedVehicle.moveToPoint(gridPositionX,gridPositionY);
+               int gridPositionX = (int) ( selectedVehicle.transform.position.x + 0.5 );
+               int gridPositionY = (int) ( selectedVehicle.transform.position.y + 0.5 );
+               selectedVehicle.moveToPoint(gridPositionX, gridPositionY);
             }
 
             selectedVehicle = null;
          }
 
-         if (selectedVehicle != null)
+         //Moving while holding the mouse down
+         if ( selectedVehicle != null )
          {
-            if (selectedVehicle.transform.axis.equals("Horizontal"))
+            if ( selectedVehicle.transform.axis.equals("Horizontal") )
             {
-               selectedVehicle.transform.position.x = vehicleOriginPosition[0] + ((Input.getMousePosition()[0] - mouseOriginPosition[0]) / (double)60);
+               int gridPositionX = (int)(vehicleOriginPosition[0] + ((Input.getMousePosition()[0] - mouseOriginPosition[0] ) / (double) 60 )) + 1;
+               int gridPositionY = (int)vehicleOriginPosition[1];
+
+               if ((Input.getMousePosition()[0] - mouseOriginPosition[0] ) > 0) //Right
+               {
+                  if (gridPositionX + selectedVehicle.transform.length > 0 && gridPositionX + selectedVehicle.transform.length < map.getMapSize())
+                  {
+                     if ( map.getGrid()[gridPositionX + selectedVehicle.transform.length][gridPositionY].equals("Space") )
+                     {
+                        selectedVehicle.transform.position.x = vehicleOriginPosition[0] + ( ( Input.getMousePosition()[0] - mouseOriginPosition[0] ) / (double) 60 );
+                     }
+                  }
+               }
+               else // Left
+               {
+                  if (gridPositionX > 0 && gridPositionX < map.getMapSize())
+                  {
+                     if ( map.getGrid()[gridPositionX][gridPositionY].equals("Space") )
+                     {
+                        selectedVehicle.transform.position.x = vehicleOriginPosition[0] + ( ( Input.getMousePosition()[0] - mouseOriginPosition[0] ) / (double) 60 );
+                     }
+                  }
+               }
             }
             else
             {
-               selectedVehicle.transform.position.y = vehicleOriginPosition[1] + ((Input.getMousePosition()[1] - mouseOriginPosition[1]) / (double)60);
+               int gridPositionX = (int)vehicleOriginPosition[0];
+               int gridPositionY = (int)(vehicleOriginPosition[1] + ( ( Input.getMousePosition()[1] - mouseOriginPosition[1] ) / (double) 60 ) + 0.5 );
+
+               if (gridPositionY > 0 && gridPositionY < map.getMapSize())
+               {
+                  if ( map.getGrid()[gridPositionX][gridPositionY].equals("Space") )
+                  {
+                     selectedVehicle.transform.position.y = vehicleOriginPosition[1] + ( ( Input.getMousePosition()[1] - mouseOriginPosition[1] ) / (double) 60 );
+                  }
+               }
             }
          }
       }
 
-      else if (currentControl == CONTROL.KEYBOARD)
+      else if ( currentControl == CONTROL.KEYBOARD )
       {
          if ( Input.getMouseButtonPressed(0) )
          {
@@ -139,8 +176,10 @@ public class VehicleController extends Controller
 
    private void setSelectedVehicle(Vehicle _selectedVehicle)
    {
-      if(_selectedVehicle != selectedVehicle) {
-         if (changed) {
+      if ( _selectedVehicle != selectedVehicle )
+      {
+         if ( changed )
+         {
             numberOfMoves++;
             GameManager.instance.autoSave(numberOfMoves);
             changed = false;
@@ -179,7 +218,7 @@ public class VehicleController extends Controller
                return false;
             }
 
-            if ( map.getGrid()[(int)selectedVehicle.transform.position.y][(int)selectedVehicle.transform.position.x + moveCheck].equals("Space") )
+            if ( map.getGrid()[(int) selectedVehicle.transform.position.y][(int) selectedVehicle.transform.position.x + moveCheck].equals("Space") )
             {
                selectedVehicle.move(moveAmount);
                selectedVehicle.isMoving = true;
@@ -203,7 +242,7 @@ public class VehicleController extends Controller
                return false;
             }
 
-            if ( map.getGrid()[((int)selectedVehicle.transform.position.y ) + moveCheck][(int)selectedVehicle.transform.position.x].equals("Space") )
+            if ( map.getGrid()[( (int) selectedVehicle.transform.position.y ) + moveCheck][(int) selectedVehicle.transform.position.x].equals("Space") )
             {
                selectedVehicle.move(moveAmount);
                selectedVehicle.isMoving = true;

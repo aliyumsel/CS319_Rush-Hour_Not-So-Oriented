@@ -17,7 +17,7 @@ public class Car extends Vehicle {
 
 	public Car(Vehicle tempVehicle)
 	{
-		super(tempVehicle.transform.position.x, tempVehicle.transform.position.y, 2, tempVehicle.transform.direction, false, false, "traffic");
+		super((int)tempVehicle.transform.position.x, (int)tempVehicle.transform.position.y, 2, tempVehicle.transform.direction, false, false, "traffic");
 		super.setType("Car");
 	}
 
