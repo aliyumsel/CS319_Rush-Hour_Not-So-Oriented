@@ -1,9 +1,6 @@
 package source.view;
 
-import source.controller.GameEngine;
-import source.controller.GameManager;
-import source.controller.MapController;
-import source.controller.SoundManager;
+import source.controller.*;
 import source.model.GameObject;
 import source.model.Settings;
 import source.model.Vehicle;
@@ -74,7 +71,7 @@ public class SettingsPanel extends JPanel
 
    private void loadImages()
    {
-      background = guiManager.LoadImage("src/image/background.png");
+      background = ThemeManager.instance.getBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
@@ -250,23 +247,25 @@ public class SettingsPanel extends JPanel
       else if ( e.getSource() == simple )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SIMPLE);
-         GameManager.instance.changeTheme("minimalistic");
+         ThemeManager.instance.setTheme("minimalistic");
       }
       else if ( e.getSource() == classic )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.CLASSIC);
-         GameManager.instance.changeTheme("traffic");
+         ThemeManager.instance.setTheme("classic");
       }
       else if ( e.getSource() == safari )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SAFARI);
-        // GameManager.instance.changeTheme("safari");
+         ThemeManager.instance.setTheme("safari");
       }
       else if ( e.getSource() == space )
       {
          GameEngine.instance.playerManager.changeTheme(Settings.Theme.SPACE);
-        // GameManager.instance.changeTheme("space");
+         ThemeManager.instance.setTheme("space");
       }
+      loadImages();
+      repaint();
    };
 
    public void paintComponent(Graphics g)
