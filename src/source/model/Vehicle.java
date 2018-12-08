@@ -41,24 +41,7 @@ public class Vehicle extends GameObject// implements Drawable
       this.drawingIndexForMoving = 60;
       verticalMoveAxis = 0;
       horizontalMoveAxis = 0;
-
-      //Use updateImages Method here
-      if ( !player && length == 2 )
-      {
-         image = ThemeManager.instance.getShortVehicleImage();
-      }
-      else if ( !player && length == 3 )
-      {
-          image = ThemeManager.instance.getLongVehicleImage();
-      }
-      else if ( player && !this.special )
-      {
-          image = ThemeManager.instance.getPlayerImage();
-      }
-      else if ( player )
-      {
-          image = ThemeManager.instance.getSpecialPlayerImage();
-      }
+      updateImages();
    }
 
    public void move(int moveAxis)
@@ -78,7 +61,8 @@ public class Vehicle extends GameObject// implements Drawable
          findOccupiedCells();
       }
    }
-   public void updateVehicleImages(){
+   @Override
+   public void updateImages(){
        if ( !player && transform.length == 2 )
        {
            image = ThemeManager.instance.getShortVehicleImage();

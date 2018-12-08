@@ -76,4 +76,7 @@ public class GameObject implements Drawable
    {
 
    }
+
+
+   public void updateImages(){}
 }

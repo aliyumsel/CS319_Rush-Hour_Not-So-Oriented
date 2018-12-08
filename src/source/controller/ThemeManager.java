@@ -1,6 +1,9 @@
 package source.controller;
 
+import source.model.GameObject;
+import source.model.Obstacle;
 import source.model.Theme;
+import source.model.Vehicle;
 
 import java.awt.image.BufferedImage;
 
@@ -31,10 +34,15 @@ public class ThemeManager extends Controller {
         else if (theme == "space")
             currentTheme = space;
         else {
-            theme = null;
             System.out.println("Theme is null");
         }
-
+        try {
+            if(MapController.instance.getMap().getGameObjects() != null){
+                for (GameObject gameObject: MapController.instance.getMap().getGameObjects()){
+                    gameObject.updateImages();
+                }
+            }
+        } catch (Exception e){}
         SoundManager.instance.updateTheme();
     }
 

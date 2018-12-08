@@ -4,6 +4,7 @@
 	<Name/>
 	<StarAmount>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD:src/data/players/Deniz/playerInfo.txt
 		8
 =======
@@ -12,6 +13,9 @@
 =======
 		11
 >>>>>>> Stashed changes
+=======
+		0
+>>>>>>> Stashed changes
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -19,7 +23,7 @@
 				1
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
@@ -46,16 +50,20 @@ OO OO OO OO OO OO OO OO
 				2
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
+<<<<<<< Updated upstream
 				inProgress
+=======
+				notStarted
+>>>>>>> Stashed changes
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
@@ -73,36 +81,18 @@ OO OO OO OO OO OO OO OO
 				3
 			<LevelNo/>
 			<Stars>
-<<<<<<< HEAD:src/data/players/Deniz/playerInfo.txt
-				1
-			<Stars/>
-			<CurrentNumberOfMoves>
-				24
-=======
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
->>>>>>> unstable:src/data/players/default/playerInfo.txt
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-<<<<<<< HEAD:src/data/players/Deniz/playerInfo.txt
-=======
-OO OO OO OO OO OO OO OO
-OO SS SS SS SS SS TU OO
-OO CL SS SS SS SS SS OO
-OO CU PC SS SS SS SS SS
-OO SS CU SS SS CR SS OO
-OO CU SS CL SS CR SS OO
-OO SS TR SS SS CR SS OO
-OO OO OO OO OO OO OO OO
->>>>>>> unstable:src/data/players/default/playerInfo.txt
 			<Map/>
 		<Level/>
 		<Level>
@@ -111,19 +101,27 @@ OO OO OO OO OO OO OO OO
 			<LevelNo/>
 			<Stars>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 				1
 =======
 				2
+>>>>>>> Stashed changes
+=======
+				0
 >>>>>>> Stashed changes
 			<Stars/>
 			<CurrentNumberOfMoves>
 				11
 			<CurrentNumberOfMoves>
 			<Status>
+<<<<<<< Updated upstream
 				finished
+=======
+				notStarted
+>>>>>>> Stashed changes
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -137,18 +135,23 @@ OO OO OO OO OO OO OO OO
 			<Stars/>
 			<CurrentNumberOfMoves>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 				4
 =======
 				3
 >>>>>>> Stashed changes
+=======
+				0
+>>>>>>> Stashed changes
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
+<<<<<<< Updated upstream
 OO OO OO OO OO OO OO OO
 <<<<<<< Updated upstream
 OO TR SS SS CD TU CU OO
@@ -165,6 +168,8 @@ OO SS SS SS TR SS SS OO
 >>>>>>> Stashed changes
 OO SS OO SS CR SS SS OO
 OO OO OO OO OO OO OO OO
+=======
+>>>>>>> Stashed changes
 			<Map/>
 		<Level/>
 		<Level>
@@ -1025,13 +1030,13 @@ OO OO OO OO OO OO OO OO
 	<Levels/>
 	<Settings>
 		<Music>
-			false
+			true
 		<Music/>
 		<Sfx>
 			true
 		<Sfx/>
 		<Theme>
-			SIMPLE
+			SAFARI
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>

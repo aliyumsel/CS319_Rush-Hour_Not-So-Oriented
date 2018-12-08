@@ -9,7 +9,6 @@ public class GameManager extends Controller
 {
    public static GameManager instance;
    public PlayerManager playerManager;
-   public String theme = "classic"; //Player da kaydedileceği zaman player a atın
 
    public int level;
 
@@ -116,21 +115,6 @@ public class GameManager extends Controller
       isGameActive = true;
    }
 
-   public void changeTheme(String theme)
-   {
-     this.theme = theme;
-     try {
-        if(MapController.instance.getMap().getGameObjects() != null){
-           for (GameObject gameObject: MapController.instance.getMap().getGameObjects()){
-              if(!gameObject.getType().equals("OO")){
-                 System.out.println("Theme");
-                 ((Vehicle)gameObject).updateVehicleImages();
-              }
-           }
-        }
-     } catch (Exception e){}
-
-   }
    public int getLevel()
    {
       return level;
