@@ -3,11 +3,15 @@
 		default
 	<Name/>
 	<StarAmount>
+<<<<<<< Updated upstream
 <<<<<<< HEAD:src/data/players/Deniz/playerInfo.txt
 		8
 =======
 		9
 >>>>>>> unstable:src/data/players/default/playerInfo.txt
+=======
+		11
+>>>>>>> Stashed changes
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -45,15 +49,23 @@ OO OO OO OO OO OO OO OO
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				4
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TD CR SS SS SS SS OO
+OO SS SS SS TD SS SS OO
+OO SS PC SS SS SS SS SS
+OO CU SS SS SS SS TU OO
+OO SS CR SS SS SS SS OO
+OO SS SS TR SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -98,26 +110,22 @@ OO OO OO OO OO OO OO OO
 				4
 			<LevelNo/>
 			<Stars>
+<<<<<<< Updated upstream
 				1
+=======
+				2
+>>>>>>> Stashed changes
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				11
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO SS CL SS SS CR SS OO
-OO SS SS CU TL SS SS OO
-OO PC SS SS CU CU CU SS
-OO CD CL SS SS SS SS OO
-OO SS SS SS SS SS CU OO
-OO OO TL SS SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -128,7 +136,11 @@ OO OO OO OO OO OO OO OO
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
+<<<<<<< Updated upstream
 				4
+=======
+				3
+>>>>>>> Stashed changes
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
@@ -138,11 +150,19 @@ OO OO OO OO OO OO OO OO
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
+<<<<<<< Updated upstream
 OO TR SS SS CD TU CU OO
 OO SS SS SS SS SS SS OO
 OO PC SS SS SS SS SS SS
 OO SS SS SS SS CL SS OO
 OO SS SS CU TR SS SS OO
+=======
+OO TR SS SS SS TU CU OO
+OO SS SS SS SS SS SS OO
+OO PC SS SS CD SS SS SS
+OO SS SS CU SS CL SS OO
+OO SS SS SS TR SS SS OO
+>>>>>>> Stashed changes
 OO SS OO SS CR SS SS OO
 OO OO OO OO OO OO OO OO
 			<Map/>
