@@ -13,59 +13,57 @@ import javax.swing.JPanel;
 import source.model.Map;
 
 @SuppressWarnings("serial")
-public class InnerGamePanel extends JPanel
-{
-	private GuiPanelManager guiManager;
-   private EndOfLevelPanel endOfLevelPanel;
-   private Map map;
+public class InnerGamePanel extends JPanel {
+    private GuiPanelManager guiManager;
+    private EndOfLevelPanel endOfLevelPanel;
+    private Map map;
 
-   InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
-		super(null);
-		this.guiManager = guiManager;
-		setPreferredSize(new Dimension(480, 480));
+    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
+        super(null);
+        this.guiManager = guiManager;
+        setPreferredSize(new Dimension(480, 480));
 
-		createEndOfLevelPanel();
-		setOpaque(false);
-		setVisible(true);
-	}
+        createEndOfLevelPanel();
+        setOpaque(false);
+        setVisible(true);
+    }
 
-	void updatePanel() {
-		if (!isShowing()) {
-			return;
-		}
-		map = GameEngine.instance.mapController.getMap();
-		endOfLevelPanel.updatePanel();
-		repaint();
-	}
+    void updatePanel() {
+        if (!isShowing()) {
+            return;
+        }
+        map = GameEngine.instance.mapController.getMap();
+        endOfLevelPanel.updatePanel();
+        repaint();
+    }
 
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		if (map == null) {
-			return;
-		}
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (map == null) {
+            return;
+        }
 
-		for (GameObject gameObject : map.getGameObjects()) {
-         gameObject.draw(g);
-		}
-	}
+        for (GameObject gameObject : map.getGameObjects()) {
+            gameObject.draw(g);
+        }
+    }
 
-	void setEndOfLevelPanelVisible(boolean bool, int starAmount)
-   {
-		if(bool) //bool ne ????????????????????????????????????????????????????????????? bool ne
-      {
-         GameEngine.instance.soundManager.successSound();
-      }
-		endOfLevelPanel.showStars(starAmount);
-		endOfLevelPanel.setVisible(bool);
-	}
+    void setEndOfLevelPanelVisible(boolean bool, int starAmount) {
+        if (bool) //bool ne ????????????????????????????????????????????????????????????? bool ne
+        {
+            GameEngine.instance.soundManager.successSound();
+        }
+        endOfLevelPanel.showStars(starAmount);
+        endOfLevelPanel.setVisible(bool);
+    }
 
-	private void createEndOfLevelPanel() {
+    private void createEndOfLevelPanel() {
 
-		endOfLevelPanel = new EndOfLevelPanel(guiManager);
-		add(endOfLevelPanel);
-		endOfLevelPanel.setVisible(false);
+        endOfLevelPanel = new EndOfLevelPanel(guiManager);
+        add(endOfLevelPanel);
+        endOfLevelPanel.setVisible(false);
 
-		Dimension size = endOfLevelPanel.getPreferredSize();
-		endOfLevelPanel.setBounds(25 , 100 , size.width, size.height);
-	}
+        Dimension size = endOfLevelPanel.getPreferredSize();
+        endOfLevelPanel.setBounds(25, 100, size.width, size.height);
+    }
 }

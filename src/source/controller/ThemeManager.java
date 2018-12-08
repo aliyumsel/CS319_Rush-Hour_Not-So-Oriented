@@ -15,7 +15,7 @@ public class ThemeManager extends Controller {
     public Theme safari;
     public Theme space;
 
-    public ThemeManager(){ //String theme parametresi ekleyip aşağıda hangi themese current theme o olucak oyun başlarken
+    public ThemeManager() { //String theme parametresi ekleyip aşağıda hangi themese current theme o olucak oyun başlarken
         instance = this;
         minimalistic = new Theme("minimalistic");
         classic = new Theme("classic");
@@ -24,7 +24,7 @@ public class ThemeManager extends Controller {
         currentTheme = minimalistic;
     }
 
-    public void setTheme(String theme){
+    public void setTheme(String theme) {
         if (theme == "classic")
             currentTheme = classic;
         else if (theme == "minimalistic")
@@ -37,44 +37,49 @@ public class ThemeManager extends Controller {
             System.out.println("Theme is null");
         }
         try {
-            if(MapController.instance.getMap().getGameObjects() != null){
-                for (GameObject gameObject: MapController.instance.getMap().getGameObjects()){
+            if (MapController.instance.getMap().getGameObjects() != null) {
+                for (GameObject gameObject : MapController.instance.getMap().getGameObjects()) {
                     gameObject.updateImages();
                 }
             }
-        } catch (Exception e){}
+        } catch (Exception e) {
+        }
         SoundManager.instance.updateTheme();
     }
 
-    public BufferedImage getLongVehicleImage(){
+    public BufferedImage getLongVehicleImage() {
         return currentTheme.getLongVehicleImage();
     }
 
-    public BufferedImage getShortVehicleImage(){
+    public BufferedImage getShortVehicleImage() {
         return currentTheme.getShortVehicleImage();
     }
 
-    public BufferedImage getBackgroundImage(){
+    public BufferedImage getBackgroundImage() {
         return currentTheme.getBackgroundImage();
     }
 
-    public BufferedImage getObstacleImage(){
+    public BufferedImage getObstacleImage() {
         return currentTheme.getObstacleImage();
     }
-    public BufferedImage getPlayerImage(){
+
+    public BufferedImage getPlayerImage() {
         return currentTheme.getPlayerImage();
     }
-    public BufferedImage getSpecialPlayerImage(){
+
+    public BufferedImage getSpecialPlayerImage() {
         return currentTheme.getSpecialPlayerImage();
     }
-    public String getButtonClickSound(){
-       return currentTheme.getButtonClickSound();
+
+    public String getButtonClickSound() {
+        return currentTheme.getButtonClickSound();
     }
 
-    public String getThemeSong(){
+    public String getThemeSong() {
         return currentTheme.getThemeSong();
     }
-    public Theme getCurrentTheme(){
+
+    public Theme getCurrentTheme() {
         return currentTheme;
     }
 }
