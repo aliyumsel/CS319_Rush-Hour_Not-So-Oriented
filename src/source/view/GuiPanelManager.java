@@ -17,7 +17,7 @@ import javax.swing.*;
 //import source.controller.Sound;
 //import source.model.GameEngine;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "Duplicates"})
 public class GuiPanelManager extends JFrame
 {
    public static GuiPanelManager instance;
@@ -118,20 +118,24 @@ public class GuiPanelManager extends JFrame
    {
       if ( panelName.equals("MainMenu") )
       {
-    	   mainMenuPanel.updatePanel();
+         mainMenuPanel.updatePanel();
+         mainMenuPanel.loadImages();
          targetPanel = mainMenuPanel;
       }
       else if ( panelName.equals("Game") )
       {
+         //gamePanel.loadImages();
          targetPanel = gamePanel;
       }
       else if ( panelName.equals("Credits") )
       {
+         creditsPanel.loadImages();
          targetPanel = creditsPanel;
       }
       else if ( panelName.equals("LevelSelection") )
       {
-    	   levelSelectionPanel.updatePanel();
+         levelSelectionPanel.loadImages();
+    	 levelSelectionPanel.updatePanel();
          targetPanel = levelSelectionPanel;
       }
       else if ( panelName.equals("Settings") )
@@ -144,10 +148,12 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("Help") )
       {
+         helpPanel.loadImages();
          targetPanel = helpPanel;
       }
       else if ( panelName.equals("ChangePlayer") )
       {
+         changePlayerPanel.loadImages();
          changePlayerPanel.updatePanel();
          targetPanel = changePlayerPanel;
       }
@@ -176,7 +182,7 @@ public class GuiPanelManager extends JFrame
       gamePanel.getInnerGamePanel().addMouseListener(mouseListener);
    }
 
-   BufferedImage LoadImage(String FileName)
+   public BufferedImage LoadImage(String FileName)
    {
       BufferedImage image = null;
       try
