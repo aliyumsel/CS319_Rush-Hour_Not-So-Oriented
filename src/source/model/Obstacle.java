@@ -1,5 +1,7 @@
 package source.model;
 
+import source.controller.ThemeManager;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,17 +10,13 @@ import java.io.IOException;
 
 public class Obstacle extends GameObject
 {
-//   public Obstacle()
-//   {
-//      super();
-//   }
 
    private BufferedImage image;
 
    public Obstacle(int x, int y, int length, String direction)
    {
       super(x, y, length, direction);
-      image = LoadImage("src/image/obstacle.png");
+      image = ThemeManager.instance.getObstacleImage();
    }
 
    @Override
@@ -34,16 +32,4 @@ public class Obstacle extends GameObject
       return "OO";
    }
 
-   private BufferedImage LoadImage(String FileName)
-   {
-      BufferedImage image = null;
-      try
-      {
-         image = ImageIO.read(new File(FileName));
-      } catch (IOException e)
-      {
-         e.printStackTrace();
-      }
-      return image;
-   }
 }

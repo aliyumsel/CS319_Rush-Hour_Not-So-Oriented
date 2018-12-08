@@ -9,7 +9,7 @@ public class GameManager extends Controller
 {
    public static GameManager instance;
    public PlayerManager playerManager;
-   public String theme = "traffic"; //Player da kaydedileceği zaman player a atın
+   public String theme = "classic"; //Player da kaydedileceği zaman player a atın
 
    public int level;
 

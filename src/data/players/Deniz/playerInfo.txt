@@ -3,7 +3,7 @@
 		Deniz
 	<Name/>
 	<StarAmount>
-		6
+		8
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -14,15 +14,23 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				4
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS SS CD SS CU SS OO
+OO SS SS SS CU SS CU OO
+OO PC SS TU SS TD SS SS
+OO SS SS SS TD SS TD OO
+OO SS SS SS SS SS SS OO
+OO SS SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -57,10 +65,29 @@ OO OO OO OO OO OO OO OO
 				3
 			<LevelNo/>
 			<Stars>
-				0
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
+				24
+			<CurrentNumberOfMoves>
+			<Status>
+				finished
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				4
+			<LevelNo/>
+			<Stars>
+				1
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
@@ -70,32 +97,13 @@ OO OO OO OO OO OO OO OO
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
-OO SS SS SS SS SS TU OO
-OO CL SS SS SS SS SS OO
-OO CU SS SS PC SS SS SS
-OO SS CU CR SS SS SS OO
-OO CU SS CL SS CR SS OO
-OO SS TR SS SS CR SS OO
+OO SS CL SS SS CR SS OO
+OO SS SS CU TL SS SS OO
+OO PC SS SS CU CU CU SS
+OO CD CL SS SS SS SS OO
+OO SS SS SS SS SS CU OO
+OO OO TL SS SS SS SS OO
 OO OO OO OO OO OO OO OO
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				4
-			<LevelNo/>
-			<Stars>
-				0
-			<Stars/>
-			<CurrentNumberOfMoves>
-				0
-			<CurrentNumberOfMoves>
-			<Status>
-				notStarted
-			<Status/>
-			<Unlocked>
-				false
-			<Unlocked/>
-			<Map>
 			<Map/>
 		<Level/>
 		<Level>
@@ -106,15 +114,23 @@ OO OO OO OO OO OO OO OO
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				4
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TR SS SS CD TU CU OO
+OO SS SS SS SS SS SS OO
+OO PC SS SS SS SS SS SS
+OO SS SS SS SS CL SS OO
+OO SS SS CU TR SS SS OO
+OO SS OO SS CR SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -978,10 +994,10 @@ OO OO OO OO OO OO OO OO
 			true
 		<Music/>
 		<Sfx>
-			false
+			true
 		<Sfx/>
 		<Theme>
-			CLASSIC
+			SIMPLE
 		<Theme/>
 	<Settings/>
 <Player/>

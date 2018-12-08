@@ -10,7 +10,7 @@ public class GameEngine extends TimerTask
    public static GameEngine instance;
 
    private ArrayList<Controller> controllers;
-
+   public ThemeManager themeManager;
    public SoundManager soundManager;
    public VehicleController vehicleController;
    public MapController mapController;
@@ -21,7 +21,7 @@ public class GameEngine extends TimerTask
    public GameEngine()
    {
       instance = this;
-
+      themeManager = new ThemeManager();
       soundManager = new SoundManager();
       mapController = new MapController();
       powerUpManager = new PowerUpManager();

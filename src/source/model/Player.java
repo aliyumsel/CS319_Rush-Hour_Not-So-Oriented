@@ -3,7 +3,7 @@ package source.model;
 import java.util.ArrayList;
 
 public class Player {
-	
+	private String theme;
 	private String playerName;
 	private ArrayList<LevelInformation> levels;
 	private int starAmount;
