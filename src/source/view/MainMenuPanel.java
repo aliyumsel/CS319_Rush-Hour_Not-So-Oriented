@@ -4,10 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import source.controller.GameEngine;
-import source.controller.GameManager;
-import source.controller.PlayerManager;
-import source.controller.SoundManager;
+import source.controller.*;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -73,9 +70,9 @@ public class MainMenuPanel extends JPanel
       this.setVisible(true);
    }
 
-   private void loadImages()
+   public void loadImages()
    {
-      background = guiManager.LoadImage("src/image/background.png");
+      background = ThemeManager.instance.getBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();

@@ -2,12 +2,14 @@ package source.view;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
+import source.controller.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+@SuppressWarnings("Duplicates")
 public class HelpPanel extends JPanel
 {
    private GuiPanelManager guiManager;
@@ -52,9 +54,9 @@ public class HelpPanel extends JPanel
       this.setVisible(false);
    }
 
-   private void loadImages()
+   public void loadImages()
    {
-      background = guiManager.LoadImage("src/image/background.png");
+      background = ThemeManager.instance.getBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth,panelHeight,Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
