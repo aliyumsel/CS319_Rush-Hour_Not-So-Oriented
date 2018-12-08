@@ -1,12 +1,19 @@
 package source.controller;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Input
 {
+    private static Component gamePanel;
+
+    private static int pixelMultiplier = 60;
+
     private static boolean[] mouseButtons = new boolean[5];
+
+    private static String[] mouseButtons2 = new String[5];
 
     private static java.util.Map<String, Boolean> keys = new HashMap<String, Boolean>()
     {
@@ -33,6 +40,11 @@ public class Input
         return mouseButtons[buttonID];
     }
 
+    static boolean getMouseButtonReleased(int buttonID)
+    {
+        return mouseButtons2[buttonID].equals("Released");
+    }
+
     public static MouseListener getMouseListener()
     {
         return new MouseEventHandler();
@@ -43,11 +55,17 @@ public class Input
         return new KeyEventHandler();
     }
 
+    public static void setGamePanel(Component component)
+    {
+        gamePanel = component;
+    }
+
     static void reset()
     {
         for (int i  = 0; i < mouseButtons.length; i++)
         {
             mouseButtons[i] = false;
+            mouseButtons2[i] = "default";
         }
 
         for (Map.Entry<String, Boolean> entry : keys.entrySet() )
@@ -56,11 +74,25 @@ public class Input
         }
     }
 
+    static int[] getMousePosition()
+    {
+        int[] mousePos = new int[2];
+
+        if (!gamePanel.isShowing())
+        {
+            return mousePos;
+        }
+
+        mousePos[0] = (int)(MouseInfo.getPointerInfo().getLocation().getX() - gamePanel.getLocationOnScreen().getX());
+        mousePos[1] = (int)(MouseInfo.getPointerInfo().getLocation().getY() - gamePanel.getLocationOnScreen().getY());
+        return mousePos;
+    }
+
     static int[] getMouseMatrixPosition()
     {
         int[] mousePos = new int[2];
-        mousePos[0] = mouseX / 60;
-        mousePos[1] = mouseY / 60;
+        mousePos[0] = mouseX / pixelMultiplier;
+        mousePos[1] = mouseY / pixelMultiplier;
 
         return mousePos;
     }
@@ -73,7 +105,23 @@ public class Input
             System.out.println("mousePressed");
             if (e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0)
             {
+                mouseButtons2[e.getButton() - 1] = "Pressed";
+
                 mouseButtons[e.getButton() - 1] = true;
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e)
+        {
+            System.out.println("mouseReleased");
+            if (e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0)
+            {
+                mouseButtons2[e.getButton() - 1] = "Released";
+
+                mouseButtons[e.getButton() - 1] = false;
                 mouseX = e.getX();
                 mouseY = e.getY();
             }

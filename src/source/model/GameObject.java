@@ -25,7 +25,7 @@ public class GameObject implements Drawable
    void findOccupiedCells()
    {
       occupiedCellNumbers = new int[transform.length];
-      occupiedCellNumbers[0] = transform.position.y * 8 + transform.position.x;
+      occupiedCellNumbers[0] = (int)transform.position.y * 8 + (int)transform.position.x;
 
       if ( transform.axis.equals("Vertical") )
       {
@@ -48,7 +48,7 @@ public class GameObject implements Drawable
    private void findPivotPointsOfOccupiedCells()
    {
       occupiedTransforms = new Transform[transform.length];
-      occupiedTransforms[0] = new Transform(transform.position.x, transform.position.y, 1, transform.direction);
+      occupiedTransforms[0] = new Transform((int)transform.position.x, (int)transform.position.y, 1, transform.direction);
 
       for ( int i = 1; i < transform.length; i++ )
       {

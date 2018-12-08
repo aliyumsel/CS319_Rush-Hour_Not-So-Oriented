@@ -29,7 +29,7 @@ public class Vehicle extends GameObject// implements Drawable
    }
    public Vehicle(Vehicle templateVehicle, int length)
    {
-      this(templateVehicle.transform.position.x, templateVehicle.transform.position.y, 2, templateVehicle.transform.direction, false, false, "traffic");
+      this((int)templateVehicle.transform.position.x, (int)templateVehicle.transform.position.y, 2, templateVehicle.transform.direction, false, false, "traffic");
    }
 
    Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme) //theme i sil burdan
@@ -96,6 +96,13 @@ public class Vehicle extends GameObject// implements Drawable
            image = ThemeManager.instance.getSpecialPlayerImage();
        }
    }
+   public void moveToPoint(int x, int y)
+   {
+      transform.position.x = x;
+      transform.position.y = y;
+      findOccupiedCells();
+   }
+
    public String getType()
    {
       return type;

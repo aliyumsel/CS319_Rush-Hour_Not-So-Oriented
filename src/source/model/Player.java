@@ -9,16 +9,19 @@ public class Player {
 	private int starAmount;
 	private String path;
 	private int lastUnlockedLevelNo;
+	private int remainingShrinkPowerup;
+	private int remainingSpacePowerup;
 
 	private Settings settings;
 
-	public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path, Settings settings)
+	public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path, Settings settings, int remainingShrinkPowerup, int remainingSpacePowerup)
    {
 		this.playerName = playerName;
 		this.starAmount = starAmount;
 		this.path = path;
 		this.levels = levels;
-
+		this.remainingShrinkPowerup = remainingShrinkPowerup;
+		this.remainingSpacePowerup = remainingSpacePowerup;
 		this.settings = settings;
 	}
 
@@ -90,6 +93,31 @@ public class Player {
 			}
 		}
 	}
-	
 
+	public int getRemainingShrinkPowerup() {
+		return remainingShrinkPowerup;
+	}
+
+	public int getRamainingSpacePowerup() {
+		return remainingSpacePowerup;
+	}
+
+	public void decrementRemaningShrinkPowerup()
+	{
+		remainingShrinkPowerup--;
+	}
+	public void decrementRemaningSpacePowerup()
+	{
+		remainingSpacePowerup--;
+	}
+
+	public void addShrinkPowerup(int amountToBeAdded)
+	{
+		remainingShrinkPowerup += amountToBeAdded;
+	}
+
+	public void addSpacePowerup(int amountToBeAdded)
+	{
+		remainingSpacePowerup += amountToBeAdded;
+	}
 }

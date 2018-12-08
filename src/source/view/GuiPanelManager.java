@@ -180,6 +180,7 @@ public class GuiPanelManager extends JFrame
       MouseListener mouseListener = Input.getMouseListener();
       addKeyListener(keyListener);
       gamePanel.getInnerGamePanel().addMouseListener(mouseListener);
+      Input.setGamePanel(gamePanel.getInnerGamePanel());
    }
 
    public BufferedImage LoadImage(String FileName)
