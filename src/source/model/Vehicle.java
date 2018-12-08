@@ -1,6 +1,8 @@
 package source.model;
 
 import source.controller.GameManager;
+import source.controller.ThemeManager;
+import source.view.GuiPanelManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -18,10 +20,8 @@ public class Vehicle extends GameObject// implements Drawable
    private int verticalMoveAxis;
    private int horizontalMoveAxis;
    private int drawingIndexForMoving;
-   private BufferedImage[] vehicleImages;
-   public String theme;
    private boolean special = false;
-
+   private BufferedImage image;
 
    public Vehicle()
    {
@@ -38,83 +38,26 @@ public class Vehicle extends GameObject// implements Drawable
       this.player = player;
       isMoving = false;
       this.special = special;
-      this.theme = theme;
-      this.theme = GameManager.instance.theme;
       this.drawingIndexForMoving = 60;
       verticalMoveAxis = 0;
       horizontalMoveAxis = 0;
-      vehicleImages = new BufferedImage[length];
-      String path = "src/image/theme_" + this.theme + "/";
-      int carType = (int) ( Math.random() * 2 );
 
+      //Use updateImages Method here
       if ( !player && length == 2 )
       {
-         path += "small";
+         image = ThemeManager.instance.getShortVehicleImage();
       }
       else if ( !player && length == 3 )
       {
-         path += "large";
+          image = ThemeManager.instance.getLongVehicleImage();
       }
       else if ( player && !this.special )
       {
-         path += "player";
+          image = ThemeManager.instance.getPlayerImage();
       }
       else if ( player )
       {
-         path += "police";
-      }
-
-      if ( direction.equals("Upwards") || direction.equals("Right") )
-      {
-         for ( int i = 0; i < length; i++ )
-         {
-            if ( !player )
-            {
-               vehicleImages[i] = LoadImage(path + carType + "-" + i + ".png");
-            }
-            else
-            {
-               vehicleImages[i] = LoadImage(path + "-" + i + ".png");
-            }
-         }
-      }
-      else
-      {
-         for ( int i = 0; i < length; i++ )
-         {
-            if ( !player )
-            {
-               vehicleImages[i] = LoadImage(path + carType + "-" + ( length - i - 1 ) + ".png");
-            }
-            else
-            {
-               vehicleImages[i] = LoadImage(path + "-" + ( length - i - 1 ) + ".png");
-            }
-         }
-      }
-
-      rescaleImages();
-
-
-		/*
-      if (!player && length == 2)
-			vehicle = LoadImage("src/image/Car.png");
-		else if (!player && length == 3)
-			vehicle = LoadImage("src/image/Truck.png");
-		else if (player)
-			vehicle = LoadImage("src/image/Player.png");
-		*/
-   }
-
-   private void rescaleImages()
-   {
-      for ( int i = 0; i < vehicleImages.length; i++ )
-      {
-         Image scaledImage = vehicleImages[i].getScaledInstance(60,60,Image.SCALE_DEFAULT);
-         vehicleImages[i] = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-         Graphics2D bGr = vehicleImages[i].createGraphics();
-         bGr.drawImage(scaledImage, 0, 0, null);
-         bGr.dispose();
+          image = ThemeManager.instance.getSpecialPlayerImage();
       }
    }
 
@@ -136,57 +79,22 @@ public class Vehicle extends GameObject// implements Drawable
       }
    }
    public void updateVehicleImages(){
-      String path = "src/image/theme_" + GameManager.instance.theme + "/";
-      int carType = (int) ( Math.random() * 2 );
-
-      if ( !player && transform.length == 2 )
-      {
-         path += "small";
-      }
-      else if ( !player && transform.length == 3 )
-      {
-         path += "large";
-      }
-      else if ( player && !this.special )
-      {
-         path += "player";
-      }
-      else if ( player )
-      {
-         path += "police";
-      }
-
-      if ( transform.direction.equals("Upwards") || transform.direction.equals("Right") )
-      {
-         for ( int i = 0; i < transform.length; i++ )
-         {
-            if ( !player )
-            {
-               vehicleImages[i] = LoadImage(path + carType + "-" + i + ".png");
-            }
-            else
-            {
-               vehicleImages[i] = LoadImage(path + "-" + i + ".png");
-            }
-         }
-      }
-      else
-      {
-         for ( int i = 0; i < transform.length; i++ )
-         {
-            if ( !player )
-            {
-               vehicleImages[i] = LoadImage(path + carType + "-" + ( transform.length - i - 1 ) + ".png");
-            }
-            else
-            {
-               vehicleImages[i] = LoadImage(path + "-" + ( transform.length - i - 1 ) + ".png");
-            }
-         }
-      }
-
-      rescaleImages();
-
+       if ( !player && transform.length == 2 )
+       {
+           image = ThemeManager.instance.getShortVehicleImage();
+       }
+       else if ( !player && transform.length == 3 )
+       {
+           image = ThemeManager.instance.getLongVehicleImage();
+       }
+       else if ( player && !this.special )
+       {
+           image = ThemeManager.instance.getPlayerImage();
+       }
+       else if ( player )
+       {
+           image = ThemeManager.instance.getSpecialPlayerImage();
+       }
    }
    public String getType()
    {
@@ -206,10 +114,10 @@ public class Vehicle extends GameObject// implements Drawable
    @Override
    public void draw(Graphics graphics)
    {
-
       int gridPixelSize = 60;
       AffineTransform at;
       Graphics2D graphics2d = (Graphics2D) graphics;
+
       if ( drawingIndexForMoving <= 0 )
       {
          drawingIndexForMoving = gridPixelSize;
@@ -218,94 +126,56 @@ public class Vehicle extends GameObject// implements Drawable
          horizontalMoveAxis = 0;
       }
 
-      int drawIndex;
-      int threshold;
-      if ( isMoving && ( verticalMoveAxis == -1 || horizontalMoveAxis == 1 ) )
-      {
-         drawIndex = transform.length - 1;
-         threshold = -1;
-      }
-      else
-      {
-         drawIndex = 0;
-         threshold = transform.length;
-      }
-      while ( drawIndex != threshold )
-      {
-
-//         if ( isMoving )
-//         {
-//            //System.out.println(occupiedTransforms[drawIndex].position.x + " , " + occupiedTransforms[drawIndex].position.y);
-//         }
          if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == -1 )
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize, occupiedTransforms[drawIndex].position.y * gridPixelSize - drawingIndexForMoving);
-            drawingIndexForMoving -= 2;
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize - drawingIndexForMoving);
+            drawingIndexForMoving -= 4;
          }
          else if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == 1 )
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize, occupiedTransforms[drawIndex].position.y * gridPixelSize + drawingIndexForMoving);
-            drawingIndexForMoving -= 2;
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize + drawingIndexForMoving);
+            drawingIndexForMoving -= 4;
          }
          else if ( isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == -1 )
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize + drawingIndexForMoving, occupiedTransforms[drawIndex].position.y * gridPixelSize);
-            drawingIndexForMoving -= 2;
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize + drawingIndexForMoving, occupiedTransforms[0].position.y * gridPixelSize);
+            drawingIndexForMoving -= 4;
          }
          else if ( isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == 1 )
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize - drawingIndexForMoving, occupiedTransforms[drawIndex].position.y * gridPixelSize);
-            drawingIndexForMoving -= 2;
+            at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize - drawingIndexForMoving, occupiedTransforms[0].position.y * gridPixelSize);
+            drawingIndexForMoving -= 4;
+         }
+         else if (!isMoving && transform.axis.equals("Horizontal") )
+         {
+
+             at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize);
          }
          else
          {
-            at = AffineTransform.getTranslateInstance(occupiedTransforms[drawIndex].position.x * gridPixelSize, occupiedTransforms[drawIndex].position.y * gridPixelSize);
+             at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize);
          }
 
 
          if ( transform.direction.equals("Upwards") )
          {
-            graphics2d.drawImage(vehicleImages[drawIndex], at, null);
+            graphics2d.drawImage(image, at, null);
          }
          else if ( transform.direction.equals("Downwards") )
          {
-            at.rotate(Math.toRadians(180), vehicleImages[drawIndex].getWidth() / 2.0, vehicleImages[drawIndex].getHeight() / 2.0);
-            graphics2d.drawImage(vehicleImages[drawIndex], at, null);
+            at.rotate(Math.toRadians(180), image.getWidth() / 2.0, image.getHeight() / 2.0 );
+            graphics2d.drawImage(image, at, null);
          }
          else if ( transform.direction.equals("Left") )
          {
-            at.rotate(Math.toRadians(90), vehicleImages[drawIndex].getWidth() / 2.0, vehicleImages[drawIndex].getHeight() / 2.0);
-            graphics2d.drawImage(vehicleImages[drawIndex], at, null);
+            at.rotate(Math.toRadians(90), image.getWidth() / 2.0 , image.getHeight() / 2.0 / transform.length);
+            at.translate(0,-60);
+            graphics2d.drawImage(image, at, null);
          }
          else
          {
-            at.rotate(Math.toRadians(270), vehicleImages[drawIndex].getWidth() / 2.0, vehicleImages[drawIndex].getHeight() / 2.0);
-            graphics2d.drawImage(vehicleImages[drawIndex], at, null);
+            at.rotate(Math.toRadians(270), image.getWidth() / 2.0, image.getHeight() / 2.0 / transform.length);
+            graphics2d.drawImage(image, at, null);
          }
-         if ( isMoving && ( verticalMoveAxis == -1 || horizontalMoveAxis == 1 ) )
-         {
-            drawIndex--;
-         }
-         else
-         {
-            drawIndex++;
-         }
-      }
-
-
-      // System.out.println(transform.position.x + " " + transform.position.y);
-   }
-
-   private BufferedImage LoadImage(String FileName)
-   {
-      BufferedImage image = null;
-      try
-      {
-         image = ImageIO.read(new File(FileName));
-      } catch (IOException e)
-      {
-         e.printStackTrace();
-      }
-      return image;
    }
 }
