@@ -25,8 +25,8 @@ public class MapGenerator {
         int index = 0;
 
 
-        while ((st = br.readLine()) != null ) {
-            if(i >= 1166950 && i < 1167000) {  //buradaki değerleri değiştirin sadece, "size" kadar fark olsun arada ve değişkene atabilirsiniz
+        while ((st = br.readLine()) != null) {
+            if (i >= 1166950 && i < 1167000) {  //buradaki değerleri değiştirin sadece, "size" kadar fark olsun arada ve değişkene atabilirsiniz
                 moves[index] = st.split(" ")[0];
                 grid[index] = st.split(" ")[1];
                 index++;
@@ -46,7 +46,7 @@ public class MapGenerator {
                             mapStr += "PC ";
                             map.setCharAt(cell + 1, 'o');
                         } else if (map.charAt(cell) == 'x') {
-                                mapStr += "OO ";
+                            mapStr += "OO ";
                         } else if (map.charAt(cell) == 'o') {
                             mapStr += "SS ";
                         } else {
@@ -66,7 +66,7 @@ public class MapGenerator {
                             else
                                 ch_H1 = '.';
                             if (cell + 2 < 36)
-                                ch_H2= map.charAt(cell + 2);
+                                ch_H2 = map.charAt(cell + 2);
                             else
                                 ch_H2 = '.';
                             direction = (int) (Math.random() * 2);

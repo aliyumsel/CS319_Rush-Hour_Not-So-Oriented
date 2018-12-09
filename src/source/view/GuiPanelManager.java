@@ -18,101 +18,95 @@ import javax.swing.*;
 //import source.model.GameEngine;
 
 @SuppressWarnings({"serial", "Duplicates"})
-public class GuiPanelManager extends JFrame
-{
-   public static GuiPanelManager instance;
+public class GuiPanelManager extends JFrame {
+    public static GuiPanelManager instance;
 
-//   private int currentPanelIndex;
-   private ArrayList<JPanel> panels;
-   private GamePanel gamePanel;
-   private MainMenuPanel mainMenuPanel;
-   private CreditsPanel creditsPanel;
-   private SettingsPanel settingsPanel;
-   private LevelSelectionPanel levelSelectionPanel;
-   private HelpPanel helpPanel;
-   private ChangePlayerPanel changePlayerPanel;
-   private JPanel targetPanel;
-   //private BufferedImage cursorImage;
-   int panelWidth;
-   int panelHeight;
+    //   private int currentPanelIndex;
+    private ArrayList<JPanel> panels;
+    private GamePanel gamePanel;
+    private MainMenuPanel mainMenuPanel;
+    private CreditsPanel creditsPanel;
+    private SettingsPanel settingsPanel;
+    private LevelSelectionPanel levelSelectionPanel;
+    private HelpPanel helpPanel;
+    private ChangePlayerPanel changePlayerPanel;
+    private JPanel targetPanel;
+    //private BufferedImage cursorImage;
+    int panelWidth;
+    int panelHeight;
 
 //   private BufferedImage cursorImage;
 
-   public GuiPanelManager()
-   {
-      super("Rush Hour");
-      setUndecorated(true);
-      instance = this;
-      Toolkit toolkit = Toolkit.getDefaultToolkit();
-      Image image = toolkit.getImage("src/image/icons/cursor.png");
-      Cursor c = toolkit.createCustomCursor(image , new Point(0, 0), "img");
-      this.setCursor (c);
+    public GuiPanelManager() {
+        super("Rush Hour");
+        setUndecorated(true);
+        instance = this;
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage("src/image/icons/cursor.png");
+        Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "img");
+        this.setCursor(c);
 
-      panels = new ArrayList<>();
+        panels = new ArrayList<>();
 
-      File fontFile = new File("src/fonts/odin.ttf");
-      try
-      {
-         Font odinRounded = Font.createFont(Font.TRUETYPE_FONT, fontFile);
-         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-         ge.registerFont(odinRounded);
-      } catch (FontFormatException | IOException e)
-      {
-         e.printStackTrace();
-      }
+        File fontFile = new File("src/fonts/odin.ttf");
+        try {
+            Font odinRounded = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(odinRounded);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
 
-      panelWidth = 800; //764
-      panelHeight = 520; //468
+        panelWidth = 800; //764
+        panelHeight = 520; //468
 
-      setLayout(new CardLayout());
-      setResizable(false);
-      setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLayout(new CardLayout());
+        setResizable(false);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-      addPanels();
-      add(new JLabel()); // do not delete this very IMPORTANT!
+        addPanels();
+        add(new JLabel()); // do not delete this very IMPORTANT!
 
-      setListeners();
-      setFocusable(true);
-      setFocusTraversalKeysEnabled(false);
-      pack();
-      setLocationRelativeTo(null);
+        setListeners();
+        setFocusable(true);
+        setFocusTraversalKeysEnabled(false);
+        pack();
+        setLocationRelativeTo(null);
 
-      setPanelVisible("MainMenu");
+        setPanelVisible("MainMenu");
 
-      setVisible(true);
-      pack();
+        setVisible(true);
+        pack();
 
-   }
+    }
 
-   private void addPanels()
-   {
-      mainMenuPanel = new MainMenuPanel(this);
-      gamePanel = new GamePanel(this);
-      creditsPanel = new CreditsPanel(this);
-      settingsPanel = new SettingsPanel(this);
-      helpPanel = new HelpPanel(this);
-      levelSelectionPanel = new LevelSelectionPanel(this);
-      changePlayerPanel = new ChangePlayerPanel(this);
-      this.add(mainMenuPanel);
-      this.add(gamePanel);
-      this.add(creditsPanel);
-      this.add(levelSelectionPanel);
-      this.add(settingsPanel);
-      this.add(helpPanel);
-      this.add(changePlayerPanel);
-      panels.add(mainMenuPanel);
-      panels.add(gamePanel);
-      panels.add(creditsPanel);
-      panels.add(levelSelectionPanel);
-      panels.add(settingsPanel);
-      panels.add(helpPanel);
-      panels.add(changePlayerPanel);
-   }
+    private void addPanels() {
+        mainMenuPanel = new MainMenuPanel(this);
+        gamePanel = new GamePanel(this);
+        creditsPanel = new CreditsPanel(this);
+        settingsPanel = new SettingsPanel(this);
+        helpPanel = new HelpPanel(this);
+        levelSelectionPanel = new LevelSelectionPanel(this);
+        changePlayerPanel = new ChangePlayerPanel(this);
+        this.add(mainMenuPanel);
+        this.add(gamePanel);
+        this.add(creditsPanel);
+        this.add(levelSelectionPanel);
+        this.add(settingsPanel);
+        this.add(helpPanel);
+        this.add(changePlayerPanel);
+        panels.add(mainMenuPanel);
+        panels.add(gamePanel);
+        panels.add(creditsPanel);
+        panels.add(levelSelectionPanel);
+        panels.add(settingsPanel);
+        panels.add(helpPanel);
+        panels.add(changePlayerPanel);
+    }
 
-   public GamePanel getGamePanel()
-   {
-      return gamePanel;
-   }
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
 
    void setPanelVisible(String panelName)
    {
@@ -172,10 +166,9 @@ public class GuiPanelManager extends JFrame
       setContentPane(targetPanel);
    }
 
-   void updatePanels()
-   {
-      gamePanel.updatePanel(); // look into updating other panels
-   }
+    void updatePanels() {
+        gamePanel.updatePanel(); // look into updating other panels
+    }
 
    public void updateImages(){
       changePlayerPanel.loadImages();
@@ -195,23 +188,18 @@ public class GuiPanelManager extends JFrame
       Input.setGamePanel(gamePanel.getInnerGamePanel());
    }
 
-   public BufferedImage LoadImage(String FileName)
-   {
-      BufferedImage image = null;
-      try
-      {
-         image = ImageIO.read(new File(FileName));
-      }
-      catch (IOException e)
-      {
-         e.printStackTrace();
-      }
-      return image;
-   }
+    public BufferedImage LoadImage(String FileName) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File(FileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
 
-   int findCenter(int _panelWidth, Component _component)
-   {
-      return ( _panelWidth - _component.getPreferredSize().width ) / 2;
-   }
+    int findCenter(int _panelWidth, Component _component) {
+        return (_panelWidth - _component.getPreferredSize().width) / 2;
+    }
 
 }

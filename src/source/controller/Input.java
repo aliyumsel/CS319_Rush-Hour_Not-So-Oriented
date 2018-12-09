@@ -5,8 +5,7 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Input
-{
+public class Input {
     private static Component gamePanel;
 
     private static int pixelMultiplier = 60;
@@ -15,8 +14,7 @@ public class Input
 
     private static String[] mouseButtons2 = new String[5];
 
-    private static java.util.Map<String, Boolean> keys = new HashMap<String, Boolean>()
-    {
+    private static java.util.Map<String, Boolean> keys = new HashMap<String, Boolean>() {
         {
             put("w", false);
             put("a", false);
@@ -29,67 +27,55 @@ public class Input
     private static int mouseX;
     private static int mouseY;
 
-    static boolean getKeyPressed(String keyID)
-    {
+    static boolean getKeyPressed(String keyID) {
         return keys.get(keyID);
     }
 
     @SuppressWarnings("SameParameterValue")
-    static boolean getMouseButtonPressed(int buttonID)
-    {
+    static boolean getMouseButtonPressed(int buttonID) {
         return mouseButtons[buttonID];
     }
 
-    static boolean getMouseButtonReleased(int buttonID)
-    {
+    static boolean getMouseButtonReleased(int buttonID) {
         return mouseButtons2[buttonID].equals("Released");
     }
 
-    public static MouseListener getMouseListener()
-    {
+    public static MouseListener getMouseListener() {
         return new MouseEventHandler();
     }
 
-    public static KeyListener getKeyListener()
-    {
+    public static KeyListener getKeyListener() {
         return new KeyEventHandler();
     }
 
-    public static void setGamePanel(Component component)
-    {
+    public static void setGamePanel(Component component) {
         gamePanel = component;
     }
 
-    static void reset()
-    {
-        for (int i  = 0; i < mouseButtons.length; i++)
-        {
+    static void reset() {
+        for (int i = 0; i < mouseButtons.length; i++) {
             mouseButtons[i] = false;
             mouseButtons2[i] = "default";
         }
 
-        for (Map.Entry<String, Boolean> entry : keys.entrySet() )
-        {
+        for (Map.Entry<String, Boolean> entry : keys.entrySet()) {
             keys.put(entry.getKey(), false);
         }
     }
 
-    static int[] getMousePosition()
-    {
+    static int[] getMousePosition() {
         int[] mousePos = new int[2];
 
-        if (!gamePanel.isShowing())
-        {
+        if (!gamePanel.isShowing()) {
             return mousePos;
         }
 
-        mousePos[0] = (int)(MouseInfo.getPointerInfo().getLocation().getX() - gamePanel.getLocationOnScreen().getX());
-        mousePos[1] = (int)(MouseInfo.getPointerInfo().getLocation().getY() - gamePanel.getLocationOnScreen().getY());
+        mousePos[0] = (int) (MouseInfo.getPointerInfo().getLocation().getX() - gamePanel.getLocationOnScreen().getX());
+        mousePos[1] = (int) (MouseInfo.getPointerInfo().getLocation().getY() - gamePanel.getLocationOnScreen().getY());
         return mousePos;
     }
 
-    static int[] getMouseMatrixPosition()
-    {
+    static int[] getMouseMatrixPosition() {
         int[] mousePos = new int[2];
         mousePos[0] = mouseX / pixelMultiplier;
         mousePos[1] = mouseY / pixelMultiplier;
@@ -97,14 +83,11 @@ public class Input
         return mousePos;
     }
 
-    private static class MouseEventHandler extends MouseAdapter
-    {
+    private static class MouseEventHandler extends MouseAdapter {
         @Override
-        public void mousePressed(MouseEvent e)
-        {
+        public void mousePressed(MouseEvent e) {
             System.out.println("mousePressed");
-            if (e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0)
-            {
+            if (e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0) {
                 mouseButtons2[e.getButton() - 1] = "Pressed";
 
                 mouseButtons[e.getButton() - 1] = true;
@@ -114,11 +97,9 @@ public class Input
         }
 
         @Override
-        public void mouseReleased(MouseEvent e)
-        {
+        public void mouseReleased(MouseEvent e) {
             System.out.println("mouseReleased");
-            if (e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0)
-            {
+            if (e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0) {
                 mouseButtons2[e.getButton() - 1] = "Released";
 
                 mouseButtons[e.getButton() - 1] = false;
@@ -128,16 +109,13 @@ public class Input
         }
     }
 
-    private static class KeyEventHandler extends KeyAdapter
-    {
+    private static class KeyEventHandler extends KeyAdapter {
         @Override
-        public void keyReleased(KeyEvent e)
-        {
-           System.out.println("keyPressed");
-           if (keys.containsKey(e.getKeyChar() + ""))
-           {
-              keys.put(e.getKeyChar() + "", true);
-           }
+        public void keyReleased(KeyEvent e) {
+            System.out.println("keyPressed");
+            if (keys.containsKey(e.getKeyChar() + "")) {
+                keys.put(e.getKeyChar() + "", true);
+            }
         }
     }
 }
