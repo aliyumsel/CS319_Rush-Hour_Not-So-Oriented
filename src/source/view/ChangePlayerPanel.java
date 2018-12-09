@@ -18,7 +18,7 @@ public class ChangePlayerPanel extends JPanel
 {
    private GuiPanelManager guiManager;
    private GameManager gameManager;
-   private CreatePlayerPopUp popUp;
+   public CreatePlayerPopUp popUp;
 
    private ArrayList<JButton> buttonArray;
    private JButton rightArrowButton;

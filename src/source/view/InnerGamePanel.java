@@ -16,7 +16,7 @@ import source.model.Map;
 public class InnerGamePanel extends JPanel
 {
 	private GuiPanelManager guiManager;
-   private EndOfLevelPanel endOfLevelPanel;
+   public EndOfLevelPanel endOfLevelPanel;
    private Map map;
 
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {

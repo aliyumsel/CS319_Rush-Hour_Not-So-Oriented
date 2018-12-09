@@ -119,22 +119,24 @@ public class GuiPanelManager extends JFrame
       if ( panelName.equals("MainMenu") )
       {
          mainMenuPanel.updatePanel();
-         mainMenuPanel.loadImages();
+//         mainMenuPanel.loadImages();
          targetPanel = mainMenuPanel;
       }
       else if ( panelName.equals("Game") )
       {
          //gamePanel.loadImages();
+//         gamePanel.getInnerGamePanel().endOfLevelPanel.loadImages();
          targetPanel = gamePanel;
+
       }
       else if ( panelName.equals("Credits") )
       {
-         creditsPanel.loadImages();
+//         creditsPanel.loadImages();
          targetPanel = creditsPanel;
       }
       else if ( panelName.equals("LevelSelection") )
       {
-         levelSelectionPanel.loadImages();
+//         levelSelectionPanel.loadImages();
     	 levelSelectionPanel.updatePanel();
          targetPanel = levelSelectionPanel;
       }
@@ -148,12 +150,13 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("Help") )
       {
-         helpPanel.loadImages();
+//         helpPanel.loadImages();
          targetPanel = helpPanel;
       }
       else if ( panelName.equals("ChangePlayer") )
       {
-         changePlayerPanel.loadImages();
+//         changePlayerPanel.loadImages();
+//         changePlayerPanel.popUp.loadImages();
          changePlayerPanel.updatePanel();
          targetPanel = changePlayerPanel;
       }
@@ -174,6 +177,15 @@ public class GuiPanelManager extends JFrame
       gamePanel.updatePanel(); // look into updating other panels
    }
 
+   public void updateImages(){
+      changePlayerPanel.loadImages();
+      changePlayerPanel.popUp.loadImages();
+      helpPanel.loadImages();
+      levelSelectionPanel.loadImages();
+      creditsPanel.loadImages();
+      gamePanel.getInnerGamePanel().endOfLevelPanel.loadImages();
+      mainMenuPanel.loadImages();
+   }
    private void setListeners()
    {
       KeyListener keyListener = Input.getKeyListener();

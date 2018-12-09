@@ -4,6 +4,7 @@ import source.model.GameObject;
 import source.model.Obstacle;
 import source.model.Theme;
 import source.model.Vehicle;
+import source.view.GuiPanelManager;
 
 import java.awt.image.BufferedImage;
 
@@ -44,6 +45,7 @@ public class ThemeManager extends Controller {
             }
         } catch (Exception e){}
         SoundManager.instance.updateTheme();
+        GuiPanelManager.instance.updateImages();
     }
 
     public BufferedImage getLongVehicleImage(){

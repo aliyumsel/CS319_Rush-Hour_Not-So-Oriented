@@ -2,6 +2,7 @@ package source.view;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
+import source.controller.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,9 +49,9 @@ public class EndOfLevelPanel extends JPanel
 //      showStars(2); for testing the showStars method it works
    }
 
-   private void loadImages()
+   public void loadImages()
    {
-      background = guiManager.LoadImage("src/image/endOfLevelPanelBackground.png");
+      background = ThemeManager.instance.getBackgroundImage();
 
       menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
       menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");

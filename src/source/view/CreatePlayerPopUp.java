@@ -2,6 +2,7 @@ package source.view;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
+import source.controller.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,9 +44,9 @@ public class CreatePlayerPopUp extends JPanel
       setVisible(false);
    }
 
-   private void loadImages()
+   public void loadImages()
    {
-      background = guiManager.LoadImage("src/image/endOfLevelPanelBackground.png");
+      background = ThemeManager.instance.getBackgroundImage();
 
       closeImage = guiManager.LoadImage("src/image/icons/quit.png");
       closeHighlightedImage = guiManager.LoadImage("src/image/icons/quitH.png");

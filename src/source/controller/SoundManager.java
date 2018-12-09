@@ -68,7 +68,8 @@ public class SoundManager extends Controller
    }
 
    public void updateTheme(){
-      clip.close();
+      if(clip != null)
+         clip.close();
       background();
    }
 
