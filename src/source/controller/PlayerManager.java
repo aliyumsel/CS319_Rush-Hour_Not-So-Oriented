@@ -6,7 +6,6 @@ import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
-import source.model.Settings.Theme;
 
 public class PlayerManager extends Controller {
     public static PlayerManager instance;
@@ -77,6 +76,7 @@ public class PlayerManager extends Controller {
         //adds the new player to players and sets it as current player
         boolean initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
         boolean initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
+
         Settings settings = new Settings(initialMusic, initialSfx);
         Player newPlayer = playerDao.cratePlayer(playerName, settings);
         playerDao.saveLastActivePlayer(playerName);
@@ -190,9 +190,12 @@ public class PlayerManager extends Controller {
         playerDao.saveSettings(currentPlayer);
     }
 
-    public void changeTheme(Theme theme) {
-        if (theme != currentPlayer.getSettings().getTheme()) {
-            currentPlayer.getSettings().setTheme(theme);
+    public void changeTheme(String theme) {
+        //commented case will be added after testing is done
+        if (theme != currentPlayer.getSettings().getActiveTheme() /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */)
+        {
+            currentPlayer.getSettings().setActiveTheme(theme);
+            GameEngine.instance.themeManager.instance.setTheme(theme);
             playerDao.saveSettings(currentPlayer);
         }
     }

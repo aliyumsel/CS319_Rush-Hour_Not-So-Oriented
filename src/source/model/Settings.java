@@ -1,33 +1,49 @@
 package source.model;
 
+import java.util.HashMap;
+
 public class Settings {
     private boolean music;
     private boolean sfx;
 
-    public enum Theme {
-        SIMPLE, CLASSIC, SAFARI, SPACE
-    }
 
-    private Theme theme;
+    private HashMap<String, Boolean> themes;
+    private String activeTheme;
 
-    public Settings(boolean music, boolean sfx, Theme theme) {
+    public Settings(boolean music, boolean sfx, HashMap themes, String activeTheme) {
         this.music = music;
         this.sfx = sfx;
-        this.theme = theme;
+        this.themes = themes;
+        this.activeTheme = activeTheme;
     }
 
     public Settings(boolean music, boolean sfx) {
         this.music = music;
         this.sfx = sfx;
-        this.theme = Theme.CLASSIC;
+        themes = new HashMap<String, Boolean>();
+
+        themes.put("minimalistic", true);
+        themes.put("classic", false);
+        themes.put("safari", false);
+        themes.put("space", false);
+
+        activeTheme = "minimalistic";
     }
 
-    public Theme getTheme() {
-        return theme;
+    public HashMap getThemes() {
+        return themes;
     }
 
-    public void setTheme(Theme theme) {
-        this.theme = theme;
+    public void setThemes(HashMap themes) {
+        this.themes = themes;
+    }
+
+    public String getActiveTheme() {
+        return activeTheme;
+    }
+
+    public void setActiveTheme(String activeTheme) {
+        this.activeTheme = activeTheme;
     }
 
     public boolean getMusic() {
@@ -55,16 +71,6 @@ public class Settings {
     }
 
     public String settingsToString() {
-        String themeStr;
-        if (theme == Theme.SIMPLE) {
-            themeStr = "SIMPLE";
-        } else if (theme == Theme.SAFARI) {
-            themeStr = "SAFARI";
-        } else if (theme == Theme.SPACE) {
-            themeStr = "SPACE";
-        } else {
-            themeStr = "CLASSIC";
-        }
         return "\t\t<Music>\n" +
                 "\t\t\t" + music + "\n" +
                 "\t\t<Music/>\n" +
@@ -72,7 +78,21 @@ public class Settings {
                 "\t\t\t" + sfx + "\n" +
                 "\t\t<Sfx/>\n" +
                 "\t\t<Theme>\n" +
-                "\t\t\t" + themeStr + "\n" +
+                "\t\t\t<Active>\n" +
+                "\t\t\t\t" + activeTheme + "\n" +
+                "\t\t\t<Active>\n" +
+                "\t\t\t<MinimalisticUnlocked>\n" +
+                "\t\t\t\t" + themes.get("minimalistic") + "\n" +
+                "\t\t\t<MinimalisticUnlocked/>\n" +
+                "\t\t\t<ClassicUnlocked>\n" +
+                "\t\t\t\t" + themes.get("classic") + "\n" +
+                "\t\t\t<ClassicUnlocked/>\n" +
+                "\t\t\t<SafariUnlocked>\n" +
+                "\t\t\t\t" + themes.get("safari") + "\n" +
+                "\t\t\t<SafariUnlocked/>\n" +
+                "\t\t\t<SpaceUnlocked>\n" +
+                "\t\t\t\t" + themes.get("space") + "\n" +
+                "\t\t\t<SpaceUnlocked/>\n" +
                 "\t\t<Theme/>\n";
 
     }

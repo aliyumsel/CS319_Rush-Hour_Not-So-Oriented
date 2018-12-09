@@ -217,17 +217,13 @@ public class SettingsPanel extends JPanel {
             updateSoundButtons("SFX");
             GameEngine.instance.soundManager.effectsToggle();
         } else if (e.getSource() == simple) {
-            GameEngine.instance.playerManager.changeTheme(Settings.Theme.SIMPLE);
-            ThemeManager.instance.setTheme("minimalistic");
+            GameEngine.instance.playerManager.changeTheme("minimalistic");
         } else if (e.getSource() == classic) {
-            GameEngine.instance.playerManager.changeTheme(Settings.Theme.CLASSIC);
-            ThemeManager.instance.setTheme("classic");
+            GameEngine.instance.playerManager.changeTheme("classic");
         } else if (e.getSource() == safari) {
-            GameEngine.instance.playerManager.changeTheme(Settings.Theme.SAFARI);
-            ThemeManager.instance.setTheme("safari");
+            GameEngine.instance.playerManager.changeTheme("safari");
         } else if (e.getSource() == space) {
-            GameEngine.instance.playerManager.changeTheme(Settings.Theme.SPACE);
-            ThemeManager.instance.setTheme("space");
+            GameEngine.instance.playerManager.changeTheme("space");
         }
         repaint();
     };

@@ -22,21 +22,27 @@ public class ThemeManager extends Controller {
         classic = new Theme("classic");
         safari = new Theme("safari");
         space = new Theme("space");
-        currentTheme = minimalistic;
+        //currentTheme = minimalistic;
+    }
+
+    private Theme findThemeByName(String theme)
+    {
+        if (theme.equals("classic"))
+            return classic;
+        else if (theme.equals("minimalistic"))
+            return minimalistic;
+        else if (theme.equals("safari"))
+            return safari;
+        else if (theme.equals("space"))
+            return space;
+        else {
+            System.out.println("Theme is null");
+            return null;
+        }
     }
 
     public void setTheme(String theme) {
-        if (theme == "classic")
-            currentTheme = classic;
-        else if (theme == "minimalistic")
-            currentTheme = minimalistic;
-        else if (theme == "safari")
-            currentTheme = safari;
-        else if (theme == "space")
-            currentTheme = space;
-        else {
-            System.out.println("Theme is null");
-        }
+        currentTheme = findThemeByName(theme);
         try {
             if (MapController.instance.getMap().getGameObjects() != null) {
                 for (GameObject gameObject : MapController.instance.getMap().getGameObjects()) {
@@ -87,5 +93,10 @@ public class ThemeManager extends Controller {
 
     public Theme getCurrentTheme() {
         return currentTheme;
+    }
+
+    public void start()
+    {
+        currentTheme = findThemeByName(GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getActiveTheme());
     }
 }

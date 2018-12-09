@@ -35,6 +35,7 @@ public class GameEngine extends TimerTask {
         controllers.add(playerManager);
         controllers.add(gameManager);
         controllers.add(powerUpManager);
+        controllers.add(themeManager);
 
         for (Controller controller : controllers) {
             controller.start();

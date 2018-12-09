@@ -2,7 +2,7 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-	AAAA
+	default
 
 <LastActivePlayer/>
 <NumberOfMaps>
