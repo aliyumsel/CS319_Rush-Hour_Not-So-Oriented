@@ -160,7 +160,7 @@ public class Vehicle extends GameObject// implements Drawable
          else if ( transform.direction.equals("Left") )
          {
             at.rotate(Math.toRadians(90), image.getWidth() / 2.0 , image.getHeight() / 2.0 / transform.length);
-            at.translate(0,-60);
+            at.translate(0,-60 * (transform.length-1));
             graphics2d.drawImage(image, at, null);
          }
          else
