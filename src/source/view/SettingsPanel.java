@@ -67,7 +67,7 @@ public class SettingsPanel extends JPanel {
         this.setVisible(false);
     }
 
-    private void loadImages() {
+    public void loadImages() {
         background = ThemeManager.instance.getBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
@@ -229,7 +229,6 @@ public class SettingsPanel extends JPanel {
             GameEngine.instance.playerManager.changeTheme(Settings.Theme.SPACE);
             ThemeManager.instance.setTheme("space");
         }
-        loadImages();
         repaint();
     };
 

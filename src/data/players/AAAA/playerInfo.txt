@@ -3,7 +3,7 @@
 		AAAA
 	<Name/>
 	<StarAmount>
-		12
+		14
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -87,26 +87,18 @@
 				5
 			<LevelNo/>
 			<Stars>
-				0
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				18
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO TR SS SS SS TU CU OO
-OO SS SS SS SS SS SS OO
-OO SS PC SS CD SS SS SS
-OO SS SS CU SS CL SS OO
-OO SS SS SS TR SS SS OO
-OO SS OO SS CR SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -120,12 +112,20 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO CD TR SS SS CR SS OO
+OO SS CD CR SS SS TD OO
+OO TU SS PC SS SS SS SS
+OO SS SS SS CU SS SS OO
+OO SS SS CD SS CR SS OO
+OO CR SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -980,6 +980,6 @@ OO OO OO OO OO OO OO OO
 		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
-		0
+		-2
 	<RemainingSpacePowerups/>
 <Player/>
