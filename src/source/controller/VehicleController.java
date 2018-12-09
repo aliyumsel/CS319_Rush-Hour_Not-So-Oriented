@@ -155,7 +155,7 @@ public class VehicleController extends Controller {
         if (soundManager == null) {
             return;
         }
-        soundManager.vehicleHorn(selectedVehicle.getType());
+        soundManager.vehicleHorn();
     }
 
     private boolean tryMove(String direction) {

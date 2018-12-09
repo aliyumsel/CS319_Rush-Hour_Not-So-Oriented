@@ -23,6 +23,7 @@ public class Theme {
     private ArrayList<String> vehicleSoundArray;
     private String themeSong;
     private String buttonClick;
+    private String selectionSound;
     private String path;
 
     public Theme(String theme) {
@@ -41,6 +42,7 @@ public class Theme {
     private void setSounds() {
         buttonClick = path + "buttonClick.wav";
         themeSong = path + "theme.wav";
+        selectionSound = path + "selectionSound.wav";
     }
 
     private void setImages() {
@@ -110,6 +112,10 @@ public class Theme {
 
     public String getThemeSong() {
         return themeSong;
+    }
+
+    public String getSelectionSound() {
+        return selectionSound;
     }
 
     @SuppressWarnings("Duplicates")

@@ -91,6 +91,10 @@ public class ThemeManager extends Controller {
         return currentTheme.getThemeSong();
     }
 
+    public String getSelectionSound() {
+        return currentTheme.getSelectionSound();
+    }
+
     public Theme getCurrentTheme() {
         return currentTheme;
     }
