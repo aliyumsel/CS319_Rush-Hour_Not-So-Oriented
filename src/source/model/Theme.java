@@ -24,7 +24,7 @@ public class Theme {
     private String buttonClick;
     private String path;
 
-    public Theme (String theme){
+    public Theme(String theme) {
         shortVehicleImageArray = new ArrayList<>();
         longVehicleImageArray = new ArrayList<>();
         this.activeTheme = theme;
@@ -75,82 +75,76 @@ public class Theme {
         specialPlayer = LoadImage(path + "special.png");
     }
 
-    public BufferedImage getLongVehicleImage(){
-        return longVehicleImageArray.get((int)(Math.random()*2)); //test lazım ama çalışır
-    }
-    public BufferedImage getShortVehicleImage(){
-        return shortVehicleImageArray.get((int)(Math.random()*2));
+    public BufferedImage getLongVehicleImage() {
+        return longVehicleImageArray.get((int) (Math.random() * 2)); //test lazım ama çalışır
     }
 
-    public BufferedImage getPlayerImage(){
+    public BufferedImage getShortVehicleImage() {
+        return shortVehicleImageArray.get((int) (Math.random() * 2));
+    }
+
+    public BufferedImage getPlayerImage() {
         return playerImage;
     }
 
-    public BufferedImage getSpecialPlayerImage(){
+    public BufferedImage getSpecialPlayerImage() {
         return specialPlayer;
     }
 
-    public BufferedImage getObstacleImage(){
+    public BufferedImage getObstacleImage() {
         return obstacle;
     }
 
-    public BufferedImage getBackgroundImage(){
+    public BufferedImage getBackgroundImage() {
         return background;
     }
 
-    public String getButtonClickSound(){
+    public String getButtonClickSound() {
         return buttonClick;
     }
 
-    public String getThemeSong(){
+    public String getThemeSong() {
         return themeSong;
     }
 
     @SuppressWarnings("Duplicates")
-    private void rescaleImages()
-    {
+    private void rescaleImages() {
         Image scaledImage;
         Graphics2D bGr;
-        for ( int i = 0; i < shortVehicleImageArray.size(); i++ )
-        {
-            scaledImage = shortVehicleImageArray.get(i).getScaledInstance(60,120,Image.SCALE_DEFAULT);
-            shortVehicleImageArray.set(i,new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB));
+        for (int i = 0; i < shortVehicleImageArray.size(); i++) {
+            scaledImage = shortVehicleImageArray.get(i).getScaledInstance(60, 120, Image.SCALE_DEFAULT);
+            shortVehicleImageArray.set(i, new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB));
             bGr = shortVehicleImageArray.get(i).createGraphics();
             bGr.drawImage(scaledImage, 0, 0, null);
             bGr.dispose();
         }
 
-        for ( int i = 0; i < longVehicleImageArray.size(); i++ )
-        {
-            scaledImage = longVehicleImageArray.get(i).getScaledInstance(60,180,Image.SCALE_DEFAULT);
-            longVehicleImageArray.set(i,new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB));
+        for (int i = 0; i < longVehicleImageArray.size(); i++) {
+            scaledImage = longVehicleImageArray.get(i).getScaledInstance(60, 180, Image.SCALE_DEFAULT);
+            longVehicleImageArray.set(i, new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB));
             bGr = longVehicleImageArray.get(i).createGraphics();
             bGr.drawImage(scaledImage, 0, 0, null);
             bGr.dispose();
         }
 
-        scaledImage = specialPlayer.getScaledInstance(60,120,Image.SCALE_DEFAULT);
+        scaledImage = specialPlayer.getScaledInstance(60, 120, Image.SCALE_DEFAULT);
         specialPlayer = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         bGr = specialPlayer.createGraphics();
         bGr.drawImage(scaledImage, 0, 0, null);
         bGr.dispose();
 
-        scaledImage = playerImage.getScaledInstance(60,120,Image.SCALE_DEFAULT);
+        scaledImage = playerImage.getScaledInstance(60, 120, Image.SCALE_DEFAULT);
         playerImage = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         bGr = playerImage.createGraphics();
         bGr.drawImage(scaledImage, 0, 0, null);
         bGr.dispose();
     }
 
-    public BufferedImage LoadImage(String FileName)
-    {
+    public BufferedImage LoadImage(String FileName) {
         BufferedImage image = null;
-        try
-        {
+        try {
             image = ImageIO.read(new File(FileName));
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return image;
