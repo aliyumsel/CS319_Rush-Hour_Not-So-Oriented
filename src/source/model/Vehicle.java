@@ -1,21 +1,16 @@
 package source.model;
 
-import source.controller.GameManager;
 import source.controller.ThemeManager;
-import source.view.GuiPanelManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class Vehicle extends GameObject// implements Drawable
 {
    private String type; // we may not need this
    public boolean isMoving; // we may not need this
+//   public boolean isHighlighted; //bunu highlight olayi icin kullanmamiz gerekebilir
    private boolean player;
    private int verticalMoveAxis;
    private int horizontalMoveAxis;

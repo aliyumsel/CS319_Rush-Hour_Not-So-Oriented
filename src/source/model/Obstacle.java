@@ -2,15 +2,11 @@ package source.model;
 
 import source.controller.ThemeManager;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Obstacle extends GameObject
 {
-
    private BufferedImage image;
 
    public Obstacle(int x, int y, int length, String direction)
