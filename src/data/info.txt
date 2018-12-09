@@ -2,7 +2,7 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-	Deniz
+	AAAA
 
 <LastActivePlayer/>
 <NumberOfMaps>

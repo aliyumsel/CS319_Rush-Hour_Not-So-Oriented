@@ -49,7 +49,7 @@ public class EndOfLevelPanel extends JPanel {
 
    public void loadImages()
    {
-      background = ThemeManager.instance.getBackgroundImage();
+      background = ThemeManager.instance.getPopupBackgroundImage();
 
         menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
         menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");

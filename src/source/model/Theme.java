@@ -19,6 +19,7 @@ public class Theme {
     private BufferedImage specialPlayer;
     private BufferedImage obstacle;
     private BufferedImage background;
+    private BufferedImage popupBackground;
     private ArrayList<String> vehicleSoundArray;
     private String themeSong;
     private String buttonClick;
@@ -69,6 +70,7 @@ public class Theme {
 
     private void setBackground() {
         background = LoadImage(path + "background.png");
+        popupBackground = LoadImage(path + "popUpBackground.png");
     }
 
     private void setSpecialPlayer() {
@@ -99,6 +101,9 @@ public class Theme {
         return background;
     }
 
+    public BufferedImage getPopupBackgroundImage() {
+        return popupBackground;
+    }
     public String getButtonClickSound() {
         return buttonClick;
     }

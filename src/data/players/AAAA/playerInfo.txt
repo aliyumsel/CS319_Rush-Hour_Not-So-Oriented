@@ -1,9 +1,9 @@
 <Player>
 	<Name>
-		Deniz
+		AAAA
 	<Name/>
 	<StarAmount>
-		6
+		12
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -14,7 +14,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				5
+				4
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -33,23 +33,15 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO TD CR SS SS SS SS OO
-OO SS SS SS TD SS SS OO
-OO SS PC SS SS SS SS SS
-OO CU SS SS SS SS TU OO
-OO SS CR SS SS SS SS OO
-OO SS SS TR SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -57,26 +49,18 @@ OO OO OO OO OO OO OO OO
 				3
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				1
+				2
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO SS SS SS SS SS TU OO
-OO CL SS SS SS SS SS OO
-OO CU PC SS SS SS SS SS
-OO SS CU SS SS CR SS OO
-OO CU SS CL SS CR SS OO
-OO SS TR SS SS CR SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -84,16 +68,16 @@ OO OO OO OO OO OO OO OO
 				4
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				8
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -109,12 +93,20 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TR SS SS SS TU CU OO
+OO SS SS SS SS SS SS OO
+OO SS PC SS CD SS SS SS
+OO SS SS CU SS CL SS OO
+OO SS SS SS TR SS SS OO
+OO SS OO SS CR SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -978,14 +970,14 @@ OO OO OO OO OO OO OO OO
 			true
 		<Music/>
 		<Sfx>
-			true
+			false
 		<Sfx/>
 		<Theme>
-			SAFARI
+			SIMPLE
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>
-		-1
+		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
 		0

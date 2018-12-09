@@ -61,6 +61,10 @@ public class ThemeManager extends Controller {
         return currentTheme.getBackgroundImage();
     }
 
+    public BufferedImage getPopupBackgroundImage() {
+        return currentTheme.getPopupBackgroundImage();
+    }
+
     public BufferedImage getObstacleImage() {
         return currentTheme.getObstacleImage();
     }
