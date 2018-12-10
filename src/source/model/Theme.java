@@ -116,6 +116,12 @@ public class Theme
       return buttonClick;
    }
 
+    public BufferedImage getPopupBackgroundImage() {
+        return popupBackground;
+    }
+    public String getButtonClickSound() {
+        return buttonClick;
+    }
    public String getThemeSong()
    {
       return themeSong;

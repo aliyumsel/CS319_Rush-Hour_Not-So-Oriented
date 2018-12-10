@@ -67,7 +67,7 @@ public class SettingsPanel extends JPanel {
         this.setVisible(false);
     }
 
-    private void loadImages() {
+    public void loadImages() {
         background = ThemeManager.instance.getBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
@@ -217,19 +217,14 @@ public class SettingsPanel extends JPanel {
             updateSoundButtons("SFX");
             GameEngine.instance.soundManager.effectsToggle();
         } else if (e.getSource() == simple) {
-            GameEngine.instance.playerManager.changeTheme(Settings.Theme.SIMPLE);
-            ThemeManager.instance.setTheme("minimalistic");
+            GameEngine.instance.playerManager.changeTheme("minimalistic");
         } else if (e.getSource() == classic) {
-            GameEngine.instance.playerManager.changeTheme(Settings.Theme.CLASSIC);
-            ThemeManager.instance.setTheme("classic");
+            GameEngine.instance.playerManager.changeTheme("classic");
         } else if (e.getSource() == safari) {
-            GameEngine.instance.playerManager.changeTheme(Settings.Theme.SAFARI);
-            ThemeManager.instance.setTheme("safari");
+            GameEngine.instance.playerManager.changeTheme("safari");
         } else if (e.getSource() == space) {
-            GameEngine.instance.playerManager.changeTheme(Settings.Theme.SPACE);
-            ThemeManager.instance.setTheme("space");
+            GameEngine.instance.playerManager.changeTheme("space");
         }
-        loadImages();
         repaint();
     };
 

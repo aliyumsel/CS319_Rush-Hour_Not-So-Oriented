@@ -171,6 +171,7 @@ public class GuiPanelManager extends JFrame {
     }
 
    public void updateImages(){
+        settingsPanel.loadImages();
       changePlayerPanel.loadImages();
       changePlayerPanel.popUp.loadImages();
       helpPanel.loadImages();

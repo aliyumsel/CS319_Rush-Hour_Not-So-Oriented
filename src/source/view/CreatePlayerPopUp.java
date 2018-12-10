@@ -44,7 +44,7 @@ public class CreatePlayerPopUp extends JPanel {
 
    public void loadImages()
    {
-      background = ThemeManager.instance.getBackgroundImage();
+       background = ThemeManager.instance.getPopupBackgroundImage();
 
         closeImage = guiManager.LoadImage("src/image/icons/quit.png");
         closeHighlightedImage = guiManager.LoadImage("src/image/icons/quitH.png");

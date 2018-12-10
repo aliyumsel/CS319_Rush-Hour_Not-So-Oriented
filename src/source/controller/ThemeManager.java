@@ -15,45 +15,38 @@ public class ThemeManager extends Controller
    private Theme safari;
    private Theme space;
 
-   public ThemeManager()
-   { //String theme parametresi ekleyip aşağıda hangi themese current theme o olucak oyun başlarken
-      instance = this;
-      minimalistic = new Theme("minimalistic");
-      classic = new Theme("classic");
-      safari = new Theme("safari");
-      space = new Theme("space");
-      currentTheme = minimalistic;
-   }
+    public ThemeManager() { //String theme parametresi ekleyip aşağıda hangi themese current theme o olucak oyun başlarken
+        instance = this;
+        minimalistic = new Theme("minimalistic");
+        classic = new Theme("classic");
+        safari = new Theme("safari");
+        space = new Theme("space");
+        //currentTheme = minimalistic;
+    }
 
-   public void setTheme(String theme)
-   {
-      if ( theme.equals("classic" ))
-      {
-         currentTheme = classic;
-      }
-      else if ( theme.equals("minimalistic") )
-      {
-         currentTheme = minimalistic;
-      }
-      else if ( theme.equals("safari") )
-      {
-         currentTheme = safari;
-      }
-      else if ( theme.equals("space") )
-      {
-         currentTheme = space;
-      }
-      else
-      {
-         System.out.println("Theme is null");
-      }
-      try
-      {
-         if ( MapController.instance.getMap().getGameObjects() != null )
-         {
-            for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
-            {
-               gameObject.updateImages();
+    private Theme findThemeByName(String theme)
+    {
+        if (theme.equals("classic"))
+            return classic;
+        else if (theme.equals("minimalistic"))
+            return minimalistic;
+        else if (theme.equals("safari"))
+            return safari;
+        else if (theme.equals("space"))
+            return space;
+        else {
+            System.out.println("Theme is null");
+            return null;
+        }
+    }
+
+    public void setTheme(String theme) {
+        currentTheme = findThemeByName(theme);
+        try {
+            if (MapController.instance.getMap().getGameObjects() != null) {
+                for (GameObject gameObject : MapController.instance.getMap().getGameObjects()) {
+                    gameObject.updateImages();
+                }
             }
          }
       } catch (Exception e)
@@ -79,10 +72,13 @@ public class ThemeManager extends Controller
       return currentTheme.getBackgroundImage();
    }
 
-   public BufferedImage getObstacleImage()
-   {
-      return currentTheme.getObstacleImage();
-   }
+    public BufferedImage getPopupBackgroundImage() {
+        return currentTheme.getPopupBackgroundImage();
+    }
+
+    public BufferedImage getObstacleImage() {
+        return currentTheme.getObstacleImage();
+    }
 
    public BufferedImage getPlayerImage()
    {
@@ -104,8 +100,16 @@ public class ThemeManager extends Controller
       return currentTheme.getThemeSong();
    }
 
-   public Theme getCurrentTheme()
-   {
-      return currentTheme;
-   }
+    public String getSelectionSound() {
+        return currentTheme.getSelectionSound();
+    }
+
+    public Theme getCurrentTheme() {
+        return currentTheme;
+    }
+
+    public void start()
+    {
+        currentTheme = findThemeByName(GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getActiveTheme());
+    }
 }

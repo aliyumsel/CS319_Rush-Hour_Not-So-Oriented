@@ -1,9 +1,9 @@
 <Player>
 	<Name>
-		Deniz
+		AAAA
 	<Name/>
 	<StarAmount>
-		15
+		14
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -14,7 +14,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				4
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -33,7 +33,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -52,7 +52,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -71,7 +71,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				8
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -87,10 +87,10 @@
 				5
 			<LevelNo/>
 			<Stars>
-				3
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				18
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -109,7 +109,7 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				6
+				20
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
@@ -121,8 +121,8 @@
 OO OO OO OO OO OO OO OO
 OO CD TR SS SS CR SS OO
 OO SS CR SS SS SS TD OO
-OO TU CD SS PC SS SS SS
-OO SS SS SS SS SS SS OO
+OO TU SS PC SS SS SS SS
+OO SS CD SS SS SS SS OO
 OO SS SS CD CU CR SS OO
 OO CR SS SS SS SS SS OO
 OO OO OO OO OO OO OO OO
@@ -967,19 +967,19 @@ OO OO OO OO OO OO OO OO
 	<Levels/>
 	<Settings>
 		<Music>
-			false
+			true
 		<Music/>
 		<Sfx>
-			false
+			true
 		<Sfx/>
 		<Theme>
-			SPACE
+			SIMPLE
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>
-		-3
+		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
-		-2
+		-3
 	<RemainingSpacePowerups/>
 <Player/>

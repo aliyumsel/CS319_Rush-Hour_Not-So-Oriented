@@ -10,6 +10,7 @@ import sun.audio.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 public class SoundManager extends Controller {
     public static SoundManager instance;
@@ -44,10 +45,11 @@ public class SoundManager extends Controller {
         }
     }
 
-    void vehicleHorn(String vehicle) {
+    void vehicleHorn() {
         if (isEffectsEnabled) {
             try {
-                inputStream = new FileInputStream("src/sounds/" + vehicle + ".wav"); //buralar değişicek folderlarda ve theme classına eklenicek
+                String selectionSound = ThemeManager.instance.getSelectionSound();
+                inputStream = new FileInputStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
                 audioStream = new AudioStream(inputStream);
                 AudioPlayer.player.start(audioStream);
             } catch (IOException a) {

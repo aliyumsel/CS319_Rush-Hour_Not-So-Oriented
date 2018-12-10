@@ -6,7 +6,6 @@ import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
-import source.model.Settings.Theme;
 
 public class PlayerManager extends Controller
 {
@@ -84,25 +83,37 @@ public class PlayerManager extends Controller
          players = new ArrayList<>();
       }
 
-      //checks if a player with the same name exists
-      for ( int i = 0; i < players.size(); i++ )
-      {
-         if ( players.get(i).getPlayerName().equals(playerName) )
-         {
-            return 1;
-         }
-      }
-      //adds the new player to players and sets it as current player
-      boolean initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
-      boolean initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
-      Settings settings = new Settings(initialMusic, initialSfx);
-      Player newPlayer = playerDao.cratePlayer(playerName, settings);
-      playerDao.saveLastActivePlayer(playerName);
-      players.add(newPlayer);
-      currentPlayer = newPlayer;
+        //checks if a player with the same name exists
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getPlayerName().equals(playerName)) {
+                return 1;
+            }
+        }
+        //adds the new player to players and sets it as current player
+        boolean initialMusic;
+        boolean initialSfx;
 
-      return 0;
-   }
+        if (players.size() == 0)
+        {
+            initialMusic = true;
+            initialSfx = true;
+        }
+        else
+        {
+            initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
+            initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
+        }
+
+        Settings settings = new Settings(initialMusic, initialSfx);
+        Player newPlayer = playerDao.cratePlayer(playerName, settings);
+        playerDao.saveLastActivePlayer(playerName);
+        players.add(newPlayer);
+        currentPlayer = newPlayer;
+
+        GameEngine.instance.themeManager.setTheme("minimalistic");
+
+        return 0;
+    }
 
    public int deletePlayer(String name)
    {
@@ -135,26 +146,23 @@ public class PlayerManager extends Controller
       return -1;
    }
 
-   public boolean selectPlayer(String name)
-   {
-      boolean selected = false;
-      for ( int i = 0; i < players.size(); i++ )
-      {
-         if ( players.get(i).getPlayerName().equals(name) && currentPlayer != players.get(i) )
-         {
-            currentPlayer = players.get(i);
-            selected = true;
-            break;
-         }
-      }
-      if ( selected )
-      {
-         GameEngine.instance.soundManager.setThemeSong(currentPlayer.getSettings().getMusic());
-         GameEngine.instance.soundManager.setEffects(currentPlayer.getSettings().getSfx());
-         playerDao.saveLastActivePlayer(name);
-         return true;
-      }
-      return false;
+    public boolean selectPlayer(String name) {
+        boolean selected = false;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getPlayerName().equals(name) && currentPlayer != players.get(i)) {
+                currentPlayer = players.get(i);
+                selected = true;
+                break;
+            }
+        }
+        if (selected) {
+            GameEngine.instance.soundManager.setThemeSong(currentPlayer.getSettings().getMusic());
+            GameEngine.instance.soundManager.setEffects(currentPlayer.getSettings().getSfx());
+            GameEngine.instance.themeManager.setTheme(currentPlayer.getSettings().getActiveTheme());
+            playerDao.saveLastActivePlayer(name);
+            return true;
+        }
+        return false;
 
    }
 
@@ -238,6 +246,15 @@ public class PlayerManager extends Controller
       }
    }
 
+    public void changeTheme(String theme) {
+        //commented case will be added after testing is done
+        if (theme != currentPlayer.getSettings().getActiveTheme() /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */)
+        {
+            currentPlayer.getSettings().setActiveTheme(theme);
+            GameEngine.instance.themeManager.instance.setTheme(theme);
+            playerDao.saveSettings(currentPlayer);
+        }
+    }
    void decrementRemainingShrinkPowerup()
    {
       currentPlayer.decrementRemainingShrinkPowerup();

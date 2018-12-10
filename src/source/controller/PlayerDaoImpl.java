@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import interfaces.PlayerDao;
@@ -20,12 +21,12 @@ class PlayerDaoImpl implements PlayerDao {
         ArrayList<Player> players = new ArrayList<>();
 
         Scanner playerInfo = null, levelInfo = null;
-        String playerName, tmp, status, mapLine, map = "";
+        String playerName, tmp, status, mapLine, map = "", activeTheme;
         int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars, remainingShrinkPowerup, remainingSpacePowerup;
         ArrayList<LevelInformation> levels;
         Settings settings;
         boolean music, sfx, unlocked;
-        Settings.Theme theme;
+        HashMap<String, Boolean> themes = new HashMap<String, Boolean>();
 
         //initiates the players
         File folder = new File("src/data/players");
@@ -123,18 +124,22 @@ class PlayerDaoImpl implements PlayerDao {
             sfx = !tmp.equals("false");
 
             while (!playerInfo.nextLine().trim().equals("<Theme>")) ;
-            tmp = playerInfo.nextLine().trim();
-            if (tmp.trim().equals("SPACE")) {
-                theme = Settings.Theme.SPACE;
-            } else if (tmp.trim().equals("SAFARI")) {
-                theme = Settings.Theme.SAFARI;
-            } else if (tmp.trim().equals("SIMPLE")) {
-                theme = Settings.Theme.SIMPLE;
-            } else {
-                theme = Settings.Theme.CLASSIC;
-            }
+            while (!playerInfo.nextLine().trim().equals("<Active>")) ;
+            activeTheme = playerInfo.nextLine().trim();
 
-            settings = new Settings(music, sfx, theme);
+            while (!playerInfo.nextLine().trim().equals("<MinimalisticUnlocked>")) ;
+            themes.put("minimalistic", playerInfo.nextLine().trim().equals("true"));
+
+            while (!playerInfo.nextLine().trim().equals("<ClassicUnlocked>")) ;
+            themes.put("classic", playerInfo.nextLine().trim().equals("true"));
+
+            while (!playerInfo.nextLine().trim().equals("<SafariUnlocked>")) ;
+            themes.put("safari", playerInfo.nextLine().trim().equals("true"));
+
+            while (!playerInfo.nextLine().trim().equals("<SpaceUnlocked>")) ;
+            themes.put("space", playerInfo.nextLine().trim().equals("true"));
+
+            settings = new Settings(music, sfx, themes, activeTheme);
 
             while (!playerInfo.nextLine().trim().equals("<RemainingShrinkPowerups>")) ;
             remainingShrinkPowerup = Integer.parseInt(playerInfo.nextLine().trim());
