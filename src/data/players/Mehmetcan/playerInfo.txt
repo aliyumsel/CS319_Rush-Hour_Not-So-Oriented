@@ -1,9 +1,13 @@
 <Player>
 	<Name>
-		default
+		Mehmetcan
 	<Name/>
 	<StarAmount>
+<<<<<<< Updated upstream:src/data/players/default/playerInfo.txt
 		21
+=======
+		0
+>>>>>>> Stashed changes:src/data/players/Mehmetcan/playerInfo.txt
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,13 +15,17 @@
 				1
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
+<<<<<<< Updated upstream:src/data/players/default/playerInfo.txt
 				inProgress
+=======
+				notStarted
+>>>>>>> Stashed changes:src/data/players/Mehmetcan/playerInfo.txt
 			<Status/>
 			<Unlocked>
 				true
@@ -38,16 +46,16 @@ OO OO OO OO OO OO OO OO
 				2
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -57,16 +65,16 @@ OO OO OO OO OO OO OO OO
 				3
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -82,10 +90,14 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
+<<<<<<< Updated upstream:src/data/players/default/playerInfo.txt
 				finished
+=======
+				notStarted
+>>>>>>> Stashed changes:src/data/players/Mehmetcan/playerInfo.txt
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>

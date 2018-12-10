@@ -143,7 +143,8 @@ public class Vehicle extends GameObject// implements Drawable
 
 
       at = AffineTransform.getTranslateInstance(transform.position.x * gridPixelSize, transform.position.y * gridPixelSize);
-//      System.out.println(transform.position.x * gridPixelSize + "," + transform.position.y * gridPixelSize);
+      //if(isMoving)
+      //System.out.println(transform.position.x * gridPixelSize + "," + transform.position.y * gridPixelSize);
 
 
       if ( transform.direction.equals("Upwards") )
