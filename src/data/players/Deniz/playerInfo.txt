@@ -3,7 +3,7 @@
 		Deniz
 	<Name/>
 	<StarAmount>
-		6
+		75
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -38,7 +38,7 @@ OO OO OO OO OO OO OO OO
 				2
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
@@ -71,20 +71,12 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO SS SS SS SS SS TU OO
-OO CL SS SS SS SS SS OO
-OO CU PC SS SS SS SS SS
-OO SS CU SS SS CR SS OO
-OO CU SS CL SS CR SS OO
-OO SS TR SS SS CR SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -990,19 +982,19 @@ OO OO OO OO OO OO OO OO
 		<Sfx/>
 		<Theme>
 			<Active>
-				minimalistic
+				safari
 			<Active>
 			<MinimalisticUnlocked>
 				true
 			<MinimalisticUnlocked/>
 			<ClassicUnlocked>
-				false
+				true
 			<ClassicUnlocked/>
 			<SafariUnlocked>
-				false
+				true
 			<SafariUnlocked/>
 			<SpaceUnlocked>
-				false
+				true
 			<SpaceUnlocked/>
 		<Theme/>
 	<Settings/>
