@@ -29,13 +29,14 @@ public class GameEngine extends TimerTask {
 
         controllers = new ArrayList<>();
 
+        controllers.add(themeManager);
         controllers.add(soundManager);
         controllers.add(mapController);
         controllers.add(vehicleController);
         controllers.add(playerManager);
         controllers.add(gameManager);
         controllers.add(powerUpManager);
-        controllers.add(themeManager);
+
 
         for (Controller controller : controllers) {
             controller.start();

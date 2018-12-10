@@ -74,14 +74,27 @@ public class PlayerManager extends Controller {
             }
         }
         //adds the new player to players and sets it as current player
-        boolean initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
-        boolean initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
+        boolean initialMusic;
+        boolean initialSfx;
+
+        if (players.size() == 0)
+        {
+            initialMusic = true;
+            initialSfx = true;
+        }
+        else
+        {
+            initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
+            initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
+        }
 
         Settings settings = new Settings(initialMusic, initialSfx);
         Player newPlayer = playerDao.cratePlayer(playerName, settings);
         playerDao.saveLastActivePlayer(playerName);
         players.add(newPlayer);
         currentPlayer = newPlayer;
+
+        GameEngine.instance.themeManager.setTheme("minimalistic");
 
         return 0;
     }
@@ -123,6 +136,7 @@ public class PlayerManager extends Controller {
         if (selected) {
             GameEngine.instance.soundManager.setThemeSong(currentPlayer.getSettings().getMusic());
             GameEngine.instance.soundManager.setEffects(currentPlayer.getSettings().getSfx());
+            GameEngine.instance.themeManager.setTheme(currentPlayer.getSettings().getActiveTheme());
             playerDao.saveLastActivePlayer(name);
             return true;
         }
