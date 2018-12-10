@@ -263,7 +263,6 @@ class PlayerDaoImpl implements PlayerDao {
         newPlayer.resetLastUnlockedLevelNo();
 
         return newPlayer;
-
     }
 
     @Override
@@ -429,7 +428,7 @@ class PlayerDaoImpl implements PlayerDao {
             newAmount = player.getRemainingShrinkPowerup();
         } else {
             powerupTag = "<RemainingSpacePowerups>";
-            newAmount = player.getRamainingSpacePowerup();
+            newAmount = player.getRemainingSpacePowerup();
         }
 
         line = scan.nextLine();

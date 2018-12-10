@@ -56,7 +56,7 @@ public class SoundManager extends Controller {
         }
     }
 
-   public void updateTheme(){
+   void updateTheme(){
       if(clip != null)
          clip.close();
       background();
@@ -106,22 +106,22 @@ public class SoundManager extends Controller {
         isEffectsEnabled = !isEffectsEnabled;
     }
 
-    public boolean isThemeSongEnabled() {
+    boolean isThemeSongEnabled() {
         return isThemeEnabled;
     }
 
-    public boolean isEffectsEnabled() {
+    boolean isEffectsEnabled() {
         return isEffectsEnabled;
     }
 
-    public void setThemeSong(boolean themeEnabled) {
+    void setThemeSong(boolean themeEnabled) {
         if (this.isThemeEnabled != themeEnabled) {
             themeSongToggle();
         }
 
     }
 
-    public void setEffects(boolean effectsEnabled) {
+    void setEffects(boolean effectsEnabled) {
         if (this.isEffectsEnabled != effectsEnabled) {
             effectsToggle();
         }
