@@ -1,5 +1,6 @@
 package source.controller;
 
+import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 import source.view.GuiPanelManager;
 
@@ -9,6 +10,8 @@ public class GameManager extends Controller
    public PlayerManager playerManager;
 
    public int level;
+   public int time;
+   private boolean bonus;
 
    boolean isGameActive = false;
 
@@ -16,11 +19,18 @@ public class GameManager extends Controller
    {
       playerManager = PlayerManager.instance;
       instance = this;
+      time = 0;
+      bonus = false;
    }
 
    public void update()
    {
-
+      if (bonus) {
+         time--;
+         if (time == 0) {
+            endMap();
+         }
+      }
    }
 
    void autoSave(int moveAmount)
@@ -74,8 +84,17 @@ public class GameManager extends Controller
       System.out.println("Loaded level: " + _level);
       System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
       level = _level;
+      LevelInformation levelToBeLoaded = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
 
-      if ( !PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1).getStatus().equals("inProgress") )
+      if (levelToBeLoaded instanceof BonusLevelInformation)
+      {
+         bonus = true;
+         time = ((BonusLevelInformation) levelToBeLoaded).getTime() * 60;
+         MapController.instance.loadOriginalLevel(_level);
+         VehicleController.instance.setMap(MapController.instance.getMap());
+         VehicleController.instance.setNumberOfMoves(0);
+      }
+      else if ( !levelToBeLoaded.getStatus().equals("inProgress") )
       {
          MapController.instance.loadOriginalLevel(_level);
          autoSave(0);

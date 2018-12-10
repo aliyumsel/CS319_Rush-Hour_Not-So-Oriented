@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import interfaces.PlayerDao;
+import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
@@ -22,10 +23,10 @@ class PlayerDaoImpl implements PlayerDao {
 
         Scanner playerInfo = null, levelInfo = null;
         String playerName, tmp, status, mapLine, map = "", activeTheme;
-        int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars, remainingShrinkPowerup, remainingSpacePowerup;
+        int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars, remainingShrinkPowerup, remainingSpacePowerup, time;
         ArrayList<LevelInformation> levels;
         Settings settings;
-        boolean music, sfx, unlocked;
+        boolean music, sfx, unlocked, bonus;
         HashMap<String, Boolean> themes = new HashMap<String, Boolean>();
 
         //initiates the players
@@ -61,6 +62,9 @@ class PlayerDaoImpl implements PlayerDao {
             while (!playerInfo.nextLine().trim().equals("<Levels>")) ;
 
             while (!playerInfo.nextLine().trim().equals("<Levels/>")) {
+                bonus = false;
+                time = 0;
+
                 while (!playerInfo.nextLine().trim().equals("<LevelNo>")) ;
                 tmp = playerInfo.nextLine().trim();
                 levelNo = Integer.parseInt(tmp);
@@ -98,9 +102,21 @@ class PlayerDaoImpl implements PlayerDao {
                     e.printStackTrace();
                 }
 
-                while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
-                tmp = levelInfo.nextLine().trim();
-                movesForThreeStars = Integer.parseInt(tmp);
+                if (levelInfo.nextLine().trim().equals("<IsBonusMap>"))
+                {
+                    time = Integer.parseInt(levelInfo.nextLine().trim());
+                    bonus = true;
+                }
+                if (bonus) {
+                    while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
+                    tmp = levelInfo.nextLine().trim();
+                    movesForThreeStars = Integer.parseInt(tmp);
+                }
+                else
+                {
+                    tmp = levelInfo.nextLine().trim();
+                    movesForThreeStars = Integer.parseInt(tmp);
+                }
 
                 while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>")) ;
                 tmp = levelInfo.nextLine().trim();
@@ -108,7 +124,13 @@ class PlayerDaoImpl implements PlayerDao {
 
                 levelInfo.close();
 
-                levels.add(new LevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked, map));
+                if (bonus)
+                {
+                    levels.add(new BonusLevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked, map, time));
+                }
+                else {
+                    levels.add(new LevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked, map));
+                }
 
                 while (!playerInfo.nextLine().trim().equals("<Level/>")) ;
             }
