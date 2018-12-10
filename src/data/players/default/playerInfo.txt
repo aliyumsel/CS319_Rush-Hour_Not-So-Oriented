@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		0
+		9
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,26 +11,18 @@
 				1
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO SS SS CD SS CU SS OO
-OO SS SS SS CU SS CU OO
-OO PC SS TU SS TD SS SS
-OO SS SS SS TD SS TD OO
-OO SS SS SS SS SS SS OO
-OO SS SS SS SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -38,16 +30,16 @@ OO OO OO OO OO OO OO OO
 				2
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -57,16 +49,16 @@ OO OO OO OO OO OO OO OO
 				3
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -82,12 +74,20 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS CL SS SS CR SS OO
+OO SS SS CU TL SS SS OO
+OO PC SS SS CU CU CU SS
+OO CD CL SS SS SS SS OO
+OO SS SS SS SS SS CU OO
+OO OO TL SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -973,7 +973,21 @@ OO OO OO OO OO OO OO OO
 			true
 		<Sfx/>
 		<Theme>
-			SPACE
+			<Active>
+				safari
+			<Active>
+			<MinimalisticUnlocked>
+				true
+			<MinimalisticUnlocked/>
+			<ClassicUnlocked>
+				false
+			<ClassicUnlocked/>
+			<SafariUnlocked>
+				false
+			<SafariUnlocked/>
+			<SpaceUnlocked>
+				false
+			<SpaceUnlocked/>
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>

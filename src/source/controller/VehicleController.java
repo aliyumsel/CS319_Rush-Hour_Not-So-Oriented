@@ -242,7 +242,7 @@ public class VehicleController extends Controller
       {
          return;
       }
-      soundManager.vehicleHorn(selectedVehicle.getType());
+      soundManager.vehicleHorn();
    }
 
    private boolean tryMove(String direction)
