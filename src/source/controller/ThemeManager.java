@@ -1,9 +1,7 @@
 package source.controller;
 
 import source.model.GameObject;
-import source.model.Obstacle;
 import source.model.Theme;
-import source.model.Vehicle;
 import source.view.GuiPanelManager;
 
 import java.awt.image.BufferedImage;
@@ -23,7 +21,6 @@ public class ThemeManager extends Controller {
       classic = new Theme("classic");
       safari = new Theme("safari");
       space = new Theme("space");
-      //currentTheme = minimalistic;
    }
 
    private Theme findThemeByName(String theme)
@@ -100,29 +97,6 @@ public class ThemeManager extends Controller {
       return currentTheme;
    }
 
-    public boolean isThemeSelectable(String name)
-    {
-        Theme theme = findThemeByName(name);
-        if (theme.isUnlocked())
-        {
-            return true;
-        }
-        else
-        {
-            return tryUnlock(theme);
-        }
-    }
-
-    public boolean tryUnlock(Theme theme)
-    {
-        if (GameEngine.instance.playerManager.getCurrentPlayer().getStarAmount() >= findRequiredStars())
-        {
-            theme.setUnlocked(true);
-            GameEngine.instance.playerManager.unlockTheme(theme.getActiveTheme());
-            return true;
-        }
-        return false;
-    }
 
     public int findRequiredStars()
     {
