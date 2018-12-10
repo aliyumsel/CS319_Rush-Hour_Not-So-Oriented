@@ -49,13 +49,14 @@ public class InnerGamePanel extends JPanel
         }
     }
 
-    void setEndOfLevelPanelVisible(boolean bool, int starAmount) {
-        if (bool) //bool ne ????????????????????????????????????????????????????????????? bool ne
+    void setEndOfLevelPanelVisible(boolean visible, int starAmount) {
+
+        if (visible)
         {
             GameEngine.instance.soundManager.successSound();
         }
         endOfLevelPanel.showStars(starAmount);
-        endOfLevelPanel.setVisible(bool);
+        endOfLevelPanel.setVisible(visible);
     }
 
     private void createEndOfLevelPanel() {

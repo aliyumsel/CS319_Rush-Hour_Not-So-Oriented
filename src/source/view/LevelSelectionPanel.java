@@ -31,7 +31,7 @@ public class LevelSelectionPanel extends JPanel {
     private int panelWidth;
     private int panelHeight;
     private int page = 0;
-    private int numberOfLevels = 40;
+    private int numberOfLevels = 50;
 
     private LevelSelectionPopUp popUp;
 
