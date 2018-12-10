@@ -478,6 +478,8 @@ class PlayerDaoImpl implements PlayerDao {
     }
 
     private void writeFile(String path, String text) {
+        File file = new File(path);
+        file.setWritable(true);
         FileWriter fileOut = null;
         try {
             fileOut = new FileWriter(path);
@@ -488,6 +490,7 @@ class PlayerDaoImpl implements PlayerDao {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        file.setReadOnly();
     }
 
 }
