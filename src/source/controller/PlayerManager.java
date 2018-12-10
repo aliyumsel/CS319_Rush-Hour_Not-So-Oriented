@@ -204,20 +204,25 @@ public class PlayerManager extends Controller {
       playerDao.saveSettings(currentPlayer);
    }
 
-   public void changeTheme(String theme) {
-      //commented case will be added after testing is done
-      if (!theme.equals(currentPlayer.getSettings().getActiveTheme()) /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */)
-      {
-         currentPlayer.getSettings().setActiveTheme(theme);
-         GameEngine.instance.themeManager.setTheme(theme);
-         playerDao.saveSettings(currentPlayer);
-      }
-   }
+    public void changeTheme(String theme) {
+        //commented case will be added after testing is done
+        if (theme != currentPlayer.getSettings().getActiveTheme() /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */)
+        {
+            currentPlayer.getSettings().setActiveTheme(theme);
+            playerDao.saveSettings(currentPlayer);
+        }
+    }
 
-   void decrementRemainingShrinkPowerup() {
-      currentPlayer.decrementRemainingShrinkPowerup();
-      playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
-   }
+    public void unlockTheme(String themeName)
+    {
+        currentPlayer.getSettings().getThemes().put(themeName, true);
+        changeTheme(themeName);
+    }
+
+    public void decrementRemainingShrinkPowerup() {
+        currentPlayer.decrementRemainingShrinkPowerup();
+        playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
+    }
 
    void decrementRemainingSpacePowerup() {
       currentPlayer.decrementRemainingSpacePowerup();
