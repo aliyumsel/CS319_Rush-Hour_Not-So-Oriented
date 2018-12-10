@@ -162,6 +162,7 @@ public class SettingsPanel extends JPanel {
         this.previousPanel = previousPanel;
         updateSoundButtons("SFX");
         updateSoundButtons("Music");
+        updateThemeButtons();
     }
 
     @SuppressWarnings("Duplicates")
@@ -203,6 +204,33 @@ public class SettingsPanel extends JPanel {
 
     }
 
+    //can be used in updateThemeButtons method below
+    private String getThemeNameByButton(JButton button)
+    {
+        if (button == simple)
+        {
+            return "minimalistic";
+        }
+        if (button == classic)
+        {
+            return "classic";
+        }
+        if (button == safari)
+        {
+            return "safari";
+        }
+        if (button == space)
+        {
+            return "space";
+        }
+        return "";
+    }
+
+    private void updateThemeButtons()
+    {
+
+    }
+
     private ActionListener actionListener = e ->
     {
         GameEngine.instance.soundManager.buttonClick();
@@ -217,13 +245,37 @@ public class SettingsPanel extends JPanel {
             updateSoundButtons("SFX");
             GameEngine.instance.soundManager.effectsToggle();
         } else if (e.getSource() == simple) {
-            GameEngine.instance.playerManager.changeTheme("minimalistic");
+            if (GameEngine.instance.themeManager.getThemeStatus("minimalistic") == 1) {
+                GameEngine.instance.themeManager.unlockTheme("minimalistic");
+            }
+            else if (GameEngine.instance.themeManager.getThemeStatus("minimalistic") == 2)
+            {
+                GameEngine.instance.themeManager.changeTheme("minimalistic");
+            }
         } else if (e.getSource() == classic) {
-            GameEngine.instance.playerManager.changeTheme("classic");
+            if (GameEngine.instance.themeManager.getThemeStatus("classic") == 1) {
+                GameEngine.instance.themeManager.unlockTheme("classic");
+            }
+            else if (GameEngine.instance.themeManager.getThemeStatus("classic") == 2)
+            {
+                GameEngine.instance.themeManager.changeTheme("classic");
+            }
         } else if (e.getSource() == safari) {
-            GameEngine.instance.playerManager.changeTheme("safari");
+            if (GameEngine.instance.themeManager.getThemeStatus("safari") == 1) {
+                GameEngine.instance.themeManager.unlockTheme("safari");
+            }
+            else if (GameEngine.instance.themeManager.getThemeStatus("safari") == 2)
+            {
+                GameEngine.instance.themeManager.changeTheme("safari");
+            }
         } else if (e.getSource() == space) {
-            GameEngine.instance.playerManager.changeTheme("space");
+            if (GameEngine.instance.themeManager.getThemeStatus("space") == 1) {
+                GameEngine.instance.themeManager.unlockTheme("space");
+            }
+            else if (GameEngine.instance.themeManager.getThemeStatus("space") == 2)
+            {
+                GameEngine.instance.themeManager.changeTheme("space");
+            }
         }
         repaint();
     };

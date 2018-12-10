@@ -12,19 +12,20 @@ import java.util.ArrayList;
 
 public class Theme {
 
-   private String activeTheme; //aslında theme de bi sürü theme oluyo diye böyle yazdım
-   private ArrayList<BufferedImage> shortVehicleImageArray; //Short ve Longu ayırdım hani zaten theme calssındayız ayrı dursunlar bari babında
-   private ArrayList<BufferedImage> longVehicleImageArray;
-   private BufferedImage playerImage;
-   private BufferedImage specialPlayer;
-   private BufferedImage obstacle;
-   private BufferedImage background;
-   private BufferedImage popupBackground;
-   private ArrayList<String> vehicleSoundArray;
-   private String themeSong;
-   private String buttonClick;
-   private String selectionSound;
-   private String path;
+    private String activeTheme; //aslında theme de bi sürü theme oluyo diye böyle yazdım
+    private ArrayList<BufferedImage> shortVehicleImageArray; //Short ve Longu ayırdım hani zaten theme calssındayız ayrı dursunlar bari babında
+    private ArrayList<BufferedImage> longVehicleImageArray;
+    private BufferedImage playerImage;
+    private BufferedImage specialPlayer;
+    private BufferedImage obstacle;
+    private BufferedImage background;
+    private BufferedImage popupBackground;
+    private ArrayList<String> vehicleSoundArray;
+    private String themeSong;
+    private String buttonClick;
+    private String selectionSound;
+    private String path;
+    private boolean unlocked;
 
    public Theme(String theme) {
       shortVehicleImageArray = new ArrayList<>();
@@ -151,13 +152,26 @@ public class Theme {
       bGr.dispose();
    }
 
-   public BufferedImage LoadImage(String FileName) {
-      BufferedImage image = null;
-      try {
-         image = ImageIO.read(new File(FileName));
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-      return image;
-   }
+    public BufferedImage LoadImage(String FileName) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File(FileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+    public boolean isUnlocked()
+    {
+        return unlocked;
+    }
+    public void setUnlocked(boolean unlocked)
+    {
+        this.unlocked = unlocked;
+    }
+
+    public String getActiveTheme() {
+        return activeTheme;
+    }
 }
