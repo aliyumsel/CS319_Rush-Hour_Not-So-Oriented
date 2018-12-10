@@ -56,6 +56,7 @@ public class GamePanel extends JPanel {
 
         loadImages();
         createComponents();
+
         addComponents();
 
         createInnerGamePanel();
@@ -78,15 +79,15 @@ public class GamePanel extends JPanel {
         repaint();
     }
 
-    private void loadImages() {
+    public void loadImages() {
 
-        background = guiManager.LoadImage("src/image/gameBackground_3.png");
+        background = ThemeManager.instance.getGamePanelBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
         bGr.drawImage(scaledImage, 0, 0, null);
         bGr.dispose();
-
+        //innerGamePanel.endOfLevelPanel.loadImages();
         menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
         menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
 
@@ -168,6 +169,7 @@ public class GamePanel extends JPanel {
 
         innerGamePanel.setBounds(guiManager.findCenter(panelWidth, innerGamePanel), guiManager.findCenter(panelHeight, innerGamePanel), innerGamePanel.getPreferredSize().width,
                 innerGamePanel.getPreferredSize().height);
+        System.out.println(innerGamePanel.getBounds().x + "," + innerGamePanel.getBounds().y);
 
     }
 

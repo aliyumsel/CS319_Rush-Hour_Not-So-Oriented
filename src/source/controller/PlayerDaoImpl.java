@@ -490,7 +490,7 @@ class PlayerDaoImpl implements PlayerDao {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        file.setReadOnly();
+        //file.setReadOnly();
     }
 
 }

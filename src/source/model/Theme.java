@@ -19,6 +19,7 @@ public class Theme {
     private BufferedImage specialPlayer;
     private BufferedImage obstacle;
     private BufferedImage background;
+    private BufferedImage gamePanelBackground;
     private BufferedImage popupBackground;
     private ArrayList<String> vehicleSoundArray;
     private String themeSong;
@@ -74,6 +75,7 @@ public class Theme {
    private void setBackground() {
       background = LoadImage(path + "background.png");
       popupBackground = LoadImage(path + "popUpBackground.png");
+      gamePanelBackground = LoadImage(path + "gameBackground.png");
    }
 
    private void setSpecialPlayer() {
@@ -100,9 +102,12 @@ public class Theme {
       return obstacle;
    }
 
-   public BufferedImage getBackgroundImage() {
-      return background;
+   public BufferedImage getGamePanelBackgroundImage() {
+      return gamePanelBackground;
    }
+    public BufferedImage getBackgroundImage() {
+        return background;
+    }
 
    public BufferedImage getPopupBackgroundImage() {
       return popupBackground;

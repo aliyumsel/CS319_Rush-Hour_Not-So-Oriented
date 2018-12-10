@@ -39,19 +39,7 @@ public class ThemeManager extends Controller {
       }
    }
 
-   public void setTheme(String theme) {
-      currentTheme = findThemeByName(theme);
-      try {
-         if (MapController.instance.getMap().getGameObjects() != null) {
-            for (GameObject gameObject : MapController.instance.getMap().getGameObjects()) {
-               gameObject.updateImages();
-            }
-         }
-      } catch (Exception e) {
-      }
-      SoundManager.instance.updateTheme();
-      GuiPanelManager.instance.updateImages();
-   }
+
 
    public BufferedImage getLongVehicleImage() {
       return currentTheme.getLongVehicleImage();
@@ -64,6 +52,10 @@ public class ThemeManager extends Controller {
    public BufferedImage getBackgroundImage() {
       return currentTheme.getBackgroundImage();
    }
+
+    public BufferedImage getGamePanelBackgroundImage() {
+        return currentTheme.getGamePanelBackgroundImage();
+    }
 
    public BufferedImage getPopupBackgroundImage() {
       return currentTheme.getPopupBackgroundImage();
@@ -149,6 +141,20 @@ public class ThemeManager extends Controller {
     {
         GameEngine.instance.playerManager.changeTheme(themeName);
         setTheme(themeName);
+    }
+
+    public void setTheme(String theme) {
+        currentTheme = findThemeByName(theme);
+        try {
+            if (MapController.instance.getMap().getGameObjects() != null) {
+                for (GameObject gameObject : MapController.instance.getMap().getGameObjects()) {
+                    gameObject.updateImages();
+                }
+            }
+        } catch (Exception e) {
+        }
+        SoundManager.instance.updateTheme();
+        GuiPanelManager.instance.updateImages();
     }
     public void unlockTheme(String themeName)
     {
