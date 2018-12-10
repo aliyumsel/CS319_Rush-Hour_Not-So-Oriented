@@ -177,7 +177,7 @@ public class GuiPanelManager extends JFrame {
       helpPanel.loadImages();
       levelSelectionPanel.loadImages();
       creditsPanel.loadImages();
-      gamePanel.loadImages();
+      gamePanel.loadImages(); 
       gamePanel.getInnerGamePanel().endOfLevelPanel.loadImages();
       mainMenuPanel.loadImages();
    }

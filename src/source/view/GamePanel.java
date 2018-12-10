@@ -169,7 +169,7 @@ public class GamePanel extends JPanel {
 
         innerGamePanel.setBounds(guiManager.findCenter(panelWidth, innerGamePanel), guiManager.findCenter(panelHeight, innerGamePanel), innerGamePanel.getPreferredSize().width,
                 innerGamePanel.getPreferredSize().height);
-        System.out.println(innerGamePanel.getBounds().x + "," + innerGamePanel.getBounds().y);
+       // System.out.println(innerGamePanel.getBounds().x + "," + innerGamePanel.getBounds().y);
 
     }
 
