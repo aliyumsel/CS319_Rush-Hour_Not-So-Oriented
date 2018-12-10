@@ -2,6 +2,9 @@ package source.controller;
 
 import source.model.*;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class VehicleController extends Controller
 {
    public static VehicleController instance;
@@ -73,7 +76,7 @@ public class VehicleController extends Controller
             {
                int gridPositionX = (int) ( selectedVehicle.transform.position.x + 0.5 );
                int gridPositionY = (int) ( selectedVehicle.transform.position.y + 0.5 );
-               System.out.println("Moved the vehicle to the point");
+
                selectedVehicle.moveToPoint(gridPositionX, gridPositionY);
                selectedVehicle.slideToPoint(gridPositionX, gridPositionY);
                MapController.instance.updateMap(map.getGameObjects());
@@ -84,6 +87,8 @@ public class VehicleController extends Controller
                GameManager.instance.endMap();
             }
 
+            //numberOfMoves++;
+
             selectedVehicle = null;
          }
 
@@ -93,9 +98,6 @@ public class VehicleController extends Controller
             if ( selectedVehicle.transform.axis.equals("Horizontal") )
             {
                int mouseDifference = ( Input.getMousePosition()[0] - mouseOriginPosition[0] );
-
-               vehicleOriginPosition[0] = (int) ( selectedVehicle.transform.position.x + 0.5 );
-               vehicleOriginPosition[1] = selectedVehicle.transform.position.y;
 
                int testPositionX = (int) vehicleOriginPosition[0];
                int testPositionY = (int) vehicleOriginPosition[1];
@@ -112,23 +114,17 @@ public class VehicleController extends Controller
                if ( mouseDifference != 0 )
                {
                   double difference = clamp(mouseDifference, -1, 1);
-
-                  if ( difference > 0.5 || difference < -0.5 )
+                  if ( testPositionX >= 0 && testPositionX < map.getMapSize() )
                   {
-                     if ( testPositionX >= 0 && testPositionX < map.getMapSize() )
+                     if ( map.getGrid()[testPositionY][testPositionX].equals("Space") )
                      {
-                        if ( map.getGrid()[testPositionY][testPositionX].equals("Space") )
-                        {
-                           selectedVehicle.transform.position.x = vehicleOriginPosition[0] + difference;
-
-                           vehicleOriginPosition[0] = (int) ( selectedVehicle.transform.position.x + 0.5 );
-                           vehicleOriginPosition[1] = (int) ( selectedVehicle.transform.position.y + 0.5 );
-                           mouseOriginPosition = Input.getMousePosition();
-
-                           selectedVehicle.moveToPoint((int) vehicleOriginPosition[0], (int) vehicleOriginPosition[1]);
-                           MapController.instance.updateMap(map.getGameObjects());
-                        }
+                        selectedVehicle.transform.position.x = vehicleOriginPosition[0] + difference;
                      }
+                  }
+
+                  if (difference == 1 || difference == -1)
+                  {
+                     changeGridPosition();
                   }
                }
             }
@@ -136,15 +132,12 @@ public class VehicleController extends Controller
             {
                int mouseDifference = ( Input.getMousePosition()[1] - mouseOriginPosition[1] );
 
-               vehicleOriginPosition[0] = selectedVehicle.transform.position.x;
-               vehicleOriginPosition[1] = (int) ( selectedVehicle.transform.position.y + 0.5 );
-
                int testPositionX = (int) vehicleOriginPosition[0];
                int testPositionY = (int) vehicleOriginPosition[1];
 
                if ( mouseDifference > 0 ) // up
                {
-                  testPositionY += selectedVehicle.transform.length;// (int) ( vehicleOriginPosition[0] + ( ( Input.getMousePosition()[0] - mouseOriginPosition[0] ) / (double) 60 ) );
+                  testPositionY += selectedVehicle.transform.length;
                }
                else if ( mouseDifference < 0 ) // down
                {
@@ -155,22 +148,17 @@ public class VehicleController extends Controller
                {
                   double difference = clamp(mouseDifference, -1, 1);
 
-                  if ( difference > 0.5 || difference < -0.5 )
+                  if ( testPositionY >= 0 && testPositionY < map.getMapSize() )
                   {
-                     if ( testPositionY >= 0 && testPositionY < map.getMapSize() )
+                     if ( map.getGrid()[testPositionY][testPositionX].equals("Space") )
                      {
-                        if ( map.getGrid()[testPositionY][testPositionX].equals("Space") )
-                        {
-                           selectedVehicle.transform.position.y = vehicleOriginPosition[1] + difference;
-
-                           vehicleOriginPosition[0] = (int) ( selectedVehicle.transform.position.x + 0.5 );
-                           vehicleOriginPosition[1] = (int) ( selectedVehicle.transform.position.y + 0.5 );
-                           mouseOriginPosition = Input.getMousePosition();
-
-                           selectedVehicle.moveToPoint((int) vehicleOriginPosition[0], (int) vehicleOriginPosition[1]);
-                           MapController.instance.updateMap(map.getGameObjects());
-                        }
+                        selectedVehicle.transform.position.y = vehicleOriginPosition[1] + difference;
                      }
+                  }
+
+                  if (difference == 1 || difference == -1)
+                  {
+                     changeGridPosition();
                   }
                }
             }
@@ -191,7 +179,6 @@ public class VehicleController extends Controller
 
          if ( selectedVehicle != null )
          {
-
             boolean moved = false;
             if ( Input.getKeyPressed("w") )
             {
@@ -243,6 +230,39 @@ public class VehicleController extends Controller
          return;
       }
       soundManager.vehicleHorn();
+   }
+
+   private void slideVehicle(String direction)
+   {
+//      Timer timer = new Timer();
+//      timer.schedule(new TimerTask()
+//      {
+//         @Override
+//         public void run()
+//         {
+//            System.out.print("=");
+//         }
+//      }, 0,1/60);
+   }
+
+   private void changeGridPosition()
+   {
+      int gridPositionX = (int) ( selectedVehicle.transform.position.x + 0.5 );
+      int gridPositionY = (int) ( selectedVehicle.transform.position.y + 0.5 );
+
+      selectedVehicle.moveToPoint(gridPositionX, gridPositionY);
+      //selectedVehicle.slideToPoint(gridPositionX, gridPositionY);
+      MapController.instance.updateMap(map.getGameObjects());
+
+      vehicleOriginPosition[0] = selectedVehicle.transform.position.x;
+      vehicleOriginPosition[1] = selectedVehicle.transform.position.y;
+      mouseOriginPosition = Input.getMousePosition();
+
+      if ( MapController.instance.isPlayerAtExit() )
+      {
+         GameManager.instance.endMap();
+         selectedVehicle = null;
+      }
    }
 
    private boolean tryMove(String direction)
