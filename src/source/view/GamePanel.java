@@ -64,6 +64,7 @@ public class GamePanel extends JPanel {
         setBoundsOfComponents();
 
         setOpaque(false);
+        this.setVisible(false);
     }
 
     public void updatePanel() {
