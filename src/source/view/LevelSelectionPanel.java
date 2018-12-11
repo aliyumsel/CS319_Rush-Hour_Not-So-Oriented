@@ -10,6 +10,9 @@ import source.controller.ThemeManager;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class LevelSelectionPanel extends JPanel {
     private GuiPanelManager guiManager;
@@ -31,7 +34,8 @@ public class LevelSelectionPanel extends JPanel {
     private int panelWidth;
     private int panelHeight;
     private int page = 0;
-    private int numberOfLevels = 50;
+    private int pageLength = 12;
+    private int numberOfLevels;
 
     private LevelSelectionPopUp popUp;
 
@@ -42,6 +46,7 @@ public class LevelSelectionPanel extends JPanel {
 
         panelWidth = guiManager.panelWidth;
         panelHeight = guiManager.panelHeight;
+        numberOfLevels = findNoOfLevels();
 
         setPreferredSize(new Dimension(panelWidth, panelHeight));
 
@@ -111,13 +116,12 @@ public class LevelSelectionPanel extends JPanel {
         }
 
         int gap = 0;
-        int pageLength = 12;
         int limit = page * pageLength;
         int gapValue = 140;
         for (int i = 0; i < numberOfLevels; i++) {
             buttonArray[i].setVisible(false);
         }
-        for (int i = limit; i < 12 + limit && i < numberOfLevels; i++) {
+        for (int i = limit; i < pageLength + limit && i < numberOfLevels; i++) {
             if (i % 4 == 0) {
                 gap = 0;
             }
@@ -125,11 +129,11 @@ public class LevelSelectionPanel extends JPanel {
                 gap += gapValue;
                 buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]) - 135,
                         buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
-            } else if (i > 3 + limit && i < 8 + limit) {
+            } else if (i >= 4 + limit && i < 8 + limit) {
                 gap += gapValue;
                 buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]),
                         buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
-            } else if (i > 7 + limit && i < 12 + limit) {
+            } else if (i >= 8 + limit && i < 12 + limit) {
                 gap += gapValue;
                 buttonArray[i].setBounds(gap, 135 + guiManager.findCenter(panelHeight, buttonArray[i]),
                         buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
@@ -154,6 +158,18 @@ public class LevelSelectionPanel extends JPanel {
         }
     }
 
+    private int findNoOfLevels(){
+        Scanner scanInfo = null;
+        try {
+            scanInfo = new Scanner(new File("src/data/info.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (!scanInfo.nextLine().equals("<NumberOfMaps>")) ;
+        String mapAmount = scanInfo.nextLine().trim();
+        return Integer.parseInt(mapAmount);
+    }
+
     void updatePanel() {
         updateButtons();
     }
@@ -161,16 +177,19 @@ public class LevelSelectionPanel extends JPanel {
     private ActionListener actionListener = e ->
     {
         GameEngine.instance.soundManager.buttonClick();
+        int noOfPages = numberOfLevels / pageLength;
+        if(numberOfLevels%pageLength == 0);
+            noOfPages--;
         if (e.getSource() == leftArrowButton) {
             if (page == 0) {
-                page = 3;
+                page = noOfPages;
             } else {
                 page -= 1;
             }
 
             setBoundsOfComponents(page);
         } else if (e.getSource() == rightArrowButton) {
-            if (page == 3) {
+            if (page == noOfPages) {
                 page = 0;
             } else {
                 page += 1;
