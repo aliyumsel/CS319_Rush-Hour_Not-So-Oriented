@@ -50,9 +50,13 @@ public class ThemeManager extends Controller
       }
    }
 
+<<<<<<< Updated upstream
 
    public BufferedImage getLongVehicleImage()
    {
+=======
+   public BufferedImage getLongVehicleImage() {
+>>>>>>> Stashed changes
       return currentTheme.getLongVehicleImage();
    }
 
@@ -155,6 +159,7 @@ public class ThemeManager extends Controller
          else
          {
             return 0;
+<<<<<<< Updated upstream
          }
       }
    }
@@ -204,4 +209,67 @@ public class ThemeManager extends Controller
 
       currentTheme = findThemeByName(GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getActiveTheme());
    }
+=======
+        }
+        return requiredStars;
+    }
+
+    //Should be used in Settings Panel for the icons od theme buttons
+    //returns 0 if the theme is locked and not unlockable
+    //returns 1 if the theme is locked but unlockable
+    //returns 2 if the the theme is already unlocked
+    public int getThemeStatus(String themeName)
+    {
+        Theme theme = findThemeByName(themeName);
+
+        if (theme.isUnlocked())
+        {
+            return 2; //returns 2 if the the theme is already unlocked
+        }
+        else
+        {
+            if (GameEngine.instance.playerManager.getCurrentPlayer().getStarAmount() >= findRequiredStars())
+            {
+                return 1; //returns 1 if the theme is locked but unlockable
+            }
+            else
+            {
+                return 0; //returns 0 if the theme is locked and not unlockable
+            }
+        }
+    }
+
+    public void setTheme(String theme) {
+        PlayerManager.instance.changeTheme(theme);
+        currentTheme = findThemeByName(theme);
+        try {
+            if (MapController.instance.getMap().getGameObjects() != null) {
+                for (GameObject gameObject : MapController.instance.getMap().getGameObjects()) {
+                    gameObject.updateImages();
+                }
+            }
+        } catch (Exception e) {
+        }
+        SoundManager.instance.updateTheme();
+        GuiPanelManager.instance.updateImages();
+    }
+
+    public void unlockTheme(String themeName)
+    {
+        Theme theme = findThemeByName(themeName);
+        theme.setUnlocked(true);
+        PlayerManager.instance.unlockTheme(themeName);
+        setTheme(themeName);
+    }
+
+    public void start()
+    {
+        HashMap themes = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getThemes();
+        minimalistic.setUnlocked((boolean)themes.get("minimalistic"));
+        classic.setUnlocked((boolean)themes.get("classic"));
+        safari.setUnlocked((boolean)themes.get("safari"));
+        space.setUnlocked((boolean)themes.get("space"));
+        currentTheme = findThemeByName(GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getActiveTheme());
+    }
+>>>>>>> Stashed changes
 }

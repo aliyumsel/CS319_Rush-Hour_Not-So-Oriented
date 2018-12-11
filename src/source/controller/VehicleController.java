@@ -14,7 +14,7 @@ public class VehicleController extends Controller
    private SoundManager soundManager;
    private int numberOfMoves;
    private boolean changed = false;
-
+   private Boolean isExitReachable = false;
    private enum CONTROL
    {
       SLIDE, KEYBOARD
@@ -56,6 +56,8 @@ public class VehicleController extends Controller
       {
          return;
       }
+      if (!isExitReachable)
+         checkPathOfPlayerVehicle();
 
       if ( currentControl == CONTROL.SLIDE )
       {
@@ -344,6 +346,17 @@ public class VehicleController extends Controller
       numberOfMoves = _moves;
    }
 
+   public void checkPathOfPlayerVehicle(){
+      Vehicle player = MapController.instance.getPlayerVehicle();
+      boolean bool = true;
+      for(int i = 0; i < map.getMapSize()-player.transform.position.gridX ;i++)
+      {
+         if(!(map.getGrid()[( (int) player.transform.position.gridY)][(int) player.transform.position.gridX+1].equals("Space")))
+            bool = false;
+      }
+      isExitReachable = bool;
+      System.out.println(isExitReachable);
+   }
    private double clamp(double value, int min, int max)
    {
       double difference;

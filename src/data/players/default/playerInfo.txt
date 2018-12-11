@@ -3,7 +3,11 @@
 		default
 	<Name/>
 	<StarAmount>
+<<<<<<< Updated upstream
 		0
+=======
+		123
+>>>>>>> Stashed changes
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -14,7 +18,11 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
+<<<<<<< Updated upstream
 				4
+=======
+				1
+>>>>>>> Stashed changes
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
@@ -24,10 +32,17 @@
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
+<<<<<<< Updated upstream
 OO SS SS CD CU CU CU OO
 OO SS SS SS SS SS SS OO
 OO PC SS SS SS SS SS SS
 OO SS SS TU TD TD TD OO
+=======
+OO SS SS CD SS CU SS OO
+OO SS SS SS CU SS CU OO
+OO PC SS SS SS TD SS SS
+OO SS SS TU TD SS TD OO
+>>>>>>> Stashed changes
 OO SS SS SS SS SS SS OO
 OO SS SS SS SS SS SS OO
 OO OO OO OO OO OO OO OO
@@ -41,15 +56,27 @@ OO OO OO OO OO OO OO OO
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
+<<<<<<< Updated upstream
 				notStarted
+=======
+				inProgress
+>>>>>>> Stashed changes
 			<Status/>
 			<Unlocked>
 				false
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TD CR SS SS SS SS OO
+OO SS SS SS SS SS SS OO
+OO SS PC SS SS SS SS SS
+OO CU SS SS TD SS TU OO
+OO SS CR SS SS SS SS OO
+OO TR SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -60,15 +87,27 @@ OO OO OO OO OO OO OO OO
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
+<<<<<<< Updated upstream
 				notStarted
+=======
+				inProgress
+>>>>>>> Stashed changes
 			<Status/>
 			<Unlocked>
 				false
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS SS SS SS SS TU OO
+OO CL SS SS SS SS SS OO
+OO CU PC SS SS SS SS SS
+OO SS CU SS SS CR SS OO
+OO CU SS CL SS CR SS OO
+OO SS TR SS SS CR SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -974,7 +1013,11 @@ OO OO OO OO OO OO OO OO
 		<Sfx/>
 		<Theme>
 			<Active>
+<<<<<<< Updated upstream
 				minimalistic
+=======
+				space
+>>>>>>> Stashed changes
 			<Active>
 			<MinimalisticUnlocked>
 				true
