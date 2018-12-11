@@ -204,7 +204,7 @@ public class PlayerManager extends Controller {
       playerDao.saveSettings(currentPlayer);
    }
 
-    public void changeTheme(String theme) {
+    void changeTheme(String theme) {
         //commented case will be added after testing is done
         if (theme != currentPlayer.getSettings().getActiveTheme() /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */)
         {
@@ -213,13 +213,13 @@ public class PlayerManager extends Controller {
         }
     }
 
-    public void unlockTheme(String themeName)
+    void unlockTheme(String themeName)
     {
         currentPlayer.getSettings().getThemes().put(themeName, true);
         changeTheme(themeName);
     }
 
-    public void decrementRemainingShrinkPowerup() {
+    void decrementRemainingShrinkPowerup() {
         currentPlayer.decrementRemainingShrinkPowerup();
         playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
     }

@@ -33,8 +33,9 @@ public class GameManager extends Controller
       }
    }
 
-   void autoSave(int moveAmount)
+   void autoSave()
    {
+      int moveAmount = VehicleController.instance.getNumberOfMoves();
       PlayerManager.instance.updateLevelDuringGame(level, moveAmount);
    }
 
@@ -97,9 +98,9 @@ public class GameManager extends Controller
       else if ( !levelToBeLoaded.getStatus().equals("inProgress") )
       {
          MapController.instance.loadOriginalLevel(_level);
-         autoSave(0);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);
+         autoSave();
       }
       else
       {
@@ -123,9 +124,9 @@ public class GameManager extends Controller
    public void resetLevel()
    {
       MapController.instance.loadOriginalLevel(level);
-      autoSave(0);
       VehicleController.instance.setMap(MapController.instance.getMap());
       VehicleController.instance.setNumberOfMoves(0);
+      autoSave();
 
       isGameActive = true;
    }
