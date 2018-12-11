@@ -85,18 +85,19 @@ public class VehicleController extends Controller
                selectedVehicle.moveToPoint(gridPositionX, gridPositionY);
                selectedVehicle.slideToPoint(gridPositionX, gridPositionY);
                MapController.instance.updateMap(map.getGameObjects());
+
+               if (!(oldPos[0] == selectedVehicle.transform.position.gridX && oldPos[1] == selectedVehicle.transform.position.gridY))
+               {
+                  numberOfMoves++;
+               }
+
+               if ( MapController.instance.isPlayerAtExit() )
+               {
+                  GameManager.instance.endMap();
+               }
             }
 
-            if ( MapController.instance.isPlayerAtExit() )
-            {
-               GameManager.instance.endMap();
-            }
-
-            if (!(oldPos[0] == selectedVehicle.transform.position.gridX && oldPos[1] == selectedVehicle.transform.position.gridY))
-            {
-               numberOfMoves++;
-               GameManager.instance.autoSave(numberOfMoves);
-            }
+            GameManager.instance.autoSave();
 
             selectedVehicle = null;
          }
@@ -229,7 +230,7 @@ public class VehicleController extends Controller
          if ( changed )
          {
             numberOfMoves++;
-            GameManager.instance.autoSave(numberOfMoves);
+            GameManager.instance.autoSave();
             changed = false;
          }
       }
