@@ -57,6 +57,7 @@ public class HelpPanel extends JPanel {
         createComponents();
         addComponents();
         setBoundsOfComponents();
+        updateVisiblePage();
         this.setVisible(false);
     }
 
