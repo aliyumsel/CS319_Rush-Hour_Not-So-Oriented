@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		6
+		18
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -49,26 +49,18 @@
 				3
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO SS SS SS SS SS TU OO
-OO CL SS SS SS SS SS OO
-OO CU PC SS SS SS SS SS
-OO SS CU SS SS CR SS OO
-OO CU SS CL SS CR SS OO
-OO SS TR SS SS CR SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -76,16 +68,16 @@ OO OO OO OO OO OO OO OO
 				4
 			<LevelNo/>
 			<Stars>
-				0
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				13
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -95,16 +87,16 @@ OO OO OO OO OO OO OO OO
 				5
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				11
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -114,16 +106,16 @@ OO OO OO OO OO OO OO OO
 				6
 			<LevelNo/>
 			<Stars>
-				0
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				21
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -133,16 +125,16 @@ OO OO OO OO OO OO OO OO
 				7
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				14
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -158,12 +150,20 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TU SS SS OO SS SS OO
+OO SS CL SS CR SS SS OO
+OO SS PC SS CU SS SS SS
+OO SS CD SS SS CR SS OO
+OO SS SS CL SS CU SS OO
+OO TR SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>

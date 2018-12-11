@@ -24,6 +24,7 @@ public class VehicleController extends Controller
 
    private double[] vehicleOriginPosition;
    private int[] mouseOriginPosition;
+   private int[] oldPos;
 
    VehicleController()
    {
@@ -35,6 +36,7 @@ public class VehicleController extends Controller
 
       mouseOriginPosition = new int[2];
       vehicleOriginPosition = new double[2];
+      oldPos = new int[2];
    }
 
    public void setMap(Map _map)
@@ -67,6 +69,9 @@ public class VehicleController extends Controller
                vehicleOriginPosition[0] = selectedVehicle.transform.position.x;
                vehicleOriginPosition[1] = selectedVehicle.transform.position.y;
                mouseOriginPosition = Input.getMousePosition();
+
+               oldPos[0] = selectedVehicle.transform.position.gridX;
+               oldPos[1] = selectedVehicle.transform.position.gridY;
             }
          }
 
@@ -87,7 +92,11 @@ public class VehicleController extends Controller
                GameManager.instance.endMap();
             }
 
-            //numberOfMoves++;
+            if (!(oldPos[0] == selectedVehicle.transform.position.gridX && oldPos[1] == selectedVehicle.transform.position.gridY))
+            {
+               numberOfMoves++;
+               GameManager.instance.autoSave(numberOfMoves);
+            }
 
             selectedVehicle = null;
          }
