@@ -48,8 +48,10 @@ public class GameManager extends Controller
 
    void endMap()
    {
+
       System.out.println("Map Finished");
       isGameActive = false;
+      VehicleController.instance.isExitReachable = false;
       //PlayerManager.instance.setLevelStatusFinished(level);
 
       if ( isNextLevelLocked() )
