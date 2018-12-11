@@ -3,7 +3,11 @@
 		default
 	<Name/>
 	<StarAmount>
+<<<<<<< Updated upstream
 		18
+=======
+		120
+>>>>>>> Stashed changes
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -974,19 +978,19 @@ OO OO OO OO OO OO OO OO
 		<Sfx/>
 		<Theme>
 			<Active>
-				minimalistic
+				safari
 			<Active>
 			<MinimalisticUnlocked>
 				true
 			<MinimalisticUnlocked/>
 			<ClassicUnlocked>
-				false
+				true
 			<ClassicUnlocked/>
 			<SafariUnlocked>
-				false
+				true
 			<SafariUnlocked/>
 			<SpaceUnlocked>
-				false
+				true
 			<SpaceUnlocked/>
 		<Theme/>
 	<Settings/>

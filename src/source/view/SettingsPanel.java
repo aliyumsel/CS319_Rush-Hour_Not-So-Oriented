@@ -250,7 +250,7 @@ public class SettingsPanel extends JPanel {
             }
             else if (GameEngine.instance.themeManager.getThemeStatus("minimalistic") == 2)
             {
-                GameEngine.instance.themeManager.changeTheme("minimalistic");
+                GameEngine.instance.themeManager.setTheme("minimalistic");
             }
         } else if (e.getSource() == classic) {
             if (GameEngine.instance.themeManager.getThemeStatus("classic") == 1) {
@@ -258,7 +258,7 @@ public class SettingsPanel extends JPanel {
             }
             else if (GameEngine.instance.themeManager.getThemeStatus("classic") == 2)
             {
-                GameEngine.instance.themeManager.changeTheme("classic");
+                GameEngine.instance.themeManager.setTheme("classic");
             }
         } else if (e.getSource() == safari) {
             if (GameEngine.instance.themeManager.getThemeStatus("safari") == 1) {
@@ -266,7 +266,7 @@ public class SettingsPanel extends JPanel {
             }
             else if (GameEngine.instance.themeManager.getThemeStatus("safari") == 2)
             {
-                GameEngine.instance.themeManager.changeTheme("safari");
+                GameEngine.instance.themeManager.setTheme("safari");
             }
         } else if (e.getSource() == space) {
             if (GameEngine.instance.themeManager.getThemeStatus("space") == 1) {
@@ -274,7 +274,7 @@ public class SettingsPanel extends JPanel {
             }
             else if (GameEngine.instance.themeManager.getThemeStatus("space") == 2)
             {
-                GameEngine.instance.themeManager.changeTheme("space");
+                GameEngine.instance.themeManager.setTheme("space");
             }
         }
         repaint();

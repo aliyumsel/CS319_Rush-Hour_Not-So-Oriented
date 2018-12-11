@@ -137,13 +137,8 @@ public class ThemeManager extends Controller {
         }
     }
 
-    public void changeTheme(String themeName)
-    {
-        GameEngine.instance.playerManager.changeTheme(themeName);
-        setTheme(themeName);
-    }
-
     public void setTheme(String theme) {
+        PlayerManager.instance.changeTheme(theme);
         currentTheme = findThemeByName(theme);
         try {
             if (MapController.instance.getMap().getGameObjects() != null) {

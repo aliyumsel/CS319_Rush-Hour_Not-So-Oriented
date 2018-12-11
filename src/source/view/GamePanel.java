@@ -53,18 +53,12 @@ public class GamePanel extends JPanel {
         panelHeight = guiManager.panelHeight;
 
         setPreferredSize(new Dimension(panelWidth, panelHeight));
-
         loadImages();
         createComponents();
-
         addComponents();
-
         createInnerGamePanel();
-
         setBoundsOfComponents();
-
         setOpaque(false);
-        this.setVisible(false);
     }
 
     public void updatePanel() {
@@ -81,7 +75,6 @@ public class GamePanel extends JPanel {
     }
 
     public void loadImages() {
-
         background = ThemeManager.instance.getGamePanelBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
