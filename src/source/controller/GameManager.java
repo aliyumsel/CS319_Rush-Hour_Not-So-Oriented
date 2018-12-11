@@ -25,9 +25,11 @@ public class GameManager extends Controller
 
    public void update()
    {
-      if (bonus) {
+      if ( bonus )
+      {
          time--;
-         if (time == 0) {
+         if ( time == 0 )
+         {
             endMap();
          }
       }
@@ -37,6 +39,11 @@ public class GameManager extends Controller
    {
       int moveAmount = VehicleController.instance.getNumberOfMoves();
       PlayerManager.instance.updateLevelDuringGame(level, moveAmount);
+   }
+
+   public void stopMap()
+   {
+      isGameActive = false;
    }
 
    void endMap()
@@ -87,10 +94,10 @@ public class GameManager extends Controller
       level = _level;
       LevelInformation levelToBeLoaded = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
 
-      if (levelToBeLoaded instanceof BonusLevelInformation)
+      if ( levelToBeLoaded instanceof BonusLevelInformation )
       {
          bonus = true;
-         time = ((BonusLevelInformation) levelToBeLoaded).getTime() * 60;
+         time = ( (BonusLevelInformation) levelToBeLoaded ).getTime() * 60;
          MapController.instance.loadOriginalLevel(_level);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);
