@@ -7,7 +7,8 @@ import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
 
-public class PlayerManager extends Controller {
+public class PlayerManager extends Controller
+{
    public static PlayerManager instance;
 
    private Player currentPlayer;
@@ -16,24 +17,32 @@ public class PlayerManager extends Controller {
 
    private PlayerDao playerDao;
 
-   public PlayerManager() {
+   public PlayerManager()
+   {
       instance = this;
       playerDao = new PlayerDaoImpl();
       extractPlayers();
    }
 
-   private void extractPlayers() {
+   private void extractPlayers()
+   {
       players = playerDao.extractPlayers();
       String lastPlayerName = playerDao.extractLastPlayerName();
-      if (players == null) {
+      if ( players == null )
+      {
          createPlayer("default");
       }
 
-      if (players.size() == 1) {
+      if ( players.size() == 1 )
+      {
          currentPlayer = players.get(0);
-      } else {
-         for (Player player : players) {
-            if (player.getPlayerName().equals(lastPlayerName)) {
+      }
+      else
+      {
+         for ( Player player : players )
+         {
+            if ( player.getPlayerName().equals(lastPlayerName) )
+            {
                currentPlayer = player;
                break;
             }
@@ -41,20 +50,25 @@ public class PlayerManager extends Controller {
       }
    }
 
-   public Player getCurrentPlayer() {
+   public Player getCurrentPlayer()
+   {
       return currentPlayer;
    }
 
-   public void setCurrentPlayer(Player currentPlayer) {
+   public void setCurrentPlayer(Player currentPlayer)
+   {
       this.currentPlayer = currentPlayer;
    }
 
-   public ArrayList<Player> getPlayers() {
+   public ArrayList<Player> getPlayers()
+   {
       return players;
    }
 
-   public void setPlayers(ArrayList<Player> players) {
-      for (int i = 0; i < players.size(); i++) {
+   public void setPlayers(ArrayList<Player> players)
+   {
+      for ( int i = 0; i < players.size(); i++ )
+      {
          this.players.set(i, players.get(i));
       }
    }
@@ -62,14 +76,18 @@ public class PlayerManager extends Controller {
    /* returns 0 if creation successful
     * returns 1 if the name already exists
     */
-   public int createPlayer(String playerName) {
-      if (players == null) {
+   public int createPlayer(String playerName)
+   {
+      if ( players == null )
+      {
          players = new ArrayList<>();
       }
 
       //checks if a player with the same name exists
-      for (int i = 0; i < players.size(); i++) {
-         if (players.get(i).getPlayerName().equals(playerName)) {
+      for ( int i = 0; i < players.size(); i++ )
+      {
+         if ( players.get(i).getPlayerName().equals(playerName) )
+         {
             return 1;
          }
       }
@@ -77,7 +95,7 @@ public class PlayerManager extends Controller {
       boolean initialMusic;
       boolean initialSfx;
 
-      if (players.size() == 0)
+      if ( players.size() == 0 )
       {
          initialMusic = true;
          initialSfx = true;
@@ -99,15 +117,20 @@ public class PlayerManager extends Controller {
       return 0;
    }
 
-   public int deletePlayer(String name) {
-      if (players.size() == 1) {
+   public int deletePlayer(String name)
+   {
+      if ( players.size() == 1 )
+      {
          return -1;
       }
       boolean deleted = false;
       int deleteIndex = 0;
-      for (int i = 0; i < players.size(); i++) {
-         if (players.get(i).getPlayerName().equals(name) && currentPlayer != players.get(i)) {
-            if (playerDao.deletePlayer(players.get(i))) {
+      for ( int i = 0; i < players.size(); i++ )
+      {
+         if ( players.get(i).getPlayerName().equals(name) && currentPlayer != players.get(i) )
+         {
+            if ( playerDao.deletePlayer(players.get(i)) )
+            {
                players.remove(i);
                deleted = true;
             }
@@ -115,7 +138,8 @@ public class PlayerManager extends Controller {
             break;
          }
       }
-      if (deleted) {
+      if ( deleted )
+      {
          //decrementPlayerNumber();
 
          return deleteIndex;
@@ -124,16 +148,20 @@ public class PlayerManager extends Controller {
       return -1;
    }
 
-   public boolean selectPlayer(String name) {
+   public boolean selectPlayer(String name)
+   {
       boolean selected = false;
-      for (int i = 0; i < players.size(); i++) {
-         if (players.get(i).getPlayerName().equals(name) && currentPlayer != players.get(i)) {
+      for ( int i = 0; i < players.size(); i++ )
+      {
+         if ( players.get(i).getPlayerName().equals(name) && currentPlayer != players.get(i) )
+         {
             currentPlayer = players.get(i);
             selected = true;
             break;
          }
       }
-      if (selected) {
+      if ( selected )
+      {
          GameEngine.instance.soundManager.setThemeSong(currentPlayer.getSettings().getMusic());
          GameEngine.instance.soundManager.setEffects(currentPlayer.getSettings().getSfx());
          GameEngine.instance.themeManager.setTheme(currentPlayer.getSettings().getActiveTheme());
@@ -144,13 +172,14 @@ public class PlayerManager extends Controller {
 
    }
 
-
-   void updateLevelAtTheEnd(int levelNo, int starAmount) {
+   void updateLevelAtTheEnd(int levelNo, int starAmount)
+   {
       LevelInformation currentLevel = currentPlayer.getLevels().get(levelNo - 1);
       setLevelStatus(levelNo, "finished");
       currentLevel.setMap("");
-      if (starAmount > currentLevel.getStars()) {
-         currentPlayer.setStarAmount(currentPlayer.getStarAmount() + (starAmount - currentLevel.getStars()));
+      if ( starAmount > currentLevel.getStars() )
+      {
+         currentPlayer.setStarAmount(currentPlayer.getStarAmount() + ( starAmount - currentLevel.getStars() ));
          currentLevel.setStars(starAmount);
       }
       playerDao.saveLevel(levelNo, currentPlayer);
@@ -159,7 +188,8 @@ public class PlayerManager extends Controller {
    }
 
    //saveMape kadar oln k�sm� MapController da bir methodla �a�r�labilir
-   void updateLevelDuringGame(int levelNo, int moveAmount) {
+   void updateLevelDuringGame(int levelNo, int moveAmount)
+   {
       setLevelStatus(levelNo, "inProgress");
 
       String map = MapController.instance.mapToString();
@@ -169,71 +199,84 @@ public class PlayerManager extends Controller {
       playerDao.saveLevel(levelNo, currentPlayer);
    }
 
-   private void setLevelStatus(int levelNo, String status) {
-      if (!currentPlayer.getLevels().get(levelNo - 1).getStatus().equals(status)) {
+   private void setLevelStatus(int levelNo, String status)
+   {
+      if ( !currentPlayer.getLevels().get(levelNo - 1).getStatus().equals(status) )
+      {
          currentPlayer.getLevels().get(levelNo - 1).setStatus(status);
       }
    }
 
-   void setLevelStatusFinished(int levelNo) {
+   void setLevelStatusFinished(int levelNo)
+   {
       setLevelStatus(levelNo, "finished");
       playerDao.saveLevel(levelNo, currentPlayer);
 
    }
 
-   void unlockLevel(int levelNo) {
+   void unlockLevel(int levelNo)
+   {
       currentPlayer.getLevels().get(levelNo - 1).unlock();
       playerDao.saveLevel(levelNo, currentPlayer);
    }
 
-   void incrementLastUnlockedLevelNo() {
+   void incrementLastUnlockedLevelNo()
+   {
       currentPlayer.incrementLastUnlockedLevelNo();
    }
 
-   public boolean isLevelLocked(int levelNo) {
+   public boolean isLevelLocked(int levelNo)
+   {
       return !currentPlayer.getLevels().get(levelNo - 1).isUnlocked();
    }
 
-   public void toggleMusic() {
+   public void toggleMusic()
+   {
       currentPlayer.getSettings().toggleMusic();
       playerDao.saveSettings(currentPlayer);
    }
 
-   public void toggleSfx() {
+   public void toggleSfx()
+   {
       currentPlayer.getSettings().toggleSfx();
       playerDao.saveSettings(currentPlayer);
    }
 
-    void changeTheme(String theme) {
-        //commented case will be added after testing is done
-        if (theme != currentPlayer.getSettings().getActiveTheme() /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */)
-        {
-            currentPlayer.getSettings().setActiveTheme(theme);
-            playerDao.saveSettings(currentPlayer);
-        }
-    }
+   void changeTheme(String theme)
+   {
+      //commented case will be added after testing is done
+      if ( !theme.equals(currentPlayer.getSettings().getActiveTheme()) /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */ )
+      {
+         currentPlayer.getSettings().setActiveTheme(theme);
+         playerDao.saveSettings(currentPlayer);
+      }
+   }
 
-    void unlockTheme(String themeName)
-    {
-        currentPlayer.getSettings().getThemes().put(themeName, true);
-        changeTheme(themeName);
-    }
+   void unlockTheme(String themeName)
+   {
+      currentPlayer.getSettings().getThemes().put(themeName, true);
+      changeTheme(themeName);
+   }
 
-    void decrementRemainingShrinkPowerup() {
-        currentPlayer.decrementRemainingShrinkPowerup();
-        playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
-    }
+   void decrementRemainingShrinkPowerup()
+   {
+      currentPlayer.decrementRemainingShrinkPowerup();
+      playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
+   }
 
-   void decrementRemainingSpacePowerup() {
+   void decrementRemainingSpacePowerup()
+   {
       currentPlayer.decrementRemainingSpacePowerup();
       playerDao.saveRemainingPowerupAmount("space", currentPlayer);
    }
 
-   public void addShrinkPowerup(int amountToBeAdded) {
+   public void addShrinkPowerup(int amountToBeAdded)
+   {
       currentPlayer.addShrinkPowerup(amountToBeAdded);
    }
 
-   public void addSpacePowerup(int amountToBeAdded) {
+   public void addSpacePowerup(int amountToBeAdded)
+   {
       currentPlayer.addSpacePowerup(amountToBeAdded);
    }
 }
