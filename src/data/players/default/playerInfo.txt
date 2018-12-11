@@ -33,15 +33,23 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				1
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TD SS CR SS SS SS OO
+OO SS SS SS TD SS SS OO
+OO SS PC SS SS SS SS SS
+OO CU SS SS SS SS TU OO
+OO SS CR SS SS SS SS OO
+OO SS SS TR SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -55,12 +63,20 @@
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS SS SS SS SS TU OO
+OO CL SS SS SS SS SS OO
+OO CU PC SS SS SS SS SS
+OO SS CU SS SS CR SS OO
+OO CU SS CL SS CR SS OO
+OO SS TR SS SS CR SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -994,6 +1010,6 @@ OO OO OO OO OO OO OO OO
 		2
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
-		-2
+		-11
 	<RemainingSpacePowerups/>
 <Player/>
