@@ -2,9 +2,6 @@ package source.controller;
 
 import source.model.*;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class VehicleController extends Controller
 {
    public static VehicleController instance;
@@ -14,7 +11,7 @@ public class VehicleController extends Controller
    private SoundManager soundManager;
    private int numberOfMoves;
    private boolean changed = false;
-
+   public Boolean isExitReachable = false;
    private enum CONTROL
    {
       SLIDE, KEYBOARD
@@ -56,6 +53,8 @@ public class VehicleController extends Controller
       {
          return;
       }
+      if (!isExitReachable)
+         checkExitPath();
 
       if ( currentControl == CONTROL.SLIDE )
       {
@@ -344,6 +343,18 @@ public class VehicleController extends Controller
       numberOfMoves = _moves;
    }
 
+   void checkExitPath(){
+      Vehicle player = MapController.instance.getPlayerVehicle();
+      boolean temp = true;
+      for(int i = 0; i < (map.getMapSize()-player.transform.position.gridX)-2 ;i++)
+      {
+         if(!(map.getGrid()[( (int) player.transform.position.gridY)][(int) player.transform.position.gridX+i+2].equals("Space"))) {
+            temp = false;
+         }
+      }
+      isExitReachable = temp;
+      System.out.println(isExitReachable);
+   }
    private double clamp(double value, int min, int max)
    {
       double difference;

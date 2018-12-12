@@ -58,7 +58,7 @@ public class LevelSelectionPanel extends JPanel
       loadImages();
       createComponents();
       addComponents();
-      setBoundsOfComponents(page);
+      setBoundsOfComponents();
 
       this.setVisible(false);
    }
@@ -106,7 +106,7 @@ public class LevelSelectionPanel extends JPanel
       add(menuButton);
    }
 
-   private void setBoundsOfComponents(int page)
+   private void setBoundsOfComponents()
    {
       leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
               leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
@@ -210,10 +210,7 @@ public class LevelSelectionPanel extends JPanel
       GameEngine.instance.soundManager.buttonClick();
       int noOfPages = numberOfLevels / pageLength;
       if ( numberOfLevels % pageLength == 0 )
-      {
-         ;
-      }
-      noOfPages--;
+        noOfPages--;
       if ( e.getSource() == leftArrowButton )
       {
          if ( page == 0 )
@@ -225,7 +222,7 @@ public class LevelSelectionPanel extends JPanel
             page -= 1;
          }
 
-         setBoundsOfComponents(page);
+         setBoundsOfComponents();
       }
       else if ( e.getSource() == rightArrowButton )
       {
@@ -237,7 +234,7 @@ public class LevelSelectionPanel extends JPanel
          {
             page += 1;
          }
-         setBoundsOfComponents(page);
+         setBoundsOfComponents();
       }
       else if ( e.getSource() == menuButton )
       {

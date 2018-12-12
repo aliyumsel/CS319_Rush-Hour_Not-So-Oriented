@@ -26,7 +26,6 @@ public class GameEngine extends TimerTask
       vehicleController = new VehicleController();
       playerManager = new PlayerManager();
       gameManager = new GameManager();
-
       controllers = new ArrayList<>();
 
         controllers.add(themeManager);

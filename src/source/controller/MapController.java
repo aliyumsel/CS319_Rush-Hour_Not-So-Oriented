@@ -114,21 +114,8 @@ public class MapController extends Controller
    // Map should hold a reference to the player car so we don't have to check every game object every move.
    boolean isPlayerAtExit()
    {
-      Vehicle player = null;
-      Vehicle temp;
+      Vehicle player = getPlayerVehicle();
 
-      for ( GameObject gameObject : map.getGameObjects() )
-      {
-         if ( gameObject instanceof Vehicle )
-         {
-            temp = (Vehicle) gameObject;
-            if ( temp.isPlayer() )
-            {
-               player = temp;
-               break;
-            }
-         }
-      }
       if ( player == null )
       {
          return false;
@@ -185,4 +172,22 @@ public class MapController extends Controller
       return mapStr;
    }
 
+   public Vehicle getPlayerVehicle(){
+      Vehicle player = null;
+      Vehicle temp;
+
+      for ( GameObject gameObject : map.getGameObjects() )
+      {
+         if ( gameObject instanceof Vehicle )
+         {
+            temp = (Vehicle) gameObject;
+            if ( temp.isPlayer() )
+            {
+               player = temp;
+               break;
+            }
+         }
+      }
+      return player;
+   }
 }
