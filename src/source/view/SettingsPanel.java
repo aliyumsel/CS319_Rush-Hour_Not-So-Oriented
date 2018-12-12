@@ -1,8 +1,6 @@
 package source.view;
 
-import source.controller.GameEngine;
-import source.controller.SoundManager;
-import source.model.Settings;
+import source.controller.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +19,7 @@ public class SettingsPanel extends JPanel
    private JButton sfx;
 
    private JButton back;
-   private JButton simple;
+   private JButton minimalistic;
    private JButton classic;
    private JButton safari;
    private JButton space;
@@ -46,7 +44,7 @@ public class SettingsPanel extends JPanel
    private BufferedImage safariHighlightedImage;
    private BufferedImage spaceImage;
    private BufferedImage spaceHighlightedImage;
-
+   private String previousPanel = "";
    private int panelWidth;
    private int panelHeight;
 
@@ -68,9 +66,9 @@ public class SettingsPanel extends JPanel
       this.setVisible(false);
    }
 
-   private void loadImages()
+   public void loadImages()
    {
-      background = guiManager.LoadImage("src/image/background.png");
+      background = ThemeManager.instance.getBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
@@ -105,7 +103,7 @@ public class SettingsPanel extends JPanel
       sfx = UIFactory.createButton(sfxImage, sfxHighlightedImage, "square", actionListener);
       back = UIFactory.createButton(backButtonImage, backButtonHighlightedImage, "square", actionListener);
 
-      simple = UIFactory.createButton(simpleImage, simpleHighlightedImage, "square", actionListener);
+      minimalistic = UIFactory.createButton(simpleImage, simpleHighlightedImage, "square", actionListener);
       classic = UIFactory.createButton(classicImage, classicHighlightedImage, "square", actionListener);
       safari = UIFactory.createButton(safariImage, safariHighlightedImage, "square", actionListener);
       space = UIFactory.createButton(spaceImage, spaceHighlightedImage, "square", actionListener);
@@ -136,7 +134,7 @@ public class SettingsPanel extends JPanel
       add(volume);
       add(theme);
 
-      add(simple);
+      add(minimalistic);
       add(classic);
       add(safari);
       add(space);
@@ -154,7 +152,7 @@ public class SettingsPanel extends JPanel
 
       theme.setBounds(50, 300, theme.getPreferredSize().width, theme.getPreferredSize().height);
 
-      simple.setBounds(75, 350, simple.getPreferredSize().width, simple.getPreferredSize().height);
+      minimalistic.setBounds(75, 350, minimalistic.getPreferredSize().width, minimalistic.getPreferredSize().height);
 
       classic.setBounds(175, 350, classic.getPreferredSize().width, classic.getPreferredSize().height);
 
@@ -163,14 +161,16 @@ public class SettingsPanel extends JPanel
       space.setBounds(375, 350, space.getPreferredSize().width, space.getPreferredSize().height);
    }
 
-   void updatePanel()
+   void updatePanel(String previousPanel)
    {
+      this.previousPanel = previousPanel;
       updateSoundButtons("SFX");
       updateSoundButtons("Music");
+      updateThemeButtons();
    }
 
    @SuppressWarnings("Duplicates")
-   void updateSoundButtons(String type)
+   private void updateSoundButtons(String type)
    {
       boolean enabled;
       JButton button;
@@ -223,59 +223,112 @@ public class SettingsPanel extends JPanel
 
    }
 
+   //can be used in updateThemeButtons method below
+   private String getThemeNameByButton(JButton button)
+   {
+      if ( button == minimalistic )
+      {
+         return "minimalistic";
+      }
+      if ( button == classic )
+      {
+         return "classic";
+      }
+      if ( button == safari )
+      {
+         return "safari";
+      }
+      if ( button == space )
+      {
+         return "space";
+      }
+      return ""; //should return null
+   }
+
+   private void updateThemeButtons()
+   {
+      ThemeManager themeManager = GameEngine.instance.themeManager;
+      if ( !themeManager.minimalistic.isUnlocked() )
+      {
+         minimalistic.setIcon(new ImageIcon(simpleImage));
+      }
+      else
+      {
+         minimalistic.setIcon(new ImageIcon(simpleImage));
+      }
+
+      if ( !themeManager.classic.isUnlocked() )
+      {
+         classic.setIcon(new ImageIcon(classicImage));
+      }
+      else
+      {
+         classic.setIcon(new ImageIcon(classicImage));
+      }
+
+      if ( !themeManager.safari.isUnlocked() )
+      {
+         safari.setIcon(new ImageIcon(safariImage));
+      }
+      else
+      {
+         safari.setIcon(new ImageIcon(safariImage));
+      }
+
+      if ( !themeManager.minimalistic.isUnlocked() )
+      {
+         space.setIcon(new ImageIcon(spaceImage));
+      }
+      else
+      {
+         space.setIcon(new ImageIcon(spaceImage));
+      }
+   }
+
    private ActionListener actionListener = e ->
    {
-      SoundManager.instance.buttonClick();
+      GameEngine.instance.soundManager.buttonClick();
       if ( e.getSource() == back )
       {
-         guiManager.setPanelVisible("MainMenu");
+         guiManager.setPanelVisible(previousPanel);
       }
       else if ( e.getSource() == music )
       {
-         boolean currentMusic = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setMusic(!currentMusic);
+         GameEngine.instance.playerManager.toggleMusic();
          updateSoundButtons("Music");
-         SoundManager.instance.themeSongToggle();
+         GameEngine.instance.soundManager.themeSongToggle();
       }
       else if ( e.getSource() == sfx )
       {
-         boolean currentSFX = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setSfx(!currentSFX);
+         GameEngine.instance.playerManager.toggleSfx();
          updateSoundButtons("SFX");
-         SoundManager.instance.effectsToggle();
+         GameEngine.instance.soundManager.effectsToggle();
       }
-      else if ( e.getSource() == simple )
+      else
       {
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SIMPLE);
+         String themeName = getThemeNameByButton((JButton) e.getSource());
+         int themeStatus = GameEngine.instance.themeManager.getThemeStatus(themeName);
+         if ( themeStatus == 1 )
+         {
+            GameEngine.instance.themeManager.unlockTheme(themeName);
+         }
+         else if ( themeStatus == 2 )
+         {
+            GameEngine.instance.themeManager.changeTheme(themeName);
+         }
       }
-      else if ( e.getSource() == classic )
-      {
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.CLASSIC);
-      }
-      else if ( e.getSource() == safari )
-      {
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SAFARI);
-      }
-      else if ( e.getSource() == space )
-      {
-         GameEngine.instance.playerManager.getCurrentPlayer().getSettings().setTheme(Settings.Theme.SPACE);
-      }
+      repaint();
    };
 
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
-
       drawBackground(g);
-      // setBackground(Color.WHITE);
    }
 
    private void drawBackground(Graphics graphics)
    {
-
       Graphics2D graphics2d = (Graphics2D) graphics;
-
       graphics2d.drawImage(background, 0, 0, null);
-
    }
 }

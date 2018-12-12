@@ -10,48 +10,56 @@ import sun.audio.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
-public class SoundManager
+public class SoundManager extends Controller
 {
    public static SoundManager instance;
 
    private AudioStream audioStream = null;
    private InputStream inputStream = null;
    private Clip clip;
-   private boolean isThemeEnabled = true;
-   private boolean isEffectsEnabled = true;
+   private boolean isThemeEnabled;
+   private boolean isEffectsEnabled;
 
    public SoundManager()
    {
+      //isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+      //isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
       instance = this;
-      background();
+   }
+
+   private void initializeClip()
+   {
+      try
+      {
+         String trafficThemeSong = ThemeManager.instance.getThemeSong();
+         AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(trafficThemeSong));
+         clip = AudioSystem.getClip();
+         clip.open(inputStream);
+         clip.loop(Clip.LOOP_CONTINUOUSLY);
+      } catch (Exception a)
+      {
+         System.out.println("Not Found");
+      }
    }
 
    public void background()
    {
       if ( isThemeEnabled )
       {
-         try
-         {
-            String trafficThemeSong = "src/sounds/theme.wav";
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(trafficThemeSong));
-            clip = AudioSystem.getClip();
-            clip.open(inputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-         } catch (Exception a)
-         {
-            System.out.println("Not Found");
-         }
+         initializeClip();
       }
    }
 
-   void vehicleHorn(String vehicle)
+   void vehicleHorn()
    {
       if ( isEffectsEnabled )
       {
          try
          {
-            inputStream = new FileInputStream("src/sounds/" + vehicle + ".wav");
+            String selectionSound = ThemeManager.instance.getSelectionSound();
+            inputStream = new FileInputStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
@@ -61,13 +69,22 @@ public class SoundManager
       }
    }
 
+   void updateTheme()
+   {
+      if ( clip != null )
+      {
+         clip.close();
+      }
+      background();
+   }
+
    public void buttonClick()
    {
       if ( isEffectsEnabled )
       {
          try
          {
-            inputStream = new FileInputStream("src/sounds/buttonClick.wav");
+            inputStream = new FileInputStream(ThemeManager.instance.getButtonClickSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
@@ -99,7 +116,14 @@ public class SoundManager
       isThemeEnabled = !isThemeEnabled;
       if ( isThemeEnabled )
       {
-         clip.start();
+         if ( clip == null )
+         {
+            initializeClip();
+         }
+         else
+         {
+            clip.start();
+         }
       }
       else
       {
@@ -114,4 +138,37 @@ public class SoundManager
       isEffectsEnabled = !isEffectsEnabled;
    }
 
+   boolean isThemeSongEnabled()
+   {
+      return isThemeEnabled;
+   }
+
+   boolean isEffectsEnabled()
+   {
+      return isEffectsEnabled;
+   }
+
+   void setThemeSong(boolean themeEnabled)
+   {
+      if ( this.isThemeEnabled != themeEnabled )
+      {
+         themeSongToggle();
+      }
+
+   }
+
+   void setEffects(boolean effectsEnabled)
+   {
+      if ( this.isEffectsEnabled != effectsEnabled )
+      {
+         effectsToggle();
+      }
+   }
+
+   public void start()
+   {
+      isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+      isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
+      background();
+   }
 }

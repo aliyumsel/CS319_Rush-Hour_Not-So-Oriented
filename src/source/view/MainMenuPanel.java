@@ -4,11 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import source.controller.GameEngine;
-import source.controller.GameManager;
-import source.controller.PlayerManager;
-import source.controller.SoundManager;
-import source.model.Player;
+import source.controller.*;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -22,7 +18,7 @@ public class MainMenuPanel extends JPanel {
     private JLabel heading;
     private JLabel player;
     private JLabel starAmount;
-    private JLabel lastlevel;
+    private JLabel lastLevel;
 
     private JButton changePlayer;
     private JButton play;
@@ -72,8 +68,8 @@ public class MainMenuPanel extends JPanel {
         this.setVisible(true);
     }
 
-    private void loadImages() {
-        background = guiManager.LoadImage("src/image/background.png");
+    public void loadImages() {
+        background = ThemeManager.instance.getBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
@@ -117,19 +113,18 @@ public class MainMenuPanel extends JPanel {
         player.setForeground(Color.white);
 
         starAmount = UIFactory.createLabelIcon(starAmountImage, "starAmount");
-        starAmount.setText("     15/120");
         starAmount.setFont(new Font("Odin Rounded", Font.PLAIN, 22));
         starAmount.setForeground(Color.black);
         starAmount.setHorizontalTextPosition(JLabel.CENTER);
         starAmount.setVerticalTextPosition(JLabel.CENTER);
 
-        lastlevel = new JLabel(playerManager.getCurrentPlayer().getLastUnlockedLevelNo()+"",SwingConstants.CENTER);
-        lastlevel.setPreferredSize(new Dimension(80,40));
-        lastlevel.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
-        lastlevel.setForeground(Color.black);
-        lastlevel.setHorizontalTextPosition(JLabel.CENTER);
-        lastlevel.setVerticalTextPosition(JLabel.CENTER);
-        //lastlevel.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
+        lastLevel = new JLabel(playerManager.getCurrentPlayer().getLastUnlockedLevelNo() + "", SwingConstants.CENTER);
+        lastLevel.setPreferredSize(new Dimension(80, 40));
+        lastLevel.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
+        lastLevel.setForeground(Color.black);
+        lastLevel.setHorizontalTextPosition(JLabel.CENTER);
+        lastLevel.setVerticalTextPosition(JLabel.CENTER);
+        //lastLevel.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
 
         changePlayer = UIFactory.createButton(changePlayerButtonImage, changePlayerButtonHighlightedImage, "long", actionListener);
         play = UIFactory.createButton(playButtonImage, playButtonImageHighlighted, "play", actionListener);
@@ -145,7 +140,7 @@ public class MainMenuPanel extends JPanel {
         this.add(player);
         this.add(starAmount);
         this.add(changePlayer);
-        this.add(lastlevel);
+        this.add(lastLevel);
         this.add(play);
         this.add(credits);
         this.add(levels);
@@ -157,11 +152,12 @@ public class MainMenuPanel extends JPanel {
     void updatePanel() {
         updatePlayerName();
         updateLastLevel();
+        updateNumberOfStars();
     }
 
     private void updateLastLevel() {
-        String lastLevelString =  Integer.toString(playerManager.getCurrentPlayer().getLastUnlockedLevelNo());
-        lastlevel.setText(lastLevelString);
+        String lastLevelString = Integer.toString(playerManager.getCurrentPlayer().getLastUnlockedLevelNo());
+        lastLevel.setText(lastLevelString);
         System.out.println(lastLevelString);
     }
 
@@ -169,6 +165,12 @@ public class MainMenuPanel extends JPanel {
         String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
         player.setText(playerName);
         System.out.println("Player selected and Player Name Updated " + playerName);
+    }
+
+    private void updateNumberOfStars() {
+        String numberOfStars = "    " + gameManager.playerManager.getCurrentPlayer().getStarAmount() + "/120"; //need to find a fix for formatting
+        starAmount.setText(numberOfStars);
+        System.out.println("Number of stars Updated " + numberOfStars);
     }
 
     private void setBoundsOfComponents() {
@@ -186,7 +188,7 @@ public class MainMenuPanel extends JPanel {
 
         play.setBounds(guiManager.findCenter(panelWidth, play), 240, play.getPreferredSize().width, play.getPreferredSize().height);
 
-        lastlevel.setBounds(guiManager.findCenter(panelWidth, lastlevel), 320, lastlevel.getPreferredSize().width, lastlevel.getPreferredSize().height);
+        lastLevel.setBounds(guiManager.findCenter(panelWidth, lastLevel), 320, lastLevel.getPreferredSize().width, lastLevel.getPreferredSize().height);
 
         credits.setBounds(guiManager.findCenter(panelWidth, credits) - 225, 430, credits.getPreferredSize().width, credits.getPreferredSize().height);
 
@@ -208,7 +210,7 @@ public class MainMenuPanel extends JPanel {
 
     private ActionListener actionListener = e ->
     {
-        SoundManager.instance.buttonClick();
+        GameEngine.instance.soundManager.buttonClick();
         if (e.getSource() == play) {
             GameEngine.instance.gameManager.loadLastLevel();
             guiManager.setPanelVisible("Game");

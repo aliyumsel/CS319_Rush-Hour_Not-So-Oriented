@@ -6,10 +6,13 @@ import java.awt.*;
 
 import source.controller.GameEngine;
 import source.controller.SoundManager;
+import source.controller.ThemeManager;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.util.logging.Level;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class LevelSelectionPanel extends JPanel
 {
@@ -32,7 +35,8 @@ public class LevelSelectionPanel extends JPanel
    private int panelWidth;
    private int panelHeight;
    private int page = 0;
-   private int numberOfLevels = 40;
+   private int pageLength = 12;
+   private int numberOfLevels;
 
    private LevelSelectionPopUp popUp;
 
@@ -44,6 +48,7 @@ public class LevelSelectionPanel extends JPanel
 
       panelWidth = guiManager.panelWidth;
       panelHeight = guiManager.panelHeight;
+      numberOfLevels = findNoOfLevels();
 
       setPreferredSize(new Dimension(panelWidth, panelHeight));
 
@@ -53,15 +58,15 @@ public class LevelSelectionPanel extends JPanel
       loadImages();
       createComponents();
       addComponents();
-      setBoundsOfComponents(page);
+      setBoundsOfComponents();
 
       this.setVisible(false);
    }
 
-   private void loadImages()
+   public void loadImages()
    {
-      background = guiManager.LoadImage("src/image/background.png");
-      Image scaledImage = background.getScaledInstance(panelWidth,panelHeight,Image.SCALE_DEFAULT);
+      background = ThemeManager.instance.getBackgroundImage();
+      Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
       bGr.drawImage(scaledImage, 0, 0, null);
@@ -101,7 +106,7 @@ public class LevelSelectionPanel extends JPanel
       add(menuButton);
    }
 
-   private void setBoundsOfComponents(int page)
+   private void setBoundsOfComponents()
    {
       leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
               leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
@@ -119,14 +124,13 @@ public class LevelSelectionPanel extends JPanel
       }
 
       int gap = 0;
-      int pageLength = 12;
       int limit = page * pageLength;
       int gapValue = 140;
       for ( int i = 0; i < numberOfLevels; i++ )
       {
          buttonArray[i].setVisible(false);
       }
-      for ( int i = limit; i < 12 + limit && i < numberOfLevels; i++ )
+      for ( int i = limit; i < pageLength + limit && i < numberOfLevels; i++ )
       {
          if ( i % 4 == 0 )
          {
@@ -138,13 +142,13 @@ public class LevelSelectionPanel extends JPanel
             buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]) - 135,
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
-         else if ( i > 3 + limit && i < 8 + limit )
+         else if ( i >= 4 + limit && i < 8 + limit )
          {
             gap += gapValue;
             buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]),
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
-         else if ( i > 7 + limit && i < 12 + limit )
+         else if ( i >= 8 + limit && i < 12 + limit )
          {
             gap += gapValue;
             buttonArray[i].setBounds(gap, 135 + guiManager.findCenter(panelHeight, buttonArray[i]),
@@ -158,7 +162,7 @@ public class LevelSelectionPanel extends JPanel
    {
       for ( int i = 0; i < buttonArray.length; i++ )
       {
-         if ( i < 5 )
+         if ( i < GameEngine.instance.playerManager.getCurrentPlayer().getLevels().size() )
          {
             if ( GameEngine.instance.playerManager.isLevelLocked(i + 1) )
             {
@@ -167,6 +171,7 @@ public class LevelSelectionPanel extends JPanel
             else
             {
                buttonArray[i].toggleLock(false);
+               System.out.println("starAmount: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
             }
          }
@@ -177,6 +182,24 @@ public class LevelSelectionPanel extends JPanel
       }
    }
 
+   private int findNoOfLevels()
+   {
+      Scanner scanInfo = null;
+      try
+      {
+         scanInfo = new Scanner(new File("src/data/info.txt"));
+      } catch (FileNotFoundException e)
+      {
+         e.printStackTrace();
+      }
+      while ( !scanInfo.nextLine().equals("<NumberOfMaps>") )
+      {
+         ;
+      }
+      String mapAmount = scanInfo.nextLine().trim();
+      return Integer.parseInt(mapAmount);
+   }
+
    void updatePanel()
    {
       updateButtons();
@@ -184,23 +207,26 @@ public class LevelSelectionPanel extends JPanel
 
    private ActionListener actionListener = e ->
    {
-      SoundManager.instance.buttonClick();
+      GameEngine.instance.soundManager.buttonClick();
+      int noOfPages = numberOfLevels / pageLength;
+      if ( numberOfLevels % pageLength == 0 )
+        noOfPages--;
       if ( e.getSource() == leftArrowButton )
       {
          if ( page == 0 )
          {
-            page = 3;
+            page = noOfPages;
          }
          else
          {
             page -= 1;
          }
 
-         setBoundsOfComponents(page);
+         setBoundsOfComponents();
       }
       else if ( e.getSource() == rightArrowButton )
       {
-         if ( page == 3 )
+         if ( page == noOfPages )
          {
             page = 0;
          }
@@ -208,12 +234,13 @@ public class LevelSelectionPanel extends JPanel
          {
             page += 1;
          }
-         setBoundsOfComponents(page);
+         setBoundsOfComponents();
       }
       else if ( e.getSource() == menuButton )
       {
          guiManager.setPanelVisible("MainMenu");
       }
+
       //clicked one of the level buttons
       else
       {
@@ -221,9 +248,11 @@ public class LevelSelectionPanel extends JPanel
          {
             if ( e.getSource() == buttonArray[index] )
             {
-               popUp.initialize(index + 1); // buna player objesi de eklenecek
+               System.out.println("Destinationlevel: " + index + 1);
+               GameEngine.instance.gameManager.loadLevel(index + 1);
+               guiManager.setPanelVisible("Game");
+               break;
             }
-            popUp.setVisible(true);
          }
       }
 

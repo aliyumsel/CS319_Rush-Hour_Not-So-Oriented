@@ -2,9 +2,9 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-	Hell Yeah
+	default
 
 <LastActivePlayer/>
 <NumberOfMaps>
-	5
+	50
 <NumberOfMaps/>

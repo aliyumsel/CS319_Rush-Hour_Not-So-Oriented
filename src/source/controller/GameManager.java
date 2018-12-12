@@ -1,18 +1,17 @@
 package source.controller;
 
-import java.util.ArrayList;
-
-import interfaces.Updatable;
+import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
-import source.model.Vehicle;
 import source.view.GuiPanelManager;
 
-public class GameManager implements Updatable
+public class GameManager extends Controller
 {
    public static GameManager instance;
    public PlayerManager playerManager;
 
    public int level;
+   public int time;
+   private boolean bonus;
 
    boolean isGameActive = false;
 
@@ -20,23 +19,40 @@ public class GameManager implements Updatable
    {
       playerManager = PlayerManager.instance;
       instance = this;
+      time = 0;
+      bonus = false;
    }
 
-   public void Update()
+   public void update()
    {
-
+      if ( bonus )
+      {
+         time--;
+         if ( time == 0 )
+         {
+            endMap();
+         }
+      }
    }
 
-   void autoSave(int moveAmount)
+   void autoSave()
    {
-      PlayerManager.instance.updateLevel(level, moveAmount);
+      int moveAmount = VehicleController.instance.getNumberOfMoves();
+      PlayerManager.instance.updateLevelDuringGame(level, moveAmount);
+   }
+
+   public void stopMap()
+   {
+      isGameActive = false;
    }
 
    void endMap()
    {
+
       System.out.println("Map Finished");
       isGameActive = false;
-      PlayerManager.instance.setLevelStatusFinished(level);
+      VehicleController.instance.isExitReachable = false;
+      //PlayerManager.instance.setLevelStatusFinished(level);
 
       if ( isNextLevelLocked() )
       {
@@ -48,8 +64,6 @@ public class GameManager implements Updatable
       System.out.println("Stars Collected: " + starsCollected);
       PlayerManager.instance.updateLevelAtTheEnd(level, starsCollected);
       GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible(starsCollected);
-
-
    }
 
    private int calculateStars(int _level)
@@ -72,19 +86,30 @@ public class GameManager implements Updatable
    public void loadLastLevel()
    {
       level = PlayerManager.instance.getCurrentPlayer().getLastUnlockedLevelNo();
-      loadLevel(level, false);
+      loadLevel(level);
    }
 
-   public void loadLevel(int _level, boolean original)
+   public void loadLevel(int _level)
    {
       System.out.println("Loaded level: " + _level);
       System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
+      level = _level;
+      LevelInformation levelToBeLoaded = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
 
-      if ( original )
+      if ( levelToBeLoaded instanceof BonusLevelInformation )
+      {
+         bonus = true;
+         time = ( (BonusLevelInformation) levelToBeLoaded ).getTime() * 60;
+         MapController.instance.loadOriginalLevel(_level);
+         VehicleController.instance.setMap(MapController.instance.getMap());
+         VehicleController.instance.setNumberOfMoves(0);
+      }
+      else if ( !levelToBeLoaded.getStatus().equals("inProgress") )
       {
          MapController.instance.loadOriginalLevel(_level);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);
+         autoSave();
       }
       else
       {
@@ -94,7 +119,7 @@ public class GameManager implements Updatable
       }
 
       GuiPanelManager.instance.getGamePanel().setInnerGamePanelVisible();
-      level = _level;
+
 
       isGameActive = true;
    }
@@ -102,13 +127,17 @@ public class GameManager implements Updatable
    public void nextLevel()
    {
       level++;
-      loadLevel(level, false);
+      loadLevel(level);
    }
 
    public void resetLevel()
    {
-      loadLevel(level, true);
-      autoSave(0);
+      MapController.instance.loadOriginalLevel(level);
+      VehicleController.instance.setMap(MapController.instance.getMap());
+      VehicleController.instance.setNumberOfMoves(0);
+      autoSave();
+
+      isGameActive = true;
    }
 
    public int getLevel()

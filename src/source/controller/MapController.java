@@ -1,40 +1,27 @@
 package source.controller;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import source.model.Map;
-import source.model.Player;
-import source.model.Vehicle;
+import interfaces.MapDao;
+import source.model.*;
 
-public class MapController
+public class MapController extends Controller
 {
    public static MapController instance;
 
-   private MapExtractor mapExtractor;
-   private MapSaver mapSaver;
+   private MapDao mapDao;
    private Map map;
-
-//	public boolean mapFinished;
 
    MapController()
    {
       instance = this;
-      mapExtractor = new MapExtractor();
-      mapSaver = new MapSaver();
-      // map = new Map();
+      mapDao = new MapDaoImpl();
    }
 
    void loadLevel(int level)
    {
-      try
-      {
-         Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
-         map = mapExtractor.extractLevel(level, currentPlayer);
-      } catch (FileNotFoundException e)
-      {
-         e.printStackTrace();
-      }
+      Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
+      map = mapDao.extractMap(level, currentPlayer, false);
 
       if ( map != null )
       {
@@ -44,13 +31,7 @@ public class MapController
 
    void loadOriginalLevel(int level)
    {
-      try
-      {
-         map = mapExtractor.extractLevel(level, null);
-      } catch (FileNotFoundException e)
-      {
-         e.printStackTrace();
-      }
+      map = mapDao.extractMap(level, null, true);
    }
 
    public Map getMap()
@@ -58,93 +39,155 @@ public class MapController
       return map;
    }
 
-   void updateMap(ArrayList<Vehicle> vehicleArray)
+   void updateMap(ArrayList<GameObject> gameObjects)
    {
-      map.formMap(vehicleArray);
+      map.formMap(gameObjects);
    }
 
-   Vehicle getVehicleBySelectedCell(int x, int y)
+   //Currently testing / May even crate a method called formMap() with no arguments
+   void updateMap()
+   {
+      map.formMap(map.getGameObjects());
+   }
+
+   private GameObject getGameObjectBySelectedCell(int x, int y)
    {
       int[] occupiedCells;
       int cellNumber = ( map.getMapSize() * y ) + x;
-      for ( Vehicle vehicle : map.getVehicleArray() )
+      GameObject selectedObject = null;
+      for ( GameObject gameObject : map.getGameObjects() )
       {
-         occupiedCells = vehicle.getOccupiedCells();
+         occupiedCells = gameObject.getOccupiedCells();
          for ( int i = 0; i < occupiedCells.length; i++ )
          {
             if ( cellNumber == occupiedCells[i] )
             {
-               return vehicle;
+               selectedObject = gameObject;
+               break;
             }
          }
       }
-      return null;
+
+      return selectedObject;
+   }
+
+   Vehicle getVehicleBySelectedCell(int x, int y)
+   {
+      GameObject temp = getGameObjectBySelectedCell(x, y);
+
+      if ( temp instanceof Vehicle )
+      {
+         return (Vehicle) temp;
+      }
+      else
+      {
+         return null;
+      }
+   }
+
+   Obstacle getObstacleBySelectedCell(int x, int y)
+   {
+      GameObject temp = getGameObjectBySelectedCell(x, y);
+
+      if ( temp instanceof Obstacle )
+      {
+         return (Obstacle) temp;
+      }
+      else
+      {
+         return null;
+      }
+   }
+
+   void removeGameObject(GameObject gameObject)
+   {
+      map.getGameObjects().remove(gameObject);
+   }
+
+   void addGameObject(GameObject gameObject)
+   {
+      map.getGameObjects().add(gameObject);
    }
 
    // This method checks if the player is at the last cell he can go
    // One more move will make him get out of the grid and finish the game
+   // Map should hold a reference to the player car so we don't have to check every game object every move.
    boolean isPlayerAtExit()
    {
-      Vehicle player = null;
+      Vehicle player = getPlayerVehicle();
 
-      for ( Vehicle vehicle : map.getVehicleArray() )
-      {
-         if ( vehicle.isPlayer() )
-         {
-            player = vehicle;
-            break;
-         }
-      }
       if ( player == null )
       {
          return false;
       }
-      if ( player.transform.position.x + player.transform.length == map.getMapSize() )
-      {
-         return true;
-      }
-      return false;
-   }
-   
-   public String mapStrToString()
-   {
-	      String mapStr = "";
-	      boolean found;
-	      int mapStrSize = map.getMapSize();
-	   	  for ( int i = 0; i < mapStrSize; i++ )
-	      {
-	         for ( int j = 0; j < mapStrSize; j++ )
-	         {
-	            found = false;
-	            for ( Vehicle vehicle : map.getVehicleArray() )
-	            {
-	               if ( vehicle.transform.getPosition().y == i && vehicle.transform.getPosition().x == j )
-	               {
-	                  if ( vehicle.isPlayer() )
-	                  {
-	                     mapStr = mapStr + "PC ";
-	                  }
-	                  else
-	                  {
-	                     mapStr = mapStr + vehicle.getType().substring(0, 1).toUpperCase() + vehicle.transform.getDirection().substring(0, 1).toUpperCase() + " ";
-	                  }
-	                  found = true;
-	                  break;
-	               }
-	            }
-	            if ( !found )
-	            {
-	               mapStr = mapStr + "SS ";
-	            }
-	         }
-	         mapStr = mapStr.substring(0, mapStr.length() - 1);
-	         mapStr = mapStr + "\n";
-	      }
-	   	  return mapStr;
+      return player.transform.position.x + player.transform.length == map.getMapSize();
    }
 
-//	public void autosave(ArrayList<Vehicle> vehicleList)
-//	{
-//		mapSaver.saveMap(vehicleList, map.getMapSize(), GameManager.instance.getLevel(), PlayerManager.instance.getCurrentPlayer());
-//	}
+   // String builder kullansak daha guzel olcak
+   String mapToString()
+   {
+      String mapStr = "";
+      boolean found;
+      int mapStrSize = map.getMapSize();
+      for ( int i = 0; i < mapStrSize; i++ )
+      {
+         for ( int j = 0; j < mapStrSize; j++ )
+         {
+            found = false;
+            for ( GameObject gameObject : map.getGameObjects() )
+            {
+               if ( gameObject.transform.getPosition().y == i && gameObject.transform.getPosition().x == j )
+               {
+                  if ( gameObject instanceof Vehicle )
+                  {
+                     if ( ( (Vehicle) gameObject ).isPlayer() )
+                     {
+                        mapStr = mapStr + "PC ";
+                     }
+                     else
+                     {
+                        mapStr = mapStr + gameObject.getType().substring(0, 1).toUpperCase() + gameObject.transform.getDirection().substring(0, 1).toUpperCase() + " ";
+                     }
+                     found = true;
+                     break;
+                  }
+
+                  if ( gameObject instanceof Obstacle )
+                  {
+                     mapStr = mapStr + "OO ";
+                     found = true;
+                     break;
+                  }
+               }
+            }
+            if ( !found )
+            {
+               mapStr = mapStr + "SS ";
+            }
+         }
+         mapStr = mapStr.substring(0, mapStr.length() - 1);
+         mapStr = mapStr + "\n";
+      }
+      //System.out.println(mapStr);
+      return mapStr;
+   }
+
+   public Vehicle getPlayerVehicle(){
+      Vehicle player = null;
+      Vehicle temp;
+
+      for ( GameObject gameObject : map.getGameObjects() )
+      {
+         if ( gameObject instanceof Vehicle )
+         {
+            temp = (Vehicle) gameObject;
+            if ( temp.isPlayer() )
+            {
+               player = temp;
+               break;
+            }
+         }
+      }
+      return player;
+   }
 }

@@ -1,98 +1,109 @@
 package source.model;
 
-public class LevelInformation {
-	private int stars; 
-	private String status; //notStarted, inProgress, finished
-	private int levelNo;
-	private int maxNumberOfMovesForThreeStars;
-	private int maxNumberOfMovesForTwoStars;
-	private int currentNumberOfMoves;
-	private boolean unlocked;
-	private String map;
-	
-	public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked, String map)
-	{
-		this.levelNo = levelNo;
-		this.maxNumberOfMovesForThreeStars = maxNumberOfMovesForThreeStars;
-		this.maxNumberOfMovesForTwoStars = maxNumberOfMovesForTwoStars;
-		this.currentNumberOfMoves = currentNumberOfMoves;
-		this.stars = stars;
-		this.status = status;
-		this.unlocked = unlocked;
-		this.map = map;
-	}
+public class LevelInformation
+{
+   private int stars;
+   private String status; //notStarted, inProgress, finished
+   private int levelNo;
+   private int maxNumberOfMovesForThreeStars;
+   private int maxNumberOfMovesForTwoStars;
+   private int currentNumberOfMoves;
+   private boolean unlocked;
+   private String map;
 
-	public int getStars() {
-		return stars;
-	}
+   public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked, String map)
+   {
+      this.levelNo = levelNo;
+      this.maxNumberOfMovesForThreeStars = maxNumberOfMovesForThreeStars;
+      this.maxNumberOfMovesForTwoStars = maxNumberOfMovesForTwoStars;
+      this.currentNumberOfMoves = currentNumberOfMoves;
+      this.stars = stars;
+      this.status = status;
+      this.unlocked = unlocked;
+      this.map = map;
+   }
 
-	public void setStars(int stars) {
-		this.stars = stars;
-	}
+   public int getStars()
+   {
+      return stars;
+   }
 
-	public String getStatus() {
-		return status;
-	}
+   public void setStars(int stars)
+   {
+      this.stars = stars;
+   }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+   public String getStatus()
+   {
+      return status;
+   }
 
-	public int getCurrentNumberOfMoves() {
-		return currentNumberOfMoves;
-	}
+   public void setStatus(String status)
+   {
+      this.status = status;
+   }
 
-	public void setCurrentNumberOfMoves(int currentNumberOfMoves) {
-		this.currentNumberOfMoves = currentNumberOfMoves;
-	}
+   public int getCurrentNumberOfMoves()
+   {
+      return currentNumberOfMoves;
+   }
 
-	public boolean isUnlocked() {
-		return unlocked;
-	}
+   public void setCurrentNumberOfMoves(int currentNumberOfMoves)
+   {
+      this.currentNumberOfMoves = currentNumberOfMoves;
+   }
 
-	public void unlock() {
-		this.unlocked = true;
-	}
+   public boolean isUnlocked()
+   {
+      return unlocked;
+   }
 
-	public int getMaxNumberOfMovesForThreeStars()
-	{
-		return maxNumberOfMovesForThreeStars;
-	}
+   public void unlock()
+   {
+      this.unlocked = true;
+   }
 
-	public int getMaxNumberOfMovesForTwoStars()
-	{
-		return maxNumberOfMovesForTwoStars;
-	}
+   public int getMaxNumberOfMovesForThreeStars()
+   {
+      return maxNumberOfMovesForThreeStars;
+   }
 
-	public String getMap() {
-		return map;
-	}
+   public int getMaxNumberOfMovesForTwoStars()
+   {
+      return maxNumberOfMovesForTwoStars;
+   }
 
-	public void setMap(String map) {
-		this.map = map;
-	}
-	public String levelToString(int levelNo, int stars, int currentNumberOfMoves, String status, boolean unlocked, String map)
-	   {
-	      String level = "\t\t<Level>\n" +
-	              "\t\t\t<LevelNo>\n" +
-	              "\t\t\t\t" + levelNo + "\n" +
-	              "\t\t\t<LevelNo/>\n" +
-	              "\t\t\t<Stars>\n" +
-	              "\t\t\t\t" + stars + "\n" +
-	              "\t\t\t<Stars/>\n" +
-	              "\t\t\t<CurrentNumberOfMoves>\n" +
-	              "\t\t\t\t" + currentNumberOfMoves + "\n" +
-	              "\t\t\t<CurrentNumberOfMoves>\n" +
-	              "\t\t\t<Status>\n" +
-	              "\t\t\t\t" + status + "\n" +
-	              "\t\t\t<Status/>\n" +
-	              "\t\t\t<Unlocked>\n" +
-	              "\t\t\t\t" + unlocked + "\n" +
-	              "\t\t\t<Unlocked/>\n" +
-	              "\t\t\t<Map>\n" +
-	              map +
-	              "\t\t\t<Map/>\n" +
-	              "\t\t<Level/>\n";
-	      return level;
-	   }
+   public String getMap()
+   {
+      return map;
+   }
+
+   public void setMap(String map)
+   {
+      this.map = map;
+   }
+
+   public String levelToString()
+   {
+      return "\t\t<Level>\n" +
+              "\t\t\t<LevelNo>\n" +
+              "\t\t\t\t" + levelNo + "\n" +
+              "\t\t\t<LevelNo/>\n" +
+              "\t\t\t<Stars>\n" +
+              "\t\t\t\t" + stars + "\n" +
+              "\t\t\t<Stars/>\n" +
+              "\t\t\t<CurrentNumberOfMoves>\n" +
+              "\t\t\t\t" + currentNumberOfMoves + "\n" +
+              "\t\t\t<CurrentNumberOfMoves>\n" +
+              "\t\t\t<Status>\n" +
+              "\t\t\t\t" + status + "\n" +
+              "\t\t\t<Status/>\n" +
+              "\t\t\t<Unlocked>\n" +
+              "\t\t\t\t" + unlocked + "\n" +
+              "\t\t\t<Unlocked/>\n" +
+              "\t\t\t<Map>\n" +
+              map +
+              "\t\t\t<Map/>\n" +
+              "\t\t<Level/>\n";
+   }
 }
