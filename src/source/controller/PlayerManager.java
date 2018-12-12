@@ -172,6 +172,7 @@ public class PlayerManager extends Controller
 
    }
 
+   //These 2 methods will have to change with gameManager to not include other controllers
    void updateLevelAtTheEnd(int levelNo, int starAmount)
    {
       LevelInformation currentLevel = currentPlayer.getLevels().get(levelNo - 1);
@@ -254,6 +255,7 @@ public class PlayerManager extends Controller
 
    void unlockTheme(String themeName)
    {
+      //check out this
       currentPlayer.getSettings().getThemes().put(themeName, true);
       changeTheme(themeName);
    }

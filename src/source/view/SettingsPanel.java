@@ -306,6 +306,7 @@ public class SettingsPanel extends JPanel
       }
       else
       {
+         // This will call game managers change / unlock theme methods
          String themeName = getThemeNameByButton((JButton) e.getSource());
          int themeStatus = GameEngine.instance.themeManager.getThemeStatus(themeName);
          if ( themeStatus == 1 )

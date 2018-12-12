@@ -165,12 +165,17 @@ public class ThemeManager extends Controller
         setTheme(themeName);
     }
 
-    public void setTheme(String theme)
-    {
-        currentTheme = findThemeByName(theme);
-        try
-        {
-            if ( MapController.instance.getMap().getGameObjects() != null )
+   //This will be called from gameManager
+   public void setTheme(String theme)
+   {
+      currentTheme = findThemeByName(theme);
+      try
+      {
+         //Map controller updateMapImages diye bi method olmasi lazim
+         // BU methoduda gamemanegerda cagirilcak
+         if ( MapController.instance.getMap().getGameObjects() != null )
+         {
+            for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
             {
                 for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
                 {
