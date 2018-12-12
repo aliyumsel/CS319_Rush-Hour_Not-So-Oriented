@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		9
+		10
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -76,10 +76,10 @@ OO OO OO OO OO OO OO OO
 				4
 			<LevelNo/>
 			<Stars>
-				0
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				14
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
@@ -89,11 +89,11 @@ OO OO OO OO OO OO OO OO
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
-OO SS CL SS SS CR SS OO
-OO SS SS CU TL SS SS OO
-OO PC SS SS CU CU CU SS
-OO CD CL SS SS SS SS OO
-OO SS SS SS SS SS CU OO
+OO CL SS CR SS SS CU OO
+OO CD TL SS SS SS SS OO
+OO SS SS SS SS SS PC SS
+OO CL SS CU CU SS SS OO
+OO SS SS SS SS CU CU OO
 OO OO TL SS SS SS SS OO
 OO OO OO OO OO OO OO OO
 			<Map/>
@@ -112,10 +112,10 @@ OO OO OO OO OO OO OO OO
 				notStarted
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
-			<Map/>
+OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS SS SS PC SSOO CU SS SS TD SS TU OOOO SS CR SS SS SS SS OOOO TR SS SS SS SS SS OOOO OO OO OO OO OO OO OOOO OO OO OO OO OO OO OOOO SS CL SS SS CR SS OOOO SS SS CU TL SS SS OOOO PC SS SS CU CU CU SSOO CD CL SS SS SS SS OOOO SS SS SS SS SS CU OOOO OO TL SS SS SS SS OOOO OO OO OO OO OO OO OO			<Map/>
 		<Level/>
 		<Level>
 			<LevelNo>
