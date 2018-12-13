@@ -175,9 +175,12 @@ public class ThemeManager extends Controller
          // BU methoduda gamemanegerda cagirilcak
          if ( MapController.instance.getMap().getGameObjects() != null ) //settings panelin previousunu da check edebiliriz
          {
-            for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
+            if ( MapController.instance.getMap().getGameObjects() != null )
             {
-               gameObject.updateImages();
+               for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
+               {
+                  gameObject.updateImages();
+               }
             }
          }
       } catch (Exception e)

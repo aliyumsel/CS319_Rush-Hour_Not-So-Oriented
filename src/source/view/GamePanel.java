@@ -27,6 +27,8 @@ public class GamePanel extends JPanel
    //private JLabel timerIcon;
    private JLabel moveLabel;
    private JLabel numberLabel;
+   private JLabel shrinkAmountLabel;
+   private JLabel spaceAmountLabel;
 
    //private JProgressBar timer;
 
@@ -39,8 +41,10 @@ public class GamePanel extends JPanel
    private BufferedImage settingsButtonHighlightedImage;
    private BufferedImage shrinkButtonImage;
    private BufferedImage shrinkButtonHighlightedImage;
+   private BufferedImage shrinkDisabledImage;
    private BufferedImage spaceButtonImage;
    private BufferedImage spaceButtonHighlightedImage;
+   private BufferedImage spaceDisabledImage;
    private BufferedImage movesImage;
 
    private int panelWidth;
@@ -54,22 +58,24 @@ public class GamePanel extends JPanel
       panelWidth = guiManager.panelWidth;
       panelHeight = guiManager.panelHeight;
 
-        setPreferredSize(new Dimension(panelWidth, panelHeight));
-        loadImages();
-        createComponents();
-        addComponents();
-        createInnerGamePanel();
-        setBoundsOfComponents();
-        setOpaque(false);
-    }
+      setPreferredSize(new Dimension(panelWidth, panelHeight));
+      loadImages();
+      createComponents();
+      addComponents();
+      createInnerGamePanel();
+      setBoundsOfComponents();
+      setOpaque(false);
+   }
 
    public void updatePanel()
    {
-      repaint();
       if ( !isShowing() )
       {
          return;
       }
+
+      updatePowerUpButtons();
+      updatePowerUpLabels();
 
       innerGamePanel.updatePanel();
 
@@ -78,16 +84,64 @@ public class GamePanel extends JPanel
       repaint();
    }
 
-    public void loadImages() {
-        background = ThemeManager.instance.getGamePanelBackgroundImage();
-        Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
-        background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D bGr = background.createGraphics();
-        bGr.drawImage(scaledImage, 0, 0, null);
-        bGr.dispose();
-        //innerGamePanel.endOfLevelPanel.loadImages();
-        menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
-        menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
+   private void updatePowerUpButtons()
+   {
+      if ( !GameEngine.instance.gameManager.isShrinkPowerUpUsable() )
+      {
+         disableButton(shrink, shrinkButtonHighlightedImage);
+      }
+      else
+      {
+         if ( !shrink.isEnabled() )
+         {
+            enableButton(shrink, shrinkButtonImage, shrinkButtonHighlightedImage);
+         }
+      }
+
+      if ( !GameEngine.instance.gameManager.isSpacePowerUpUsable() )
+      {
+         disableButton(space, spaceButtonHighlightedImage);
+      }
+      else
+      {
+         if ( !space.isEnabled() )
+         {
+            enableButton(shrink, spaceButtonImage, spaceButtonHighlightedImage);
+         }
+      }
+   }
+
+   private void updatePowerUpLabels()
+   {
+      shrinkAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingShrinkPowerup() + "");
+      spaceAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingSpacePowerup() + "");
+   }
+
+   private void disableButton(JButton button, BufferedImage lockedImage)
+   {
+      button.setIcon(new ImageIcon(lockedImage));
+      button.setRolloverIcon(new ImageIcon(lockedImage));
+      button.setEnabled(false);
+   }
+
+   private void enableButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage)
+   {
+      button.setIcon(new ImageIcon(normalImage));
+      button.setRolloverIcon(new ImageIcon(highlightedImage));
+      button.setEnabled(true);
+   }
+
+   public void loadImages()
+   {
+      background = ThemeManager.instance.getGamePanelBackgroundImage();
+      Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
+      background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D bGr = background.createGraphics();
+      bGr.drawImage(scaledImage, 0, 0, null);
+      bGr.dispose();
+      //innerGamePanel.endOfLevelPanel.loadImages();
+      menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
+      menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
 
       settingsButtonImage = guiManager.LoadImage("src/image/icons/settingsIcon.png");
       settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsIconH.png");
@@ -95,11 +149,13 @@ public class GamePanel extends JPanel
       resetButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
       resetButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
 
-      shrinkButtonImage = guiManager.LoadImage("src/image/icons/hint.png");
-      shrinkButtonHighlightedImage = guiManager.LoadImage("src/image/icons/hintH.png");
+      shrinkButtonImage = guiManager.LoadImage("src/image/icons/shrink.png");
+      shrinkButtonHighlightedImage = guiManager.LoadImage("src/image/icons/shrinkH.png");
+      shrinkDisabledImage = guiManager.LoadImage("src/image/icons/shrinkD.png");
 
-      spaceButtonImage = guiManager.LoadImage("src/image/icons/hint.png");
-      spaceButtonHighlightedImage = guiManager.LoadImage("src/image/icons/hintH.png");
+      spaceButtonImage = guiManager.LoadImage("src/image/icons/poof.png");
+      spaceButtonHighlightedImage = guiManager.LoadImage("src/image/icons/poofH.png");
+      spaceDisabledImage = guiManager.LoadImage("src/image/icons/poofD.png");
 
       movesImage = guiManager.LoadImage("src/image/icons/movesCar.png");
    }
@@ -112,8 +168,20 @@ public class GamePanel extends JPanel
       shrink = UIFactory.createButton(shrinkButtonImage, shrinkButtonHighlightedImage, "square", actionListener);
       space = UIFactory.createButton(spaceButtonImage, spaceButtonHighlightedImage, "square", actionListener);
 
+      space.setDisabledIcon(new ImageIcon(spaceDisabledImage));
+      shrink.setDisabledIcon(new ImageIcon(shrinkDisabledImage));
       //timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
       //timerIcon.setPreferredSize(new Dimension(32, 32));
+
+      spaceAmountLabel = new JLabel("0",SwingConstants.CENTER);
+      spaceAmountLabel.setPreferredSize(new Dimension(20, 20));
+      spaceAmountLabel.setFont(new Font("Odin Rounded", Font.BOLD, 15));
+      spaceAmountLabel.setForeground(Color.white);
+
+      shrinkAmountLabel = new JLabel("0",SwingConstants.CENTER);
+      shrinkAmountLabel.setPreferredSize(new Dimension(20, 20));
+      shrinkAmountLabel.setFont(new Font("Odin Rounded", Font.BOLD, 15));
+      shrinkAmountLabel.setForeground(Color.white);
 
       moveLabel = UIFactory.createLabelIcon(movesImage, "movesCar");
 
@@ -132,6 +200,8 @@ public class GamePanel extends JPanel
       this.add(reset);
       add(shrink);
       add(space);
+      add(shrinkAmountLabel);
+      add(spaceAmountLabel);
       add(moveLabel);
       add(numberLabel);
       //add(timerIcon);
@@ -156,6 +226,12 @@ public class GamePanel extends JPanel
       space.setBounds(30, panelHeight - 100 - space.getPreferredSize().height,
               space.getPreferredSize().width, space.getPreferredSize().height);
 
+      shrinkAmountLabel.setBounds(80, panelHeight - 60 - shrinkAmountLabel.getPreferredSize().height,
+              shrinkAmountLabel.getPreferredSize().width, shrinkAmountLabel.getPreferredSize().height);
+
+      spaceAmountLabel.setBounds(80, panelHeight - 130 - spaceAmountLabel.getPreferredSize().height,
+              spaceAmountLabel.getPreferredSize().width, spaceAmountLabel.getPreferredSize().height);
+
       moveLabel.setBounds(panelWidth - moveLabel.getPreferredSize().width - 30, 200, moveLabel.getPreferredSize().width,
               moveLabel.getPreferredSize().height);
 
@@ -168,21 +244,23 @@ public class GamePanel extends JPanel
 //		timer.setBounds(71, 160, timer.getPreferredSize().width,
 //				timer.getPreferredSize().height);
 
-        innerGamePanel.setBounds(guiManager.findCenter(panelWidth, innerGamePanel), guiManager.findCenter(panelHeight, innerGamePanel), innerGamePanel.getPreferredSize().width,
-                innerGamePanel.getPreferredSize().height);
-        // System.out.println(innerGamePanel.getBounds().x + "," + innerGamePanel.getBounds().y);
+      innerGamePanel.setBounds(guiManager.findCenter(panelWidth, innerGamePanel), guiManager.findCenter(panelHeight, innerGamePanel), innerGamePanel.getPreferredSize().width,
+              innerGamePanel.getPreferredSize().height);
+      // System.out.println(innerGamePanel.getBounds().x + "," + innerGamePanel.getBounds().y);
 
    }
 
-    public void setEndOfLevelPanelVisible(int starAmount, boolean success) {
-        innerGamePanel.setEndOfLevelPanelVisible(true, starAmount, success);
-    }
+   public void setEndOfLevelPanelVisible(int starAmount, boolean success)
+   {
+      innerGamePanel.setEndOfLevelPanelVisible(true, starAmount, success);
+   }
 
-    public void setInnerGamePanelVisible() {
-        System.out.println("Should have shown inner game panel");
-        innerGamePanel.setVisible(true);
-        innerGamePanel.setEndOfLevelPanelVisible(false, 0, false);
-    }
+   public void setInnerGamePanelVisible()
+   {
+      System.out.println("Should have shown inner game panel");
+      innerGamePanel.setVisible(true);
+      innerGamePanel.setEndOfLevelPanelVisible(false, 0, false);
+   }
 
    private void createInnerGamePanel()
    {
