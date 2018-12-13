@@ -33,15 +33,23 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				3
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TD CR SS SS SS SS OO
+OO SS SS SS SS SS SS OO
+OO SS SS SS SS SS PC SS
+OO CU SS SS TD SS TU OO
+OO SS CR SS SS SS SS OO
+OO TR SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -55,12 +63,20 @@
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				inProgress
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS SS SS SS SS TU OO
+OO CL SS SS SS SS SS OO
+OO CU PC SS SS SS SS SS
+OO SS CU SS SS CR SS OO
+OO CU SS CL SS CR SS OO
+OO SS TR SS SS CR SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -261,7 +277,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				18
+				25
 			<CurrentNumberOfMoves>
 			<Status>
 				finished

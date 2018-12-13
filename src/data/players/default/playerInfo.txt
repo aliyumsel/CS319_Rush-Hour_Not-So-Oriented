@@ -1018,6 +1018,10 @@ OO OO OO OO OO OO OO OO
 		-4
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
+<<<<<<< Updated upstream:src/data/players/default/playerInfo.txt
 		-17
+=======
+		2
+>>>>>>> Stashed changes:src/data/players/Kaan/playerInfo.txt
 	<RemainingSpacePowerups/>
 <Player/>
