@@ -353,7 +353,7 @@ public class VehicleController extends Controller
          }
       }
       isExitReachable = temp;
-      System.out.println(isExitReachable);
+      //System.out.println(isExitReachable);
    }
    private double clamp(double value, int min, int max)
    {
