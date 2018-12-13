@@ -3,7 +3,7 @@
 		Zeynep
 	<Name/>
 	<StarAmount>
-		42
+		43
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -296,6 +296,25 @@
 				16
 			<LevelNo/>
 			<Stars>
+				1
+			<Stars/>
+			<CurrentNumberOfMoves>
+				12
+			<CurrentNumberOfMoves>
+			<Status>
+				finished
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				17
+			<LevelNo/>
+			<Stars>
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
@@ -313,28 +332,9 @@ SS TL SS SS CD CU SS SS
 PC SS SS TD SS SS SS SS
 CL SS SS SS CD CU SS SS
 SS CU SS SS SS SS SS SS
-SS SS TR SS SS SS SS SS
+SS SS CR SS SS SS SS SS
 SS SS SS SS SS SS SS SS
 SS SS SS SS SS SS SS SS
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				17
-			<LevelNo/>
-			<Stars>
-				0
-			<Stars/>
-			<CurrentNumberOfMoves>
-				0
-			<CurrentNumberOfMoves>
-			<Status>
-				notStarted
-			<Status/>
-			<Unlocked>
-				false
-			<Unlocked/>
-			<Map>
 			<Map/>
 		<Level/>
 		<Level>
@@ -991,7 +991,7 @@ SS SS SS SS SS SS SS SS
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>
-		3
+		0
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
 		-1
