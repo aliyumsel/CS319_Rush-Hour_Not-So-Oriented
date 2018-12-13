@@ -167,4 +167,14 @@ public class GameManager extends Controller
       PlayerManager.instance.unlockLevel(level + 1);
    }
 
+   public boolean isShrinkPowerUpUsable()
+   {
+      return playerManager.getCurrentPlayer().getRemainingShrinkPowerup() > 0;
+   }
+
+   public boolean isSpacePowerUpUsable()
+   {
+      return playerManager.getCurrentPlayer().getRemainingSpacePowerup() > 0;
+   }
+
 }
