@@ -4,9 +4,13 @@
 	<Name/>
 	<StarAmount>
 <<<<<<< HEAD
+<<<<<<< HEAD
 		12
 =======
 		10
+>>>>>>> unstable
+=======
+		103
 >>>>>>> unstable
 	<StarAmount/>
 	<Levels>
@@ -125,18 +129,26 @@ OO OO OO OO OO OO OO OO
 				5
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
+<<<<<<< HEAD
 				4
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
+=======
+				14
+			<CurrentNumberOfMoves>
+			<Status>
+				finished
+>>>>>>> unstable
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+<<<<<<< HEAD
 <<<<<<< HEAD
 OO OO OO OO OO OO OO OO
 OO TR SS SS CD TU CU OO
@@ -150,24 +162,35 @@ OO OO OO OO OO OO OO OO
 =======
 OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS SS SS PC SSOO CU SS SS TD SS TU OOOO SS CR SS SS SS SS OOOO TR SS SS SS SS SS OOOO OO OO OO OO OO OO OOOO OO OO OO OO OO OO OOOO SS CL SS SS CR SS OOOO SS SS CU TL SS SS OOOO PC SS SS CU CU CU SSOO CD CL SS SS SS SS OOOO SS SS SS SS SS CU OOOO OO TL SS SS SS SS OOOO OO OO OO OO OO OO OO			<Map/>
 >>>>>>> unstable
+=======
+			<Map/>
+>>>>>>> unstable
 		<Level/>
 		<Level>
 			<LevelNo>
-				6
+				7
 			<LevelNo/>
 			<Stars>
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				3
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO CD TR SS SS CR SS OO
+OO SS CR SS SS SS TD OO
+OO TU SS PC SS SS SS SS
+OO SS CD SS SS SS SS OO
+OO SS SS CD CU CR SS OO
+OO CR SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -1016,7 +1039,7 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 		<Sfx/>
 		<Theme>
 			<Active>
-				minimalistic
+				space
 			<Active>
 			<MinimalisticUnlocked>
 				true
@@ -1025,10 +1048,10 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 				false
 			<ClassicUnlocked/>
 			<SafariUnlocked>
-				false
+				true
 			<SafariUnlocked/>
 			<SpaceUnlocked>
-				false
+				true
 			<SpaceUnlocked/>
 		<Theme/>
 	<Settings/>
