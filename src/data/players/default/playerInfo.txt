@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		131
+		10
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -33,7 +33,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
+				5
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -52,7 +52,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				1
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -68,10 +68,10 @@
 				4
 			<LevelNo/>
 			<Stars>
-				2
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				11
+				27
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -90,7 +90,7 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				3
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
@@ -100,11 +100,11 @@
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
-OO TR SS SS SS TU CU OO
+OO TR SS SS CD TU CU OO
 OO SS SS SS SS SS SS OO
-OO SS PC SS CD SS SS SS
-OO SS SS CU SS CL SS OO
-OO SS SS SS TR SS SS OO
+OO PC SS SS SS SS SS SS
+OO SS SS SS SS CL SS OO
+OO SS SS CU TR SS SS OO
 OO SS OO SS CR SS SS OO
 OO OO OO OO OO OO OO OO
 			<Map/>
@@ -974,24 +974,24 @@ OO OO OO OO OO OO OO OO
 		<Sfx/>
 		<Theme>
 			<Active>
-				space
+				minimalistic
 			<Active>
 			<MinimalisticUnlocked>
 				true
 			<MinimalisticUnlocked/>
 			<ClassicUnlocked>
-				true
+				false
 			<ClassicUnlocked/>
 			<SafariUnlocked>
-				true
+				false
 			<SafariUnlocked/>
 			<SpaceUnlocked>
-				true
+				false
 			<SpaceUnlocked/>
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>
-		4
+		0
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
 		3
