@@ -106,7 +106,7 @@ public class GamePanel extends JPanel
       {
          if ( !space.isEnabled() )
          {
-            enableButton(shrink, spaceButtonImage, spaceButtonHighlightedImage);
+            enableButton(space, spaceButtonImage, spaceButtonHighlightedImage);
          }
       }
    }
@@ -250,16 +250,22 @@ public class GamePanel extends JPanel
 
    }
 
-   public void setEndOfLevelPanelVisible(int starAmount, boolean success)
+   public void showEndOfLevelPopUp(int starAmount)
    {
-      innerGamePanel.setEndOfLevelPanelVisible(true, starAmount, success);
+      innerGamePanel.setEndOfLevelPanelVisible(true, starAmount);
+   }
+
+   public void showTimeOverPopUp()
+   {
+      innerGamePanel.setTimeOverPopUpVisible(true);
    }
 
    public void setInnerGamePanelVisible()
    {
       System.out.println("Should have shown inner game panel");
       innerGamePanel.setVisible(true);
-      innerGamePanel.setEndOfLevelPanelVisible(false, 0, false);
+      innerGamePanel.setEndOfLevelPanelVisible(false, 0);
+      innerGamePanel.setTimeOverPopUpVisible(false);
    }
 
    private void createInnerGamePanel()
