@@ -173,11 +173,14 @@ public class ThemeManager extends Controller
       {
          //Map controller updateMapImages diye bi method olmasi lazim
          // BU methoduda gamemanegerda cagirilcak
-         if ( MapController.instance.getMap().getGameObjects() != null )
+         if ( MapController.instance.getMap() != null )
          {
-            for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
+            if ( MapController.instance.getMap().getGameObjects() != null )
             {
-               gameObject.updateImages();
+               for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
+               {
+                  gameObject.updateImages();
+               }
             }
          }
       } catch (Exception e)

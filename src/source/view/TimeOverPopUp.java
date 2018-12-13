@@ -15,110 +15,119 @@ This class was created for testing purposes of bonus levels.
 There are many duplicate codes with EndOfLevelPopUp and has to be revised and redesigned (maybe with inheritance).
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
-public class TimeOverPopUp extends JPanel{
-    private GuiPanelManager guiManager;
+public class TimeOverPopUp extends JPanel
+{
+   private GuiPanelManager guiManager;
 
-    private JButton retry;
-    private JButton menu;
-    private JLabel heading;
+   private JButton retry;
+   private JButton menu;
+   private JLabel heading;
 
-    private BufferedImage background;
+   private BufferedImage background;
 
-    private BufferedImage menuButtonImage;
-    private BufferedImage menuButtonHighlightedImage;
-    private BufferedImage retryButtonImage;
-    private BufferedImage retryButtonHighlightedImage;
+   private BufferedImage menuButtonImage;
+   private BufferedImage menuButtonHighlightedImage;
+   private BufferedImage retryButtonImage;
+   private BufferedImage retryButtonHighlightedImage;
 
-    private int panelWidth = 400;
-    private int panelHeight = 250;
+   private int panelWidth = 400;
+   private int panelHeight = 250;
 
-    TimeOverPopUp (GuiPanelManager _guiManager) {
-        super(null);
-        guiManager = _guiManager;
-        setPreferredSize(new Dimension(panelWidth, panelHeight));
+   TimeOverPopUp(GuiPanelManager _guiManager)
+   {
+      super(null);
+      guiManager = _guiManager;
+      setPreferredSize(new Dimension(panelWidth, panelHeight));
 
-        loadImages();
-        createComponents();
-        addComponents();
-        setBoundsOfComponents();
-        setOpaque(false);
+      loadImages();
+      createComponents();
+      addComponents();
+      setBoundsOfComponents();
+      setOpaque(false);
+   }
 
-//      showStars(2); for testing the showStars method it works
-    }
+   public void loadImages()
+   {
+      background = ThemeManager.instance.getPopupBackgroundImage();
 
-    public void loadImages() {
-        background = ThemeManager.instance.getPopupBackgroundImage();
+      menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
+      menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
 
-        menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
-        menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
-
-        retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
-        retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
-    }
-
-
-    void updatePanel() {
-        if (!isShowing()) {
-            return;
-        }
-        repaint();
-    }
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        drawBackground(g);
-    }
-
-    private void drawBackground(Graphics graphics) {
-
-        Graphics2D graphics2d = (Graphics2D) graphics;
-
-        graphics2d.drawImage(background, 0, 0, null);
-
-    }
-
-    private void createComponents() {
-        heading = new JLabel("Time Over!", SwingConstants.CENTER);
-        heading.setPreferredSize(new Dimension(300, 60));
-        heading.setFont(new Font("Odin Rounded", Font.PLAIN, 35));
-        heading.setForeground(Color.white);
-        menu = UIFactory.createButton(menuButtonImage, menuButtonHighlightedImage, "square", actionListener);
-        retry = UIFactory.createButton(retryButtonImage, retryButtonHighlightedImage, "square", actionListener);
-
-    }
-
-    private void addComponents() {
-        add(retry);
-        add(menu);
-        add(heading);
-
-    }
-
-    private void setBoundsOfComponents() {
-        heading.setBounds(50, 20, heading.getPreferredSize().width,
-                heading.getPreferredSize().height);
-
-        menu.setBounds(125, 150, menu.getPreferredSize().width, menu.getPreferredSize().height);
-        retry.setBounds(230, 150, retry.getPreferredSize().width, retry.getPreferredSize().height);
-
-    }
+      retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
+      retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
+   }
 
 
+   void updatePanel()
+   {
+      if ( !isShowing() )
+      {
+         return;
+      }
+      repaint();
+   }
 
-    private ActionListener actionListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GameEngine.instance.soundManager.buttonClick();
-            if (e.getSource() == retry) {
-                GameEngine.instance.gameManager.resetLevel();
-            }
+   public void paintComponent(Graphics g)
+   {
+      super.paintComponent(g);
 
-            if (e.getSource() == menu) {
-                guiManager.setPanelVisible("MainMenu");
-            }
+      drawBackground(g);
+   }
 
-            setVisible(false);
-        }
-    };
+   private void drawBackground(Graphics graphics)
+   {
+
+      Graphics2D graphics2d = (Graphics2D) graphics;
+
+      graphics2d.drawImage(background, 0, 0, null);
+
+   }
+
+   private void createComponents()
+   {
+      heading = new JLabel("Time Over!", SwingConstants.CENTER);
+      heading.setPreferredSize(new Dimension(300, 60));
+      heading.setFont(new Font("Odin Rounded", Font.PLAIN, 45));
+      heading.setForeground(Color.white);
+      menu = UIFactory.createButton(menuButtonImage, menuButtonHighlightedImage, "square", actionListener);
+      retry = UIFactory.createButton(retryButtonImage, retryButtonHighlightedImage, "square", actionListener);
+
+   }
+
+   private void addComponents()
+   {
+      add(retry);
+      add(menu);
+      add(heading);
+   }
+
+   private void setBoundsOfComponents()
+   {
+      heading.setBounds(50, 60, heading.getPreferredSize().width,
+              heading.getPreferredSize().height);
+
+      menu.setBounds(125, 150, menu.getPreferredSize().width, menu.getPreferredSize().height);
+      retry.setBounds(230, 150, retry.getPreferredSize().width, retry.getPreferredSize().height);
+
+   }
+
+   private ActionListener actionListener = new ActionListener()
+   {
+      @Override
+      public void actionPerformed(ActionEvent e)
+      {
+         GameEngine.instance.soundManager.buttonClick();
+         if ( e.getSource() == retry )
+         {
+            GameEngine.instance.gameManager.resetLevel();
+         }
+
+         if ( e.getSource() == menu )
+         {
+            guiManager.setPanelVisible("MainMenu");
+         }
+
+         setVisible(false);
+      }
+   };
 }

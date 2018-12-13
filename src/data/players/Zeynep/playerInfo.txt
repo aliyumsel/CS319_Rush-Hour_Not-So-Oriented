@@ -3,7 +3,7 @@
 		Zeynep
 	<Name/>
 	<StarAmount>
-		33
+		42
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -220,26 +220,18 @@
 				12
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				15
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO CU TR SS SS OO SS OO
-OO SS CU SS CL SS SS OO
-OO TD SS PC SS CD SS SS
-OO SS CL SS CU SS SS OO
-OO SS SS SS SS CR SS OO
-OO SS OO SS SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -247,16 +239,16 @@ OO OO OO OO OO OO OO OO
 				13
 			<LevelNo/>
 			<Stars>
-				0
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				24
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -266,16 +258,16 @@ OO OO OO OO OO OO OO OO
 				14
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				18
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -285,16 +277,16 @@ OO OO OO OO OO OO OO OO
 				15
 			<LevelNo/>
 			<Stars>
-				0
+				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				19
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -310,12 +302,20 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+CD SS CR SS SS SS SS SS
+SS TL SS SS CD CU SS SS
+PC SS SS TD SS SS SS SS
+CL SS SS SS CD CU SS SS
+SS CU SS SS SS SS SS SS
+SS SS TR SS SS SS SS SS
+SS SS SS SS SS SS SS SS
+SS SS SS SS SS SS SS SS
 			<Map/>
 		<Level/>
 		<Level>

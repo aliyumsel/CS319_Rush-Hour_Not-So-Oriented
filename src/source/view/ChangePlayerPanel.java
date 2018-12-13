@@ -309,6 +309,7 @@ public class ChangePlayerPanel extends JPanel
       else if ( e.getSource() == menuButton )
       {
          guiManager.setPanelVisible("MainMenu");
+         popUp.setVisible(false);
       }
       else if ( e.getSource() == addButton )
       {
