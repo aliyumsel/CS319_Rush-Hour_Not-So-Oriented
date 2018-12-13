@@ -308,9 +308,13 @@ class PlayerDaoImpl implements PlayerDao {
 
     @Override
     public boolean deletePlayer(Player player) {
-        File file = new File(player.getPath() + "/playerInfo.txt");
+        File[] files = {new File(player.getPath() + "/PlayerInfo.txt"), new File(player.getPath() + "/LevelsInfo.txt"), new File(player.getPath() + "/SettingsInfo.txt"), new File(player.getPath() + "/PowerUpInfo.txt")};
+        for (int i = 0; i < 4; i++)
+        {
+            files[i].delete();
+        }
+
         File folder = new File(player.getPath());
-        file.delete();
         if (folder.delete()) {
             return true;
         }
