@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		0
+		14
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,13 +11,13 @@
 				1
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				5
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
@@ -30,16 +30,16 @@
 				2
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -49,16 +49,16 @@
 				3
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -68,18 +68,26 @@
 				4
 			<LevelNo/>
 			<Stars>
-				0
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				2
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS CL SS SS CR SS OO
+OO SS SS CU TL SS SS OO
+OO PC SS SS SS SS CU SS
+OO CD CL SS CU SS SS OO
+OO SS SS SS SS CU CU OO
+OO OO TL SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -87,16 +95,16 @@
 				5
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				11
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -112,12 +120,20 @@
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO CD TR SS SS CR SS OO
+OO SS CD CR SS SS TD OO
+OO TU SS PC SS SS SS SS
+OO SS SS SS CU SS SS OO
+OO SS SS CD SS CR SS OO
+OO CR SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -983,7 +999,7 @@
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>
-		3
+		2
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
 		3
