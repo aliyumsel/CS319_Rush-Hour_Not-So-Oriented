@@ -162,11 +162,11 @@ public class VehicleController extends Controller {
             } else {
                 CONTROL temp = currentControl;
 
-                if (selectedVehicle == null) {
-                    currentControl = CONTROL.CPU; //cpu yu silmeyin, slide da da kullanılmak istenirse burası işe yarıyo çok
-                    selectedVehicle = MapController.instance.getPlayerVehicle(); //otomatik gitsin istenirse sadece bu satır kalıcak if ve cpu gidicek
-                }
-
+//                if (selectedVehicle == null) {
+//                    currentControl = CONTROL.CPU; //cpu yu silmeyin, slide da da kullanılmak istenirse burası işe yarıyo çok
+//                    selectedVehicle = MapController.instance.getPlayerVehicle(); //otomatik gitsin istenirse sadece bu satır kalıcak if ve cpu gidicek
+//                }
+                System.out.println("inside");
                 if (!MapController.instance.isPlayerAtExit() && selectedVehicle == MapController.instance.getPlayerVehicle()) {
                     selectedVehicle.move(0.1);
                 } else if (MapController.instance.isPlayerAtExit()) {
