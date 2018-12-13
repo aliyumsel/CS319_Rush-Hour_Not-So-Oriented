@@ -25,7 +25,7 @@ public class ThemeManager extends Controller
       space = new Theme("space");
    }
 
-   public Theme findThemeByName(String theme)
+   private Theme findThemeByName(String theme)
    {
       if ( theme.equals("classic") )
       {
@@ -91,17 +91,17 @@ public class ThemeManager extends Controller
       return currentTheme.getSpecialPlayerImage();
    }
 
-   public String getButtonClickSound()
+   String getButtonClickSound()
    {
       return currentTheme.getButtonClickSound();
    }
 
-   public String getThemeSong()
+   String getThemeSong()
    {
       return currentTheme.getThemeSong();
    }
 
-   public String getSelectionSound()
+   String getSelectionSound()
    {
       return currentTheme.getSelectionSound();
    }
@@ -112,7 +112,7 @@ public class ThemeManager extends Controller
    }
 
 
-   public int findRequiredStars()
+   private int findRequiredStars()
    {
       int requiredStars = 100;
       if ( !classic.isUnlocked() )
@@ -173,7 +173,7 @@ public class ThemeManager extends Controller
       {
          //Map controller updateMapImages diye bi method olmasi lazim
          // BU methoduda gamemanegerda cagirilcak
-         if ( MapController.instance.getMap().getGameObjects() != null ) //settings panelin previousunu da check edebiliriz
+         if ( MapController.instance.getMap() != null ) //settings panelin previousunu da check edebiliriz
          {
             if ( MapController.instance.getMap().getGameObjects() != null )
             {

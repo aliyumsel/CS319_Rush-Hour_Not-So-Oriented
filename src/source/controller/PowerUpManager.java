@@ -42,7 +42,7 @@ public class PowerUpManager extends Controller
                   MapController.instance.addGameObject(newVehicle);
 
                   MapController.instance.updateMap();
-                  shrinkActive = false;
+                  deactivateShrink();
                   //this decrement method will be put inside the game manager
                   GameEngine.instance.playerManager.decrementRemainingShrinkPowerup();
                }
@@ -59,7 +59,7 @@ public class PowerUpManager extends Controller
             {
                MapController.instance.removeGameObject(temp);
                MapController.instance.updateMap();
-               spaceActive = false;
+               deactivateSpace();
                //this decrement method will be put inside the game manager
                GameEngine.instance.playerManager.decrementRemainingSpacePowerup();
             }
@@ -67,30 +67,68 @@ public class PowerUpManager extends Controller
       }
    }
 
-   public void initializePowerUp(PowerUp powerUp)
+   public void togglePowerUp(PowerUp powerUp)
    {
       if ( powerUp == PowerUp.Space )
       {
-         initializeSpace();
+         if ( spaceActive )
+         {
+            deactivateSpace();
+         }
+         else
+         {
+            initializeSpace();
+         }
       }
       else if ( powerUp == PowerUp.Shrink )
       {
-         initializeShrink();
+         if ( shrinkActive )
+         {
+            deactivateShrink();
+         }
+         else
+         {
+            initializeShrink();
+         }
       }
    }
+
+//   private void initializePowerUp(PowerUp powerUp)
+//   {
+//      if ( powerUp == PowerUp.Space )
+//      {
+//         initializeSpace();
+//      }
+//      else if ( powerUp == PowerUp.Shrink )
+//      {
+//         initializeShrink();
+//      }
+//   }
 
    private void initializeSpace()
    {
       System.out.println("Activated Space");
       spaceActive = true;
-      shrinkActive = false;
+      deactivateShrink();
    }
 
    private void initializeShrink()
    {
       System.out.println("Activated Shrink");
       shrinkActive = true;
+      deactivateSpace();
+   }
+
+   private void deactivateSpace()
+   {
+      System.out.println("Deactivated Space");
       spaceActive = false;
+   }
+
+   private void deactivateShrink()
+   {
+      System.out.println("Deactivated Shrink");
+      shrinkActive = false;
    }
 
    boolean isPowerUpActive()

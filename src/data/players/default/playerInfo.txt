@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		138
+		132
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -14,7 +14,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				4
+				5
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -60,7 +60,7 @@ OO OO OO OO OO OO OO OO
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				1
+				12
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -79,52 +79,6 @@ OO OO OO OO OO OO OO OO
 				1
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
-			<CurrentNumberOfMoves>
-			<Status>
-				inProgress
-			<Status/>
-			<Unlocked>
-				true
-			<Unlocked/>
-			<Map>
-OO OO OO OO OO OO OO OO
-OO SS CL SS SS CR SS OO
-OO SS SS CU TL SS SS OO
-OO PC SS SS CU CU CU SS
-OO CD CL SS SS SS SS OO
-OO SS SS SS SS SS CU OO
-OO OO TL SS SS SS SS OO
-OO OO OO OO OO OO OO OO
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				5
-			<LevelNo/>
-			<Stars>
-				2
-			<Stars/>
-			<CurrentNumberOfMoves>
-				18
-			<CurrentNumberOfMoves>
-			<Status>
-				finished
-			<Status/>
-			<Unlocked>
-				true
-			<Unlocked/>
-			<Map>
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				6
-			<LevelNo/>
-			<Stars>
-				3
-			<Stars/>
-			<CurrentNumberOfMoves>
 				12
 			<CurrentNumberOfMoves>
 			<Status>
@@ -138,48 +92,10 @@ OO OO OO OO OO OO OO OO
 		<Level/>
 		<Level>
 			<LevelNo>
-				7
-			<LevelNo/>
-			<Stars>
-				3
-			<Stars/>
-			<CurrentNumberOfMoves>
-				8
-			<CurrentNumberOfMoves>
-			<Status>
-				finished
-			<Status/>
-			<Unlocked>
-				true
-			<Unlocked/>
-			<Map>
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				8
-			<LevelNo/>
-			<Stars>
-				3
-			<Stars/>
-			<CurrentNumberOfMoves>
 				5
-			<CurrentNumberOfMoves>
-			<Status>
-				finished
-			<Status/>
-			<Unlocked>
-				true
-			<Unlocked/>
-			<Map>
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				9
 			<LevelNo/>
 			<Stars>
-				3
+				2
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
@@ -192,13 +108,97 @@ OO OO OO OO OO OO OO OO
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
-OO SS TL SS SS SS SS OO
-OO SS SS SS TD SS TU OO
-OO SS PC SS SS SS SS SS
-OO TR SS SS SS SS SS OO
-OO SS SS CU TL SS SS OO
+OO TR SS SS SS TU CU OO
+OO SS SS SS SS SS SS OO
+OO SS PC SS CD SS SS SS
+OO SS SS CU SS CL SS OO
 OO SS SS SS TR SS SS OO
+OO SS OO SS CR SS SS OO
 OO OO OO OO OO OO OO OO
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				6
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				inProgress
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+OO OO OO OO OO OO OO OO
+OO CD TR SS SS CR SS OO
+OO SS CD CR SS SS TD OO
+OO TU SS PC SS SS SS SS
+OO SS SS SS CU SS SS OO
+OO SS SS CD SS CR SS OO
+OO CR SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				7
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				8
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				9
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
+			<Map>
 			<Map/>
 		<Level/>
 		<Level>
@@ -212,20 +212,12 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO SS CU CL SS CD SS OO
-OO OO SS SS CU SS SS OO
-OO CD PC SS SS CU SS SS
-OO SS TR SS SS SS SS OO
-OO OO SS SS SS SS SS OO
-OO SS SS SS CR SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -1015,13 +1007,9 @@ OO OO OO OO OO OO OO OO
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>
-		-4
+		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
-<<<<<<< Updated upstream:src/data/players/default/playerInfo.txt
-		-17
-=======
-		2
->>>>>>> Stashed changes:src/data/players/Kaan/playerInfo.txt
+		1
 	<RemainingSpacePowerups/>
 <Player/>

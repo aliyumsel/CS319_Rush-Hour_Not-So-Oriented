@@ -2,12 +2,7 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-<<<<<<< Updated upstream
 	default
-=======
-	Kaan
->>>>>>> Stashed changes
-
 <LastActivePlayer/>
 <NumberOfMaps>
 	50

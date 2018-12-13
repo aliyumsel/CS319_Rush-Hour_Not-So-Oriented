@@ -297,11 +297,11 @@ public class GamePanel extends JPanel
          }
          else if ( e.getSource() == shrink )
          {
-            GameEngine.instance.powerUpManager.initializePowerUp(PowerUpManager.PowerUp.Shrink);
+            GameEngine.instance.powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Shrink);
          }
          else if ( e.getSource() == space )
          {
-            GameEngine.instance.powerUpManager.initializePowerUp(PowerUpManager.PowerUp.Space);
+            GameEngine.instance.powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Space);
          }
          else if ( e.getSource() == settings )
          {
