@@ -51,20 +51,23 @@ public class InnerGamePanel extends JPanel
         }
     }
 
-    void setEndOfLevelPanelVisible(boolean visible, int starAmount, boolean success) {
+    void setEndOfLevelPanelVisible(boolean visible, int starAmount) {
 
         if (visible)
         {
             GameEngine.instance.soundManager.successSound();
         }
-        if (success) {
-            endOfLevelPanel.showStars(starAmount);
-            endOfLevelPanel.setVisible(visible);
-        }
+        endOfLevelPanel.showStars(starAmount);
+        endOfLevelPanel.setVisible(visible);
+    }
 
-        else {
-            timeOverPopUp.setVisible(visible);
+    void setTimeOverPopUpVisible(boolean visible)
+    {
+        if (visible)
+        {
+            //failure sound will be added
         }
+        timeOverPopUp.setVisible(visible);
     }
 
     private void createEndOfLevelPanel() {

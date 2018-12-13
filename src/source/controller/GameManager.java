@@ -59,10 +59,16 @@ public class GameManager extends Controller
          PlayerManager.instance.incrementLastUnlockedLevelNo();
       }
 
+      if (bonus && PlayerManager.instance.getCurrentPlayer().getLevels().get(level - 1).getStars() == 0)
+      {
+         PlayerManager.instance.addShrinkPowerup(2);
+         PlayerManager.instance.addSpacePowerup(2);
+      }
+
       int starsCollected = calculateStars(level);
       System.out.println("Stars Collected: " + starsCollected);
       PlayerManager.instance.updateLevelAtTheEnd(level, starsCollected);
-      GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible(starsCollected, true);
+      GuiPanelManager.instance.getGamePanel().showEndOfLevelPopUp(starsCollected);
    }
 
    private void timeOver()
@@ -70,7 +76,7 @@ public class GameManager extends Controller
       System.out.println("Time Over!");
       isGameActive = false;
       PlayerManager.instance.updateLevelAtTheEnd(level, 0);
-      GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible(0, false);
+      GuiPanelManager.instance.getGamePanel().showTimeOverPopUp();
    }
 
    private int calculateStars(int _level)
