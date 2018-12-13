@@ -174,17 +174,15 @@ public class GamePanel extends JPanel
 
    }
 
-   public void setEndOfLevelPanelVisible(int starAmount)
-   {
-      innerGamePanel.setEndOfLevelPanelVisible(true, starAmount);
-   }
+    public void setEndOfLevelPanelVisible(int starAmount, boolean success) {
+        innerGamePanel.setEndOfLevelPanelVisible(true, starAmount, success);
+    }
 
-   public void setInnerGamePanelVisible()
-   {
-      System.out.println("Should have shown inner game panel");
-      innerGamePanel.setVisible(true);
-      innerGamePanel.setEndOfLevelPanelVisible(false, 0);
-   }
+    public void setInnerGamePanelVisible() {
+        System.out.println("Should have shown inner game panel");
+        innerGamePanel.setVisible(true);
+        innerGamePanel.setEndOfLevelPanelVisible(false, 0, false);
+    }
 
    private void createInnerGamePanel()
    {

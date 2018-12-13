@@ -1,9 +1,9 @@
 <Player>
 	<Name>
-		default
+		Zeynep
 	<Name/>
 	<StarAmount>
-		10
+		33
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -14,7 +14,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				4
+				0
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -33,10 +33,10 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
@@ -52,7 +52,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
+				0
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -68,26 +68,18 @@
 				4
 			<LevelNo/>
 			<Stars>
-				1
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				14
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO CL SS CR SS SS CU OO
-OO CD TL SS SS SS SS OO
-OO SS SS SS SS SS PC SS
-OO CL SS CU CU SS SS OO
-OO SS SS SS SS CU CU OO
-OO OO TL SS SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -95,35 +87,35 @@ OO OO OO OO OO OO OO OO
 				5
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS SS SS PC SSOO CU SS SS TD SS TU OOOO SS CR SS SS SS SS OOOO TR SS SS SS SS SS OOOO OO OO OO OO OO OO OOOO OO OO OO OO OO OO OOOO SS CL SS SS CR SS OOOO SS SS CU TL SS SS OOOO PC SS SS CU CU CU SSOO CD CL SS SS SS SS OOOO SS SS SS SS SS CU OOOO OO TL SS SS SS SS OOOO OO OO OO OO OO OO OO			<Map/>
+			<Map/>
 		<Level/>
 		<Level>
 			<LevelNo>
 				6
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -133,16 +125,16 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 				7
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -152,16 +144,16 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 				8
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -171,16 +163,16 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 				9
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -190,16 +182,16 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 				10
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -209,16 +201,16 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 				11
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -234,12 +226,20 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO CU TR SS SS OO SS OO
+OO SS CU SS CL SS SS OO
+OO TD SS PC SS CD SS SS
+OO SS CL SS CU SS SS OO
+OO SS SS SS SS CR SS OO
+OO SS OO SS SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -980,7 +980,7 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 				true
 			<MinimalisticUnlocked/>
 			<ClassicUnlocked>
-				false
+				true
 			<ClassicUnlocked/>
 			<SafariUnlocked>
 				false
@@ -994,6 +994,18 @@ OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS
 		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
+		-1
+	<RemainingSpacePowerups/>
+<Player/>
+aceUnlocked>
+				false
+			<SpaceUnlocked/>
+		<Theme/>
+	<Settings/>
+	<RemainingShrinkPowerups>
 		3
+	<RemainingShrinkPowerups/>
+	<RemainingSpacePowerups>
+		-1
 	<RemainingSpacePowerups/>
 <Player/>

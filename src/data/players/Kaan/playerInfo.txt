@@ -1,9 +1,9 @@
 <Player>
 	<Name>
-		default
+		Kaan
 	<Name/>
 	<StarAmount>
-		10
+		0
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,10 +11,10 @@
 				1
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				4
+				0
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -30,18 +30,26 @@
 				2
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TD CR SS SS SS SS OO
+OO SS SS SS TD SS SS OO
+OO SS PC SS SS SS SS SS
+OO CU SS SS SS SS TU OO
+OO SS CR SS SS SS SS OO
+OO SS SS TR SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -49,16 +57,16 @@
 				3
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -68,26 +76,18 @@
 				4
 			<LevelNo/>
 			<Stars>
-				1
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				14
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO CL SS CR SS SS CU OO
-OO CD TL SS SS SS SS OO
-OO SS SS SS SS SS PC SS
-OO CL SS CU CU SS SS OO
-OO SS SS SS SS CU CU OO
-OO OO TL SS SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -104,10 +104,10 @@ OO OO OO OO OO OO OO OO
 				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OOOO TD CR SS SS SS SS OOOO SS SS SS SS SS SS OOOO SS SS SS SS SS PC SSOO CU SS SS TD SS TU OOOO SS CR SS SS SS SS OOOO TR SS SS SS SS SS OOOO OO OO OO OO OO OO OOOO OO OO OO OO OO OO OOOO SS CL SS SS CR SS OOOO SS SS CU TL SS SS OOOO PC SS SS CU CU CU SSOO CD CL SS SS SS SS OOOO SS SS SS SS SS CU OOOO OO TL SS SS SS SS OOOO OO OO OO OO OO OO OO			<Map/>
+			<Map/>
 		<Level/>
 		<Level>
 			<LevelNo>
