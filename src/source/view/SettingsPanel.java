@@ -318,6 +318,7 @@ public class SettingsPanel extends JPanel
             GameEngine.instance.themeManager.changeTheme(themeName);
          }
       }
+      guiManager.updateImages();
       repaint();
    };
 

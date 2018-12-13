@@ -188,7 +188,7 @@ public class ThemeManager extends Controller
          //e.printStackTrace(); bunun commentini açmayın exception alması doğal halledicem burayı
       }
       SoundManager.instance.updateTheme();
-      GuiPanelManager.instance.updateImages();
+//      GuiPanelManager.instance.updateImages();
    }
 
    public void unlockTheme(String themeName)
