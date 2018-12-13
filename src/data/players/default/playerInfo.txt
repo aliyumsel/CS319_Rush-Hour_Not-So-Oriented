@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		9
+		12
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -33,34 +33,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
-			<CurrentNumberOfMoves>
-			<Status>
-				inProgress
-			<Status/>
-			<Unlocked>
-				true
-			<Unlocked/>
-			<Map>
-OO OO OO OO OO OO OO OO
-OO TD CR SS SS SS SS OO
-OO SS SS SS SS SS SS OO
-OO SS SS SS SS SS PC SS
-OO CU SS SS TD SS TU OO
-OO SS CR SS SS SS SS OO
-OO TR SS SS SS SS SS OO
-OO OO OO OO OO OO OO OO
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				3
-			<LevelNo/>
-			<Stars>
-				3
-			<Stars/>
-			<CurrentNumberOfMoves>
-				3
+				2
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -73,10 +46,10 @@ OO OO OO OO OO OO OO OO
 		<Level/>
 		<Level>
 			<LevelNo>
-				4
+				3
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
@@ -89,11 +62,38 @@ OO OO OO OO OO OO OO OO
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
+OO SS SS SS SS SS TU OO
+OO CL SS SS SS SS SS OO
+OO CU PC SS SS SS SS SS
+OO SS CU SS SS CR SS OO
+OO CU SS CL SS CR SS OO
+OO SS TR SS SS CR SS OO
+OO OO OO OO OO OO OO OO
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				4
+			<LevelNo/>
+			<Stars>
+				3
+			<Stars/>
+			<CurrentNumberOfMoves>
+				2
+			<CurrentNumberOfMoves>
+			<Status>
+				inProgress
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+OO OO OO OO OO OO OO OO
 OO SS CL SS SS CR SS OO
 OO SS SS CU TL SS SS OO
-OO PC SS SS CU CU CU SS
-OO CD CL SS SS SS SS OO
-OO SS SS SS SS SS CU OO
+OO PC SS SS SS SS CU SS
+OO CD CL SS CU SS SS OO
+OO SS SS SS SS CU CU OO
 OO OO TL SS SS SS SS OO
 OO OO OO OO OO OO OO OO
 			<Map/>
@@ -106,15 +106,23 @@ OO OO OO OO OO OO OO OO
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				4
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TR SS SS CD TU CU OO
+OO SS SS CU SS SS SS OO
+OO PC SS SS SS SS SS SS
+OO CL SS SS SS SS SS OO
+OO SS SS SS TR SS SS OO
+OO SS OO SS CR SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -1002,6 +1010,6 @@ OO OO OO OO OO OO OO OO
 		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
-		2
+		-18
 	<RemainingSpacePowerups/>
 <Player/>
