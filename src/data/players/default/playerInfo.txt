@@ -3,7 +3,7 @@
 		default
 	<Name/>
 	<StarAmount>
-		0
+		106
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -11,13 +11,13 @@
 				1
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				0
+				5
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				finished
 			<Status/>
 			<Unlocked>
 				true
@@ -30,18 +30,26 @@
 				2
 			<LevelNo/>
 			<Stars>
-				0
+				3
 			<Stars/>
 			<CurrentNumberOfMoves>
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TD CR SS SS SS SS OO
+OO SS SS SS TD SS SS OO
+OO SS PC SS SS SS SS SS
+OO CU SS SS SS SS TU OO
+OO SS CR SS SS SS SS OO
+OO SS SS TR SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -55,12 +63,20 @@
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				notStarted
+				inProgress
 			<Status/>
 			<Unlocked>
-				false
+				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO SS SS SS SS SS TU OO
+OO CL SS SS SS SS SS OO
+OO CU PC SS SS SS SS SS
+OO SS CU SS SS CR SS OO
+OO CU SS CL SS CR SS OO
+OO SS TR SS SS CR SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -966,7 +982,7 @@
 		<Sfx/>
 		<Theme>
 			<Active>
-				minimalistic
+				space
 			<Active>
 			<MinimalisticUnlocked>
 				true
@@ -975,10 +991,10 @@
 				false
 			<ClassicUnlocked/>
 			<SafariUnlocked>
-				false
+				true
 			<SafariUnlocked/>
 			<SpaceUnlocked>
-				false
+				true
 			<SpaceUnlocked/>
 		<Theme/>
 	<Settings/>
