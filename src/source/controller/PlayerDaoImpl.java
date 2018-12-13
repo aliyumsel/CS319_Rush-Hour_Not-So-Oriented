@@ -25,7 +25,7 @@ class PlayerDaoImpl implements PlayerDao {
     public ArrayList<Player> extractPlayers() {
         ArrayList<Player> players = new ArrayList<>();
 
-        Scanner playerInfo = null, levelInfo = null;
+        Scanner playerInfo, levelInfo;
         String playerName, tmp, status, mapLine, map = "", activeTheme;
         int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars, remainingShrinkPowerup, remainingSpacePowerup, time;
         ArrayList<LevelInformation> levels;
@@ -50,11 +50,8 @@ class PlayerDaoImpl implements PlayerDao {
 
         for (int i = 0; i < list.length; i++) {
             levels = new ArrayList<>();
-            try {
-                playerInfo = new Scanner(new File(list[i].getPath() + "/playerInfo.txt"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
+            playerInfo = createScanner(list[i].getPath() + "/PlayerInfo.txt");
 
             while (!playerInfo.nextLine().trim().equals("<Name>")) ;
             playerName = playerInfo.nextLine().trim();
@@ -63,7 +60,7 @@ class PlayerDaoImpl implements PlayerDao {
             tmp = playerInfo.nextLine().trim();
             starAmount = Integer.parseInt(tmp);
 
-            while (!playerInfo.nextLine().trim().equals("<Levels>")) ;
+            playerInfo = createScanner(list[i].getPath() + "/LevelsInfo.txt");
 
             while (!playerInfo.nextLine().trim().equals("<Levels/>")) {
                 bonus = false;
@@ -100,11 +97,7 @@ class PlayerDaoImpl implements PlayerDao {
                     }
                 }
 
-                try {
-                    levelInfo = new Scanner(new File("src/data/levels/level" + levelNo + ".txt"));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                levelInfo = createScanner("src/data/levels/level" + levelNo + ".txt");
 
                 if (levelInfo.nextLine().trim().equals("<IsBonusMap>"))
                 {
@@ -139,6 +132,7 @@ class PlayerDaoImpl implements PlayerDao {
                 while (!playerInfo.nextLine().trim().equals("<Level/>")) ;
             }
 
+            playerInfo = createScanner(list[i].getPath() + "/SettingsInfo.txt");
             while (!playerInfo.nextLine().trim().equals("<Music>")) ;
             tmp = playerInfo.nextLine().trim();
 
@@ -167,6 +161,8 @@ class PlayerDaoImpl implements PlayerDao {
 
             settings = new Settings(music, sfx, themes, activeTheme);
 
+            playerInfo = createScanner(list[i].getPath() + "/PowerUpInfo.txt");
+
             while (!playerInfo.nextLine().trim().equals("<RemainingShrinkPowerups>")) ;
             remainingShrinkPowerup = Integer.parseInt(playerInfo.nextLine().trim());
 
@@ -185,13 +181,7 @@ class PlayerDaoImpl implements PlayerDao {
 
     @Override
     public String extractLastPlayerName() {
-        Scanner info = null;
-
-        try {
-            info = new Scanner(new File("src/data/info.txt"));
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        }
+        Scanner info = createScanner("src/data/info.txt");
 
         while (!info.nextLine().trim().equals("<LastActivePlayer>")) ;
         return info.nextLine().trim();
@@ -199,18 +189,13 @@ class PlayerDaoImpl implements PlayerDao {
 
     @Override
     public Player cratePlayer(String playerName, Settings settings) {
-        Scanner scanInfo = null, levelInfo = null;
+        Scanner scanInfo, levelInfo;
         int playerAmount, mapAmount, movesForThreeStars, movesForTwoStars, time;
         String tmp, playerPath, playerInfo;
         ArrayList<LevelInformation> levels = new ArrayList<LevelInformation>();
         boolean unlocked, bonus;
 
-        try {
-            scanInfo = new Scanner(new File("src/data/info.txt"));
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+            scanInfo = createScanner("src/data/info.txt");
 
 			/*
 			while(!scanInfo.nextLine().equals("<NumberOfPlayers>"));
@@ -229,13 +214,14 @@ class PlayerDaoImpl implements PlayerDao {
         newFolder.mkdirs();
         newFolder.setWritable(true);
 
-        File newFile = new File(playerPath + "/playerInfo.txt");
-        try {
-            newFile.createNewFile();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        createFile(playerPath + "/PlayerInfo.txt");
+
+        createFile(playerPath + "/LevelsInfo.txt");
+
+        createFile(playerPath + "/SettingsInfo.txt");
+
+        createFile(playerPath + "/PowerUpInfo.txt");
+
 
         //fills the playerInfo file and LevelInformation
         playerInfo = "<Player>\n" +
@@ -245,16 +231,17 @@ class PlayerDaoImpl implements PlayerDao {
                 "\t<StarAmount>\n" +
                 "\t\t0\n" +
                 "\t<StarAmount/>\n" +
-                "\t<Levels>\n";
+                "<Player>\n";
+
+        writeFile(playerPath + "/PlayerInfo.txt", playerInfo);
+
+        playerInfo = "<Levels>\n";
 
         for (int i = 1; i <= mapAmount; i++) {
             bonus = false;
             time = 0;
-            try {
-                levelInfo = new Scanner(new File("src/data/levels/level" + i + ".txt"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
+            levelInfo = createScanner("src/data/levels/level" + i + ".txt");
 
             if (levelInfo.nextLine().trim().equals("<IsBonusMap>"))
             {
@@ -280,13 +267,8 @@ class PlayerDaoImpl implements PlayerDao {
 
 
             LevelInformation level;
-            if (i == 1) {
-                unlocked = true;
+            unlocked = i == 1;
 
-            } else {
-                unlocked = false;
-
-            }
             if (bonus)
             {
                 level = new BonusLevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, unlocked, "", time);            }
@@ -296,20 +278,25 @@ class PlayerDaoImpl implements PlayerDao {
             playerInfo = playerInfo + level.levelToString();
             levels.add(level);
         }
-        playerInfo = playerInfo +
-                "\t<Levels/>\n" +
-                "\t<Settings>\n" +
-                settings.settingsToString() +
-                "\t<Settings/>\n" +
-                "\t<RemainingShrinkPowerups>\n" +
-                "\t\t3\n" +
-                "\t<RemainingShrinkPowerups/>\n" +
-                "\t<RemainingSpacePowerups>\n" +
-                "\t\t3\n" +
-                "\t<RemainingSpacePowerups/>\n" +
-                "<Player/>\n";
+        playerInfo = playerInfo + "<Levels/>";
 
-        writeFile(playerPath + "/playerInfo.txt", playerInfo);
+        writeFile(playerPath + "/LevelsInfo.txt", playerInfo);
+
+        playerInfo = "<Settings>\n" +
+                settings.settingsToString() +
+                "<Settings/>";
+
+        writeFile(playerPath + "/SettingsInfo.txt", playerInfo);
+
+        playerInfo =
+                "<RemainingShrinkPowerups>\n" +
+                "\t3\n" +
+                "<RemainingShrinkPowerups/>\n" +
+                "<RemainingSpacePowerups>\n" +
+                "\t3\n" +
+                "<RemainingSpacePowerups/>";
+
+        writeFile(playerPath + "/PowerUpInfo.txt", playerInfo);
 
         scanInfo.close();
 
@@ -334,13 +321,9 @@ class PlayerDaoImpl implements PlayerDao {
     @Override
     public void saveLastActivePlayer(String playerName) {
         String text, line;
-        Scanner scanInfo = null;
+        Scanner scanInfo;
 
-        try {
-            scanInfo = new Scanner(new File("src/data/info.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        scanInfo = createScanner("src/data/info.txt");
 
         line = scanInfo.nextLine();
         text = line + "\n";
@@ -357,33 +340,18 @@ class PlayerDaoImpl implements PlayerDao {
             text = text + line + "\n";
         }
 
-        FileWriter fileOut = null;
-        try {
-            fileOut = new FileWriter("src/data/info.txt");
-            fileOut.write(text);
-            fileOut.flush();
-            fileOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        writeFile("src/data/info.txt", text);
 
     }
 
     @Override
     public void saveLevel(int levelNo, Player player) {
-        Scanner scan = null;
-        int totalStars = player.getStarAmount();
+        Scanner scan;
         LevelInformation levelToBeSaved = player.getLevels().get(levelNo - 1);
-        String status = levelToBeSaved.getStatus();
-        try {
-            scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
-        } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+
+        scan = createScanner(player.getPath() + "/LevelsInfo.txt");
 
         String line, text;
-        int no;
 
         String levelStr = levelToBeSaved.levelToString();
         int levelCounter = 0;
@@ -392,20 +360,6 @@ class PlayerDaoImpl implements PlayerDao {
         line = scan.nextLine();
         text = line + "\n";
 
-        if (status.equals("finished")) {
-            while (!line.trim().equals("<StarAmount>")) {
-                line = scan.nextLine();
-                text = text + line + "\n";
-            }
-            text = text + "\t\t" + totalStars + "\n";
-            line = scan.nextLine();
-        }
-        while (!line.trim().equals("<Levels>")) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-        //line = scan.nextLine();
-        //text = text + line + "\n";
         while (!line.trim().equals("<Levels/>")) {
             line = scan.nextLine();
             if (line.trim().equals("<Level>") && checkLevel) {
@@ -421,57 +375,24 @@ class PlayerDaoImpl implements PlayerDao {
                 text = text + line + "\n";
             }
         }
-        while (scan.hasNext()) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
 
-        writeFile(player.getPath() + "/playerInfo.txt", text);
+        writeFile(player.getPath() + "/LevelsInfo.txt", text);
 
     }
 
     @Override
     public void saveSettings(Player player) {
-        Scanner scan = null;
-        String line, text;
         Settings settings = player.getSettings();
 
-        try {
-            scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
-        } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        line = scan.nextLine();
-        text = line + "\n";
-
-        while (!line.trim().equals("<Settings>")) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-        text = text + settings.settingsToString();
-        while (!line.trim().equals("<Settings/>")) {
-            line = scan.nextLine();
-        }
-        text = text + line + "\n";
-
-        while (scan.hasNext()) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-        writeFile(player.getPath() + "/playerInfo.txt", text);
+        String text = "<Settings>\n" + settings.settingsToString() + "<Settings/>";
+        writeFile(player.getPath() + "/SettingsInfo.txt", text);
     }
 
     @Override
     public void saveRemainingPowerupAmount(String powerup, Player player) {
-        Scanner scan = null;
-        try {
-            scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
-        } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+        Scanner scan;
+
+        scan = createScanner(player.getPath() + "/PowerUpInfo.txt");
 
         String powerupTag;
         int newAmount;
@@ -494,14 +415,39 @@ class PlayerDaoImpl implements PlayerDao {
         }
 
         scan.nextLine();
-        text = text + "\t\t" + newAmount + "\n";
+        text = text + "\t" + newAmount + "\n";
 
         while (scan.hasNext()) {
             line = scan.nextLine();
             text = text + line + "\n";
         }
-        writeFile(player.getPath() + "/playerInfo.txt", text);
+        writeFile(player.getPath() + "/PowerUpInfo.txt", text);
 
+    }
+
+    @Override
+    public void saveTotalStarAmount(Player player) {
+        String line, text;
+
+        Scanner scan = createScanner(player.getPath() + "/PlayerInfo.txt");
+
+        line = scan.nextLine();
+        text = line + "\n";
+
+        while (!line.trim().equals("<StarAmount>"))
+        {
+            line = scan.nextLine();
+            text = text + line + "\n";
+        }
+
+        scan.nextLine();
+        text = text + "\t\t" + player.getStarAmount() + "\n";
+
+        while (scan.hasNext()) {
+            line = scan.nextLine();
+            text = text + line + "\n";
+        }
+        writeFile(player.getPath() + "/PlayerInfo.txt", text);
     }
 
     private void writeFile(String path, String text) {
@@ -514,6 +460,28 @@ class PlayerDaoImpl implements PlayerDao {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+    }
+
+    private void createFile(String path)
+    {
+        File newFile = new File(path);
+        try {
+            newFile.createNewFile();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private Scanner createScanner(String path)
+    {
+
+        try {
+            return new Scanner(new File(path));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

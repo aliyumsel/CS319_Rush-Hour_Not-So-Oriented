@@ -10,8 +10,8 @@ public class GameManager extends Controller
    public PlayerManager playerManager;
 
    public int level;
-   public int time;
-   private boolean bonus;
+   public int remainingTime;
+   private boolean isLevelBonus;
 
    boolean isGameActive = false;
 
@@ -19,16 +19,16 @@ public class GameManager extends Controller
    {
       playerManager = PlayerManager.instance;
       instance = this;
-      time = 0;
-      bonus = false;
+      remainingTime = 0;
+      isLevelBonus = false;
    }
 
    public void update()
    {
-      if ( bonus & isGameActive)
+      if ( isLevelBonus & isGameActive)
       {
-         time--;
-         if (time <= 0) {
+         remainingTime--;
+         if (remainingTime <= 0) {
             timeOver();
          }
       }
@@ -59,7 +59,7 @@ public class GameManager extends Controller
          PlayerManager.instance.incrementLastUnlockedLevelNo();
       }
 
-      if (bonus && PlayerManager.instance.getCurrentPlayer().getLevels().get(level - 1).getStars() == 0)
+      if (isLevelBonus && PlayerManager.instance.getCurrentPlayer().getLevels().get(level - 1).getStars() == 0)
       {
          PlayerManager.instance.addShrinkPowerup(2);
          PlayerManager.instance.addSpacePowerup(2);
@@ -108,13 +108,13 @@ public class GameManager extends Controller
       System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
       level = _level;
       LevelInformation levelToBeLoaded = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
-      bonus = false;
+      isLevelBonus = false;
 
       if ( levelToBeLoaded instanceof BonusLevelInformation )
       {
          System.out.println("Bonus Map");
-         bonus = true;
-         time = ( (BonusLevelInformation) levelToBeLoaded ).getTime() * 60;
+         isLevelBonus = true;
+         remainingTime = ( (BonusLevelInformation) levelToBeLoaded ).getTime() * 60;
          MapController.instance.loadOriginalLevel(_level);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);

@@ -1,0 +1,8 @@
+<Player>
+	<Name>
+		Kaan
+	<Name/>
+	<StarAmount>
+		0
+	<StarAmount/>
+<Player>

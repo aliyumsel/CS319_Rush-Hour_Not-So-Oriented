@@ -182,6 +182,7 @@ public class PlayerManager extends Controller
       {
          currentPlayer.setStarAmount(currentPlayer.getStarAmount() + ( starAmount - currentLevel.getStars() ));
          currentLevel.setStars(starAmount);
+         playerDao.saveTotalStarAmount(currentPlayer);
       }
       playerDao.saveLevel(levelNo, currentPlayer);
       //playerDao.saveStarAmount(currentPlayer); will be added

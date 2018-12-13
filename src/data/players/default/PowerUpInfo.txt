@@ -1,0 +1,6 @@
+<RemainingShrinkPowerups>
+	4
+<RemainingShrinkPowerups/>
+<RemainingSpacePowerups>
+	4
+<RemainingSpacePowerups/>
