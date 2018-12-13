@@ -43,6 +43,7 @@ public class PowerUpManager extends Controller
 
                   MapController.instance.updateMap();
                   shrinkActive = false;
+                  //this decrement method will be put inside the game manager
                   GameEngine.instance.playerManager.decrementRemainingShrinkPowerup();
                }
             }
@@ -59,6 +60,7 @@ public class PowerUpManager extends Controller
                MapController.instance.removeGameObject(temp);
                MapController.instance.updateMap();
                spaceActive = false;
+               //this decrement method will be put inside the game manager
                GameEngine.instance.playerManager.decrementRemainingSpacePowerup();
             }
          }

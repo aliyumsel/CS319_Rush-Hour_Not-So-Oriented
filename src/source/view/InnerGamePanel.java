@@ -17,6 +17,7 @@ public class InnerGamePanel extends JPanel
 {
 	private GuiPanelManager guiManager;
    public EndOfLevelPanel endOfLevelPanel;
+   public TimeOverPopUp timeOverPopUp;
    private Map map;
 
     InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
@@ -25,6 +26,7 @@ public class InnerGamePanel extends JPanel
         setPreferredSize(new Dimension(480, 480));
 
         createEndOfLevelPanel();
+        createTimeOverPopUp();
         setOpaque(false);
         setVisible(true);
     }
@@ -49,14 +51,20 @@ public class InnerGamePanel extends JPanel
         }
     }
 
-    void setEndOfLevelPanelVisible(boolean visible, int starAmount) {
+    void setEndOfLevelPanelVisible(boolean visible, int starAmount, boolean success) {
 
         if (visible)
         {
             GameEngine.instance.soundManager.successSound();
         }
-        endOfLevelPanel.showStars(starAmount);
-        endOfLevelPanel.setVisible(visible);
+        if (success) {
+            endOfLevelPanel.showStars(starAmount);
+            endOfLevelPanel.setVisible(visible);
+        }
+
+        else {
+            timeOverPopUp.setVisible(visible);
+        }
     }
 
     private void createEndOfLevelPanel() {
@@ -67,5 +75,15 @@ public class InnerGamePanel extends JPanel
 
         Dimension size = endOfLevelPanel.getPreferredSize();
         endOfLevelPanel.setBounds(25, 100, size.width, size.height);
+    }
+
+    private void createTimeOverPopUp()
+    {
+        timeOverPopUp = new TimeOverPopUp(guiManager);
+        add(timeOverPopUp);
+        timeOverPopUp.setVisible(false);
+
+        Dimension size = timeOverPopUp.getPreferredSize();
+        timeOverPopUp.setBounds(25, 100, size.width, size.height);
     }
 }

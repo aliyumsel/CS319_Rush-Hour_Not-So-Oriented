@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -196,9 +200,10 @@ class PlayerDaoImpl implements PlayerDao {
     @Override
     public Player cratePlayer(String playerName, Settings settings) {
         Scanner scanInfo = null, levelInfo = null;
-        int playerAmount, mapAmount, movesForThreeStars, movesForTwoStars;
+        int playerAmount, mapAmount, movesForThreeStars, movesForTwoStars, time;
         String tmp, playerPath, playerInfo;
         ArrayList<LevelInformation> levels = new ArrayList<LevelInformation>();
+        boolean unlocked, bonus;
 
         try {
             scanInfo = new Scanner(new File("src/data/info.txt"));
@@ -222,6 +227,7 @@ class PlayerDaoImpl implements PlayerDao {
         //creates player folder
         File newFolder = new File(playerPath);
         newFolder.mkdirs();
+        newFolder.setWritable(true);
 
         File newFile = new File(playerPath + "/playerInfo.txt");
         try {
@@ -242,31 +248,52 @@ class PlayerDaoImpl implements PlayerDao {
                 "\t<Levels>\n";
 
         for (int i = 1; i <= mapAmount; i++) {
+            bonus = false;
+            time = 0;
             try {
                 levelInfo = new Scanner(new File("src/data/levels/level" + i + ".txt"));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
-            while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
-            tmp = levelInfo.nextLine().trim();
-            movesForThreeStars = Integer.parseInt(tmp);
+            if (levelInfo.nextLine().trim().equals("<IsBonusMap>"))
+            {
+                time = Integer.parseInt(levelInfo.nextLine().trim());
+                bonus = true;
+            }
+            if (bonus) {
+                while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
+                tmp = levelInfo.nextLine().trim();
+                movesForThreeStars = Integer.parseInt(tmp);
+            }
+            else
+            {
+                tmp = levelInfo.nextLine().trim();
+                movesForThreeStars = Integer.parseInt(tmp);
+            }
 
             while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>")) ;
             tmp = levelInfo.nextLine().trim();
             movesForTwoStars = Integer.parseInt(tmp);
 
             levelInfo.close();
+
+
             LevelInformation level;
             if (i == 1) {
-                level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, true, "");
-                playerInfo = playerInfo + level.levelToString();
+                unlocked = true;
 
             } else {
-                level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, false, "");
-                playerInfo = playerInfo + level.levelToString();
+                unlocked = false;
 
             }
+            if (bonus)
+            {
+                level = new BonusLevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, unlocked, "", time);            }
+            else {
+                level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, unlocked, "");
+            }
+            playerInfo = playerInfo + level.levelToString();
             levels.add(level);
         }
         playerInfo = playerInfo +
@@ -478,8 +505,6 @@ class PlayerDaoImpl implements PlayerDao {
     }
 
     private void writeFile(String path, String text) {
-        File file = new File(path);
-        file.setWritable(true);
         FileWriter fileOut = null;
         try {
             fileOut = new FileWriter(path);
@@ -490,7 +515,6 @@ class PlayerDaoImpl implements PlayerDao {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //file.setReadOnly();
     }
 
 }

@@ -249,7 +249,7 @@ public class LevelSelectionPanel extends JPanel
             if ( e.getSource() == buttonArray[index] )
             {
                System.out.println("Destinationlevel: " + index + 1);
-               GameEngine.instance.gameManager.loadLevel(index + 1);
+               GameEngine.instance.gameManager.loadLevel(index + 1, false);
                guiManager.setPanelVisible("Game");
                break;
             }

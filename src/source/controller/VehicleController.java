@@ -304,27 +304,33 @@ public class VehicleController extends Controller {
         numberOfMoves = _moves;
     }
 
-    void checkExitPath() {
-        Vehicle player = MapController.instance.getPlayerVehicle();
-        boolean temp = true;
-        for (int i = 0; i < (map.getMapSize() - player.transform.position.gridX) - 2; i++) {
-            if (!(map.getGrid()[((int) player.transform.position.gridY)][(int) player.transform.position.gridX + i + 2].equals("Space"))) {
-                temp = false;
-            }
-        }
-        isExitReachable = temp;
-        System.out.println(isExitReachable);
-    }
-
-    private double clamp(double value, int min, int max) {
-        double difference;
-        if (value / (double) 60 > max) {
-            difference = max;
-        } else if (value / (double) 60 < min) {
-            difference = min;
-        } else {
-            difference = value / (double) 60;
-        }
-        return difference;
-    }
+   void checkExitPath(){
+      Vehicle player = MapController.instance.getPlayerVehicle();
+      boolean temp = true;
+      for(int i = 0; i < (map.getMapSize()-player.transform.position.gridX)-2 ;i++)
+      {
+         if(!(map.getGrid()[( (int) player.transform.position.gridY)][(int) player.transform.position.gridX+i+2].equals("Space"))) {
+            temp = false;
+         }
+      }
+      isExitReachable = temp;
+      //System.out.println(isExitReachable);
+   }
+   private double clamp(double value, int min, int max)
+   {
+      double difference;
+      if ( value / (double) 60 > max )
+      {
+         difference = max;
+      }
+      else if ( value / (double) 60 < min )
+      {
+         difference = min;
+      }
+      else
+      {
+         difference = value / (double) 60;
+      }
+      return difference;
+   }
 }
