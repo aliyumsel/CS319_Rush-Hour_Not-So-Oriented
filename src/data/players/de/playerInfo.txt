@@ -1,9 +1,9 @@
 <Player>
 	<Name>
-		default
+		de
 	<Name/>
 	<StarAmount>
-		14
+		9
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -14,7 +14,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				5
+				4
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -33,7 +33,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				2
+				3
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -68,10 +68,10 @@
 				4
 			<LevelNo/>
 			<Stars>
-				2
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				2
+				1
 			<CurrentNumberOfMoves>
 			<Status>
 				inProgress
@@ -83,10 +83,10 @@
 OO OO OO OO OO OO OO OO
 OO SS CL SS SS CR SS OO
 OO SS SS CU TL SS SS OO
-OO PC SS SS SS SS CU SS
-OO CD CL SS CU SS SS OO
-OO SS SS SS SS CU CU OO
-OO OO TL SS SS SS SS OO
+OO PC SS SS CU CU CU SS
+OO CD CL SS SS SS SS OO
+OO SS SS SS SS SS CU OO
+OO OO SS SS SS SS SS OO
 OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
@@ -95,16 +95,16 @@ OO OO OO OO OO OO OO OO
 				5
 			<LevelNo/>
 			<Stars>
-				3
+				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				11
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -120,20 +120,12 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-				inProgress
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO CD TR SS SS CR SS OO
-OO SS CD CR SS SS TD OO
-OO TU SS PC SS SS SS SS
-OO SS SS SS CU SS SS OO
-OO SS SS CD SS CR SS OO
-OO CR SS SS SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -999,7 +991,7 @@ OO OO OO OO OO OO OO OO
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>
-		2
+		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
 		3

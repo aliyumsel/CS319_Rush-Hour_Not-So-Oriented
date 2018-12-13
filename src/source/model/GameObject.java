@@ -22,7 +22,7 @@ public class GameObject implements Drawable
       findOccupiedCells();
    }
 
-   void findOccupiedCells()
+   public void findOccupiedCells()
    {
       occupiedCellNumbers = new int[transform.length];
       occupiedCellNumbers[0] = transform.position.gridY * 8 + transform.position.gridX;

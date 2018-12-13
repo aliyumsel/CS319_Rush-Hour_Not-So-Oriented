@@ -13,6 +13,9 @@ public class VehicleController extends Controller {
     private int numberOfMoves;
     private boolean changed = false;
     Boolean isExitReachable = false;
+    private double moveAmount;
+    private int counter = 0;
+    boolean moved = false;
 
     private enum CONTROL {
         SLIDE, KEYBOARD, CPU
@@ -34,6 +37,7 @@ public class VehicleController extends Controller {
         mouseOriginPosition = new int[2];
         vehicleOriginPosition = new double[2];
         oldPos = new int[2];
+        moveAmount = 0;
     }
 
     public void setMap(Map _map) {
@@ -177,22 +181,34 @@ public class VehicleController extends Controller {
         }
 
         if (selectedVehicle != null) {
-            boolean moved = false;
+
             if (Input.getKeyPressed("w")) {
                 moved = tryMove("Upwards");
+                moveAmount = 0.1;
             } else if (Input.getKeyPressed("a")) {
                 moved = tryMove("Left");
+                moveAmount = -0.1;
             } else if (Input.getKeyPressed("s")) {
                 moved = tryMove("Downwards");
+                moveAmount = -0.1;
             } else if (Input.getKeyPressed("d")) {
                 moved = tryMove("Right");
+                moveAmount = 0.1;
             }
 
             if (moved) {
                 System.out.println("Moved");
-                MapController.instance.updateMap(map.getGameObjects());
-                changed = true;
-
+                if (counter < 10) {
+                    System.out.println(counter);
+                    selectedVehicle.move(moveAmount);
+                    counter++;
+                }
+                else {
+                    counter = 0;
+                    MapController.instance.updateMap(map.getGameObjects());
+                    changed = true;
+                    moved = false;
+                }
                 if (MapController.instance.isPlayerAtExit()) {
                     GameManager.instance.endMap();
                     selectedVehicle = null;
@@ -264,8 +280,8 @@ public class VehicleController extends Controller {
                 return false;
             }
 
-            if (map.getGrid()[(int) selectedVehicle.transform.position.y][(int) selectedVehicle.transform.position.x + moveCheck].equals("Space")) {
-                selectedVehicle.move(moveAmount);
+            if (map.getGrid()[selectedVehicle.transform.position.gridY][ selectedVehicle.transform.position.gridX + moveCheck].equals("Space")) {
+                //selectedVehicle.move(moveAmount);
                 selectedVehicle.isMoving = true;
                 return true;
             }
@@ -282,8 +298,8 @@ public class VehicleController extends Controller {
                 return false;
             }
 
-            if (map.getGrid()[((int) selectedVehicle.transform.position.y) + moveCheck][(int) selectedVehicle.transform.position.x].equals("Space")) {
-                selectedVehicle.move(moveAmount);
+            if (map.getGrid()[( selectedVehicle.transform.position.gridY) + moveCheck][selectedVehicle.transform.position.gridX].equals("Space")) {
+                //selectedVehicle.move(moveAmount);
                 selectedVehicle.isMoving = true;
                 return true;
             }

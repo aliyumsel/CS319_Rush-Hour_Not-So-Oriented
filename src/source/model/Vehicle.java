@@ -37,16 +37,16 @@ public class Vehicle extends GameObject// implements Drawable
       if ( transform.axis.equals("Vertical") )
       {
          transform.position.y -= moveAxis;
-         transform.position.gridY = (int) (transform.position.y / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
+         transform.position.gridY = (int) ((transform.position.y +0.5) / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
          verticalMoveAxis = moveAxis; // if move axis == -1 vehicle goes downwards
       }
       else if ( transform.axis.equals("Horizontal") )
       {
          transform.position.x += moveAxis;
-         transform.position.gridX = (int) (transform.position.x / 1);
+         transform.position.gridX = (int) ((transform.position.x +0.5) / 1);
          horizontalMoveAxis = moveAxis; // if move axis == -1 vehicle goes left
       }
-      System.out.println("Keyboard");
+      System.out.println(transform.position.gridX + " , " + transform.position.gridY);
       findOccupiedCells();
    }
 
