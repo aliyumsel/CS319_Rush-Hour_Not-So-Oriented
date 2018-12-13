@@ -28,7 +28,7 @@ class MapDaoImpl implements MapDao
          //System.out.println("Inside inprogress if");
          try
          {
-            scanLevel = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
+            scanLevel = new Scanner(new File(player.getPath() + "/LevelsInfo.txt"));
          } catch (FileNotFoundException e)
          {
             e.printStackTrace();

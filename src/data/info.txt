@@ -2,10 +2,7 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-	default
-	default
-=======
-	aa
+	Kaan
 
 >>>>>>> unstable
 <LastActivePlayer/>

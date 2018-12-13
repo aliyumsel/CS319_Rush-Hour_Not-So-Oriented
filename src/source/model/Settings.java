@@ -70,29 +70,29 @@ public class Settings {
    }
 
    public String settingsToString() {
-      return "\t\t<Music>\n" +
-              "\t\t\t" + music + "\n" +
-              "\t\t<Music/>\n" +
-              "\t\t<Sfx>\n" +
-              "\t\t\t" + sfx + "\n" +
-              "\t\t<Sfx/>\n" +
-              "\t\t<Theme>\n" +
-              "\t\t\t<Active>\n" +
-              "\t\t\t\t" + activeTheme + "\n" +
-              "\t\t\t<Active>\n" +
-              "\t\t\t<MinimalisticUnlocked>\n" +
-              "\t\t\t\t" + themes.get("minimalistic") + "\n" +
-              "\t\t\t<MinimalisticUnlocked/>\n" +
-              "\t\t\t<ClassicUnlocked>\n" +
-              "\t\t\t\t" + themes.get("classic") + "\n" +
-              "\t\t\t<ClassicUnlocked/>\n" +
-              "\t\t\t<SafariUnlocked>\n" +
-              "\t\t\t\t" + themes.get("safari") + "\n" +
-              "\t\t\t<SafariUnlocked/>\n" +
-              "\t\t\t<SpaceUnlocked>\n" +
-              "\t\t\t\t" + themes.get("space") + "\n" +
-              "\t\t\t<SpaceUnlocked/>\n" +
-              "\t\t<Theme/>\n";
+      return "\t<Music>\n" +
+              "\t\t" + music + "\n" +
+              "\t<Music/>\n" +
+              "\t<Sfx>\n" +
+              "\t\t" + sfx + "\n" +
+              "\t<Sfx/>\n" +
+              "\t<Theme>\n" +
+              "\t\t<Active>\n" +
+              "\t\t\t" + activeTheme + "\n" +
+              "\t\t<Active>\n" +
+              "\t\t<MinimalisticUnlocked>\n" +
+              "\t\t\t" + themes.get("minimalistic") + "\n" +
+              "\t\t<MinimalisticUnlocked/>\n" +
+              "\t\t<ClassicUnlocked>\n" +
+              "\t\t\t" + themes.get("classic") + "\n" +
+              "\t\t<ClassicUnlocked/>\n" +
+              "\t\t<SafariUnlocked>\n" +
+              "\t\t\t" + themes.get("safari") + "\n" +
+              "\t\t<SafariUnlocked/>\n" +
+              "\t\t<SpaceUnlocked>\n" +
+              "\t\t\t" + themes.get("space") + "\n" +
+              "\t\t<SpaceUnlocked/>\n" +
+              "\t<Theme/>\n";
 
    }
 }

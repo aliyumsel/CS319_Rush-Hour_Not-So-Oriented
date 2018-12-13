@@ -1,8 +1,8 @@
 <Player>
 	<Name>
-		Kaan
+		default
 	<Name/>
 	<StarAmount>
-		0
+		3
 	<StarAmount/>
 <Player>

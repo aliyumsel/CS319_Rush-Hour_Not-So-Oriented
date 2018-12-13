@@ -23,4 +23,6 @@ public interface PlayerDao {
 	void saveSettings(Player player);
 	
 	void saveRemainingPowerupAmount(String powerup, Player player);
+
+	void saveTotalStarAmount(Player player);
 }

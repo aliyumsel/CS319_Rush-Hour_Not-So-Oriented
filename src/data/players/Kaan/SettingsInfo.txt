@@ -1,0 +1,25 @@
+<Settings>
+	<Music>
+		true
+	<Music/>
+	<Sfx>
+		false
+	<Sfx/>
+	<Theme>
+		<Active>
+			minimalistic
+		<Active>
+		<MinimalisticUnlocked>
+			true
+		<MinimalisticUnlocked/>
+		<ClassicUnlocked>
+			false
+		<ClassicUnlocked/>
+		<SafariUnlocked>
+			false
+		<SafariUnlocked/>
+		<SpaceUnlocked>
+			false
+		<SpaceUnlocked/>
+	<Theme/>
+<Settings/>
