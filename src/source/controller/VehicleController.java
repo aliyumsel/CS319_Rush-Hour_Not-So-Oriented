@@ -199,14 +199,10 @@ public class VehicleController extends Controller
 //                    currentControl = CONTROL.CPU; //cpu yu silmeyin, slide da da kullanılmak istenirse burası işe yarıyo çok
 //                    selectedVehicle = MapController.instance.getPlayerVehicle(); //otomatik gitsin istenirse sadece bu satır kalıcak if ve cpu gidicek
 //                }
-                System.out.println("inside");
-                if (!MapController.instance.isPlayerAtExit() && selectedVehicle == MapController.instance.getPlayerVehicle()) {
-                    selectedVehicle.move(0.1);
-                } else if (MapController.instance.isPlayerAtExit()) {
-                    GameManager.instance.endMap();
-                    selectedVehicle = null;
-                    currentControl = temp;
-                }
+            System.out.println("inside");
+            if ( !MapController.instance.isPlayerAtExit() && selectedVehicle == MapController.instance.getPlayerVehicle() )
+            {
+               selectedVehicle.move(0.1);
             }
             else if ( MapController.instance.isPlayerAtExit() )
             {
@@ -215,38 +211,38 @@ public class VehicleController extends Controller
                currentControl = temp;
             }
          }
+      }
 
-         if ( selectedVehicle != null )
+      if ( selectedVehicle != null )
+      {
+         boolean moved = false;
+         if ( Input.getKeyPressed("w") )
          {
-            boolean moved = false;
-            if ( Input.getKeyPressed("w") )
-            {
-               moved = tryMove("Upwards");
-            }
-            else if ( Input.getKeyPressed("a") )
-            {
-               moved = tryMove("Left");
-            }
-            else if ( Input.getKeyPressed("s") )
-            {
-               moved = tryMove("Downwards");
-            }
-            else if ( Input.getKeyPressed("d") )
-            {
-               moved = tryMove("Right");
-            }
+            moved = tryMove("Upwards");
+         }
+         else if ( Input.getKeyPressed("a") )
+         {
+            moved = tryMove("Left");
+         }
+         else if ( Input.getKeyPressed("s") )
+         {
+            moved = tryMove("Downwards");
+         }
+         else if ( Input.getKeyPressed("d") )
+         {
+            moved = tryMove("Right");
+         }
 
-            if ( moved )
-            {
-               System.out.println("Moved");
-               MapController.instance.updateMap(map.getGameObjects());
-               changed = true;
+         if ( moved )
+         {
+            System.out.println("Moved");
+            MapController.instance.updateMap(map.getGameObjects());
+            changed = true;
 
-               if ( MapController.instance.isPlayerAtExit() )
-               {
-                  GameManager.instance.endMap();
-                  selectedVehicle = null;
-               }
+            if ( MapController.instance.isPlayerAtExit() )
+            {
+               GameManager.instance.endMap();
+               selectedVehicle = null;
             }
          }
       }

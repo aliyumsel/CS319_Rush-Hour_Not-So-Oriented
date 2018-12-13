@@ -1,13 +1,9 @@
 <Player>
 	<Name>
-		aa
+		default
 	<Name/>
 	<StarAmount>
-<<<<<<< HEAD:src/data/players/default/playerInfo.txt
-		132
-=======
-		9
->>>>>>> unstable:src/data/players/aa/playerInfo.txt
+		0
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -15,58 +11,54 @@
 				1
 			<LevelNo/>
 			<Stars>
-				3
-			<Stars/>
-			<CurrentNumberOfMoves>
-				5
-			<CurrentNumberOfMoves>
-			<Status>
-				finished
-			<Status/>
-			<Unlocked>
-				true
-			<Unlocked/>
-			<Map>
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				2
-			<LevelNo/>
-			<Stars>
-				3
-			<Stars/>
-			<CurrentNumberOfMoves>
-				2
-			<CurrentNumberOfMoves>
-			<Status>
-				finished
-			<Status/>
-			<Unlocked>
-				true
-			<Unlocked/>
-			<Map>
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				3
-			<LevelNo/>
-			<Stars>
-				3
-			<Stars/>
-			<CurrentNumberOfMoves>
-<<<<<<< HEAD:src/data/players/default/playerInfo.txt
-				12
-=======
 				0
->>>>>>> unstable:src/data/players/aa/playerInfo.txt
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
 				true
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				2
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Unlocked>
+				false
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				3
+			<LevelNo/>
+			<Stars>
+				0
+			<Stars/>
+			<CurrentNumberOfMoves>
+				0
+			<CurrentNumberOfMoves>
+			<Status>
+				notStarted
+			<Status/>
+			<Unlocked>
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -79,13 +71,13 @@
 				0
 			<Stars/>
 			<CurrentNumberOfMoves>
-				12
+				0
 			<CurrentNumberOfMoves>
 			<Status>
-				finished
+				notStarted
 			<Status/>
 			<Unlocked>
-				true
+				false
 			<Unlocked/>
 			<Map>
 			<Map/>
@@ -101,24 +93,12 @@
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-<<<<<<< HEAD:src/data/players/default/playerInfo.txt
-				inProgress
-=======
 				notStarted
->>>>>>> unstable:src/data/players/aa/playerInfo.txt
 			<Status/>
 			<Unlocked>
 				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO TR SS SS SS TU CU OO
-OO SS SS SS SS SS SS OO
-OO SS PC SS CD SS SS SS
-OO SS SS CU SS CL SS OO
-OO SS SS SS TR SS SS OO
-OO SS OO SS CR SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -132,24 +112,12 @@ OO OO OO OO OO OO OO OO
 				0
 			<CurrentNumberOfMoves>
 			<Status>
-<<<<<<< HEAD:src/data/players/default/playerInfo.txt
-				inProgress
-=======
 				notStarted
->>>>>>> unstable:src/data/players/aa/playerInfo.txt
 			<Status/>
 			<Unlocked>
 				false
 			<Unlocked/>
 			<Map>
-OO OO OO OO OO OO OO OO
-OO CD TR SS SS CR SS OO
-OO SS CD CR SS SS TD OO
-OO TU SS PC SS SS SS SS
-OO SS SS SS CU SS SS OO
-OO SS SS CD SS CR SS OO
-OO CR SS SS SS SS SS OO
-OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -1015,16 +983,9 @@ OO OO OO OO OO OO OO OO
 		<Theme/>
 	<Settings/>
 	<RemainingShrinkPowerups>
-<<<<<<< HEAD:src/data/players/default/playerInfo.txt
 		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
-		1
-=======
-		0
-	<RemainingShrinkPowerups/>
-	<RemainingSpacePowerups>
-		2
->>>>>>> unstable:src/data/players/aa/playerInfo.txt
+		3
 	<RemainingSpacePowerups/>
 <Player/>
