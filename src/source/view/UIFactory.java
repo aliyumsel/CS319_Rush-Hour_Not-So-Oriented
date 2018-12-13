@@ -98,18 +98,6 @@ class UIFactory
       button.setFocusable(false);
    }
 
-   static void disableButton(JButton button, BufferedImage highlightedImage)
-   {
-      button.setIcon(new ImageIcon(highlightedImage));
-      button.setEnabled(false);
-   }
-
-   static void enableButton(JButton button, BufferedImage normalImage)
-   {
-      button.setIcon(new ImageIcon(normalImage));
-      button.setEnabled(true);
-   }
-
    private static void setupLabelIcon(JLabel label, BufferedImage image, String labelType)
    {
       if ( labelType.equals("long") )
