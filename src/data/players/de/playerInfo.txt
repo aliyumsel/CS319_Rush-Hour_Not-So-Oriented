@@ -3,7 +3,15 @@
 		de
 	<Name/>
 	<StarAmount>
+<<<<<<< HEAD:src/data/players/de/playerInfo.txt
 		17
+=======
+<<<<<<< HEAD
+		106
+=======
+		14
+>>>>>>> unstable
+>>>>>>> unstable:src/data/players/default/playerInfo.txt
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -36,12 +44,24 @@
 				2
 			<CurrentNumberOfMoves>
 			<Status>
+<<<<<<< HEAD
+				inProgress
+=======
 				finished
+>>>>>>> unstable
 			<Status/>
 			<Unlocked>
 				true
 			<Unlocked/>
 			<Map>
+OO OO OO OO OO OO OO OO
+OO TD CR SS SS SS SS OO
+OO SS SS SS TD SS SS OO
+OO SS PC SS SS SS SS SS
+OO CU SS SS SS SS TU OO
+OO SS CR SS SS SS SS OO
+OO SS SS TR SS SS SS OO
+OO OO OO OO OO OO OO OO
 			<Map/>
 		<Level/>
 		<Level>
@@ -55,7 +75,15 @@
 				0
 			<CurrentNumberOfMoves>
 			<Status>
+<<<<<<< HEAD:src/data/players/de/playerInfo.txt
 				inProgress
+=======
+<<<<<<< HEAD
+				inProgress
+=======
+				finished
+>>>>>>> unstable
+>>>>>>> unstable:src/data/players/default/playerInfo.txt
 			<Status/>
 			<Unlocked>
 				true
@@ -982,7 +1010,7 @@ OO OO OO OO OO OO OO OO
 		<Sfx/>
 		<Theme>
 			<Active>
-				minimalistic
+				space
 			<Active>
 			<MinimalisticUnlocked>
 				true
@@ -991,10 +1019,10 @@ OO OO OO OO OO OO OO OO
 				false
 			<ClassicUnlocked/>
 			<SafariUnlocked>
-				false
+				true
 			<SafariUnlocked/>
 			<SpaceUnlocked>
-				false
+				true
 			<SpaceUnlocked/>
 		<Theme/>
 	<Settings/>
