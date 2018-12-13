@@ -1,5 +1,6 @@
 package source.model;
 
+import source.controller.MapController;
 import source.controller.ThemeManager;
 
 import java.awt.*;
@@ -12,9 +13,10 @@ public class Vehicle extends GameObject// implements Drawable
    public boolean isMoving; // we may not need this
    //   public boolean isHighlighted; //bunu highlight olayi icin kullanmamiz gerekebilir
    private boolean player;
-   private int verticalMoveAxis;
-   private int horizontalMoveAxis;
+   private double verticalMoveAxis;
+   private double horizontalMoveAxis;
    private int drawingIndexForMoving;
+   public  int gridPixelSize = 60;
    private boolean special = false;
    private BufferedImage image;
 
@@ -30,20 +32,21 @@ public class Vehicle extends GameObject// implements Drawable
       updateImages();
    }
 
-   public void move(int moveAxis)
+   public void move(double moveAxis)
    {
       if ( transform.axis.equals("Vertical") )
       {
          transform.position.y -= moveAxis;
-         transform.position.gridY -= moveAxis;
+         transform.position.gridY = (int) (transform.position.y / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
          verticalMoveAxis = moveAxis; // if move axis == -1 vehicle goes downwards
       }
       else if ( transform.axis.equals("Horizontal") )
       {
          transform.position.x += moveAxis;
-         transform.position.gridX += moveAxis;
+         transform.position.gridX = (int) (transform.position.x / 1);
          horizontalMoveAxis = moveAxis; // if move axis == -1 vehicle goes left
       }
+      System.out.println("Keyboard");
       findOccupiedCells();
    }
 
@@ -99,7 +102,7 @@ public class Vehicle extends GameObject// implements Drawable
    @Override
    public void draw(Graphics graphics)
    {
-      int gridPixelSize = 60;
+
       AffineTransform at;
       Graphics2D graphics2d = (Graphics2D) graphics;
 

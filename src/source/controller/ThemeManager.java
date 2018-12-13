@@ -173,7 +173,7 @@ public class ThemeManager extends Controller
       {
          //Map controller updateMapImages diye bi method olmasi lazim
          // BU methoduda gamemanegerda cagirilcak
-         if ( MapController.instance.getMap().getGameObjects() != null )
+         if ( MapController.instance.getMap().getGameObjects() != null ) //settings panelin previousunu da check edebiliriz
          {
             for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
             {
@@ -182,7 +182,7 @@ public class ThemeManager extends Controller
          }
       } catch (Exception e)
       {
-         e.printStackTrace();
+         //e.printStackTrace(); bunun commentini açmayın exception alması doğal halledicem burayı
       }
       SoundManager.instance.updateTheme();
       GuiPanelManager.instance.updateImages();

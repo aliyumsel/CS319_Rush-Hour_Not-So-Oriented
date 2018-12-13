@@ -120,7 +120,7 @@ public class MapController extends Controller
       {
          return false;
       }
-      return player.transform.position.x + player.transform.length == map.getMapSize();
+      return player.transform.position.gridX + player.transform.length == map.getMapSize();
    }
 
    // String builder kullansak daha guzel olcak
