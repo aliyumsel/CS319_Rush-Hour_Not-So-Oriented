@@ -163,9 +163,15 @@ public class ChangePlayerPanel extends JPanel
       int gap = 0;
       int pageLength = 3; //amount of buttons in one page
       limit = page * pageLength;
+      boolean showDelete;
 
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
+         showDelete = true;
+         if (buttonArray.get(i).getText().equals(GameEngine.instance.playerManager.getCurrentPlayer().getPlayerName()))
+         {
+            showDelete = false;
+         }
          if ( i % 3 == 0 )
          {
             gap = 0;
@@ -176,9 +182,11 @@ public class ChangePlayerPanel extends JPanel
             buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
-            deleteButton1.setVisible(true);
-            deleteButton1.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
-                    deleteButton1.getPreferredSize().width, deleteButton1.getPreferredSize().height);
+            if (showDelete) {
+               deleteButton1.setVisible(true);
+               deleteButton1.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
+                       deleteButton1.getPreferredSize().width, deleteButton1.getPreferredSize().height);
+            }
             editButton1.setVisible(true);
             editButton1.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) - 75, gap + 30, editButton1.getPreferredSize().width,
                     editButton1.getPreferredSize().height);
@@ -189,9 +197,11 @@ public class ChangePlayerPanel extends JPanel
             buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
-            deleteButton2.setVisible(true);
-            deleteButton2.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
-                    deleteButton2.getPreferredSize().width, deleteButton2.getPreferredSize().height);
+            if (showDelete) {
+               deleteButton2.setVisible(true);
+               deleteButton2.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
+                       deleteButton2.getPreferredSize().width, deleteButton2.getPreferredSize().height);
+            }
             editButton2.setVisible(true);
             editButton2.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) - 75, gap + 30, editButton2.getPreferredSize().width,
                     editButton2.getPreferredSize().height);
@@ -202,9 +212,11 @@ public class ChangePlayerPanel extends JPanel
             buttonArray.get(i).setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)), gap, buttonArray.get(i).getPreferredSize().width,
                     buttonArray.get(i).getPreferredSize().height);
             buttonArray.get(i).setVisible(true);
-            deleteButton3.setVisible(true);
-            deleteButton3.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
-                    deleteButton3.getPreferredSize().width, deleteButton3.getPreferredSize().height);
+            if (showDelete) {
+               deleteButton3.setVisible(true);
+               deleteButton3.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) + buttonArray.get(i).getPreferredSize().width + 25, gap + 30,
+                       deleteButton3.getPreferredSize().width, deleteButton3.getPreferredSize().height);
+            }
             editButton3.setVisible(true);
             editButton3.setBounds(guiManager.findCenter(panelWidth, buttonArray.get(i)) - 75, gap + 30, editButton3.getPreferredSize().width,
                     editButton3.getPreferredSize().height);
