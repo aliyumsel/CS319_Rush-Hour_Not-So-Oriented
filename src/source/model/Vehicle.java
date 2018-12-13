@@ -37,13 +37,13 @@ public class Vehicle extends GameObject// implements Drawable
       if ( transform.axis.equals("Vertical") )
       {
          transform.position.y -= moveAxis;
-         transform.position.gridY = (int) ((transform.position.y +0.5) / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
+         transform.position.gridY = (int) ((transform.position.y +0.1) / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
          verticalMoveAxis = moveAxis; // if move axis == -1 vehicle goes downwards
       }
       else if ( transform.axis.equals("Horizontal") )
       {
          transform.position.x += moveAxis;
-         transform.position.gridX = (int) ((transform.position.x +0.5) / 1);
+         transform.position.gridX = (int) ((transform.position.x +0.1) / 1);
          horizontalMoveAxis = moveAxis; // if move axis == -1 vehicle goes left
       }
       System.out.println(transform.position.gridX + " , " + transform.position.gridY);
@@ -105,45 +105,6 @@ public class Vehicle extends GameObject// implements Drawable
 
       AffineTransform at;
       Graphics2D graphics2d = (Graphics2D) graphics;
-
-//      if ( drawingIndexForMoving <= 0 )
-//      {
-//         drawingIndexForMoving = gridPixelSize;
-//         isMoving = false;
-//         verticalMoveAxis = 0;
-//         horizontalMoveAxis = 0;
-//      }
-//
-//      if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == -1 )
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize - drawingIndexForMoving);
-//         drawingIndexForMoving -= 4;
-//      }
-//      else if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == 1 )
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize + drawingIndexForMoving);
-//         drawingIndexForMoving -= 4;
-//      }
-//      else if ( isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == -1 )
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize + drawingIndexForMoving, occupiedTransforms[0].position.y * gridPixelSize);
-//         drawingIndexForMoving -= 4;
-//      }
-//      else if ( isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == 1 )
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize - drawingIndexForMoving, occupiedTransforms[0].position.y * gridPixelSize);
-//         drawingIndexForMoving -= 4;
-//      }
-//      else if ( !isMoving && transform.axis.equals("Horizontal") )
-//      {
-//
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize);
-//      }
-//      else
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize);
-//      }
-
 
       at = AffineTransform.getTranslateInstance(transform.position.x * gridPixelSize, transform.position.y * gridPixelSize);
       //if(isMoving)

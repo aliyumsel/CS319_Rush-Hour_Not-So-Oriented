@@ -12,13 +12,14 @@ public class VehicleController extends Controller {
     private SoundManager soundManager;
     private int numberOfMoves;
     private boolean changed = false;
-    Boolean isExitReachable = false;
+    private boolean isMoving = false;
+    public boolean isExitReachable = false;
     private double moveAmount;
     private int counter = 0;
-    boolean moved = false;
+
 
     private enum CONTROL {
-        SLIDE, KEYBOARD, CPU
+        SLIDE, KEYBOARD, CPU //CPU kalsın
     }
 
     private CONTROL currentControl;
@@ -183,32 +184,30 @@ public class VehicleController extends Controller {
         if (selectedVehicle != null) {
 
             if (Input.getKeyPressed("w")) {
-                moved = tryMove("Upwards");
+                isMoving = tryMove("Upwards");
                 moveAmount = 0.1;
             } else if (Input.getKeyPressed("a")) {
-                moved = tryMove("Left");
+                isMoving = tryMove("Left");
                 moveAmount = -0.1;
             } else if (Input.getKeyPressed("s")) {
-                moved = tryMove("Downwards");
+                isMoving = tryMove("Downwards");
                 moveAmount = -0.1;
             } else if (Input.getKeyPressed("d")) {
-                moved = tryMove("Right");
+                isMoving = tryMove("Right");
                 moveAmount = 0.1;
             }
 
-            if (moved) {
-                System.out.println("Moved");
-                if (counter < 10) {
-                    System.out.println(counter);
+            if (isMoving) {
+                if (counter < 10) { // 10 == moveAmount * 100
                     selectedVehicle.move(moveAmount);
                     counter++;
-                }
-                else {
+                } else {
                     counter = 0;
                     MapController.instance.updateMap(map.getGameObjects());
                     changed = true;
-                    moved = false;
+                    isMoving = false;
                 }
+
                 if (MapController.instance.isPlayerAtExit()) {
                     GameManager.instance.endMap();
                     selectedVehicle = null;
@@ -265,41 +264,35 @@ public class VehicleController extends Controller {
     private boolean tryMove(String direction) {
         System.out.println("In here??");
         String vehicleAxis = selectedVehicle.transform.axis;
-        int moveAmount = 0;
+
         int moveCheck = 0;
 
         if (vehicleAxis.equals("Horizontal")) {
             if (direction.equals("Left")) {
-                moveAmount = -1;
                 moveCheck = -1;
             } else if (direction.equals("Right")) {
-                moveAmount = 1;
                 moveCheck = selectedVehicle.transform.length;
             }
             if (selectedVehicle.transform.position.x + moveCheck < 0 || selectedVehicle.transform.position.x + moveCheck >= map.getMapSize()) {
                 return false;
             }
 
-            if (map.getGrid()[selectedVehicle.transform.position.gridY][ selectedVehicle.transform.position.gridX + moveCheck].equals("Space")) {
-                //selectedVehicle.move(moveAmount);
+            if (map.getGrid()[selectedVehicle.transform.position.gridY][selectedVehicle.transform.position.gridX + moveCheck].equals("Space")) {
                 selectedVehicle.isMoving = true;
                 return true;
             }
         }
         if (vehicleAxis.equals("Vertical")) {
             if (direction.equals("Upwards")) {
-                moveAmount = 1;
                 moveCheck = -1;
             } else if (direction.equals("Downwards")) {
-                moveAmount = -1;
                 moveCheck = selectedVehicle.transform.length;
             }
             if (selectedVehicle.transform.position.y + moveCheck < 0 || selectedVehicle.transform.position.y + moveCheck >= map.getMapSize()) {
                 return false;
             }
 
-            if (map.getGrid()[( selectedVehicle.transform.position.gridY) + moveCheck][selectedVehicle.transform.position.gridX].equals("Space")) {
-                //selectedVehicle.move(moveAmount);
+            if (map.getGrid()[(selectedVehicle.transform.position.gridY) + moveCheck][selectedVehicle.transform.position.gridX].equals("Space")) {
                 selectedVehicle.isMoving = true;
                 return true;
             }
@@ -320,7 +313,7 @@ public class VehicleController extends Controller {
         Vehicle player = MapController.instance.getPlayerVehicle();
         boolean temp = true;
         for (int i = 0; i < (map.getMapSize() - player.transform.position.gridX) - player.transform.length; i++) {
-            if (!(map.getGrid()[( player.transform.position.gridY)][ player.transform.position.gridX + i + player.transform.length].equals("Space"))) {
+            if (!(map.getGrid()[(player.transform.position.gridY)][player.transform.position.gridX + i + player.transform.length].equals("Space"))) {
                 temp = false;
             }
         }

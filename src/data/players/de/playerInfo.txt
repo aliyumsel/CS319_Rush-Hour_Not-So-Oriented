@@ -3,7 +3,7 @@
 		de
 	<Name/>
 	<StarAmount>
-		9
+		17
 	<StarAmount/>
 	<Levels>
 		<Level>
@@ -33,7 +33,7 @@
 				3
 			<Stars/>
 			<CurrentNumberOfMoves>
-				3
+				2
 			<CurrentNumberOfMoves>
 			<Status>
 				finished
@@ -55,6 +55,33 @@
 				0
 			<CurrentNumberOfMoves>
 			<Status>
+				inProgress
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+OO OO OO OO OO OO OO OO
+OO SS SS SS SS SS TU OO
+OO CL SS SS SS SS SS OO
+OO CU PC SS SS SS SS SS
+OO SS CU SS SS CR SS OO
+OO CU SS CL SS CR SS OO
+OO SS TR SS SS CR SS OO
+OO OO OO OO OO OO OO OO
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				4
+			<LevelNo/>
+			<Stars>
+				2
+			<Stars/>
+			<CurrentNumberOfMoves>
+				10
+			<CurrentNumberOfMoves>
+			<Status>
 				finished
 			<Status/>
 			<Unlocked>
@@ -65,7 +92,45 @@
 		<Level/>
 		<Level>
 			<LevelNo>
+				5
+			<LevelNo/>
+			<Stars>
+				3
+			<Stars/>
+			<CurrentNumberOfMoves>
 				4
+			<CurrentNumberOfMoves>
+			<Status>
+				finished
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				6
+			<LevelNo/>
+			<Stars>
+				3
+			<Stars/>
+			<CurrentNumberOfMoves>
+				3
+			<CurrentNumberOfMoves>
+			<Status>
+				finished
+			<Status/>
+			<Unlocked>
+				true
+			<Unlocked/>
+			<Map>
+			<Map/>
+		<Level/>
+		<Level>
+			<LevelNo>
+				7
 			<LevelNo/>
 			<Stars>
 				0
@@ -81,70 +146,13 @@
 			<Unlocked/>
 			<Map>
 OO OO OO OO OO OO OO OO
-OO SS CL SS SS CR SS OO
-OO SS SS CU TL SS SS OO
-OO PC SS SS CU CU CU SS
-OO CD CL SS SS SS SS OO
-OO SS SS SS SS SS CU OO
-OO OO SS SS SS SS SS OO
+OO SS SS SS CU CR SS OO
+OO CL SS SS SS TD CU OO
+OO CD CU PC SS SS SS SS
+OO SS SS SS SS SS TU OO
+OO CU SS SS OO SS SS OO
+OO SS CL SS CL SS SS OO
 OO OO OO OO OO OO OO OO
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				5
-			<LevelNo/>
-			<Stars>
-				0
-			<Stars/>
-			<CurrentNumberOfMoves>
-				0
-			<CurrentNumberOfMoves>
-			<Status>
-				notStarted
-			<Status/>
-			<Unlocked>
-				false
-			<Unlocked/>
-			<Map>
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				6
-			<LevelNo/>
-			<Stars>
-				0
-			<Stars/>
-			<CurrentNumberOfMoves>
-				0
-			<CurrentNumberOfMoves>
-			<Status>
-				notStarted
-			<Status/>
-			<Unlocked>
-				false
-			<Unlocked/>
-			<Map>
-			<Map/>
-		<Level/>
-		<Level>
-			<LevelNo>
-				7
-			<LevelNo/>
-			<Stars>
-				0
-			<Stars/>
-			<CurrentNumberOfMoves>
-				0
-			<CurrentNumberOfMoves>
-			<Status>
-				notStarted
-			<Status/>
-			<Unlocked>
-				false
-			<Unlocked/>
-			<Map>
 			<Map/>
 		<Level/>
 		<Level>
@@ -994,6 +1002,6 @@ OO OO OO OO OO OO OO OO
 		3
 	<RemainingShrinkPowerups/>
 	<RemainingSpacePowerups>
-		3
+		1
 	<RemainingSpacePowerups/>
 <Player/>
