@@ -71,6 +71,30 @@ public class GamePanel extends JPanel
          return;
       }
 
+      if (!GameEngine.instance.gameManager.isShrinkPowerUpUsable())
+      {
+          UIFactory.disableButton(shrink, shrinkButtonHighlightedImage);
+   }
+      else
+      {
+          if (!shrink.isEnabled())
+          {
+              UIFactory.enableButton(shrink, shrinkButtonImage);
+          }
+      }
+
+       if (!GameEngine.instance.gameManager.isSpacePowerUpUsable())
+       {
+           UIFactory.disableButton(space, spaceButtonHighlightedImage);
+       }
+       else
+       {
+           if (!space.isEnabled())
+           {
+               UIFactory.enableButton(shrink, spaceButtonImage);
+           }
+       }
+
       innerGamePanel.updatePanel();
 
       updateNumberOfMoves();
