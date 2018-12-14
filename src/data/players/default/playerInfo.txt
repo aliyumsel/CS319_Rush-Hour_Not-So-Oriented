@@ -1,8 +1,0 @@
-<Player>
-	<Name>
-		default
-	<Name/>
-	<StarAmount>
-		0
-	<StarAmount/>
-<Player>
