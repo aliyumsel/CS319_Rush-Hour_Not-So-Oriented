@@ -297,6 +297,7 @@ public class SettingsPanel extends JPanel
          GameEngine.instance.playerManager.toggleMusic();
          updateSoundButtons("Music");
          GameEngine.instance.soundManager.themeSongToggle();
+         GameEngine.instance.soundManager.updateTheme();
       }
       else if ( e.getSource() == sfx )
       {

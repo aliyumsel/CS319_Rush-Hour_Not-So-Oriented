@@ -1,6 +1,6 @@
 <RemainingShrinkPowerups>
-	4
+	3
 <RemainingShrinkPowerups/>
 <RemainingSpacePowerups>
-	4
+	3
 <RemainingSpacePowerups/>

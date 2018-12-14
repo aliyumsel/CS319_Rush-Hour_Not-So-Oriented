@@ -3,7 +3,7 @@
 		true
 	<Music/>
 	<Sfx>
-		false
+		true
 	<Sfx/>
 	<Theme>
 		<Active>

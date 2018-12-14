@@ -1,6 +1,6 @@
 <Player>
 	<Name>
-		Kaan
+		deniz
 	<Name/>
 	<StarAmount>
 		0
