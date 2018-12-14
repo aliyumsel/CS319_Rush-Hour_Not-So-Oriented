@@ -4,3 +4,4 @@
 !/doc/
 !.gitignore
 src/data/
+!/src/data/levels/*
