@@ -69,7 +69,7 @@ public class SoundManager extends Controller
       }
    }
 
-   void updateTheme()
+   public void updateTheme()
    {
       if ( clip != null )
       {

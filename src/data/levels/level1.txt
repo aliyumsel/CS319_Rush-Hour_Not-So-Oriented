@@ -1,5 +1,5 @@
 <IsBonusMap>
-	5
+	10
 <IsBonusMap/>
 <ExpectedNumberOfMovesForThreeStars>
 	8
