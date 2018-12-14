@@ -33,6 +33,11 @@ public class GameManager extends Controller
             timeOver();
          }
       }
+
+      if (Input.getKeyPressed("n"))
+      {
+         endMap();
+      }
    }
 
    void autoSave()
