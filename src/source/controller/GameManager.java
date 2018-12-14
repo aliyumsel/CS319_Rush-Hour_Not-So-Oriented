@@ -10,7 +10,7 @@ public class GameManager extends Controller
    public PlayerManager playerManager;
 
    public int level;
-   public int remainingTime;
+   private int remainingTime;
    private boolean isLevelBonus;
 
    boolean isGameActive = false;
@@ -28,7 +28,8 @@ public class GameManager extends Controller
       if ( isLevelBonus & isGameActive)
       {
          remainingTime--;
-         if (remainingTime <= 0) {
+         if (remainingTime <= 0)
+         {
             timeOver();
          }
       }
@@ -181,6 +182,11 @@ public class GameManager extends Controller
    public boolean isSpacePowerUpUsable()
    {
       return playerManager.getCurrentPlayer().getRemainingSpacePowerup() > 0;
+   }
+
+   public int getRemainingTime()
+   {
+      return remainingTime;
    }
 
 }

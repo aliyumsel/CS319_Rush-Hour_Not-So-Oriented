@@ -29,6 +29,7 @@ public class GamePanel extends JPanel
    private JLabel numberLabel;
    private JLabel shrinkAmountLabel;
    private JLabel spaceAmountLabel;
+   private JLabel remaningTimeLabel;
 
    //private JProgressBar timer;
 
@@ -81,6 +82,8 @@ public class GamePanel extends JPanel
 
       updateNumberOfMoves();
 
+      updateRemainingTimeLabel();
+
       repaint();
    }
 
@@ -117,6 +120,13 @@ public class GamePanel extends JPanel
       spaceAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingSpacePowerup() + "");
    }
 
+   private void updateRemainingTimeLabel()
+   {
+      int remainingTime = GameEngine.instance.gameManager.getRemainingTime();
+      String countDown = String.format("%02d:%02d", remainingTime / 60, remainingTime % 60);
+      remaningTimeLabel.setText(countDown + "");
+   }
+
    private void disableButton(JButton button, BufferedImage lockedImage)
    {
       button.setIcon(new ImageIcon(lockedImage));
@@ -139,7 +149,7 @@ public class GamePanel extends JPanel
       Graphics2D bGr = background.createGraphics();
       bGr.drawImage(scaledImage, 0, 0, null);
       bGr.dispose();
-      //innerGamePanel.endOfLevelPanel.loadImages();
+
       menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
       menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
 
@@ -170,8 +180,6 @@ public class GamePanel extends JPanel
 
       space.setDisabledIcon(new ImageIcon(spaceDisabledImage));
       shrink.setDisabledIcon(new ImageIcon(shrinkDisabledImage));
-      //timerIcon = new JLabel(new ImageIcon("src/image/timer.png"));
-      //timerIcon.setPreferredSize(new Dimension(32, 32));
 
       spaceAmountLabel = new JLabel("0",SwingConstants.CENTER);
       spaceAmountLabel.setPreferredSize(new Dimension(20, 20));
@@ -190,8 +198,10 @@ public class GamePanel extends JPanel
       numberLabel.setFont(new Font("Odin Rounded", Font.BOLD, 60));
       numberLabel.setForeground(Color.white);
 
-      //timer = new JProgressBar(SwingConstants.VERTICAL);
-      //timer.setPreferredSize(new Dimension(30, 300));
+      remaningTimeLabel = new JLabel("0", SwingConstants.LEFT);
+      remaningTimeLabel.setPreferredSize(new Dimension(107, 68));
+      remaningTimeLabel.setFont(new Font("Odin Rounded", Font.BOLD, 30));
+      remaningTimeLabel.setForeground(Color.white);
    }
 
    private void addComponents()
@@ -204,9 +214,8 @@ public class GamePanel extends JPanel
       add(spaceAmountLabel);
       add(moveLabel);
       add(numberLabel);
-      //add(timerIcon);
-      //add(timer);
       add(settings);
+      add(remaningTimeLabel);
    }
 
    private void setBoundsOfComponents()
@@ -238,16 +247,10 @@ public class GamePanel extends JPanel
       numberLabel.setBounds(panelWidth - numberLabel.getPreferredSize().width - 15, 265, numberLabel.getPreferredSize().width,
               numberLabel.getPreferredSize().height);
 
-//		timerIcon.setBounds(70, 116, timerIcon.getPreferredSize().width,
-//				timerIcon.getPreferredSize().height);
-//
-//		timer.setBounds(71, 160, timer.getPreferredSize().width,
-//				timer.getPreferredSize().height);
-
       innerGamePanel.setBounds(guiManager.findCenter(panelWidth, innerGamePanel), guiManager.findCenter(panelHeight, innerGamePanel), innerGamePanel.getPreferredSize().width,
               innerGamePanel.getPreferredSize().height);
-      // System.out.println(innerGamePanel.getBounds().x + "," + innerGamePanel.getBounds().y);
 
+      remaningTimeLabel.setBounds( 50, panelHeight / 2, remaningTimeLabel.getPreferredSize().width, remaningTimeLabel.getPreferredSize().height);
    }
 
    public void showEndOfLevelPopUp(int starAmount)

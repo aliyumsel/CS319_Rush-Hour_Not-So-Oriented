@@ -38,7 +38,7 @@ public class LevelSelectionPanel extends JPanel
    private int pageLength = 12;
    private int numberOfLevels;
 
-   private LevelSelectionPopUp popUp;
+//   private LevelSelectionPopUp popUp;
 
    LevelSelectionPanel(GuiPanelManager _guiManager)
    {
@@ -52,8 +52,8 @@ public class LevelSelectionPanel extends JPanel
 
       setPreferredSize(new Dimension(panelWidth, panelHeight));
 
-      popUp = new LevelSelectionPopUp(_guiManager);
-      add(popUp);
+//      popUp = new LevelSelectionPopUp(_guiManager);
+//      add(popUp);
 
       loadImages();
       createComponents();
@@ -115,7 +115,7 @@ public class LevelSelectionPanel extends JPanel
 
       menuButton.setBounds(30, 30, menuButton.getPreferredSize().width, menuButton.getPreferredSize().height);
 
-      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, popUp.getPreferredSize().width, popUp.getPreferredSize().height);
+//      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, popUp.getPreferredSize().width, popUp.getPreferredSize().height);
 
       for ( int i = 0; i < buttonArray.length; i++ )
       {

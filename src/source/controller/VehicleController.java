@@ -33,7 +33,7 @@ public class VehicleController extends Controller {
         numberOfMoves = 0;
         soundManager = GameEngine.instance.soundManager;
         currentControl = CONTROL.SLIDE;
-        currentControl = CONTROL.KEYBOARD;
+//        currentControl = CONTROL.KEYBOARD;
 
         mouseOriginPosition = new int[2];
         vehicleOriginPosition = new double[2];
