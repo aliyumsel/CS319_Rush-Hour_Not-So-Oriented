@@ -68,12 +68,11 @@ public class CreatePlayerPopUp extends JPanel
       playerName.addMouseListener(new MouseAdapter()
       {
          @Override
-         public void mouseClicked(MouseEvent e)
+         public void mousePressed(MouseEvent e)
          {
             playerName.setText("");
             playerName.setForeground(Color.WHITE);
          }
-
       });
 
       close = UIFactory.createButton(closeImage, closeHighlightedImage, "square", actionListener);

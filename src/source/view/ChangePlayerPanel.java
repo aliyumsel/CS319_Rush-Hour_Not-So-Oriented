@@ -139,9 +139,9 @@ public class ChangePlayerPanel extends JPanel
       add(deleteButton1);
       add(deleteButton2);
       add(deleteButton3);
-      add(editButton1);
-      add(editButton2);
-      add(editButton3);
+//      add(editButton1);
+//      add(editButton2);
+//      add(editButton3);
    }
 
    private void setBoundsOfComponents(int page)
