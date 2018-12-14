@@ -251,6 +251,8 @@ public class ChangePlayerPanel extends JPanel
          playerNameArray.add(name);
          buttonArray.add(temp);
          add(temp);
+
+         guiManager.updateImages();
       }
    }
 
@@ -349,6 +351,7 @@ public class ChangePlayerPanel extends JPanel
             {
                selectPlayer(playerNameArray.get(i));
                guiManager.setPanelVisible("MainMenu");
+               guiManager.updateImages();
             }
          }
       }
