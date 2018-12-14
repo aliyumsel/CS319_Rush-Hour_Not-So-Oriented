@@ -195,10 +195,11 @@ public class VehicleController extends Controller {
                 if (isMoving) {
                     if (counter < 10) { // 10 == moveAmount * 100
                         selectedVehicle.move(moveAmount);
-                        System.out.println(counter);
                         counter++;
                     } else {
                         counter = 0;
+                        selectedVehicle.transform.position.x = (int)(selectedVehicle.transform.position.x +0.1);
+                        selectedVehicle.transform.position.y = (int)(selectedVehicle.transform.position.y + 0.1);
                         MapController.instance.updateMap(map.getGameObjects());
                         changed = true;
                         isMoving = false;
