@@ -10,6 +10,7 @@ public class GameManager extends Controller
    public PlayerManager playerManager;
 
    public int level;
+   private int timerStartValue;
    private int remainingTime;
    private boolean isLevelBonus;
 
@@ -121,6 +122,7 @@ public class GameManager extends Controller
          System.out.println("Bonus Map");
          isLevelBonus = true;
          remainingTime = ( (BonusLevelInformation) levelToBeLoaded ).getTime() * 60;
+         timerStartValue = remainingTime;
          MapController.instance.loadOriginalLevel(_level);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);
@@ -194,4 +196,18 @@ public class GameManager extends Controller
       return remainingTime;
    }
 
+   public int getTimerStartValue()
+   {
+      return timerStartValue;
+   }
+
+   public boolean isLevelBonus()
+   {
+      return isLevelBonus;
+   }
+
+   public boolean isGameActive()
+   {
+      return isGameActive;
+   }
 }

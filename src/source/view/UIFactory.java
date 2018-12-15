@@ -52,6 +52,13 @@ class UIFactory
       return _label;
    }
 
+   static JLabel createLabelIcon(BufferedImage image, Dimension labelDimension)
+   {
+      JLabel _label = new JLabel();
+      setupLabelIcon(_label, image, labelDimension);
+      return _label;
+   }
+
    private static void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage, String buttonType,
                                    ActionListener actionListener)
    {
@@ -141,6 +148,14 @@ class UIFactory
          System.out.println("Error: Enter valid String For Label");
       }
 
+      label.setIcon(new ImageIcon(image));
+      label.setOpaque(false);
+      label.setFocusable(false);
+   }
+
+   private static void setupLabelIcon(JLabel label, BufferedImage image, Dimension labelDimension)
+   {
+      label.setPreferredSize(labelDimension);
       label.setIcon(new ImageIcon(image));
       label.setOpaque(false);
       label.setFocusable(false);
