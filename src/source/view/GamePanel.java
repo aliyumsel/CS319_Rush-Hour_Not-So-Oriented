@@ -9,7 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
 import source.controller.*;
+import source.model.LevelInformation;
 
+@SuppressWarnings("Duplicates")
 public class GamePanel extends JPanel
 {
    GuiPanelManager guiManager;
@@ -34,6 +36,10 @@ public class GamePanel extends JPanel
    private JLabel timerBackgroundLabel;
    private JLabel timerForegroundLabel;
 
+   //move count bar
+   private JLabel moveCountBackgroundLabel;
+   private JLabel moveCountForegroundLabel;
+   private JLabel moveCountBottomLabel;
    //private JProgressBar timer;
 
    private BufferedImage background;
@@ -53,6 +59,9 @@ public class GamePanel extends JPanel
    private BufferedImage timerBottomImage;
    private BufferedImage timerBackgroundImage;
    private BufferedImage timerForegroundImage;
+   private BufferedImage firstStarForegroundImage;
+   private BufferedImage firstStarBackgroundImage;
+   private BufferedImage moveCountBottomImage;
 
    private int panelWidth;
    private int panelHeight;
@@ -181,6 +190,9 @@ public class GamePanel extends JPanel
       timerBackgroundImage = guiManager.LoadImage("src/image/timerBackground.png");
       timerForegroundImage = guiManager.LoadImage("src/image/timerForeground.png");
       timerBottomImage = guiManager.LoadImage("src/image/timerBottom.png");
+      firstStarForegroundImage = guiManager.LoadImage("src/image/timerBackground.png");
+      firstStarBackgroundImage = guiManager.LoadImage("src/image/timerForeground.png");
+      moveCountBottomImage = guiManager.LoadImage("src/image/timerBottom.png");
    }
 
    private void createComponents()
@@ -194,6 +206,11 @@ public class GamePanel extends JPanel
       timerBackgroundLabel = UIFactory.createLabelIcon(timerBackgroundImage, new Dimension(30,232));
       timerForegroundLabel = UIFactory.createLabelIcon(timerForegroundImage, new Dimension(30,232));
       timerBottomLabel = UIFactory.createLabelIcon(timerBottomImage, new Dimension(30, 28));
+
+      moveCountBackgroundLabel = UIFactory.createLabelIcon(firstStarForegroundImage, new Dimension(30,232));
+      moveCountForegroundLabel = UIFactory.createLabelIcon(firstStarBackgroundImage, new Dimension(30,232));
+      moveCountBottomLabel = UIFactory.createLabelIcon(moveCountBottomImage, new Dimension(30, 28));
+
       timerForegroundStartHeight = timerForegroundLabel.getPreferredSize().height;
 
       space.setDisabledIcon(new ImageIcon(spaceDisabledImage));
@@ -230,11 +247,12 @@ public class GamePanel extends JPanel
       add(space);
       add(shrinkAmountLabel);
       add(spaceAmountLabel);
-      add(moveLabel);
-      add(numberLabel);
+      //add(moveLabel);
+      //add(numberLabel);
       add(settings);
 //      add(remainingTimeLabel);
       add(timerBottomLabel);
+      add(moveCountBottomLabel);
 //      add(timerForegroundLabel);
 //      add(timerBackgroundLabel);
    }
@@ -278,6 +296,12 @@ public class GamePanel extends JPanel
       timerForegroundLabel.setBounds(40, (panelHeight - timerForegroundLabel.getPreferredSize().height) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
 
       timerBackgroundLabel.setBounds(40, (panelHeight - timerBackgroundLabel.getPreferredSize().height) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
+
+      moveCountBottomLabel.setBounds(panelWidth-40-moveCountBottomLabel.getPreferredSize().width, (panelHeight + timerForegroundLabel.getPreferredSize().height) / 2 - 45, timerBottomLabel.getPreferredSize().width, timerBottomLabel.getPreferredSize().height);
+
+      moveCountForegroundLabel.setBounds(panelWidth-40-moveCountForegroundLabel.getPreferredSize().width, (panelHeight - timerForegroundLabel.getPreferredSize().height) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
+
+      moveCountBackgroundLabel.setBounds(panelWidth-40-moveCountBackgroundLabel.getPreferredSize().width, (panelHeight - timerBackgroundLabel.getPreferredSize().height) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
 
       timerForegroundStartPosition = (panelHeight - timerForegroundLabel.getPreferredSize().height) / 2 - 45;
    }
@@ -355,6 +379,7 @@ public class GamePanel extends JPanel
       drawBackground(g);
       if (GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive())
       {
+         drawMoveCountForeground(g);
          drawTimerForeground(g);
       }
    }
@@ -366,7 +391,8 @@ public class GamePanel extends JPanel
       Graphics2D graphics2d = (Graphics2D) graphics;
 
       graphics2d.drawImage(background, 0, 0, null);
-      graphics2d.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, 30, timerForegroundStartHeight, null);
+      graphics2d.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
+      graphics2d.drawImage(firstStarForegroundImage, panelWidth-40-moveCountBackgroundLabel.getPreferredSize().width, timerForegroundStartPosition, null);
    }
 
    private void drawTimerForeground(Graphics g)
@@ -382,7 +408,21 @@ public class GamePanel extends JPanel
       Graphics2D graphics2d = (Graphics2D) g;
       graphics2d.drawImage(subImage, 40, timerPosition, null);
    }
+   private void drawMoveCountForeground(Graphics g)
+   {
+      LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(GameManager.instance.level - 1);
+      int remainingMoves = currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.instance.vehicleController.getNumberOfMoves();
+      int moveCountStartValue = currentLevel.getMaxNumberOfMovesForTwoStars();
+      double f = remainingMoves / (double)moveCountStartValue;
+      int timerHeight = timerForegroundStartHeight - (int)lerp(0, timerForegroundStartHeight, f);
+      int timerPosition = (int)lerp(timerForegroundStartPosition,timerForegroundStartPosition + timerForegroundLabel.getPreferredSize().height,f);
+      BufferedImage subImage = null;
+      if(currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0)
+         subImage = firstStarBackgroundImage.getSubimage(0, 0, 30, timerHeight);
 
+      Graphics2D graphics2d = (Graphics2D) g;
+      graphics2d.drawImage(subImage, panelWidth-40-moveCountForegroundLabel.getPreferredSize().width, timerPosition, null);
+   }
    InnerGamePanel getInnerGamePanel()
    {
       return innerGamePanel;

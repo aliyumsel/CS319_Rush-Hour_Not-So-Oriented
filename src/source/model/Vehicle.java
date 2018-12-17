@@ -20,6 +20,7 @@ public class Vehicle extends GameObject// implements Drawable
    private boolean special = false;
    private BufferedImage image;
    public boolean isSliding = false;
+   public double velocity;
 
    Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme) //theme i sil burdan
    {
@@ -30,6 +31,7 @@ public class Vehicle extends GameObject// implements Drawable
       this.drawingIndexForMoving = 60;
       verticalMoveAxis = 0;
       horizontalMoveAxis = 0;
+      velocity = 0.05;
       updateImages();
    }
 
@@ -65,11 +67,11 @@ public class Vehicle extends GameObject// implements Drawable
          }
          else if (y > transform.position.y)
          {
-            move(-0.05);
+            move(-velocity);
          }
          else if (y < transform.position.y)
          {
-            move(0.05);
+            move(velocity);
          }
       }
       else if ( transform.axis.equals("Horizontal") )
@@ -81,11 +83,11 @@ public class Vehicle extends GameObject// implements Drawable
          }
          else if (x > transform.position.x)
          {
-            move(0.05);
+            move(velocity);
          }
          else if (x < transform.position.x)
          {
-            move(-0.05);
+            move(-velocity);
          }
       }
    }

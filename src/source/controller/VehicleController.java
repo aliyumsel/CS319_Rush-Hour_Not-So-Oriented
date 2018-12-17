@@ -117,6 +117,7 @@ public class VehicleController extends Controller {
 
             //Moving while holding the mouse down
             if (selectedVehicle != null && !isSelectedVehicleSliding) {
+                selectedVehicle.velocity = 0.05;
                 if (selectedVehicle.transform.axis.equals("Horizontal")) {
                     int mouseDifference = (Input.getMousePosition()[0] - mouseOriginPosition[0]);
 
@@ -199,31 +200,39 @@ public class VehicleController extends Controller {
             }
 
             if (selectedVehicle != null && !isMoving) {
-
+                selectedVehicle.velocity = 0.1;
                 if (Input.getKeyPressed("w")) {
                     isMoving = tryMove("Upwards");
-                    moveAmount = 0.1;
+                    moveAmount = 1;
+                    destination.y = selectedVehicle.transform.position.gridY -1;
+                    destination.x = selectedVehicle.transform.position.gridX;
                 } else if (Input.getKeyPressed("a")) {
                     isMoving = tryMove("Left");
-                    moveAmount = -0.1;
+                    moveAmount = -1;
+                    destination.y = selectedVehicle.transform.position.gridY;
+                    destination.x = selectedVehicle.transform.position.gridX-1;
                 } else if (Input.getKeyPressed("s")) {
                     isMoving = tryMove("Downwards");
-                    moveAmount = -0.1;
+                    moveAmount = -1;
+                    destination.y = selectedVehicle.transform.position.gridY +1;
+                    destination.x = selectedVehicle.transform.position.gridX;
                 } else if (Input.getKeyPressed("d")) {
                     isMoving = tryMove("Right");
-                    moveAmount = 0.1;
+                    moveAmount = 1;
+                    destination.y = selectedVehicle.transform.position.gridY;
+                    destination.x = selectedVehicle.transform.position.gridX+1;
                 }
             }
                 if (isMoving) {
-                    if (counter < 10) { // 10 == moveAmount * 100
-                        selectedVehicle.move(moveAmount);
-                        counter++;
-                    } else {
-                        counter = 0;
-                        selectedVehicle.transform.position.x = (int)(selectedVehicle.transform.position.x +0.1);
-                        selectedVehicle.transform.position.y = (int)(selectedVehicle.transform.position.y + 0.1);
+                    selectedVehicle.isSliding = true;
+                    selectedVehicle.slideToPoint(destination.x, destination.y);
+                    isSelectedVehicleSliding = selectedVehicle.isSliding;
+                    if (!isSelectedVehicleSliding)
+                    {
+                        selectedVehicle.moveToPoint(destination.x,destination.y);
                         MapController.instance.updateMap(map.getGameObjects());
                         changed = true;
+                        GameManager.instance.autoSave();
                         isMoving = false;
                     }
                 }
