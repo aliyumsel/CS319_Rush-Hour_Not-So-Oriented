@@ -25,4 +25,6 @@ public interface PlayerDao {
 	void saveRemainingPowerupAmount(Player player);
 
 	void savePlayerInfo(Player player);
+
+	void changePlayerName(Player player);
 }

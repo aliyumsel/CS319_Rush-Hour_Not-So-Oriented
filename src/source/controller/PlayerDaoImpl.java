@@ -419,6 +419,14 @@ class PlayerDaoImpl implements PlayerDao {
         writeFile(player.getPath() + "/PlayerInfo.txt", text);
     }
 
+    @Override
+    public void changePlayerName(Player player) {
+        File folder = new File(player.getPath());
+        folder.renameTo(new File(folder.getParent() + "/" + player.getPlayerName()));
+        player.setPath("src/data/players/" +  player.getPlayerName());
+        savePlayerInfo(player);
+    }
+
     private void writeFile(String path, String text) {
         FileWriter fileOut = null;
         try {

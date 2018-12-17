@@ -31,20 +31,20 @@ public class Player
       return path;
    }
 
-//   public void setPath(String path)
-//   {
-//      this.path = path;
-//   }
+   public void setPath(String path)
+   {
+      this.path = path;
+   }
 
    public String getPlayerName()
    {
       return playerName;
    }
 
-//   public void setPlayerName(String playerName)
-//   {
-//      this.playerName = playerName;
-//   }
+   public void setPlayerName(String playerName)
+   {
+      this.playerName = playerName;
+   }
 
    public int getStarAmount()
    {

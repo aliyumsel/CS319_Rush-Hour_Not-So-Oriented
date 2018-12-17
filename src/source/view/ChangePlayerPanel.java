@@ -139,9 +139,9 @@ public class ChangePlayerPanel extends JPanel
       add(deleteButton1);
       add(deleteButton2);
       add(deleteButton3);
-//      add(editButton1);
-//      add(editButton2);
-//      add(editButton3);
+      add(editButton1);
+      add(editButton2);
+      add(editButton3);
    }
 
    private void setBoundsOfComponents(int page)
@@ -269,6 +269,16 @@ public class ChangePlayerPanel extends JPanel
       updatePages();
    }
 
+   void editPlayer(String name)
+   {
+      int index = GameEngine.instance.playerManager.editPlayer(name, "_"+ name);
+      if(index > -1)
+      {
+         playerNameArray.set(index, "_" + name);
+         updatePages();
+      }
+   }
+
    private ActionListener actionListener = e ->
    {
       GameEngine.instance.soundManager.buttonClick();
@@ -342,6 +352,18 @@ public class ChangePlayerPanel extends JPanel
       else if ( e.getSource() == deleteButton3 )
       {
          deletePlayer(playerNameArray.get(limit + 2));
+      }
+      else if ( e.getSource() == editButton1 )
+      {
+         editPlayer(playerNameArray.get(limit));
+      }
+      else if ( e.getSource() == editButton2 )
+      {
+         editPlayer(playerNameArray.get(limit + 1));
+      }
+      else if ( e.getSource() == editButton3 )
+      {
+         editPlayer(playerNameArray.get(limit + 2));
       }
       else
       {

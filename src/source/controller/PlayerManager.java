@@ -84,12 +84,9 @@ public class PlayerManager extends Controller
       }
 
       //checks if a player with the same name exists
-      for ( int i = 0; i < players.size(); i++ )
+      if (checkIfPlayerExistsByName(playerName))
       {
-         if ( players.get(i).getPlayerName().equals(playerName) )
-         {
-            return 1;
-         }
+         return 1;
       }
       //adds the new player to players and sets it as current player
       boolean initialMusic;
@@ -170,6 +167,41 @@ public class PlayerManager extends Controller
       }
       return false;
 
+   }
+
+   public int editPlayer(String oldName, String newName)
+   {
+      if (checkIfPlayerExistsByName(newName))
+      {
+         return -1;
+      }
+
+      for (int i = 0; i < players.size(); i++)
+      {
+         Player player = players.get(i);
+         if (player.getPlayerName().equals(oldName))
+         {
+            player.setPlayerName(newName);
+            playerDao.changePlayerName(player);
+            if (player == currentPlayer)
+            {
+               playerDao.saveLastActivePlayer(player.getPlayerName());
+            }
+            return i;
+         }
+      }
+      return -1;
+   }
+   private boolean checkIfPlayerExistsByName(String playerName)
+   {
+      for ( int i = 0; i < players.size(); i++ )
+      {
+         if ( players.get(i).getPlayerName().equals(playerName) )
+         {
+            return true;
+         }
+      }
+      return false;
    }
 
    //These 2 methods will have to change with gameManager to not include other controllers
