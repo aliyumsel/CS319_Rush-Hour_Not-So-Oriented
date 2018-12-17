@@ -182,10 +182,9 @@ public class PlayerManager extends Controller
       {
          currentPlayer.setStarAmount(currentPlayer.getStarAmount() + ( starAmount - currentLevel.getStars() ));
          currentLevel.setStars(starAmount);
-         playerDao.saveTotalStarAmount(currentPlayer);
+         playerDao.savePlayerInfo(currentPlayer);
       }
       playerDao.saveLevel(levelNo, currentPlayer);
-      //playerDao.saveStarAmount(currentPlayer); will be added
 
    }
 
@@ -264,25 +263,25 @@ public class PlayerManager extends Controller
    void decrementRemainingShrinkPowerup()
    {
       currentPlayer.decrementRemainingShrinkPowerup();
-      playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
+      playerDao.saveRemainingPowerupAmount(currentPlayer);
    }
 
    void decrementRemainingSpacePowerup()
    {
       currentPlayer.decrementRemainingSpacePowerup();
-      playerDao.saveRemainingPowerupAmount("space", currentPlayer);
+      playerDao.saveRemainingPowerupAmount(currentPlayer);
    }
 
    public void addShrinkPowerup(int amountToBeAdded)
    {
       currentPlayer.addShrinkPowerup(amountToBeAdded);
-      playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
+      playerDao.saveRemainingPowerupAmount(currentPlayer);
    }
 
    public void addSpacePowerup(int amountToBeAdded)
    {
       currentPlayer.addSpacePowerup(amountToBeAdded);
-      playerDao.saveRemainingPowerupAmount("space", currentPlayer);
+      playerDao.saveRemainingPowerupAmount(currentPlayer);
    }
 
    public void  toggleControlPreference()

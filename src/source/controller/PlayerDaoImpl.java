@@ -291,13 +291,12 @@ class PlayerDaoImpl implements PlayerDao {
 
         writeFile(playerPath + "/SettingsInfo.txt", playerInfo);
 
-        playerInfo =
-                "<RemainingShrinkPowerups>\n" +
-                        "\t3\n" +
-                        "<RemainingShrinkPowerups/>\n" +
-                        "<RemainingSpacePowerups>\n" +
-                        "\t3\n" +
-                        "<RemainingSpacePowerups/>";
+        playerInfo = "<RemainingShrinkPowerups>\n" +
+                "\t3\n" +
+                "<RemainingShrinkPowerups/>\n" +
+                "<RemainingSpacePowerups>\n" +
+                "\t3\n" +
+                "<RemainingSpacePowerups/>";
 
         writeFile(playerPath + "/PowerUpInfo.txt", playerInfo);
 
@@ -396,64 +395,27 @@ class PlayerDaoImpl implements PlayerDao {
     }
 
     @Override
-    public void saveRemainingPowerupAmount(String powerup, Player player) {
-        Scanner scan;
-
-        scan = createScanner(player.getPath() + "/PowerUpInfo.txt");
-
-        String powerupTag;
-        int newAmount;
-        String line, text;
-
-        if (powerup.equals("shrink")) {
-            powerupTag = "<RemainingShrinkPowerups>";
-            newAmount = player.getRemainingShrinkPowerup();
-        } else {
-            powerupTag = "<RemainingSpacePowerups>";
-            newAmount = player.getRemainingSpacePowerup();
-        }
-
-        line = scan.nextLine();
-        text = line + "\n";
-
-        while (!line.trim().equals(powerupTag)) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-
-        scan.nextLine();
-        text = text + "\t" + newAmount + "\n";
-
-        while (scan.hasNext()) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
+    public void saveRemainingPowerupAmount(Player player) {
+        String text = "<RemainingShrinkPowerups>\n" +
+                "\t" + player.getRemainingShrinkPowerup() + "\n" +
+                "<RemainingShrinkPowerups/>\n" +
+                "<RemainingSpacePowerups>\n" +
+                "\t" + player.getRemainingSpacePowerup() + "\n" +
+                "<RemainingSpacePowerups/>";
         writeFile(player.getPath() + "/PowerUpInfo.txt", text);
 
     }
 
     @Override
-    public void saveTotalStarAmount(Player player) {
-        String line, text;
-
-        Scanner scan = createScanner(player.getPath() + "/PlayerInfo.txt");
-
-        line = scan.nextLine();
-        text = line + "\n";
-
-        while (!line.trim().equals("<StarAmount>"))
-        {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-
-        scan.nextLine();
-        text = text + "\t\t" + player.getStarAmount() + "\n";
-
-        while (scan.hasNext()) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
+    public void savePlayerInfo(Player player) {
+        String text = "<Player>\n" +
+                "\t<Name>\n" +
+                "\t\t" + player.getPlayerName() + "\n" +
+                "\t<Name/>\n" +
+                "\t<StarAmount>\n" +
+                "\t\t" + player.getStarAmount() + "\n" +
+                "\t<StarAmount/>\n" +
+                "<Player>\n";
         writeFile(player.getPath() + "/PlayerInfo.txt", text);
     }
 

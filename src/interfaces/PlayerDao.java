@@ -22,7 +22,7 @@ public interface PlayerDao {
 	
 	void saveSettings(Player player);
 	
-	void saveRemainingPowerupAmount(String powerup, Player player);
+	void saveRemainingPowerupAmount(Player player);
 
-	void saveTotalStarAmount(Player player);
+	void savePlayerInfo(Player player);
 }
