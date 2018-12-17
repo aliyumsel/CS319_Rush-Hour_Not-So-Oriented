@@ -360,6 +360,7 @@ public class GamePanel extends JPanel {
         graphics2d.drawImage(background, 0, 0, null);
         graphics2d.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
 
+        //Backgrounds for stars
         graphics2d.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
         graphics2d.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
         graphics2d.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
@@ -369,17 +370,21 @@ public class GamePanel extends JPanel {
         Graphics2D graphics2d = (Graphics2D) g;
         BufferedImage subImage = null;
         LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(GameManager.instance.level - 1);
+
+        //For the first star
         if (GameEngine.instance.vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars()) {
             int remainingMoves = currentLevel.getMaxNumberOfMovesForThreeStars() - GameEngine.instance.vehicleController.getNumberOfMoves();
             int moveCountStartValue = currentLevel.getMaxNumberOfMovesForThreeStars();
             double f = remainingMoves / (double) moveCountStartValue;
             int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f); //26 yı değikene atcam da anlamadım ahmet kodunu
             if (currentLevel.getMaxNumberOfMovesForThreeStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0)
+            {
                 subImage = firstStarForegroundImage.getSubimage(0, firstStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
-
+            }
             graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
 
         }
+        //For the second star
         if (GameEngine.instance.vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForTwoStars()) {
             if (GameEngine.instance.vehicleController.getNumberOfMoves() > currentLevel.getMaxNumberOfMovesForThreeStars()) {
                 int remainingMoves = currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.instance.vehicleController.getNumberOfMoves();
@@ -387,14 +392,14 @@ public class GamePanel extends JPanel {
                 double f = remainingMoves / (double) moveCountStartValue;
                 int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f);
                 if (currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0)
+                {
                     subImage = secondStarForegroundImage.getSubimage(0, secondStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
+                }
                 graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
-
             } else {
                 subImage = secondStarForegroundImage;
                 int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, 1);
                 graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
-
             }
 
         }
