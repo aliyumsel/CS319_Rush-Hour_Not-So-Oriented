@@ -19,6 +19,7 @@ public class Vehicle extends GameObject// implements Drawable
    public  int gridPixelSize = 60;
    private boolean special = false;
    private BufferedImage image;
+   public boolean isSliding = false;
 
    Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme) //theme i sil burdan
    {
@@ -37,19 +38,57 @@ public class Vehicle extends GameObject// implements Drawable
       if ( transform.axis.equals("Vertical") )
       {
          transform.position.y -= moveAxis;
-         transform.position.gridY = (int) ((transform.position.y +0.1) / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
+         if (!isSliding) {
+            transform.position.gridY = (int) ((transform.position.y + 0.1) / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
+         }
          verticalMoveAxis = moveAxis; // if move axis == -1 vehicle goes downwards
       }
       else if ( transform.axis.equals("Horizontal") )
       {
          transform.position.x += moveAxis;
-         transform.position.gridX = (int) ((transform.position.x +0.1) / 1);
+         if (!isSliding) {
+            transform.position.gridX = (int) ((transform.position.x + 0.1) / 1);
+         }
          horizontalMoveAxis = moveAxis; // if move axis == -1 vehicle goes left
       }
-      System.out.println(transform.position.gridX + " , " + transform.position.gridY);
       findOccupiedCells();
    }
 
+   public void slideToPoint(int x, int y) // tam sayılara gitmesini istiyoruz, eğer başka bir feature gelirse double la değiştirin
+   {
+      if ( transform.axis.equals("Vertical") )
+      {
+         if (y == (int)(transform.position.y) && Math.abs(transform.position.y-y) <= 0.1)
+         {
+            transform.position.y = (int)(transform.position.y+0.1);
+            isSliding = false;
+         }
+         else if (y > transform.position.y)
+         {
+            move(-0.05);
+         }
+         else if (y < transform.position.y)
+         {
+            move(0.05);
+         }
+      }
+      else if ( transform.axis.equals("Horizontal") )
+      {
+         if (x == (int)transform.position.x && Math.abs(transform.position.x-x) <=0.1)
+         {
+            transform.position.x = (int)(transform.position.x+0.1);
+            isSliding = false;
+         }
+         else if (x > transform.position.x)
+         {
+            move(0.05);
+         }
+         else if (x < transform.position.x)
+         {
+            move(-0.05);
+         }
+      }
+   }
    @Override
    public void updateImages()
    {
@@ -78,11 +117,7 @@ public class Vehicle extends GameObject// implements Drawable
       findOccupiedCells();
    }
 
-   public void slideToPoint(int x, int y)
-   {
-      transform.position.x = x;
-      transform.position.y = y;
-   }
+
 
    public String getType()
    {
