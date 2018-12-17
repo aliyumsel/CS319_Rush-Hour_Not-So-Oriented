@@ -363,6 +363,7 @@ public class VehicleController extends Controller {
         {
             currentControl = CONTROL.SLIDE;
         }
+        selectedVehicle = null;
     }
 
     private void initializeCurrentControl()
