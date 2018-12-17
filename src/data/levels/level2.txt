@@ -2,7 +2,7 @@
 	8
 <ExpectedNumberOfMovesForThreeStars/>
 <ExpectedNumberOfMovesForTwoStars>
-	11
+	15
 <ExpectedNumberOfMovesForTwoStars/>
 <Map>
 OO OO OO OO OO OO OO OO
