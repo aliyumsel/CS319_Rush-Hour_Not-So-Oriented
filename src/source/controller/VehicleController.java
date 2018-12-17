@@ -2,7 +2,10 @@ package source.controller;
 
 import source.model.*;
 
+import java.awt.*;
+
 //@SuppressWarnings("Duplicates")
+@SuppressWarnings("Duplicates")
 public class VehicleController extends Controller {
     public static VehicleController instance;
 
@@ -16,6 +19,8 @@ public class VehicleController extends Controller {
     public boolean isExitReachable = false;
     private double moveAmount;
     private int counter = 0;
+    private boolean isSelectedVehicleSliding = false;
+    Point destination = new Point();
 
 
     private enum CONTROL {
@@ -56,6 +61,8 @@ public class VehicleController extends Controller {
         }
 
         if (currentControl == CONTROL.SLIDE) {
+
+
             if (Input.getMouseButtonPressed(0)) {
                 Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
@@ -71,13 +78,17 @@ public class VehicleController extends Controller {
             }
 
             if (Input.getMouseButtonReleased(0)) {
+
                 if (selectedVehicle != null) {
+                    selectedVehicle.isSliding = true;
+
                     int gridPositionX = (int) (selectedVehicle.transform.position.x + 0.5);
                     int gridPositionY = (int) (selectedVehicle.transform.position.y + 0.5);
 
                     selectedVehicle.moveToPoint(gridPositionX, gridPositionY);
-                    selectedVehicle.slideToPoint(gridPositionX, gridPositionY);
                     MapController.instance.updateMap(map.getGameObjects());
+                    destination.x = selectedVehicle.transform.position.gridX ;
+                    destination.y = selectedVehicle.transform.position.gridY ;
 
                     if (!(oldPos[0] == selectedVehicle.transform.position.gridX && oldPos[1] == selectedVehicle.transform.position.gridY)) {
                         numberOfMoves++;
@@ -87,14 +98,25 @@ public class VehicleController extends Controller {
                         GameManager.instance.endMap();
                     }
                 }
-
-                GameManager.instance.autoSave();
-
-                selectedVehicle = null;
             }
 
+            try {
+                if (selectedVehicle.isSliding){
+                    selectedVehicle.slideToPoint(destination.x, destination.y);
+                    isSelectedVehicleSliding = selectedVehicle.isSliding;
+                    if (!isSelectedVehicleSliding)
+                    {
+                        GameManager.instance.autoSave();
+                        selectedVehicle = null;
+                    }
+                }
+            }catch (Exception e){
+                //do nothing
+            }
+
+
             //Moving while holding the mouse down
-            if (selectedVehicle != null) {
+            if (selectedVehicle != null && !isSelectedVehicleSliding) {
                 if (selectedVehicle.transform.axis.equals("Horizontal")) {
                     int mouseDifference = (Input.getMousePosition()[0] - mouseOriginPosition[0]);
 

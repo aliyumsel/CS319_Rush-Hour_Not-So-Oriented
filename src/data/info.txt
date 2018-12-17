@@ -1,0 +1,18 @@
+<NumberOfPlayers>
+	1
+<NumberOfPlayers/>
+<LastActivePlayer>
+	de
+	d
+	default
+=======
+	aa
+=======
+	Kaan
+>>>>>>> unstable
+
+>>>>>>> unstable
+<LastActivePlayer/>
+<NumberOfMaps>
+	50
+<NumberOfMaps/>
