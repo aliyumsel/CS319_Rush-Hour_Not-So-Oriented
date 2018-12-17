@@ -26,7 +26,7 @@ class PlayerDaoImpl implements PlayerDao {
         ArrayList<Player> players = new ArrayList<>();
 
         Scanner playerInfo, levelInfo;
-        String playerName, tmp, status, mapLine, map = "", activeTheme;
+        String playerName, tmp, status, mapLine, map = "", activeTheme, controlPreference;
         int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars, remainingShrinkPowerup, remainingSpacePowerup, time;
         ArrayList<LevelInformation> levels;
         Settings settings;
@@ -143,6 +143,9 @@ class PlayerDaoImpl implements PlayerDao {
 
             sfx = !tmp.equals("false");
 
+            while (!playerInfo.nextLine().trim().equals("<ControlPreference>")) ;
+            controlPreference = playerInfo.nextLine().trim();
+
             while (!playerInfo.nextLine().trim().equals("<Theme>")) ;
             while (!playerInfo.nextLine().trim().equals("<Active>")) ;
             activeTheme = playerInfo.nextLine().trim();
@@ -159,7 +162,7 @@ class PlayerDaoImpl implements PlayerDao {
             while (!playerInfo.nextLine().trim().equals("<SpaceUnlocked>")) ;
             themes.put("space", playerInfo.nextLine().trim().equals("true"));
 
-            settings = new Settings(music, sfx, themes, activeTheme);
+            settings = new Settings(music, sfx, themes, activeTheme, controlPreference);
 
             playerInfo = createScanner(list[i].getPath() + "/PowerUpInfo.txt");
 
@@ -195,7 +198,7 @@ class PlayerDaoImpl implements PlayerDao {
         ArrayList<LevelInformation> levels = new ArrayList<LevelInformation>();
         boolean unlocked, bonus;
 
-            scanInfo = createScanner("src/data/info.txt");
+        scanInfo = createScanner("src/data/info.txt");
 
 			/*
 			while(!scanInfo.nextLine().equals("<NumberOfPlayers>"));
@@ -290,11 +293,11 @@ class PlayerDaoImpl implements PlayerDao {
 
         playerInfo =
                 "<RemainingShrinkPowerups>\n" +
-                "\t3\n" +
-                "<RemainingShrinkPowerups/>\n" +
-                "<RemainingSpacePowerups>\n" +
-                "\t3\n" +
-                "<RemainingSpacePowerups/>";
+                        "\t3\n" +
+                        "<RemainingShrinkPowerups/>\n" +
+                        "<RemainingSpacePowerups>\n" +
+                        "\t3\n" +
+                        "<RemainingSpacePowerups/>";
 
         writeFile(playerPath + "/PowerUpInfo.txt", playerInfo);
 

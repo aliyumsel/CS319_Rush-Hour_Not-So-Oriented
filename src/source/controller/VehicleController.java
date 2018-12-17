@@ -330,4 +330,33 @@ public class VehicleController extends Controller {
         }
         return difference;
     }
+
+    public void toggleCurrentControl()
+    {
+        if (currentControl == CONTROL.SLIDE)
+        {
+            currentControl = CONTROL.KEYBOARD;
+        }
+        else
+        {
+            currentControl = CONTROL.SLIDE;
+        }
+    }
+
+    private void initializeCurrentControl()
+    {
+        if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getControlPrefrence().equals("Slide"))
+        {
+            currentControl = CONTROL.SLIDE;
+        }
+        else
+        {
+            currentControl = CONTROL.KEYBOARD;
+        }
+    }
+
+    public void start()
+    {
+        initializeCurrentControl();
+    }
 }

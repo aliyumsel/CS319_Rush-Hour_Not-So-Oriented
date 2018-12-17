@@ -14,9 +14,12 @@ public class SettingsPanel extends JPanel
    private JLabel heading;
    private JLabel volume;
    private JLabel theme;
+   private JLabel control;
 
    private JButton music;
    private JButton sfx;
+
+   private JButton controlPreference;
 
    private JButton back;
    private JButton minimalistic;
@@ -103,6 +106,8 @@ public class SettingsPanel extends JPanel
       sfx = UIFactory.createButton(sfxImage, sfxHighlightedImage, "square", actionListener);
       back = UIFactory.createButton(backButtonImage, backButtonHighlightedImage, "square", actionListener);
 
+      controlPreference = UIFactory.createButton(simpleImage, simpleHighlightedImage, "square", actionListener);
+
       minimalistic = UIFactory.createButton(simpleImage, simpleHighlightedImage, "square", actionListener);
       classic = UIFactory.createButton(classicImage, classicHighlightedImage, "square", actionListener);
       safari = UIFactory.createButton(safariImage, safariHighlightedImage, "square", actionListener);
@@ -116,6 +121,11 @@ public class SettingsPanel extends JPanel
       volume.setPreferredSize(new Dimension(150, 30));
       volume.setFont(new Font("Odin Rounded", Font.PLAIN, 40));
       volume.setForeground(Color.white);
+
+      control = new JLabel("Control", SwingConstants.CENTER);
+      control.setPreferredSize(new Dimension(150, 30));
+      control.setFont(new Font("Odin Rounded", Font.PLAIN, 40));
+      control.setForeground(Color.white);
 
       theme = new JLabel("Theme", SwingConstants.CENTER);
       theme.setPreferredSize(new Dimension(150, 30));
@@ -133,6 +143,9 @@ public class SettingsPanel extends JPanel
       add(heading);
       add(volume);
       add(theme);
+
+      add(control);
+      add(controlPreference);
 
       add(minimalistic);
       add(classic);
@@ -159,6 +172,9 @@ public class SettingsPanel extends JPanel
       safari.setBounds(275, 350, safari.getPreferredSize().width, safari.getPreferredSize().height);
 
       space.setBounds(375, 350, space.getPreferredSize().width, space.getPreferredSize().height);
+
+      control.setBounds(550, 125, control.getPreferredSize().width, control.getPreferredSize().height);
+      controlPreference.setBounds(575, 175, controlPreference.getPreferredSize().width, controlPreference.getPreferredSize().height);
    }
 
    void updatePanel(String previousPanel)
@@ -304,6 +320,10 @@ public class SettingsPanel extends JPanel
          GameEngine.instance.playerManager.toggleSfx();
          updateSoundButtons("SFX");
          GameEngine.instance.soundManager.effectsToggle();
+      }
+      else if (e.getSource() == controlPreference)
+      {
+         GameEngine.instance.gameManager.toggleControlType();
       }
       else
       {

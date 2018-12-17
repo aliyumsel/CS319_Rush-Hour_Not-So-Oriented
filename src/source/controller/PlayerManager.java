@@ -284,4 +284,10 @@ public class PlayerManager extends Controller
       currentPlayer.addSpacePowerup(amountToBeAdded);
       playerDao.saveRemainingPowerupAmount("space", currentPlayer);
    }
+
+   public void  toggleControlPreference()
+   {
+      currentPlayer.getSettings().toggleControlPreference();
+      playerDao.saveSettings(currentPlayer);
+   }
 }

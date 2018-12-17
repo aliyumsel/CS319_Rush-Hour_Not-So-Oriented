@@ -210,4 +210,10 @@ public class GameManager extends Controller
    {
       return isGameActive;
    }
+
+   public void toggleControlType()
+   {
+      PlayerManager.instance.toggleControlPreference();
+      VehicleController.instance.toggleCurrentControl();
+   }
 }
