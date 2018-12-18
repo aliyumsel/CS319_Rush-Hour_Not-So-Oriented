@@ -23,6 +23,10 @@ public class LevelInformation
       this.map = map;
    }
 
+   public int getLevelNo() {
+      return levelNo;
+   }
+
    public int getStars()
    {
       return stars;
