@@ -25,6 +25,7 @@ class LevelButton extends JButton {
 
     private boolean isLocked;
     private boolean isInProgress;
+
     LevelButton(GuiPanelManager _guiManager) {
         super();
         guiManager = _guiManager;
@@ -74,8 +75,8 @@ class LevelButton extends JButton {
         for (int i = 0; i < stars.length; i++) {
             stars[i] = UIFactory.createLabelIcon(starInactive, "miniStar");
         }
-        timerIconLabel = UIFactory.createLabelIcon(bonusLevelIcon,"timer");
-        if(!isLocked)
+        timerIconLabel = UIFactory.createLabelIcon(bonusLevelIcon, "timer");
+        if (!isLocked)
             timerIconLabel.setVisible(false);
     }
 
@@ -116,14 +117,12 @@ class LevelButton extends JButton {
 
     }
 
-    void showTimerIcon(boolean isBonusLevel)
-    {
+    void showTimerIcon(boolean isBonusLevel) {
         timerIconLabel.setVisible(isBonusLevel);
     }
+
     void toggleLock(boolean state) {
         isLocked = state;
-        //System.out.println("isLocked: " + isLocked);
-
         BufferedImage temp;
         BufferedImage tempH;
         if (isLocked) {
@@ -141,28 +140,21 @@ class LevelButton extends JButton {
         setRolloverIcon(new ImageIcon(tempH));
         setDisabledIcon(new ImageIcon(lockedBackground));
     }
+
     public void toggleInProgress(boolean state) {
         isInProgress = state;
-        //System.out.println("isLocked: " + isLocked);
-
         BufferedImage temp;
         BufferedImage tempH;
         if (isInProgress) {
             temp = inProgress;
             tempH = inProgressHighlighted;
-            //showStars(0);
         } else {
             temp = levelBackground;
             tempH = levelBackgroundHighlighted;
-            //showStars(0);
         }
         setIcon(new ImageIcon(temp));
         setRolloverIcon(new ImageIcon(tempH));
         setDisabledIcon(new ImageIcon(lockedBackground));
     }
-//   boolean getIsLocked()
-//   {
-//      return isLocked;
-//   }
 }
 
