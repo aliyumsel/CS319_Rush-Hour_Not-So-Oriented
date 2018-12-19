@@ -1,24 +1,20 @@
 package source.model;
 
-import source.controller.MapController;
 import source.controller.ThemeManager;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class Vehicle extends GameObject// implements Drawable
 {
    private String type; // we may not need this
    public boolean isMoving; // we may not need this
-   //   public boolean isHighlighted; //bunu highlight olayi icin kullanmamiz gerekebilir
    private boolean player;
-   private double verticalMoveAxis;
-   private double horizontalMoveAxis;
-   private int drawingIndexForMoving;
-   public  int gridPixelSize = 60;
+   private int gridPixelSize = 60;
    private boolean special = false;
    private BufferedImage image;
+   private BufferedImage blackedOutImage;
    public boolean isSliding = false;
    public double velocity;
 
@@ -28,9 +24,6 @@ public class Vehicle extends GameObject// implements Drawable
       this.player = player;
       isMoving = false;
       this.special = special;
-      this.drawingIndexForMoving = 60;
-      verticalMoveAxis = 0;
-      horizontalMoveAxis = 0;
       velocity = 0.05;
       updateImages();
    }
@@ -43,7 +36,6 @@ public class Vehicle extends GameObject// implements Drawable
          if (!isSliding) {
             transform.position.gridY = (int) ((transform.position.y + 0.1) / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
          }
-         verticalMoveAxis = moveAxis; // if move axis == -1 vehicle goes downwards
       }
       else if ( transform.axis.equals("Horizontal") )
       {
@@ -51,7 +43,6 @@ public class Vehicle extends GameObject// implements Drawable
          if (!isSliding) {
             transform.position.gridX = (int) ((transform.position.x + 0.1) / 1);
          }
-         horizontalMoveAxis = moveAxis; // if move axis == -1 vehicle goes left
       }
       findOccupiedCells();
    }
@@ -144,9 +135,6 @@ public class Vehicle extends GameObject// implements Drawable
       Graphics2D graphics2d = (Graphics2D) graphics;
 
       at = AffineTransform.getTranslateInstance(transform.position.x * gridPixelSize, transform.position.y * gridPixelSize);
-      //if(isMoving)
-      //System.out.println(transform.position.x * gridPixelSize + "," + transform.position.y * gridPixelSize);
-
 
       if ( transform.direction.equals("Upwards") )
       {
