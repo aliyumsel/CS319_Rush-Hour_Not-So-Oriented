@@ -240,6 +240,7 @@ public class ChangePlayerPanel extends JPanel
    private void selectPlayer(String name)
    {
       gameManager.playerManager.selectPlayer(name);
+      ThemeManager.instance.update();
    }
 
    void addPlayer(String name)
@@ -253,6 +254,7 @@ public class ChangePlayerPanel extends JPanel
          add(temp);
 
          guiManager.updateImages();
+         ThemeManager.instance.update();
       }
    }
 

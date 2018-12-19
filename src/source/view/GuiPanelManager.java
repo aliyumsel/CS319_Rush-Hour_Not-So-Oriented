@@ -94,6 +94,7 @@ public class GuiPanelManager extends JFrame
       levelSelectionPanel = new LevelSelectionPanel(this);
       changePlayerPanel = new ChangePlayerPanel(this);
       this.add(mainMenuPanel);
+
       this.add(gamePanel);
       this.add(creditsPanel);
       this.add(levelSelectionPanel);
@@ -137,6 +138,7 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("Settings") )
       {
+         targetPanel = settingsPanel;
          if ( mainMenuPanel.isVisible() )
          {
             settingsPanel.updatePanel("MainMenu");
@@ -145,7 +147,7 @@ public class GuiPanelManager extends JFrame
          {
             settingsPanel.updatePanel("Game");
          }
-         targetPanel = settingsPanel;
+
       }
       else if ( panelName.equals("Help") )
       {
@@ -206,6 +208,7 @@ public class GuiPanelManager extends JFrame
       }
       return image;
    }
+
 
    int findCenter(int _panelWidth, Component _component)
    {
