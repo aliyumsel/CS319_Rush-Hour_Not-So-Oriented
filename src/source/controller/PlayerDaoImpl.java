@@ -24,7 +24,7 @@ public class PlayerDaoImpl implements PlayerDao{
     public ArrayList<Player> extractPlayers()
     {
         ArrayList<Player> players = new ArrayList<>();
-        File folder = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\cs319\\project\\RushHour_GitHub\\CS319_Rush-Hour_Not-So-Oriented\\src\\data\\players");
+        File folder = new File("src\\data\\players");
         File[] list = folder.listFiles();
 
         for (int i = 0; i < list.length; i++)
