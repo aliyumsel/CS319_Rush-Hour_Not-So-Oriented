@@ -496,7 +496,7 @@ public class GamePanel extends JPanel
          {
             subImage = secondStarForegroundImage;
             int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, 1);
-            graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
+            graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }
 
       }
