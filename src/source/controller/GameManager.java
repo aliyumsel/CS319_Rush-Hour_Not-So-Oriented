@@ -159,6 +159,11 @@ public class GameManager extends Controller
       loadLevel(level, true);
    }
 
+   public boolean isLastLevel()
+   {
+      return level == PlayerManager.instance.getCurrentPlayer().getLevels().size();
+   }
+
    public int getLevel()
    {
       return level;
