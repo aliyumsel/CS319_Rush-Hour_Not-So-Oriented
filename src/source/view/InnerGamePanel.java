@@ -1,23 +1,19 @@
 package source.view;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-
 import source.controller.GameEngine;
-import source.controller.SoundManager;
-import source.model.*;
-
-import javax.swing.JPanel;
-
+import source.model.GameObject;
 import source.model.Map;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.FileNotFoundException;
 
 @SuppressWarnings("serial")
 public class InnerGamePanel extends JPanel
 {
 	private GuiPanelManager guiManager;
-   public EndOfLevelPanel endOfLevelPanel;
-   public TimeOverPopUp timeOverPopUp;
+   EndOfLevelPanel endOfLevelPanel;
+   private TimeOverPopUp timeOverPopUp;
    private Map map;
 
     InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException {
@@ -40,7 +36,7 @@ public class InnerGamePanel extends JPanel
         repaint();
     }
 
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics2D g) {
         super.paintComponent(g);
         if (map == null) {
             return;
