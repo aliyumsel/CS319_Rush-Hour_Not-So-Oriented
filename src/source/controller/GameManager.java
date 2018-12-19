@@ -89,11 +89,12 @@ public class GameManager extends Controller
    private int calculateStars(int _level)
    {
       LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
-      if ( currentLevel.getCurrentNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars() )
+      //bad fix maybe change it later
+      if ( currentLevel.getCurrentNumberOfMoves() + 1 <= currentLevel.getMaxNumberOfMovesForThreeStars() )
       {
          return 3;
       }
-      else if ( currentLevel.getCurrentNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForTwoStars() )
+      else if ( currentLevel.getCurrentNumberOfMoves() + 1 <= currentLevel.getMaxNumberOfMovesForTwoStars() )
       {
          return 2;
       }

@@ -117,6 +117,10 @@ public class MapController extends Controller
          {
             gameObject.showBlackForeground();
          }
+         else if (gameObject instanceof Space)
+         {
+            gameObject.showBlackForeground();
+         }
       }
    }
 
@@ -129,6 +133,10 @@ public class MapController extends Controller
             gameObject.showBlackForeground();
          }
          else if (gameObject instanceof Obstacle)
+         {
+            gameObject.showBlackForeground();
+         }
+         else if (gameObject instanceof Space)
          {
             gameObject.showBlackForeground();
          }

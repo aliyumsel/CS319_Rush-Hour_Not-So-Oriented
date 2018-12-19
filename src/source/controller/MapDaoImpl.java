@@ -1,23 +1,19 @@
 package source.controller;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import interfaces.MapDao;
+import source.model.*;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import interfaces.MapDao;
-import source.model.*;
 
 class MapDaoImpl implements MapDao
 {
 
    private Gson gson = new Gson();
    private ArrayList<GameObject> gameObjects = new ArrayList<>();
-
- 
 
    @SuppressWarnings("StatementWithEmptyBody")
    @Override
@@ -100,6 +96,10 @@ class MapDaoImpl implements MapDao
          else if ( objectCode.equals("OO") )
          {
             gameObjects.add(new Obstacle(x, y, 1, "Right"));
+         }
+         else if (objectCode.equals("SS"))
+         {
+            gameObjects.add(new Space(x, y, 1, "Right"));
          }
          x++;
       }
