@@ -183,7 +183,14 @@ public class EndOfLevelPanel extends JPanel
 
          if ( e.getSource() == nextLevel )
          {
-            GameEngine.instance.gameManager.nextLevel();
+            if (GameEngine.instance.gameManager.isLastLevel())
+            {
+               guiManager.setPanelVisible("Credits");
+            }
+            else
+            {
+               GameEngine.instance.gameManager.nextLevel();
+            }
          }
          guiManager.getGamePanel().hideBlackBackground();
          setVisible(false);
