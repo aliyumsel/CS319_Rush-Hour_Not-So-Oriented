@@ -2,9 +2,9 @@ package source.model;
 
 public class Car extends Vehicle {
 
-	public Car(int x, int y, String direction, boolean player, boolean special, String theme)
+	public Car(int x, int y, String direction, boolean player)
 	{
-		super(x, y, 2, direction, player, special, theme);
+		super(x, y, 2, direction, player);
 		if (player)
 		{
 			super.setType("Player");
@@ -17,7 +17,7 @@ public class Car extends Vehicle {
 
 	public Car(Vehicle tempVehicle)
 	{
-		super((int)tempVehicle.transform.position.x, (int)tempVehicle.transform.position.y, 2, tempVehicle.transform.direction, false, false, "traffic");
+		super((int)tempVehicle.transform.position.x, (int)tempVehicle.transform.position.y, 2, tempVehicle.transform.direction,  false);
 		super.setType("Car");
 	}
 

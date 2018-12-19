@@ -1,11 +1,13 @@
 package source.view;
 
 import source.controller.*;
+import source.model.Theme;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class SettingsPanel extends JPanel {
     private GuiPanelManager guiManager;
@@ -14,7 +16,10 @@ public class SettingsPanel extends JPanel {
     private JLabel volume;
     private JLabel theme;
     private JLabel control;
-    private JLabel starActiveLabel;
+    private ArrayList<JLabel> starActiveLabel = new ArrayList<>();
+
+    private ArrayList<JLabel> starAmount = new ArrayList<>();
+
     private BufferedImage starActive;
     private JButton music;
     private JButton sfx;
@@ -107,11 +112,9 @@ public class SettingsPanel extends JPanel {
         mouseControlHighlightedImage = guiManager.LoadImage("src/image/icons/control_mouseH.png");
         keyboardControlImage = guiManager.LoadImage("src/image/icons/control_keyboard.png");
         keyboardControlHighlightedImage = guiManager.LoadImage("src/image/icons/control_keyboardH.png");
-        //Disabled
         classicD = guiManager.LoadImage("src/image/icons/classicD.png");
         safariD = guiManager.LoadImage("src/image/icons/safariD.png");
         spaceD = guiManager.LoadImage("src/image/icons/spaceD.png");
-        // simpleD =  guiManager.LoadImage("src/image/icons/minimalisticD.png");
     }
 
     @SuppressWarnings("Duplicates")
@@ -134,7 +137,15 @@ public class SettingsPanel extends JPanel {
         safari.setDisabledIcon(new ImageIcon(safariD));
         space.setDisabledIcon(new ImageIcon(spaceD));
 
-        starActiveLabel = UIFactory.createLabelIcon(starActive, "miniStar");///////
+        for (int i = 0; i < 3; i++) {
+            JLabel temp = UIFactory.createLabelIcon(starActive, "miniStar");
+            starActiveLabel.add(temp);
+            starAmount.add(new JLabel());
+            starAmount.get(i).setText(ThemeManager.instance.findRequiredStars()+"");
+            starAmount.get(i).setPreferredSize(new Dimension(26, 26));
+            starAmount.get(i).setFont(new Font("Odin Rounded", Font.PLAIN, 20));
+            starAmount.get(i).setForeground(Color.white);
+        }
 
         heading = new JLabel();
         heading.setIcon(new ImageIcon(title));
@@ -166,7 +177,12 @@ public class SettingsPanel extends JPanel {
         add(heading);
         add(volume);
         add(theme);
-        add(starActiveLabel);
+        for (int i = 0;i <3; i++)
+        {
+            add(starActiveLabel.get(i));
+            add(starAmount.get(i));
+        }
+        //add(starActiveLabel);
         add(control);
         add(controlPreference);
 
@@ -196,8 +212,16 @@ public class SettingsPanel extends JPanel {
         space.setBounds(375, 350, space.getPreferredSize().width, space.getPreferredSize().height);
 
         control.setBounds(550, 125, control.getPreferredSize().width, control.getPreferredSize().height);
+
         controlPreference.setBounds(605, 175, controlPreference.getPreferredSize().width, controlPreference.getPreferredSize().height);
-        starActiveLabel.setBounds(175, 370, classic.getPreferredSize().width, classic.getPreferredSize().height);
+        int gap = 200;
+        for (int i = 0 ; i < 3;i++)
+        {
+            starActiveLabel.get(i).setBounds(gap, 400, classic.getPreferredSize().width, classic.getPreferredSize().height);
+            starAmount.get(i).setBounds(gap-25, 400, classic.getPreferredSize().width, classic.getPreferredSize().height);
+            gap += 100;
+        }
+
 //        keyboard.setBounds(645, 175, mouse.getPreferredSize().width, mouse.getPreferredSize().height);
     }
 
@@ -206,8 +230,26 @@ public class SettingsPanel extends JPanel {
         updateSoundButtons("SFX");
         updateSoundButtons("Music");
         updateThemeButtons();
+        updateThemeLabels();
     }
 
+    public void updateThemeLabels(){
+
+        for (int i = 0; i < 3; i++) {
+            if(PlayerManager.instance.getCurrentPlayer().getSettings().getThemes().get(ThemeManager.instance.getThemes()[i+1])){
+                System.out.println(ThemeManager.instance.findRequiredStars());
+                starAmount.get(i).setVisible(false);
+                starActiveLabel.get(i).setVisible(false);
+            }
+            else
+            {
+                starAmount.get(i).setText(ThemeManager.instance.findRequiredStars()+"");
+                starAmount.get(i).setVisible(true);
+                starActiveLabel.get(i).setVisible(true);
+            }
+
+        }
+    }
     @SuppressWarnings("Duplicates")
     private void updateSoundButtons(String type) {
         boolean enabled;
