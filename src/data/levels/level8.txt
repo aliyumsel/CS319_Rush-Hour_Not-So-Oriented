@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+<IsBonusMap>
+	10
+<IsBonusMap/>
+<ExpectedNumberOfMovesForThreeStars>
+	16
+<ExpectedNumberOfMovesForThreeStars/>
+<ExpectedNumberOfMovesForTwoStars>
+	21
+<ExpectedNumberOfMovesForTwoStars/>
+<Map>
+OO OO OO OO OO OO OO OO
+OO TU SS SS OO SS SS OO
+OO SS CL SS CR SS SS OO
+OO SS PC SS CU SS SS SS
+OO SS CD SS SS CR SS OO
+OO SS SS CL SS CU SS OO
+OO TR SS SS SS SS SS OO
+OO OO OO OO OO OO OO OO
+=======
 <ExpectedNumberOfMovesForThreeStars>
 	8
 <ExpectedNumberOfMovesForThreeStars/>
@@ -13,4 +33,5 @@ OO CD CL SS SS SS SS OO
 OO SS SS SS SS SS CU OO
 OO OO TL SS SS SS SS OO
 OO OO OO OO OO OO OO OO
+>>>>>>> unstable
 <Map/>

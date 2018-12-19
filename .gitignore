@@ -2,6 +2,7 @@
 /*/
 !/src/
 !/doc/
+!/lib/
 !.gitignore
 src/data/**/*
 !src/data/levels/

@@ -377,7 +377,7 @@ public class VehicleController extends Controller {
 
     private void initializeCurrentControl()
     {
-        if (GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getControlPrefrence().equals("Slide"))
+        if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPrefrence().equals("Slide"))
         {
             currentControl = CONTROL.SLIDE;
         }
