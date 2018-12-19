@@ -2,6 +2,8 @@ package source.view;
 
 import source.controller.Input;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -9,9 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
 //import source.controller.Controller;
 //import source.controller.Sound;
@@ -117,7 +116,6 @@ public class GuiPanelManager extends JFrame
 
    void setPanelVisible(String panelName)
    {
-
       if ( panelName.equals("MainMenu") )
       {
          mainMenuPanel.updatePanel();
@@ -175,7 +173,7 @@ public class GuiPanelManager extends JFrame
       gamePanel.updatePanel(); // look into updating other panels
    }
 
-   public void updateImages()
+   void updateImages()
    {
       settingsPanel.loadImages();
       changePlayerPanel.loadImages();

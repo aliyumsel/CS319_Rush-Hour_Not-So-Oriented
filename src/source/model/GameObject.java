@@ -9,12 +9,8 @@ public class GameObject implements Drawable
    public Transform transform;
    private int[] occupiedCellNumbers;
    private Transform[] occupiedTransforms;
+   boolean isBlackedOut; //bunu highlight olayi icin kullanmamiz gerekebilir
 
-//   GameObject()
-//   {
-//      transform = new Transform();
-//      findOccupiedCells();
-//   }
 
    GameObject(int x, int y, int length, String direction)
    {
@@ -22,7 +18,7 @@ public class GameObject implements Drawable
       findOccupiedCells();
    }
 
-   public void findOccupiedCells()
+   void findOccupiedCells()
    {
       occupiedCellNumbers = new int[transform.length];
       occupiedCellNumbers[0] = transform.position.gridY * 8 + transform.position.gridX;
@@ -80,5 +76,15 @@ public class GameObject implements Drawable
 
    public void updateImages()
    {
+   }
+
+   public void showBlackForeground()
+   {
+      isBlackedOut = true;
+   }
+
+   public void hideBlackForeground()
+   {
+      isBlackedOut = false;
    }
 }
