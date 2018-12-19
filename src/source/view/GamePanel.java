@@ -396,21 +396,21 @@ public class GamePanel extends JPanel
 
    private void drawBackground(Graphics graphics)
    {
+      graphics.drawImage(background, 0, 0, null);
 
-      Graphics2D graphics2d = (Graphics2D) graphics;
-
-      graphics2d.drawImage(background, 0, 0, null);
+//      Color myColour = new Color(0, 0, 0, 200);
+//      graphics.setColor(myColour);
+//      graphics.fillRect(0,0,panelWidth,panelHeight);
 
       if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive())
       {
-         graphics2d.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
-         graphics2d.drawImage(timerBottomImage, 40, timerBottomPosition, null);
+         graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
+         graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
       }
-
       //Backgrounds for stars
-      graphics2d.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
-      graphics2d.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
-      graphics2d.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
+      graphics.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
+      graphics.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
+      graphics.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
    }
 
    private void drawMoveCountForeground(Graphics g)

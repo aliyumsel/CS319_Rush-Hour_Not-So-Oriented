@@ -68,7 +68,7 @@ public class GameObject implements Drawable
    }
 
    @Override
-   public void draw(Graphics graphics)
+   public void draw(Graphics2D graphics)
    {
 
    }

@@ -128,33 +128,32 @@ public class Vehicle extends GameObject// implements Drawable
    }
 
    @Override
-   public void draw(Graphics graphics)
+   public void draw(Graphics2D graphics)
    {
 
       AffineTransform at;
-      Graphics2D graphics2d = (Graphics2D) graphics;
 
       at = AffineTransform.getTranslateInstance(transform.position.x * gridPixelSize, transform.position.y * gridPixelSize);
 
       if ( transform.direction.equals("Upwards") )
       {
-         graphics2d.drawImage(image, at, null);
+         graphics.drawImage(image, at, null);
       }
       else if ( transform.direction.equals("Downwards") )
       {
          at.rotate(Math.toRadians(180), image.getWidth() / 2.0, image.getHeight() / 2.0);
-         graphics2d.drawImage(image, at, null);
+         graphics.drawImage(image, at, null);
       }
       else if ( transform.direction.equals("Left") )
       {
          at.rotate(Math.toRadians(90), image.getWidth() / 2.0, image.getHeight() / 2.0 / transform.length);
          at.translate(0, -60 * ( transform.length - 1 ));
-         graphics2d.drawImage(image, at, null);
+         graphics.drawImage(image, at, null);
       }
       else
       {
          at.rotate(Math.toRadians(270), image.getWidth() / 2.0, image.getHeight() / 2.0 / transform.length);
-         graphics2d.drawImage(image, at, null);
+         graphics.drawImage(image, at, null);
       }
    }
 }
