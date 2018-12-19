@@ -193,6 +193,11 @@ public class MapController extends Controller
                      break;
                   }
                }
+               else if (getGameObjectBySelectedCell(j, j) != null)
+               {
+                  mapStr = mapStr + "XX ";
+                  found = true;
+               }
             }
             if ( !found )
             {
