@@ -1,4 +1,4 @@
-package source.controller;
+/*package source.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,7 +34,7 @@ class PlayerDaoImpl implements PlayerDao {
         HashMap<String, Boolean> themes = new HashMap<String, Boolean>();
 
         //initiates the players
-        File folder = new File("src/data/players");
+        File folder = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\cs319\\project\\RushHour_GitHub\\CS319_Rush-Hour_Not-So-Oriented\\src\\data\\players");
         File[] list = folder.listFiles();
 
         if (list.length == 0) {
@@ -53,70 +53,70 @@ class PlayerDaoImpl implements PlayerDao {
 
             playerInfo = createScanner(list[i].getPath() + "/PlayerInfo.txt");
 
-            while (!playerInfo.nextLine().trim().equals("<Name>")) ;
-            playerName = playerInfo.nextLine().trim();
+            while (!scanLine(playerInfo, true).equals("<Name>")) ;
+            playerName = scanLine(playerInfo, true);
 
-            while (!playerInfo.nextLine().trim().equals("<StarAmount>")) ;
-            tmp = playerInfo.nextLine().trim();
+            while (!scanLine(playerInfo, true).equals("<StarAmount>")) ;
+            tmp = scanLine(playerInfo, true);
             starAmount = Integer.parseInt(tmp);
 
             playerInfo = createScanner(list[i].getPath() + "/LevelsInfo.txt");
 
-            while (!playerInfo.nextLine().trim().equals("<Levels/>")) {
+            while (!scanLine(playerInfo, true).equals("<Levels/>")) {
                 bonus = false;
                 time = 0;
 
-                while (!playerInfo.nextLine().trim().equals("<LevelNo>")) ;
-                tmp = playerInfo.nextLine().trim();
+                while (!scanLine(playerInfo, true).equals("<LevelNo>")) ;
+                tmp = scanLine(playerInfo, true);
                 levelNo = Integer.parseInt(tmp);
 
-                while (!playerInfo.nextLine().trim().equals("<Stars>")) ;
-                tmp = playerInfo.nextLine().trim();
+                while (!scanLine(playerInfo, true).equals("<Stars>")) ;
+                tmp = scanLine(playerInfo, true);
                 currentStars = Integer.parseInt(tmp);
 
-                while (!playerInfo.nextLine().trim().equals("<CurrentNumberOfMoves>")) ;
-                tmp = playerInfo.nextLine().trim();
+                while (!scanLine(playerInfo, true).equals("<CurrentNumberOfMoves>")) ;
+                tmp = scanLine(playerInfo, true);
                 currentNumberOfMoves = Integer.parseInt(tmp);
 
-                while (!playerInfo.nextLine().trim().equals("<Status>")) ;
-                status = playerInfo.nextLine().trim();
+                while (!scanLine(playerInfo, true).equals("<Status>")) ;
+                status = scanLine(playerInfo, true);
 
-                while (!playerInfo.nextLine().trim().equals("<Unlocked>")) ;
-                tmp = playerInfo.nextLine().trim();
+                while (!scanLine(playerInfo, true).equals("<Unlocked>")) ;
+                tmp = scanLine(playerInfo, true);
 
                 unlocked = !tmp.equals("false");
 
-                while (!playerInfo.nextLine().trim().equals("<Map>")) ;
-                mapLine = playerInfo.nextLine().trim();
+                while (!scanLine(playerInfo).equals("<Map>")) ;
+                mapLine = scanLine(playerInfo);
                 if (!mapLine.equals("<Map/>")) {
                     map = map + mapLine;
-                    mapLine = playerInfo.nextLine().trim();
+                    mapLine = scanLine(playerInfo);
                     while (!mapLine.equals("<Map/>")) {
                         map = map + mapLine;
-                        mapLine = playerInfo.nextLine().trim();
+                        mapLine = scanLine(playerInfo);
                     }
                 }
 
                 levelInfo = createScanner("src/data/levels/level" + levelNo + ".txt");
 
-                if (levelInfo.nextLine().trim().equals("<IsBonusMap>"))
+                if (scanLine(levelInfo).equals("<IsBonusMap>"))
                 {
-                    time = Integer.parseInt(levelInfo.nextLine().trim());
+                    time = Integer.parseInt(scanLine(levelInfo));
                     bonus = true;
                 }
                 if (bonus) {
-                    while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
-                    tmp = levelInfo.nextLine().trim();
+                    while (!scanLine(levelInfo).equals("<ExpectedNumberOfMovesForThreeStars>")) ;
+                    tmp = scanLine(levelInfo);
                     movesForThreeStars = Integer.parseInt(tmp);
                 }
                 else
                 {
-                    tmp = levelInfo.nextLine().trim();
+                    tmp = scanLine(levelInfo);
                     movesForThreeStars = Integer.parseInt(tmp);
                 }
 
-                while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>")) ;
-                tmp = levelInfo.nextLine().trim();
+                while (!scanLine(levelInfo).equals("<ExpectedNumberOfMovesForTwoStars>")) ;
+                tmp = scanLine(levelInfo);
                 movesForTwoStars = Integer.parseInt(tmp);
 
                 levelInfo.close();
@@ -129,48 +129,48 @@ class PlayerDaoImpl implements PlayerDao {
                     levels.add(new LevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked, map));
                 }
 
-                while (!playerInfo.nextLine().trim().equals("<Level/>")) ;
+                while (!scanLine(playerInfo).equals("<Level/>")) ;
             }
 
             playerInfo = createScanner(list[i].getPath() + "/SettingsInfo.txt");
-            while (!playerInfo.nextLine().trim().equals("<Music>")) ;
-            tmp = playerInfo.nextLine().trim();
+            while (!scanLine(playerInfo).equals("<Music>")) ;
+            tmp = scanLine(playerInfo);
 
             music = !tmp.equals("false");
 
-            while (!playerInfo.nextLine().trim().equals("<Sfx>")) ;
-            tmp = playerInfo.nextLine().trim();
+            while (!scanLine(playerInfo).equals("<Sfx>")) ;
+            tmp = scanLine(playerInfo);
 
             sfx = !tmp.equals("false");
 
-            while (!playerInfo.nextLine().trim().equals("<ControlPreference>")) ;
-            controlPreference = playerInfo.nextLine().trim();
+            while (!scanLine(playerInfo).equals("<ControlPreference>")) ;
+            controlPreference = scanLine(playerInfo);
 
-            while (!playerInfo.nextLine().trim().equals("<Theme>")) ;
-            while (!playerInfo.nextLine().trim().equals("<Active>")) ;
-            activeTheme = playerInfo.nextLine().trim();
+            while (!scanLine(playerInfo).equals("<Theme>")) ;
+            while (!scanLine(playerInfo).equals("<Active>")) ;
+            activeTheme = scanLine(playerInfo);
 
-            while (!playerInfo.nextLine().trim().equals("<MinimalisticUnlocked>")) ;
-            themes.put("minimalistic", playerInfo.nextLine().trim().equals("true"));
+            while (!scanLine(playerInfo).equals("<MinimalisticUnlocked>")) ;
+            themes.put("minimalistic", scanLine(playerInfo).equals("true"));
 
-            while (!playerInfo.nextLine().trim().equals("<ClassicUnlocked>")) ;
-            themes.put("classic", playerInfo.nextLine().trim().equals("true"));
+            while (!scanLine(playerInfo).equals("<ClassicUnlocked>")) ;
+            themes.put("classic", scanLine(playerInfo).equals("true"));
 
-            while (!playerInfo.nextLine().trim().equals("<SafariUnlocked>")) ;
-            themes.put("safari", playerInfo.nextLine().trim().equals("true"));
+            while (!scanLine(playerInfo).equals("<SafariUnlocked>")) ;
+            themes.put("safari", scanLine(playerInfo).equals("true"));
 
-            while (!playerInfo.nextLine().trim().equals("<SpaceUnlocked>")) ;
-            themes.put("space", playerInfo.nextLine().trim().equals("true"));
+            while (!scanLine(playerInfo).equals("<SpaceUnlocked>")) ;
+            themes.put("space", scanLine(playerInfo).equals("true"));
 
             settings = new Settings(music, sfx, themes, activeTheme, controlPreference);
 
             playerInfo = createScanner(list[i].getPath() + "/PowerUpInfo.txt");
 
-            while (!playerInfo.nextLine().trim().equals("<RemainingShrinkPowerups>")) ;
-            remainingShrinkPowerup = Integer.parseInt(playerInfo.nextLine().trim());
+            while (!scanLine(playerInfo).equals("<RemainingShrinkPowerups>")) ;
+            remainingShrinkPowerup = Integer.parseInt(scanLine(playerInfo));
 
-            while (!playerInfo.nextLine().trim().equals("<RemainingSpacePowerups>")) ;
-            remainingSpacePowerup = Integer.parseInt(playerInfo.nextLine().trim());
+            while (!scanLine(playerInfo).equals("<RemainingSpacePowerups>")) ;
+            remainingSpacePowerup = Integer.parseInt(scanLine(playerInfo));
 
             Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName, settings, remainingShrinkPowerup, remainingSpacePowerup);
             player.configureLastUnlockedLevelNo();
@@ -186,8 +186,8 @@ class PlayerDaoImpl implements PlayerDao {
     public String extractLastPlayerName() {
         Scanner info = createScanner("src/data/info.txt");
 
-        while (!info.nextLine().trim().equals("<LastActivePlayer>")) ;
-        return info.nextLine().trim();
+        while (!scanLine(info).equals("<LastActivePlayer>")) ;
+        return scanLine(info);
     }
 
     @Override
@@ -200,14 +200,9 @@ class PlayerDaoImpl implements PlayerDao {
 
         scanInfo = createScanner("src/data/info.txt");
 
-			/*
-			while(!scanInfo.nextLine().equals("<NumberOfPlayers>"));
-			tmp = scanInfo.nextLine().trim();
-			playerAmount = Integer.parseInt(tmp);
-			*/
 
-        while (!scanInfo.nextLine().equals("<NumberOfMaps>")) ;
-        tmp = scanInfo.nextLine().trim();
+        while (!scanLine(scanInfo).equals("<NumberOfMaps>")) ;
+        tmp = scanLine(scanInfo);
         mapAmount = Integer.parseInt(tmp);
 
         playerPath = "src/data/players/" + playerName;
@@ -246,24 +241,24 @@ class PlayerDaoImpl implements PlayerDao {
 
             levelInfo = createScanner("src/data/levels/level" + i + ".txt");
 
-            if (levelInfo.nextLine().trim().equals("<IsBonusMap>"))
+            if (scanLine(levelInfo).equals("<IsBonusMap>"))
             {
-                time = Integer.parseInt(levelInfo.nextLine().trim());
+                time = Integer.parseInt(scanLine(levelInfo));
                 bonus = true;
             }
             if (bonus) {
-                while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
-                tmp = levelInfo.nextLine().trim();
+                while (!scanLine(levelInfo).equals("<ExpectedNumberOfMovesForThreeStars>")) ;
+                tmp = scanLine(levelInfo);
                 movesForThreeStars = Integer.parseInt(tmp);
             }
             else
             {
-                tmp = levelInfo.nextLine().trim();
+                tmp = scanLine(levelInfo);
                 movesForThreeStars = Integer.parseInt(tmp);
             }
 
-            while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>")) ;
-            tmp = levelInfo.nextLine().trim();
+            while (!scanLine(levelInfo).equals("<ExpectedNumberOfMovesForTwoStars>")) ;
+            tmp = scanLine(levelInfo);
             movesForTwoStars = Integer.parseInt(tmp);
 
             levelInfo.close();
@@ -373,7 +368,7 @@ class PlayerDaoImpl implements PlayerDao {
                 if (levelCounter == levelNo) {
                     text = text + levelStr;
                     checkLevel = false;
-                    while (!scan.nextLine().trim().equals("<Level/>")) ;
+                    while (!scanLine(scan).equals("<Level/>")) ;
                 } else {
                     text = text + line + "\n";
                 }
@@ -428,6 +423,9 @@ class PlayerDaoImpl implements PlayerDao {
     }
 
     private void writeFile(String path, String text) {
+
+        text = encrypt(text);
+        //text = decrypt(text);
         FileWriter fileOut = null;
         try {
             fileOut = new FileWriter(path);
@@ -461,5 +459,59 @@ class PlayerDaoImpl implements PlayerDao {
             return null;
         }
     }
+    private String encrypt(String text)
+    {
+        String newText = "";
+        for (int i = 0; i < text.length(); i++)
+        {
+            if(text.charAt(i) == '\n')
+            {
+                newText = newText + "\n";
+                continue;
+            }
+            else if (text.charAt(i) == '\t')
+            {
+                newText = newText + "\t";
+            }
+            else {
+                newText = newText + (char) (text.charAt(i) + 'b') + "";
+            }
+            //System.out.println(newText);
+        }
+        return newText;
+    }
 
+    private String decrypt(String text)
+    {
+        String newText = "";
+        for (int i = 0; i < text.length(); i++)
+        {
+            if(text.charAt(i) == '\n')
+            {
+                newText = newText + "\n";
+            }
+            else if (text.charAt(i) == '\t')
+            {
+                newText = newText + "\t";
+            }
+            else {
+                newText = newText + (char) (text.charAt(i) - 'b') + "";
+            }
+            //System.out.println(newText);
+        }
+        return newText;
+    }
+
+    private String scanLine(Scanner scan, boolean decrypt)
+    {
+        String text = scan.nextLine();
+        if (decrypt)
+        {
+            text = decrypt(text);
+        }
+        System.out.println(decrypt(text));
+        System.out.println(encrypt(text));
+        return text.trim();
+    }
 }
+*/

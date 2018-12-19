@@ -12,12 +12,12 @@ public interface PlayerDao {
 	
 	String extractLastPlayerName();
 	
-	Player cratePlayer(String playerName, Settings settings);
+	Player createPlayer(String playerName, Settings settings);
 	
 	boolean deletePlayer(Player player);
 	
 	void saveLastActivePlayer(String playerName);
-	
+	/*
 	void saveLevel(int levelNo, Player player);
 	
 	void saveSettings(Player player);
@@ -25,6 +25,8 @@ public interface PlayerDao {
 	void saveRemainingPowerupAmount(Player player);
 
 	void savePlayerInfo(Player player);
+	*/
+    void savePlayer(Player player);
 
 	void changePlayerName(Player player);
 }
