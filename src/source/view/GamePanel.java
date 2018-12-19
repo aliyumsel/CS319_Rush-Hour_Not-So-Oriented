@@ -408,10 +408,21 @@ public class GamePanel extends JPanel
          graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
       }
       //Backgrounds for stars
-      graphics2d.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
-      graphics2d.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
-      graphics2d.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
-   }
+      graphics.drawImage(background, 0, 0, null);
+
+//      Color myColour = new Color(0, 0, 0, 200);
+//      graphics.setColor(myColour);
+//      graphics.fillRect(0,0,panelWidth,panelHeight);
+
+      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive())
+      {
+         graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
+         graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
+      }
+      //Backgrounds for stars
+      graphics.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
+      graphics.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
+      graphics.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null); }
 
    private void drawMoveCountForeground(Graphics g)
    {
