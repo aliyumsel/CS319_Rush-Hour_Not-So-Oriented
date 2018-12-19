@@ -64,7 +64,7 @@ public class GuiPanelManager extends JFrame
       panelWidth = 800; //764
       panelHeight = 520; //468
 
-      setLayout(new CardLayout());
+      setLayout(null);
       setResizable(false);
       setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,27 +116,22 @@ public class GuiPanelManager extends JFrame
 
    void setPanelVisible(String panelName)
    {
+
       if ( panelName.equals("MainMenu") )
       {
          mainMenuPanel.updatePanel();
-//         mainMenuPanel.loadImages();
          targetPanel = mainMenuPanel;
       }
       else if ( panelName.equals("Game") )
       {
-         //gamePanel.loadImages();
-//         gamePanel.getInnerGamePanel().endOfLevelPanel.loadImages();
          targetPanel = gamePanel;
-
       }
       else if ( panelName.equals("Credits") )
       {
-//         creditsPanel.loadImages();
          targetPanel = creditsPanel;
       }
       else if ( panelName.equals("LevelSelection") )
       {
-//         levelSelectionPanel.loadImages();
          levelSelectionPanel.updatePanel();
          targetPanel = levelSelectionPanel;
       }
@@ -154,13 +149,10 @@ public class GuiPanelManager extends JFrame
       }
       else if ( panelName.equals("Help") )
       {
-//         helpPanel.loadImages();
          targetPanel = helpPanel;
       }
       else if ( panelName.equals("ChangePlayer") )
       {
-//         changePlayerPanel.loadImages();
-//         changePlayerPanel.popUp.loadImages();
          changePlayerPanel.updatePanel();
          targetPanel = changePlayerPanel;
       }
@@ -185,7 +177,6 @@ public class GuiPanelManager extends JFrame
    {
       settingsPanel.loadImages();
       changePlayerPanel.loadImages();
-//      changePlayerPanel.popUp.loadImages(); Bunu changePlayerPanelin load imagesin icine koydum
       helpPanel.loadImages();
       levelSelectionPanel.loadImages();
       creditsPanel.loadImages();

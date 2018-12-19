@@ -13,7 +13,7 @@ public class Player
    private int remainingShrinkPowerup;
    private int remainingSpacePowerup;
 
-   private Settings settings;
+   public Settings settings;
 
    public Player(String playerName, int starAmount, ArrayList<LevelInformation> levels, String path, Settings settings, int remainingShrinkPowerup, int remainingSpacePowerup)
    {

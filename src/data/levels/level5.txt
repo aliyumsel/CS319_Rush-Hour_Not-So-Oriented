@@ -1,3 +1,6 @@
+<IsBonusMap>
+	10
+<IsBonusMap/>
 <ExpectedNumberOfMovesForThreeStars>
 	15
 <ExpectedNumberOfMovesForThreeStars/>

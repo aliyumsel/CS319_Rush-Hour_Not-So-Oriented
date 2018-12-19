@@ -4,9 +4,9 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import source.controller.GameEngine;
-import source.controller.SoundManager;
-import source.controller.ThemeManager;
+import source.controller.*;
+import source.model.BonusLevelInformation;
+import source.model.LevelInformation;
 
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -173,6 +173,14 @@ public class LevelSelectionPanel extends JPanel
                buttonArray[i].toggleLock(false);
                System.out.println("starAmount: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+               LevelInformation level = PlayerManager.instance.getCurrentPlayer().getLevels().get(i);
+               buttonArray[i].showTimerIcon(false);
+               if ( level instanceof BonusLevelInformation && level.isUnlocked())
+               {
+                  buttonArray[i].showTimerIcon(true);
+               }
+
+
             }
          }
          else
