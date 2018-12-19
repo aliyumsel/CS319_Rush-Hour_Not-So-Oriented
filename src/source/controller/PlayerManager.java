@@ -28,7 +28,7 @@ public class PlayerManager extends Controller
    {
       players = playerDao.extractPlayers();
       String lastPlayerName = playerDao.extractLastPlayerName();
-      if ( players == null )
+      if ( players.size() == 0)
       {
          createPlayer("default");
       }
@@ -104,7 +104,7 @@ public class PlayerManager extends Controller
       }
 
       Settings settings = new Settings(initialMusic, initialSfx);
-      Player newPlayer = playerDao.cratePlayer(playerName, settings);
+      Player newPlayer = playerDao.createPlayer(playerName, settings);
       playerDao.saveLastActivePlayer(playerName);
       players.add(newPlayer);
       currentPlayer = newPlayer;
@@ -214,9 +214,11 @@ public class PlayerManager extends Controller
       {
          currentPlayer.setStarAmount(currentPlayer.getStarAmount() + ( starAmount - currentLevel.getStars() ));
          currentLevel.setStars(starAmount);
-         playerDao.savePlayerInfo(currentPlayer);
+         //playerDao.savePlayerInfo(currentPlayer);
+         playerDao.savePlayer(currentPlayer);
       }
-      playerDao.saveLevel(levelNo, currentPlayer);
+      //playerDao.saveLevel(levelNo, currentPlayer);
+      playerDao.savePlayer(currentPlayer);
 
    }
 
@@ -229,7 +231,8 @@ public class PlayerManager extends Controller
       currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(moveAmount);
       currentPlayer.getLevels().get(levelNo - 1).setMap(map);
 
-      playerDao.saveLevel(levelNo, currentPlayer);
+      //playerDao.saveLevel(levelNo, currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    private void setLevelStatus(int levelNo, String status)
@@ -243,14 +246,16 @@ public class PlayerManager extends Controller
    void setLevelStatusFinished(int levelNo)
    {
       setLevelStatus(levelNo, "finished");
-      playerDao.saveLevel(levelNo, currentPlayer);
+      //playerDao.saveLevel(levelNo, currentPlayer);
+      playerDao.savePlayer(currentPlayer);
 
    }
 
    void unlockLevel(int levelNo)
    {
       currentPlayer.getLevels().get(levelNo - 1).unlock();
-      playerDao.saveLevel(levelNo, currentPlayer);
+      //playerDao.saveLevel(levelNo, currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    void incrementLastUnlockedLevelNo()
@@ -266,13 +271,15 @@ public class PlayerManager extends Controller
    public void toggleMusic()
    {
       currentPlayer.getSettings().toggleMusic();
-      playerDao.saveSettings(currentPlayer);
+      //playerDao.saveSettings(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    public void toggleSfx()
    {
       currentPlayer.getSettings().toggleSfx();
-      playerDao.saveSettings(currentPlayer);
+      //playerDao.saveSettings(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    void changeTheme(String theme)
@@ -281,7 +288,8 @@ public class PlayerManager extends Controller
       if ( !theme.equals(currentPlayer.getSettings().getActiveTheme()) /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */ )
       {
          currentPlayer.getSettings().setActiveTheme(theme);
-         playerDao.saveSettings(currentPlayer);
+         //playerDao.saveSettings(currentPlayer);
+         playerDao.savePlayer(currentPlayer);
       }
    }
 
@@ -295,30 +303,35 @@ public class PlayerManager extends Controller
    void decrementRemainingShrinkPowerup()
    {
       currentPlayer.decrementRemainingShrinkPowerup();
-      playerDao.saveRemainingPowerupAmount(currentPlayer);
+      //playerDao.saveRemainingPowerupAmount(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    void decrementRemainingSpacePowerup()
    {
       currentPlayer.decrementRemainingSpacePowerup();
-      playerDao.saveRemainingPowerupAmount(currentPlayer);
+      //playerDao.saveRemainingPowerupAmount(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    public void addShrinkPowerup(int amountToBeAdded)
    {
       currentPlayer.addShrinkPowerup(amountToBeAdded);
-      playerDao.saveRemainingPowerupAmount(currentPlayer);
+      //playerDao.saveRemainingPowerupAmount(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    public void addSpacePowerup(int amountToBeAdded)
    {
       currentPlayer.addSpacePowerup(amountToBeAdded);
-      playerDao.saveRemainingPowerupAmount(currentPlayer);
+      //playerDao.saveRemainingPowerupAmount(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    public void  toggleControlPreference()
    {
       currentPlayer.getSettings().toggleControlPreference();
-      playerDao.saveSettings(currentPlayer);
+      //playerDao.saveSettings(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 }

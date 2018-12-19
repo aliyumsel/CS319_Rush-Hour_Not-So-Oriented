@@ -194,20 +194,7 @@ public class LevelSelectionPanel extends JPanel
 
    private int findNoOfLevels()
    {
-      Scanner scanInfo = null;
-      try
-      {
-         scanInfo = new Scanner(new File("src/data/info.txt"));
-      } catch (FileNotFoundException e)
-      {
-         e.printStackTrace();
-      }
-      while ( !scanInfo.nextLine().equals("<NumberOfMaps>") )
-      {
-         ;
-      }
-      String mapAmount = scanInfo.nextLine().trim();
-      return Integer.parseInt(mapAmount);
+      return GameEngine.instance.playerManager.getCurrentPlayer().getLevels().size();
    }
 
    void updatePanel()
