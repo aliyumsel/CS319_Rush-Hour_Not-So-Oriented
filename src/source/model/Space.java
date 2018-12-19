@@ -31,6 +31,6 @@ public class Space extends GameObject
    @Override
    public String getType()
    {
-      return "SS";
+      return "Space";
    }
 }

@@ -16,6 +16,7 @@ public class Obstacle extends GameObject
       updateImages();
    }
 
+   @SuppressWarnings("Duplicates")
    @Override
    public void draw(Graphics2D graphics)
    {

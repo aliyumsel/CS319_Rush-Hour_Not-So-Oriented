@@ -506,7 +506,7 @@ public class GamePanel extends JPanel
          int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f); //26 yı değikene atcam da anlamadım ahmet kodunu
          if ( currentLevel.getMaxNumberOfMovesForThreeStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0 )
          {
-            System.out.println(currentLevel.getMaxNumberOfMovesForThreeStars() -GameEngine.instance.vehicleController.getNumberOfMoves() + "  ,  " + starHeight);
+//            System.out.println(currentLevel.getMaxNumberOfMovesForThreeStars() -GameEngine.instance.vehicleController.getNumberOfMoves() + "  ,  " + starHeight);
             subImage = firstStarForegroundImage.getSubimage(0, firstStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
             graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }

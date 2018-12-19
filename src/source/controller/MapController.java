@@ -50,7 +50,7 @@ public class MapController extends Controller
       map.formMap(map.getGameObjects());
    }
 
-   private GameObject getGameObjectBySelectedCell(int x, int y)
+   GameObject getGameObjectBySelectedCell(int x, int y)
    {
       int[] occupiedCells;
       int cellNumber = ( map.getMapSize() * y ) + x;
@@ -200,11 +200,6 @@ public class MapController extends Controller
                      found = true;
                      break;
                   }
-               }
-               else if (getGameObjectBySelectedCell(j, j) != null)
-               {
-                  mapStr = mapStr + "XX ";
-                  found = true;
                }
             }
             if ( !found )

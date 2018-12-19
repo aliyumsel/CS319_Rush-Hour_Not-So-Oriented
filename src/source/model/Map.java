@@ -29,22 +29,27 @@ public class Map
       for ( GameObject gameObject : gameObjects )
       {
          String name = gameObject.getType();
+//         System.out.println("NAME: " + name);
          for ( int i = 0; i < gameObject.transform.length; i++ )
          {
+//            System.out.println("OCCUPIED CELL: " + (gameObject.getOccupiedCells()[i] / mapSize + "," + gameObject.getOccupiedCells()[i] % mapSize));
             grid[gameObject.getOccupiedCells()[i] / mapSize][gameObject.getOccupiedCells()[i] % mapSize] = name;
          }
       }
+
+//      System.out.println("GRID: " + grid.toString());
 
       for ( int i = 0; i < mapSize; i++ )
       {
          for ( int j = 0; j < mapSize; j++ )
          {
-            if ( grid[i][j] == null )
+            if ( grid[i][j] == null)
             {
                grid[i][j] = "Space";
             }
          }
       }
+
    }
 
    public ArrayList<GameObject> getGameObjects()

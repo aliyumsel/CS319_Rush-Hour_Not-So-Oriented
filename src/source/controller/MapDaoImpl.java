@@ -104,7 +104,7 @@ class MapDaoImpl implements MapDao
          x++;
       }
 
-
+      System.out.println(gameObjects.toString());
       map.formMap(gameObjects);
       return map;
    }
