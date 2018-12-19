@@ -10,7 +10,7 @@ public class Settings {
    private HashMap<String, Boolean> themes;
    private String activeTheme;
 
-   public Settings(boolean music, boolean sfx, HashMap themes, String activeTheme, String controlPrefrence) {
+   public Settings(boolean music, boolean sfx, HashMap<String, Boolean> themes, String activeTheme, String controlPrefrence) {
       this.music = music;
       this.sfx = sfx;
       this.themes = themes;
@@ -32,11 +32,11 @@ public class Settings {
       controlPrefrence = "Slide";
    }
 
-   public HashMap getThemes() {
+   public HashMap<String,Boolean> getThemes() {
       return themes;
    }
 
-   public void setThemes(HashMap themes) {
+   public void setThemes(HashMap<String,Boolean> themes) {
       this.themes = themes;
    }
 

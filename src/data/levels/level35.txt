@@ -1,14 +1,19 @@
+<IsBonusMap>
+	30
+<IsBonusMap/>
 <ExpectedNumberOfMovesForThreeStars>
-	8
+	22
 <ExpectedNumberOfMovesForThreeStars/>
 <ExpectedNumberOfMovesForTwoStars>
-	11
+	33
 <ExpectedNumberOfMovesForTwoStars/>
 <Map>
-CD TR SS SS SS SS
-SS TL SS SS TU SS
-SS TD PC SS SS SS
-SS SS CL SS SS SS
-SS SS SS CU CR SS
-TR SS SS SS SS SS
+OO OO OO OO OO OO OO OO
+OO OO CU CR SS TU SS OO
+OO SS SS CR SS SS CU OO
+OO PC SS CU SS SS SS SS
+OO SS SS SS SS CL SS OO
+OO TR SS SS SS SS CU OO
+OO TR SS SS OO SS SS OO
+OO OO OO OO OO OO OO OO
 <Map/>

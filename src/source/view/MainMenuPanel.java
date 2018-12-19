@@ -168,7 +168,7 @@ public class MainMenuPanel extends JPanel {
     }
 
     private void updateNumberOfStars() {
-        String numberOfStars = "    " + gameManager.playerManager.getCurrentPlayer().getStarAmount() + "/120"; //need to find a fix for formatting
+        String numberOfStars = "    " + gameManager.playerManager.getCurrentPlayer().getStarAmount() + "/150"; //need to find a fix for formatting
         starAmount.setText(numberOfStars);
         System.out.println("Number of stars Updated " + numberOfStars);
     }

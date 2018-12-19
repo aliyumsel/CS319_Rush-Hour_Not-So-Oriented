@@ -272,9 +272,9 @@ class PlayerDaoImpl implements PlayerDao {
             LevelInformation level;
             unlocked = i == 1;
 
-            if (bonus)
-            {
-                level = new BonusLevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, unlocked, "", time);            }
+            if (bonus) {
+                level = new BonusLevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, unlocked, "", time);
+            }
             else {
                 level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, unlocked, "");
             }
