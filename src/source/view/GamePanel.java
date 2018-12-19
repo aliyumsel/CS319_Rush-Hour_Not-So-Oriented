@@ -16,6 +16,7 @@ public class GamePanel extends JPanel
    GuiPanelManager guiManager;
 
    private InnerGamePanel innerGamePanel;
+   private EndOfLevelPanel endOfLevelPanel;
 
    private JButton menu;
    private JButton reset;
@@ -23,7 +24,7 @@ public class GamePanel extends JPanel
    private JButton shrink;
    private JButton space;
 
-   //private JLabel timerIcon;
+   private JLabel blackBackground;
    private JLabel moveLabel;
    private JLabel numberLabel;
    private JLabel shrinkAmountLabel;
@@ -65,7 +66,6 @@ public class GamePanel extends JPanel
    private BufferedImage secondStarForegroundImage;
    private BufferedImage secondStarBackgroundImage;
 
-
    private int panelWidth;
    private int panelHeight;
 
@@ -86,6 +86,7 @@ public class GamePanel extends JPanel
       setPreferredSize(new Dimension(panelWidth, panelHeight));
       loadImages();
       createComponents();
+      createEndOfLevelPanel();
       addComponents();
       createInnerGamePanel();
       setBoundsOfComponents();
@@ -98,6 +99,8 @@ public class GamePanel extends JPanel
       {
          return;
       }
+
+      endOfLevelPanel.updatePanel();
 
       updatePowerUpButtons();
       updatePowerUpLabels();
@@ -140,13 +143,6 @@ public class GamePanel extends JPanel
    {
       shrinkAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingShrinkPowerup() + "");
       spaceAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingSpacePowerup() + "");
-   }
-
-   private void updateRemainingTimeLabel()
-   {
-      int remainingTime = GameEngine.instance.gameManager.getRemainingTime();
-      String countDown = String.format("%02d:%02d", remainingTime / 60, remainingTime % 60);
-      remainingTimeLabel.setText(countDown + "");
    }
 
    private void disableButton(JButton button, BufferedImage lockedImage)
@@ -198,11 +194,27 @@ public class GamePanel extends JPanel
       firstStarBackgroundImage = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
       secondStarForegroundImage = guiManager.LoadImage("src/image/icons/miniStar.png");
       secondStarBackgroundImage = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
-
    }
 
    private void createComponents()
    {
+      blackBackground = new JLabel()
+      {
+         @Override
+         protected void paintComponent(Graphics g)
+         {
+            super.paintComponent(g);
+            Graphics2D temp = (Graphics2D) g.create();
+            int width = panelWidth;
+            int height = panelHeight;
+            Color myColour = new Color(0, 0, 0, 200);
+            temp.setColor(myColour);
+            temp.fillRect(0, 0, width, height);
+         }
+      };
+      blackBackground.setPreferredSize(new Dimension(panelWidth,panelHeight));
+      blackBackground.setVisible(false);
+
       menu = UIFactory.createButton(menuButtonImage, menuButtonHighlightedImage, "square", actionListener);
       reset = UIFactory.createButton(resetButtonImage, resetButtonHighlightedImage, "square", actionListener);
       settings = UIFactory.createButton(settingsButtonImage, settingsButtonHighlightedImage, "square", actionListener);
@@ -217,7 +229,6 @@ public class GamePanel extends JPanel
       firstStarBackgroundLabel = UIFactory.createLabelIcon(firstStarBackgroundImage, new Dimension(26, 26));
       secondStarForegroundLabel = UIFactory.createLabelIcon(secondStarForegroundImage, new Dimension(26, 26));
       secondStarBackgroundLabel = UIFactory.createLabelIcon(secondStarBackgroundImage, new Dimension(26, 26));
-
 
       timerForegroundStartHeight = timerForegroundLabel.getPreferredSize().height;
       moveCountForegroundStartHeight = firstStarForegroundLabel.getPreferredSize().height;
@@ -249,6 +260,8 @@ public class GamePanel extends JPanel
 
    private void addComponents()
    {
+      add(blackBackground);
+
       this.add(menu);
       this.add(reset);
       add(shrink);
@@ -258,11 +271,12 @@ public class GamePanel extends JPanel
       add(moveLabel);
       add(numberLabel);
       add(settings);
-      //add(timerBottomLabel);
    }
 
    private void setBoundsOfComponents()
    {
+      blackBackground.setBounds(0,0,panelWidth,panelHeight);
+
       menu.setBounds(30, 30, menu.getPreferredSize().width,
               menu.getPreferredSize().height);
 
@@ -315,9 +329,19 @@ public class GamePanel extends JPanel
 
    }
 
+   private void setEndOfLevelPanelVisible(boolean visible, int starAmount)
+   {
+      if ( visible )
+      {
+         GameEngine.instance.soundManager.successSound();
+      }
+      endOfLevelPanel.showStars(starAmount);
+      endOfLevelPanel.setVisible(visible);
+   }
+
    public void showEndOfLevelPopUp(int starAmount)
    {
-      innerGamePanel.setEndOfLevelPanelVisible(true, starAmount);
+      setEndOfLevelPanelVisible(true, starAmount);
    }
 
    public void showTimeOverPopUp()
@@ -327,10 +351,14 @@ public class GamePanel extends JPanel
 
    public void setInnerGamePanelVisible()
    {
-      System.out.println("Should have shown inner game panel");
       innerGamePanel.setVisible(true);
-      innerGamePanel.setEndOfLevelPanelVisible(false, 0);
+      setEndOfLevelPanelVisible(false, 0);
       innerGamePanel.setTimeOverPopUpVisible(false);
+   }
+
+   public EndOfLevelPanel getEndOfLevelPanel()
+   {
+      return endOfLevelPanel;
    }
 
    private void createInnerGamePanel()
@@ -344,6 +372,16 @@ public class GamePanel extends JPanel
          e.printStackTrace();
       }
       setVisible(false);
+   }
+
+   private void createEndOfLevelPanel()
+   {
+      endOfLevelPanel = new EndOfLevelPanel(guiManager);
+      add(endOfLevelPanel);
+      endOfLevelPanel.setVisible(false);
+
+      Dimension size = endOfLevelPanel.getPreferredSize();
+      endOfLevelPanel.setBounds(guiManager.findCenter(panelWidth,endOfLevelPanel), guiManager.findCenterVertical(panelHeight,endOfLevelPanel), size.width, size.height);
    }
 
    private ActionListener actionListener = new ActionListener()
@@ -393,16 +431,11 @@ public class GamePanel extends JPanel
       drawMoveCountForeground(g);
    }
 
-
    private void drawBackground(Graphics graphics)
    {
       graphics.drawImage(background, 0, 0, null);
 
-//      Color myColour = new Color(0, 0, 0, 200);
-//      graphics.setColor(myColour);
-//      graphics.fillRect(0,0,panelWidth,panelHeight);
-
-      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive())
+      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive() )
       {
          graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
          graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);

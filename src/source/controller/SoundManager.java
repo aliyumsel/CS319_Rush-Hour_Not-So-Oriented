@@ -1,16 +1,15 @@
 package source.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import sun.audio.*;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class SoundManager extends Controller
 {
@@ -40,7 +39,7 @@ public class SoundManager extends Controller
          clip.loop(Clip.LOOP_CONTINUOUSLY);
       } catch (Exception a)
       {
-         System.out.println("Not Found");
+         System.out.println("Not Found: Clip");
       }
    }
 
@@ -64,7 +63,7 @@ public class SoundManager extends Controller
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
          {
-            System.out.println("Not Found");
+            System.out.println("Not Found: Vehicle horn");
          }
       }
    }
@@ -89,7 +88,7 @@ public class SoundManager extends Controller
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
          {
-            System.out.println("Not Found");
+            System.out.println("Not Found: button Click");
          }
       }
    }
@@ -106,7 +105,7 @@ public class SoundManager extends Controller
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
          {
-            System.out.println("Not Found");
+            System.out.println("Not Found: Success Sound");
          }
       }
    }

@@ -110,6 +110,7 @@ public class PowerUpManager extends Controller
       System.out.println("Activated Space");
       spaceActive = true;
       deactivateShrink();
+      MapController.instance.highlightObstacles();
    }
 
    private void initializeShrink()
@@ -117,18 +118,21 @@ public class PowerUpManager extends Controller
       System.out.println("Activated Shrink");
       shrinkActive = true;
       deactivateSpace();
+      MapController.instance.highlightLongs();
    }
 
    private void deactivateSpace()
    {
       System.out.println("Deactivated Space");
       spaceActive = false;
+      MapController.instance.clearHighlights();
    }
 
    private void deactivateShrink()
    {
       System.out.println("Deactivated Shrink");
       shrinkActive = false;
+      MapController.instance.clearHighlights();
    }
 
    boolean isPowerUpActive()

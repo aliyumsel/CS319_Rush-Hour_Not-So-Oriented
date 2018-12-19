@@ -16,6 +16,7 @@ public class GameObject implements Drawable
    {
       transform = new Transform(x, y, length, direction);
       findOccupiedCells();
+      isBlackedOut = false;
    }
 
    void findOccupiedCells()

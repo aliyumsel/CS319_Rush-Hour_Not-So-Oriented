@@ -181,7 +181,7 @@ public class GuiPanelManager extends JFrame
       levelSelectionPanel.loadImages();
       creditsPanel.loadImages();
       gamePanel.loadImages();
-      gamePanel.getInnerGamePanel().endOfLevelPanel.loadImages();
+      gamePanel.getEndOfLevelPanel().loadImages();
       mainMenuPanel.loadImages();
    }
 
@@ -211,6 +211,11 @@ public class GuiPanelManager extends JFrame
    int findCenter(int _panelWidth, Component _component)
    {
       return ( _panelWidth - _component.getPreferredSize().width ) / 2;
+   }
+
+   int findCenterVertical(int _panelHeight, Component _component)
+   {
+      return ( _panelHeight - _component.getPreferredSize().height ) / 2;
    }
 
 }

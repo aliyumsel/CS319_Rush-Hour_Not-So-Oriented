@@ -14,19 +14,19 @@ public class Obstacle extends GameObject
    {
       super(x, y, length, direction);
       updateImages();
-      isBlackedOut = true;
    }
 
    @Override
    public void draw(Graphics2D graphics)
    {
       graphics.drawImage(image, (int) transform.position.x * 60, (int) transform.position.y * 60, null);
-//      if (isBlackedOut)
-//      {
-//         Composite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
-//         graphics.setComposite(composite);
-//         graphics.drawImage(blackedOutImage,(int) transform.position.x * 60, (int) transform.position.y * 60, null);
-//      }
+      if (isBlackedOut)
+      {
+         Graphics2D temp = (Graphics2D) graphics.create();
+         Composite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+         temp.setComposite(composite);
+         temp.drawImage(blackedOutImage,(int) transform.position.x * 60, (int) transform.position.y * 60, null);
+      }
    }
 
    @Override
@@ -39,6 +39,6 @@ public class Obstacle extends GameObject
    public void updateImages()
    {
       image = ThemeManager.instance.getObstacleImage();
-//      blackedOutImage = ThemeManager.instance.get
+      blackedOutImage = ThemeManager.instance.getDisabledImage("obstacle");
    }
 }

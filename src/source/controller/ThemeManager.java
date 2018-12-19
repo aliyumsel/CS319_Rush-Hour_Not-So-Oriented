@@ -2,7 +2,6 @@ package source.controller;
 
 import source.model.GameObject;
 import source.model.Theme;
-import source.view.GuiPanelManager;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -50,7 +49,6 @@ public class ThemeManager extends Controller
       }
    }
 
-
    public BufferedImage getLongVehicleImage()
    {
       return currentTheme.getLongVehicleImage();
@@ -84,7 +82,7 @@ public class ThemeManager extends Controller
    public BufferedImage getDisabledImage(String type)
    {
       if (type.equals("obstacle")){
-       return currentTheme.getObstacleImage();}
+       return currentTheme.getObstacleDisabledImage();}
       else if (type.equals("long")){
          return currentTheme.getLongDisabledImage();
       }

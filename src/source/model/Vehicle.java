@@ -88,18 +88,22 @@ public class Vehicle extends GameObject// implements Drawable
       if ( !player && transform.length == 2 )
       {
          image = ThemeManager.instance.getShortVehicleImage();
+         blackedOutImage = ThemeManager.instance.getDisabledImage("short");
       }
       else if ( !player && transform.length == 3 )
       {
          image = ThemeManager.instance.getLongVehicleImage();
+         blackedOutImage = ThemeManager.instance.getDisabledImage("long");
       }
       else if ( player && !this.special )
       {
          image = ThemeManager.instance.getPlayerImage();
+         blackedOutImage = ThemeManager.instance.getDisabledImage("short");
       }
       else if ( player )
       {
          image = ThemeManager.instance.getSpecialPlayerImage();
+         blackedOutImage = ThemeManager.instance.getDisabledImage("short");
       }
    }
 
@@ -109,8 +113,6 @@ public class Vehicle extends GameObject// implements Drawable
       transform.position.gridY = y;
       findOccupiedCells();
    }
-
-
 
    public String getType()
    {
@@ -135,25 +137,32 @@ public class Vehicle extends GameObject// implements Drawable
 
       at = AffineTransform.getTranslateInstance(transform.position.x * gridPixelSize, transform.position.y * gridPixelSize);
 
+      //for drawing the black out
+      Graphics2D temp = (Graphics2D) graphics.create();
+      Composite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+      temp.setComposite(composite);
+
       if ( transform.direction.equals("Upwards") )
       {
-         graphics.drawImage(image, at, null);
+         //do nothing
       }
       else if ( transform.direction.equals("Downwards") )
       {
          at.rotate(Math.toRadians(180), image.getWidth() / 2.0, image.getHeight() / 2.0);
-         graphics.drawImage(image, at, null);
       }
       else if ( transform.direction.equals("Left") )
       {
          at.rotate(Math.toRadians(90), image.getWidth() / 2.0, image.getHeight() / 2.0 / transform.length);
          at.translate(0, -60 * ( transform.length - 1 ));
-         graphics.drawImage(image, at, null);
       }
       else
       {
          at.rotate(Math.toRadians(270), image.getWidth() / 2.0, image.getHeight() / 2.0 / transform.length);
-         graphics.drawImage(image, at, null);
+      }
+      graphics.drawImage(image, at, null);
+      if (isBlackedOut)
+      {
+         temp.drawImage(blackedOutImage,at, null);
       }
    }
 }

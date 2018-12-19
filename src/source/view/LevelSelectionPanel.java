@@ -1,13 +1,13 @@
 package source.view;
 
-import javax.swing.*;
-
-import java.awt.*;
-
-import source.controller.*;
+import source.controller.GameEngine;
+import source.controller.PlayerManager;
+import source.controller.ThemeManager;
 import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -172,7 +172,7 @@ public class LevelSelectionPanel extends JPanel
             {
                buttonArray[i].toggleLock(false);
                buttonArray[i].toggleInProgress(false);
-               System.out.println("starAmount: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
+//               System.out.println("starAmount: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
                LevelInformation level = PlayerManager.instance.getCurrentPlayer().getLevels().get(i);
                buttonArray[i].showTimerIcon(false);
@@ -183,8 +183,6 @@ public class LevelSelectionPanel extends JPanel
                if (GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStatus().equals("inProgress")){
                   buttonArray[i].toggleInProgress(true);
                }
-
-
             }
          }
          else
