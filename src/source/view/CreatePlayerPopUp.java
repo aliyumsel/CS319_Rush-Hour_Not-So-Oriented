@@ -1,12 +1,13 @@
 package source.view;
 
 import source.controller.GameEngine;
-import source.controller.SoundManager;
 import source.controller.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 
@@ -28,6 +29,14 @@ public class CreatePlayerPopUp extends JPanel
 
    private int panelWidth = 400;
    private int panelHeight = 250;
+
+   enum Mode
+   {
+      Edit, New
+   }
+
+   private Mode currentMode;
+   private String oldName;
 
    CreatePlayerPopUp(GuiPanelManager _guiManager, ChangePlayerPanel _changePlayerPanel)
    {
@@ -70,8 +79,15 @@ public class CreatePlayerPopUp extends JPanel
          @Override
          public void mousePressed(MouseEvent e)
          {
-            playerName.setText("");
-            playerName.setForeground(Color.WHITE);
+            if ( currentMode == Mode.New )
+            {
+               playerName.setText("");
+               playerName.setForeground(Color.WHITE);
+            }
+            else
+            {
+               playerName.setForeground(Color.WHITE);
+            }
          }
       });
 
@@ -99,6 +115,35 @@ public class CreatePlayerPopUp extends JPanel
       //reset the panel when being set visible
    }
 
+   private void updateDefaultTextField(String defaultText)
+   {
+      playerName.setText(defaultText);
+      playerName.setForeground(Color.gray);
+   }
+
+   void showPopUp(Mode mode)
+   {
+      setVisible(true);
+      currentMode = mode;
+      if ( mode == Mode.New )
+      {
+         updateDefaultTextField("Enter player name...");
+      }
+   }
+
+   void showPopUp(Mode mode, String playerName)
+   {
+      setVisible(true);
+      currentMode = mode;
+      updateDefaultTextField(playerName);
+      oldName = playerName;
+   }
+
+   void hidePopUp()
+   {
+      setVisible(false);
+   }
+
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
@@ -114,11 +159,6 @@ public class CreatePlayerPopUp extends JPanel
 
    }
 
-   void requestFocusForTextField()
-   {
-      playerName.requestFocus();
-   }
-
    private ActionListener actionListener = e ->
    {
       GameEngine.instance.soundManager.buttonClick();
@@ -132,22 +172,35 @@ public class CreatePlayerPopUp extends JPanel
 
       if ( e.getSource() == confirm )
       {
-         if ( playerName.getText().equals("") )
+         if ( currentMode == Mode.New )
          {
-            return;
+            if ( playerName.getText().equals("") )
+            {
+               return;
+            }
+
+            if ( playerName.getText().equals("Enter Player name...") )
+            {
+               return;
+            }
+            changePlayerPanel.addPlayer(playerName.getText());
+            playerName.setText("Enter Player name...");
+            playerName.setForeground(Color.gray);
+            setVisible(false);
+            guiManager.setPanelVisible("MainMenu");
+            requestFocus();
+         }
+         else
+         {
+            changePlayerPanel.editPlayer(oldName, playerName.getText());
+            playerName.setText("Enter Player name...");
+            playerName.setForeground(Color.gray);
+            setVisible(false);
+            guiManager.setPanelVisible("ChangePlayer");
          }
 
-         if ( playerName.getText().equals("Enter Player name...") )
-         {
-            return;
-         }
-         changePlayerPanel.addPlayer(playerName.getText());
-         playerName.setText("Enter Player name...");
-         playerName.setForeground(Color.gray);
-         setVisible(false);
-         guiManager.setPanelVisible("MainMenu");
-         requestFocus();
       }
+      changePlayerPanel.hideBlackBackground();
    };
 
 

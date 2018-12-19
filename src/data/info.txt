@@ -1,0 +1,8 @@
+<NumberOfPlayers>
+	1
+<NumberOfPlayers/>
+<LastActivePlayer>
+	malKaan
+<NumberOfMaps>
+	50
+<NumberOfMaps/>
