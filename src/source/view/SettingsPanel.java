@@ -166,7 +166,7 @@ public class SettingsPanel extends JPanel {
         add(heading);
         add(volume);
         add(theme);
-
+        add(starActiveLabel);
         add(control);
         add(controlPreference);
 
@@ -197,6 +197,7 @@ public class SettingsPanel extends JPanel {
 
         control.setBounds(550, 125, control.getPreferredSize().width, control.getPreferredSize().height);
         controlPreference.setBounds(605, 175, controlPreference.getPreferredSize().width, controlPreference.getPreferredSize().height);
+        starActiveLabel.setBounds(175, 370, classic.getPreferredSize().width, classic.getPreferredSize().height);
 //        keyboard.setBounds(645, 175, mouse.getPreferredSize().width, mouse.getPreferredSize().height);
     }
 

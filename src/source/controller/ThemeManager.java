@@ -81,9 +81,20 @@ public class ThemeManager extends Controller
       return currentTheme.getObstacleImage();
    }
 
-   public BufferedImage getDisabledImage()
+   public BufferedImage getDisabledImage(String type)
    {
-      return currentTheme.getDisabledImage();
+      if (type.equals("obstacle")){
+       return currentTheme.getObstacleImage();}
+      else if (type.equals("long")){
+         return currentTheme.getLongDisabledImage();
+      }
+      else if (type.equals("short")){
+         return currentTheme.getShortDisabledImage();
+      }
+      else {
+         System.out.println("Disabled image not found");
+         return null;
+      }
    }
 
    public BufferedImage getPlayerImage()

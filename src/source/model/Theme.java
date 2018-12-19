@@ -1,8 +1,5 @@
 package source.model;
 
-import source.controller.GameManager;
-import source.view.GuiPanelManager;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -21,7 +18,9 @@ public class Theme {
     private BufferedImage background;
     private BufferedImage gamePanelBackground;
     private BufferedImage popupBackground;
-    private BufferedImage disabled;
+    private BufferedImage obstacleDisabled;
+    private BufferedImage longDisabled;
+    private BufferedImage shortDisabled;
     private ArrayList<String> vehicleSoundArray;
     private String themeSong;
     private String buttonClick;
@@ -74,7 +73,9 @@ public class Theme {
       playerImage = LoadImage(path + "player.png");
    }
     private void setDisabled(){
-       disabled = LoadImage(path + "disabled.png");
+       obstacleDisabled = LoadImage(path + "obstacleDisabled.png");
+       longDisabled = LoadImage(path+"longDisabled.png");
+       shortDisabled = LoadImage(path + "shortDisabled.png");
     }
    private void setBackground() {
       background = LoadImage(path + "background.png");
@@ -105,9 +106,14 @@ public class Theme {
    public BufferedImage getObstacleImage() {
       return obstacle;
    }
-
-    public BufferedImage getDisabledImage() {
-        return disabled;
+    public BufferedImage getLongDisabledImage() {
+        return longDisabled;
+    }
+    public BufferedImage getShortDisabledImage() {
+        return shortDisabled;
+    }
+    public BufferedImage getObstacleDisabledImage() {
+        return obstacleDisabled;
     }
 
    public BufferedImage getGamePanelBackgroundImage() {
