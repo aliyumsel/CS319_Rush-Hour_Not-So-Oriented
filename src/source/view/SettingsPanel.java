@@ -14,7 +14,8 @@ public class SettingsPanel extends JPanel {
     private JLabel volume;
     private JLabel theme;
     private JLabel control;
-
+    private JLabel starActiveLabel;
+    private BufferedImage starActive;
     private JButton music;
     private JButton sfx;
     private JButton mouse;
@@ -82,7 +83,7 @@ public class SettingsPanel extends JPanel {
         Graphics2D bGr = background.createGraphics();
         bGr.drawImage(scaledImage, 0, 0, null);
         bGr.dispose();
-
+        starActive = guiManager.LoadImage("src/image/icons/miniStar.png");
         title = guiManager.LoadImage("src/image/icons/settingsTitle.png");
         backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
         backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
@@ -132,6 +133,8 @@ public class SettingsPanel extends JPanel {
         classic.setDisabledIcon(new ImageIcon(classicD));
         safari.setDisabledIcon(new ImageIcon(safariD));
         space.setDisabledIcon(new ImageIcon(spaceD));
+
+        starActiveLabel = UIFactory.createLabelIcon(starActive, "miniStar");///////
 
         heading = new JLabel();
         heading.setIcon(new ImageIcon(title));

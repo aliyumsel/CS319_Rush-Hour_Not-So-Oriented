@@ -81,6 +81,11 @@ public class ThemeManager extends Controller
       return currentTheme.getObstacleImage();
    }
 
+   public BufferedImage getDisabledImage()
+   {
+      return currentTheme.getDisabledImage();
+   }
+
    public BufferedImage getPlayerImage()
    {
       return currentTheme.getPlayerImage();
