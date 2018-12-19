@@ -233,4 +233,5 @@ public class HelpPanel extends JPanel
       graphics2d.drawImage(background, 0, 0, null);
 
    }
+
 }

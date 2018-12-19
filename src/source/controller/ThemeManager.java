@@ -2,7 +2,6 @@ package source.controller;
 
 import source.model.GameObject;
 import source.model.Theme;
-import source.view.GuiPanelManager;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -15,6 +14,12 @@ public class ThemeManager extends Controller
    public Theme minimalistic;
    public Theme safari;
    public Theme space;
+
+   public String[] getThemes() {
+      return themes;
+   }
+
+   private String themes[] = {"minimalistic", "classic" , "safari", "space"};
 
    public ThemeManager()
    { //String theme parametresi ekleyip aşağıda hangi themese current theme o olucak oyun başlarken
@@ -50,7 +55,6 @@ public class ThemeManager extends Controller
       }
    }
 
-
    public BufferedImage getLongVehicleImage()
    {
       return currentTheme.getLongVehicleImage();
@@ -79,6 +83,22 @@ public class ThemeManager extends Controller
    public BufferedImage getObstacleImage()
    {
       return currentTheme.getObstacleImage();
+   }
+
+   public BufferedImage getDisabledImage(String type)
+   {
+      if (type.equals("obstacle")){
+       return currentTheme.getObstacleDisabledImage();}
+      else if (type.equals("long")){
+         return currentTheme.getLongDisabledImage();
+      }
+      else if (type.equals("short")){
+         return currentTheme.getShortDisabledImage();
+      }
+      else {
+         System.out.println("Disabled image not found");
+         return null;
+      }
    }
 
    public BufferedImage getPlayerImage()
@@ -112,7 +132,7 @@ public class ThemeManager extends Controller
    }
 
 
-   private int findRequiredStars()
+   public int findRequiredStars()
    {
       int requiredStars = 100;
       if ( !classic.isUnlocked() )
@@ -159,6 +179,10 @@ public class ThemeManager extends Controller
       }
    }
 
+   public void start(){
+      update();
+   }
+
    public void changeTheme(String themeName)
    {
       GameEngine.instance.playerManager.changeTheme(themeName);
@@ -200,7 +224,7 @@ public class ThemeManager extends Controller
       setTheme(themeName);
    }
 
-   public void start()
+   public void update()
    {
       HashMap themes = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getThemes();
       minimalistic.setUnlocked((boolean) themes.get("minimalistic"));
@@ -209,5 +233,6 @@ public class ThemeManager extends Controller
       space.setUnlocked((boolean) themes.get("space"));
 
       currentTheme = findThemeByName(GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getActiveTheme());
+      findRequiredStars();
    }
 }

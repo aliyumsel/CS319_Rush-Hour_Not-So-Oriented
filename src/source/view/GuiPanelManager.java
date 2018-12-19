@@ -2,6 +2,8 @@ package source.view;
 
 import source.controller.Input;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -9,9 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
 //import source.controller.Controller;
 //import source.controller.Sound;
@@ -94,6 +93,7 @@ public class GuiPanelManager extends JFrame
       levelSelectionPanel = new LevelSelectionPanel(this);
       changePlayerPanel = new ChangePlayerPanel(this);
       this.add(mainMenuPanel);
+
       this.add(gamePanel);
       this.add(creditsPanel);
       this.add(levelSelectionPanel);
@@ -119,29 +119,24 @@ public class GuiPanelManager extends JFrame
       if ( panelName.equals("MainMenu") )
       {
          mainMenuPanel.updatePanel();
-//         mainMenuPanel.loadImages();
          targetPanel = mainMenuPanel;
       }
       else if ( panelName.equals("Game") )
       {
-         //gamePanel.loadImages();
-//         gamePanel.getInnerGamePanel().endOfLevelPanel.loadImages();
          targetPanel = gamePanel;
-
       }
       else if ( panelName.equals("Credits") )
       {
-//         creditsPanel.loadImages();
          targetPanel = creditsPanel;
       }
       else if ( panelName.equals("LevelSelection") )
       {
-//         levelSelectionPanel.loadImages();
          levelSelectionPanel.updatePanel();
          targetPanel = levelSelectionPanel;
       }
       else if ( panelName.equals("Settings") )
       {
+         targetPanel = settingsPanel;
          if ( mainMenuPanel.isVisible() )
          {
             settingsPanel.updatePanel("MainMenu");
@@ -150,17 +145,14 @@ public class GuiPanelManager extends JFrame
          {
             settingsPanel.updatePanel("Game");
          }
-         targetPanel = settingsPanel;
+
       }
       else if ( panelName.equals("Help") )
       {
-//         helpPanel.loadImages();
          targetPanel = helpPanel;
       }
       else if ( panelName.equals("ChangePlayer") )
       {
-//         changePlayerPanel.loadImages();
-//         changePlayerPanel.popUp.loadImages();
          changePlayerPanel.updatePanel();
          targetPanel = changePlayerPanel;
       }
@@ -181,16 +173,15 @@ public class GuiPanelManager extends JFrame
       gamePanel.updatePanel(); // look into updating other panels
    }
 
-   public void updateImages()
+   void updateImages()
    {
       settingsPanel.loadImages();
       changePlayerPanel.loadImages();
-//      changePlayerPanel.popUp.loadImages(); Bunu changePlayerPanelin load imagesin icine koydum
       helpPanel.loadImages();
       levelSelectionPanel.loadImages();
       creditsPanel.loadImages();
       gamePanel.loadImages();
-      gamePanel.getInnerGamePanel().endOfLevelPanel.loadImages();
+      gamePanel.getEndOfLevelPanel().loadImages();
       mainMenuPanel.loadImages();
    }
 
@@ -216,9 +207,15 @@ public class GuiPanelManager extends JFrame
       return image;
    }
 
+
    int findCenter(int _panelWidth, Component _component)
    {
       return ( _panelWidth - _component.getPreferredSize().width ) / 2;
+   }
+
+   int findCenterVertical(int _panelHeight, Component _component)
+   {
+      return ( _panelHeight - _component.getPreferredSize().height ) / 2;
    }
 
 }

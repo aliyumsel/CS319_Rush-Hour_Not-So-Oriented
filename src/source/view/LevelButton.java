@@ -10,12 +10,13 @@ class LevelButton extends JButton {
 
     private BufferedImage levelBackground;
     private BufferedImage levelBackgroundHighlighted;
-
+    private BufferedImage inProgress;
+    private BufferedImage inProgressHighlighted;
     private BufferedImage starActive;
     private BufferedImage starInactive;
-
+    private BufferedImage bonusLevelIcon;
     private BufferedImage lockedBackground;
-
+    private JLabel timerIconLabel;
     private static Dimension levelButtonDimension = new Dimension(105, 120);
 
     private JLabel[] stars;
@@ -23,6 +24,7 @@ class LevelButton extends JButton {
     private int levelNo;
 
     private boolean isLocked;
+    private boolean isInProgress;
 
     LevelButton(GuiPanelManager _guiManager) {
         super();
@@ -30,7 +32,7 @@ class LevelButton extends JButton {
 
         levelNo = 0;
         isLocked = false;
-
+        isInProgress = false;
         setLayout(null);
         loadImages();
         setupButton();
@@ -57,11 +59,15 @@ class LevelButton extends JButton {
     }
 
     private void loadImages() {
+        Graphics2D bGr;
         levelBackground = guiManager.LoadImage("src/image/icons/levelbackground.png");
         levelBackgroundHighlighted = guiManager.LoadImage("src/image/icons/levelbackgroundH.png");
         lockedBackground = guiManager.LoadImage("src/image/icons/levelBackgroundLocked.png");
         starActive = guiManager.LoadImage("src/image/icons/miniStar.png");
         starInactive = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
+        bonusLevelIcon = guiManager.LoadImage("src/image/icons/timerIcon.png");
+        inProgress = guiManager.LoadImage("src/image/icons/levelButton_inProgress.png");
+        inProgressHighlighted = guiManager.LoadImage("src/image/icons/levelButton_inProgressH.png");
     }
 
     private void createComponents() {
@@ -69,18 +75,23 @@ class LevelButton extends JButton {
         for (int i = 0; i < stars.length; i++) {
             stars[i] = UIFactory.createLabelIcon(starInactive, "miniStar");
         }
+        timerIconLabel = UIFactory.createLabelIcon(bonusLevelIcon, "timer");
+        if (!isLocked)
+            timerIconLabel.setVisible(false);
     }
 
     private void addComponents() {
         for (int i = 0; i < stars.length; i++) {
             add(stars[i]);
         }
+        add(timerIconLabel);
     }
 
     private void setBoundsOfComponents() {
         for (int i = 0; i < stars.length; i++) {
             stars[i].setBounds(guiManager.findCenter(levelButtonDimension.width, stars[i]) + (30 * (i - 1)), 15, stars[i].getPreferredSize().width, stars[i].getPreferredSize().height);
         }
+        timerIconLabel.setBounds(52, 55, timerIconLabel.getPreferredSize().width, timerIconLabel.getPreferredSize().height);
     }
 
     void setLevelNo(int _levelNo) {
@@ -103,12 +114,15 @@ class LevelButton extends JButton {
             }
             stars[i].setVisible(true);
         }
+
+    }
+
+    void showTimerIcon(boolean isBonusLevel) {
+        timerIconLabel.setVisible(isBonusLevel);
     }
 
     void toggleLock(boolean state) {
         isLocked = state;
-        //System.out.println("isLocked: " + isLocked);
-
         BufferedImage temp;
         BufferedImage tempH;
         if (isLocked) {
@@ -122,15 +136,25 @@ class LevelButton extends JButton {
             setEnabled(true);
             showStars(0);
         }
-
         setIcon(new ImageIcon(temp));
         setRolloverIcon(new ImageIcon(tempH));
         setDisabledIcon(new ImageIcon(lockedBackground));
     }
 
-//   boolean getIsLocked()
-//   {
-//      return isLocked;
-//   }
+    public void toggleInProgress(boolean state) {
+        isInProgress = state;
+        BufferedImage temp;
+        BufferedImage tempH;
+        if (isInProgress) {
+            temp = inProgress;
+            tempH = inProgressHighlighted;
+        } else {
+            temp = levelBackground;
+            tempH = levelBackgroundHighlighted;
+        }
+        setIcon(new ImageIcon(temp));
+        setRolloverIcon(new ImageIcon(tempH));
+        setDisabledIcon(new ImageIcon(lockedBackground));
+    }
 }
 

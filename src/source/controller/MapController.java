@@ -1,9 +1,9 @@
 package source.controller;
 
-import java.util.ArrayList;
-
 import interfaces.MapDao;
 import source.model.*;
+
+import java.util.ArrayList;
 
 public class MapController extends Controller
 {
@@ -23,10 +23,10 @@ public class MapController extends Controller
       Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
       map = mapDao.extractMap(level, currentPlayer, false);
 
-      if ( map != null )
-      {
-         System.out.println("Map Loaded");
-      }
+//      if ( map != null )
+//      {
+//         System.out.println("Map Loaded");
+//      }
    }
 
    void loadOriginalLevel(int level)
@@ -109,6 +109,40 @@ public class MapController extends Controller
       map.getGameObjects().add(gameObject);
    }
 
+   void highlightObstacles()
+   {
+      for ( GameObject gameObject : map.getGameObjects())
+      {
+         if (gameObject instanceof Vehicle)
+         {
+            gameObject.showBlackForeground();
+         }
+      }
+   }
+
+   void highlightLongs()
+   {
+      for ( GameObject gameObject : map.getGameObjects())
+      {
+         if (gameObject instanceof Car)
+         {
+            gameObject.showBlackForeground();
+         }
+         else if (gameObject instanceof Obstacle)
+         {
+            gameObject.showBlackForeground();
+         }
+      }
+   }
+
+   void clearHighlights()
+   {
+      for ( GameObject gameObject : map.getGameObjects())
+      {
+         gameObject.hideBlackForeground();
+      }
+   }
+
    // This method checks if the player is at the last cell he can go
    // One more move will make him get out of the grid and finish the game
    // Map should hold a reference to the player car so we don't have to check every game object every move.
@@ -173,7 +207,7 @@ public class MapController extends Controller
       return mapStr;
    }
 
-   public Vehicle getPlayerVehicle(){
+   Vehicle getPlayerVehicle(){
       Vehicle player = null;
       Vehicle temp;
 

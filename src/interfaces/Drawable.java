@@ -1,7 +1,7 @@
 package interfaces;
-import java.awt.Graphics;
+import java.awt.*;
 
-    public abstract interface Drawable
+public abstract interface Drawable
     {
-      public abstract void draw(Graphics paramGraphics);
+      public abstract void draw(Graphics2D paramGraphics);
     }

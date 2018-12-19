@@ -6,3 +6,4 @@
 !.gitignore
 src/data/**/*
 !src/data/levels/
+src/data/

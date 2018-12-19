@@ -55,7 +55,7 @@ public class GameManager extends Controller
    void endMap()
    {
 
-      System.out.println("Map Finished");
+//      System.out.println("Map Finished");
       isGameActive = false;
       VehicleController.instance.isExitReachable = false;
       //PlayerManager.instance.setLevelStatusFinished(level);
@@ -73,7 +73,7 @@ public class GameManager extends Controller
       }
 
       int starsCollected = calculateStars(level);
-      System.out.println("Stars Collected: " + starsCollected);
+//      System.out.println("Stars Collected: " + starsCollected);
       PlayerManager.instance.updateLevelAtTheEnd(level, starsCollected);
       GuiPanelManager.instance.getGamePanel().showEndOfLevelPopUp(starsCollected);
    }
@@ -111,8 +111,8 @@ public class GameManager extends Controller
 
    public void loadLevel(int _level, boolean reset)
    {
-      System.out.println("Loaded level: " + _level);
-      System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
+//      System.out.println("Loaded level: " + _level);
+//      System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
       level = _level;
       LevelInformation levelToBeLoaded = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
       isLevelBonus = false;
@@ -156,14 +156,6 @@ public class GameManager extends Controller
    public void resetLevel()
    {
       loadLevel(level, true);
-      /*
-      MapController.instance.loadOriginalLevel(level);
-      VehicleController.instance.setMap(MapController.instance.getMap());
-      VehicleController.instance.setNumberOfMoves(0);
-      autoSave();
-
-      isGameActive = true;
-      */
    }
 
    public int getLevel()

@@ -1,7 +1,6 @@
 package source.view;
 
 import source.controller.GameEngine;
-import source.controller.SoundManager;
 import source.controller.ThemeManager;
 
 import javax.swing.*;
@@ -159,7 +158,8 @@ public class EndOfLevelPanel extends JPanel {
                 guiManager.setPanelVisible("MainMenu");
             }
 
-            if (e.getSource() == nextLevel) {
+            if (e.getSource() == nextLevel)
+            {
                 GameEngine.instance.gameManager.nextLevel();
             }
             setVisible(false);

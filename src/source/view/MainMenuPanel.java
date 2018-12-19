@@ -1,11 +1,12 @@
 package source.view;
 
+import source.controller.GameEngine;
+import source.controller.GameManager;
+import source.controller.PlayerManager;
+import source.controller.ThemeManager;
+
 import javax.swing.*;
-
 import java.awt.*;
-
-import source.controller.*;
-
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
@@ -158,7 +159,7 @@ public class MainMenuPanel extends JPanel {
     private void updateLastLevel() {
         String lastLevelString = Integer.toString(playerManager.getCurrentPlayer().getLastUnlockedLevelNo());
         lastLevel.setText(lastLevelString);
-        System.out.println(lastLevelString);
+//        System.out.println(lastLevelString);
     }
 
     private void updatePlayerName() {
@@ -170,7 +171,7 @@ public class MainMenuPanel extends JPanel {
     private void updateNumberOfStars() {
         String numberOfStars = "    " + gameManager.playerManager.getCurrentPlayer().getStarAmount() + "/150"; //need to find a fix for formatting
         starAmount.setText(numberOfStars);
-        System.out.println("Number of stars Updated " + numberOfStars);
+//        System.out.println("Number of stars Updated " + numberOfStars);
     }
 
     private void setBoundsOfComponents() {
