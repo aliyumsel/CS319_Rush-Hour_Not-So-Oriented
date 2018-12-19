@@ -3,16 +3,6 @@
 <NumberOfPlayers/>
 <LastActivePlayer>
 	default
-	d
-	default
-=======
-	aa
-=======
-	Kaan
->>>>>>> unstable
-
->>>>>>> unstable
-<LastActivePlayer/>
 <NumberOfMaps>
 	50
 <NumberOfMaps/>

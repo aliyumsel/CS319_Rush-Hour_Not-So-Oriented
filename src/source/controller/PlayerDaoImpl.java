@@ -258,6 +258,7 @@ class PlayerDaoImpl implements PlayerDao {
             }
             else
             {
+                System.out.println(i);
                 tmp = levelInfo.nextLine().trim();
                 movesForThreeStars = Integer.parseInt(tmp);
             }

@@ -64,7 +64,7 @@ public class GuiPanelManager extends JFrame
       panelWidth = 800; //764
       panelHeight = 520; //468
 
-      setLayout(null);
+      setLayout(new CardLayout());
       setResizable(false);
       setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
