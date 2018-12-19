@@ -159,6 +159,10 @@ public class ThemeManager extends Controller
       }
    }
 
+   public void start(){
+      update();
+   }
+
    public void changeTheme(String themeName)
    {
       GameEngine.instance.playerManager.changeTheme(themeName);
@@ -200,7 +204,7 @@ public class ThemeManager extends Controller
       setTheme(themeName);
    }
 
-   public void start()
+   public void update()
    {
       HashMap themes = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getThemes();
       minimalistic.setUnlocked((boolean) themes.get("minimalistic"));
