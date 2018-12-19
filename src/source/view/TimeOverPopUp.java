@@ -126,7 +126,7 @@ public class TimeOverPopUp extends JPanel
          {
             guiManager.setPanelVisible("MainMenu");
          }
-
+         guiManager.getGamePanel().hideBlackBackground();
          setVisible(false);
       }
    };

@@ -1,24 +1,22 @@
 package source.view;
 
-import javax.swing.*;
-
-import java.awt.*;
-
 import source.controller.GameEngine;
 import source.controller.GameManager;
-import source.controller.SoundManager;
 import source.controller.ThemeManager;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ChangePlayerPanel extends JPanel
 {
    private GuiPanelManager guiManager;
    private GameManager gameManager;
-   public CreatePlayerPopUp popUp;
+   private CreatePlayerPopUp popUp;
+
+   private JLabel blackBackground;
 
    private ArrayList<JButton> buttonArray;
    private JButton rightArrowButton;
@@ -106,8 +104,27 @@ public class ChangePlayerPanel extends JPanel
       popUp.loadImages();
    }
 
+   @SuppressWarnings("Duplicates")
    private void createComponents()
    {
+      blackBackground = new JLabel()
+      {
+         @Override
+         protected void paintComponent(Graphics g)
+         {
+            super.paintComponent(g);
+            Graphics2D temp = (Graphics2D) g.create();
+            int width = panelWidth;
+            int height = panelHeight;
+            Color myColour = new Color(0, 0, 0, 200);
+            temp.setColor(myColour);
+            temp.fillRect(0, 0, width, height);
+         }
+      };
+      blackBackground.setPreferredSize(new Dimension(panelWidth,panelHeight));
+      blackBackground.setVisible(false);
+      add(blackBackground);
+
       rightArrowButton = UIFactory.createButton(rightArrow, rightArrowH, "arrow", actionListener);
       leftArrowButton = UIFactory.createButton(leftArrow, leftArrowH, "arrow", actionListener);
       menuButton = UIFactory.createButton(back, backHighlighted, "square", actionListener);
@@ -146,6 +163,8 @@ public class ChangePlayerPanel extends JPanel
 
    private void setBoundsOfComponents(int page)
    {
+      blackBackground.setBounds(0,0,panelWidth,panelHeight);
+
       numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
@@ -271,18 +290,33 @@ public class ChangePlayerPanel extends JPanel
       updatePages();
    }
 
-   void editPlayer(String name)
+   void editPlayer(String name, String newName)
    {
-      int index = GameEngine.instance.playerManager.editPlayer(name, "_"+ name);
+      int index = GameEngine.instance.playerManager.editPlayer(name, newName);
       if(index > -1)
       {
-         playerNameArray.set(index, "_" + name);
+         playerNameArray.set(index, newName);
          updatePages();
       }
    }
 
+   private void showBlackBackground()
+   {
+      blackBackground.setVisible(true);
+   }
+
+   void hideBlackBackground()
+   {
+      blackBackground.setVisible(false);
+   }
+
    private ActionListener actionListener = e ->
    {
+      if (blackBackground.isVisible())
+      {
+         return;
+      }
+
       GameEngine.instance.soundManager.buttonClick();
 
       if ( e.getSource() == leftArrowButton )
@@ -335,13 +369,12 @@ public class ChangePlayerPanel extends JPanel
       else if ( e.getSource() == menuButton )
       {
          guiManager.setPanelVisible("MainMenu");
-         popUp.setVisible(false);
+         popUp.hidePopUp();
       }
       else if ( e.getSource() == addButton )
       {
-         popUp.setVisible(true);
-         //needs to be thought about
-         //popUp.requestFocusForTextField();
+         popUp.showPopUp(CreatePlayerPopUp.Mode.New);
+         showBlackBackground();
       }
       else if ( e.getSource() == deleteButton1 )
       {
@@ -357,15 +390,18 @@ public class ChangePlayerPanel extends JPanel
       }
       else if ( e.getSource() == editButton1 )
       {
-         editPlayer(playerNameArray.get(limit));
+         popUp.showPopUp(CreatePlayerPopUp.Mode.Edit, playerNameArray.get(limit));
+         showBlackBackground();
       }
       else if ( e.getSource() == editButton2 )
       {
-         editPlayer(playerNameArray.get(limit + 1));
+         popUp.showPopUp(CreatePlayerPopUp.Mode.Edit, playerNameArray.get(limit + 1));
+         showBlackBackground();
       }
       else if ( e.getSource() == editButton3 )
       {
-         editPlayer(playerNameArray.get(limit + 2));
+         popUp.showPopUp(CreatePlayerPopUp.Mode.Edit, playerNameArray.get(limit + 2));
+         showBlackBackground();
       }
       else
       {

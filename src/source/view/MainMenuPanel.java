@@ -109,7 +109,7 @@ public class MainMenuPanel extends JPanel {
         heading.setPreferredSize(new Dimension(295, 58));
 
         player = new JLabel(playerManager.getCurrentPlayer().getPlayerName(), SwingConstants.CENTER);
-        player.setPreferredSize(new Dimension(100, 32));
+        player.setPreferredSize(new Dimension(300, 32));
         player.setFont(new Font("Odin Rounded", Font.PLAIN, 30));
         player.setForeground(Color.white);
 
