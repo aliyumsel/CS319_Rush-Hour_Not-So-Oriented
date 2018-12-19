@@ -18,7 +18,7 @@ public class Vehicle extends GameObject// implements Drawable
    public boolean isSliding = false;
    public double velocity;
 
-   Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme) //theme i sil burdan
+   Vehicle(int x, int y, int length, String direction, boolean player) //theme i sil burdan
    {
       super(x, y, length, direction);
       this.player = player;

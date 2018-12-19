@@ -82,43 +82,43 @@ class MapDaoImpl implements MapDao
 
             if ( objectCode.equals("TU") )
             {
-               gameObjects.add(new Truck(x, y, "Upwards", false, special, theme));
+               gameObjects.add(new Truck(x, y, "Upwards", false));
             }
             else if ( objectCode.equals("TD") )
             {
-               gameObjects.add(new Truck(x, y, "Downwards", false, special, theme));
+               gameObjects.add(new Truck(x, y, "Downwards", false));
             }
             else if ( objectCode.equals("TR") )
             {
-               gameObjects.add(new Truck(x, y, "Right", false, special, theme));
+               gameObjects.add(new Truck(x, y, "Right", false));
             }
             else if ( objectCode.equals("TL") )
             {
-               gameObjects.add(new Truck(x, y, "Left", false, special, theme));
+               gameObjects.add(new Truck(x, y, "Left", false));
             }
             else if ( objectCode.equals("CU") )
             {
-               gameObjects.add(new Car(x, y, "Upwards", false, special, theme));
+               gameObjects.add(new Car(x, y, "Upwards", false));
             }
             else if ( objectCode.equals("CD") )
             {
-               gameObjects.add(new Car(x, y, "Downwards", false, special, theme));
+               gameObjects.add(new Car(x, y, "Downwards", false));
             }
             else if ( objectCode.equals("CR") )
             {
-               gameObjects.add(new Car(x, y, "Right", false, special, theme));
+               gameObjects.add(new Car(x, y, "Right", false));
             }
             else if ( objectCode.equals("CL") )
             {
-               gameObjects.add(new Car(x, y, "Left", false, special, theme));
+               gameObjects.add(new Car(x, y, "Left", false));
             }
             else if ( objectCode.equals("PC") )
             {
-               gameObjects.add(new Car(x, y, "Left", true, special, theme));
+               gameObjects.add(new Car(x, y, "Left", true));
             }
             else if ( objectCode.equals("PT") )
             {
-               gameObjects.add(new Truck(x, y, "Right", true, special, theme));
+               gameObjects.add(new Truck(x, y, "Right", true));
             }
             else if ( objectCode.equals("OO") )
             {

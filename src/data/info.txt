@@ -2,7 +2,7 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
-	a
+	den
 <NumberOfMaps>
 	50
 <NumberOfMaps/>
