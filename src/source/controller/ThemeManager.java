@@ -16,6 +16,12 @@ public class ThemeManager extends Controller
    public Theme safari;
    public Theme space;
 
+   public String[] getThemes() {
+      return themes;
+   }
+
+   private String themes[] = {"minimalistic", "classic" , "safari", "space"};
+
    public ThemeManager()
    { //String theme parametresi ekleyip aşağıda hangi themese current theme o olucak oyun başlarken
       instance = this;
@@ -128,7 +134,7 @@ public class ThemeManager extends Controller
    }
 
 
-   private int findRequiredStars()
+   public int findRequiredStars()
    {
       int requiredStars = 100;
       if ( !classic.isUnlocked() )
@@ -229,5 +235,6 @@ public class ThemeManager extends Controller
       space.setUnlocked((boolean) themes.get("space"));
 
       currentTheme = findThemeByName(GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getActiveTheme());
+      findRequiredStars();
    }
 }

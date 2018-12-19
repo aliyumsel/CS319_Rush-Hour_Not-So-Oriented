@@ -284,7 +284,7 @@ public class GamePanel extends JPanel
       spaceAmountLabel.setBounds(80, panelHeight - 130 - spaceAmountLabel.getPreferredSize().height,
               spaceAmountLabel.getPreferredSize().width, spaceAmountLabel.getPreferredSize().height);
 
-      moveLabel.setBounds(panelWidth - moveLabel.getPreferredSize().width - 30, 200, moveLabel.getPreferredSize().width,
+      moveLabel.setBounds(panelWidth - moveLabel.getPreferredSize().width - 30, 215, moveLabel.getPreferredSize().width,
               moveLabel.getPreferredSize().height);
 
       numberLabel.setBounds(panelWidth - numberLabel.getPreferredSize().width - 15, 265, numberLabel.getPreferredSize().width,
@@ -301,13 +301,13 @@ public class GamePanel extends JPanel
 
       timerBackgroundLabel.setBounds(40, ( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
 
-      firstStarForegroundLabel.setBounds(panelWidth - 60 - firstStarForegroundLabel.getPreferredSize().width, ( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
+      firstStarForegroundLabel.setBounds(panelWidth - 60 - firstStarForegroundLabel.getPreferredSize().width, 15+( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
 
-      firstStarBackgroundLabel.setBounds(panelWidth - 60 - firstStarBackgroundLabel.getPreferredSize().width, ( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
+      firstStarBackgroundLabel.setBounds(panelWidth - 60 - firstStarBackgroundLabel.getPreferredSize().width, 15+( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
 
-      secondStarForegroundLabel.setBounds(panelWidth - 40 - firstStarForegroundLabel.getPreferredSize().width, ( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
+      secondStarForegroundLabel.setBounds(panelWidth - 40 - firstStarForegroundLabel.getPreferredSize().width, 15+( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
 
-      secondStarBackgroundLabel.setBounds(panelWidth - 40 - firstStarBackgroundLabel.getPreferredSize().width, ( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
+      secondStarBackgroundLabel.setBounds(panelWidth - 40 - firstStarBackgroundLabel.getPreferredSize().width,15+ ( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
 
       timerForegroundStartPosition = ( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45;
       moveCountForegroundStartPosition = ( panelHeight - firstStarForegroundLabel.getPreferredSize().height ) / 2 - 45;
@@ -408,9 +408,9 @@ public class GamePanel extends JPanel
       }
 
       //Backgrounds for stars
-      graphics2d.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
-      graphics2d.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
-      graphics2d.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45, null);
+      graphics2d.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
+      graphics2d.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
+      graphics2d.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
    }
 
    private void drawMoveCountForeground(Graphics g)
@@ -430,7 +430,7 @@ public class GamePanel extends JPanel
          {
             subImage = firstStarForegroundImage.getSubimage(0, firstStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
          }
-         graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
+         graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
 
       }
       //For the second star
@@ -446,7 +446,7 @@ public class GamePanel extends JPanel
             {
                subImage = secondStarForegroundImage.getSubimage(0, secondStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
             }
-            graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
+            graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width,15+ moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }
          else
          {
