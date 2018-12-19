@@ -17,6 +17,7 @@ public class GamePanel extends JPanel
 
    private InnerGamePanel innerGamePanel;
    private EndOfLevelPanel endOfLevelPanel;
+   private TimeOverPopUp timeOverPopUp;
 
    private JButton menu;
    private JButton reset;
@@ -87,6 +88,7 @@ public class GamePanel extends JPanel
       loadImages();
       createComponents();
       createEndOfLevelPanel();
+      createTimeOverPopUp();
       addComponents();
       createInnerGamePanel();
       setBoundsOfComponents();
@@ -304,7 +306,7 @@ public class GamePanel extends JPanel
       numberLabel.setBounds(panelWidth - numberLabel.getPreferredSize().width - 15, 265, numberLabel.getPreferredSize().width,
               numberLabel.getPreferredSize().height);
 
-      innerGamePanel.setBounds(guiManager.findCenter(panelWidth, innerGamePanel), guiManager.findCenter(panelHeight, innerGamePanel), innerGamePanel.getPreferredSize().width,
+      innerGamePanel.setBounds(guiManager.findCenter(panelWidth, innerGamePanel), guiManager.findCenterVertical(panelHeight, innerGamePanel), innerGamePanel.getPreferredSize().width,
               innerGamePanel.getPreferredSize().height);
 
       remainingTimeLabel.setBounds(80, panelHeight / 2, remainingTimeLabel.getPreferredSize().width, remainingTimeLabel.getPreferredSize().height);
@@ -342,23 +344,44 @@ public class GamePanel extends JPanel
    public void showEndOfLevelPopUp(int starAmount)
    {
       setEndOfLevelPanelVisible(true, starAmount);
+      showBlackBackground();
    }
 
    public void showTimeOverPopUp()
    {
-      innerGamePanel.setTimeOverPopUpVisible(true);
+      setTimeOverPopUpVisible(true);
+      showBlackBackground();
+   }
+
+   private void showBlackBackground()
+   {
+      blackBackground.setVisible(true);
+   }
+
+   void hideBlackBackground()
+   {
+      blackBackground.setVisible(false);
    }
 
    public void setInnerGamePanelVisible()
    {
       innerGamePanel.setVisible(true);
       setEndOfLevelPanelVisible(false, 0);
-      innerGamePanel.setTimeOverPopUpVisible(false);
+      setTimeOverPopUpVisible(false);
    }
 
-   public EndOfLevelPanel getEndOfLevelPanel()
+   EndOfLevelPanel getEndOfLevelPanel()
    {
       return endOfLevelPanel;
+   }
+
+   private void setTimeOverPopUpVisible(boolean visible)
+   {
+      if ( visible )
+      {
+         //failure sound will be added
+      }
+      timeOverPopUp.setVisible(visible);
    }
 
    private void createInnerGamePanel()
@@ -373,6 +396,17 @@ public class GamePanel extends JPanel
       }
       setVisible(false);
    }
+
+   private void createTimeOverPopUp()
+   {
+      timeOverPopUp = new TimeOverPopUp(guiManager);
+      add(timeOverPopUp);
+      timeOverPopUp.setVisible(false);
+
+      Dimension size = timeOverPopUp.getPreferredSize();
+      timeOverPopUp.setBounds(guiManager.findCenter(panelWidth,endOfLevelPanel), guiManager.findCenterVertical(panelHeight,endOfLevelPanel), size.width, size.height);
+   }
+
 
    private void createEndOfLevelPanel()
    {
@@ -389,6 +423,11 @@ public class GamePanel extends JPanel
       @Override
       public void actionPerformed(ActionEvent e)
       {
+         if (blackBackground.isVisible())
+         {
+            return;
+         }
+
          GameEngine.instance.soundManager.buttonClick();
          if ( e.getSource() == reset )
          {
@@ -440,12 +479,7 @@ public class GamePanel extends JPanel
          graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
          graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
       }
-      //Backgrounds for stars
       graphics.drawImage(background, 0, 0, null);
-
-//      Color myColour = new Color(0, 0, 0, 200);
-//      graphics.setColor(myColour);
-//      graphics.fillRect(0,0,panelWidth,panelHeight);
 
       if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive())
       {

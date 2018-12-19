@@ -2,7 +2,11 @@
 	1
 <NumberOfPlayers/>
 <LastActivePlayer>
+<<<<<<< HEAD
 	_____default
+=======
+	malKaan
+>>>>>>> unstable
 <NumberOfMaps>
 	50
 <NumberOfMaps/>

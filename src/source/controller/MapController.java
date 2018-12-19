@@ -199,9 +199,10 @@ public class MapController extends Controller
                mapStr = mapStr + "SS ";
             }
          }
-         mapStr = mapStr.substring(0, mapStr.length() - 1);
-         mapStr = mapStr + "\n";
+
+         mapStr = mapStr + "| ";
       }
+      mapStr = mapStr.substring(0, mapStr.length() - 2);
       //System.out.println(mapStr);
       return mapStr;
    }

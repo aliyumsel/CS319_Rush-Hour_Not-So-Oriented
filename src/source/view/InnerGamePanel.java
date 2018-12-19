@@ -13,7 +13,6 @@ import java.util.Iterator;
 public class InnerGamePanel extends JPanel
 {
    private GuiPanelManager guiManager;
-   private TimeOverPopUp timeOverPopUp;
    private Map map;
 
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException
@@ -22,7 +21,6 @@ public class InnerGamePanel extends JPanel
       this.guiManager = guiManager;
       setPreferredSize(new Dimension(480, 480));
 
-      createTimeOverPopUp();
       setOpaque(false);
       setVisible(true);
    }
@@ -52,27 +50,7 @@ public class InnerGamePanel extends JPanel
          GameObject gameObject = gameObjects.next();
          gameObject.draw(g2D);
       }
-//      for ( GameObject gameObject : map.getGameObjects() )
-//      {
-//         gameObject.draw(g2D);
-//      }
    }
 
-   void setTimeOverPopUpVisible(boolean visible)
-   {
-      if ( visible )
-      {
-         //failure sound will be added
-      }
-      timeOverPopUp.setVisible(visible);
-   }
-   private void createTimeOverPopUp()
-   {
-      timeOverPopUp = new TimeOverPopUp(guiManager);
-      add(timeOverPopUp);
-      timeOverPopUp.setVisible(false);
 
-      Dimension size = timeOverPopUp.getPreferredSize();
-      timeOverPopUp.setBounds(25, 100, size.width, size.height);
-   }
 }
