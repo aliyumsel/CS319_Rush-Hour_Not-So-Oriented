@@ -37,6 +37,6 @@ public class Obstacle extends GameObject
    public void updateImages()
    {
       image = ThemeManager.instance.getObstacleImage();
-      blackedOutImage =
+     // blackedOutImage =
    }
 }
