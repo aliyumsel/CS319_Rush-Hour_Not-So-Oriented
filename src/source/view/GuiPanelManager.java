@@ -12,10 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-//import source.controller.Controller;
-//import source.controller.Sound;
-//import source.model.GameEngine;
-
 @SuppressWarnings({"serial", "Duplicates"})
 public class GuiPanelManager extends JFrame
 {

@@ -116,7 +116,7 @@ public class ChangePlayerPanel extends JPanel
             Graphics2D temp = (Graphics2D) g.create();
             int width = panelWidth;
             int height = panelHeight;
-            Color myColour = new Color(0, 0, 0, 200);
+            Color myColour = new Color(0, 0, 0, 100);
             temp.setColor(myColour);
             temp.fillRect(0, 0, width, height);
          }

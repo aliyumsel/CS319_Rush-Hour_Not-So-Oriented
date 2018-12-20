@@ -16,9 +16,21 @@ public class PowerUpManager extends Controller
    private boolean spaceActive;
    private boolean shrinkActive;
 
+   private Obstacle obstacleToRemove;
+   private int obstacleToRemoveX;
+   private int obstacleToRemoveY;
+   private int poofDuration;
+   private int counter = 0;
+   private boolean shouldCount;
+
    PowerUpManager()
    {
       instance = this;
+      obstacleToRemove = null;
+      shouldCount = false;
+      obstacleToRemoveX = -1;
+      obstacleToRemoveY = -1;
+      poofDuration = 60;
    }
 
    public void update()
@@ -57,13 +69,39 @@ public class PowerUpManager extends Controller
 
             if ( temp != null )
             {
-               MapController.instance.removeGameObject(temp);
-               MapController.instance.updateMap();
+               obstacleToRemove = temp;
+               obstacleToRemoveX = obstacleToRemove.transform.position.gridX;
+               obstacleToRemoveY = obstacleToRemove.transform.position.gridY;
                deactivateSpace();
+               shouldCount = true;
+
                //this decrement method will be put inside the game manager
                GameEngine.instance.playerManager.decrementRemainingSpacePowerup();
             }
          }
+      }
+
+      if (shouldCount)
+      {
+         counter++;
+         System.out.println("Counter: " + counter);
+      }
+
+      if (obstacleToRemove != null && counter >= (poofDuration / 2))
+      {
+         System.out.println("Removed game object");
+         MapController.instance.removeGameObject(obstacleToRemove);
+         MapController.instance.updateMap();
+         obstacleToRemove = null;
+      }
+
+      if (counter >= poofDuration)
+      {
+         System.out.println("Stopped Counter");
+         counter = 0;
+         shouldCount = false;
+         obstacleToRemoveX = -1;
+         obstacleToRemoveY = -1;
       }
    }
 
@@ -93,17 +131,25 @@ public class PowerUpManager extends Controller
       }
    }
 
-//   private void initializePowerUp(PowerUp powerUp)
-//   {
-//      if ( powerUp == PowerUp.Space )
-//      {
-//         initializeSpace();
-//      }
-//      else if ( powerUp == PowerUp.Shrink )
-//      {
-//         initializeShrink();
-//      }
-//   }
+   public int getObstacleToRemoveX()
+   {
+      return obstacleToRemoveX;
+   }
+
+   public int getObstacleToRemoveY()
+   {
+      return obstacleToRemoveY;
+   }
+
+   public int getCurrentCount()
+   {
+      return counter;
+   }
+
+   public int getPoofDuration()
+   {
+     return poofDuration;
+   }
 
    private void initializeSpace()
    {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class GameEngine
 {
    public static GameEngine instance;
-   private int frameCount;
    private ArrayList<Controller> controllers;
    public ThemeManager themeManager;
    public SoundManager soundManager;
@@ -35,8 +34,6 @@ public class GameEngine
       controllers.add(gameManager);
       controllers.add(powerUpManager);
 
-      frameCount = 0;
-
       for ( Controller controller : controllers )
       {
          controller.start();
@@ -50,15 +47,6 @@ public class GameEngine
       for ( Controller controller : controllers )
       {
          controller.update();
-      }
-
-      if ( frameCount >= 60 )
-      {
-         frameCount = 1;
-      }
-      else
-      {
-         frameCount++;
       }
 
       Input.reset();
