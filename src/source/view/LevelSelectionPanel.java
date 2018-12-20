@@ -176,7 +176,7 @@ public class LevelSelectionPanel extends JPanel
                {
                   buttonArray[i].showTimerIcon(true);
                }
-               if (GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStatus().equals("inProgress")){
+               if (GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStatus().equals("inProgress") && GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getTime() < 0){
                   buttonArray[i].toggleInProgress(true);
                }
             }
