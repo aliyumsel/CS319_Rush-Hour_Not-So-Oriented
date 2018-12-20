@@ -88,7 +88,7 @@ public class HelpPanel extends JPanel
       helpLabels = new JLabel[2];
       for ( int i = 0; i < 2; i++ )
       {
-         helpImages[i] = guiManager.LoadImage(imagePath + "/help" + (i + 1) +".png");
+        helpImages[i] = guiManager.LoadImage(imagePath + "/help" + (i + 1) +".png");
       }
 
    }

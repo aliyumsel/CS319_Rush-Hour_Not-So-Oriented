@@ -100,9 +100,10 @@ public class GuiPanelManager extends JFrame
       levelSelectionPanel = new LevelSelectionPanel(this);
       changePlayerPanel = new ChangePlayerPanel(this);
       this.add(mainMenuPanel);
-      this.add(tutorialPanel);
+
       this.add(gamePanel);
       this.add(creditsPanel);
+      this.add(tutorialPanel);
       this.add(levelSelectionPanel);
       this.add(settingsPanel);
       this.add(helpPanel);
