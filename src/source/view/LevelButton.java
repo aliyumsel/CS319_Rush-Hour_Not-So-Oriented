@@ -59,7 +59,7 @@ class LevelButton extends JButton {
     }
 
     private void loadImages() {
-        Graphics2D bGr;
+
         levelBackground = guiManager.LoadImage("image/icons/levelbackground.png");
         levelBackgroundHighlighted = guiManager.LoadImage("image/icons/levelbackgroundH.png");
         lockedBackground = guiManager.LoadImage("image/icons/levelBackgroundLocked.png");
@@ -141,7 +141,7 @@ class LevelButton extends JButton {
         setDisabledIcon(new ImageIcon(lockedBackground));
     }
 
-    public void toggleInProgress(boolean state) {
+    void toggleInProgress(boolean state) {
         isInProgress = state;
         BufferedImage temp;
         BufferedImage tempH;

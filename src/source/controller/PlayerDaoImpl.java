@@ -1,19 +1,12 @@
 
 package source.controller;
 
-import com.google.gson.*;
-
+import com.google.gson.Gson;
 import interfaces.PlayerDao;
-import source.model.BonusLevelInformation;
-import source.model.LevelInformation;
-import source.model.Player;
-import source.model.Settings;
-import source.model.OriginalLevel;
+import source.model.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
 
 @SuppressWarnings("Duplicates")
 public class PlayerDaoImpl implements PlayerDao{
@@ -24,7 +17,7 @@ public class PlayerDaoImpl implements PlayerDao{
     public ArrayList<Player> extractPlayers()
     {
         ArrayList<Player> players = new ArrayList<>();
-        File folder = new File("src\\data\\players");
+        File folder = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players");
         File[] list = folder.listFiles();
 
         for (int i = 0; i < list.length; i++)
@@ -36,15 +29,15 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public String extractLastPlayerName()
     {
-        Info info = gson.fromJson(createReader("src/data/info.json"), Info.class);
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
         return info.lastActivePlayer;
     }
 
     @Override
     public Player createPlayer(String playerName, Settings settings) {
-        Info info = gson.fromJson(createReader("src/data/info.json"), Info.class);
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
         OriginalLevel originalLevel;
-        String playerPath = "src/data/players/" + playerName;
+        String playerPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players\\" + playerName;
 
         //creates player folder
         File newFolder = new File(playerPath);
@@ -59,17 +52,10 @@ public class PlayerDaoImpl implements PlayerDao{
 
         for (int i = 1; i <= info.numberOfMaps; i++)
         {
-            originalLevel = gson.fromJson(createReader("src/data/levels/level" + i + ".json"), OriginalLevel.class);
-            unlocked = i == 1;
-
-            if (originalLevel.time < 0)
-            {
-                levels.add(new LevelInformation(0, "notStarted", i, originalLevel.expectedMovesForThreeStars, originalLevel.expectedMovesForTwoStars, 0, unlocked, ""));
-            }
-            else
-            {
-                levels.add(new BonusLevelInformation(0, "notStarted", i, originalLevel.expectedMovesForThreeStars, originalLevel.expectedMovesForTwoStars, 0, unlocked, "", originalLevel.time));
-            }
+            InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + i + ".json");
+            InputStreamReader reader = new InputStreamReader(input);
+            originalLevel = gson.fromJson(reader, OriginalLevel.class);
+            levels.add(new LevelInformation(0, "notStarted", i, originalLevel.expectedMovesForThreeStars, originalLevel.expectedMovesForTwoStars, 0, i == 1, "", originalLevel.time));
         }
         Player newPlayer = new Player(playerName, 0, levels, playerPath, settings, 3, 3);
         newPlayer.resetLastUnlockedLevelNo();
@@ -93,10 +79,10 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public void saveLastActivePlayer(String playerName)
     {
-        Info info = gson.fromJson(createReader("src/data/info.json"), Info.class);
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
         info.lastActivePlayer = playerName;
         String text = gson.toJson(info);
-        writeFile("src/data/info.json", text);
+        writeFile("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json", text);
     }
 
     @Override
@@ -110,7 +96,7 @@ public class PlayerDaoImpl implements PlayerDao{
     public void changePlayerName(Player player){
         File folder = new File(player.getPath());
         folder.renameTo(new File(folder.getParent() + "/" + player.getPlayerName()));
-        player.setPath("src/data/players/" +  player.getPlayerName());
+        player.setPath("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players\\"+  player.getPlayerName());
         savePlayer(player);
     }
 
@@ -124,7 +110,6 @@ public class PlayerDaoImpl implements PlayerDao{
             fileOut.flush();
             fileOut.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -145,7 +130,6 @@ public class PlayerDaoImpl implements PlayerDao{
         try {
             newFile.createNewFile();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

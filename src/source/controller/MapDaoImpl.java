@@ -4,8 +4,7 @@ import com.google.gson.Gson;
 import interfaces.MapDao;
 import source.model.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,8 +20,8 @@ class MapDaoImpl implements MapDao
    {
       Map map = new Map();
       gameObjects.clear();
-      
-      String mapStr = "";
+
+      String mapStr;
       if ( !original )
       {
          //System.out.println("Inside inprogress if");
@@ -30,12 +29,9 @@ class MapDaoImpl implements MapDao
       }
       else
       {
-         //System.out.println("Inside else");
-         try {
-            mapStr = gson.fromJson(new FileReader("src/data/levels/level" + level + ".json"), OriginalLevel.class).map;
-         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-         }
+         InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + level + ".json");
+         InputStreamReader reader = new InputStreamReader(input);
+         mapStr = gson.fromJson(reader, OriginalLevel.class).map;
       }
 
       int x = 0;
@@ -109,33 +105,33 @@ class MapDaoImpl implements MapDao
       return map;
    }
 
-   private void printVehicleArray()
-   {
-      int i = 0;
-      for ( GameObject gameObject : gameObjects )
-      {
-         System.out.println("Vehicle " + ++i);
-         System.out.println("Type: " + gameObject.getType());
-         System.out.println("X Coordinate: " + gameObject.transform.position.x);
-         System.out.println("Y Coordinate: " + gameObject.transform.position.y);
-         System.out.println("Direction:  " + gameObject.transform.direction);
-         System.out.println("Axis:  " + gameObject.transform.axis);
-         //System.out.println("Color: " + vehicle.getColor());
-         System.out.println("Length: " + gameObject.transform.length);
-         System.out.print("Occupied Cells: ");
-
-         for ( int a = 0; a < gameObject.transform.length; a++ )
-         {
-            System.out.print(gameObject.getOccupiedCells()[a] + " ");
-         }
-
-         System.out.print("\nOccupied Coordinates: ");
-
-         for ( int a = 0; a < gameObject.transform.length; a++ )
-         {
-            System.out.print("(" + gameObject.getOccupiedTransforms()[a].position.x + "," + gameObject.getOccupiedTransforms()[a].position.y + ")" + " ");
-         }
-      }
-   }
+//   private void printVehicleArray()
+//   {
+//      int i = 0;
+//      for ( GameObject gameObject : gameObjects )
+//      {
+//         System.out.println("Vehicle " + ++i);
+//         System.out.println("Type: " + gameObject.getType());
+//         System.out.println("X Coordinate: " + gameObject.transform.position.x);
+//         System.out.println("Y Coordinate: " + gameObject.transform.position.y);
+//         System.out.println("Direction:  " + gameObject.transform.direction);
+//         System.out.println("Axis:  " + gameObject.transform.axis);
+//         //System.out.println("Color: " + vehicle.getColor());
+//         System.out.println("Length: " + gameObject.transform.length);
+//         System.out.print("Occupied Cells: ");
+//
+//         for ( int a = 0; a < gameObject.transform.length; a++ )
+//         {
+//            System.out.print(gameObject.getOccupiedCells()[a] + " ");
+//         }
+//
+//         System.out.print("\nOccupied Coordinates: ");
+//
+//         for ( int a = 0; a < gameObject.transform.length; a++ )
+//         {
+//            System.out.print("(" + gameObject.getOccupiedTransforms()[a].position.x + "," + gameObject.getOccupiedTransforms()[a].position.y + ")" + " ");
+//         }
+//      }
+//   }
 
 }

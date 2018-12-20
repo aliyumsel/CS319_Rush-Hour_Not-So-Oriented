@@ -11,8 +11,6 @@ public class Vehicle extends GameObject// implements Drawable
    private String type; // we may not need this
    public boolean isMoving; // we may not need this
    private boolean player;
-   private int gridPixelSize = 60;
-   private boolean special = false;
    private BufferedImage image;
    private BufferedImage blackedOutImage;
    public boolean isSliding = false;
@@ -23,7 +21,6 @@ public class Vehicle extends GameObject// implements Drawable
       super(x, y, length, direction);
       this.player = player;
       isMoving = false;
-      this.special = special;
       velocity = 0.05;
       updateImages();
    }
@@ -95,14 +92,9 @@ public class Vehicle extends GameObject// implements Drawable
          image = ThemeManager.instance.getLongVehicleImage();
          blackedOutImage = ThemeManager.instance.getDisabledImage("long");
       }
-      else if ( player && !this.special )
-      {
-         image = ThemeManager.instance.getPlayerImage();
-         blackedOutImage = ThemeManager.instance.getDisabledImage("short");
-      }
       else if ( player )
       {
-         image = ThemeManager.instance.getSpecialPlayerImage();
+         image = ThemeManager.instance.getPlayerImage();
          blackedOutImage = ThemeManager.instance.getDisabledImage("short");
       }
    }
@@ -135,6 +127,7 @@ public class Vehicle extends GameObject// implements Drawable
 
       AffineTransform at;
 
+      int gridPixelSize = 60;
       at = AffineTransform.getTranslateInstance(transform.position.x * gridPixelSize, transform.position.y * gridPixelSize);
 
       //for drawing the black out

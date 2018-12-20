@@ -92,17 +92,17 @@ public class Player
       lastUnlockedLevelNo++;
    }
 
-   public void configureLastUnlockedLevelNo()
-   {
-      for ( int i = levels.size() - 1; i >= 0; i-- )
-      {
-         if ( levels.get(i).isUnlocked() )
-         {
-            lastUnlockedLevelNo = i + 1;
-            break;
-         }
-      }
-   }
+//   public void configureLastUnlockedLevelNo()
+//   {
+//      for ( int i = levels.size() - 1; i >= 0; i-- )
+//      {
+//         if ( levels.get(i).isUnlocked() )
+//         {
+//            lastUnlockedLevelNo = i + 1;
+//            break;
+//         }
+//      }
+//   }
 
    public int getRemainingShrinkPowerup()
    {

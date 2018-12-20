@@ -1,7 +1,6 @@
 package source.view;
 
 import source.controller.*;
-import source.model.Theme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,8 +22,8 @@ public class SettingsPanel extends JPanel {
     private BufferedImage starActive;
     private JButton music;
     private JButton sfx;
-    private JButton mouse;
-    private JButton keyboard;
+//    private JButton mouse;
+//    private JButton keyboard;
     private JButton controlPreference;
 
     private JButton back;
@@ -58,9 +57,9 @@ public class SettingsPanel extends JPanel {
     private BufferedImage spaceHighlightedImage;
     private BufferedImage classicD;
     private BufferedImage safariD;
-    private BufferedImage simpleD;
+//    private BufferedImage simpleD;
     private BufferedImage spaceD;
-    public String previousPanel = "";
+    private String previousPanel = "";
     private int panelWidth;
     private int panelHeight;
 
@@ -122,8 +121,8 @@ public class SettingsPanel extends JPanel {
         music = UIFactory.createButton(musicImage, musicHighlightedImage, "square", actionListener);
         sfx = UIFactory.createButton(sfxImage, sfxHighlightedImage, "square", actionListener);
         back = UIFactory.createButton(backButtonImage, backButtonHighlightedImage, "square", actionListener);
-        mouse = UIFactory.createButton(mouseControlImage, mouseControlHighlightedImage, "square", actionListener);
-        keyboard = UIFactory.createButton(keyboardControlImage, keyboardControlHighlightedImage, "square", actionListener);
+//        mouse = UIFactory.createButton(mouseControlImage, mouseControlHighlightedImage, "square", actionListener);
+//        keyboard = UIFactory.createButton(keyboardControlImage, keyboardControlHighlightedImage, "square", actionListener);
         if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
             controlPreference = UIFactory.createButton(mouseControlImage, mouseControlHighlightedImage, "square", actionListener);
         } else {
@@ -233,7 +232,7 @@ public class SettingsPanel extends JPanel {
         updateThemeLabels();
     }
 
-    public void updateThemeLabels(){
+    private void updateThemeLabels(){
 
         for (int i = 0; i < 3; i++) {
             if(PlayerManager.instance.getCurrentPlayer().getSettings().getThemes().get(ThemeManager.instance.getThemes()[i+1])){

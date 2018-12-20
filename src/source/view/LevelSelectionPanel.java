@@ -3,16 +3,12 @@ package source.view;
 import source.controller.GameEngine;
 import source.controller.PlayerManager;
 import source.controller.ThemeManager;
-import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class LevelSelectionPanel extends JPanel
 {
@@ -108,9 +104,9 @@ public class LevelSelectionPanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
+      leftArrowButton.setBounds(5, guiManager.findCenterVertical(panelHeight, leftArrowButton),
               leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
-      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton),
+      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenterVertical(panelHeight, rightArrowButton),
               rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
 
       menuButton.setBounds(30, 30, menuButton.getPreferredSize().width, menuButton.getPreferredSize().height);
@@ -119,7 +115,7 @@ public class LevelSelectionPanel extends JPanel
 
       for ( int i = 0; i < buttonArray.length; i++ )
       {
-         buttonArray[i].setBounds(10, guiManager.findCenter(panelHeight, buttonArray[i]) - 135,
+         buttonArray[i].setBounds(10, guiManager.findCenterVertical(panelHeight, buttonArray[i]) - 135,
                  buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
       }
 
@@ -139,19 +135,19 @@ public class LevelSelectionPanel extends JPanel
          if ( i > -1 + limit && i < 4 + limit )
          {
             gap += gapValue;
-            buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]) - 135,
+            buttonArray[i].setBounds(gap, guiManager.findCenterVertical(panelHeight, buttonArray[i]) - 135,
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
          else if ( i >= 4 + limit && i < 8 + limit )
          {
             gap += gapValue;
-            buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]),
+            buttonArray[i].setBounds(gap, guiManager.findCenterVertical(panelHeight, buttonArray[i]),
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
          else if ( i >= 8 + limit && i < 12 + limit )
          {
             gap += gapValue;
-            buttonArray[i].setBounds(gap, 135 + guiManager.findCenter(panelHeight, buttonArray[i]),
+            buttonArray[i].setBounds(gap, 135 + guiManager.findCenterVertical(panelHeight, buttonArray[i]),
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
          buttonArray[i].setVisible(true);
@@ -176,7 +172,7 @@ public class LevelSelectionPanel extends JPanel
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
                LevelInformation level = PlayerManager.instance.getCurrentPlayer().getLevels().get(i);
                buttonArray[i].showTimerIcon(false);
-               if ( level instanceof BonusLevelInformation && level.isUnlocked())
+               if ( level.getTime() >= 0 && level.isUnlocked())
                {
                   buttonArray[i].showTimerIcon(true);
                }

@@ -1,6 +1,5 @@
 package source.controller;
 
-import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 import source.view.GuiPanelManager;
 
@@ -118,11 +117,11 @@ public class GameManager extends Controller
       LevelInformation levelToBeLoaded = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
       isLevelBonus = false;
 
-      if ( levelToBeLoaded instanceof BonusLevelInformation )
+      if ( levelToBeLoaded.getTime() >= 0 )
       {
          System.out.println("Bonus Map");
          isLevelBonus = true;
-         remainingTime = ( (BonusLevelInformation) levelToBeLoaded ).getTime() * 60;
+         remainingTime = levelToBeLoaded .getTime() * 60;
          timerStartValue = remainingTime;
          MapController.instance.loadOriginalLevel(_level);
          VehicleController.instance.setMap(MapController.instance.getMap());

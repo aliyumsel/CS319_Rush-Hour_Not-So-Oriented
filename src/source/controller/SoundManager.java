@@ -1,14 +1,11 @@
 package source.controller;
 
-import source.model.Theme;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,7 +19,7 @@ public class SoundManager extends Controller
    private boolean isThemeEnabled;
    private boolean isEffectsEnabled;
 
-   public SoundManager()
+   SoundManager()
    {
       //isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
       //isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();

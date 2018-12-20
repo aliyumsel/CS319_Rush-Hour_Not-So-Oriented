@@ -58,14 +58,14 @@ public class TimeOverPopUp extends JPanel
    }
 
 
-   void updatePanel()
-   {
-      if ( !isShowing() )
-      {
-         return;
-      }
-      repaint();
-   }
+//   void updatePanel()
+//   {
+//      if ( !isShowing() )
+//      {
+//         return;
+//      }
+//      repaint();
+//   }
 
    public void paintComponent(Graphics g)
    {
