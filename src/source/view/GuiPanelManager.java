@@ -195,6 +195,7 @@ public class GuiPanelManager extends JFrame
       creditsPanel.loadImages();
       gamePanel.loadImages();
       gamePanel.getEndOfLevelPanel().loadImages();
+      gamePanel.getTimeOverPopUp().loadImages();
       mainMenuPanel.loadImages();
    }
 

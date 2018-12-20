@@ -44,8 +44,6 @@ public class EndOfLevelPanel extends JPanel
       addComponents();
       setBoundsOfComponents();
       setOpaque(false);
-
-//      showStars(2); for testing the showStars method it works
    }
 
    public void loadImages()
