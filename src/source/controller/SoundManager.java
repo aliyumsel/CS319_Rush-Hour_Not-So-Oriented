@@ -33,7 +33,7 @@ public class SoundManager extends Controller
       try
       {
          String trafficThemeSong = ThemeManager.instance.getThemeSong();
-         AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(trafficThemeSong));
+         AudioInputStream inputStream = AudioSystem.getAudioInputStream(SoundManager.class.getClassLoader().getResourceAsStream(trafficThemeSong));
          clip = AudioSystem.getClip();
          clip.open(inputStream);
          clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -58,7 +58,7 @@ public class SoundManager extends Controller
          try
          {
             String selectionSound = ThemeManager.instance.getSelectionSound();
-            inputStream = new FileInputStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
@@ -83,7 +83,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = new FileInputStream(ThemeManager.instance.getButtonClickSound());
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getButtonClickSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
@@ -99,7 +99,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = new FileInputStream("src/sounds/success.wav");
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream("sounds/success.wav");
 
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);

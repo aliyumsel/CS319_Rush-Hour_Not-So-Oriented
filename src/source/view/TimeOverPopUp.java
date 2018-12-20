@@ -50,11 +50,11 @@ public class TimeOverPopUp extends JPanel
    {
       background = ThemeManager.instance.getPopupBackgroundImage();
 
-      menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
-      menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
+      menuButtonImage = guiManager.LoadImage("image/icons/menu.png");
+      menuButtonHighlightedImage = guiManager.LoadImage("image/icons/menuH.png");
 
-      retryButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
-      retryButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
+      retryButtonImage = guiManager.LoadImage("image/icons/reset.png");
+      retryButtonHighlightedImage = guiManager.LoadImage("image/icons/resetH.png");
    }
 
 

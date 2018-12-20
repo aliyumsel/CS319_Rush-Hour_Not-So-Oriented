@@ -72,12 +72,12 @@ public class LevelSelectionPanel extends JPanel
       bGr.drawImage(scaledImage, 0, 0, null);
       bGr.dispose();
 
-      rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
-      rightArrowHighlighted = guiManager.LoadImage("src/image/icons/rightarrowH.png");
-      leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
-      leftArrowHighlighted = guiManager.LoadImage("src/image/icons/leftarrowH.png");
-      back = guiManager.LoadImage("src/image/icons/back.png");
-      backHighlighted = guiManager.LoadImage("src/image/icons/backH.png");
+      rightArrow = guiManager.LoadImage("image/icons/rightarrow.png");
+      rightArrowHighlighted = guiManager.LoadImage("image/icons/rightarrowH.png");
+      leftArrow = guiManager.LoadImage("image/icons/leftarrow.png");
+      leftArrowHighlighted = guiManager.LoadImage("image/icons/leftarrowH.png");
+      back = guiManager.LoadImage("image/icons/back.png");
+      backHighlighted = guiManager.LoadImage("image/icons/backH.png");
    }
 
    private void createComponents()
