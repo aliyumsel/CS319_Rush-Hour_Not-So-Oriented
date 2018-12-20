@@ -30,7 +30,7 @@ public class PowerUpManager extends Controller
       shouldCount = false;
       obstacleToRemoveX = -1;
       obstacleToRemoveY = -1;
-      poofDuration = 30;
+      poofDuration = 24;
    }
 
    public void update()
@@ -149,6 +149,12 @@ public class PowerUpManager extends Controller
    public int getPoofDuration()
    {
      return poofDuration;
+   }
+
+   public void deactivatePowerUps()
+   {
+      deactivateShrink();
+      deactivateSpace();
    }
 
    private void initializeSpace()
