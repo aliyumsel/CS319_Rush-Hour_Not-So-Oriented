@@ -55,12 +55,12 @@ public class InnerGamePanel extends JPanel
 
    public void loadImages()
    {
-      poof0 = guiManager.LoadImage("image/icons/miniStar.png");
-      poof1 = guiManager.LoadImage("image/icons/miniStarLocked.png");
-      poof2 = guiManager.LoadImage("image/icons/miniStar.png");
-      poof3 = guiManager.LoadImage("image/icons/miniStarLocked.png");
-      poof4 = guiManager.LoadImage("image/icons/miniStar.png");
-      poof5 = guiManager.LoadImage("image/icons/miniStarLocked.png");
+      poof0 = guiManager.LoadImage("image/poof/poof0.png");
+      poof1 = guiManager.LoadImage("image/poof/poof1.png");
+      poof2 = guiManager.LoadImage("image/poof/poof2.png");
+      poof3 = guiManager.LoadImage("image/poof/poof3.png");
+      poof4 = guiManager.LoadImage("image/poof/poof4.png");
+      poof5 = guiManager.LoadImage("image/poof/poof5.png");
    }
 
    private void addPoofImages()

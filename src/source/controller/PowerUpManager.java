@@ -30,7 +30,7 @@ public class PowerUpManager extends Controller
       shouldCount = false;
       obstacleToRemoveX = -1;
       obstacleToRemoveY = -1;
-      poofDuration = 60;
+      poofDuration = 30;
    }
 
    public void update()
