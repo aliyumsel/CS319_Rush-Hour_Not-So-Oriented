@@ -4,8 +4,7 @@ import com.google.gson.Gson;
 import interfaces.MapDao;
 import source.model.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ class MapDaoImpl implements MapDao
    {
       Map map = new Map();
       gameObjects.clear();
-      
+
       String mapStr = "";
       if ( !original )
       {
@@ -30,12 +29,9 @@ class MapDaoImpl implements MapDao
       }
       else
       {
-         //System.out.println("Inside else");
-         try {
-            mapStr = gson.fromJson(new FileReader("src/data/levels/level" + level + ".json"), OriginalLevel.class).map;
-         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-         }
+         InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + level + ".json");
+         InputStreamReader reader = new InputStreamReader(input);
+         mapStr = gson.fromJson(reader, OriginalLevel.class).map;
       }
 
       int x = 0;

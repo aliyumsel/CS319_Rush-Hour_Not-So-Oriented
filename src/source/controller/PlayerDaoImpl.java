@@ -24,7 +24,7 @@ public class PlayerDaoImpl implements PlayerDao{
     public ArrayList<Player> extractPlayers()
     {
         ArrayList<Player> players = new ArrayList<>();
-        File folder = new File("src\\data\\players");
+        File folder = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players");
         File[] list = folder.listFiles();
 
         for (int i = 0; i < list.length; i++)
@@ -36,15 +36,15 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public String extractLastPlayerName()
     {
-        Info info = gson.fromJson(createReader("src/data/info.json"), Info.class);
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
         return info.lastActivePlayer;
     }
 
     @Override
     public Player createPlayer(String playerName, Settings settings) {
-        Info info = gson.fromJson(createReader("src/data/info.json"), Info.class);
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
         OriginalLevel originalLevel;
-        String playerPath = "src/data/players/" + playerName;
+        String playerPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players\\" + playerName;
 
         //creates player folder
         File newFolder = new File(playerPath);
@@ -59,7 +59,9 @@ public class PlayerDaoImpl implements PlayerDao{
 
         for (int i = 1; i <= info.numberOfMaps; i++)
         {
-            originalLevel = gson.fromJson(createReader("src/data/levels/level" + i + ".json"), OriginalLevel.class);
+            InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + i + ".json");
+            InputStreamReader reader = new InputStreamReader(input);
+            originalLevel = gson.fromJson(reader, OriginalLevel.class);
             unlocked = i == 1;
 
             if (originalLevel.time < 0)
@@ -93,10 +95,10 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public void saveLastActivePlayer(String playerName)
     {
-        Info info = gson.fromJson(createReader("src/data/info.json"), Info.class);
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
         info.lastActivePlayer = playerName;
         String text = gson.toJson(info);
-        writeFile("src/data/info.json", text);
+        writeFile("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json", text);
     }
 
     @Override
@@ -110,7 +112,7 @@ public class PlayerDaoImpl implements PlayerDao{
     public void changePlayerName(Player player){
         File folder = new File(player.getPath());
         folder.renameTo(new File(folder.getParent() + "/" + player.getPlayerName()));
-        player.setPath("src/data/players/" +  player.getPlayerName());
+        player.setPath("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players\\"+  player.getPlayerName());
         savePlayer(player);
     }
 
