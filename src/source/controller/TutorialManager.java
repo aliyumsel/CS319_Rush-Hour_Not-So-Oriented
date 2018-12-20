@@ -32,7 +32,7 @@ public class TutorialManager extends Controller {
     private void setBounds(JLabel label,int x , int y){
         label.setBounds(x,y,label.getPreferredSize().width,label.getPreferredSize().height);
     }
-    
+
     public int getIndex() {
         return index;
     }
