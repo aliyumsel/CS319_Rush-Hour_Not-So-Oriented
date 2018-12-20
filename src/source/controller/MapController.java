@@ -22,11 +22,6 @@ public class MapController extends Controller
    {
       Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
       map = mapDao.extractMap(level, currentPlayer, false);
-
-//      if ( map != null )
-//      {
-//         System.out.println("Map Loaded");
-//      }
    }
 
    void loadOriginalLevel(int level)
@@ -50,7 +45,7 @@ public class MapController extends Controller
       map.formMap(map.getGameObjects());
    }
 
-   GameObject getGameObjectBySelectedCell(int x, int y)
+   private GameObject getGameObjectBySelectedCell(int x, int y)
    {
       int[] occupiedCells;
       int cellNumber = ( map.getMapSize() * y ) + x;
@@ -111,13 +106,9 @@ public class MapController extends Controller
 
    void highlightObstacles()
    {
-      for ( GameObject gameObject : map.getGameObjects())
+      for ( GameObject gameObject : map.getGameObjects() )
       {
-         if (gameObject instanceof Vehicle)
-         {
-            gameObject.showBlackForeground();
-         }
-         else if (gameObject instanceof Space)
+         if ( gameObject instanceof Vehicle )
          {
             gameObject.showBlackForeground();
          }
@@ -126,17 +117,13 @@ public class MapController extends Controller
 
    void highlightLongs()
    {
-      for ( GameObject gameObject : map.getGameObjects())
+      for ( GameObject gameObject : map.getGameObjects() )
       {
-         if (gameObject instanceof Car)
+         if ( gameObject instanceof Car )
          {
             gameObject.showBlackForeground();
          }
-         else if (gameObject instanceof Obstacle)
-         {
-            gameObject.showBlackForeground();
-         }
-         else if (gameObject instanceof Space)
+         else if ( gameObject instanceof Obstacle )
          {
             gameObject.showBlackForeground();
          }
@@ -145,7 +132,7 @@ public class MapController extends Controller
 
    void clearHighlights()
    {
-      for ( GameObject gameObject : map.getGameObjects())
+      for ( GameObject gameObject : map.getGameObjects() )
       {
          gameObject.hideBlackForeground();
       }
@@ -168,39 +155,64 @@ public class MapController extends Controller
    // String builder kullansak daha guzel olcak
    String mapToString()
    {
-      String mapStr = "";
-      boolean found;
-      int mapStrSize = map.getMapSize();
-      for ( int i = 0; i < mapStrSize; i++ )
+      String[][] mapStr = new String[map.getMapSize()][map.getMapSize()];
+      StringBuilder mapString = new StringBuilder();
+
+      ArrayList<GameObject> gameObjects = map.getGameObjects();
+      for ( GameObject gameObject : gameObjects )
       {
-         for ( int j = 0; j < mapStrSize; j++ ) {
-            found = false;
-            GameObject gameObject = getGameObjectBySelectedCell(j, i);
-            if (gameObject instanceof Vehicle) {
-               if (gameObject.transform.getPosition().y == i && gameObject.transform.getPosition().x == j) {
-                  if (((Vehicle) gameObject).isPlayer()) {
-                     mapStr = mapStr + "PC ";
-                  } else {
-                     mapStr = mapStr + gameObject.getType().substring(0, 1).toUpperCase() + gameObject.transform.getDirection().substring(0, 1).toUpperCase() + " ";
+         if ( gameObject instanceof Vehicle )
+         {
+            int[] cells = gameObject.getOccupiedCells();
+            for ( int i = 0; i < cells.length; i++ )
+            {
+               int x = cells[i] / mapStr.length;
+               int y = cells[i] % mapStr.length;
+               if ( i == 0 )
+               {
+                  if ( ( (Vehicle) gameObject ).isPlayer() )
+                  {
+                     mapStr[x][y] = "PC";
                   }
-               } else {
-                  mapStr = mapStr + "XX ";
+                  else
+                  {
+                     mapStr[x][y] = gameObject.getType().substring(0, 1).toUpperCase() + gameObject.transform.getDirection().substring(0, 1).toUpperCase();
+                  }
                }
-            } else if (gameObject instanceof Obstacle) {
-               mapStr = mapStr + "OO ";
-            } else if (gameObject instanceof Space) {
-               mapStr = mapStr + "SS ";
+               else
+               {
+                  mapStr[x][y] = "XX";
+               }
             }
          }
-
-         mapStr = mapStr + "| ";
+         else if ( gameObject instanceof Obstacle )
+         {
+            int cell = gameObject.getOccupiedCells()[0];
+            int x = cell / mapStr.length;
+            int y = cell % mapStr.length;
+            mapStr[x][y] = "OO";
+         }
       }
-      mapStr = mapStr.substring(0, mapStr.length() - 2);
-      //System.out.println(mapStr);
-      return mapStr;
+
+      for ( int i = 0; i < mapStr.length; i++ )
+      {
+         for ( int j = 0; j < mapStr.length; j++ )
+         {
+            if (mapStr[i][j] == null)
+            {
+               mapStr[i][j] = "SS";
+            }
+            mapString.append(mapStr[i][j]).append(" ");
+         }
+         mapString.append("| ");
+      }
+
+      System.out.println("MAP TO STRING: " + mapString.substring(0, mapString.length() - 2));
+      return mapString.substring(0, mapString.length() - 2);
    }
 
-   Vehicle getPlayerVehicle(){
+   Vehicle getPlayerVehicle()
+   {
       Vehicle player = null;
       Vehicle temp;
 

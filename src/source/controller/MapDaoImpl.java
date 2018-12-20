@@ -97,10 +97,10 @@ class MapDaoImpl implements MapDao
          {
             gameObjects.add(new Obstacle(x, y, 1, "Right"));
          }
-         else if (objectCode.equals("SS"))
-         {
-            gameObjects.add(new Space(x, y, 1, "Right"));
-         }
+//         else if (objectCode.equals("SS"))
+//         {
+//            gameObjects.add(new Space(x, y, 1, "Right"));
+//         }
          x++;
       }
 
