@@ -1,5 +1,6 @@
 package source.controller;
 
+import source.model.Theme;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -99,7 +100,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream("sounds/success.wav");
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getSelectionSound()); // getSuccess sound olacak
 
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
