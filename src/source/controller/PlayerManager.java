@@ -235,6 +235,19 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+   void  updateLevelAtReset(int levelNo)
+   {
+      if (currentPlayer.getLevels().get(levelNo - 1).getStars() > 0)
+      {
+         setLevelStatus(levelNo, "finished");
+      }
+      else
+      {
+         setLevelStatus(levelNo, "notStarted");
+      }
+      playerDao.savePlayer(currentPlayer);
+   }
+
    private void setLevelStatus(int levelNo, String status)
    {
       if ( !currentPlayer.getLevels().get(levelNo - 1).getStatus().equals(status) )

@@ -156,6 +156,7 @@ public class GameManager extends Controller
 
    public void resetLevel()
    {
+      PlayerManager.instance.updateLevelAtReset(level);
       loadLevel(level, true);
    }
 
