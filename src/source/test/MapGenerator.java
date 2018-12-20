@@ -6,12 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class MapGenerator {
-    public static int size = 50;
+    public static int size = 2267000;
     public static String[] grid = new String[size];
     public static String[] moves = new String[size];
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\asus\\Desktop\\rush.txt");
+        File file = new File("C:\\Users\\asus\\Desktop\\rush.txt"); // pathi değiştir
         BufferedReader br = new BufferedReader(new FileReader(file));
         String mapStr = "";
         char ch_V1;
@@ -22,11 +22,11 @@ public class MapGenerator {
         int cell = 0;
         String st;
         int i = 0;
+        int previousCount = 0;
         int index = 0;
-
-
+        int targetCount = 60;
         while ((st = br.readLine()) != null) {
-            if (i >= 1166950 && i < 1167000) {  //buradaki değerleri değiştirin sadece, "size" kadar fark olsun arada ve değişkene atabilirsiniz
+            if (i >= 0&& i < 2267000) {  //buradaki değerleri değiştirin sadece, "size" kadar fark olsun arada ve değişkene atabilirsiniz
                 moves[index] = st.split(" ")[0];
                 grid[index] = st.split(" ")[1];
                 index++;
@@ -44,11 +44,13 @@ public class MapGenerator {
                         cell = a * 6 + j;
                         if (map.charAt(cell) == 'A') {
                             mapStr += "PC ";
-                            map.setCharAt(cell + 1, 'o');
+                            map.setCharAt(cell + 1, 'p');
                         } else if (map.charAt(cell) == 'x') {
                             mapStr += "OO ";
                         } else if (map.charAt(cell) == 'o') {
                             mapStr += "SS ";
+                        }else if (map.charAt(cell) == 'p') {
+                            mapStr += "XX ";
                         } else {
 
                             char ch = map.charAt(cell);
@@ -77,30 +79,30 @@ public class MapGenerator {
                                     mapStr += "CR ";
                                 else
                                     mapStr += "CL ";
-                                map.setCharAt(cell + 1, 'o');
+                                map.setCharAt(cell + 1, 'p');
                             } else if (ch_H1 == ch && ch_H2 == ch) {
 
                                 if (direction == 1)
                                     mapStr += "TR ";
                                 else
                                     mapStr += "TL ";
-                                map.setCharAt(cell + 1, 'o');
-                                map.setCharAt(cell + 2, 'o');
+                                map.setCharAt(cell + 1, 'p');
+                                map.setCharAt(cell + 2, 'p');
                             } else if (ch_V1 == ch && ch_V2 != ch) {
                                 if (direction == 1)
                                     mapStr += "CD ";
                                 else
                                     mapStr += "CU ";
 
-                                map.setCharAt(cell + 6, 'o');
+                                map.setCharAt(cell + 6, 'p');
                             } else if (ch_V1 == ch && ch_V2 == ch) {
                                 if (direction == 1)
                                     mapStr += "TD ";
                                 else
                                     mapStr += "TU ";
 
-                                map.setCharAt(cell + 6, 'o');
-                                map.setCharAt(cell + 12, 'o');
+                                map.setCharAt(cell + 6, 'p');
+                                map.setCharAt(cell + 12, 'p');
                             }
                         }
                     } else {
@@ -112,10 +114,19 @@ public class MapGenerator {
 
                 }
                 mapStr = mapStr.substring(0, mapStr.length() - 1); //removes space at the end of the line but there is no need for it
-                mapStr = mapStr + "\n";
+                mapStr = mapStr + " | ";
             }
-            System.out.println("MOVES: " + moves[mapIndex] + "\n");
-            System.out.println(mapStr + "\n");
+
+            if (Integer.parseInt(moves[mapIndex]) != previousCount && targetCount <= 60 && targetCount > 14) {
+                System.out.println("MOVES: " + moves[mapIndex] + "\n");
+                System.out.println(mapStr + "\n");
+                previousCount = Integer.parseInt(moves[mapIndex]);
+                targetCount--;
+            }
+            else if (Integer.parseInt(moves[mapIndex]) == previousCount)
+            {
+               //
+            }
         }
     }
 

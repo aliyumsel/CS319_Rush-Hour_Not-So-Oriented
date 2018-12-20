@@ -39,12 +39,13 @@ public class Map
       {
          for ( int j = 0; j < mapSize; j++ )
          {
-            if ( grid[i][j] == null )
+            if ( grid[i][j] == null)
             {
                grid[i][j] = "Space";
             }
          }
       }
+
    }
 
    public ArrayList<GameObject> getGameObjects()
