@@ -3,15 +3,12 @@ package source.model;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Theme {
 
-    private String activeTheme; //aslında theme de bi sürü theme oluyo diye böyle yazdım
-    private ArrayList<BufferedImage> shortVehicleImageArray; //Short ve Longu ayırdım hani zaten theme calssındayız ayrı dursunlar bari babında
+   private ArrayList<BufferedImage> shortVehicleImageArray; //Short ve Longu ayırdım hani zaten theme calssındayız ayrı dursunlar bari babında
     private ArrayList<BufferedImage> longVehicleImageArray;
     private BufferedImage playerImage;
     private BufferedImage specialPlayer;
@@ -22,7 +19,7 @@ public class Theme {
     private BufferedImage obstacleDisabled;
     private BufferedImage longDisabled;
     private BufferedImage shortDisabled;
-    private ArrayList<String> vehicleSoundArray;
+//    private ArrayList<String> vehicleSoundArray;
     private String themeSong;
     private String buttonClick;
     private String selectionSound;
@@ -32,8 +29,7 @@ public class Theme {
    public Theme(String theme) {
       shortVehicleImageArray = new ArrayList<>();
       longVehicleImageArray = new ArrayList<>();
-      this.activeTheme = theme;
-      path = "image/theme_" + this.activeTheme + "/";
+      path = "image/theme_" + theme + "/";
       initializeAttributes();
    }
 
@@ -196,7 +192,7 @@ public class Theme {
         this.unlocked = unlocked;
     }
 
-    public String getActiveTheme() {
-        return activeTheme;
-    }
+//    public String getActiveTheme() {
+//        return activeTheme;
+//    }
 }

@@ -1,12 +1,11 @@
 package source.controller;
 
 import java.util.ArrayList;
-import java.util.TimerTask;
 
 public class GameEngine
 {
    public static GameEngine instance;
-   public int frameCount;
+   private int frameCount;
    private ArrayList<Controller> controllers;
    public ThemeManager themeManager;
    public SoundManager soundManager;

@@ -1,11 +1,11 @@
 package source.controller;
 
-import java.util.ArrayList;
-
 import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
+
+import java.util.ArrayList;
 
 public class PlayerManager extends Controller
 {
@@ -55,23 +55,23 @@ public class PlayerManager extends Controller
       return currentPlayer;
    }
 
-   public void setCurrentPlayer(Player currentPlayer)
-   {
-      this.currentPlayer = currentPlayer;
-   }
+//   public void setCurrentPlayer(Player currentPlayer)
+//   {
+//      this.currentPlayer = currentPlayer;
+//   }
 
    public ArrayList<Player> getPlayers()
    {
       return players;
    }
 
-   public void setPlayers(ArrayList<Player> players)
-   {
-      for ( int i = 0; i < players.size(); i++ )
-      {
-         this.players.set(i, players.get(i));
-      }
-   }
+//   public void setPlayers(ArrayList<Player> players)
+//   {
+//      for ( int i = 0; i < players.size(); i++ )
+//      {
+//         this.players.set(i, players.get(i));
+//      }
+//   }
 
    /* returns 0 if creation successful
     * returns 1 if the name already exists
@@ -256,13 +256,13 @@ public class PlayerManager extends Controller
       }
    }
 
-   void setLevelStatusFinished(int levelNo)
-   {
-      setLevelStatus(levelNo, "finished");
-      //playerDao.saveLevel(levelNo, currentPlayer);
-      playerDao.savePlayer(currentPlayer);
-
-   }
+//   void setLevelStatusFinished(int levelNo)
+//   {
+//      setLevelStatus(levelNo, "finished");
+//      //playerDao.saveLevel(levelNo, currentPlayer);
+//      playerDao.savePlayer(currentPlayer);
+//
+//   }
 
    void unlockLevel(int levelNo)
    {
@@ -327,21 +327,21 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
-   public void addShrinkPowerup(int amountToBeAdded)
+   void addShrinkPowerup(int amountToBeAdded)
    {
       currentPlayer.addShrinkPowerup(amountToBeAdded);
       //playerDao.saveRemainingPowerupAmount(currentPlayer);
       playerDao.savePlayer(currentPlayer);
    }
 
-   public void addSpacePowerup(int amountToBeAdded)
+   void addSpacePowerup(int amountToBeAdded)
    {
       currentPlayer.addSpacePowerup(amountToBeAdded);
       //playerDao.saveRemainingPowerupAmount(currentPlayer);
       playerDao.savePlayer(currentPlayer);
    }
 
-   public void  toggleControlPreference()
+   void  toggleControlPreference()
    {
       currentPlayer.getSettings().toggleControlPreference();
       //playerDao.saveSettings(currentPlayer);

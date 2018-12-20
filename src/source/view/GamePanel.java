@@ -214,7 +214,7 @@ public class GamePanel extends JPanel
             temp.fillRect(0, 0, width, height);
          }
       };
-      blackBackground.setPreferredSize(new Dimension(panelWidth,panelHeight));
+      blackBackground.setPreferredSize(new Dimension(panelWidth, panelHeight));
       blackBackground.setVisible(false);
 
       menu = UIFactory.createButton(menuButtonImage, menuButtonHighlightedImage, "square", actionListener);
@@ -277,7 +277,7 @@ public class GamePanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-      blackBackground.setBounds(0,0,panelWidth,panelHeight);
+      blackBackground.setBounds(0, 0, panelWidth, panelHeight);
 
       menu.setBounds(30, 30, menu.getPreferredSize().width,
               menu.getPreferredSize().height);
@@ -317,13 +317,13 @@ public class GamePanel extends JPanel
 
       timerBackgroundLabel.setBounds(40, ( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
 
-      firstStarForegroundLabel.setBounds(panelWidth - 60 - firstStarForegroundLabel.getPreferredSize().width, 15+( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
+      firstStarForegroundLabel.setBounds(panelWidth - 60 - firstStarForegroundLabel.getPreferredSize().width, 15 + ( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
 
-      firstStarBackgroundLabel.setBounds(panelWidth - 60 - firstStarBackgroundLabel.getPreferredSize().width, 15+( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
+      firstStarBackgroundLabel.setBounds(panelWidth - 60 - firstStarBackgroundLabel.getPreferredSize().width, 15 + ( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
 
-      secondStarForegroundLabel.setBounds(panelWidth - 40 - firstStarForegroundLabel.getPreferredSize().width, 15+( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
+      secondStarForegroundLabel.setBounds(panelWidth - 40 - firstStarForegroundLabel.getPreferredSize().width, 15 + ( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45, timerForegroundLabel.getPreferredSize().width, timerForegroundLabel.getPreferredSize().height);
 
-      secondStarBackgroundLabel.setBounds(panelWidth - 40 - firstStarBackgroundLabel.getPreferredSize().width,15+ ( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
+      secondStarBackgroundLabel.setBounds(panelWidth - 40 - firstStarBackgroundLabel.getPreferredSize().width, 15 + ( panelHeight - timerBackgroundLabel.getPreferredSize().height ) / 2 - 45, timerBackgroundLabel.getPreferredSize().width, timerBackgroundLabel.getPreferredSize().height);
 
       timerForegroundStartPosition = ( panelHeight - timerForegroundLabel.getPreferredSize().height ) / 2 - 45;
       moveCountForegroundStartPosition = ( panelHeight - firstStarForegroundLabel.getPreferredSize().height ) / 2 - 45;
@@ -377,10 +377,10 @@ public class GamePanel extends JPanel
 
    private void setTimeOverPopUpVisible(boolean visible)
    {
-      if ( visible )
-      {
-         //failure sound will be added
-      }
+//      if ( visible )
+//      {
+//         //failure sound will be added
+//      }
       timeOverPopUp.setVisible(visible);
    }
 
@@ -404,7 +404,7 @@ public class GamePanel extends JPanel
       timeOverPopUp.setVisible(false);
 
       Dimension size = timeOverPopUp.getPreferredSize();
-      timeOverPopUp.setBounds(guiManager.findCenter(panelWidth,endOfLevelPanel), guiManager.findCenterVertical(panelHeight,endOfLevelPanel), size.width, size.height);
+      timeOverPopUp.setBounds(guiManager.findCenter(panelWidth, endOfLevelPanel), guiManager.findCenterVertical(panelHeight, endOfLevelPanel), size.width, size.height);
    }
 
 
@@ -415,7 +415,7 @@ public class GamePanel extends JPanel
       endOfLevelPanel.setVisible(false);
 
       Dimension size = endOfLevelPanel.getPreferredSize();
-      endOfLevelPanel.setBounds(guiManager.findCenter(panelWidth,endOfLevelPanel), guiManager.findCenterVertical(panelHeight,endOfLevelPanel), size.width, size.height);
+      endOfLevelPanel.setBounds(guiManager.findCenter(panelWidth, endOfLevelPanel), guiManager.findCenterVertical(panelHeight, endOfLevelPanel), size.width, size.height);
    }
 
    private ActionListener actionListener = new ActionListener()
@@ -423,7 +423,7 @@ public class GamePanel extends JPanel
       @Override
       public void actionPerformed(ActionEvent e)
       {
-         if (blackBackground.isVisible())
+         if ( blackBackground.isVisible() )
          {
             return;
          }
@@ -481,15 +481,16 @@ public class GamePanel extends JPanel
       }
       graphics.drawImage(background, 0, 0, null);
 
-      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive())
+      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive() )
       {
          graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
          graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
       }
       //Backgrounds for stars
-      graphics.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
-      graphics.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null);
-      graphics.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45, null); }
+      graphics.drawImage(firstStarBackgroundImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45, null);
+      graphics.drawImage(secondStarBackgroundImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45, null);
+      graphics.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45, null);
+   }
 
    private void drawMoveCountForeground(Graphics g)
    {
@@ -500,7 +501,7 @@ public class GamePanel extends JPanel
       //For the first star
       if ( GameEngine.instance.vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars() )
       {
-         int remainingMoves = currentLevel.getMaxNumberOfMovesForThreeStars() - (GameEngine.instance.vehicleController.getNumberOfMoves());
+         int remainingMoves = currentLevel.getMaxNumberOfMovesForThreeStars() - ( GameEngine.instance.vehicleController.getNumberOfMoves() );
          int moveCountStartValue = currentLevel.getMaxNumberOfMovesForThreeStars();
          double f = remainingMoves / (double) moveCountStartValue;
          int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f); //26 yı değikene atcam da anlamadım ahmet kodunu
@@ -511,7 +512,8 @@ public class GamePanel extends JPanel
             graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }
       }
-      else if (currentLevel.getMaxNumberOfMovesForThreeStars() < GameEngine.instance.vehicleController.getNumberOfMoves()) {
+      else if ( currentLevel.getMaxNumberOfMovesForThreeStars() < GameEngine.instance.vehicleController.getNumberOfMoves() )
+      {
          graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height, null);
       }
       //For the second star
@@ -527,13 +529,13 @@ public class GamePanel extends JPanel
             {
                subImage = secondStarForegroundImage.getSubimage(0, secondStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
             }
-            graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width,15+ moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
+            graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }
          else
          {
             subImage = secondStarForegroundImage;
             int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, 1);
-            graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15+moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
+            graphics2d.drawImage(subImage, panelWidth - 60 - secondStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }
 
       }

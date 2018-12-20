@@ -11,20 +11,19 @@ public class VehicleController extends Controller {
 
    private Map map;
    private Vehicle selectedVehicle;
-   private Vehicle player;
+//   private Vehicle player;
    private SoundManager soundManager;
    private int numberOfMoves;
    private boolean changed = false;
    private boolean isMoving = false;
-   public boolean isExitReachable = false;
-   private double moveAmount;
-   private int counter = 0;
+   boolean isExitReachable = false;
+//   private double moveAmount;
+//   private int counter = 0;
    private boolean isSelectedVehicleSliding = false;
-   Point destination = new Point();
-
+   private Point destination = new Point();
 
    private enum CONTROL {
-      SLIDE, KEYBOARD, CPU //CPU kalsın
+      SLIDE, KEYBOARD, //CPU //CPU kalsın
    }
 
    private CONTROL currentControl;
@@ -43,7 +42,7 @@ public class VehicleController extends Controller {
       mouseOriginPosition = new int[2];
       vehicleOriginPosition = new double[2];
       oldPos = new int[2];
-      moveAmount = 0;
+//      moveAmount = 0;
    }
 
    public void setMap(Map _map) {
@@ -101,7 +100,7 @@ public class VehicleController extends Controller {
          }
 
          try {
-            if (selectedVehicle.isSliding){
+            if (selectedVehicle != null && selectedVehicle.isSliding){
                selectedVehicle.slideToPoint(destination.x, destination.y);
                isSelectedVehicleSliding = selectedVehicle.isSliding;
                if (!isSelectedVehicleSliding)
@@ -203,27 +202,27 @@ public class VehicleController extends Controller {
             selectedVehicle.velocity = 0.1;
             if (Input.getKeyPressed("w")) {
                isMoving = tryMove("Upwards");
-               moveAmount = 1;
+//               moveAmount = 1;
                destination.y = selectedVehicle.transform.position.gridY -1;
                destination.x = selectedVehicle.transform.position.gridX;
             } else if (Input.getKeyPressed("a")) {
                isMoving = tryMove("Left");
-               moveAmount = -1;
+//               moveAmount = -1;
                destination.y = selectedVehicle.transform.position.gridY;
                destination.x = selectedVehicle.transform.position.gridX-1;
             } else if (Input.getKeyPressed("s")) {
                isMoving = tryMove("Downwards");
-               moveAmount = -1;
+//               moveAmount = -1;
                destination.y = selectedVehicle.transform.position.gridY +1;
                destination.x = selectedVehicle.transform.position.gridX;
             } else if (Input.getKeyPressed("d")) {
                isMoving = tryMove("Right");
-               moveAmount = 1;
+//               moveAmount = 1;
                destination.y = selectedVehicle.transform.position.gridY;
                destination.x = selectedVehicle.transform.position.gridX+1;
             }
          }
-         if (isMoving) {
+         if (selectedVehicle != null && isMoving) {
             selectedVehicle.isSliding = true;
             selectedVehicle.slideToPoint(destination.x, destination.y);
             isSelectedVehicleSliding = selectedVehicle.isSliding;
@@ -260,7 +259,7 @@ public class VehicleController extends Controller {
       soundManager.vehicleHorn();
    }
 
-   private void slideVehicle(String direction) {
+//   private void slideVehicle(String direction) {
 //      Timer timer = new Timer();
 //      timer.schedule(new TimerTask()
 //      {
@@ -270,7 +269,7 @@ public class VehicleController extends Controller {
 //            System.out.print("=");
 //         }
 //      }, 0,1/60);
-   }
+//   }
 
    private void changeGridPosition() {
       int gridPositionX = (int) (selectedVehicle.transform.position.x + 0.5);
@@ -362,7 +361,7 @@ public class VehicleController extends Controller {
       return difference;
    }
 
-   public void toggleCurrentControl()
+   void toggleCurrentControl()
    {
       if (currentControl == CONTROL.SLIDE)
       {

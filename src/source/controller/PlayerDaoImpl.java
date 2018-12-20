@@ -1,13 +1,9 @@
 
 package source.controller;
 
-import com.google.gson.*;
-
+import com.google.gson.Gson;
 import interfaces.PlayerDao;
-import source.model.LevelInformation;
-import source.model.Player;
-import source.model.Settings;
-import source.model.OriginalLevel;
+import source.model.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -114,7 +110,6 @@ public class PlayerDaoImpl implements PlayerDao{
             fileOut.flush();
             fileOut.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -135,7 +130,6 @@ public class PlayerDaoImpl implements PlayerDao{
         try {
             newFile.createNewFile();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

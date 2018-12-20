@@ -25,9 +25,9 @@ public class LevelInformation
       this.time = time;
    }
 
-   public int getLevelNo() {
-      return levelNo;
-   }
+//   public int getLevelNo() {
+//      return levelNo;
+//   }
 
    public int getStars()
    {
@@ -97,27 +97,27 @@ public class LevelInformation
       this.time = time;
    }
 
-   public String levelToString()
-   {
-      return "\t<Level>\n" +
-              "\t\t<LevelNo>\n" +
-              "\t\t\t" + levelNo + "\n" +
-              "\t\t<LevelNo/>\n" +
-              "\t\t<Stars>\n" +
-              "\t\t\t" + stars + "\n" +
-              "\t\t<Stars/>\n" +
-              "\t\t<CurrentNumberOfMoves>\n" +
-              "\t\t\t" + currentNumberOfMoves + "\n" +
-              "\t\t<CurrentNumberOfMoves>\n" +
-              "\t\t<Status>\n" +
-              "\t\t\t" + status + "\n" +
-              "\t\t<Status/>\n" +
-              "\t\t<Unlocked>\n" +
-              "\t\t\t" + unlocked + "\n" +
-              "\t\t<Unlocked/>\n" +
-              "\t\t<Map>\n" +
-              map +
-              "\t\t<Map/>\n" +
-              "\t<Level/>\n";
-   }
+//   public String levelToString()
+//   {
+//      return "\t<Level>\n" +
+//              "\t\t<LevelNo>\n" +
+//              "\t\t\t" + levelNo + "\n" +
+//              "\t\t<LevelNo/>\n" +
+//              "\t\t<Stars>\n" +
+//              "\t\t\t" + stars + "\n" +
+//              "\t\t<Stars/>\n" +
+//              "\t\t<CurrentNumberOfMoves>\n" +
+//              "\t\t\t" + currentNumberOfMoves + "\n" +
+//              "\t\t<CurrentNumberOfMoves>\n" +
+//              "\t\t<Status>\n" +
+//              "\t\t\t" + status + "\n" +
+//              "\t\t<Status/>\n" +
+//              "\t\t<Unlocked>\n" +
+//              "\t\t\t" + unlocked + "\n" +
+//              "\t\t<Unlocked/>\n" +
+//              "\t\t<Map>\n" +
+//              map +
+//              "\t\t<Map/>\n" +
+//              "\t<Level/>\n";
+//   }
 }

@@ -126,11 +126,10 @@ public class ThemeManager extends Controller
       return currentTheme.getSelectionSound();
    }
 
-   public Theme getCurrentTheme()
-   {
-      return currentTheme;
-   }
-
+//   public Theme getCurrentTheme()
+//   {
+//      return currentTheme;
+//   }
 
    public int findRequiredStars()
    {
@@ -190,7 +189,7 @@ public class ThemeManager extends Controller
    }
 
    //This will be called from gameManager
-   public void setTheme(String theme)
+   void setTheme(String theme)
    {
       currentTheme = findThemeByName(theme);
       try

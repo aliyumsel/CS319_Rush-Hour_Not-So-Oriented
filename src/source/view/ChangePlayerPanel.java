@@ -242,9 +242,9 @@ public class ChangePlayerPanel extends JPanel
          }
 
       }
-      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
+      leftArrowButton.setBounds(5, guiManager.findCenterVertical(panelHeight, leftArrowButton),
               leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
-      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton),
+      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenterVertical(panelHeight, rightArrowButton),
               rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
       menuButton.setBounds(30, 30, menuButton.getPreferredSize().width,
               menuButton.getPreferredSize().height);
