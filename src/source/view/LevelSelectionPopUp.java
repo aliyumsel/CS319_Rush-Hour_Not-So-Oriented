@@ -49,16 +49,16 @@
 //    }
 //
 //    private void loadImages() {
-//        background = guiManager.LoadImage("src/image/endOfLevelPanelBackground.png");
+//        background = guiManager.LoadImage("image/endOfLevelPanelBackground.png");
 //
-//        backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
-//        backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
+//        backButtonImage = guiManager.LoadImage("image/icons/back.png");
+//        backButtonHighlightedImage = guiManager.LoadImage("image/icons/backH.png");
 //
-//        playButtonImage = guiManager.LoadImage("src/image/icons/miniPlay.png");
-//        playButtonHighlightedImage = guiManager.LoadImage("src/image/icons/miniPlayH.png");
+//        playButtonImage = guiManager.LoadImage("image/icons/miniPlay.png");
+//        playButtonHighlightedImage = guiManager.LoadImage("image/icons/miniPlayH.png");
 //
-//        starImage = guiManager.LoadImage("src/image/icons/star.png");
-//        starLockedImage = guiManager.LoadImage("src/image/icons/starLocked.png");
+//        starImage = guiManager.LoadImage("image/icons/star.png");
+//        starLockedImage = guiManager.LoadImage("image/icons/starLocked.png");
 //    }
 //
 //    void updatePanel() {

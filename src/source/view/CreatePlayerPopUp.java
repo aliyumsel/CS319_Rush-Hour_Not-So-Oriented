@@ -57,11 +57,11 @@ public class CreatePlayerPopUp extends JPanel
    {
       background = ThemeManager.instance.getPopupBackgroundImage();
 
-      closeImage = guiManager.LoadImage("src/image/icons/quit.png");
-      closeHighlightedImage = guiManager.LoadImage("src/image/icons/quitH.png");
+      closeImage = guiManager.LoadImage("image/icons/quit.png");
+      closeHighlightedImage = guiManager.LoadImage("image/icons/quitH.png");
 
-      confirmImage = guiManager.LoadImage("src/image/icons/miniPlay.png");
-      confirmHighlightedImage = guiManager.LoadImage("src/image/icons/miniPlayH.png");
+      confirmImage = guiManager.LoadImage("image/icons/miniPlay.png");
+      confirmHighlightedImage = guiManager.LoadImage("image/icons/miniPlayH.png");
    }
 
    void createComponents()

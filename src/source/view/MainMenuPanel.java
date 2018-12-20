@@ -77,30 +77,30 @@ public class MainMenuPanel extends JPanel {
         bGr.drawImage(scaledImage, 0, 0, null);
         bGr.dispose();
 
-        title = guiManager.LoadImage("src/image/icons/title.png");
+        title = guiManager.LoadImage("image/icons/title.png");
 
-        playButtonImage = guiManager.LoadImage("src/image/icons/play.png");
-        playButtonImageHighlighted = guiManager.LoadImage("src/image/icons/playH.png");
+        playButtonImage = guiManager.LoadImage("image/icons/play.png");
+        playButtonImageHighlighted = guiManager.LoadImage("image/icons/playH.png");
 
-        creditsButtonImage = guiManager.LoadImage("src/image/icons/credits.png");
-        creditsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/creditsH.png");
+        creditsButtonImage = guiManager.LoadImage("image/icons/credits.png");
+        creditsButtonHighlightedImage = guiManager.LoadImage("image/icons/creditsH.png");
 
-        changePlayerButtonImage = guiManager.LoadImage("src/image/icons/changePlayer.png");
-        changePlayerButtonHighlightedImage = guiManager.LoadImage("src/image/icons/changePlayerH.png");
+        changePlayerButtonImage = guiManager.LoadImage("image/icons/changePlayer.png");
+        changePlayerButtonHighlightedImage = guiManager.LoadImage("image/icons/changePlayerH.png");
 
-        helpButtonImage = guiManager.LoadImage("src/image/icons/help.png");
-        helpButtonHighlightedImage = guiManager.LoadImage("src/image/icons/helpH.png");
+        helpButtonImage = guiManager.LoadImage("image/icons/help.png");
+        helpButtonHighlightedImage = guiManager.LoadImage("image/icons/helpH.png");
 
-        levelsButtonImage = guiManager.LoadImage("src/image/icons/levels.png");
-        levelsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/levelsH.png");
+        levelsButtonImage = guiManager.LoadImage("image/icons/levels.png");
+        levelsButtonHighlightedImage = guiManager.LoadImage("image/icons/levelsH.png");
 
-        exitButtonImage = guiManager.LoadImage("src/image/icons/quit.png");
-        exitButtonHighlightedImage = guiManager.LoadImage("src/image/icons/quitH.png");
+        exitButtonImage = guiManager.LoadImage("image/icons/quit.png");
+        exitButtonHighlightedImage = guiManager.LoadImage("image/icons/quitH.png");
 
-        settingsButtonImage = guiManager.LoadImage("src/image/icons/settings.png");
-        settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsH.png");
+        settingsButtonImage = guiManager.LoadImage("image/icons/settings.png");
+        settingsButtonHighlightedImage = guiManager.LoadImage("image/icons/settingsH.png");
 
-        starAmountImage = guiManager.LoadImage("src/image/icons/numberOfStars.png");
+        starAmountImage = guiManager.LoadImage("image/icons/numberOfStars.png");
     }
 
     private void createComponents() {

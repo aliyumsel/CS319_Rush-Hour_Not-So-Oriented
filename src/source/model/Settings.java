@@ -5,17 +5,17 @@ import java.util.HashMap;
 public class Settings {
    private boolean music;
    private boolean sfx;
-   String controlPrefrence;
+   String controlPreference;
 
    private HashMap<String, Boolean> themes;
    private String activeTheme;
 
-   public Settings(boolean music, boolean sfx, HashMap<String, Boolean> themes, String activeTheme, String controlPrefrence) {
+   public Settings(boolean music, boolean sfx, HashMap<String, Boolean> themes, String activeTheme, String controlPreference) {
       this.music = music;
       this.sfx = sfx;
       this.themes = themes;
       this.activeTheme = activeTheme;
-      this.controlPrefrence = controlPrefrence;
+      this.controlPreference = controlPreference;
    }
 
    public Settings(boolean music, boolean sfx) {
@@ -29,7 +29,7 @@ public class Settings {
       themes.put("space", false);
 
       activeTheme = "minimalistic";
-      controlPrefrence = "Slide";
+      controlPreference = "Slide";
    }
 
    public HashMap<String,Boolean> getThemes() {
@@ -74,19 +74,19 @@ public class Settings {
 
    public void toggleControlPreference()
    {
-      if (controlPrefrence.equals("Slide"))
+      if (controlPreference.equals("Slide"))
       {
-         controlPrefrence = "Keyboard";
+         controlPreference = "Keyboard";
       }
       else
       {
-         controlPrefrence = "Slide";
+         controlPreference = "Slide";
       }
    }
 
-   public String getControlPrefrence()
+   public String getControlPreference()
    {
-      return controlPrefrence;
+      return controlPreference;
    }
 
    public String settingsToString() {
@@ -97,7 +97,7 @@ public class Settings {
               "\t\t" + sfx + "\n" +
               "\t<Sfx/>\n" +
               "\t<ControlPreference>\n" +
-              "\t\t" + controlPrefrence + "\n" +
+              "\t\t" + controlPreference + "\n" +
               "\t<ControlPreference/>\n" +
               "\t<Theme>\n" +
               "\t\t<Active>\n" +

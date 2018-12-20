@@ -60,14 +60,14 @@ class LevelButton extends JButton {
 
     private void loadImages() {
         Graphics2D bGr;
-        levelBackground = guiManager.LoadImage("src/image/icons/levelbackground.png");
-        levelBackgroundHighlighted = guiManager.LoadImage("src/image/icons/levelbackgroundH.png");
-        lockedBackground = guiManager.LoadImage("src/image/icons/levelBackgroundLocked.png");
-        starActive = guiManager.LoadImage("src/image/icons/miniStar.png");
-        starInactive = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
-        bonusLevelIcon = guiManager.LoadImage("src/image/icons/timerIcon.png");
-        inProgress = guiManager.LoadImage("src/image/icons/levelButton_inProgress.png");
-        inProgressHighlighted = guiManager.LoadImage("src/image/icons/levelButton_inProgressH.png");
+        levelBackground = guiManager.LoadImage("image/icons/levelbackground.png");
+        levelBackgroundHighlighted = guiManager.LoadImage("image/icons/levelbackgroundH.png");
+        lockedBackground = guiManager.LoadImage("image/icons/levelBackgroundLocked.png");
+        starActive = guiManager.LoadImage("image/icons/miniStar.png");
+        starInactive = guiManager.LoadImage("image/icons/miniStarLocked.png");
+        bonusLevelIcon = guiManager.LoadImage("image/icons/timerIcon.png");
+        inProgress = guiManager.LoadImage("image/icons/levelButton_inProgress.png");
+        inProgressHighlighted = guiManager.LoadImage("image/icons/levelButton_inProgressH.png");
     }
 
     private void createComponents() {

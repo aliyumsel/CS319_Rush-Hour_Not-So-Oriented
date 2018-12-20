@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 //import source.controller.Controller;
@@ -43,16 +44,23 @@ public class GuiPanelManager extends JFrame
       setUndecorated(true);
       instance = this;
       Toolkit toolkit = Toolkit.getDefaultToolkit();
-      Image image = toolkit.getImage("src/image/icons/cursor.png");
+      //Image image = toolkit.getImage("src/image/icons/cursor.png");
+      Image image = null;
+      try {
+         image = ImageIO.read(GuiPanelManager.class.getClassLoader().getResourceAsStream("image/icons/cursor.png"));
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
       Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "img");
       this.setCursor(c);
 
       panels = new ArrayList<>();
 
-      File fontFile = new File("src/fonts/odin.ttf");
+      //File fontFile = new File("src/fonts/odin.ttf");
+      InputStream input = GuiPanelManager.class.getClassLoader().getResourceAsStream("fonts/odin.ttf");
       try
       {
-         Font odinRounded = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+         Font odinRounded = Font.createFont(Font.TRUETYPE_FONT, input);
          GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
          ge.registerFont(odinRounded);
       } catch (FontFormatException | IOException e)
@@ -194,12 +202,13 @@ public class GuiPanelManager extends JFrame
       Input.setGamePanel(gamePanel.getInnerGamePanel());
    }
 
-   public BufferedImage LoadImage(String FileName)
+   public BufferedImage LoadImage(String fileName)
    {
+      //fileName = fileName.substring(fileName.indexOf('/') + 1);
       BufferedImage image = null;
       try
       {
-         image = ImageIO.read(new File(FileName));
+         image = ImageIO.read(GuiPanelManager.class.getClassLoader().getResourceAsStream(fileName));
       } catch (IOException e)
       {
          e.printStackTrace();
