@@ -30,7 +30,7 @@ public class TutorialPanel extends JPanel {
     JLabel activeLabel = null;
     private BufferedImage coreBackground;
 
-    public TutorialPanel(boolean isTutorialActive,GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
+    public TutorialPanel(boolean isTutorialActive, GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
         setLayout(null);
         index = 0;
         this.isTutorialActive = isTutorialActive;
@@ -43,7 +43,9 @@ public class TutorialPanel extends JPanel {
     }
 
     void update() {
+        //System.out.println(tutorials.size());
         if (index == tutorials.size())
+
             guiManager.setPanelVisible("MainMenu");
         else {
             setActiveLabel();
@@ -51,30 +53,26 @@ public class TutorialPanel extends JPanel {
         }
     }
 
-    private void setActiveBackground(){
-        for (int i = 0; i < backgrounds.size();i++)
-        {
+    private void setActiveBackground() {
+        for (int i = 0; i < backgrounds.size(); i++) {
             backgrounds.get(i).setVisible(false);
         }
 
-        if (index == 0)
-        {
+        if (index == 0) {
             activeBackground = backgrounds.get(0);
-        }
-        else if (index == 1)
-        {
+        } else if (index == 1) {
             activeBackground = backgrounds.get(1);
-        }
-        else if (index == 2){
+        } else if (index == 2) {
             activeBackground = backgrounds.get(2);
-        }
-        else if (index == 3){
+        } else if (index == 3) {
+            activeBackground = backgrounds.get(3);
+        } else if (index == 4) {
             activeBackground = backgrounds.get(3);
         }
         activeBackground.setVisible(true);
     }
 
-    private void setActiveLabel(){
+    private void setActiveLabel() {
         for (int i = 0; i < tutorials.size(); i++) {
             tutorials.get(i).setVisible(false);
         }
@@ -83,42 +81,68 @@ public class TutorialPanel extends JPanel {
     }
 
     private void createComponents() {
-        forwardButton = UIFactory.createButton(next,nextH,"square",actionListener);
+        forwardButton = UIFactory.createButton(next, nextH, "square", actionListener);
         add(forwardButton);
         //manipulate tutorialImages, backgroundImages and points(for tutorials) here
-        tutorialCoordinates.add(new Point(100,150));
-        tutorialCoordinates.add(new Point(400,150));
-        tutorialCoordinates.add(new Point(100,150));
-        tutorialCoordinates.add(new Point(400,150));
+        tutorialCoordinates.add(new Point(100, 150));
+        tutorialCoordinates.add(new Point(400, 150));
+        tutorialCoordinates.add(new Point(100, 150));
+        tutorialCoordinates.add(new Point(400, 150));
+        tutorialCoordinates.add(new Point(400, 150));
 
-        for(int i = 1; i <= 4;i++) {
-            tutorialImages.add(LoadImage("image/help_images/help" + i + ".png"));
-            System.out.println(i);
+        for (int i = 1; i <= 5; i++) { // change size !!!!
+            try {
+                if (LoadImage("image/help_images/help" + i + ".png") != null) {
+                    tutorialImages.add(LoadImage("image/help_images/help" + i + ".png"));
+                    Dimension temp = new Dimension(tutorialImages.get(i - 1).getWidth(), tutorialImages.get(i - 1).getHeight());
+                    tutorials.add(UIFactory.createLabelIcon(tutorialImages.get(i - 1), temp));
+
+                    add(tutorials.get(i - 1));
+                    tutorials.get(i - 1).setVisible(false);
+                }
+            } catch (Exception e) {
+            }
+
+            try {
+                if (LoadGif(createImageIcon("/image/help_images/help" + i + ".gif")) != null) {
+
+                    JLabel temp = LoadGif(createImageIcon("/image/help_images/help" + i + ".gif"));
+                    tutorials.add(temp);
+                    add(tutorials.get(i - 1));
+                    tutorials.get(i - 1).setVisible(false);
+
+                }
+            } catch (Exception e) {
+            }
+
+
+        }
+        for (int i = 1; i <= 4; i++) {
+            try {
+                if (LoadImage("image/tutorial_Backgrounds/background" + i + ".png") != null) {
+                    backgroundImages.add(LoadImage("image/tutorial_Backgrounds/background" + i + ".png"));
+                    Dimension temp = new Dimension(backgroundImages.get(i - 1).getWidth(), backgroundImages.get(i - 1).getHeight());
+                    backgrounds.add(UIFactory.createLabelIcon(backgroundImages.get(i - 1), temp));
+                    add(backgrounds.get(i - 1));
+                    backgrounds.get(i - 1).setVisible(false);
+                }
+            }catch (Exception e){}
+
+            try {
+                if (LoadGif(createImageIcon("/image/tutorial_Backgrounds/background" + i + ".gif")) != null) {
+                    JLabel temp = LoadGif(createImageIcon("/image/tutorial_Backgrounds/background" + i + ".gif"));
+                    backgrounds.add(temp);
+                    add(backgrounds.get(i - 1));
+                    backgrounds.get(i - 1).setVisible(false);
+                }
+            }catch (Exception e){}
+
+
         }
 
-        for(int i = 1; i <= 4;i++) {
-            backgroundImages.add(LoadImage("image/tutorial_Backgrounds/background"+i+".png"));
-            System.out.println(i);
-        }
-
-
-        //set the images and their coordinates above this part
-        for ( int i = 0 ; i < tutorialImages.size();i++){
-            Dimension temp = new Dimension(tutorialImages.get(i).getWidth(),tutorialImages.get(i).getHeight());
-            tutorials.add(UIFactory.createLabelIcon(tutorialImages.get(i),temp));
-            add(tutorials.get(i));
-            tutorials.get(i).setVisible(false);
-        }
-
-        for ( int i = 0 ; i < backgroundImages.size();i++){
-            Dimension temp = new Dimension(backgroundImages.get(i).getWidth(),backgroundImages.get(i).getHeight());
-            backgrounds.add(UIFactory.createLabelIcon(backgroundImages.get(i),temp));
-            add(backgrounds.get(i));
-            backgrounds.get(i).setVisible(false);
-        }
 
         coreBackground = ThemeManager.instance.getBackgroundImage();
-        Image scaledImage = coreBackground.getScaledInstance(GuiPanelManager.instance.panelWidth,GuiPanelManager.instance.panelHeight, Image.SCALE_DEFAULT);
+        Image scaledImage = coreBackground.getScaledInstance(GuiPanelManager.instance.panelWidth, GuiPanelManager.instance.panelHeight, Image.SCALE_DEFAULT);
         coreBackground = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = coreBackground.createGraphics();
         bGr.drawImage(scaledImage, 0, 0, null);
@@ -126,14 +150,12 @@ public class TutorialPanel extends JPanel {
     }
 
     private void setBoundsOfComponents() {
-        forwardButton.setBounds(350,400,forwardButton.getPreferredSize().width,forwardButton.getPreferredSize().height);
-        for (int i = 0; i < tutorials.size();i++)
-        {
-            setBounds(tutorials.get(i),tutorialCoordinates.get(i).x,tutorialCoordinates.get(i).y);
+        forwardButton.setBounds(350, 400, forwardButton.getPreferredSize().width, forwardButton.getPreferredSize().height);
+        for (int i = 0; i < tutorials.size(); i++) {
+            setBounds(tutorials.get(i), tutorialCoordinates.get(i).x, tutorialCoordinates.get(i).y);
         }
-        for (int i = 0; i < backgrounds.size();i++)
-        {
-            setBounds(backgrounds.get(i),0,0);
+        for (int i = 0; i < backgrounds.size(); i++) {
+            setBounds(backgrounds.get(i), 0, 0);
         }
     }
 
@@ -167,8 +189,8 @@ public class TutorialPanel extends JPanel {
     public void setTutorialActive(boolean tutorialActive) {
         isTutorialActive = tutorialActive;
     }
-    public BufferedImage LoadImage(String fileName) {
 
+    private BufferedImage LoadImage(String fileName) {
         BufferedImage image = null;
         try {
             image = ImageIO.read(TutorialPanel.class.getClassLoader().getResourceAsStream(fileName));
@@ -176,22 +198,31 @@ public class TutorialPanel extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
-        BufferedInputStream image = new BufferedInputStream(
-                getClass().getResourceAsStream(path));
-        */return image;
+        return image;
     }
 
-    private ActionListener actionListener = new ActionListener()
-    {
+    private JLabel LoadGif(ImageIcon icon) {
+        JLabel label = new JLabel();
+        label.setIcon(icon);
+        return label;
+    }
+
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     */
+    private ImageIcon createImageIcon(String path) {
+
+        ImageIcon icon = new ImageIcon(TutorialPanel.this.getClass().getResource(path));
+        return icon;
+    }
+
+    private ActionListener actionListener = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e)
-        {
-          if (e.getSource() == forwardButton)
-          {
-              index++;
-              update();
-          }
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == forwardButton) {
+                index++;
+                update();
+            }
         }
     };
 }
