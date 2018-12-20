@@ -49,6 +49,7 @@ public class GameManager extends Controller
    public void stopMap()
    {
       isGameActive = false;
+      PowerUpManager.instance.deactivatePowerUps();
    }
 
    void endMap()
@@ -56,6 +57,7 @@ public class GameManager extends Controller
 
 //      System.out.println("Map Finished");
       isGameActive = false;
+      PowerUpManager.instance.deactivatePowerUps();
       VehicleController.instance.isExitReachable = false;
       //PlayerManager.instance.setLevelStatusFinished(level);
 
@@ -81,6 +83,7 @@ public class GameManager extends Controller
    {
       System.out.println("Time Over!");
       isGameActive = false;
+      PowerUpManager.instance.deactivatePowerUps();
       PlayerManager.instance.updateLevelAtTheEnd(level, 0);
       GuiPanelManager.instance.getGamePanel().showTimeOverPopUp();
    }

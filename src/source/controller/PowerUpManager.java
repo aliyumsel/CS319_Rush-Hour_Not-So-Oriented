@@ -30,7 +30,7 @@ public class PowerUpManager extends Controller
       shouldCount = false;
       obstacleToRemoveX = -1;
       obstacleToRemoveY = -1;
-      poofDuration = 30;
+      poofDuration = 27;
    }
 
    public void update()
@@ -87,7 +87,7 @@ public class PowerUpManager extends Controller
          System.out.println("Counter: " + counter);
       }
 
-      if (obstacleToRemove != null && counter >= (poofDuration / 2))
+      if (obstacleToRemove != null && counter >= (poofDuration * (2 / 3f)))
       {
          System.out.println("Removed game object");
          MapController.instance.removeGameObject(obstacleToRemove);
@@ -149,6 +149,12 @@ public class PowerUpManager extends Controller
    public int getPoofDuration()
    {
      return poofDuration;
+   }
+
+   void deactivatePowerUps()
+   {
+      deactivateShrink();
+      deactivateSpace();
    }
 
    private void initializeSpace()

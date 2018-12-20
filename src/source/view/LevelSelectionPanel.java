@@ -163,12 +163,12 @@ public class LevelSelectionPanel extends JPanel
             if ( GameEngine.instance.playerManager.isLevelLocked(i + 1) )
             {
                buttonArray[i].toggleLock(true);
+               buttonArray[i].showTimerIcon(false);
             }
             else
             {
                buttonArray[i].toggleLock(false);
                buttonArray[i].toggleInProgress(false);
-//               System.out.println("starAmount: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
                LevelInformation level = PlayerManager.instance.getCurrentPlayer().getLevels().get(i);
                buttonArray[i].showTimerIcon(false);

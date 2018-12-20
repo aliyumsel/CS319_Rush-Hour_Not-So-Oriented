@@ -103,6 +103,7 @@ public class GamePanel extends JPanel
       }
 
       endOfLevelPanel.updatePanel();
+      timeOverPopUp.updatePanel();
 
       updatePowerUpButtons();
       updatePowerUpLabels();
@@ -375,6 +376,11 @@ public class GamePanel extends JPanel
       return endOfLevelPanel;
    }
 
+   TimeOverPopUp getTimeOverPopUp()
+   {
+      return timeOverPopUp;
+   }
+
    private void setTimeOverPopUpVisible(boolean visible)
    {
 //      if ( visible )
@@ -559,6 +565,7 @@ public class GamePanel extends JPanel
    {
       return innerGamePanel;
    }
+
 
    private void updateNumberOfMoves()
    {
