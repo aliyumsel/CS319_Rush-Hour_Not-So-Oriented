@@ -25,6 +25,9 @@ public class InnerGamePanel extends JPanel
    private BufferedImage poof3;
    private BufferedImage poof4;
    private BufferedImage poof5;
+   private BufferedImage poof6;
+   private BufferedImage poof7;
+   private BufferedImage poof8;
 
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException
    {
@@ -55,12 +58,25 @@ public class InnerGamePanel extends JPanel
 
    public void loadImages()
    {
-      poof0 = guiManager.LoadImage("image/poof/poof0.png");
-      poof1 = guiManager.LoadImage("image/poof/poof1.png");
-      poof2 = guiManager.LoadImage("image/poof/poof2.png");
-      poof3 = guiManager.LoadImage("image/poof/poof3.png");
-      poof4 = guiManager.LoadImage("image/poof/poof4.png");
-      poof5 = guiManager.LoadImage("image/poof/poof5.png");
+//      poof0 = guiManager.LoadImage("image/poof/poof0.png");
+//      poof1 = guiManager.LoadImage("image/poof/poof1.png");
+//      poof2 = guiManager.LoadImage("image/poof/poof2.png");
+//      poof3 = guiManager.LoadImage("image/poof/poof3.png");
+//      poof4 = guiManager.LoadImage("image/poof/poof4.png");
+//      poof5 = guiManager.LoadImage("image/poof/poof5.png");
+//      poof6 = guiManager.LoadImage("image/poof/poof6.png");
+//      poof7 = guiManager.LoadImage("image/poof/poof7.png");
+//      poof8 = guiManager.LoadImage("image/poof/poof8.png");
+//
+      poof0 = guiManager.LoadImage("image/poof2/poof0.png");
+      poof1 = guiManager.LoadImage("image/poof2/poof1.png");
+      poof2 = guiManager.LoadImage("image/poof2/poof2.png");
+      poof3 = guiManager.LoadImage("image/poof2/poof3.png");
+      poof4 = guiManager.LoadImage("image/poof2/poof4.png");
+      poof5 = guiManager.LoadImage("image/poof2/poof5.png");
+      poof6 = guiManager.LoadImage("image/poof2/poof6.png");
+      poof7 = guiManager.LoadImage("image/poof2/poof7.png");
+      poof8 = guiManager.LoadImage("image/poof2/poof8.png");
    }
 
    private void addPoofImages()
@@ -71,6 +87,9 @@ public class InnerGamePanel extends JPanel
       poofImages.add(poof3);
       poofImages.add(poof4);
       poofImages.add(poof5);
+      poofImages.add(poof6);
+      poofImages.add(poof7);
+      poofImages.add(poof8);
    }
 
    public void paintComponent(Graphics g)
@@ -89,32 +108,32 @@ public class InnerGamePanel extends JPanel
          gameObject.draw(g2D);
       }
 
-      if (GameEngine.instance.powerUpManager.isPowerUpActive())
+      if ( GameEngine.instance.powerUpManager.isPowerUpActive() )
       {
          Graphics2D temp = (Graphics2D) g.create();
          Composite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
          temp.setComposite(composite);
          String[][] grid = GameEngine.instance.mapController.getMap().getGrid();
-         for (int i = 0; i < grid.length; i++)
+         for ( int i = 0; i < grid.length; i++ )
          {
-            for (int j = 0; j < grid.length; j++)
+            for ( int j = 0; j < grid.length; j++ )
             {
-               if (grid[j][i].equals("Space"))
+               if ( grid[j][i].equals("Space") )
                {
-                  temp.drawImage(blackedOutImage,i * 60, j * 60, null);
+                  temp.drawImage(blackedOutImage, i * 60, j * 60, null);
                }
             }
          }
       }
 
       int counter = GameEngine.instance.powerUpManager.getCurrentCount();
-      if ( counter > 0)
+      if ( counter > 0 )
       {
          Graphics2D temp = (Graphics2D) g.create();
          int x = GameEngine.instance.powerUpManager.getObstacleToRemoveX();
          int y = GameEngine.instance.powerUpManager.getObstacleToRemoveY();
 
-         temp.drawImage(poofImages.get(counter / ( GameEngine.instance.powerUpManager.getPoofDuration()/ poofImages.size())), x  * 60, y * 60, null);
+         temp.drawImage(poofImages.get(counter / ( GameEngine.instance.powerUpManager.getPoofDuration() / poofImages.size() )), x * 60, y * 60, null);
       }
    }
 }
