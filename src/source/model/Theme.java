@@ -3,6 +3,7 @@ package source.model;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class Theme {
       shortVehicleImageArray = new ArrayList<>();
       longVehicleImageArray = new ArrayList<>();
       this.activeTheme = theme;
-      path = "src/image/theme_" + this.activeTheme + "/";
+      path = "image/theme_" + this.activeTheme + "/";
       initializeAttributes();
    }
 
@@ -171,14 +172,19 @@ public class Theme {
       bGr.dispose();
    }
 
-    public BufferedImage LoadImage(String FileName) {
+    public BufferedImage LoadImage(String fileName) {
+
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File(FileName));
+            image = ImageIO.read(Theme.class.getClassLoader().getResourceAsStream(fileName));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return image;
+        /*
+        BufferedInputStream image = new BufferedInputStream(
+                getClass().getResourceAsStream(path));
+        */return image;
     }
 
     public boolean isUnlocked()

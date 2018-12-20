@@ -86,20 +86,20 @@ public class ChangePlayerPanel extends JPanel
       bGr.drawImage(scaledImage, 0, 0, null);
       bGr.dispose();
 
-      levelBackground = guiManager.LoadImage("src/image/icons/playerSelection.png");
-      levelBackgroundH = guiManager.LoadImage("src/image/icons/playerSelectionH.png");
-      rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
-      leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
-      rightArrowH = guiManager.LoadImage("src/image/icons/rightarrowH.png");
-      leftArrowH = guiManager.LoadImage("src/image/icons/leftarrowH.png");
-      back = guiManager.LoadImage("src/image/icons/back.png");
-      backHighlighted = guiManager.LoadImage("src/image/icons/backH.png");
-      add = guiManager.LoadImage("src/image/icons/addPlayer.png");
-      addH = guiManager.LoadImage("src/image/icons/addPlayerH.png");
-      delete = guiManager.LoadImage("src/image/icons/quit.png");
-      deleteH = guiManager.LoadImage("src/image/icons/quitH.png");
-      edit = guiManager.LoadImage("src/image/icons/edit.png");
-      editH = guiManager.LoadImage("src/image/icons/editH.png");
+      levelBackground = guiManager.LoadImage("image/icons/playerSelection.png");
+      levelBackgroundH = guiManager.LoadImage("image/icons/playerSelectionH.png");
+      rightArrow = guiManager.LoadImage("image/icons/rightarrow.png");
+      leftArrow = guiManager.LoadImage("image/icons/leftarrow.png");
+      rightArrowH = guiManager.LoadImage("image/icons/rightarrowH.png");
+      leftArrowH = guiManager.LoadImage("image/icons/leftarrowH.png");
+      back = guiManager.LoadImage("image/icons/back.png");
+      backHighlighted = guiManager.LoadImage("image/icons/backH.png");
+      add = guiManager.LoadImage("image/icons/addPlayer.png");
+      addH = guiManager.LoadImage("image/icons/addPlayerH.png");
+      delete = guiManager.LoadImage("image/icons/quit.png");
+      deleteH = guiManager.LoadImage("image/icons/quitH.png");
+      edit = guiManager.LoadImage("image/icons/edit.png");
+      editH = guiManager.LoadImage("image/icons/editH.png");
 
       popUp.loadImages();
    }

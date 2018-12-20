@@ -88,33 +88,33 @@ public class SettingsPanel extends JPanel {
         Graphics2D bGr = background.createGraphics();
         bGr.drawImage(scaledImage, 0, 0, null);
         bGr.dispose();
-        starActive = guiManager.LoadImage("src/image/icons/miniStar.png");
-        title = guiManager.LoadImage("src/image/icons/settingsTitle.png");
-        backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
-        backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
-        musicImage = guiManager.LoadImage("src/image/icons/musicon.png");
-        musicHighlightedImage = guiManager.LoadImage("src/image/icons/musiconH.png");
-        musicOffImage = guiManager.LoadImage("src/image/icons/musicoff.png");
-        musicOffHighlightedImage = guiManager.LoadImage("src/image/icons/musicoffH.png");
-        sfxImage = guiManager.LoadImage("src/image/icons/soundon.png");
-        sfxHighlightedImage = guiManager.LoadImage("src/image/icons/soundonH.png");
-        sfxOffImage = guiManager.LoadImage("src/image/icons/soundoff.png");
-        sfxOffHighlightedImage = guiManager.LoadImage("src/image/icons/soundoffH.png");
-        simpleImage = guiManager.LoadImage("src/image/icons/simple.png");
-        simpleHighlightedImage = guiManager.LoadImage("src/image/icons/simpleH.png");
-        classicImage = guiManager.LoadImage("src/image/icons/classic.png");
-        classicHighlightedImage = guiManager.LoadImage("src/image/icons/classicH.png");
-        safariImage = guiManager.LoadImage("src/image/icons/safari.png");
-        safariHighlightedImage = guiManager.LoadImage("src/image/icons/safariH.png");
-        spaceImage = guiManager.LoadImage("src/image/icons/space.png");
-        spaceHighlightedImage = guiManager.LoadImage("src/image/icons/spaceH.png");
-        mouseControlImage = guiManager.LoadImage("src/image/icons/control_mouse.png");
-        mouseControlHighlightedImage = guiManager.LoadImage("src/image/icons/control_mouseH.png");
-        keyboardControlImage = guiManager.LoadImage("src/image/icons/control_keyboard.png");
-        keyboardControlHighlightedImage = guiManager.LoadImage("src/image/icons/control_keyboardH.png");
-        classicD = guiManager.LoadImage("src/image/icons/classicD.png");
-        safariD = guiManager.LoadImage("src/image/icons/safariD.png");
-        spaceD = guiManager.LoadImage("src/image/icons/spaceD.png");
+        starActive = guiManager.LoadImage("image/icons/miniStar.png");
+        title = guiManager.LoadImage("image/icons/settingsTitle.png");
+        backButtonImage = guiManager.LoadImage("image/icons/back.png");
+        backButtonHighlightedImage = guiManager.LoadImage("image/icons/backH.png");
+        musicImage = guiManager.LoadImage("image/icons/musicon.png");
+        musicHighlightedImage = guiManager.LoadImage("image/icons/musiconH.png");
+        musicOffImage = guiManager.LoadImage("image/icons/musicoff.png");
+        musicOffHighlightedImage = guiManager.LoadImage("image/icons/musicoffH.png");
+        sfxImage = guiManager.LoadImage("image/icons/soundon.png");
+        sfxHighlightedImage = guiManager.LoadImage("image/icons/soundonH.png");
+        sfxOffImage = guiManager.LoadImage("image/icons/soundoff.png");
+        sfxOffHighlightedImage = guiManager.LoadImage("image/icons/soundoffH.png");
+        simpleImage = guiManager.LoadImage("image/icons/simple.png");
+        simpleHighlightedImage = guiManager.LoadImage("image/icons/simpleH.png");
+        classicImage = guiManager.LoadImage("image/icons/classic.png");
+        classicHighlightedImage = guiManager.LoadImage("image/icons/classicH.png");
+        safariImage = guiManager.LoadImage("image/icons/safari.png");
+        safariHighlightedImage = guiManager.LoadImage("image/icons/safariH.png");
+        spaceImage = guiManager.LoadImage("image/icons/space.png");
+        spaceHighlightedImage = guiManager.LoadImage("image/icons/spaceH.png");
+        mouseControlImage = guiManager.LoadImage("image/icons/control_mouse.png");
+        mouseControlHighlightedImage = guiManager.LoadImage("image/icons/control_mouseH.png");
+        keyboardControlImage = guiManager.LoadImage("image/icons/control_keyboard.png");
+        keyboardControlHighlightedImage = guiManager.LoadImage("image/icons/control_keyboardH.png");
+        classicD = guiManager.LoadImage("image/icons/classicD.png");
+        safariD = guiManager.LoadImage("image/icons/safariD.png");
+        spaceD = guiManager.LoadImage("image/icons/spaceD.png");
     }
 
     @SuppressWarnings("Duplicates")
@@ -124,7 +124,7 @@ public class SettingsPanel extends JPanel {
         back = UIFactory.createButton(backButtonImage, backButtonHighlightedImage, "square", actionListener);
         mouse = UIFactory.createButton(mouseControlImage, mouseControlHighlightedImage, "square", actionListener);
         keyboard = UIFactory.createButton(keyboardControlImage, keyboardControlHighlightedImage, "square", actionListener);
-        if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPrefrence().equals("Slide")) {
+        if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
             controlPreference = UIFactory.createButton(mouseControlImage, mouseControlHighlightedImage, "square", actionListener);
         } else {
             controlPreference = UIFactory.createButton(keyboardControlImage, keyboardControlHighlightedImage, "square", actionListener);
@@ -369,7 +369,7 @@ public class SettingsPanel extends JPanel {
             GameEngine.instance.soundManager.effectsToggle();
         } else if (e.getSource() == controlPreference) {
             //Sırasıyla oynadım hızı değişmedi
-            if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPrefrence().equals("Slide")) {
+            if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
                 controlPreference.setIcon(new ImageIcon(keyboardControlImage));
                 controlPreference.setRolloverIcon(new ImageIcon(keyboardControlHighlightedImage));
             } else {

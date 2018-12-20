@@ -170,32 +170,32 @@ public class GamePanel extends JPanel
       bGr.drawImage(scaledImage, 0, 0, null);
       bGr.dispose();
 
-      menuButtonImage = guiManager.LoadImage("src/image/icons/menu.png");
-      menuButtonHighlightedImage = guiManager.LoadImage("src/image/icons/menuH.png");
+      menuButtonImage = guiManager.LoadImage("image/icons/menu.png");
+      menuButtonHighlightedImage = guiManager.LoadImage("image/icons/menuH.png");
 
-      settingsButtonImage = guiManager.LoadImage("src/image/icons/settingsIcon.png");
-      settingsButtonHighlightedImage = guiManager.LoadImage("src/image/icons/settingsIconH.png");
+      settingsButtonImage = guiManager.LoadImage("image/icons/settingsIcon.png");
+      settingsButtonHighlightedImage = guiManager.LoadImage("image/icons/settingsIconH.png");
 
-      resetButtonImage = guiManager.LoadImage("src/image/icons/reset.png");
-      resetButtonHighlightedImage = guiManager.LoadImage("src/image/icons/resetH.png");
+      resetButtonImage = guiManager.LoadImage("image/icons/reset.png");
+      resetButtonHighlightedImage = guiManager.LoadImage("image/icons/resetH.png");
 
-      shrinkButtonImage = guiManager.LoadImage("src/image/icons/shrink.png");
-      shrinkButtonHighlightedImage = guiManager.LoadImage("src/image/icons/shrinkH.png");
-      shrinkDisabledImage = guiManager.LoadImage("src/image/icons/shrinkD.png");
+      shrinkButtonImage = guiManager.LoadImage("image/icons/shrink.png");
+      shrinkButtonHighlightedImage = guiManager.LoadImage("image/icons/shrinkH.png");
+      shrinkDisabledImage = guiManager.LoadImage("image/icons/shrinkD.png");
 
-      spaceButtonImage = guiManager.LoadImage("src/image/icons/poof.png");
-      spaceButtonHighlightedImage = guiManager.LoadImage("src/image/icons/poofH.png");
-      spaceDisabledImage = guiManager.LoadImage("src/image/icons/poofD.png");
+      spaceButtonImage = guiManager.LoadImage("image/icons/poof.png");
+      spaceButtonHighlightedImage = guiManager.LoadImage("image/icons/poofH.png");
+      spaceDisabledImage = guiManager.LoadImage("image/icons/poofD.png");
 
-      movesImage = guiManager.LoadImage("src/image/icons/movesCar.png");
+      movesImage = guiManager.LoadImage("image/icons/movesCar.png");
 
-      timerBackgroundImage = guiManager.LoadImage("src/image/timerBackground.png");
-      timerForegroundImage = guiManager.LoadImage("src/image/timerForeground.png");
-      timerBottomImage = guiManager.LoadImage("src/image/timerBottom.png");
-      firstStarForegroundImage = guiManager.LoadImage("src/image/icons/miniStar.png");
-      firstStarBackgroundImage = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
-      secondStarForegroundImage = guiManager.LoadImage("src/image/icons/miniStar.png");
-      secondStarBackgroundImage = guiManager.LoadImage("src/image/icons/miniStarLocked.png");
+      timerBackgroundImage = guiManager.LoadImage("image/timerBackground.png");
+      timerForegroundImage = guiManager.LoadImage("image/timerForeground.png");
+      timerBottomImage = guiManager.LoadImage("image/timerBottom.png");
+      firstStarForegroundImage = guiManager.LoadImage("image/icons/miniStar.png");
+      firstStarBackgroundImage = guiManager.LoadImage("image/icons/miniStarLocked.png");
+      secondStarForegroundImage = guiManager.LoadImage("image/icons/miniStar.png");
+      secondStarBackgroundImage = guiManager.LoadImage("image/icons/miniStarLocked.png");
    }
 
    private void createComponents()
@@ -506,7 +506,7 @@ public class GamePanel extends JPanel
          int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f); //26 yı değikene atcam da anlamadım ahmet kodunu
          if ( currentLevel.getMaxNumberOfMovesForThreeStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0 )
          {
-            System.out.println(currentLevel.getMaxNumberOfMovesForThreeStars() -GameEngine.instance.vehicleController.getNumberOfMoves() + "  ,  " + starHeight);
+            //System.out.println(currentLevel.getMaxNumberOfMovesForThreeStars() -GameEngine.instance.vehicleController.getNumberOfMoves() + "  ,  " + starHeight);
             subImage = firstStarForegroundImage.getSubimage(0, firstStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
             graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }

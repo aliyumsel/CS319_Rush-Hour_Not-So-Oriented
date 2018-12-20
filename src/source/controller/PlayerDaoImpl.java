@@ -135,9 +135,8 @@ public class PlayerDaoImpl implements PlayerDao{
             return new FileReader(path);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     private void createFile(String path)

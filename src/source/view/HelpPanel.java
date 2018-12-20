@@ -72,26 +72,27 @@ public class HelpPanel extends JPanel
       bGr.drawImage(scaledImage, 0, 0, null);
       bGr.dispose();
 
-      title = guiManager.LoadImage("src/image/icons/howToPlayTitle.png");
-      backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
-      backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
-      //help1Image = guiManager.LoadImage("src/image/help_images/help0.png");
-      //help2Image = guiManager.LoadImage("src/image/help_images/help1.png");
+      title = guiManager.LoadImage("image/icons/howToPlayTitle.png");
+      backButtonImage = guiManager.LoadImage("image/icons/back.png");
+      backButtonHighlightedImage = guiManager.LoadImage("image/icons/backH.png");
+      //help1Image = guiManager.LoadImage("image/help_images/help0.png");
+      //help2Image = guiManager.LoadImage("image/help_images/help1.png");
 
-      rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
-      rightArrowHighlighted = guiManager.LoadImage("src/image/icons/rightarrowH.png");
-      leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
-      leftArrowHighlighted = guiManager.LoadImage("src/image/icons/leftarrowH.png");
+      rightArrow = guiManager.LoadImage("image/icons/rightarrow.png");
+      rightArrowHighlighted = guiManager.LoadImage("image/icons/rightarrowH.png");
+      leftArrow = guiManager.LoadImage("image/icons/leftarrow.png");
+      leftArrowHighlighted = guiManager.LoadImage("image/icons/leftarrowH.png");
 
-      String imagePath = "src/image/help_images";
-      File folder = new File(imagePath);
-      String[] filenameList = folder.list();
-      helpImages = new BufferedImage[filenameList.length];
-      helpLabels = new JLabel[filenameList.length];
-      for ( int i = 0; i < filenameList.length; i++ )
+      String imagePath = "image/help_images";
+      //File folder = new File(imagePath);
+      //String[] filenameList = folder.list();
+      helpImages = new BufferedImage[2];
+      helpLabels = new JLabel[2];
+      for ( int i = 0; i < 2; i++ )
       {
-         helpImages[i] = guiManager.LoadImage(imagePath + "/" + filenameList[i]);
+         helpImages[i] = guiManager.LoadImage(imagePath + "/help" + (i + 1) +".png");
       }
+
    }
 
    private void createComponents()

@@ -55,10 +55,10 @@ public class CreditsPanel extends JPanel {
         bGr.drawImage(scaledImage, 0, 0, null);
         bGr.dispose();
 
-        developersImage = guiManager.LoadImage("src/image/creditsUs.png");
-        title = guiManager.LoadImage("src/image/icons/creditsTitle.png");
-        backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
-        backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
+        developersImage = guiManager.LoadImage("image/creditsUs.png");
+        title = guiManager.LoadImage("image/icons/creditsTitle.png");
+        backButtonImage = guiManager.LoadImage("image/icons/back.png");
+        backButtonHighlightedImage = guiManager.LoadImage("image/icons/backH.png");
     }
 
     private void createComponents() {

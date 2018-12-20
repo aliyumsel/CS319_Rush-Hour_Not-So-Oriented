@@ -117,6 +117,10 @@ public class MapController extends Controller
          {
             gameObject.showBlackForeground();
          }
+         else if (gameObject instanceof Space)
+         {
+            gameObject.showBlackForeground();
+         }
       }
    }
 
@@ -129,6 +133,10 @@ public class MapController extends Controller
             gameObject.showBlackForeground();
          }
          else if (gameObject instanceof Obstacle)
+         {
+            gameObject.showBlackForeground();
+         }
+         else if (gameObject instanceof Space)
          {
             gameObject.showBlackForeground();
          }
@@ -165,37 +173,22 @@ public class MapController extends Controller
       int mapStrSize = map.getMapSize();
       for ( int i = 0; i < mapStrSize; i++ )
       {
-         for ( int j = 0; j < mapStrSize; j++ )
-         {
+         for ( int j = 0; j < mapStrSize; j++ ) {
             found = false;
-            for ( GameObject gameObject : map.getGameObjects() )
-            {
-               if ( gameObject.transform.getPosition().y == i && gameObject.transform.getPosition().x == j )
-               {
-                  if ( gameObject instanceof Vehicle )
-                  {
-                     if ( ( (Vehicle) gameObject ).isPlayer() )
-                     {
-                        mapStr = mapStr + "PC ";
-                     }
-                     else
-                     {
-                        mapStr = mapStr + gameObject.getType().substring(0, 1).toUpperCase() + gameObject.transform.getDirection().substring(0, 1).toUpperCase() + " ";
-                     }
-                     found = true;
-                     break;
+            GameObject gameObject = getGameObjectBySelectedCell(j, i);
+            if (gameObject instanceof Vehicle) {
+               if (gameObject.transform.getPosition().y == i && gameObject.transform.getPosition().x == j) {
+                  if (((Vehicle) gameObject).isPlayer()) {
+                     mapStr = mapStr + "PC ";
+                  } else {
+                     mapStr = mapStr + gameObject.getType().substring(0, 1).toUpperCase() + gameObject.transform.getDirection().substring(0, 1).toUpperCase() + " ";
                   }
-
-                  if ( gameObject instanceof Obstacle )
-                  {
-                     mapStr = mapStr + "OO ";
-                     found = true;
-                     break;
-                  }
+               } else {
+                  mapStr = mapStr + "XX ";
                }
-            }
-            if ( !found )
-            {
+            } else if (gameObject instanceof Obstacle) {
+               mapStr = mapStr + "OO ";
+            } else if (gameObject instanceof Space) {
                mapStr = mapStr + "SS ";
             }
          }
