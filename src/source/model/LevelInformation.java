@@ -10,8 +10,9 @@ public class LevelInformation
    private int currentNumberOfMoves;
    private boolean unlocked;
    private String map;
+   private int time;
 
-   public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked, String map)
+   public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked, String map, int time)
    {
       this.levelNo = levelNo;
       this.maxNumberOfMovesForThreeStars = maxNumberOfMovesForThreeStars;
@@ -21,6 +22,7 @@ public class LevelInformation
       this.status = status;
       this.unlocked = unlocked;
       this.map = map;
+      this.time = time;
    }
 
    public int getLevelNo() {
@@ -85,6 +87,14 @@ public class LevelInformation
    public void setMap(String map)
    {
       this.map = map;
+   }
+
+   public int getTime() {
+      return time;
+   }
+
+   public void setTime(int time) {
+      this.time = time;
    }
 
    public String levelToString()

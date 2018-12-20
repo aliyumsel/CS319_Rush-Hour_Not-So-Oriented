@@ -3,16 +3,12 @@ package source.view;
 import source.controller.GameEngine;
 import source.controller.PlayerManager;
 import source.controller.ThemeManager;
-import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class LevelSelectionPanel extends JPanel
 {
@@ -176,7 +172,7 @@ public class LevelSelectionPanel extends JPanel
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
                LevelInformation level = PlayerManager.instance.getCurrentPlayer().getLevels().get(i);
                buttonArray[i].showTimerIcon(false);
-               if ( level instanceof BonusLevelInformation && level.isUnlocked())
+               if ( level.getTime() >= 0 && level.isUnlocked())
                {
                   buttonArray[i].showTimerIcon(true);
                }

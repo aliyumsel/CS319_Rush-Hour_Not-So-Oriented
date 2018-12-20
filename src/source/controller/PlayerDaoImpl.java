@@ -4,7 +4,6 @@ package source.controller;
 import com.google.gson.*;
 
 import interfaces.PlayerDao;
-import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
@@ -12,8 +11,6 @@ import source.model.OriginalLevel;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
 
 @SuppressWarnings("Duplicates")
 public class PlayerDaoImpl implements PlayerDao{
@@ -62,16 +59,7 @@ public class PlayerDaoImpl implements PlayerDao{
             InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + i + ".json");
             InputStreamReader reader = new InputStreamReader(input);
             originalLevel = gson.fromJson(reader, OriginalLevel.class);
-            unlocked = i == 1;
-
-            if (originalLevel.time < 0)
-            {
-                levels.add(new LevelInformation(0, "notStarted", i, originalLevel.expectedMovesForThreeStars, originalLevel.expectedMovesForTwoStars, 0, unlocked, ""));
-            }
-            else
-            {
-                levels.add(new BonusLevelInformation(0, "notStarted", i, originalLevel.expectedMovesForThreeStars, originalLevel.expectedMovesForTwoStars, 0, unlocked, "", originalLevel.time));
-            }
+            levels.add(new LevelInformation(0, "notStarted", i, originalLevel.expectedMovesForThreeStars, originalLevel.expectedMovesForTwoStars, 0, i == 1, "", originalLevel.time));
         }
         Player newPlayer = new Player(playerName, 0, levels, playerPath, settings, 3, 3);
         newPlayer.resetLastUnlockedLevelNo();
