@@ -132,7 +132,6 @@ public class GameManager extends Controller
          MapController.instance.loadOriginalLevel(_level);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);
-         autoSave();
       }
       else
       {
