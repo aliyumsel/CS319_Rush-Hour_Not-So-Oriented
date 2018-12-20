@@ -8,7 +8,7 @@ public class GameObject implements Drawable
 {
    public Transform transform;
    private int[] occupiedCellNumbers;
-   private Transform[] occupiedTransforms;
+//   private Transform[] occupiedTransforms;
    boolean isBlackedOut; //bunu highlight olayi icin kullanmamiz gerekebilir
 
 
@@ -39,24 +39,24 @@ public class GameObject implements Drawable
          }
       }
 
-      findPivotPointsOfOccupiedCells();
+//      findPivotPointsOfOccupiedCells();
    }
 
-   private void findPivotPointsOfOccupiedCells()
-   {
-      occupiedTransforms = new Transform[transform.length];
-      occupiedTransforms[0] = new Transform((int) transform.position.gridX, (int) transform.position.gridY, 1, transform.direction);
+//   private void findPivotPointsOfOccupiedCells()
+//   {
+//      occupiedTransforms = new Transform[transform.length];
+//      occupiedTransforms[0] = new Transform(transform.position.gridX, transform.position.gridY, 1, transform.direction);
+//
+//      for ( int i = 1; i < transform.length; i++ )
+//      {
+//         occupiedTransforms[i] = new Transform(occupiedCellNumbers[i] % 8, occupiedCellNumbers[i] / 8, 1, transform.direction);
+//      }
+//   }
 
-      for ( int i = 1; i < transform.length; i++ )
-      {
-         occupiedTransforms[i] = new Transform(occupiedCellNumbers[i] % 8, occupiedCellNumbers[i] / 8, 1, transform.direction);
-      }
-   }
-
-   public Transform[] getOccupiedTransforms()
-   {
-      return occupiedTransforms;
-   }
+//   public Transform[] getOccupiedTransforms()
+//   {
+//      return occupiedTransforms;
+//   }
 
    public int[] getOccupiedCells() // for those want to use cell numbers and calculate pivot points
    {

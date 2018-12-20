@@ -1,14 +1,12 @@
 package source.view;
 
 import source.controller.GameEngine;
-import source.controller.SoundManager;
 import source.controller.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 @SuppressWarnings("Duplicates")
 public class HelpPanel extends JPanel
@@ -148,9 +146,9 @@ public class HelpPanel extends JPanel
 
       //help2.setBounds(guiManager.findCenter(panelWidth, help1) + 190, 180, help2.getPreferredSize().width, help2.getPreferredSize().height);
 
-      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
+      leftArrowButton.setBounds(5, guiManager.findCenterVertical(panelHeight, leftArrowButton),
               leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
-      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton),
+      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenterVertical(panelHeight, rightArrowButton),
               rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
 
 

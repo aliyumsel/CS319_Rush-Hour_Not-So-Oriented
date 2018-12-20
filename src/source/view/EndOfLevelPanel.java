@@ -160,10 +160,10 @@ public class EndOfLevelPanel extends JPanel
       }
    }
 
-   public void setHeading(String text)
-   {
-      heading.setText(text);
-   }
+//   public void setHeading(String text)
+//   {
+//      heading.setText(text);
+//   }
 
    private ActionListener actionListener = new ActionListener()
    {

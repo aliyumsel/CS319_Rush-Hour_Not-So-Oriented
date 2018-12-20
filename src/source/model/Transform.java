@@ -65,10 +65,10 @@ public class Transform
 //      position.y = y;
 //   }
 
-   public Position getPosition()
-   {
-      return position;
-   }
+//   public Position getPosition()
+//   {
+//      return position;
+//   }
 
    public int getLength()
    {
