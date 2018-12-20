@@ -26,6 +26,7 @@ public class Theme {
     private String themeSong;
     private String buttonClick;
     private String selectionSound;
+    private String endOfLevelSound;
     private String path;
     private boolean unlocked;
 
@@ -46,6 +47,7 @@ public class Theme {
       buttonClick = path + "buttonClick.wav";
       themeSong = path + "theme.wav";
       selectionSound = path + "selectionSound.wav";
+      endOfLevelSound = path + "success.wav";
    }
 
    private void setImages() {
@@ -134,7 +136,9 @@ public class Theme {
    public String getThemeSong() {
       return themeSong;
    }
-
+    public String getEndOfLevelSound(){
+       return endOfLevelSound;
+    }
    public String getSelectionSound() {
       return selectionSound;
    }

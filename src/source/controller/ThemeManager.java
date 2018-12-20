@@ -120,7 +120,9 @@ public class ThemeManager extends Controller
    {
       return currentTheme.getThemeSong();
    }
-
+   String getEndOfLevelSound(){
+   return currentTheme.getEndOfLevelSound();
+}
    String getSelectionSound()
    {
       return currentTheme.getSelectionSound();
