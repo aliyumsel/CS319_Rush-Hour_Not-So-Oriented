@@ -135,7 +135,7 @@ public class PowerUpManager extends Controller
       MapController.instance.clearHighlights();
    }
 
-   boolean isPowerUpActive()
+   public boolean isPowerUpActive()
    {
       return ( shrinkActive || spaceActive );
    }

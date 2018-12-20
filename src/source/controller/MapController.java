@@ -207,7 +207,7 @@ public class MapController extends Controller
          mapString.append("| ");
       }
 
-      System.out.println("MAP TO STRING: " + mapString.substring(0, mapString.length() - 2));
+//      System.out.println("MAP TO STRING: " + mapString.substring(0, mapString.length() - 2));
       return mapString.substring(0, mapString.length() - 2);
    }
 
