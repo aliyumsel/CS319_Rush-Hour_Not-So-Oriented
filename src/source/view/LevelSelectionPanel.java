@@ -3,7 +3,6 @@ package source.view;
 import source.controller.GameEngine;
 import source.controller.PlayerManager;
 import source.controller.ThemeManager;
-import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 
 import javax.swing.*;
@@ -173,11 +172,11 @@ public class LevelSelectionPanel extends JPanel
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
                LevelInformation level = PlayerManager.instance.getCurrentPlayer().getLevels().get(i);
                buttonArray[i].showTimerIcon(false);
-               if ( level instanceof BonusLevelInformation && level.isUnlocked())
+               if ( level.getTime() >= 0 && level.isUnlocked())
                {
                   buttonArray[i].showTimerIcon(true);
                }
-               if (GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStatus().equals("inProgress")){
+               if (GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStatus().equals("inProgress") && GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getTime() < 0){
                   buttonArray[i].toggleInProgress(true);
                }
             }

@@ -97,7 +97,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getSelectionSound()); // getSuccess sound olacak
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getEndOfLevelSound()); // getSuccess sound olacak
 
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);

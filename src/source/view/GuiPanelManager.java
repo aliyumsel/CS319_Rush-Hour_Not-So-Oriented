@@ -25,6 +25,7 @@ public class GuiPanelManager extends JFrame
    private SettingsPanel settingsPanel;
    private LevelSelectionPanel levelSelectionPanel;
    private HelpPanel helpPanel;
+   private TutorialPanel tutorialPanel;
    private ChangePlayerPanel changePlayerPanel;
    private JPanel targetPanel;
    //private BufferedImage cursorImage;
@@ -79,7 +80,9 @@ public class GuiPanelManager extends JFrame
       pack();
       setLocationRelativeTo(null);
 
-      setPanelVisible("MainMenu");
+      //gamepanel managerdan çekilen bilgiye göre ya tutorial ya da main menu açılacak
+      setPanelVisible("Tutorial");
+      //setPanelVisible("MainMenu");
 
       setVisible(true);
       pack();
@@ -89,6 +92,7 @@ public class GuiPanelManager extends JFrame
    private void addPanels()
    {
       mainMenuPanel = new MainMenuPanel(this);
+      tutorialPanel = new TutorialPanel(true,this);
       gamePanel = new GamePanel(this);
       creditsPanel = new CreditsPanel(this);
       settingsPanel = new SettingsPanel(this);
@@ -96,14 +100,16 @@ public class GuiPanelManager extends JFrame
       levelSelectionPanel = new LevelSelectionPanel(this);
       changePlayerPanel = new ChangePlayerPanel(this);
       this.add(mainMenuPanel);
-
+      this.add(tutorialPanel);
       this.add(gamePanel);
       this.add(creditsPanel);
       this.add(levelSelectionPanel);
       this.add(settingsPanel);
       this.add(helpPanel);
       this.add(changePlayerPanel);
+
       panels.add(mainMenuPanel);
+      panels.add(tutorialPanel);
       panels.add(gamePanel);
       panels.add(creditsPanel);
       panels.add(levelSelectionPanel);
@@ -123,6 +129,10 @@ public class GuiPanelManager extends JFrame
       {
          mainMenuPanel.updatePanel();
          targetPanel = mainMenuPanel;
+      }
+      else if (panelName.equals("Tutorial")){
+         tutorialPanel.update();
+         targetPanel = tutorialPanel;
       }
       else if ( panelName.equals("Game") )
       {
