@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class TutorialPanel extends JPanel {
 
     private JButton forwardButton;
+    private JButton backButton;
+    private JButton cancelButton;
     private GuiPanelManager guiManager;
     public int index; //for activating current tutorial
     private boolean isTutorialActive; //will be accessed from guiManager
@@ -24,6 +26,10 @@ public class TutorialPanel extends JPanel {
     private BufferedImage coreBackground;
     private BufferedImage next = GuiPanelManager.instance.LoadImage("image/icons/next.png");
     private BufferedImage nextH = GuiPanelManager.instance.LoadImage("image/icons/nextH.png");
+    private BufferedImage back = GuiPanelManager.instance.LoadImage("image/icons/back.png");
+    private BufferedImage backH = GuiPanelManager.instance.LoadImage("image/icons/backH.png");
+    private BufferedImage cancel = GuiPanelManager.instance.LoadImage("image/icons/quit.png");
+    private BufferedImage cancelH = GuiPanelManager.instance.LoadImage("image/icons/quitH.png");
 
 
     TutorialPanel(boolean isTutorialActive, GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
@@ -43,6 +49,7 @@ public class TutorialPanel extends JPanel {
 
             guiManager.setPanelVisible("MainMenu");
         else {
+            backButton.setVisible(index != 0);
             setActiveLabel();
             setActiveBackground();
         }
@@ -80,7 +87,11 @@ public class TutorialPanel extends JPanel {
 
     private void createComponents() {
         forwardButton = UIFactory.createButton(next, nextH, "square", actionListener);
+        backButton = UIFactory.createButton(back, backH, "square", actionListener);
+        cancelButton = UIFactory.createButton(cancel, cancelH, "square", actionListener);
         add(forwardButton);
+        add(backButton);
+        add(cancelButton);
 
         //manipulate tutorialImages, backgroundImages and points(for tutorials) here sizes should match for cooardinates and labels
         tutorialCoordinates.add(new Point(0, 0));
@@ -132,7 +143,10 @@ public class TutorialPanel extends JPanel {
     }
 
     private void setBoundsOfComponents() {
-        forwardButton.setBounds(350, 400, forwardButton.getPreferredSize().width, forwardButton.getPreferredSize().height);
+        forwardButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) + 75, 425, forwardButton.getPreferredSize().width, forwardButton.getPreferredSize().height);
+        backButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) - 75, 425, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
+        cancelButton.setBounds(guiManager.findCenter(guiManager.panelWidth, cancelButton), 425, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
+
         for (int i = 0; i < tutorials.size(); i++) {
             setBounds(tutorials.get(i), tutorialCoordinates.get(i).x, tutorialCoordinates.get(i).y);
         }
@@ -173,8 +187,15 @@ public class TutorialPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == forwardButton) {
                 index++;
-                update();
+
+            } else if (e.getSource() == backButton) {
+                index--;
+
+            } else if (e.getSource() == cancelButton) {
+                index = tutorials.size();
+
             }
+            update();
         }
     };
 }
