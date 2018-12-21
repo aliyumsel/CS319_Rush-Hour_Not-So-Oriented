@@ -23,9 +23,9 @@ public class VehicleController extends Controller {
     private boolean isSelectedVehicleSliding = false;
     private Point destination = new Point();
 
-    private enum CONTROL {
-        SLIDE, KEYBOARD, //CPU //CPU kalsın
-    }
+   enum CONTROL {
+      SLIDE, KEYBOARD, //CPU //CPU kalsın
+   }
 
     private CONTROL currentControl;
 
@@ -352,6 +352,11 @@ public class VehicleController extends Controller {
         }
         return difference;
     }
+
+   void setCurrentControl(CONTROL type)
+   {
+      currentControl = type;
+   }
 
     void toggleCurrentControl() {
         if (currentControl == CONTROL.SLIDE) {

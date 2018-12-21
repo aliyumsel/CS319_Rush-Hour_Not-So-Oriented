@@ -109,7 +109,8 @@ public class PlayerManager extends Controller
       players.add(newPlayer);
       currentPlayer = newPlayer;
 
-      GameEngine.instance.themeManager.setTheme("minimalistic");
+      ThemeManager.instance.setTheme("minimalistic");
+      VehicleController.instance.setCurrentControl(VehicleController.CONTROL.SLIDE);
 
       return 0;
    }
