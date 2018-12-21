@@ -92,11 +92,11 @@ public class GameManager extends Controller
    {
       LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
       //bad fix maybe change it later
-      if ( currentLevel.getCurrentNumberOfMoves() + 1 <= currentLevel.getMaxNumberOfMovesForThreeStars() )
+      if ( VehicleController.instance.getNumberOfMoves() + 1 <= currentLevel.getMaxNumberOfMovesForThreeStars() )
       {
          return 3;
       }
-      else if ( currentLevel.getCurrentNumberOfMoves() + 1 <= currentLevel.getMaxNumberOfMovesForTwoStars() )
+      else if ( VehicleController.instance.getNumberOfMoves() + 1 <= currentLevel.getMaxNumberOfMovesForTwoStars() )
       {
          return 2;
       }
@@ -159,6 +159,7 @@ public class GameManager extends Controller
    {
       PlayerManager.instance.updateLevelAtReset(level);
       loadLevel(level, true);
+      PowerUpManager.instance.deactivatePowerUps();
    }
 
    public boolean isLastLevel()

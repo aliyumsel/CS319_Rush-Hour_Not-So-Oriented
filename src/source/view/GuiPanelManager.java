@@ -132,6 +132,7 @@ public class GuiPanelManager extends JFrame
       }
       else if (panelName.equals("Tutorial")){
          tutorialPanel.update();
+         tutorialPanel.setIndex(0);
          targetPanel = tutorialPanel;
       }
       else if ( panelName.equals("Game") )

@@ -83,6 +83,7 @@ public class LevelSelectionPanel extends JPanel
       menuButton = UIFactory.createButton(back, backHighlighted, "square", actionListener);
 
       buttonArray = new LevelButton[numberOfLevels];
+      System.out.println(numberOfLevels);
       for ( int i = 0; i < buttonArray.length; i++ )
       {
          buttonArray[i] = UIFactory.createLevelButton(actionListener);

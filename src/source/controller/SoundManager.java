@@ -31,17 +31,16 @@ public class SoundManager extends Controller
    {
       try
       {
-
          String themeSong = ThemeManager.instance.getThemeSong();
          clip = AudioSystem.getClip();
-         AudioInputStream inputStream;
-         inputStream = AudioSystem.getAudioInputStream(SoundManager.class.getClassLoader().getResourceAsStream(themeSong));
-         clip.open(inputStream);
+         URL url = this.getClass().getResource(themeSong);
+         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
+         clip.open(audioInputStream);
          clip.start();
          clip.loop(Clip.LOOP_CONTINUOUSLY);
       } catch (Exception a)
       {
-         System.out.println("Not Found: Clip");
+         a.printStackTrace();
       }
    }
 
