@@ -1,6 +1,5 @@
 package source.controller;
 
-import source.model.BonusLevelInformation;
 import source.model.LevelInformation;
 import source.view.GuiPanelManager;
 
@@ -10,8 +9,9 @@ public class GameManager extends Controller
    public PlayerManager playerManager;
 
    public int level;
-   public int time;
-   private boolean bonus;
+   private int timerStartValue;
+   private int remainingTime;
+   private boolean isLevelBonus;
 
    boolean isGameActive = false;
 
@@ -19,19 +19,24 @@ public class GameManager extends Controller
    {
       playerManager = PlayerManager.instance;
       instance = this;
-      time = 0;
-      bonus = false;
+      remainingTime = 0;
+      isLevelBonus = false;
    }
 
    public void update()
    {
-      if ( bonus )
+      if ( isLevelBonus & isGameActive)
       {
-         time--;
-         if ( time == 0 )
+         remainingTime--;
+         if (remainingTime <= 0)
          {
-            endMap();
+            timeOver();
          }
+      }
+
+      if (Input.getKeyPressed("n"))
+      {
+         endMap();
       }
    }
 
@@ -44,13 +49,15 @@ public class GameManager extends Controller
    public void stopMap()
    {
       isGameActive = false;
+      PowerUpManager.instance.deactivatePowerUps();
    }
 
    void endMap()
    {
 
-      System.out.println("Map Finished");
+//      System.out.println("Map Finished");
       isGameActive = false;
+      PowerUpManager.instance.deactivatePowerUps();
       VehicleController.instance.isExitReachable = false;
       //PlayerManager.instance.setLevelStatusFinished(level);
 
@@ -60,20 +67,36 @@ public class GameManager extends Controller
          PlayerManager.instance.incrementLastUnlockedLevelNo();
       }
 
+      if (isLevelBonus && PlayerManager.instance.getCurrentPlayer().getLevels().get(level - 1).getStars() == 0)
+      {
+         PlayerManager.instance.addShrinkPowerup(2);
+         PlayerManager.instance.addSpacePowerup(2);
+      }
+
       int starsCollected = calculateStars(level);
-      System.out.println("Stars Collected: " + starsCollected);
+//      System.out.println("Stars Collected: " + starsCollected);
       PlayerManager.instance.updateLevelAtTheEnd(level, starsCollected);
-      GuiPanelManager.instance.getGamePanel().setEndOfLevelPanelVisible(starsCollected);
+      GuiPanelManager.instance.getGamePanel().showEndOfLevelPopUp(starsCollected);
+   }
+
+   private void timeOver()
+   {
+      System.out.println("Time Over!");
+      isGameActive = false;
+      PowerUpManager.instance.deactivatePowerUps();
+      PlayerManager.instance.updateLevelAtTheEnd(level, 0);
+      GuiPanelManager.instance.getGamePanel().showTimeOverPopUp();
    }
 
    private int calculateStars(int _level)
    {
       LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
-      if ( currentLevel.getCurrentNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars() )
+      //bad fix maybe change it later
+      if ( currentLevel.getCurrentNumberOfMoves() + 1 <= currentLevel.getMaxNumberOfMovesForThreeStars() )
       {
          return 3;
       }
-      else if ( currentLevel.getCurrentNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForTwoStars() )
+      else if ( currentLevel.getCurrentNumberOfMoves() + 1 <= currentLevel.getMaxNumberOfMovesForTwoStars() )
       {
          return 2;
       }
@@ -86,30 +109,32 @@ public class GameManager extends Controller
    public void loadLastLevel()
    {
       level = PlayerManager.instance.getCurrentPlayer().getLastUnlockedLevelNo();
-      loadLevel(level);
+      loadLevel(level, false);
    }
 
-   public void loadLevel(int _level)
+   public void loadLevel(int _level, boolean reset)
    {
-      System.out.println("Loaded level: " + _level);
-      System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
+//      System.out.println("Loaded level: " + _level);
+//      System.out.println(PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1));
       level = _level;
       LevelInformation levelToBeLoaded = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
+      isLevelBonus = false;
 
-      if ( levelToBeLoaded instanceof BonusLevelInformation )
+      if ( levelToBeLoaded.getTime() >= 0 )
       {
-         bonus = true;
-         time = ( (BonusLevelInformation) levelToBeLoaded ).getTime() * 60;
+         System.out.println("Bonus Map");
+         isLevelBonus = true;
+         remainingTime = levelToBeLoaded .getTime() * 60;
+         timerStartValue = remainingTime;
          MapController.instance.loadOriginalLevel(_level);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);
       }
-      else if ( !levelToBeLoaded.getStatus().equals("inProgress") )
+      else if ( !levelToBeLoaded.getStatus().equals("inProgress") || reset )
       {
          MapController.instance.loadOriginalLevel(_level);
          VehicleController.instance.setMap(MapController.instance.getMap());
          VehicleController.instance.setNumberOfMoves(0);
-         autoSave();
       }
       else
       {
@@ -127,17 +152,18 @@ public class GameManager extends Controller
    public void nextLevel()
    {
       level++;
-      loadLevel(level);
+      loadLevel(level, false);
    }
 
    public void resetLevel()
    {
-      MapController.instance.loadOriginalLevel(level);
-      VehicleController.instance.setMap(MapController.instance.getMap());
-      VehicleController.instance.setNumberOfMoves(0);
-      autoSave();
+      PlayerManager.instance.updateLevelAtReset(level);
+      loadLevel(level, true);
+   }
 
-      isGameActive = true;
+   public boolean isLastLevel()
+   {
+      return level == PlayerManager.instance.getCurrentPlayer().getLevels().size();
    }
 
    public int getLevel()
@@ -155,4 +181,39 @@ public class GameManager extends Controller
       PlayerManager.instance.unlockLevel(level + 1);
    }
 
+   public boolean isShrinkPowerUpUsable()
+   {
+      return playerManager.getCurrentPlayer().getRemainingShrinkPowerup() > 0;
+   }
+
+   public boolean isSpacePowerUpUsable()
+   {
+      return playerManager.getCurrentPlayer().getRemainingSpacePowerup() > 0;
+   }
+
+   public int getRemainingTime()
+   {
+      return remainingTime;
+   }
+
+   public int getTimerStartValue()
+   {
+      return timerStartValue;
+   }
+
+   public boolean isLevelBonus()
+   {
+      return isLevelBonus;
+   }
+
+   public boolean isGameActive()
+   {
+      return isGameActive;
+   }
+
+   public void toggleControlType()
+   {
+      PlayerManager.instance.toggleControlPreference();
+      VehicleController.instance.toggleCurrentControl();
+   }
 }

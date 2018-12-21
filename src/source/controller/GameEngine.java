@@ -1,12 +1,10 @@
 package source.controller;
 
 import java.util.ArrayList;
-import java.util.TimerTask;
 
-public class GameEngine extends TimerTask
+public class GameEngine
 {
    public static GameEngine instance;
-
    private ArrayList<Controller> controllers;
    public ThemeManager themeManager;
    public SoundManager soundManager;
@@ -28,13 +26,13 @@ public class GameEngine extends TimerTask
       gameManager = new GameManager();
       controllers = new ArrayList<>();
 
-        controllers.add(themeManager);
-        controllers.add(soundManager);
-        controllers.add(mapController);
-        controllers.add(vehicleController);
-        controllers.add(playerManager);
-        controllers.add(gameManager);
-        controllers.add(powerUpManager);
+      controllers.add(themeManager);
+      controllers.add(soundManager);
+      controllers.add(mapController);
+      controllers.add(vehicleController);
+      controllers.add(playerManager);
+      controllers.add(gameManager);
+      controllers.add(powerUpManager);
 
       for ( Controller controller : controllers )
       {
@@ -53,4 +51,5 @@ public class GameEngine extends TimerTask
 
       Input.reset();
    }
+
 }

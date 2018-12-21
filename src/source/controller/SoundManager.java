@@ -1,16 +1,13 @@
 package source.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import sun.audio.*;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class SoundManager extends Controller
 {
@@ -22,7 +19,7 @@ public class SoundManager extends Controller
    private boolean isThemeEnabled;
    private boolean isEffectsEnabled;
 
-   public SoundManager()
+   SoundManager()
    {
       //isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
       //isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
@@ -34,13 +31,13 @@ public class SoundManager extends Controller
       try
       {
          String trafficThemeSong = ThemeManager.instance.getThemeSong();
-         AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(trafficThemeSong));
+         AudioInputStream inputStream = AudioSystem.getAudioInputStream(SoundManager.class.getClassLoader().getResourceAsStream(trafficThemeSong));
          clip = AudioSystem.getClip();
          clip.open(inputStream);
          clip.loop(Clip.LOOP_CONTINUOUSLY);
       } catch (Exception a)
       {
-         System.out.println("Not Found");
+         System.out.println("Not Found: Clip");
       }
    }
 
@@ -59,17 +56,17 @@ public class SoundManager extends Controller
          try
          {
             String selectionSound = ThemeManager.instance.getSelectionSound();
-            inputStream = new FileInputStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
          {
-            System.out.println("Not Found");
+            System.out.println("Not Found: Vehicle horn");
          }
       }
    }
 
-   void updateTheme()
+   public void updateTheme()
    {
       if ( clip != null )
       {
@@ -84,12 +81,12 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = new FileInputStream(ThemeManager.instance.getButtonClickSound());
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getButtonClickSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
          {
-            System.out.println("Not Found");
+            System.out.println("Not Found: button Click");
          }
       }
    }
@@ -100,13 +97,13 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = new FileInputStream("src/sounds/success.wav");
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getEndOfLevelSound()); // getSuccess sound olacak
 
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (IOException a)
          {
-            System.out.println("Not Found");
+            System.out.println("Not Found: Success Sound");
          }
       }
    }

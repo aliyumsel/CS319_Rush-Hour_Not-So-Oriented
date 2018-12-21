@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 public class Obstacle extends GameObject
 {
    private BufferedImage image;
+   private BufferedImage blackedOutImage;
 
    public Obstacle(int x, int y, int length, String direction)
    {
@@ -15,11 +16,18 @@ public class Obstacle extends GameObject
       updateImages();
    }
 
+   @SuppressWarnings("Duplicates")
    @Override
-   public void draw(Graphics graphics)
+   public void draw(Graphics2D graphics)
    {
-      Image scaledImage = image.getScaledInstance(58, 58, Image.SCALE_DEFAULT);
-      graphics.drawImage(scaledImage, (int) transform.position.x * 60, (int) transform.position.y * 60, null);
+      graphics.drawImage(image, (int) transform.position.x * 60, (int) transform.position.y * 60, null);
+      if (isBlackedOut)
+      {
+         Graphics2D temp = (Graphics2D) graphics.create();
+         Composite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+         temp.setComposite(composite);
+         temp.drawImage(blackedOutImage,(int) transform.position.x * 60, (int) transform.position.y * 60, null);
+      }
    }
 
    @Override
@@ -32,5 +40,6 @@ public class Obstacle extends GameObject
    public void updateImages()
    {
       image = ThemeManager.instance.getObstacleImage();
+      blackedOutImage = ThemeManager.instance.getDisabledImage("obstacle");
    }
 }

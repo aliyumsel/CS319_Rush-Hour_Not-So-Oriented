@@ -3,68 +3,99 @@ package source.model;
 import source.controller.ThemeManager;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class Vehicle extends GameObject// implements Drawable
 {
    private String type; // we may not need this
    public boolean isMoving; // we may not need this
-   //   public boolean isHighlighted; //bunu highlight olayi icin kullanmamiz gerekebilir
    private boolean player;
-   private int verticalMoveAxis;
-   private int horizontalMoveAxis;
-   private int drawingIndexForMoving;
-   private boolean special = false;
    private BufferedImage image;
+   private BufferedImage blackedOutImage;
+   public boolean isSliding = false;
+   public double velocity;
 
-   Vehicle(int x, int y, int length, String direction, boolean player, boolean special, String theme) //theme i sil burdan
+   Vehicle(int x, int y, int length, String direction, boolean player) //theme i sil burdan
    {
       super(x, y, length, direction);
       this.player = player;
       isMoving = false;
-      this.special = special;
-      this.drawingIndexForMoving = 60;
-      verticalMoveAxis = 0;
-      horizontalMoveAxis = 0;
+      velocity = 0.05;
       updateImages();
    }
 
-   public void move(int moveAxis)
+   public void move(double moveAxis)
    {
       if ( transform.axis.equals("Vertical") )
       {
          transform.position.y -= moveAxis;
-         transform.position.gridY -= moveAxis;
-         verticalMoveAxis = moveAxis; // if move axis == -1 vehicle goes downwards
+         if (!isSliding) {
+            transform.position.gridY = (int) ((transform.position.y + 0.1) / 1); //değerler double a döndüğü için direk typecast etmek mantıklı / 1 yaptım olay anlaşılsın diye
+         }
       }
       else if ( transform.axis.equals("Horizontal") )
       {
          transform.position.x += moveAxis;
-         transform.position.gridX += moveAxis;
-         horizontalMoveAxis = moveAxis; // if move axis == -1 vehicle goes left
+         if (!isSliding) {
+            transform.position.gridX = (int) ((transform.position.x + 0.1) / 1);
+         }
       }
       findOccupiedCells();
    }
 
+   public void slideToPoint(int x, int y) // tam sayılara gitmesini istiyoruz, eğer başka bir feature gelirse double la değiştirin
+   {
+      if ( transform.axis.equals("Vertical") )
+      {
+         if (y == (int)(transform.position.y) && Math.abs(transform.position.y-y) <= 0.1)
+         {
+            transform.position.y = (int)(transform.position.y+0.1);
+            isSliding = false;
+         }
+         else if (y > transform.position.y)
+         {
+            move(-velocity);
+         }
+         else if (y < transform.position.y)
+         {
+            move(velocity);
+         }
+      }
+      else if ( transform.axis.equals("Horizontal") )
+      {
+         if (x == (int)transform.position.x && Math.abs(transform.position.x-x) <=0.1)
+         {
+            transform.position.x = (int)(transform.position.x+0.1);
+            isSliding = false;
+         }
+         else if (x > transform.position.x)
+         {
+            move(velocity);
+         }
+         else if (x < transform.position.x)
+         {
+            move(-velocity);
+         }
+      }
+   }
    @Override
    public void updateImages()
    {
       if ( !player && transform.length == 2 )
       {
          image = ThemeManager.instance.getShortVehicleImage();
+         blackedOutImage = ThemeManager.instance.getDisabledImage("short");
       }
       else if ( !player && transform.length == 3 )
       {
          image = ThemeManager.instance.getLongVehicleImage();
-      }
-      else if ( player && !this.special )
-      {
-         image = ThemeManager.instance.getPlayerImage();
+         blackedOutImage = ThemeManager.instance.getDisabledImage("long");
       }
       else if ( player )
       {
-         image = ThemeManager.instance.getSpecialPlayerImage();
+         image = ThemeManager.instance.getPlayerImage();
+         blackedOutImage = ThemeManager.instance.getDisabledImage("short");
       }
    }
 
@@ -73,12 +104,6 @@ public class Vehicle extends GameObject// implements Drawable
       transform.position.gridX = x;
       transform.position.gridY = y;
       findOccupiedCells();
-   }
-
-   public void slideToPoint(int x, int y)
-   {
-      transform.position.x = x;
-      transform.position.y = y;
    }
 
    public String getType()
@@ -97,75 +122,40 @@ public class Vehicle extends GameObject// implements Drawable
    }
 
    @Override
-   public void draw(Graphics graphics)
+   public void draw(Graphics2D graphics)
    {
-      int gridPixelSize = 60;
+
       AffineTransform at;
-      Graphics2D graphics2d = (Graphics2D) graphics;
 
-//      if ( drawingIndexForMoving <= 0 )
-//      {
-//         drawingIndexForMoving = gridPixelSize;
-//         isMoving = false;
-//         verticalMoveAxis = 0;
-//         horizontalMoveAxis = 0;
-//      }
-//
-//      if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == -1 )
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize - drawingIndexForMoving);
-//         drawingIndexForMoving -= 4;
-//      }
-//      else if ( isMoving && transform.axis.equals("Vertical") && verticalMoveAxis == 1 )
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize + drawingIndexForMoving);
-//         drawingIndexForMoving -= 4;
-//      }
-//      else if ( isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == -1 )
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize + drawingIndexForMoving, occupiedTransforms[0].position.y * gridPixelSize);
-//         drawingIndexForMoving -= 4;
-//      }
-//      else if ( isMoving && transform.axis.equals("Horizontal") && horizontalMoveAxis == 1 )
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize - drawingIndexForMoving, occupiedTransforms[0].position.y * gridPixelSize);
-//         drawingIndexForMoving -= 4;
-//      }
-//      else if ( !isMoving && transform.axis.equals("Horizontal") )
-//      {
-//
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize);
-//      }
-//      else
-//      {
-//         at = AffineTransform.getTranslateInstance(occupiedTransforms[0].position.x * gridPixelSize, occupiedTransforms[0].position.y * gridPixelSize);
-//      }
-
-
+      int gridPixelSize = 60;
       at = AffineTransform.getTranslateInstance(transform.position.x * gridPixelSize, transform.position.y * gridPixelSize);
-      //if(isMoving)
-      //System.out.println(transform.position.x * gridPixelSize + "," + transform.position.y * gridPixelSize);
 
+      //for drawing the black out
+      Graphics2D temp = (Graphics2D) graphics.create();
+      Composite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+      temp.setComposite(composite);
 
       if ( transform.direction.equals("Upwards") )
       {
-         graphics2d.drawImage(image, at, null);
+         //do nothing
       }
       else if ( transform.direction.equals("Downwards") )
       {
          at.rotate(Math.toRadians(180), image.getWidth() / 2.0, image.getHeight() / 2.0);
-         graphics2d.drawImage(image, at, null);
       }
       else if ( transform.direction.equals("Left") )
       {
          at.rotate(Math.toRadians(90), image.getWidth() / 2.0, image.getHeight() / 2.0 / transform.length);
          at.translate(0, -60 * ( transform.length - 1 ));
-         graphics2d.drawImage(image, at, null);
       }
       else
       {
          at.rotate(Math.toRadians(270), image.getWidth() / 2.0, image.getHeight() / 2.0 / transform.length);
-         graphics2d.drawImage(image, at, null);
+      }
+      graphics.drawImage(image, at, null);
+      if (isBlackedOut)
+      {
+         temp.drawImage(blackedOutImage,at, null);
       }
    }
 }

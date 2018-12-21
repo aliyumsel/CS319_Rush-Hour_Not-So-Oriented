@@ -1,18 +1,14 @@
 package source.view;
 
-import javax.swing.*;
-
-import java.awt.*;
-
 import source.controller.GameEngine;
-import source.controller.SoundManager;
+import source.controller.PlayerManager;
 import source.controller.ThemeManager;
+import source.model.LevelInformation;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class LevelSelectionPanel extends JPanel
 {
@@ -38,7 +34,7 @@ public class LevelSelectionPanel extends JPanel
    private int pageLength = 12;
    private int numberOfLevels;
 
-   private LevelSelectionPopUp popUp;
+//   private LevelSelectionPopUp popUp;
 
    LevelSelectionPanel(GuiPanelManager _guiManager)
    {
@@ -52,8 +48,8 @@ public class LevelSelectionPanel extends JPanel
 
       setPreferredSize(new Dimension(panelWidth, panelHeight));
 
-      popUp = new LevelSelectionPopUp(_guiManager);
-      add(popUp);
+//      popUp = new LevelSelectionPopUp(_guiManager);
+//      add(popUp);
 
       loadImages();
       createComponents();
@@ -72,12 +68,12 @@ public class LevelSelectionPanel extends JPanel
       bGr.drawImage(scaledImage, 0, 0, null);
       bGr.dispose();
 
-      rightArrow = guiManager.LoadImage("src/image/icons/rightarrow.png");
-      rightArrowHighlighted = guiManager.LoadImage("src/image/icons/rightarrowH.png");
-      leftArrow = guiManager.LoadImage("src/image/icons/leftarrow.png");
-      leftArrowHighlighted = guiManager.LoadImage("src/image/icons/leftarrowH.png");
-      back = guiManager.LoadImage("src/image/icons/back.png");
-      backHighlighted = guiManager.LoadImage("src/image/icons/backH.png");
+      rightArrow = guiManager.LoadImage("image/icons/rightarrow.png");
+      rightArrowHighlighted = guiManager.LoadImage("image/icons/rightarrowH.png");
+      leftArrow = guiManager.LoadImage("image/icons/leftarrow.png");
+      leftArrowHighlighted = guiManager.LoadImage("image/icons/leftarrowH.png");
+      back = guiManager.LoadImage("image/icons/back.png");
+      backHighlighted = guiManager.LoadImage("image/icons/backH.png");
    }
 
    private void createComponents()
@@ -108,18 +104,18 @@ public class LevelSelectionPanel extends JPanel
 
    private void setBoundsOfComponents()
    {
-      leftArrowButton.setBounds(5, guiManager.findCenter(panelHeight, leftArrowButton),
+      leftArrowButton.setBounds(5, guiManager.findCenterVertical(panelHeight, leftArrowButton),
               leftArrowButton.getPreferredSize().width, leftArrowButton.getPreferredSize().height);
-      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenter(panelHeight, rightArrowButton),
+      rightArrowButton.setBounds(panelWidth - 135, guiManager.findCenterVertical(panelHeight, rightArrowButton),
               rightArrowButton.getPreferredSize().width, rightArrowButton.getPreferredSize().height);
 
       menuButton.setBounds(30, 30, menuButton.getPreferredSize().width, menuButton.getPreferredSize().height);
 
-      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, popUp.getPreferredSize().width, popUp.getPreferredSize().height);
+//      popUp.setBounds(guiManager.findCenter(panelWidth, popUp), 100, popUp.getPreferredSize().width, popUp.getPreferredSize().height);
 
       for ( int i = 0; i < buttonArray.length; i++ )
       {
-         buttonArray[i].setBounds(10, guiManager.findCenter(panelHeight, buttonArray[i]) - 135,
+         buttonArray[i].setBounds(10, guiManager.findCenterVertical(panelHeight, buttonArray[i]) - 135,
                  buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
       }
 
@@ -139,19 +135,19 @@ public class LevelSelectionPanel extends JPanel
          if ( i > -1 + limit && i < 4 + limit )
          {
             gap += gapValue;
-            buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]) - 135,
+            buttonArray[i].setBounds(gap, guiManager.findCenterVertical(panelHeight, buttonArray[i]) - 135,
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
          else if ( i >= 4 + limit && i < 8 + limit )
          {
             gap += gapValue;
-            buttonArray[i].setBounds(gap, guiManager.findCenter(panelHeight, buttonArray[i]),
+            buttonArray[i].setBounds(gap, guiManager.findCenterVertical(panelHeight, buttonArray[i]),
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
          else if ( i >= 8 + limit && i < 12 + limit )
          {
             gap += gapValue;
-            buttonArray[i].setBounds(gap, 135 + guiManager.findCenter(panelHeight, buttonArray[i]),
+            buttonArray[i].setBounds(gap, 135 + guiManager.findCenterVertical(panelHeight, buttonArray[i]),
                     buttonArray[i].getPreferredSize().width, buttonArray[i].getPreferredSize().height);
          }
          buttonArray[i].setVisible(true);
@@ -167,12 +163,22 @@ public class LevelSelectionPanel extends JPanel
             if ( GameEngine.instance.playerManager.isLevelLocked(i + 1) )
             {
                buttonArray[i].toggleLock(true);
+               buttonArray[i].showTimerIcon(false);
             }
             else
             {
                buttonArray[i].toggleLock(false);
-               System.out.println("starAmount: " + GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars());
+               buttonArray[i].toggleInProgress(false);
                buttonArray[i].showStars(GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStars()); // from controllers player info
+               LevelInformation level = PlayerManager.instance.getCurrentPlayer().getLevels().get(i);
+               buttonArray[i].showTimerIcon(false);
+               if ( level.getTime() >= 0 && level.isUnlocked())
+               {
+                  buttonArray[i].showTimerIcon(true);
+               }
+               if (GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getStatus().equals("inProgress") && GameEngine.instance.playerManager.getCurrentPlayer().getLevels().get(i).getTime() < 0){
+                  buttonArray[i].toggleInProgress(true);
+               }
             }
          }
          else
@@ -184,20 +190,7 @@ public class LevelSelectionPanel extends JPanel
 
    private int findNoOfLevels()
    {
-      Scanner scanInfo = null;
-      try
-      {
-         scanInfo = new Scanner(new File("src/data/info.txt"));
-      } catch (FileNotFoundException e)
-      {
-         e.printStackTrace();
-      }
-      while ( !scanInfo.nextLine().equals("<NumberOfMaps>") )
-      {
-         ;
-      }
-      String mapAmount = scanInfo.nextLine().trim();
-      return Integer.parseInt(mapAmount);
+      return GameEngine.instance.playerManager.getCurrentPlayer().getLevels().size();
    }
 
    void updatePanel()
@@ -249,7 +242,7 @@ public class LevelSelectionPanel extends JPanel
             if ( e.getSource() == buttonArray[index] )
             {
                System.out.println("Destinationlevel: " + index + 1);
-               GameEngine.instance.gameManager.loadLevel(index + 1);
+               GameEngine.instance.gameManager.loadLevel(index + 1, false);
                guiManager.setPanelVisible("Game");
                break;
             }

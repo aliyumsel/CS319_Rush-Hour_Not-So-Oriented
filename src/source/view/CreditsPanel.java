@@ -12,6 +12,7 @@ public class CreditsPanel extends JPanel {
     private GuiPanelManager guiManager;
 
     private JLabel heading;
+    private JLabel developers;
     private JLabel name1;
     private JLabel name2;
     private JLabel name3;
@@ -21,6 +22,7 @@ public class CreditsPanel extends JPanel {
     private JButton back;
 
     private BufferedImage background;
+    private BufferedImage developersImage;
     private BufferedImage title;
     private BufferedImage backButtonImage;
     private BufferedImage backButtonHighlightedImage;
@@ -53,9 +55,10 @@ public class CreditsPanel extends JPanel {
         bGr.drawImage(scaledImage, 0, 0, null);
         bGr.dispose();
 
-        title = guiManager.LoadImage("src/image/icons/creditsTitle.png");
-        backButtonImage = guiManager.LoadImage("src/image/icons/back.png");
-        backButtonHighlightedImage = guiManager.LoadImage("src/image/icons/backH.png");
+        developersImage = guiManager.LoadImage("image/creditsUs.png");
+        title = guiManager.LoadImage("image/icons/creditsTitle.png");
+        backButtonImage = guiManager.LoadImage("image/icons/back.png");
+        backButtonHighlightedImage = guiManager.LoadImage("image/icons/backH.png");
     }
 
     private void createComponents() {
@@ -64,6 +67,10 @@ public class CreditsPanel extends JPanel {
         heading = new JLabel();
         heading.setIcon(new ImageIcon(title));
         heading.setPreferredSize(new Dimension(233, 65));
+
+        developers = new JLabel();
+        developers.setIcon(new ImageIcon(developersImage));
+        developers.setPreferredSize(new Dimension(820,300));
 
         name1 = new JLabel("Ahmet Ayrancioglu", SwingConstants.CENTER);
         name1.setPreferredSize(new Dimension(300, 35));
@@ -99,12 +106,15 @@ public class CreditsPanel extends JPanel {
         add(name4);
         add(name5);
         add(back);
+        add(developers);
     }
 
     private void setBoundsOfComponents() {
         back.setBounds(30, 30, back.getPreferredSize().width, back.getPreferredSize().height);
 
         heading.setBounds(guiManager.findCenter(panelWidth, heading), 25, heading.getPreferredSize().width, heading.getPreferredSize().height);
+
+        developers.setBounds(guiManager.findCenter(panelWidth, developers), panelHeight - developers.getPreferredSize().height, developers.getPreferredSize().width, developers.getPreferredSize().height);
 
         name1.setBounds(guiManager.findCenter(panelWidth, name1), 150, name1.getPreferredSize().width, name1.getPreferredSize().height);
 

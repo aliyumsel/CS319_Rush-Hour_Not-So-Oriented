@@ -1,19 +1,14 @@
 package source.model;
 
-import source.controller.GameManager;
-import source.view.GuiPanelManager;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Theme {
 
-    private String activeTheme; //aslında theme de bi sürü theme oluyo diye böyle yazdım
-    private ArrayList<BufferedImage> shortVehicleImageArray; //Short ve Longu ayırdım hani zaten theme calssındayız ayrı dursunlar bari babında
+   private ArrayList<BufferedImage> shortVehicleImageArray; //Short ve Longu ayırdım hani zaten theme calssındayız ayrı dursunlar bari babında
     private ArrayList<BufferedImage> longVehicleImageArray;
     private BufferedImage playerImage;
     private BufferedImage specialPlayer;
@@ -21,18 +16,22 @@ public class Theme {
     private BufferedImage background;
     private BufferedImage gamePanelBackground;
     private BufferedImage popupBackground;
-    private ArrayList<String> vehicleSoundArray;
+    private BufferedImage obstacleDisabled;
+    private BufferedImage longDisabled;
+    private BufferedImage shortDisabled;
+//    private ArrayList<String> vehicleSoundArray;
     private String themeSong;
     private String buttonClick;
     private String selectionSound;
+    private String endOfLevelSound;
     private String path;
     private boolean unlocked;
-
+    public String name;
    public Theme(String theme) {
       shortVehicleImageArray = new ArrayList<>();
       longVehicleImageArray = new ArrayList<>();
-      this.activeTheme = theme;
-      path = "src/image/theme_" + this.activeTheme + "/";
+      path = "image/theme_" + theme + "/";
+      name = theme;
       initializeAttributes();
    }
 
@@ -45,6 +44,7 @@ public class Theme {
       buttonClick = path + "buttonClick.wav";
       themeSong = path + "theme.wav";
       selectionSound = path + "selectionSound.wav";
+      endOfLevelSound = path + "success.wav";
    }
 
    private void setImages() {
@@ -53,6 +53,7 @@ public class Theme {
       setSpecialPlayer();
       setBackground();
       setObstacleImage();
+      setDisabled();
       rescaleImages();
    }
 
@@ -71,7 +72,11 @@ public class Theme {
    private void setPlayerImage() {
       playerImage = LoadImage(path + "player.png");
    }
-
+    private void setDisabled(){
+       obstacleDisabled = LoadImage(path + "obstacleDisabled.png");
+       longDisabled = LoadImage(path+"longDisabled.png");
+       shortDisabled = LoadImage(path + "shortDisabled.png");
+    }
    private void setBackground() {
       background = LoadImage(path + "background.png");
       popupBackground = LoadImage(path + "popUpBackground.png");
@@ -101,6 +106,15 @@ public class Theme {
    public BufferedImage getObstacleImage() {
       return obstacle;
    }
+    public BufferedImage getLongDisabledImage() {
+        return longDisabled;
+    }
+    public BufferedImage getShortDisabledImage() {
+        return shortDisabled;
+    }
+    public BufferedImage getObstacleDisabledImage() {
+        return obstacleDisabled;
+    }
 
    public BufferedImage getGamePanelBackgroundImage() {
       return gamePanelBackground;
@@ -119,7 +133,9 @@ public class Theme {
    public String getThemeSong() {
       return themeSong;
    }
-
+    public String getEndOfLevelSound(){
+       return endOfLevelSound;
+    }
    public String getSelectionSound() {
       return selectionSound;
    }
@@ -157,14 +173,19 @@ public class Theme {
       bGr.dispose();
    }
 
-    public BufferedImage LoadImage(String FileName) {
+    public BufferedImage LoadImage(String fileName) {
+
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File(FileName));
+            image = ImageIO.read(Theme.class.getClassLoader().getResourceAsStream(fileName));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return image;
+        /*
+        BufferedInputStream image = new BufferedInputStream(
+                getClass().getResourceAsStream(path));
+        */return image;
     }
 
     public boolean isUnlocked()
@@ -176,7 +197,7 @@ public class Theme {
         this.unlocked = unlocked;
     }
 
-    public String getActiveTheme() {
-        return activeTheme;
-    }
+//    public String getActiveTheme() {
+//        return activeTheme;
+//    }
 }

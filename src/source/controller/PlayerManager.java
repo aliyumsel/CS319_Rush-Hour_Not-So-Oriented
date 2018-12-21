@@ -1,11 +1,11 @@
 package source.controller;
 
-import java.util.ArrayList;
-
 import interfaces.PlayerDao;
 import source.model.LevelInformation;
 import source.model.Player;
 import source.model.Settings;
+
+import java.util.ArrayList;
 
 public class PlayerManager extends Controller
 {
@@ -28,7 +28,7 @@ public class PlayerManager extends Controller
    {
       players = playerDao.extractPlayers();
       String lastPlayerName = playerDao.extractLastPlayerName();
-      if ( players == null )
+      if ( players.size() == 0)
       {
          createPlayer("default");
       }
@@ -55,23 +55,23 @@ public class PlayerManager extends Controller
       return currentPlayer;
    }
 
-   public void setCurrentPlayer(Player currentPlayer)
-   {
-      this.currentPlayer = currentPlayer;
-   }
+//   public void setCurrentPlayer(Player currentPlayer)
+//   {
+//      this.currentPlayer = currentPlayer;
+//   }
 
    public ArrayList<Player> getPlayers()
    {
       return players;
    }
 
-   public void setPlayers(ArrayList<Player> players)
-   {
-      for ( int i = 0; i < players.size(); i++ )
-      {
-         this.players.set(i, players.get(i));
-      }
-   }
+//   public void setPlayers(ArrayList<Player> players)
+//   {
+//      for ( int i = 0; i < players.size(); i++ )
+//      {
+//         this.players.set(i, players.get(i));
+//      }
+//   }
 
    /* returns 0 if creation successful
     * returns 1 if the name already exists
@@ -84,12 +84,9 @@ public class PlayerManager extends Controller
       }
 
       //checks if a player with the same name exists
-      for ( int i = 0; i < players.size(); i++ )
+      if (checkIfPlayerExistsByName(playerName))
       {
-         if ( players.get(i).getPlayerName().equals(playerName) )
-         {
-            return 1;
-         }
+         return 1;
       }
       //adds the new player to players and sets it as current player
       boolean initialMusic;
@@ -107,7 +104,7 @@ public class PlayerManager extends Controller
       }
 
       Settings settings = new Settings(initialMusic, initialSfx);
-      Player newPlayer = playerDao.cratePlayer(playerName, settings);
+      Player newPlayer = playerDao.createPlayer(playerName, settings);
       playerDao.saveLastActivePlayer(playerName);
       players.add(newPlayer);
       currentPlayer = newPlayer;
@@ -172,6 +169,42 @@ public class PlayerManager extends Controller
 
    }
 
+   public int editPlayer(String oldName, String newName)
+   {
+      if (checkIfPlayerExistsByName(newName))
+      {
+         return -1;
+      }
+
+      for (int i = 0; i < players.size(); i++)
+      {
+         Player player = players.get(i);
+         if (player.getPlayerName().equals(oldName))
+         {
+            player.setPlayerName(newName);
+            playerDao.changePlayerName(player);
+            if (player == currentPlayer)
+            {
+               playerDao.saveLastActivePlayer(player.getPlayerName());
+            }
+            return i;
+         }
+      }
+      return -1;
+   }
+   private boolean checkIfPlayerExistsByName(String playerName)
+   {
+      for ( int i = 0; i < players.size(); i++ )
+      {
+         if ( players.get(i).getPlayerName().equals(playerName) )
+         {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   //These 2 methods will have to change with gameManager to not include other controllers
    void updateLevelAtTheEnd(int levelNo, int starAmount)
    {
       LevelInformation currentLevel = currentPlayer.getLevels().get(levelNo - 1);
@@ -181,9 +214,11 @@ public class PlayerManager extends Controller
       {
          currentPlayer.setStarAmount(currentPlayer.getStarAmount() + ( starAmount - currentLevel.getStars() ));
          currentLevel.setStars(starAmount);
+         //playerDao.savePlayerInfo(currentPlayer);
+         playerDao.savePlayer(currentPlayer);
       }
-      playerDao.saveLevel(levelNo, currentPlayer);
-      //playerDao.saveStarAmount(currentPlayer); will be added
+      //playerDao.saveLevel(levelNo, currentPlayer);
+      playerDao.savePlayer(currentPlayer);
 
    }
 
@@ -196,7 +231,21 @@ public class PlayerManager extends Controller
       currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(moveAmount);
       currentPlayer.getLevels().get(levelNo - 1).setMap(map);
 
-      playerDao.saveLevel(levelNo, currentPlayer);
+      //playerDao.saveLevel(levelNo, currentPlayer);
+      playerDao.savePlayer(currentPlayer);
+   }
+
+   void  updateLevelAtReset(int levelNo)
+   {
+      if (currentPlayer.getLevels().get(levelNo - 1).getStars() > 0)
+      {
+         setLevelStatus(levelNo, "finished");
+      }
+      else
+      {
+         setLevelStatus(levelNo, "notStarted");
+      }
+      playerDao.savePlayer(currentPlayer);
    }
 
    private void setLevelStatus(int levelNo, String status)
@@ -207,17 +256,19 @@ public class PlayerManager extends Controller
       }
    }
 
-   void setLevelStatusFinished(int levelNo)
-   {
-      setLevelStatus(levelNo, "finished");
-      playerDao.saveLevel(levelNo, currentPlayer);
-
-   }
+//   void setLevelStatusFinished(int levelNo)
+//   {
+//      setLevelStatus(levelNo, "finished");
+//      //playerDao.saveLevel(levelNo, currentPlayer);
+//      playerDao.savePlayer(currentPlayer);
+//
+//   }
 
    void unlockLevel(int levelNo)
    {
       currentPlayer.getLevels().get(levelNo - 1).unlock();
-      playerDao.saveLevel(levelNo, currentPlayer);
+      //playerDao.saveLevel(levelNo, currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    void incrementLastUnlockedLevelNo()
@@ -233,13 +284,15 @@ public class PlayerManager extends Controller
    public void toggleMusic()
    {
       currentPlayer.getSettings().toggleMusic();
-      playerDao.saveSettings(currentPlayer);
+      //playerDao.saveSettings(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    public void toggleSfx()
    {
       currentPlayer.getSettings().toggleSfx();
-      playerDao.saveSettings(currentPlayer);
+      //playerDao.saveSettings(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    void changeTheme(String theme)
@@ -248,12 +301,14 @@ public class PlayerManager extends Controller
       if ( !theme.equals(currentPlayer.getSettings().getActiveTheme()) /* && (boolean) currentPlayer.getSettings().getThemes().get(theme) */ )
       {
          currentPlayer.getSettings().setActiveTheme(theme);
-         playerDao.saveSettings(currentPlayer);
+         //playerDao.saveSettings(currentPlayer);
+         playerDao.savePlayer(currentPlayer);
       }
    }
 
    void unlockTheme(String themeName)
    {
+      //check out this
       currentPlayer.getSettings().getThemes().put(themeName, true);
       changeTheme(themeName);
    }
@@ -261,22 +316,35 @@ public class PlayerManager extends Controller
    void decrementRemainingShrinkPowerup()
    {
       currentPlayer.decrementRemainingShrinkPowerup();
-      playerDao.saveRemainingPowerupAmount("shrink", currentPlayer);
+      //playerDao.saveRemainingPowerupAmount(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
    void decrementRemainingSpacePowerup()
    {
       currentPlayer.decrementRemainingSpacePowerup();
-      playerDao.saveRemainingPowerupAmount("space", currentPlayer);
+      //playerDao.saveRemainingPowerupAmount(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
-   public void addShrinkPowerup(int amountToBeAdded)
+   void addShrinkPowerup(int amountToBeAdded)
    {
       currentPlayer.addShrinkPowerup(amountToBeAdded);
+      //playerDao.saveRemainingPowerupAmount(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 
-   public void addSpacePowerup(int amountToBeAdded)
+   void addSpacePowerup(int amountToBeAdded)
    {
       currentPlayer.addSpacePowerup(amountToBeAdded);
+      //playerDao.saveRemainingPowerupAmount(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
+   }
+
+   void  toggleControlPreference()
+   {
+      currentPlayer.getSettings().toggleControlPreference();
+      //playerDao.saveSettings(currentPlayer);
+      playerDao.savePlayer(currentPlayer);
    }
 }

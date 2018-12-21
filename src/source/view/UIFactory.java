@@ -15,6 +15,7 @@ class UIFactory {
     private static Dimension miniStarDimension = new Dimension(26, 26);
     private static Dimension movesCarDimension = new Dimension(121, 41);
     private static Dimension starAmountDimension = new Dimension(101, 37);
+    private static Dimension timerIconDimension = new Dimension(60, 60);
 
 
     static LevelButton createLevelButton(ActionListener actionListener) {
@@ -47,6 +48,12 @@ class UIFactory {
         return _label;
     }
 
+    static JLabel createLabelIcon(BufferedImage image, Dimension labelDimension) {
+        JLabel _label = new JLabel();
+        setupLabelIcon(_label, image, labelDimension);
+        return _label;
+    }
+
     private static void setupButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage, String buttonType,
                                     ActionListener actionListener) {
         button.addActionListener(actionListener);
@@ -64,6 +71,8 @@ class UIFactory {
             button.setPreferredSize(playerButtonDimension);
         } else if (buttonType.equals("miniStar")) {
             button.setPreferredSize(miniStarDimension);
+        } else if (buttonType.equals("timer")) {
+            button.setPreferredSize(timerIconDimension);
         } else {
             System.out.println("Error: Enter valid String for button dimension");
         }
@@ -96,10 +105,19 @@ class UIFactory {
             label.setPreferredSize(movesCarDimension);
         } else if (labelType.equals("starAmount")) {
             label.setPreferredSize(starAmountDimension);
+        } else if (labelType.equals("timer")) {
+            label.setPreferredSize(timerIconDimension);
         } else {
             System.out.println("Error: Enter valid String For Label");
         }
 
+        label.setIcon(new ImageIcon(image));
+        label.setOpaque(false);
+        label.setFocusable(false);
+    }
+
+    private static void setupLabelIcon(JLabel label, BufferedImage image, Dimension labelDimension) {
+        label.setPreferredSize(labelDimension);
         label.setIcon(new ImageIcon(image));
         label.setOpaque(false);
         label.setFocusable(false);

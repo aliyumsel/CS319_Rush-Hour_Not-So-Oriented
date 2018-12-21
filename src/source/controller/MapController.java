@@ -1,9 +1,9 @@
 package source.controller;
 
-import java.util.ArrayList;
-
 import interfaces.MapDao;
 import source.model.*;
+
+import java.util.ArrayList;
 
 public class MapController extends Controller
 {
@@ -22,11 +22,6 @@ public class MapController extends Controller
    {
       Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
       map = mapDao.extractMap(level, currentPlayer, false);
-
-      if ( map != null )
-      {
-         System.out.println("Map Loaded");
-      }
    }
 
    void loadOriginalLevel(int level)
@@ -109,6 +104,40 @@ public class MapController extends Controller
       map.getGameObjects().add(gameObject);
    }
 
+   void highlightObstacles()
+   {
+      for ( GameObject gameObject : map.getGameObjects() )
+      {
+         if ( gameObject instanceof Vehicle )
+         {
+            gameObject.showBlackForeground();
+         }
+      }
+   }
+
+   void highlightLongs()
+   {
+      for ( GameObject gameObject : map.getGameObjects() )
+      {
+         if ( gameObject instanceof Car )
+         {
+            gameObject.showBlackForeground();
+         }
+         else if ( gameObject instanceof Obstacle )
+         {
+            gameObject.showBlackForeground();
+         }
+      }
+   }
+
+   void clearHighlights()
+   {
+      for ( GameObject gameObject : map.getGameObjects() )
+      {
+         gameObject.hideBlackForeground();
+      }
+   }
+
    // This method checks if the player is at the last cell he can go
    // One more move will make him get out of the grid and finish the game
    // Map should hold a reference to the player car so we don't have to check every game object every move.
@@ -120,59 +149,70 @@ public class MapController extends Controller
       {
          return false;
       }
-      return player.transform.position.x + player.transform.length == map.getMapSize();
+      return player.transform.position.gridX + player.transform.length == map.getMapSize();
    }
 
    // String builder kullansak daha guzel olcak
    String mapToString()
    {
-      String mapStr = "";
-      boolean found;
-      int mapStrSize = map.getMapSize();
-      for ( int i = 0; i < mapStrSize; i++ )
-      {
-         for ( int j = 0; j < mapStrSize; j++ )
-         {
-            found = false;
-            for ( GameObject gameObject : map.getGameObjects() )
-            {
-               if ( gameObject.transform.getPosition().y == i && gameObject.transform.getPosition().x == j )
-               {
-                  if ( gameObject instanceof Vehicle )
-                  {
-                     if ( ( (Vehicle) gameObject ).isPlayer() )
-                     {
-                        mapStr = mapStr + "PC ";
-                     }
-                     else
-                     {
-                        mapStr = mapStr + gameObject.getType().substring(0, 1).toUpperCase() + gameObject.transform.getDirection().substring(0, 1).toUpperCase() + " ";
-                     }
-                     found = true;
-                     break;
-                  }
+      String[][] mapStr = new String[map.getMapSize()][map.getMapSize()];
+      StringBuilder mapString = new StringBuilder();
 
-                  if ( gameObject instanceof Obstacle )
+      ArrayList<GameObject> gameObjects = map.getGameObjects();
+      for ( GameObject gameObject : gameObjects )
+      {
+         if ( gameObject instanceof Vehicle )
+         {
+            int[] cells = gameObject.getOccupiedCells();
+            for ( int i = 0; i < cells.length; i++ )
+            {
+               int x = cells[i] / mapStr.length;
+               int y = cells[i] % mapStr.length;
+               if ( i == 0 )
+               {
+                  if ( ( (Vehicle) gameObject ).isPlayer() )
                   {
-                     mapStr = mapStr + "OO ";
-                     found = true;
-                     break;
+                     mapStr[x][y] = "PC";
+                  }
+                  else
+                  {
+                     mapStr[x][y] = gameObject.getType().substring(0, 1).toUpperCase() + gameObject.transform.getDirection().substring(0, 1).toUpperCase();
                   }
                }
-            }
-            if ( !found )
-            {
-               mapStr = mapStr + "SS ";
+               else
+               {
+                  mapStr[x][y] = "XX";
+               }
             }
          }
-         mapStr = mapStr.substring(0, mapStr.length() - 1);
-         mapStr = mapStr + "\n";
+         else if ( gameObject instanceof Obstacle )
+         {
+            int cell = gameObject.getOccupiedCells()[0];
+            int x = cell / mapStr.length;
+            int y = cell % mapStr.length;
+            mapStr[x][y] = "OO";
+         }
       }
-      //System.out.println(mapStr);
-      return mapStr;
+
+      for ( int i = 0; i < mapStr.length; i++ )
+      {
+         for ( int j = 0; j < mapStr.length; j++ )
+         {
+            if (mapStr[i][j] == null)
+            {
+               mapStr[i][j] = "SS";
+            }
+            mapString.append(mapStr[i][j]).append(" ");
+         }
+         mapString.append("| ");
+      }
+
+//      System.out.println("MAP TO STRING: " + mapString.substring(0, mapString.length() - 2));
+      return mapString.substring(0, mapString.length() - 2);
    }
 
-   public Vehicle getPlayerVehicle(){
+   Vehicle getPlayerVehicle()
+   {
       Vehicle player = null;
       Vehicle temp;
 

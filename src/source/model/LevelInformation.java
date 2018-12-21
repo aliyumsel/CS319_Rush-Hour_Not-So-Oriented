@@ -10,8 +10,9 @@ public class LevelInformation
    private int currentNumberOfMoves;
    private boolean unlocked;
    private String map;
+   private int time;
 
-   public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked, String map)
+   public LevelInformation(int stars, String status, int levelNo, int maxNumberOfMovesForThreeStars, int maxNumberOfMovesForTwoStars, int currentNumberOfMoves, boolean unlocked, String map, int time)
    {
       this.levelNo = levelNo;
       this.maxNumberOfMovesForThreeStars = maxNumberOfMovesForThreeStars;
@@ -21,7 +22,12 @@ public class LevelInformation
       this.status = status;
       this.unlocked = unlocked;
       this.map = map;
+      this.time = time;
    }
+
+//   public int getLevelNo() {
+//      return levelNo;
+//   }
 
    public int getStars()
    {
@@ -83,27 +89,35 @@ public class LevelInformation
       this.map = map;
    }
 
-   public String levelToString()
-   {
-      return "\t\t<Level>\n" +
-              "\t\t\t<LevelNo>\n" +
-              "\t\t\t\t" + levelNo + "\n" +
-              "\t\t\t<LevelNo/>\n" +
-              "\t\t\t<Stars>\n" +
-              "\t\t\t\t" + stars + "\n" +
-              "\t\t\t<Stars/>\n" +
-              "\t\t\t<CurrentNumberOfMoves>\n" +
-              "\t\t\t\t" + currentNumberOfMoves + "\n" +
-              "\t\t\t<CurrentNumberOfMoves>\n" +
-              "\t\t\t<Status>\n" +
-              "\t\t\t\t" + status + "\n" +
-              "\t\t\t<Status/>\n" +
-              "\t\t\t<Unlocked>\n" +
-              "\t\t\t\t" + unlocked + "\n" +
-              "\t\t\t<Unlocked/>\n" +
-              "\t\t\t<Map>\n" +
-              map +
-              "\t\t\t<Map/>\n" +
-              "\t\t<Level/>\n";
+   public int getTime() {
+      return time;
    }
+
+   public void setTime(int time) {
+      this.time = time;
+   }
+
+//   public String levelToString()
+//   {
+//      return "\t<Level>\n" +
+//              "\t\t<LevelNo>\n" +
+//              "\t\t\t" + levelNo + "\n" +
+//              "\t\t<LevelNo/>\n" +
+//              "\t\t<Stars>\n" +
+//              "\t\t\t" + stars + "\n" +
+//              "\t\t<Stars/>\n" +
+//              "\t\t<CurrentNumberOfMoves>\n" +
+//              "\t\t\t" + currentNumberOfMoves + "\n" +
+//              "\t\t<CurrentNumberOfMoves>\n" +
+//              "\t\t<Status>\n" +
+//              "\t\t\t" + status + "\n" +
+//              "\t\t<Status/>\n" +
+//              "\t\t<Unlocked>\n" +
+//              "\t\t\t" + unlocked + "\n" +
+//              "\t\t<Unlocked/>\n" +
+//              "\t\t<Map>\n" +
+//              map +
+//              "\t\t<Map/>\n" +
+//              "\t<Level/>\n";
+//   }
 }

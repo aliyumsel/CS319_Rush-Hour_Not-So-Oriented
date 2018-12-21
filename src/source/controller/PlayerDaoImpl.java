@@ -1,485 +1,108 @@
+
 package source.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-
+import com.google.gson.Gson;
 import interfaces.PlayerDao;
-import source.model.BonusLevelInformation;
-import source.model.LevelInformation;
-import source.model.Player;
-import source.model.Settings;
+import source.model.*;
 
-@SuppressWarnings("StatementWithEmptyBody")
-class PlayerDaoImpl implements PlayerDao {
+import java.io.*;
+import java.util.ArrayList;
+
+@SuppressWarnings("Duplicates")
+public class PlayerDaoImpl implements PlayerDao{
+
+    private Gson gson = new Gson();
 
     @Override
-    public ArrayList<Player> extractPlayers() {
+    public ArrayList<Player> extractPlayers()
+    {
         ArrayList<Player> players = new ArrayList<>();
-
-        Scanner playerInfo = null, levelInfo = null;
-        String playerName, tmp, status, mapLine, map = "", activeTheme;
-        int starAmount, levelNo, currentStars, currentNumberOfMoves, movesForThreeStars, movesForTwoStars, remainingShrinkPowerup, remainingSpacePowerup, time;
-        ArrayList<LevelInformation> levels;
-        Settings settings;
-        boolean music, sfx, unlocked, bonus;
-        HashMap<String, Boolean> themes = new HashMap<String, Boolean>();
-
-        //initiates the players
-        File folder = new File("src/data/players");
+        File folder = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players");
         File[] list = folder.listFiles();
 
-        if (list.length == 0) {
-            System.out.println("no players");
-            return null;
-            //createPlayer("default");
+        for (int i = 0; i < list.length; i++)
+        {
+            players.add(gson.fromJson(createReader(list[i].getPath() + "/playerInfo.json"), Player.class));
         }
-        //numberOfPlayers = list.length;
-
-        for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i].getPath());
-        }
-
-        for (int i = 0; i < list.length; i++) {
-            levels = new ArrayList<>();
-            try {
-                playerInfo = new Scanner(new File(list[i].getPath() + "/playerInfo.txt"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            while (!playerInfo.nextLine().trim().equals("<Name>")) ;
-            playerName = playerInfo.nextLine().trim();
-
-            while (!playerInfo.nextLine().trim().equals("<StarAmount>")) ;
-            tmp = playerInfo.nextLine().trim();
-            starAmount = Integer.parseInt(tmp);
-
-            while (!playerInfo.nextLine().trim().equals("<Levels>")) ;
-
-            while (!playerInfo.nextLine().trim().equals("<Levels/>")) {
-                bonus = false;
-                time = 0;
-
-                while (!playerInfo.nextLine().trim().equals("<LevelNo>")) ;
-                tmp = playerInfo.nextLine().trim();
-                levelNo = Integer.parseInt(tmp);
-
-                while (!playerInfo.nextLine().trim().equals("<Stars>")) ;
-                tmp = playerInfo.nextLine().trim();
-                currentStars = Integer.parseInt(tmp);
-
-                while (!playerInfo.nextLine().trim().equals("<CurrentNumberOfMoves>")) ;
-                tmp = playerInfo.nextLine().trim();
-                currentNumberOfMoves = Integer.parseInt(tmp);
-
-                while (!playerInfo.nextLine().trim().equals("<Status>")) ;
-                status = playerInfo.nextLine().trim();
-
-                while (!playerInfo.nextLine().trim().equals("<Unlocked>")) ;
-                tmp = playerInfo.nextLine().trim();
-
-                unlocked = !tmp.equals("false");
-
-                while (!playerInfo.nextLine().trim().equals("<Map>")) ;
-                mapLine = playerInfo.nextLine().trim();
-                if (!mapLine.equals("<Map/>")) {
-                    map = map + mapLine;
-                    mapLine = playerInfo.nextLine().trim();
-                    while (!mapLine.equals("<Map/>")) {
-                        map = map + mapLine;
-                        mapLine = playerInfo.nextLine().trim();
-                    }
-                }
-
-                try {
-                    levelInfo = new Scanner(new File("src/data/levels/level" + levelNo + ".txt"));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                if (levelInfo.nextLine().trim().equals("<IsBonusMap>"))
-                {
-                    time = Integer.parseInt(levelInfo.nextLine().trim());
-                    bonus = true;
-                }
-                if (bonus) {
-                    while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
-                    tmp = levelInfo.nextLine().trim();
-                    movesForThreeStars = Integer.parseInt(tmp);
-                }
-                else
-                {
-                    tmp = levelInfo.nextLine().trim();
-                    movesForThreeStars = Integer.parseInt(tmp);
-                }
-
-                while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>")) ;
-                tmp = levelInfo.nextLine().trim();
-                movesForTwoStars = Integer.parseInt(tmp);
-
-                levelInfo.close();
-
-                if (bonus)
-                {
-                    levels.add(new BonusLevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked, map, time));
-                }
-                else {
-                    levels.add(new LevelInformation(currentStars, status, levelNo, movesForThreeStars, movesForTwoStars, currentNumberOfMoves, unlocked, map));
-                }
-
-                while (!playerInfo.nextLine().trim().equals("<Level/>")) ;
-            }
-
-            while (!playerInfo.nextLine().trim().equals("<Music>")) ;
-            tmp = playerInfo.nextLine().trim();
-
-            music = !tmp.equals("false");
-
-            while (!playerInfo.nextLine().trim().equals("<Sfx>")) ;
-            tmp = playerInfo.nextLine().trim();
-
-            sfx = !tmp.equals("false");
-
-            while (!playerInfo.nextLine().trim().equals("<Theme>")) ;
-            while (!playerInfo.nextLine().trim().equals("<Active>")) ;
-            activeTheme = playerInfo.nextLine().trim();
-
-            while (!playerInfo.nextLine().trim().equals("<MinimalisticUnlocked>")) ;
-            themes.put("minimalistic", playerInfo.nextLine().trim().equals("true"));
-
-            while (!playerInfo.nextLine().trim().equals("<ClassicUnlocked>")) ;
-            themes.put("classic", playerInfo.nextLine().trim().equals("true"));
-
-            while (!playerInfo.nextLine().trim().equals("<SafariUnlocked>")) ;
-            themes.put("safari", playerInfo.nextLine().trim().equals("true"));
-
-            while (!playerInfo.nextLine().trim().equals("<SpaceUnlocked>")) ;
-            themes.put("space", playerInfo.nextLine().trim().equals("true"));
-
-            settings = new Settings(music, sfx, themes, activeTheme);
-
-            while (!playerInfo.nextLine().trim().equals("<RemainingShrinkPowerups>")) ;
-            remainingShrinkPowerup = Integer.parseInt(playerInfo.nextLine().trim());
-
-            while (!playerInfo.nextLine().trim().equals("<RemainingSpacePowerups>")) ;
-            remainingSpacePowerup = Integer.parseInt(playerInfo.nextLine().trim());
-
-            Player player = new Player(playerName, starAmount, levels, "src/data/players/" + playerName, settings, remainingShrinkPowerup, remainingSpacePowerup);
-            player.configureLastUnlockedLevelNo();
-
-            players.add(player);
-            playerInfo.close();
-        }
-
         return players;
     }
-
     @Override
-    public String extractLastPlayerName() {
-        Scanner info = null;
-
-        try {
-            info = new Scanner(new File("src/data/info.txt"));
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        }
-
-        while (!info.nextLine().trim().equals("<LastActivePlayer>")) ;
-        return info.nextLine().trim();
+    public String extractLastPlayerName()
+    {
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
+        return info.lastActivePlayer;
     }
 
     @Override
-    public Player cratePlayer(String playerName, Settings settings) {
-        Scanner scanInfo = null, levelInfo = null;
-        int playerAmount, mapAmount, movesForThreeStars, movesForTwoStars;
-        String tmp, playerPath, playerInfo;
-        ArrayList<LevelInformation> levels = new ArrayList<LevelInformation>();
-
-        try {
-            scanInfo = new Scanner(new File("src/data/info.txt"));
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-			/*
-			while(!scanInfo.nextLine().equals("<NumberOfPlayers>"));
-			tmp = scanInfo.nextLine().trim();
-			playerAmount = Integer.parseInt(tmp);
-			*/
-
-        while (!scanInfo.nextLine().equals("<NumberOfMaps>")) ;
-        tmp = scanInfo.nextLine().trim();
-        mapAmount = Integer.parseInt(tmp);
-
-        playerPath = "src/data/players/" + playerName;
+    public Player createPlayer(String playerName, Settings settings) {
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
+        OriginalLevel originalLevel;
+        String playerPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players\\" + playerName;
 
         //creates player folder
         File newFolder = new File(playerPath);
         newFolder.mkdirs();
+        newFolder.setWritable(true);
 
-        File newFile = new File(playerPath + "/playerInfo.txt");
-        try {
-            newFile.createNewFile();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        createFile(playerPath + "/playerInfo.json");
+
+
+        boolean unlocked;
+        ArrayList<LevelInformation> levels = new ArrayList<>();
+
+        for (int i = 1; i <= info.numberOfMaps; i++)
+        {
+            InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + i + ".json");
+            InputStreamReader reader = new InputStreamReader(input);
+            originalLevel = gson.fromJson(reader, OriginalLevel.class);
+            levels.add(new LevelInformation(0, "notStarted", i, originalLevel.expectedMovesForThreeStars, originalLevel.expectedMovesForTwoStars, 0, i == 1, "", originalLevel.time));
         }
-
-        //fills the playerInfo file and LevelInformation
-        playerInfo = "<Player>\n" +
-                "\t<Name>\n" +
-                "\t\t" + playerName + "\n" +
-                "\t<Name/>\n" +
-                "\t<StarAmount>\n" +
-                "\t\t0\n" +
-                "\t<StarAmount/>\n" +
-                "\t<Levels>\n";
-
-        for (int i = 1; i <= mapAmount; i++) {
-            try {
-                levelInfo = new Scanner(new File("src/data/levels/level" + i + ".txt"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
-            tmp = levelInfo.nextLine().trim();
-            movesForThreeStars = Integer.parseInt(tmp);
-
-            while (!levelInfo.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>")) ;
-            tmp = levelInfo.nextLine().trim();
-            movesForTwoStars = Integer.parseInt(tmp);
-
-            levelInfo.close();
-            LevelInformation level;
-            if (i == 1) {
-                level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, true, "");
-                playerInfo = playerInfo + level.levelToString();
-
-            } else {
-                level = new LevelInformation(0, "notStarted", i, movesForThreeStars, movesForTwoStars, 0, false, "");
-                playerInfo = playerInfo + level.levelToString();
-
-            }
-            levels.add(level);
-        }
-        playerInfo = playerInfo +
-                "\t<Levels/>\n" +
-                "\t<Settings>\n" +
-                settings.settingsToString() +
-                "\t<Settings/>\n" +
-                "\t<RemainingShrinkPowerups>\n" +
-                "\t\t3\n" +
-                "\t<RemainingShrinkPowerups/>\n" +
-                "\t<RemainingSpacePowerups>\n" +
-                "\t\t3\n" +
-                "\t<RemainingSpacePowerups/>\n" +
-                "<Player/>\n";
-
-        writeFile(playerPath + "/playerInfo.txt", playerInfo);
-
-        scanInfo.close();
-
         Player newPlayer = new Player(playerName, 0, levels, playerPath, settings, 3, 3);
         newPlayer.resetLastUnlockedLevelNo();
-
+        String text = gson.toJson(newPlayer);
+        writeFile(playerPath + "/playerInfo.json", text);
         return newPlayer;
     }
 
     @Override
-    public boolean deletePlayer(Player player) {
-        File file = new File(player.getPath() + "/playerInfo.txt");
-        File folder = new File(player.getPath());
+    public boolean deletePlayer(Player player){
+        File file = new File(player.getPath() + "/playerInfo.json");
         file.delete();
+
+        File folder = new File(player.getPath());
         if (folder.delete()) {
             return true;
         }
         return false;
-
     }
 
     @Override
-    public void saveLastActivePlayer(String playerName) {
-        String text, line;
-        Scanner scanInfo = null;
-
-        try {
-            scanInfo = new Scanner(new File("src/data/info.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        line = scanInfo.nextLine();
-        text = line + "\n";
-        while (!line.trim().equals("<LastActivePlayer>")) {
-            line = scanInfo.nextLine();
-            text = text + line + "\n";
-        }
-
-        text = text + "\t" + playerName + "\n";
-
-        scanInfo.nextLine();
-        while (scanInfo.hasNext()) {
-            line = scanInfo.nextLine();
-            text = text + line + "\n";
-        }
-
-        FileWriter fileOut = null;
-        try {
-            fileOut = new FileWriter("src/data/info.txt");
-            fileOut.write(text);
-            fileOut.flush();
-            fileOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void saveLastActivePlayer(String playerName)
+    {
+        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
+        info.lastActivePlayer = playerName;
+        String text = gson.toJson(info);
+        writeFile("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json", text);
     }
 
     @Override
-    public void saveLevel(int levelNo, Player player) {
-        Scanner scan = null;
-        int totalStars = player.getStarAmount();
-        LevelInformation levelToBeSaved = player.getLevels().get(levelNo - 1);
-        String status = levelToBeSaved.getStatus();
-        try {
-            scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
-        } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        String line, text;
-        int no;
-
-        String levelStr = levelToBeSaved.levelToString();
-        int levelCounter = 0;
-        boolean checkLevel = true;
-
-        line = scan.nextLine();
-        text = line + "\n";
-
-        if (status.equals("finished")) {
-            while (!line.trim().equals("<StarAmount>")) {
-                line = scan.nextLine();
-                text = text + line + "\n";
-            }
-            text = text + "\t\t" + totalStars + "\n";
-            line = scan.nextLine();
-        }
-        while (!line.trim().equals("<Levels>")) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-        //line = scan.nextLine();
-        //text = text + line + "\n";
-        while (!line.trim().equals("<Levels/>")) {
-            line = scan.nextLine();
-            if (line.trim().equals("<Level>") && checkLevel) {
-                levelCounter++;
-                if (levelCounter == levelNo) {
-                    text = text + levelStr;
-                    checkLevel = false;
-                    while (!scan.nextLine().trim().equals("<Level/>")) ;
-                } else {
-                    text = text + line + "\n";
-                }
-            } else {
-                text = text + line + "\n";
-            }
-        }
-        while (scan.hasNext()) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-
-        writeFile(player.getPath() + "/playerInfo.txt", text);
-
+    public void savePlayer(Player player)
+    {
+        String text = gson.toJson(player);
+        writeFile(player.getPath() + "/playerInfo.json", text);
     }
 
     @Override
-    public void saveSettings(Player player) {
-        Scanner scan = null;
-        String line, text;
-        Settings settings = player.getSettings();
-
-        try {
-            scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
-        } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        line = scan.nextLine();
-        text = line + "\n";
-
-        while (!line.trim().equals("<Settings>")) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-        text = text + settings.settingsToString();
-        while (!line.trim().equals("<Settings/>")) {
-            line = scan.nextLine();
-        }
-        text = text + line + "\n";
-
-        while (scan.hasNext()) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-        writeFile(player.getPath() + "/playerInfo.txt", text);
-    }
-
-    @Override
-    public void saveRemainingPowerupAmount(String powerup, Player player) {
-        Scanner scan = null;
-        try {
-            scan = new Scanner(new File(player.getPath() + "/playerInfo.txt"));
-        } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        String powerupTag;
-        int newAmount;
-        String line, text;
-
-        if (powerup.equals("shrink")) {
-            powerupTag = "<RemainingShrinkPowerups>";
-            newAmount = player.getRemainingShrinkPowerup();
-        } else {
-            powerupTag = "<RemainingSpacePowerups>";
-            newAmount = player.getRemainingSpacePowerup();
-        }
-
-        line = scan.nextLine();
-        text = line + "\n";
-
-        while (!line.trim().equals(powerupTag)) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-
-        scan.nextLine();
-        text = text + "\t\t" + newAmount + "\n";
-
-        while (scan.hasNext()) {
-            line = scan.nextLine();
-            text = text + line + "\n";
-        }
-        writeFile(player.getPath() + "/playerInfo.txt", text);
-
+    public void changePlayerName(Player player){
+        File folder = new File(player.getPath());
+        folder.renameTo(new File(folder.getParent() + "/" + player.getPlayerName()));
+        player.setPath("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players\\"+  player.getPlayerName());
+        savePlayer(player);
     }
 
     private void writeFile(String path, String text) {
-        File file = new File(path);
-        file.setWritable(true);
+
+        //text = decrypt(text);
         FileWriter fileOut = null;
         try {
             fileOut = new FileWriter(path);
@@ -487,10 +110,96 @@ class PlayerDaoImpl implements PlayerDao {
             fileOut.flush();
             fileOut.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //file.setReadOnly();
     }
+
+    private FileReader createReader(String path)
+    {
+        try {
+            return new FileReader(path);
+
+        } catch (FileNotFoundException e) {
+            return null;
+        }
+    }
+
+    private void createFile(String path)
+    {
+        File newFile = new File(path);
+        try {
+            newFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static class Info {
+        private  String lastActivePlayer;
+        private  int numberOfMaps;
+    }
+
+    // May be needed to fix file issues
+    /*
+    private void convertLevelsFromTxtToJson()
+    {
+        OriginalLevel level = new OriginalLevel();
+        Scanner scan = null;
+        boolean bonus;
+        int time, movesForThreeStars, movesForTwoStars;
+        String tmp, map, line;
+        for (int i = 1; i <= 50; i++)
+        {
+            bonus = false;
+            time = -1;
+            movesForThreeStars = 0;
+            movesForTwoStars = 0;
+            map = "";
+            try {
+                scan = new Scanner (new File("src/data/levels/level" + i + ".txt"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (scan.nextLine().trim().equals("<IsBonusMap>"))
+            {
+                time = Integer.parseInt(scan.nextLine().trim());
+                bonus = true;
+            }
+            if (bonus) {
+                while (!scan.nextLine().trim().equals("<ExpectedNumberOfMovesForThreeStars>")) ;
+                tmp = scan.nextLine().trim();
+                movesForThreeStars = Integer.parseInt(tmp);
+            }
+            else
+            {
+                tmp = scan.nextLine().trim();
+                movesForThreeStars = Integer.parseInt(tmp);
+            }
+
+            while (!scan.nextLine().trim().equals("<ExpectedNumberOfMovesForTwoStars>")) ;
+            tmp = scan.nextLine().trim();
+            movesForTwoStars = Integer.parseInt(tmp);
+
+            while (!scan.nextLine().trim().equals("<Map>")) ;
+            line = scan.nextLine().trim();
+            while (!line.equals("<Map/>"))
+            {
+                map = map + line + " | ";
+                line = scan.nextLine().trim();
+            }
+            map = map.substring(0, map.length() - 3);
+
+            level.time = time;
+            level.expectedMovesForThreeStars = movesForThreeStars;
+            level.expectedMovesForTwoStars = movesForTwoStars;
+            level.map = map;
+
+            createFile("src/data/levels/level" + i +".json");
+            String text = gson.toJson(level);
+            writeFile("src/data/levels/level" + i +".json", text);
+
+        }
+    }
+    */
 
 }
