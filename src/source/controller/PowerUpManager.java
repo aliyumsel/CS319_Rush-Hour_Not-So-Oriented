@@ -54,6 +54,7 @@ public class PowerUpManager extends Controller
                   MapController.instance.addGameObject(newVehicle);
 
                   MapController.instance.updateMap();
+                  GameManager.instance.autoSave();
                   deactivateShrink();
                   //this decrement method will be put inside the game manager
                   GameEngine.instance.playerManager.decrementRemainingShrinkPowerup();
@@ -92,6 +93,7 @@ public class PowerUpManager extends Controller
          System.out.println("Removed game object");
          MapController.instance.removeGameObject(obstacleToRemove);
          MapController.instance.updateMap();
+         GameManager.instance.autoSave();
          obstacleToRemove = null;
       }
 
