@@ -81,8 +81,8 @@ public class GuiPanelManager extends JFrame
       setLocationRelativeTo(null);
 
       //gamepanel managerdan çekilen bilgiye göre ya tutorial ya da main menu açılacak
-      setPanelVisible("Tutorial");
-      //setPanelVisible("MainMenu");
+      //setPanelVisible("Tutorial");
+      setPanelVisible("MainMenu");
 
       setVisible(true);
       pack();

@@ -19,10 +19,12 @@ public class SettingsPanel extends JPanel {
 
     private ArrayList<JLabel> starAmount = new ArrayList<>();
 
+    private JLabel selectedLabel;
+
     private BufferedImage starActive;
     private JButton music;
     private JButton sfx;
-//    private JButton mouse;
+    //    private JButton mouse;
 //    private JButton keyboard;
     private JButton controlPreference;
 
@@ -57,7 +59,8 @@ public class SettingsPanel extends JPanel {
     private BufferedImage spaceHighlightedImage;
     private BufferedImage classicD;
     private BufferedImage safariD;
-//    private BufferedImage simpleD;
+    private BufferedImage selectedImage;
+    //    private BufferedImage simpleD;
     private BufferedImage spaceD;
     private String previousPanel = "";
     private int panelWidth;
@@ -114,6 +117,7 @@ public class SettingsPanel extends JPanel {
         classicD = guiManager.LoadImage("image/icons/classicD.png");
         safariD = guiManager.LoadImage("image/icons/safariD.png");
         spaceD = guiManager.LoadImage("image/icons/spaceD.png");
+        selectedImage = guiManager.LoadImage("image/icons/checkmark.png");
     }
 
     @SuppressWarnings("Duplicates")
@@ -135,12 +139,12 @@ public class SettingsPanel extends JPanel {
         classic.setDisabledIcon(new ImageIcon(classicD));
         safari.setDisabledIcon(new ImageIcon(safariD));
         space.setDisabledIcon(new ImageIcon(spaceD));
-
+        selectedLabel = UIFactory.createLabelIcon(selectedImage, new Dimension(26, 26));
         for (int i = 0; i < 3; i++) {
             JLabel temp = UIFactory.createLabelIcon(starActive, "miniStar");
             starActiveLabel.add(temp);
             starAmount.add(new JLabel());
-            starAmount.get(i).setText(ThemeManager.instance.findRequiredStars()+"");
+            starAmount.get(i).setText(ThemeManager.instance.findRequiredStars() + "");
             starAmount.get(i).setPreferredSize(new Dimension(26, 26));
             starAmount.get(i).setFont(new Font("Odin Rounded", Font.PLAIN, 20));
             starAmount.get(i).setForeground(Color.white);
@@ -176,15 +180,14 @@ public class SettingsPanel extends JPanel {
         add(heading);
         add(volume);
         add(theme);
-        for (int i = 0;i <3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             add(starActiveLabel.get(i));
             add(starAmount.get(i));
         }
         //add(starActiveLabel);
         add(control);
         add(controlPreference);
-
+        add(selectedLabel);
         add(minimalistic);
         add(classic);
         add(safari);
@@ -213,11 +216,11 @@ public class SettingsPanel extends JPanel {
         control.setBounds(550, 125, control.getPreferredSize().width, control.getPreferredSize().height);
 
         controlPreference.setBounds(605, 175, controlPreference.getPreferredSize().width, controlPreference.getPreferredSize().height);
+        selectedLabel.setBounds(75, 370, selectedLabel.getPreferredSize().width, selectedLabel.getPreferredSize().height);
         int gap = 200;
-        for (int i = 0 ; i < 3;i++)
-        {
+        for (int i = 0; i < 3; i++) {
             starActiveLabel.get(i).setBounds(gap, 400, classic.getPreferredSize().width, classic.getPreferredSize().height);
-            starAmount.get(i).setBounds(gap-25, 400, classic.getPreferredSize().width, classic.getPreferredSize().height);
+            starAmount.get(i).setBounds(gap - 25, 400, classic.getPreferredSize().width, classic.getPreferredSize().height);
             gap += 100;
         }
 
@@ -232,23 +235,33 @@ public class SettingsPanel extends JPanel {
         updateThemeLabels();
     }
 
-    private void updateThemeLabels(){
+    private void updateThemeLabels() {
 
         for (int i = 0; i < 3; i++) {
-            if(PlayerManager.instance.getCurrentPlayer().getSettings().getThemes().get(ThemeManager.instance.getThemes()[i+1])){
+            if (PlayerManager.instance.getCurrentPlayer().getSettings().getThemes().get(ThemeManager.instance.getThemes()[i + 1])) {
                 System.out.println(ThemeManager.instance.findRequiredStars());
                 starAmount.get(i).setVisible(false);
                 starActiveLabel.get(i).setVisible(false);
-            }
-            else
-            {
-                starAmount.get(i).setText(ThemeManager.instance.findRequiredStars()+"");
+            } else {
+                starAmount.get(i).setText(ThemeManager.instance.findRequiredStars() + "");
                 starAmount.get(i).setVisible(true);
                 starActiveLabel.get(i).setVisible(true);
             }
 
         }
+
+        if (ThemeManager.instance.currentTheme.name.equals("minimalistic")) {
+            selectedLabel.setBounds(72, 370, minimalistic.getPreferredSize().width, minimalistic.getPreferredSize().height);
+        } else if (ThemeManager.instance.currentTheme.name.equals("classic")) {
+            selectedLabel.setBounds(172, 370, classic.getPreferredSize().width, classic.getPreferredSize().height);
+        } else if (ThemeManager.instance.currentTheme.name.equals("safari")) {
+
+            selectedLabel.setBounds(272, 370, safari.getPreferredSize().width, safari.getPreferredSize().height);
+        } else if (ThemeManager.instance.currentTheme.name.equals("space")) {
+            selectedLabel.setBounds(372, 370, space.getPreferredSize().width, space.getPreferredSize().height);
+        }
     }
+
     @SuppressWarnings("Duplicates")
     private void updateSoundButtons(String type) {
         boolean enabled;

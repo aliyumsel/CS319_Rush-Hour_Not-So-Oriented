@@ -66,7 +66,7 @@ public class TutorialPanel extends JPanel {
             activeBackground = backgrounds.get(3);
         } else if (index == 4) {
             activeBackground = backgrounds.get(4);
-        }else if (index == 5) {
+        } else if (index == 5) {
             activeBackground = backgrounds.get(5);
         }
         activeBackground.setVisible(true);
@@ -96,12 +96,6 @@ public class TutorialPanel extends JPanel {
 //        File folder = new File("src/image/tutorial_Labels");
 //        File[] listOfFiles = folder.listFiles();
         for (int i = 1; i <= 6; i++) { // change size !!!!
-
-//            String extension = "";
-//            if (listOfFiles[i - 1].isFile()) {
-//                extension = listOfFiles[i - 1].getName().substring(listOfFiles[i - 1].getName().indexOf("."));
-//            }
-
             if (LoadMediaToLabel("/image/tutorial_Labels/help" + i + ".png") != null) {
                 tutorials.add(LoadMediaToLabel("/image/tutorial_Labels/help" + i + ".png"));
                 add(tutorials.get(i - 1));
@@ -114,21 +108,15 @@ public class TutorialPanel extends JPanel {
 
 
         }
-//        folder = new File("src/image/tutorial_Backgrounds");
-//        listOfFiles = folder.listFiles();
 
         for (int i = 1; i <= 6; i++) {
-//            String extension = "";
-//            if (listOfFiles[i - 1].isFile()) {
-//                extension = listOfFiles[i - 1].getName().substring(listOfFiles[i - 1].getName().indexOf("."));
-//            }
 
             if (LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".gif") != null) {
                 backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".gif"));
                 add(backgrounds.get(i - 1));
                 backgrounds.get(i - 1).setVisible(false);
                 System.out.println(backgrounds.size());
-            } else  {
+            } else {
                 backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".png"));
                 add(backgrounds.get(i - 1));
                 backgrounds.get(i - 1).setVisible(false);
@@ -139,17 +127,9 @@ public class TutorialPanel extends JPanel {
     }
 
     private JLabel LoadMediaToLabel(String fileName) {
-
         URL url = this.getClass().getResource(fileName);
-        System.out.println(url);
         ImageIcon icon = new ImageIcon(url);
-        JLabel label = new JLabel();
-        label.setIcon(icon);
-        if (url == null)
-        {
-            return null;
-        }
-        //icon.setImageObserver(label);
+        JLabel label = new JLabel(icon);
         return label;
     }
 
