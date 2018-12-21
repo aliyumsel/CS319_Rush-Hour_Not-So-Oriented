@@ -26,11 +26,12 @@ public class Theme {
     private String endOfLevelSound;
     private String path;
     private boolean unlocked;
-
+    public String name;
    public Theme(String theme) {
       shortVehicleImageArray = new ArrayList<>();
       longVehicleImageArray = new ArrayList<>();
       path = "image/theme_" + theme + "/";
+      name = theme;
       initializeAttributes();
    }
 
