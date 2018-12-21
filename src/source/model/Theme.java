@@ -42,7 +42,7 @@ public class Theme {
 
    private void setSounds() {
       buttonClick = path + "buttonClick.wav";
-      themeSong = path + "theme.wav";
+      themeSong = "/" +path + "theme.wav";
       selectionSound = path + "selectionSound.wav";
       endOfLevelSound = path + "success.wav";
    }
