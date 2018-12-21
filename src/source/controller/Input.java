@@ -1,5 +1,6 @@
 package source.controller;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
@@ -49,9 +50,25 @@ public class Input
       return new MouseEventHandler();
    }
 
-   public static KeyListener getKeyListener()
+//   public static KeyListener getKeyListener()
+//   {
+//      return new KeyEventHandler();
+//   }
+
+   public static void setKeyBindings(JComponent component)
    {
-      return new KeyEventHandler();
+      int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("W"), "w");
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("A"), "a");
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("S"), "s");
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("D"), "d");
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("N"), "n");
+
+      component.getActionMap().put("w", new KeyAction("w"));
+      component.getActionMap().put("a", new KeyAction("a"));
+      component.getActionMap().put("s", new KeyAction("s"));
+      component.getActionMap().put("d", new KeyAction("d"));
+      component.getActionMap().put("n", new KeyAction("n"));
    }
 
    public static void setGamePanel(Component component)
@@ -97,6 +114,25 @@ public class Input
       return mousePos;
    }
 
+   private static class KeyAction extends AbstractAction
+   {
+      String keyChar;
+      KeyAction(String _keyChar)
+      {
+         keyChar = _keyChar;
+      }
+
+      @Override
+      public void actionPerformed(ActionEvent e)
+      {
+         System.out.println("keyPressed: " + keyChar);
+         if ( keys.containsKey(keyChar + "") )
+         {
+            keys.put(keyChar + "", true);
+         }
+      }
+   }
+
    private static class MouseEventHandler extends MouseAdapter
    {
       @Override
@@ -128,16 +164,16 @@ public class Input
       }
    }
 
-   private static class KeyEventHandler extends KeyAdapter
-   {
-      @Override
-      public void keyReleased(KeyEvent e)
-      {
-         System.out.println("keyPressed");
-         if ( keys.containsKey(e.getKeyChar() + "") )
-         {
-            keys.put(e.getKeyChar() + "", true);
-         }
-      }
-   }
+//   private static class KeyEventHandler extends KeyAdapter
+//   {
+//      @Override
+//      public void keyReleased(KeyEvent e)
+//      {
+//         System.out.println("keyPressed");
+//         if ( keys.containsKey(e.getKeyChar() + "") )
+//         {
+//            keys.put(e.getKeyChar() + "", true);
+//         }
+//      }
+//   }
 }
