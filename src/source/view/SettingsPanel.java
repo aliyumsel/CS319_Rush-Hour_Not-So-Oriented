@@ -1,6 +1,7 @@
 package source.view;
 
 import source.controller.*;
+import source.model.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -233,6 +234,7 @@ public class SettingsPanel extends JPanel {
         updateSoundButtons("Music");
         updateThemeButtons();
         updateThemeLabels();
+        updateControlButton();
     }
 
     private void updateThemeLabels() {
@@ -299,6 +301,26 @@ public class SettingsPanel extends JPanel {
             }
         }
 
+    }
+
+    private void updateControlButton() {
+        if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
+            controlPreference.setIcon(new ImageIcon(mouseControlImage));
+            controlPreference.setRolloverIcon(new ImageIcon(mouseControlHighlightedImage));
+        } else {
+            controlPreference.setIcon(new ImageIcon(keyboardControlImage));
+            controlPreference.setRolloverIcon(new ImageIcon(keyboardControlHighlightedImage));
+        }
+    }
+
+    private void toggleControlButton() {
+        if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
+            controlPreference.setIcon(new ImageIcon(keyboardControlImage));
+            controlPreference.setRolloverIcon(new ImageIcon(keyboardControlHighlightedImage));
+        } else {
+            controlPreference.setIcon(new ImageIcon(mouseControlImage));
+            controlPreference.setRolloverIcon(new ImageIcon(mouseControlHighlightedImage));
+        }
     }
 
     //can be used in updateThemeButtons method below
@@ -381,13 +403,7 @@ public class SettingsPanel extends JPanel {
             GameEngine.instance.soundManager.effectsToggle();
         } else if (e.getSource() == controlPreference) {
             //Sırasıyla oynadım hızı değişmedi
-            if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
-                controlPreference.setIcon(new ImageIcon(keyboardControlImage));
-                controlPreference.setRolloverIcon(new ImageIcon(keyboardControlHighlightedImage));
-            } else {
-                controlPreference.setIcon(new ImageIcon(mouseControlImage));
-                controlPreference.setRolloverIcon(new ImageIcon(mouseControlHighlightedImage));
-            }
+            toggleControlButton();
             GameEngine.instance.gameManager.toggleControlType();
         } else {
             // This will call game managers change / unlock theme methods

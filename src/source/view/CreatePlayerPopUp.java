@@ -187,7 +187,7 @@ public class CreatePlayerPopUp extends JPanel
             playerName.setText("Enter Player name...");
             playerName.setForeground(Color.gray);
             setVisible(false);
-            guiManager.setPanelVisible("MainMenu");
+            guiManager.setPanelVisible("Tutorial");
             requestFocus();
          }
          else

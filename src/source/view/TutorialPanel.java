@@ -13,7 +13,7 @@ public class TutorialPanel extends JPanel {
 
     private JButton forwardButton;
     private GuiPanelManager guiManager;
-    private int index; //for activating current tutorial
+    public int index; //for activating current tutorial
     private boolean isTutorialActive; //will be accessed from guiManager
     private ArrayList<JLabel> tutorials = new ArrayList<>();
     private ArrayList<JLabel> backgrounds = new ArrayList<>(); //for images and gifs
@@ -47,6 +47,7 @@ public class TutorialPanel extends JPanel {
             setActiveBackground();
         }
     }
+
 
     private void setActiveBackground() {
         for (int i = 0; i < backgrounds.size(); i++) {
@@ -159,6 +160,8 @@ public class TutorialPanel extends JPanel {
 
     public void setIndex(int index) {
         this.index = index;
+        setActiveLabel();
+        setActiveBackground();
     }
 
     public void setTutorialActive(boolean tutorialActive) {
