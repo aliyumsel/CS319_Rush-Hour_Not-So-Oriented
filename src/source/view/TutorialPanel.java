@@ -5,11 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 
 @SuppressWarnings("Duplicates")
 public class TutorialPanel extends JPanel {
@@ -29,7 +26,7 @@ public class TutorialPanel extends JPanel {
     private BufferedImage nextH = GuiPanelManager.instance.LoadImage("image/icons/nextH.png");
 
 
-    public TutorialPanel(boolean isTutorialActive, GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
+    TutorialPanel(boolean isTutorialActive, GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
         setLayout(null);
         index = 0;
         this.isTutorialActive = isTutorialActive;
@@ -145,11 +142,7 @@ public class TutorialPanel extends JPanel {
         ImageIcon icon = new ImageIcon(url);
         JLabel label = new JLabel();
         label.setIcon(icon);
-        if (url == null)
-        {
-            return null;
-        }
-        //icon.setImageObserver(label);
+       //icon.setImageObserver(label);
         return label;
     }
 
@@ -187,7 +180,6 @@ public class TutorialPanel extends JPanel {
     public void setTutorialActive(boolean tutorialActive) {
         isTutorialActive = tutorialActive;
     }
-
 
     private ActionListener actionListener = new ActionListener() {
         @Override
