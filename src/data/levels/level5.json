@@ -1,1 +1,1 @@
-{"time":30,"expectedMovesForThreeStars":18,"expectedMovesForTwoStars":20,"map":"OO OO OO OO OO OO OO OO | OO OO CL XX CD SS SS OO | OO SS SS SS XX CL XX OO | OO CD CD PC XX CU CU SS | OO XX XX CR XX XX XX OO | OO SS SS CU CL XX SS OO | OO CL XX XX SS SS SS OO | OO OO OO OO OO OO OO OO"}
+{"time":20,"expectedMovesForThreeStars":9,"expectedMovesForTwoStars":13,"map":"OO OO OO OO OO OO OO OO | OO SS SS SS SS SS TU OO | OO TL SS SS CL SS SS OO | OO CD PC SS SS SS SS SS | OO SS TL SS SS CL SS OO | OO CR SS SS SS SS SS OO | OO CL SS SS SS SS SS OO | OO OO OO OO OO OO OO OO"}
