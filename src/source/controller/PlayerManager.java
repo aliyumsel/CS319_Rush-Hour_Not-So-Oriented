@@ -219,6 +219,7 @@ public class PlayerManager extends Controller
       }
       //playerDao.saveLevel(levelNo, currentPlayer);
       playerDao.savePlayer(currentPlayer);
+      currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(0);
 
    }
 
@@ -245,6 +246,7 @@ public class PlayerManager extends Controller
       {
          setLevelStatus(levelNo, "notStarted");
       }
+      currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(0);
       playerDao.savePlayer(currentPlayer);
    }
 

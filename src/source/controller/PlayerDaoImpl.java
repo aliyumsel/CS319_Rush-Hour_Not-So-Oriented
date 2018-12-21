@@ -49,7 +49,7 @@ public class PlayerDaoImpl implements PlayerDao{
 
         boolean unlocked;
         ArrayList<LevelInformation> levels = new ArrayList<>();
-
+        System.out.println(info.numberOfMaps);
         for (int i = 1; i <= info.numberOfMaps; i++)
         {
             InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + i + ".json");

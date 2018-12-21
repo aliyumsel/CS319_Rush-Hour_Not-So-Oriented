@@ -50,7 +50,6 @@ public class VehicleController extends Controller {
         map = _map;
     }
 
-    //executed every frame write the functionality needed to here
     public void update() {
         if (!GameManager.instance.isGameActive) {
             return;
