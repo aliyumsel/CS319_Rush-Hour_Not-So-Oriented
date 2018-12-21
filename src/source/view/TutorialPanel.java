@@ -93,16 +93,16 @@ public class TutorialPanel extends JPanel {
         tutorialCoordinates.add(new Point(0, 0));
         tutorialCoordinates.add(new Point(0, 0));
 
-        File folder = new File("src/image/tutorial_Labels");
-        File[] listOfFiles = folder.listFiles();
+//        File folder = new File("src/image/tutorial_Labels");
+//        File[] listOfFiles = folder.listFiles();
         for (int i = 1; i <= 6; i++) { // change size !!!!
 
-            String extension = "";
-            if (listOfFiles[i - 1].isFile()) {
-                extension = listOfFiles[i - 1].getName().substring(listOfFiles[i - 1].getName().indexOf("."));
-            }
+//            String extension = "";
+//            if (listOfFiles[i - 1].isFile()) {
+//                extension = listOfFiles[i - 1].getName().substring(listOfFiles[i - 1].getName().indexOf("."));
+//            }
 
-            if (extension.equals(".png")) {
+            if (LoadMediaToLabel("/image/tutorial_Labels/help" + i + ".png") != null) {
                 tutorials.add(LoadMediaToLabel("/image/tutorial_Labels/help" + i + ".png"));
                 add(tutorials.get(i - 1));
                 tutorials.get(i - 1).setVisible(false);
@@ -114,21 +114,21 @@ public class TutorialPanel extends JPanel {
 
 
         }
-        folder = new File("src/image/tutorial_Backgrounds");
-        listOfFiles = folder.listFiles();
+//        folder = new File("src/image/tutorial_Backgrounds");
+//        listOfFiles = folder.listFiles();
 
         for (int i = 1; i <= 6; i++) {
-            String extension = "";
-            if (listOfFiles[i - 1].isFile()) {
-                extension = listOfFiles[i - 1].getName().substring(listOfFiles[i - 1].getName().indexOf("."));
-            }
+//            String extension = "";
+//            if (listOfFiles[i - 1].isFile()) {
+//                extension = listOfFiles[i - 1].getName().substring(listOfFiles[i - 1].getName().indexOf("."));
+//            }
 
-            if (extension.equals(".gif")) {
+            if (LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".gif") != null) {
                 backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".gif"));
                 add(backgrounds.get(i - 1));
                 backgrounds.get(i - 1).setVisible(false);
                 System.out.println(backgrounds.size());
-            } else if (extension.equals(".png")) {
+            } else  {
                 backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".png"));
                 add(backgrounds.get(i - 1));
                 backgrounds.get(i - 1).setVisible(false);
@@ -139,10 +139,16 @@ public class TutorialPanel extends JPanel {
     }
 
     private JLabel LoadMediaToLabel(String fileName) {
+
         URL url = this.getClass().getResource(fileName);
+        System.out.println(url);
         ImageIcon icon = new ImageIcon(url);
         JLabel label = new JLabel();
         label.setIcon(icon);
+        if (url == null)
+        {
+            return null;
+        }
         //icon.setImageObserver(label);
         return label;
     }
