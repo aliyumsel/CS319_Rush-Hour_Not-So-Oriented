@@ -73,6 +73,22 @@ public class TutorialPanel extends JPanel {
             activeBackground = backgrounds.get(4);
         } else if (index == 5) {
             activeBackground = backgrounds.get(5);
+        } else if (index == 6) {
+            activeBackground = backgrounds.get(6);
+        } else if (index == 7) {
+            activeBackground = backgrounds.get(7);
+        } else if (index == 8) {
+            activeBackground = backgrounds.get(8);
+        } else if (index == 9) {
+            activeBackground = backgrounds.get(9);
+        } else if (index == 10) {
+            activeBackground = backgrounds.get(10);
+        } else if (index == 11) {
+            activeBackground = backgrounds.get(11);
+        } else if (index == 12) {
+            activeBackground = backgrounds.get(12);
+        } else if (index == 13) {
+            activeBackground = backgrounds.get(13);
         }
         activeBackground.setVisible(true);
     }
@@ -101,16 +117,22 @@ public class TutorialPanel extends JPanel {
         tutorialCoordinates.add(new Point(0, 0));
         tutorialCoordinates.add(new Point(0, 0));
         tutorialCoordinates.add(new Point(0, 0));
+        tutorialCoordinates.add(new Point(0, 0));
+        tutorialCoordinates.add(new Point(0, 0));
+        tutorialCoordinates.add(new Point(0, 0));
+        tutorialCoordinates.add(new Point(0, 0));
+        tutorialCoordinates.add(new Point(0, 0));
+        tutorialCoordinates.add(new Point(0, 0));
+        tutorialCoordinates.add(new Point(0, 0));
 
-//        File folder = new File("src/image/tutorial_Labels");
-//        File[] listOfFiles = folder.listFiles();
-        for (int i = 1; i <= 6; i++) { // change size !!!!
-            if (LoadMediaToLabel("/image/tutorial_Labels/help" + i + ".png") != null) {
-                tutorials.add(LoadMediaToLabel("/image/tutorial_Labels/help" + i + ".png"));
+
+        for (int i = 1; i <= 14; i++) { // change size !!!!
+            if (LoadMediaToLabel("/image/tutorial_Labels/" + i + ".png") != null) {
+                tutorials.add(LoadMediaToLabel("/image/tutorial_Labels/" + i + ".png"));
                 add(tutorials.get(i - 1));
                 tutorials.get(i - 1).setVisible(false);
             } else {
-                tutorials.add(LoadMediaToLabel("/image/tutorial_Labels/help" + i + ".gif"));
+                tutorials.add(LoadMediaToLabel("/image/tutorial_Labels/" + i + ".gif"));
                 add(tutorials.get(i - 1));
                 tutorials.get(i - 1).setVisible(false);
             }
@@ -118,15 +140,15 @@ public class TutorialPanel extends JPanel {
 
         }
 
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 14; i++) {
 
-            if (LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".gif") != null) {
-                backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".gif"));
+            if (LoadMediaToLabel("/image/tutorial_Backgrounds/" + i + ".gif") != null) {
+                backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/" + i + ".gif"));
                 add(backgrounds.get(i - 1));
                 backgrounds.get(i - 1).setVisible(false);
                 System.out.println(backgrounds.size());
             } else {
-                backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/background" + i + ".png"));
+                backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/" + i + ".png"));
                 add(backgrounds.get(i - 1));
                 backgrounds.get(i - 1).setVisible(false);
                 System.out.println(backgrounds.size());
@@ -143,9 +165,9 @@ public class TutorialPanel extends JPanel {
     }
 
     private void setBoundsOfComponents() {
-        forwardButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) + 75, 425, forwardButton.getPreferredSize().width, forwardButton.getPreferredSize().height);
-        backButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) - 75, 425, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
-        cancelButton.setBounds(guiManager.findCenter(guiManager.panelWidth, cancelButton), 425, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
+        forwardButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) + 115, 465, forwardButton.getPreferredSize().width, forwardButton.getPreferredSize().height);
+        backButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) - 115, 465, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
+        cancelButton.setBounds(guiManager.findCenter(guiManager.panelWidth, cancelButton), 465, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
 
         for (int i = 0; i < tutorials.size(); i++) {
             setBounds(tutorials.get(i), tutorialCoordinates.get(i).x, tutorialCoordinates.get(i).y);
