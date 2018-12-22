@@ -226,7 +226,8 @@ public class MainMenuPanel extends JPanel {
             guiManager.setPanelVisible("Settings");
         }
         if (e.getSource() == help) {
-            guiManager.setPanelVisible("Help");
+            guiManager.setPanelVisible("Tutorial");
+
         }
         if (e.getSource() == changePlayer) {
             guiManager.setPanelVisible("ChangePlayer");

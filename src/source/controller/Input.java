@@ -1,5 +1,6 @@
 package source.controller;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ public class Input
 {
    private static Component gamePanel;
 
-   private static boolean[] mouseButtons = new boolean[5];
+//   private static boolean[] mouseButtons = new boolean[5];
 
    private static String[] mouseButtons2 = new String[5];
 
@@ -35,7 +36,7 @@ public class Input
    @SuppressWarnings("SameParameterValue")
    static boolean getMouseButtonPressed(int buttonID)
    {
-      return mouseButtons[buttonID];
+      return mouseButtons2[buttonID].equals("Pressed");
    }
 
    @SuppressWarnings("SameParameterValue")
@@ -49,9 +50,25 @@ public class Input
       return new MouseEventHandler();
    }
 
-   public static KeyListener getKeyListener()
+//   public static KeyListener getKeyListener()
+//   {
+//      return new KeyEventHandler();
+//   }
+
+   public static void setKeyBindings(JComponent component)
    {
-      return new KeyEventHandler();
+      int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("W"), "w");
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("A"), "a");
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("S"), "s");
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("D"), "d");
+      component.getInputMap(IFW).put(KeyStroke.getKeyStroke("N"), "n");
+
+      component.getActionMap().put("w", new KeyAction("w"));
+      component.getActionMap().put("a", new KeyAction("a"));
+      component.getActionMap().put("s", new KeyAction("s"));
+      component.getActionMap().put("d", new KeyAction("d"));
+      component.getActionMap().put("n", new KeyAction("n"));
    }
 
    public static void setGamePanel(Component component)
@@ -61,9 +78,9 @@ public class Input
 
    static void reset()
    {
-      for ( int i = 0; i < mouseButtons.length; i++ )
+      for ( int i = 0; i < mouseButtons2.length; i++ )
       {
-         mouseButtons[i] = false;
+//         mouseButtons[i] = false;
          mouseButtons2[i] = "default";
       }
 
@@ -97,17 +114,36 @@ public class Input
       return mousePos;
    }
 
+   private static class KeyAction extends AbstractAction
+   {
+      String keyChar;
+      KeyAction(String _keyChar)
+      {
+         keyChar = _keyChar;
+      }
+
+      @Override
+      public void actionPerformed(ActionEvent e)
+      {
+         System.out.println("keyPressed: " + keyChar);
+         if ( keys.containsKey(keyChar + "") )
+         {
+            keys.put(keyChar + "", true);
+         }
+      }
+   }
+
    private static class MouseEventHandler extends MouseAdapter
    {
       @Override
       public void mousePressed(MouseEvent e)
       {
          System.out.println("mousePressed");
-         if ( e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0 )
+         if ( e.getButton() - 1 < mouseButtons2.length && e.getButton() - 1 >= 0 )
          {
             mouseButtons2[e.getButton() - 1] = "Pressed";
 
-            mouseButtons[e.getButton() - 1] = true;
+//            mouseButtons[e.getButton() - 1] = true;
             mouseX = e.getX();
             mouseY = e.getY();
          }
@@ -117,27 +153,27 @@ public class Input
       public void mouseReleased(MouseEvent e)
       {
          System.out.println("mouseReleased");
-         if ( e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0 )
+         if ( e.getButton() - 1 < mouseButtons2.length && e.getButton() - 1 >= 0 )
          {
             mouseButtons2[e.getButton() - 1] = "Released";
 
-            mouseButtons[e.getButton() - 1] = false;
+//            mouseButtons[e.getButton() - 1] = false;
             mouseX = e.getX();
             mouseY = e.getY();
          }
       }
    }
 
-   private static class KeyEventHandler extends KeyAdapter
-   {
-      @Override
-      public void keyReleased(KeyEvent e)
-      {
-         System.out.println("keyPressed");
-         if ( keys.containsKey(e.getKeyChar() + "") )
-         {
-            keys.put(e.getKeyChar() + "", true);
-         }
-      }
-   }
+//   private static class KeyEventHandler extends KeyAdapter
+//   {
+//      @Override
+//      public void keyReleased(KeyEvent e)
+//      {
+//         System.out.println("keyPressed");
+//         if ( keys.containsKey(e.getKeyChar() + "") )
+//         {
+//            keys.put(e.getKeyChar() + "", true);
+//         }
+//      }
+//   }
 }

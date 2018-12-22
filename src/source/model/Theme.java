@@ -24,6 +24,8 @@ public class Theme {
     private String buttonClick;
     private String selectionSound;
     private String endOfLevelSound;
+    private String poof;
+    private  String shrink;
     private String path;
     private boolean unlocked;
     public String name;
@@ -42,9 +44,11 @@ public class Theme {
 
    private void setSounds() {
       buttonClick = path + "buttonClick.wav";
-      themeSong = path + "theme.wav";
+      themeSong = "/" +path + "theme.wav";
       selectionSound = path + "selectionSound.wav";
       endOfLevelSound = path + "success.wav";
+      poof = path + "poof.wav";
+      shrink = path + "shrink.wav";
    }
 
    private void setImages() {
@@ -139,6 +143,12 @@ public class Theme {
    public String getSelectionSound() {
       return selectionSound;
    }
+    public String getPoofSound(){
+        return poof;
+    }
+    public String getShrinkSound() {
+        return shrink;
+    }
 
    @SuppressWarnings("Duplicates")
    private void rescaleImages() {

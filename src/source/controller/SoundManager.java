@@ -8,6 +8,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 public class SoundManager extends Controller
 {
@@ -30,14 +31,16 @@ public class SoundManager extends Controller
    {
       try
       {
-         String trafficThemeSong = ThemeManager.instance.getThemeSong();
-         AudioInputStream inputStream = AudioSystem.getAudioInputStream(SoundManager.class.getClassLoader().getResourceAsStream(trafficThemeSong));
+         String themeSong = ThemeManager.instance.getThemeSong();
          clip = AudioSystem.getClip();
-         clip.open(inputStream);
+         URL url = this.getClass().getResource(themeSong);
+         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
+         clip.open(audioInputStream);
+         clip.start();
          clip.loop(Clip.LOOP_CONTINUOUSLY);
       } catch (Exception a)
       {
-         System.out.println("Not Found: Clip");
+         a.printStackTrace();
       }
    }
 
@@ -59,7 +62,7 @@ public class SoundManager extends Controller
             inputStream = SoundManager.class.getClassLoader().getResourceAsStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
-         } catch (IOException a)
+         } catch (Exception a)
          {
             System.out.println("Not Found: Vehicle horn");
          }
@@ -84,9 +87,41 @@ public class SoundManager extends Controller
             inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getButtonClickSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
-         } catch (IOException a)
+         } catch (Exception a)
          {
             System.out.println("Not Found: button Click");
+         }
+      }
+   }
+
+   public void poofSound()
+   {
+      if ( isEffectsEnabled )
+      {
+         try
+         {
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getPoofSound());
+            audioStream = new AudioStream(inputStream);
+            AudioPlayer.player.start(audioStream);
+         } catch (Exception a)
+         {
+            System.out.println("Not Found: Poof");
+         }
+      }
+   }
+
+   public void shrinkSound()
+   {
+      if ( isEffectsEnabled )
+      {
+         try
+         {
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getShrinkSound());
+            audioStream = new AudioStream(inputStream);
+            AudioPlayer.player.start(audioStream);
+         } catch (Exception a)
+         {
+            System.out.println("Not Found: Shrink");
          }
       }
    }
@@ -101,7 +136,7 @@ public class SoundManager extends Controller
 
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
-         } catch (IOException a)
+         } catch (Exception a)
          {
             System.out.println("Not Found: Success Sound");
          }
