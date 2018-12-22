@@ -10,7 +10,7 @@ public class Input
 {
    private static Component gamePanel;
 
-   private static boolean[] mouseButtons = new boolean[5];
+//   private static boolean[] mouseButtons = new boolean[5];
 
    private static String[] mouseButtons2 = new String[5];
 
@@ -36,7 +36,7 @@ public class Input
    @SuppressWarnings("SameParameterValue")
    static boolean getMouseButtonPressed(int buttonID)
    {
-      return mouseButtons[buttonID];
+      return mouseButtons2[buttonID].equals("Pressed");
    }
 
    @SuppressWarnings("SameParameterValue")
@@ -78,9 +78,9 @@ public class Input
 
    static void reset()
    {
-      for ( int i = 0; i < mouseButtons.length; i++ )
+      for ( int i = 0; i < mouseButtons2.length; i++ )
       {
-         mouseButtons[i] = false;
+//         mouseButtons[i] = false;
          mouseButtons2[i] = "default";
       }
 
@@ -139,11 +139,11 @@ public class Input
       public void mousePressed(MouseEvent e)
       {
          System.out.println("mousePressed");
-         if ( e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0 )
+         if ( e.getButton() - 1 < mouseButtons2.length && e.getButton() - 1 >= 0 )
          {
             mouseButtons2[e.getButton() - 1] = "Pressed";
 
-            mouseButtons[e.getButton() - 1] = true;
+//            mouseButtons[e.getButton() - 1] = true;
             mouseX = e.getX();
             mouseY = e.getY();
          }
@@ -153,11 +153,11 @@ public class Input
       public void mouseReleased(MouseEvent e)
       {
          System.out.println("mouseReleased");
-         if ( e.getButton() - 1 < mouseButtons.length && e.getButton() - 1 >= 0 )
+         if ( e.getButton() - 1 < mouseButtons2.length && e.getButton() - 1 >= 0 )
          {
             mouseButtons2[e.getButton() - 1] = "Released";
 
-            mouseButtons[e.getButton() - 1] = false;
+//            mouseButtons[e.getButton() - 1] = false;
             mouseX = e.getX();
             mouseY = e.getY();
          }
