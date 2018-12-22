@@ -16,9 +16,13 @@ public class PowerUpManager extends Controller
    private boolean spaceActive;
    private boolean shrinkActive;
 
+   private Vehicle vehicleToShrink;
+   private int[] vehicleToShrinkCells;
+
    private Obstacle obstacleToRemove;
    private int obstacleToRemoveX;
    private int obstacleToRemoveY;
+
    private int poofDuration;
    private int counter = 0;
    private boolean shouldCount;
@@ -30,6 +34,7 @@ public class PowerUpManager extends Controller
       shouldCount = false;
       obstacleToRemoveX = -1;
       obstacleToRemoveY = -1;
+      vehicleToShrinkCells = null;
       poofDuration = 27;
    }
 
@@ -46,19 +51,21 @@ public class PowerUpManager extends Controller
                if ( temp.transform.length == 3 )
                {
                   SoundManager.instance.shrinkSound();
-                  System.out.println("Selected truck: " + temp.transform.position.x + ", " + temp.transform.position.y);
-                  MapController.instance.removeGameObject(temp);
 
-                  //May move this to MapController or smt
-                  //Vehicle newVehicle = new Vehicle(temp, 2);
-                  Vehicle newVehicle = new Car(temp);
-                  MapController.instance.addGameObject(newVehicle);
+                  vehicleToShrink = temp;
+                  vehicleToShrinkCells = vehicleToShrink.getOccupiedCells();
 
-                  MapController.instance.updateMap();
-                  GameManager.instance.autoSave();
+//                  MapController.instance.removeGameObject(temp);
+//                  Vehicle newVehicle = new Car(temp);
+//                  MapController.instance.addGameObject(newVehicle);
+//                  MapController.instance.updateMap();
+//                  GameManager.instance.autoSave();
+
                   deactivateShrink();
+                  shouldCount = true;
+
                   //this decrement method will be put inside the game manager
-                  GameEngine.instance.playerManager.decrementRemainingShrinkPowerup();
+                  PlayerManager.instance.decrementRemainingShrinkPowerup();
                }
             }
          }
@@ -79,33 +86,49 @@ public class PowerUpManager extends Controller
                shouldCount = true;
 
                //this decrement method will be put inside the game manager
-               GameEngine.instance.playerManager.decrementRemainingSpacePowerup();
+               PlayerManager.instance.decrementRemainingSpacePowerup();
             }
          }
       }
 
-      if (shouldCount)
+      if ( shouldCount )
       {
          counter++;
          System.out.println("Counter: " + counter);
       }
 
-      if (obstacleToRemove != null && counter >= (poofDuration * (2 / 3f)))
+      if (counter >= ( poofDuration * ( 2 / 3f ) ))
       {
-         System.out.println("Removed game object");
-         MapController.instance.removeGameObject(obstacleToRemove);
-         MapController.instance.updateMap();
-         GameManager.instance.autoSave();
-         obstacleToRemove = null;
+         //shrink the gameobject
+         if ( vehicleToShrink != null)
+         {
+            MapController.instance.removeGameObject(vehicleToShrink);
+            Vehicle newVehicle = new Car(vehicleToShrink);
+            MapController.instance.addGameObject(newVehicle);
+            MapController.instance.updateMap();
+            GameManager.instance.autoSave();
+            vehicleToShrink = null;
+         }
+
+         //remove game object
+         if ( obstacleToRemove != null)
+         {
+            System.out.println("Removed game object");
+            MapController.instance.removeGameObject(obstacleToRemove);
+            MapController.instance.updateMap();
+            GameManager.instance.autoSave();
+            obstacleToRemove = null;
+         }
       }
 
-      if (counter >= poofDuration)
+      if ( counter >= poofDuration )
       {
          System.out.println("Stopped Counter");
          counter = 0;
          shouldCount = false;
          obstacleToRemoveX = -1;
          obstacleToRemoveY = -1;
+         vehicleToShrinkCells = null;
       }
    }
 
@@ -145,6 +168,11 @@ public class PowerUpManager extends Controller
       return obstacleToRemoveY;
    }
 
+   public int[] getVehicleToShrinkCells()
+   {
+      return vehicleToShrinkCells;
+   }
+
    public int getCurrentCount()
    {
       return counter;
@@ -152,7 +180,7 @@ public class PowerUpManager extends Controller
 
    public int getPoofDuration()
    {
-     return poofDuration;
+      return poofDuration;
    }
 
    void deactivatePowerUps()
