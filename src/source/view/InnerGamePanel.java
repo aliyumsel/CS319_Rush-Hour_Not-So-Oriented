@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.ConcurrentModificationException;
 
 @SuppressWarnings("serial")
 public class InnerGamePanel extends JPanel
@@ -102,10 +102,16 @@ public class InnerGamePanel extends JPanel
 
       Graphics2D g2D = (Graphics2D) g;
 
-      for ( Iterator<GameObject> gameObjects = map.getGameObjects().iterator(); gameObjects.hasNext(); )
+      try
       {
-         GameObject gameObject = gameObjects.next();
-         gameObject.draw(g2D);
+         for ( GameObject gameObject : map.getGameObjects() )
+         {
+            gameObject.draw(g2D);
+         }
+      }
+      catch (ConcurrentModificationException e)
+      {
+         //do nothing
       }
 
       if ( GameEngine.instance.powerUpManager.isPowerUpActive() )
@@ -130,10 +136,28 @@ public class InnerGamePanel extends JPanel
       if ( counter > 0 )
       {
          Graphics2D temp = (Graphics2D) g.create();
-         int x = GameEngine.instance.powerUpManager.getObstacleToRemoveX();
-         int y = GameEngine.instance.powerUpManager.getObstacleToRemoveY();
+         int obstacleX = GameEngine.instance.powerUpManager.getObstacleToRemoveX();
+         int obstacleY = GameEngine.instance.powerUpManager.getObstacleToRemoveY();
+         int[] vehicleCells = GameEngine.instance.powerUpManager.getVehicleToShrinkCells();
 
-         temp.drawImage(poofImages.get(counter / ( GameEngine.instance.powerUpManager.getPoofDuration() / poofImages.size() )), x * 60, y * 60, null);
+         if (obstacleX == -1 || obstacleY == - 1)
+         {
+            int x;
+            int y;
+            //vehicle
+            for (int i : vehicleCells)
+            {
+               x = i % GameEngine.instance.mapController.getMap().getMapSize();
+               y = i / GameEngine.instance.mapController.getMap().getMapSize();
+               temp.drawImage(poofImages.get(counter / ( GameEngine.instance.powerUpManager.getPoofDuration() / poofImages.size() )), x * 60, y * 60, null);
+            }
+         }
+         else
+         {
+            //obstacle
+            temp.drawImage(poofImages.get(counter / ( GameEngine.instance.powerUpManager.getPoofDuration() / poofImages.size() )), obstacleX * 60, obstacleY * 60, null);
+         }
+
       }
    }
 }
