@@ -45,6 +45,7 @@ public class PowerUpManager extends Controller
             {
                if ( temp.transform.length == 3 )
                {
+                  SoundManager.instance.shrinkSound();
                   System.out.println("Selected truck: " + temp.transform.position.x + ", " + temp.transform.position.y);
                   MapController.instance.removeGameObject(temp);
 
@@ -70,6 +71,7 @@ public class PowerUpManager extends Controller
 
             if ( temp != null )
             {
+               SoundManager.instance.poofSound();
                obstacleToRemove = temp;
                obstacleToRemoveX = obstacleToRemove.transform.position.gridX;
                obstacleToRemoveY = obstacleToRemove.transform.position.gridY;

@@ -94,6 +94,38 @@ public class SoundManager extends Controller
       }
    }
 
+   public void poofSound()
+   {
+      if ( isEffectsEnabled )
+      {
+         try
+         {
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getPoofSound());
+            audioStream = new AudioStream(inputStream);
+            AudioPlayer.player.start(audioStream);
+         } catch (Exception a)
+         {
+            System.out.println("Not Found: Poof");
+         }
+      }
+   }
+
+   public void shrinkSound()
+   {
+      if ( isEffectsEnabled )
+      {
+         try
+         {
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getShrinkSound());
+            audioStream = new AudioStream(inputStream);
+            AudioPlayer.player.start(audioStream);
+         } catch (Exception a)
+         {
+            System.out.println("Not Found: Shrink");
+         }
+      }
+   }
+
    public void successSound()
    {
       if ( isEffectsEnabled )

@@ -127,6 +127,13 @@ public class ThemeManager extends Controller
    {
       return currentTheme.getSelectionSound();
    }
+   String getPoofSound(){
+      return currentTheme.getPoofSound();
+   }
+   String getShrinkSound()
+   {
+      return currentTheme.getShrinkSound();
+   }
 
 //   public Theme getCurrentTheme()
 //   {
