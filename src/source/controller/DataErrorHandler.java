@@ -14,7 +14,7 @@ public class DataErrorHandler {
 
     void handlePlayersNotFoundError()
     {
-        int reply = JOptionPane.showConfirmDialog(null, "Couldn't find 'players' folder. Do you want to setup the game again?", "ERROR LOADING THE GAME", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Couldn't find 'players' folder. Do you accept to setup the game again?", "ERROR LOADING THE GAME", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (reply == JOptionPane.YES_OPTION)
         {
             recreate();
@@ -27,7 +27,7 @@ public class DataErrorHandler {
 
     void handleInfoDamagedError()
     {
-        int reply = JOptionPane.showConfirmDialog(null, "'info.json' file is damaged or missing. Do you want to setup the game again?", "ERROR LOADING THE GAME", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "'info.json' file is damaged or missing. Do you accept to setup the game again?", "ERROR LOADING THE GAME", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (reply == JOptionPane.YES_OPTION)
         {
             recreate();
@@ -40,7 +40,7 @@ public class DataErrorHandler {
 
     static void handlePlayerDamagedError(String playerName)
     {
-        int reply = JOptionPane.showConfirmDialog(null, "Player " + playerName + " is damaged. Do you accept to delete it?", "ERROR LOADING THE GAME", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Player " + playerName + " is damaged. Do you accept to delete it?", "ERROR LOADING THE GAME", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (reply == JOptionPane.YES_OPTION)
         {
             File file = new File(DataConfiguration.dataPath + "\\players\\" + playerName + "\\playerInfo.json");
