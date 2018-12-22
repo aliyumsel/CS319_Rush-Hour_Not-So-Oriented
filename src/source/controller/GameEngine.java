@@ -14,6 +14,10 @@ public class GameEngine
    public GameManager gameManager;
    public PowerUpManager powerUpManager;
 
+
+   /**
+    * ffjh
+    */
    public GameEngine()
    {
       instance = this;
