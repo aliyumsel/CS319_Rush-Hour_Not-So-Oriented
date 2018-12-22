@@ -239,7 +239,7 @@ public class TutorialPanel extends JPanel {
     }
 
     private void setBounds(JLabel label, int x, int y) {
-        label.setBounds(x, y, label.getPreferredSize().width + 20, label.getPreferredSize().height);
+        label.setBounds(x, y, label.getPreferredSize().width , label.getPreferredSize().height);
     }
 
     public int getIndex() {
