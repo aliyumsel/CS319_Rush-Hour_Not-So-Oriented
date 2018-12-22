@@ -4,6 +4,7 @@
 !/doc/
 !/lib/
 !.gitignore
+!README.md
 src/data/**/*
 !src/data/levels/
 src/data/
