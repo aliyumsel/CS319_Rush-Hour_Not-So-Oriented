@@ -12,9 +12,7 @@ public class GameObject implements Drawable
 
    public Transform transform; /*  Represents all attributes that is related to 2d space.*/
    private int[] occupiedCellNumbers; /* Holds all the cells that this game object currently occupies. */
-//   private Transform[] occupiedTransforms;
    boolean isBlackedOut; /* Boolean that checks whether the object is blacked out or not*/
-   //bunu highlight olayi icin kullanmamiz gerekebilir
 
    /**
     * Constructor that initializes values to their specified initial values.
@@ -52,25 +50,7 @@ public class GameObject implements Drawable
             occupiedCellNumbers[i] = occupiedCellNumbers[i - 1] + 1;
          }
       }
-
-//      findPivotPointsOfOccupiedCells();
    }
-
-//   private void findPivotPointsOfOccupiedCells()
-//   {
-//      occupiedTransforms = new Transform[transform.length];
-//      occupiedTransforms[0] = new Transform(transform.position.gridX, transform.position.gridY, 1, transform.direction);
-//
-//      for ( int i = 1; i < transform.length; i++ )
-//      {
-//         occupiedTransforms[i] = new Transform(occupiedCellNumbers[i] % 8, occupiedCellNumbers[i] / 8, 1, transform.direction);
-//      }
-//   }
-
-//   public Transform[] getOccupiedTransforms()
-//   {
-//      return occupiedTransforms;
-//   }
 
    /**
     * Getter for the occupiedCellNumbers.
@@ -81,7 +61,6 @@ public class GameObject implements Drawable
       return occupiedCellNumbers;
    }
 
-
    /**
     * Getter for a type
     * @return empty string
@@ -90,8 +69,6 @@ public class GameObject implements Drawable
    {
       return "";
    }
-
-
 
    /**
     * Draws the image connected to this game object.
@@ -102,7 +79,6 @@ public class GameObject implements Drawable
    {
 
    }
-
 
    public void updateImages()
    {
@@ -115,7 +91,6 @@ public class GameObject implements Drawable
    {
       isBlackedOut = true;
    }
-
 
    /**
     * It is function to hide the black foreground.

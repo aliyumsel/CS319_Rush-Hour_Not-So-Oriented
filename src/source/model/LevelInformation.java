@@ -10,13 +10,11 @@ public class LevelInformation
 
    private int stars; // Represents the stars in that level.
    private String status; // Represents the state of the level. For example: Completed, NeverPlayed and such.
-   //notStarted, inProgress, finished
    private int levelNo; // Represents the level with a number.
    private int maxNumberOfMovesForThreeStars; // Holds the number of moves to get a three star in this particular level.
    private int maxNumberOfMovesForTwoStars; // Holds the number of moves to a two star in this particular level.
    private int currentNumberOfMoves; /* If the level is not completed and is in a saved state,
-   holds the current number of moves the user has made in that level.
-   boolean unlocked: To determine whether the level is locked or unlocked*/
+   holds the current number of moves the user has made in that level.*/
    private boolean unlocked; // To determine whether the level is locked or unlocked.
    private String map; // Holds the current state of the map as a string so it can be saved to a text file later.
    private int time; // Represent the planned time for the level.
@@ -47,10 +45,6 @@ public class LevelInformation
       this.map = map;
       this.time = time;
    }
-
-//   public int getLevelNo() {
-//      return levelNo;
-//   }
 
    /**
     * Getter for the stars
@@ -185,28 +179,4 @@ public class LevelInformation
    public void setTime(int time) {
       this.time = time;
    }
-
-//   public String levelToString()
-//   {
-//      return "\t<Level>\n" +
-//              "\t\t<LevelNo>\n" +
-//              "\t\t\t" + levelNo + "\n" +
-//              "\t\t<LevelNo/>\n" +
-//              "\t\t<Stars>\n" +
-//              "\t\t\t" + stars + "\n" +
-//              "\t\t<Stars/>\n" +
-//              "\t\t<CurrentNumberOfMoves>\n" +
-//              "\t\t\t" + currentNumberOfMoves + "\n" +
-//              "\t\t<CurrentNumberOfMoves>\n" +
-//              "\t\t<Status>\n" +
-//              "\t\t\t" + status + "\n" +
-//              "\t\t<Status/>\n" +
-//              "\t\t<Unlocked>\n" +
-//              "\t\t\t" + unlocked + "\n" +
-//              "\t\t<Unlocked/>\n" +
-//              "\t\t<Map>\n" +
-//              map +
-//              "\t\t<Map/>\n" +
-//              "\t<Level/>\n";
-//   }
 }
