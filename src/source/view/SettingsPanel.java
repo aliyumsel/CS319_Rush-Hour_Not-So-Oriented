@@ -156,17 +156,17 @@ public class SettingsPanel extends JPanel {
         heading.setPreferredSize(new Dimension(263, 81));
 
         volume = new JLabel("Volume", SwingConstants.CENTER);
-        volume.setPreferredSize(new Dimension(150, 30));
+        volume.setPreferredSize(new Dimension(150, 40));
         volume.setFont(new Font("Odin Rounded", Font.PLAIN, 40));
         volume.setForeground(Color.white);
 
         control = new JLabel("Control", SwingConstants.CENTER);
-        control.setPreferredSize(new Dimension(150, 30));
+        control.setPreferredSize(new Dimension(150, 40));
         control.setFont(new Font("Odin Rounded", Font.PLAIN, 40));
         control.setForeground(Color.white);
 
         theme = new JLabel("Theme", SwingConstants.CENTER);
-        theme.setPreferredSize(new Dimension(150, 30));
+        theme.setPreferredSize(new Dimension(150, 40));
         theme.setFont(new Font("Odin Rounded", Font.PLAIN, 40));
         theme.setForeground(Color.white);
     }

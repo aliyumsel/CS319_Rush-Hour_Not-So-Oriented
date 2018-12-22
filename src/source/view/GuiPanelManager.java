@@ -5,7 +5,6 @@ import source.controller.Input;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -203,11 +202,12 @@ public class GuiPanelManager extends JFrame
 
    private void setListeners()
    {
-      KeyListener keyListener = Input.getKeyListener();
+//      KeyListener keyListener = Input.getKeyListener();
       MouseListener mouseListener = Input.getMouseListener();
-      addKeyListener(keyListener);
+//      addKeyListener(keyListener);
       gamePanel.getInnerGamePanel().addMouseListener(mouseListener);
       Input.setGamePanel(gamePanel.getInnerGamePanel());
+      Input.setKeyBindings(gamePanel);
    }
 
    public BufferedImage LoadImage(String fileName)
