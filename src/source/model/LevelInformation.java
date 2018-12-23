@@ -1,13 +1,11 @@
 package source.model;
 
+/**
+ * LevelInformation class holds all information about a particular level such as
+ * the level no, number of moves and the amount of stars collected on that level.
+ */
 public class LevelInformation
 {
-   /**
-    * LevelInformation class holds all information about a particular level such as
-    * the level no, number of moves and the amount of stars collected on that level.
-    */
-
-
    private int stars; // Represents the stars in that level.
    private String status; // Represents the state of the level. For example: Completed, NeverPlayed and such.
    private int levelNo; // Represents the level with a number.

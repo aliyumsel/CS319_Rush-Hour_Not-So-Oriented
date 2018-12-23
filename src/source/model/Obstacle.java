@@ -5,16 +5,14 @@ import source.controller.ThemeManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Obstacle class is used to represent the obstacles in our game.
+ * They are the secondary game object in the game Rush Hour.
+ */
 public class Obstacle extends GameObject
 {
-   /**
-    * Obstacle class is used to represent the obstacles in our game.
-    * They are the secondary game object in the game Rush Hour.
-    */
-
    private BufferedImage image; //Holds the image that represents this obstacle.
    private BufferedImage blackedOutImage; //Holds the image that represents the blacked out obstacles.
-
 
    /**
     * Constructor that initializes values to their specified initial values.
