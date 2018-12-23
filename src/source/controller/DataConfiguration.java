@@ -1,35 +1,42 @@
 package source.controller;
 
-import javax.xml.crypto.Data;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-
 
 /**
  * It is class for data configuration.
  */
 public class DataConfiguration {
 
-    static String dataPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour";
-    public static boolean gameOpenedFirstTime = false;
-    public GameInfo gameInfo;
-    public DataErrorHandler handler;
-    public static DataConfiguration instance;
+    private static DataConfiguration instance = null;
 
+    String dataPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour";
+    public boolean gameOpenedFirstTime = false;
+    private GameInfo gameInfo;
+    private DataErrorHandler handler;
 
     /**
      * Empty constructor that initializes values to their specified initial values.
      */
-    public DataConfiguration()
+    private DataConfiguration()
     {
         instance = this;
-        handler = new DataErrorHandler();
-        gameInfo = new GameInfo();
+        handler = DataErrorHandler.getInstance();
+        gameInfo = GameInfo.getInstance();
         confirmData();
         gameInfo.extractInfo();
+    }
 
+    /**
+     * Returns a new instance of the DataConfiguration class
+     * @return new DataConfiguration object
+     */
+    public static DataConfiguration getInstance()
+    {
+        if(instance == null) {
+            instance = new DataConfiguration();
+        }
+        return instance;
     }
 
     /**
@@ -57,7 +64,6 @@ public class DataConfiguration {
         }
     }
 
-
     /**
      * It is for setup new file.
      */
@@ -72,7 +78,6 @@ public class DataConfiguration {
         createInfoFile();
         gameOpenedFirstTime = true;
     }
-
 
     /**
      * Creates information file.

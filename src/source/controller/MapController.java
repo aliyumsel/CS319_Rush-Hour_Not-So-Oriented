@@ -11,21 +11,30 @@ import java.util.ArrayList;
  */
 public class MapController extends Controller
 {
-   public static MapController instance;
+   private static MapController instance = null;
 
    private MapDao mapDao;
    private Map map;
 
-
    /**
     * Empty constructor that initializes values to their specified initial values.
     */
-   MapController()
+   private MapController()
    {
-      instance = this;
       mapDao = new MapDaoImpl();
    }
 
+   /**
+    * Returns a new instance of the MapController class
+    * @return new MapController object
+    */
+   public static MapController getInstance()
+   {
+      if(instance == null) {
+         instance = new MapController();
+      }
+      return instance;
+   }
 
    /**
     * Load the level given the level number.
@@ -33,10 +42,9 @@ public class MapController extends Controller
     */
    void loadLevel(int level)
    {
-      Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
+      Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
       map = mapDao.extractMap(level, currentPlayer, false);
    }
-
 
    /**
     * Loads original level.
