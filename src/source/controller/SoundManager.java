@@ -6,8 +6,10 @@ import sun.audio.AudioStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
 
 /**
  * SoundManager class is responsible for all the sounds
@@ -15,7 +17,7 @@ import java.net.URL;
  */
 public class SoundManager extends Controller
 {
-   private static SoundManager instance = null;
+   public static SoundManager instance;
 
    private AudioStream audioStream = null;
    private InputStream inputStream = null;
@@ -23,26 +25,17 @@ public class SoundManager extends Controller
    private boolean isThemeEnabled;
    private boolean isEffectsEnabled;
 
+
    /**
     * Empty constructor that initializes values to their specified initial values.
     */
-   private SoundManager()
+   SoundManager()
    {
-      //isThemeEnabled = GameEngine.getInstance().playerManager.getCurrentPlayer().getSettings().getMusic();
-      //isEffectsEnabled = GameEngine.getInstance().playerManager.getCurrentPlayer().getSettings().getSfx();
+      //isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+      //isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
+      instance = this;
    }
 
-   /**
-    * Returns a new instance of the SoundManager class
-    * @return new SoundManager object
-    */
-   public static SoundManager getInstance()
-   {
-      if(instance == null) {
-         instance = new SoundManager();
-      }
-      return instance;
-   }
 
    /**
     * It initializes the clip.
@@ -51,7 +44,7 @@ public class SoundManager extends Controller
    {
       try
       {
-         String themeSong = ThemeManager.getInstance().getThemeSong();
+         String themeSong = ThemeManager.instance.getThemeSong();
          clip = AudioSystem.getClip();
          URL url = this.getClass().getResource(themeSong);
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
@@ -64,6 +57,7 @@ public class SoundManager extends Controller
       }
    }
 
+
    /**
     * Plays the background music
     */
@@ -75,6 +69,7 @@ public class SoundManager extends Controller
       }
    }
 
+
    /**
     * Plays the vehicle horn sound effect
     */
@@ -84,7 +79,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            String selectionSound = ThemeManager.getInstance().getSelectionSound();
+            String selectionSound = ThemeManager.instance.getSelectionSound();
             inputStream = SoundManager.class.getClassLoader().getResourceAsStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
@@ -94,6 +89,7 @@ public class SoundManager extends Controller
          }
       }
    }
+
 
    /**
     * Updates the theme for the sounds.
@@ -107,6 +103,7 @@ public class SoundManager extends Controller
       background();
    }
 
+
    /**
     * Plays the button click sound.
     */
@@ -116,7 +113,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.getInstance().getButtonClickSound());
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getButtonClickSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (Exception a)
@@ -125,6 +122,7 @@ public class SoundManager extends Controller
          }
       }
    }
+
 
    /**
     * Plays poof sound after the poof effect.
@@ -135,7 +133,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.getInstance().getPoofSound());
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getPoofSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (Exception a)
@@ -144,6 +142,7 @@ public class SoundManager extends Controller
          }
       }
    }
+
 
    /**
     * Plays shrink sound after the shrink effect.
@@ -154,7 +153,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.getInstance().getShrinkSound());
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getShrinkSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (Exception a)
@@ -163,6 +162,7 @@ public class SoundManager extends Controller
          }
       }
    }
+
 
    /**
     * Plays the success sound.
@@ -173,7 +173,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.getInstance().getEndOfLevelSound()); // getSuccess sound olacak
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getEndOfLevelSound()); // getSuccess sound olacak
 
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
@@ -183,6 +183,7 @@ public class SoundManager extends Controller
          }
       }
    }
+
 
    /**
     * Toggles the state of the theme song, on or off.
@@ -209,6 +210,7 @@ public class SoundManager extends Controller
 
    }
 
+
    /**
     * Toggles the state of the sound effects, on or off.
     */
@@ -216,6 +218,7 @@ public class SoundManager extends Controller
    {
       isEffectsEnabled = !isEffectsEnabled;
    }
+
 
    /**
     * Checks whether theme song is enabled or not.
@@ -269,8 +272,8 @@ public class SoundManager extends Controller
     */
    public void start()
    {
-      isThemeEnabled = PlayerManager.getInstance().getCurrentPlayer().getSettings().getMusic();
-      isEffectsEnabled = PlayerManager.getInstance().getCurrentPlayer().getSettings().getSfx();
+      isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
+      isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
       background();
    }
 }

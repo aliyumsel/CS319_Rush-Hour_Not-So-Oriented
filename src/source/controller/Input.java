@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * Input class is responsible for handling player inputs.
  */
@@ -31,6 +32,7 @@ public class Input
    private static int mouseX;
    private static int mouseY;
 
+
    /**
     * Cehcks if keys are pressed.
     * @param keyID ID of the keys.
@@ -40,6 +42,7 @@ public class Input
    {
       return keys.get(keyID);
    }
+
 
    /**
     * Checks if the button of the mouse is pressed.
@@ -52,6 +55,7 @@ public class Input
       return mouseButtons2[buttonID].equals("Pressed");
    }
 
+
    /**
     * Checks if mouse button is reales or not.
     * @param buttonID ID of the mouse button.
@@ -62,6 +66,7 @@ public class Input
    {
       return mouseButtons2[buttonID].equals("Released");
    }
+
 
    /**
     * Checks the activity of the mouse
@@ -76,6 +81,7 @@ public class Input
 //   {
 //      return new KeyEventHandler();
 //   }
+
 
    /**
     * Setter of the bindings of the keys.
@@ -97,6 +103,7 @@ public class Input
       component.getActionMap().put("n", new KeyAction("n"));
    }
 
+
    /**
     * Setter of the game panel.
     * @param component instance of JComponent.
@@ -105,6 +112,7 @@ public class Input
    {
       gamePanel = component;
    }
+
 
    /**
     * Resets the activity of the inputs.
@@ -122,6 +130,7 @@ public class Input
          keys.put(entry.getKey(), false);
       }
    }
+
 
    /**
     * Getter of the mouse position.
@@ -141,6 +150,7 @@ public class Input
       return mousePos;
    }
 
+
    /**
     * Gets the mouse position as a matrix.
     * @return the position of the mouse as a matrix.
@@ -155,6 +165,7 @@ public class Input
       return mousePos;
    }
 
+
    /**
     * A private class to understand key actions.
     */
@@ -165,6 +176,7 @@ public class Input
       {
          keyChar = _keyChar;
       }
+
 
       /**
        * Checks the performed actions
@@ -186,6 +198,7 @@ public class Input
     */
    private static class MouseEventHandler extends MouseAdapter
    {
+
       /**
        * Checks pressed mouse buttons.
        * @param e an instance of the MouseEvent.
@@ -203,6 +216,7 @@ public class Input
             mouseY = e.getY();
          }
       }
+
 
       /**
        * Checks if the mouse is relaesed.

@@ -4,13 +4,15 @@ import source.model.*;
 
 import java.awt.*;
 
+
 /**
  * VehicleController class is responsible for controlling the vehicles on the map.
  */
+//@SuppressWarnings("Duplicates")
 @SuppressWarnings("Duplicates")
 public class VehicleController extends Controller
 {
-   private static VehicleController instance = null;
+   public static VehicleController instance;
 
    private Map map;
    private Vehicle selectedVehicle;
@@ -35,13 +37,15 @@ public class VehicleController extends Controller
    private int[] mouseOriginPosition;
    private int[] oldPos;
 
+
    /**
     * Empty constructor that initializes values to their specified initial values.
     */
-   private VehicleController()
+   VehicleController()
    {
+      instance = this;
       numberOfMoves = 0;
-//      soundManager = GameEngine.getInstance().soundManager;
+      soundManager = GameEngine.instance.soundManager;
       currentControl = CONTROL.SLIDE;
 
       mouseOriginPosition = new int[2];
@@ -49,17 +53,6 @@ public class VehicleController extends Controller
       oldPos = new int[2];
    }
 
-   /**
-    * Returns a new instance of the VehicleController class
-    * @return new VehicleController object
-    */
-   public static VehicleController getInstance()
-   {
-      if(instance == null) {
-         instance = new VehicleController();
-      }
-      return instance;
-   }
 
    /**
     * Setter for a map
@@ -70,17 +63,18 @@ public class VehicleController extends Controller
       map = _map;
    }
 
+
    /**
     * Updates the vehicle.
     */
    public void update()
    {
-      if ( !GameManager.getInstance().isGameActive )
+      if ( !GameManager.instance.isGameActive )
       {
          return;
       }
 
-      if ( PowerUpManager.getInstance().isPowerUpActive() )
+      if ( PowerUpManager.instance.isPowerUpActive() )
       {
          return;
       }
@@ -93,7 +87,7 @@ public class VehicleController extends Controller
             slidingVehicle.slideToPoint(destination.x,destination.y);
             if (!slidingVehicle.isSliding)
             {
-               GameManager.getInstance().autoSave();
+               GameManager.instance.autoSave();
                slidingVehicle = null;
             }
             return;
@@ -101,7 +95,7 @@ public class VehicleController extends Controller
 
          if ( Input.getMouseButtonPressed(0) )
          {
-            Vehicle temp = MapController.getInstance().getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+            Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
             if ( temp != null )
             {
@@ -125,7 +119,7 @@ public class VehicleController extends Controller
                int gridPositionY = (int) ( selectedVehicle.transform.position.y + 0.5 );
 
                selectedVehicle.moveToPoint(gridPositionX, gridPositionY);
-               MapController.getInstance().updateMap(map.getGameObjects());
+               MapController.instance.updateMap(map.getGameObjects());
                destination.x = selectedVehicle.transform.position.gridX;
                destination.y = selectedVehicle.transform.position.gridY;
 
@@ -220,7 +214,7 @@ public class VehicleController extends Controller
 
          if ( Input.getMouseButtonPressed(0) && !isMoving )
          {
-            Vehicle temp = MapController.getInstance().getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+            Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
             if ( temp != null )
             {
@@ -236,17 +230,17 @@ public class VehicleController extends Controller
          else
          {
 
-            if ( !MapController.getInstance().isPlayerAtExit() && selectedVehicle == MapController.getInstance().getPlayerVehicle() )
+            if ( !MapController.instance.isPlayerAtExit() && selectedVehicle == MapController.instance.getPlayerVehicle() )
             {
                isPlayerMoving = true;
                selectedVehicle.move(0.1);
             }
-            else if ( MapController.getInstance().isPlayerAtExit() )
+            else if ( MapController.instance.isPlayerAtExit() )
             {
                selectedVehicle = null;
                isMoving = false;
                isPlayerMoving = false;
-               GameManager.getInstance().endMap();
+               GameManager.instance.endMap();
 
             }
          }
@@ -293,24 +287,25 @@ public class VehicleController extends Controller
             if ( !isSelectedVehicleSliding )
             {
                selectedVehicle.moveToPoint(destination.x, destination.y);
-               MapController.getInstance().updateMap(map.getGameObjects());
+               MapController.instance.updateMap(map.getGameObjects());
                changed = true;
                isMoving = false;
                isPlayerMoving = false;
-               GameManager.getInstance().autoSave();
+               GameManager.instance.autoSave();
 
             }
          }
 
       }
-      if ( MapController.getInstance().isPlayerAtExit() )
+      if ( MapController.instance.isPlayerAtExit() )
       {
          selectedVehicle = null;
          isMoving = false;
          isPlayerMoving = false;
-         GameManager.getInstance().endMap();
+         GameManager.instance.endMap();
       }
    }
+
 
    /**
     * Setter for a selected vehicle.
@@ -323,7 +318,7 @@ public class VehicleController extends Controller
          if ( changed )
          {
             numberOfMoves++;
-            GameManager.getInstance().autoSave();
+            GameManager.instance.autoSave();
             changed = false;
          }
       }
@@ -345,15 +340,15 @@ public class VehicleController extends Controller
       int gridPositionY = (int) ( selectedVehicle.transform.position.y + 0.5 );
 
       selectedVehicle.moveToPoint(gridPositionX, gridPositionY);
-      MapController.getInstance().updateMap(map.getGameObjects());
+      MapController.instance.updateMap(map.getGameObjects());
 
       vehicleOriginPosition[0] = selectedVehicle.transform.position.x;
       vehicleOriginPosition[1] = selectedVehicle.transform.position.y;
       mouseOriginPosition = Input.getMousePosition();
 
-//      if ( MapController.getInstance().isPlayerAtExit() )
+//      if ( MapController.instance.isPlayerAtExit() )
 //      {
-//         GameManager.getInstance().endMap();
+//         GameManager.instance.endMap();
 //         selectedVehicle = null;
 //      }
    }
@@ -443,7 +438,7 @@ public class VehicleController extends Controller
     */
    private void checkExitPath()
    {
-      Vehicle player = MapController.getInstance().getPlayerVehicle();
+      Vehicle player = MapController.instance.getPlayerVehicle();
       boolean temp = true;
       for ( int i = 0; i < ( map.getMapSize() - player.transform.position.gridX ) - player.transform.length; i++ )
       {
@@ -514,7 +509,7 @@ public class VehicleController extends Controller
     */
    private void initializeCurrentControl()
    {
-      if ( PlayerManager.getInstance().getCurrentPlayer().getSettings().getControlPreference().equals("Slide") )
+      if ( PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide") )
       {
          currentControl = CONTROL.SLIDE;
       }
@@ -529,7 +524,6 @@ public class VehicleController extends Controller
     */
    public void start()
    {
-      soundManager = SoundManager.getInstance();
       initializeCurrentControl();
    }
 }
