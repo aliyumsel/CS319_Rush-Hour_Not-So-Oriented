@@ -39,6 +39,7 @@ public class TutorialPanel extends JPanel {
     private BufferedImage nextH = GuiPanelManager.instance.LoadImage("image/icons/nextOH.png");
     private BufferedImage back = GuiPanelManager.instance.LoadImage("image/icons/backO.png");
     private BufferedImage backH = GuiPanelManager.instance.LoadImage("image/icons/backOH.png");
+    private BufferedImage backD = GuiPanelManager.instance.LoadImage("image/icons/back_OD.png");
     private BufferedImage cancel = GuiPanelManager.instance.LoadImage("image/icons/quitO.png");
     private BufferedImage cancelH = GuiPanelManager.instance.LoadImage("image/icons/quitOH.png");
 
@@ -63,8 +64,10 @@ public class TutorialPanel extends JPanel {
         } else {
             backButton.setEnabled(index != 0);
             setLabels();
-
         }
+        System.out.println(backButton.isEnabled());
+        System.out.println(backButton.isVisible());
+
     }
 
 
@@ -176,6 +179,7 @@ public class TutorialPanel extends JPanel {
         down = LoadMediaToLabel("/image/icons/down.gif");
         forwardButton = UIFactory.createButton(next, nextH, "square", actionListener);
         backButton = UIFactory.createButton(back, backH, "square", actionListener);
+        backButton.setDisabledIcon(new ImageIcon(backD));
         cancelButton = UIFactory.createButton(cancel, cancelH, "square", actionListener);
 
         labelBackground = LoadMediaToLabel("/image/icons/tutorialBG.png");
@@ -190,21 +194,21 @@ public class TutorialPanel extends JPanel {
         //manipulate tutorialImages, backgroundImages and points(for tutorials) here sizes should match for cooardinates and labels
         arrowCooardinates.add(new Point(20, 100));
         arrowCooardinates.add(new Point(114, 100));
-        arrowCooardinates.add(new Point(143, 305));
+        arrowCooardinates.add(new Point(143, 295));
         arrowCooardinates.add(new Point(712, 100));
         arrowCooardinates.add(new Point(195, 166));
         arrowCooardinates.add(new Point(712, 100));
         arrowCooardinates.add(new Point(568, 150));
         arrowCooardinates.add(new Point(285, 127));
-        arrowCooardinates.add(new Point(166, 282));
+        arrowCooardinates.add(new Point(166, 295));
         arrowCooardinates.add(new Point(20, 100));
         arrowCooardinates.add(new Point(367,300));
         arrowCooardinates.add(new Point(300, 83));
         arrowCooardinates.add(new Point(251, 252));
-        arrowCooardinates.add(new Point(579, 295));
+        arrowCooardinates.add(new Point(593, 295));
         arrowCooardinates.add(new Point(67, 231));
         arrowCooardinates.add(new Point(165, 231));
-        arrowCooardinates.add(new Point(476, 169)); // will turn to right
+        arrowCooardinates.add(new Point(476, 169));
         arrowCooardinates.add(new Point(66, 407));
         arrowCooardinates.add(new Point(203, 275));
         arrowCooardinates.add(new Point(309, 260));//maybe turn to up
@@ -220,6 +224,7 @@ public class TutorialPanel extends JPanel {
         for (int i = 1; i <= 25; i++) { // change size !!!!
             if (LoadMediaToLabel("/image/tutorial_Labels/" + i + ".png") != null) {
                 tutorials.add(LoadMediaToLabel("/image/tutorial_Labels/" + i + ".png"));
+                tutorials.get(i-1).setPreferredSize(new Dimension( labelBackground.getPreferredSize().width,labelBackground.getPreferredSize().height));
                 add(tutorials.get(i - 1));
                 tutorials.get(i - 1).setVisible(false);
             } else {
@@ -258,13 +263,15 @@ public class TutorialPanel extends JPanel {
         URL url = this.getClass().getResource(fileName);
         ImageIcon icon = new ImageIcon(url);
         JLabel label = new JLabel(icon);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
         return label;
     }
 
     private void updateLabelBackground(int x, int y) {
         labelBackground.setBounds(guiManager.findCenter(guiManager.panelWidth, labelBackground) + 200 + x, 200 + y, labelBackground.getPreferredSize().width, labelBackground.getPreferredSize().height);
         for (int i = 0; i < tutorials.size(); i++) {
-            setBounds(tutorials.get(i), labelBackground.getX() + 10, labelBackground.getY() + 20); //label background coordinates
+            setBounds(tutorials.get(i), labelBackground.getX() , labelBackground.getY()); //label background coordinates
         }
         forwardButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) + 75 + 200 + x, 275 + y, forwardButton.getPreferredSize().width, forwardButton.getPreferredSize().height);
         backButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) - 75 + 200 + x, 275 + y, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
@@ -334,7 +341,7 @@ public class TutorialPanel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
             System.out.println(e.getX() + " , " + e.getY() + " , "+index);
-           // setBounds(currentArrow,e.getX(), e.getY());
+            //setBounds(currentArrow,e.getX(), e.getY());
         }
 
         @Override
