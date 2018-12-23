@@ -10,6 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
+
+/**
+ * The panel that holds the Layout for the Play Game Screen.
+ * The actual gameplay is in the innerGamePanel panel
+ * which is held inside this panel as the game attribute.
+ */
 @SuppressWarnings("Duplicates")
 public class GamePanel extends JPanel
 {
@@ -76,6 +82,12 @@ public class GamePanel extends JPanel
    private int moveCountForegroundStartPosition;
    private int timerBottomPosition;
 
+
+   /**
+    * Constructor that initializes regarding values
+    * and creates desired user interface of total game.
+    * @param _guiManager The GuiPanelManager instance for easy access to its functions.
+    */
    GamePanel(GuiPanelManager _guiManager)
    {
       super(null);
@@ -95,6 +107,10 @@ public class GamePanel extends JPanel
       setOpaque(false);
    }
 
+
+   /**
+    * Updates the panel to display the latest changes to the components.
+    */
    public void updatePanel()
    {
       if ( !isShowing() )
@@ -115,6 +131,10 @@ public class GamePanel extends JPanel
       repaint();
    }
 
+
+   /**
+    * Updates the power-up buttons.
+    */
    private void updatePowerUpButtons()
    {
       if ( !GameEngine.getInstance().gameManager.isShrinkPowerUpUsable() )
@@ -142,12 +162,22 @@ public class GamePanel extends JPanel
       }
    }
 
+
+   /**
+    * Updates the labels to display the latest changes to the components after power-up.
+    */
    private void updatePowerUpLabels()
    {
       shrinkAmountLabel.setText(GameEngine.getInstance().playerManager.getCurrentPlayer().getRemainingShrinkPowerup() + "");
       spaceAmountLabel.setText(GameEngine.getInstance().playerManager.getCurrentPlayer().getRemainingSpacePowerup() + "");
    }
 
+
+   /**
+    * Disables the button as an image
+    * @param button the button to be disabled
+    * @param lockedImage to show that button is disabled.
+    */
    private void disableButton(JButton button, BufferedImage lockedImage)
    {
       button.setIcon(new ImageIcon(lockedImage));
@@ -155,6 +185,14 @@ public class GamePanel extends JPanel
       button.setEnabled(false);
    }
 
+
+
+   /**
+    * Enables the button as an image
+    * @param button the button to be enabled
+    * @param normalImage normal image of the button
+    * @param highlightedImage image after the button is pressed.
+    */
    private void enableButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage)
    {
       button.setIcon(new ImageIcon(normalImage));
@@ -162,6 +200,10 @@ public class GamePanel extends JPanel
       button.setEnabled(true);
    }
 
+
+   /**
+    * Loads the images from the images directory into the memory.
+    */
    public void loadImages()
    {
       background = ThemeManager.getInstance().getGamePanelBackgroundImage();
@@ -199,6 +241,10 @@ public class GamePanel extends JPanel
       secondStarBackgroundImage = guiManager.LoadImage("image/icons/miniStarLocked.png");
    }
 
+
+   /**
+    * Creates the components from the loaded images.
+    */
    private void createComponents()
    {
       blackBackground = new JLabel()
@@ -261,6 +307,11 @@ public class GamePanel extends JPanel
       remainingTimeLabel.setForeground(Color.white);
    }
 
+
+
+   /**
+    * Adds the components to the panel.
+    */
    private void addComponents()
    {
       add(blackBackground);
@@ -276,6 +327,10 @@ public class GamePanel extends JPanel
       add(settings);
    }
 
+
+   /**
+    * Sets the sizes and positions of the components in the panel.
+    */
    private void setBoundsOfComponents()
    {
       blackBackground.setBounds(0, 0, panelWidth, panelHeight);
@@ -332,6 +387,14 @@ public class GamePanel extends JPanel
 
    }
 
+
+
+   /**
+    * Method to make visible the end of level panel and
+    * demonstrate the earned stars  with considering the number of moves.
+    * @param visible indicates if i visible or not as a boolean.
+    * @param starAmount the earned stars.
+    */
    private void setEndOfLevelPanelVisible(boolean visible, int starAmount)
    {
       if ( visible )
@@ -342,28 +405,51 @@ public class GamePanel extends JPanel
       endOfLevelPanel.setVisible(visible);
    }
 
+
+
+   /**
+    * Shows the end of level pop up with considering the earned stars.
+    * @param starAmount the earned stars.
+    */
    public void showEndOfLevelPopUp(int starAmount)
    {
       setEndOfLevelPanelVisible(true, starAmount);
       showBlackBackground();
    }
 
+
+
+   /**
+    * Shows time over pop up.
+    */
    public void showTimeOverPopUp()
    {
       setTimeOverPopUpVisible(true);
       showBlackBackground();
    }
 
+
+   /**
+    * Shows black background.
+    */
    private void showBlackBackground()
    {
       blackBackground.setVisible(true);
    }
 
+
+   /**
+    * Hides the black background.
+    */
    void hideBlackBackground()
    {
       blackBackground.setVisible(false);
    }
 
+
+   /**
+    * Method to set visible the inner game panel which is a panel that game is played.
+    */
    public void setInnerGamePanelVisible()
    {
       innerGamePanel.setVisible(true);
@@ -371,16 +457,32 @@ public class GamePanel extends JPanel
       setTimeOverPopUpVisible(false);
    }
 
+
+   /**
+    * Gets the end of level panel.
+    * @return end of level panel.
+    */
    EndOfLevelPanel getEndOfLevelPanel()
    {
       return endOfLevelPanel;
    }
 
+
+
+   /**
+    * Gets time over pop up.
+    * @return time over pop up.
+    */
    TimeOverPopUp getTimeOverPopUp()
    {
       return timeOverPopUp;
    }
 
+
+   /**
+    * Sets time over pop up as visible
+    * @param visible indicates if it is visible or not.
+    */
    private void setTimeOverPopUpVisible(boolean visible)
    {
 //      if ( visible )
@@ -390,6 +492,10 @@ public class GamePanel extends JPanel
       timeOverPopUp.setVisible(visible);
    }
 
+
+   /**
+    * Method to set visible the inner game panel which is a panel that game is played.
+    */
    private void createInnerGamePanel()
    {
       try
@@ -403,6 +509,10 @@ public class GamePanel extends JPanel
       setVisible(false);
    }
 
+
+   /**
+    * Creates time over pop up.
+    */
    private void createTimeOverPopUp()
    {
       timeOverPopUp = new TimeOverPopUp(guiManager);
@@ -414,6 +524,10 @@ public class GamePanel extends JPanel
    }
 
 
+
+   /**
+    * Creates end of level panel.
+    */
    private void createEndOfLevelPanel()
    {
       endOfLevelPanel = new EndOfLevelPanel(guiManager);
@@ -424,6 +538,9 @@ public class GamePanel extends JPanel
       endOfLevelPanel.setBounds(guiManager.findCenter(panelWidth, endOfLevelPanel), guiManager.findCenterVertical(panelHeight, endOfLevelPanel), size.width, size.height);
    }
 
+   /**
+    * It is a action listener for game panel.
+    */
    private ActionListener actionListener = new ActionListener()
    {
       @Override
@@ -464,6 +581,12 @@ public class GamePanel extends JPanel
       }
    };
 
+
+
+   /**
+    * The method that paints the panel to the screen.
+    * @param g An instance of the graphics.
+    */
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
@@ -476,6 +599,11 @@ public class GamePanel extends JPanel
       drawMoveCountForeground(g);
    }
 
+
+   /**
+    * The method that draws the background image to the background of the panel.
+    * @param graphics An instance of the graphics.
+    */
    private void drawBackground(Graphics graphics)
    {
       graphics.drawImage(background, 0, 0, null);
@@ -547,6 +675,11 @@ public class GamePanel extends JPanel
       }
    }
 
+
+   /**
+    * The method that paints the timer foreground.
+    * @param g An instance of the graphics.
+    */
    private void drawTimerForeground(Graphics g)
    {
       int remainingTime = GameEngine.getInstance().gameManager.getRemainingTime();
