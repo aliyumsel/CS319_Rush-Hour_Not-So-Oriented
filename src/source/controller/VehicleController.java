@@ -4,7 +4,9 @@ import source.model.*;
 
 import java.awt.*;
 
-//@SuppressWarnings("Duplicates")
+/**
+ * VehicleController class is responsible for controlling the vehicles on the map.
+ */
 @SuppressWarnings("Duplicates")
 public class VehicleController extends Controller
 {
@@ -33,6 +35,9 @@ public class VehicleController extends Controller
    private int[] mouseOriginPosition;
    private int[] oldPos;
 
+   /**
+    * Empty constructor that initializes values to their specified initial values.
+    */
    private VehicleController()
    {
       numberOfMoves = 0;
@@ -44,6 +49,10 @@ public class VehicleController extends Controller
       oldPos = new int[2];
    }
 
+   /**
+    * Returns a new instance of the VehicleController class
+    * @return new VehicleController object
+    */
    public static VehicleController getInstance()
    {
       if(instance == null) {
@@ -52,13 +61,18 @@ public class VehicleController extends Controller
       return instance;
    }
 
+   /**
+    * Setter for a map
+    * @param _map desired map.
+    */
    public void setMap(Map _map)
    {
       map = _map;
    }
 
-
-
+   /**
+    * Updates the vehicle.
+    */
    public void update()
    {
       if ( !GameManager.getInstance().isGameActive )
@@ -298,6 +312,10 @@ public class VehicleController extends Controller
       }
    }
 
+   /**
+    * Setter for a selected vehicle.
+    * @param _selectedVehicle a vwhile that is selected by the player.
+    */
    private void setSelectedVehicle(Vehicle _selectedVehicle)
    {
       if ( _selectedVehicle != selectedVehicle )
@@ -317,6 +335,10 @@ public class VehicleController extends Controller
       soundManager.vehicleHorn();
    }
 
+
+   /**
+    * Changes the grid positions of the vehicle.
+    */
    private void changeGridPosition()
    {
       int gridPositionX = (int) ( selectedVehicle.transform.position.x + 0.5 );
@@ -336,6 +358,12 @@ public class VehicleController extends Controller
 //      }
    }
 
+
+   /**
+    * Checks whether the player can move the vehicle or not.
+    * @param direction The direction of the movement.
+    * @return true if it moves, false otherwise.
+    */
    private boolean tryMove(String direction)
    {
       System.out.println("In here??");
@@ -389,16 +417,30 @@ public class VehicleController extends Controller
       return false;
    }
 
+
+   /**
+    * Getter for number of moves.
+    * @return the number of moves.
+    */
    public int getNumberOfMoves()
    {
       return numberOfMoves;
    }
 
+
+   /**
+    * Setter for number of moves.
+    * @param _moves number of moves to be setted.
+    */
    void setNumberOfMoves(int _moves)
    {
       numberOfMoves = _moves;
    }
 
+
+   /**
+    * Checks the exit path for player's vehicle.
+    */
    private void checkExitPath()
    {
       Vehicle player = MapController.getInstance().getPlayerVehicle();
@@ -414,6 +456,14 @@ public class VehicleController extends Controller
       //System.out.println(isExitReachable);
    }
 
+
+   /**
+    * It is a function of clamp
+    * @param value indicates entered value
+    * @param min minimum value
+    * @param max maximum value
+    * @return the difference
+    */
    private double clamp(double value, int min, int max)
    {
       double difference;
@@ -432,11 +482,19 @@ public class VehicleController extends Controller
       return difference;
    }
 
+   /**
+    * Setter for current control.
+    * @param type represents the control.
+    */
    void setCurrentControl(CONTROL type)
    {
       currentControl = type;
    }
 
+
+   /**
+    * Toggles current control.
+    */
    void toggleCurrentControl()
    {
       if ( currentControl == CONTROL.SLIDE )
@@ -450,6 +508,10 @@ public class VehicleController extends Controller
       selectedVehicle = null;
    }
 
+
+   /**
+    * It initializes the current control.
+    */
    private void initializeCurrentControl()
    {
       if ( PlayerManager.getInstance().getCurrentPlayer().getSettings().getControlPreference().equals("Slide") )
@@ -462,6 +524,9 @@ public class VehicleController extends Controller
       }
    }
 
+   /**
+    * Caller of the initializeCurrentControl.
+    */
    public void start()
    {
       soundManager = SoundManager.getInstance();

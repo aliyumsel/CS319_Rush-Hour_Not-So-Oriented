@@ -10,7 +10,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-
+/**
+ * The panel that holds the pop-up layout for the create new player functionality our game
+ */
 public class CreatePlayerPopUp extends JPanel
 {
    private GuiPanelManager guiManager;
@@ -38,6 +40,11 @@ public class CreatePlayerPopUp extends JPanel
    private Mode currentMode;
    private String oldName;
 
+   /**
+    * Initializes and configures the panel.
+    * @param _guiManager  The GuiPanelManager instance for easy access to its functions.
+    * @param _changePlayerPanel The ChangePlayerPanel instance for easy access to its functions.
+    */
    CreatePlayerPopUp(GuiPanelManager _guiManager, ChangePlayerPanel _changePlayerPanel)
    {
       super(null);
@@ -53,6 +60,9 @@ public class CreatePlayerPopUp extends JPanel
       setVisible(false);
    }
 
+   /**
+    * Loads the images from the images directory into the memory.
+    */
    public void loadImages()
    {
       background = ThemeManager.getInstance().getPopupBackgroundImage();
@@ -64,6 +74,9 @@ public class CreatePlayerPopUp extends JPanel
       confirmHighlightedImage = guiManager.LoadImage("image/icons/miniPlayH.png");
    }
 
+   /**
+    * Creates the components from the loaded images.
+    */
    void createComponents()
    {
       playerName = new JTextField();
@@ -95,6 +108,9 @@ public class CreatePlayerPopUp extends JPanel
       confirm = UIFactory.createButton(confirmImage, confirmHighlightedImage, "square", actionListener);
    }
 
+   /**
+    * Adds the components to the panel.
+    */
    private void addComponents()
    {
       add(playerName);
@@ -102,6 +118,9 @@ public class CreatePlayerPopUp extends JPanel
       add(confirm);
    }
 
+   /**
+    * Sets the sizes and positions of the components in the panel.
+    */
    private void setBoundsOfComponents()
    {
       playerName.setBounds(guiManager.findCenter(panelWidth, playerName), 20, playerName.getPreferredSize().width, playerName.getPreferredSize().height);
@@ -110,17 +129,28 @@ public class CreatePlayerPopUp extends JPanel
       confirm.setBounds(guiManager.findCenter(panelWidth, close) + 120, 150, close.getPreferredSize().width, close.getPreferredSize().height);
    }
 
+    /**
+    * Updates the panel to display the latest changes to the components.
+    */
    void updatePanel()
    {
       //reset the panel when being set visible
    }
 
+   /**
+    * The method to update the default text field.
+    * @param defaultText The default text that will be shown in the text field.
+    */
    private void updateDefaultTextField(String defaultText)
    {
       playerName.setText(defaultText);
       playerName.setForeground(Color.gray);
    }
 
+   /**
+    * The method to show the pop-up.
+    * @param mode Mode of the pop-up. (add/edit)
+    */
    void showPopUp(Mode mode)
    {
       setVisible(true);
@@ -131,6 +161,11 @@ public class CreatePlayerPopUp extends JPanel
       }
    }
 
+   /**
+    * The method to show the pop-up.
+    * @param mode Mode of the pop-up. (add/edit)
+    * @param playerName The name of the player.
+    */
    void showPopUp(Mode mode, String playerName)
    {
       setVisible(true);
@@ -139,17 +174,28 @@ public class CreatePlayerPopUp extends JPanel
       oldName = playerName;
    }
 
+   /**
+    * The method to hide the pop-up
+    */
    void hidePopUp()
    {
       setVisible(false);
    }
 
+   /**
+    * The method that paints the panel to the screen.
+    * @param g the graphics object for the component.
+    */
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
       drawBackground(g);
    }
 
+   /**
+    * The method that draws the background image to the background of the panel.
+    * @param graphics The graphics object to draw the background.
+    */
    private void drawBackground(Graphics graphics)
    {
 

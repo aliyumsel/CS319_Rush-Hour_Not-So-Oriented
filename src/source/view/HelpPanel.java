@@ -8,6 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+
+/**
+ * The panel that holds the Help Screen for our game.
+ */
 @SuppressWarnings("Duplicates")
 public class HelpPanel extends JPanel
 {
@@ -42,6 +46,11 @@ public class HelpPanel extends JPanel
    private int pageLength = 2;
    private int page = 0;
 
+
+   /**
+    * Constructor that initializes regarding values and creates desired user interface of help screen.
+    * @param _guiManager The GuiPanelManager instance for easy access to its functions.
+    */
    HelpPanel(GuiPanelManager _guiManager)
    {
       super(null);
@@ -61,6 +70,10 @@ public class HelpPanel extends JPanel
       this.setVisible(false);
    }
 
+
+   /**
+    * Loads the images from the images directory into the memory.
+    */
    public void loadImages()
    {
       background = ThemeManager.getInstance().getBackgroundImage();
@@ -93,6 +106,11 @@ public class HelpPanel extends JPanel
 
    }
 
+
+
+   /**
+    * Creates the components from the loaded images.
+    */
    private void createComponents()
    {
       back = UIFactory.createButton(backButtonImage, backButtonHighlightedImage, "square", actionListener);
@@ -121,6 +139,10 @@ public class HelpPanel extends JPanel
       leftArrowButton = UIFactory.createButton(leftArrow, leftArrowHighlighted, "arrow", actionListener);
    }
 
+
+   /**
+    *  Adds the components to the panel.
+    */
    private void addComponents()
    {
       add(heading);
@@ -136,6 +158,12 @@ public class HelpPanel extends JPanel
       add(leftArrowButton);
    }
 
+
+
+   /**
+    * Sets the sizes and positions of the components in the panel.
+    * Parameter page controls the current page number.
+    */
    private void setBoundsOfComponents()
    {
       heading.setBounds(guiManager.findCenter(panelWidth, heading), 25, heading.getPreferredSize().width, heading.getPreferredSize().height);
@@ -165,6 +193,10 @@ public class HelpPanel extends JPanel
       }
    }
 
+
+   /**
+    * Method to update the number of visible pages.
+    */
    private void updateVisiblePage()
    {
       int limit = page * pageLength;
@@ -178,6 +210,10 @@ public class HelpPanel extends JPanel
       }
    }
 
+
+   /**
+    * Action listener for the help panel.
+    */
    private ActionListener actionListener = e ->
    {
       GameEngine.getInstance().soundManager.buttonClick();
@@ -216,6 +252,11 @@ public class HelpPanel extends JPanel
       }
    };
 
+
+   /**
+    * The method that paints the panel to the screen.
+    * @param g An instance of the Graphics.
+    */
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
@@ -224,6 +265,11 @@ public class HelpPanel extends JPanel
       // setBackground(Color.WHITE);
    }
 
+
+   /**
+    * The method that draws the background image to the background of the panel.
+    * @param graphics An instance of the Graphics.
+    */
    private void drawBackground(Graphics graphics)
    {
 

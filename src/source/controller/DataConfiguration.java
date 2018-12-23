@@ -3,6 +3,9 @@ package source.controller;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * It is class for data configuration.
+ */
 public class DataConfiguration {
 
     private static DataConfiguration instance = null;
@@ -12,6 +15,9 @@ public class DataConfiguration {
     private GameInfo gameInfo;
     private DataErrorHandler handler;
 
+    /**
+     * Empty constructor that initializes values to their specified initial values.
+     */
     private DataConfiguration()
     {
         instance = this;
@@ -21,6 +27,10 @@ public class DataConfiguration {
         gameInfo.extractInfo();
     }
 
+    /**
+     * Returns a new instance of the DataConfiguration class
+     * @return new DataConfiguration object
+     */
     public static DataConfiguration getInstance()
     {
         if(instance == null) {
@@ -29,6 +39,9 @@ public class DataConfiguration {
         return instance;
     }
 
+    /**
+     * It is to confirm the data.
+     */
     private void confirmData()
     {
         File file;
@@ -50,6 +63,10 @@ public class DataConfiguration {
             handler.handleInfoDamagedError();
         }
     }
+
+    /**
+     * It is for setup new file.
+     */
     void setup()
     {
         File folder = new File(dataPath);
@@ -62,6 +79,9 @@ public class DataConfiguration {
         gameOpenedFirstTime = true;
     }
 
+    /**
+     * Creates information file.
+     */
     private void createInfoFile()
     {
         File infoFile = new File(dataPath + "\\info.json");

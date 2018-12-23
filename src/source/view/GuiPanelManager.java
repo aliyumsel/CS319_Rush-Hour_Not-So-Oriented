@@ -12,7 +12,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+
+
+
+/**
+ * GuiPanelManager class extends javax.swing.JFrame class,
+ * and it is responsible for managing the different panels of the game.
+ */
 @SuppressWarnings({"serial", "Duplicates"})
+
 public class GuiPanelManager extends JFrame
 {
    private static GuiPanelManager instance = null;
@@ -34,6 +42,10 @@ public class GuiPanelManager extends JFrame
 
 //   private BufferedImage cursorImage;
 
+
+   /**
+    * Initializes and configures the frame and the panels inside.
+    */
    private GuiPanelManager()
    {
       super("Rush Hour");
@@ -93,6 +105,11 @@ public class GuiPanelManager extends JFrame
 
    }
 
+
+   /**
+    * Getter for instance of GuiPanelManager.
+    * @return instance of GuiPanelManager.
+    */
    public static GuiPanelManager getInstance()
    {
       if(instance == null) {
@@ -101,6 +118,10 @@ public class GuiPanelManager extends JFrame
       return instance;
    }
 
+
+   /**
+    * Function that creates the panels and adds them to the frame and the panels ArrayList.
+    */
    private void addPanels()
    {
       mainMenuPanel = new MainMenuPanel(this);
@@ -131,11 +152,22 @@ public class GuiPanelManager extends JFrame
       panels.add(changePlayerPanel);
    }
 
+
+   /**
+    * Function to access the game panel.
+    * @return the game panel
+    */
    public GamePanel getGamePanel()
    {
       return gamePanel;
    }
 
+
+
+   /**
+    * Sets the panel with the given name visible and sets the other panels invisible.
+    * @param panelName the panel with the given name.
+    */
    void setPanelVisible(String panelName)
    {
       if ( panelName.equals("MainMenu") )
@@ -194,12 +226,18 @@ public class GuiPanelManager extends JFrame
       targetPanel.setVisible(true);
       setContentPane(targetPanel);
    }
-
+   /**
+    * Updates the panels to display the latest changes to the screen.
+    */
    void updatePanels()
    {
       gamePanel.updatePanel(); // look into updating other panels
    }
 
+
+   /**
+    *  Updates the images in all panels.
+    */
    void updateImages()
    {
       settingsPanel.loadImages();
@@ -213,6 +251,9 @@ public class GuiPanelManager extends JFrame
       mainMenuPanel.loadImages();
    }
 
+   /**
+    * Sets the keyboard and mouse listeners.
+    */
    private void setListeners()
    {
 //      KeyListener keyListener = Input.getKeyListener();
@@ -223,6 +264,12 @@ public class GuiPanelManager extends JFrame
       Input.setKeyBindings(gamePanel);
    }
 
+
+   /**
+    * Function to load the images.
+    * @param fileName the desired file's name
+    * @return the image with the given filename as BufferedImage.
+    */
    public BufferedImage LoadImage(String fileName)
    {
       //fileName = fileName.substring(fileName.indexOf('/') + 1);
@@ -238,11 +285,25 @@ public class GuiPanelManager extends JFrame
    }
 
 
+
+   /**
+    * Finds the center of the panel with the given length for the given component.
+    * @param _panelWidth the width of the panel.
+    * @param _component instance of Component.
+    * @return the center.
+    */
    int findCenter(int _panelWidth, Component _component)
    {
       return ( _panelWidth - _component.getPreferredSize().width ) / 2;
    }
 
+
+   /**
+    * Finds the vertical center of the panel with the given height for the given component.
+    * @param _panelHeight the width of the panel.
+    * @param _component instance of Component.
+    * @return the center.
+    */
    int findCenterVertical(int _panelHeight, Component _component)
    {
       return ( _panelHeight - _component.getPreferredSize().height ) / 2;

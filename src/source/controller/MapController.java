@@ -5,6 +5,10 @@ import source.model.*;
 
 import java.util.ArrayList;
 
+/**
+ * MapController class is responsible for loading, saving levels.
+ * Updating the current map and holding information about the level.
+ */
 public class MapController extends Controller
 {
    private static MapController instance = null;
@@ -12,11 +16,18 @@ public class MapController extends Controller
    private MapDao mapDao;
    private Map map;
 
+   /**
+    * Empty constructor that initializes values to their specified initial values.
+    */
    private MapController()
    {
       mapDao = new MapDaoImpl();
    }
 
+   /**
+    * Returns a new instance of the MapController class
+    * @return new MapController object
+    */
    public static MapController getInstance()
    {
       if(instance == null) {
@@ -25,27 +36,49 @@ public class MapController extends Controller
       return instance;
    }
 
+   /**
+    * Load the level given the level number.
+    * @param level given level number.
+    */
    void loadLevel(int level)
    {
       Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
       map = mapDao.extractMap(level, currentPlayer, false);
    }
 
+   /**
+    * Loads original level.
+    * @param level given level number.
+    */
    void loadOriginalLevel(int level)
    {
       map = mapDao.extractMap(level, null, true);
    }
 
+
+   /**
+    * Getter for a map
+    * @return the map.
+    */
    public Map getMap()
    {
       return map;
    }
 
+
+   /**
+    * Updates map with the given game objects.
+    * @param gameObjects objects of the game.
+    */
    void updateMap(ArrayList<GameObject> gameObjects)
    {
       map.formMap(gameObjects);
    }
 
+
+   /**
+    * Updates the map.
+    */
    //Currently testing / May even crate a method called formMap() with no arguments
    void updateMap()
    {
@@ -73,6 +106,13 @@ public class MapController extends Controller
       return selectedObject;
    }
 
+
+   /**
+    * Getter for vehicle in selected cell
+    * @param x coordinates on x-axis
+    * @param y coordinates on y-axis
+    * @return the vehicle in selected cell.
+    */
    Vehicle getVehicleBySelectedCell(int x, int y)
    {
       GameObject temp = getGameObjectBySelectedCell(x, y);
@@ -87,6 +127,13 @@ public class MapController extends Controller
       }
    }
 
+
+   /**
+    * Getter for obstacle in selected cell
+    * @param x coordinates on x-axis
+    * @param y coordinates on y-axis
+    * @return the obstacle in selected cell.
+    */
    Obstacle getObstacleBySelectedCell(int x, int y)
    {
       GameObject temp = getGameObjectBySelectedCell(x, y);
@@ -101,16 +148,30 @@ public class MapController extends Controller
       }
    }
 
+
+   /**
+    * Removes the desired object.
+    * @param gameObject the desired game object.
+    */
    void removeGameObject(GameObject gameObject)
    {
       map.getGameObjects().remove(gameObject);
    }
 
+
+   /**
+    * Adds the desired object.
+    * @param gameObject the desired game object.
+    */
    void addGameObject(GameObject gameObject)
    {
       map.getGameObjects().add(gameObject);
    }
 
+
+   /**
+    * Highlights the obstacles.
+    */
    void highlightObstacles()
    {
       for ( GameObject gameObject : map.getGameObjects() )
@@ -122,6 +183,10 @@ public class MapController extends Controller
       }
    }
 
+
+   /**
+    * Highlights the long vehicles.
+    */
    void highlightLongs()
    {
       for ( GameObject gameObject : map.getGameObjects() )
@@ -137,6 +202,10 @@ public class MapController extends Controller
       }
    }
 
+
+   /**
+    * Clears the highlights.
+    */
    void clearHighlights()
    {
       for ( GameObject gameObject : map.getGameObjects() )
@@ -145,9 +214,12 @@ public class MapController extends Controller
       }
    }
 
-   // This method checks if the player is at the last cell he can go
-   // One more move will make him get out of the grid and finish the game
-   // Map should hold a reference to the player car so we don't have to check every game object every move.
+   /**
+    * This method checks if the player is at the last cell he can go
+    * One more move will make him get out of the grid and finish the game
+    * Map should hold a reference to the player car so we don't have to check every game object every move.
+    * @return true if it is at exit, false otherwise.
+    */
    boolean isPlayerAtExit()
    {
       Vehicle player = getPlayerVehicle();
@@ -159,6 +231,11 @@ public class MapController extends Controller
       return player.transform.position.gridX + player.transform.length == map.getMapSize();
    }
 
+
+   /**
+    * Transforms maps to strings.
+    * @return strings that are transformed maps
+    */
    // String builder kullansak daha guzel olcak
    String mapToString()
    {
@@ -218,6 +295,11 @@ public class MapController extends Controller
       return mapString.substring(0, mapString.length() - 2);
    }
 
+
+   /**
+    * Getter for the player's vehicle.
+    * @return the player's vehicle.
+    */
    Vehicle getPlayerVehicle()
    {
       Vehicle player = null;

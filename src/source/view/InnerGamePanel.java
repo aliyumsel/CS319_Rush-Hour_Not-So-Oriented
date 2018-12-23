@@ -11,6 +11,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
+
+/**
+ * The panel that the actual game is running
+ */
 @SuppressWarnings("serial")
 public class InnerGamePanel extends JPanel
 {
@@ -29,6 +33,13 @@ public class InnerGamePanel extends JPanel
    private BufferedImage poof7;
    private BufferedImage poof8;
 
+
+
+   /**
+    * Initializes and configures the panel.
+    * @param guiManager The GuiPanelManager instance for easy access to its functions.
+    * @throws FileNotFoundException file not found exception
+    */
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException
    {
       super(null);
@@ -46,6 +57,10 @@ public class InnerGamePanel extends JPanel
       setVisible(true);
    }
 
+
+   /**
+    * Updates the panel to display the latest changes to the components.
+    */
    void updatePanel()
    {
       if ( !isShowing() )
@@ -56,6 +71,10 @@ public class InnerGamePanel extends JPanel
       repaint();
    }
 
+
+   /**
+    * Loads the images from memory.
+    */
    public void loadImages()
    {
 //      poof0 = guiManager.LoadImage("image/poof/poof0.png");
@@ -79,6 +98,12 @@ public class InnerGamePanel extends JPanel
       poof8 = guiManager.LoadImage("image/poof2/poof8.png");
    }
 
+
+
+
+   /**
+    * Adds images of the poof effect to the inner game panel.
+    */
    private void addPoofImages()
    {
       poofImages.add(poof0);
@@ -92,6 +117,11 @@ public class InnerGamePanel extends JPanel
       poofImages.add(poof8);
    }
 
+
+   /**
+    * The method that paints the panel to the screen.
+    * @param g An instance of the Graphics.
+    */
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);

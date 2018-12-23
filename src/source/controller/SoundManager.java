@@ -8,6 +8,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.net.URL;
 
+/**
+ * SoundManager class is responsible for all the sounds
+ * that can be heard in the game.
+ */
 @SuppressWarnings("Duplicates")
 public class SoundManager extends Controller
 {
@@ -19,12 +23,19 @@ public class SoundManager extends Controller
    private boolean isThemeEnabled;
    private boolean isEffectsEnabled;
 
+   /**
+    * Empty constructor that initializes values to their specified initial values.
+    */
    private SoundManager()
    {
       //isThemeEnabled = GameEngine.getInstance().playerManager.getCurrentPlayer().getSettings().getMusic();
       //isEffectsEnabled = GameEngine.getInstance().playerManager.getCurrentPlayer().getSettings().getSfx();
    }
 
+   /**
+    * Returns a new instance of the SoundManager class
+    * @return new SoundManager object
+    */
    public static SoundManager getInstance()
    {
       if(instance == null) {
@@ -33,6 +44,9 @@ public class SoundManager extends Controller
       return instance;
    }
 
+   /**
+    * It initializes the clip.
+    */
    private void initializeClip()
    {
       try
@@ -50,6 +64,9 @@ public class SoundManager extends Controller
       }
    }
 
+   /**
+    * Plays the background music
+    */
    public void background()
    {
       if ( isThemeEnabled )
@@ -58,6 +75,9 @@ public class SoundManager extends Controller
       }
    }
 
+   /**
+    * Plays the vehicle horn sound effect
+    */
    void vehicleHorn()
    {
       if ( isEffectsEnabled )
@@ -66,6 +86,9 @@ public class SoundManager extends Controller
       }
    }
 
+   /**
+    * Updates the theme for the sounds.
+    */
    public void updateTheme()
    {
       if ( theme != null )
@@ -75,6 +98,9 @@ public class SoundManager extends Controller
       background();
    }
 
+   /**
+    * Plays the button click sound.
+    */
    public void buttonClick()
    {
       if ( isEffectsEnabled )
@@ -83,6 +109,9 @@ public class SoundManager extends Controller
       }
    }
 
+   /**
+    * Plays poof sound after the poof effect.
+    */
    public void poofSound()
    {
       if ( isEffectsEnabled )
@@ -91,6 +120,9 @@ public class SoundManager extends Controller
       }
    }
 
+   /**
+    * Plays shrink sound after the shrink effect.
+    */
    public void shrinkSound()
    {
       if ( isEffectsEnabled )
@@ -99,6 +131,9 @@ public class SoundManager extends Controller
       }
    }
 
+   /**
+    * Plays the success sound.
+    */
    public void successSound()
    {
       if ( isEffectsEnabled )
@@ -107,6 +142,9 @@ public class SoundManager extends Controller
       }
    }
 
+   /**
+    * Toggles the state of the theme song, on or off.
+    */
    public void themeSongToggle()
    {
       isThemeEnabled = !isThemeEnabled;
@@ -144,21 +182,38 @@ public class SoundManager extends Controller
       }
    }
 
+   /**
+    * Toggles the state of the sound effects, on or off.
+    */
    public void effectsToggle()
    {
       isEffectsEnabled = !isEffectsEnabled;
    }
 
+   /**
+    * Checks whether theme song is enabled or not.
+    * @return true if it is enabled, false otherwise.
+    */
    boolean isThemeSongEnabled()
    {
       return isThemeEnabled;
    }
 
+
+   /**
+    * Checks whether effects is enabled or not.
+    * @return true if it is enabled, false otherwise.
+    */
    boolean isEffectsEnabled()
    {
       return isEffectsEnabled;
    }
 
+
+   /**
+    * Setter for theme song
+    * @param themeEnabled Sets if the theme enabled.
+    */
    void setThemeSong(boolean themeEnabled)
    {
       if ( this.isThemeEnabled != themeEnabled )
@@ -168,6 +223,11 @@ public class SoundManager extends Controller
 
    }
 
+
+   /**
+    * Setter for effects.
+    * @param effectsEnabled Sets if the effects enabled.
+    */
    void setEffects(boolean effectsEnabled)
    {
       if ( this.isEffectsEnabled != effectsEnabled )
@@ -176,6 +236,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Starter for sound manager.
+    */
    public void start()
    {
       isThemeEnabled = PlayerManager.getInstance().getCurrentPlayer().getSettings().getMusic();

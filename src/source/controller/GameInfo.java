@@ -8,24 +8,37 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * The class for giving information of the game.
+ */
 class GameInfo {
     private static GameInfo instance = null;
 
     final int numberOfMaps = 50;
     String lastActivePlayer;
 
+    /**
+     * The inner class which holds last active player's info.
+     */
     private class Info
     {
          String lastActivePlayer;
     }
     private Info info;
 
+    /**
+     * Empty constructor that initializes values to their specified initial values.
+     */
     private GameInfo()
     {
         instance = this;
         info = new Info();
     }
 
+    /**
+     * Returns a new instance of the class
+     * @return new GameInfo object
+     */
     public static GameInfo getInstance()
     {
         if(instance == null) {
@@ -34,6 +47,10 @@ class GameInfo {
         return instance;
     }
 
+    /**
+     * Extracts info.
+     * @return true if it is extractad, false otherwise.
+     */
     boolean extractInfo()
     {
         Gson gson = new Gson();
@@ -66,6 +83,10 @@ class GameInfo {
 
     }
 
+    /**
+     * Updates the last players info.
+     * @param lastPlayer the last player who played the game.
+     */
     void updateInfo(String lastPlayer)
     {
         Gson gson = new Gson();
