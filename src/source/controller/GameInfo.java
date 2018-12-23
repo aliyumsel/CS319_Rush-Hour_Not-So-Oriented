@@ -14,7 +14,7 @@ import java.io.IOException;
 class GameInfo {
     private static GameInfo instance = null;
 
-    final int numberOfMaps = 50;
+    final int numberOfMaps = 60;
     String lastActivePlayer;
 
     /**
