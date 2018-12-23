@@ -3,7 +3,7 @@ package source.controller;
 /**
  * Controller class is the base class that every manager or controller is derived from this class.
  */
-public abstract class Controller
+abstract class Controller
 {
    /**
     * It is a function to start.
@@ -13,7 +13,6 @@ public abstract class Controller
 
    }
 
-
    /**
     * It is a function to update.
     * Called every frame from the Game Engine.
@@ -21,4 +20,5 @@ public abstract class Controller
    void update(){
 
    }
+
 }

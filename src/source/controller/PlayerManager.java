@@ -7,31 +7,40 @@ import source.model.Settings;
 
 import java.util.ArrayList;
 
-
 /**
  * PlayerManager is responsible for handling the updates of
  * player information, creating, changing and deleting users
  */
 public class PlayerManager extends Controller
 {
-   public static PlayerManager instance;
+   private static PlayerManager instance = null;
 
-   private Player currentPlayer; // Represents the currently active user,
-   private ArrayList<Player> players; //Holds every player that is created for the game.
-   public int numberOfPlayers; //Holds the number of players.
+   private Player currentPlayer;
+   private ArrayList<Player> players;
+   public int numberOfPlayers;
 
    private PlayerDao playerDao;
 
    /**
     *  Empty constructor that initializes values to their specified initial values.
     */
-   public PlayerManager()
+   private PlayerManager()
    {
-      instance = this;
       playerDao = new PlayerDaoImpl();
       extractPlayers();
    }
 
+   /**
+    * Returns a new instance of the PlayerManager class
+    * @return new PlayerManager object
+    */
+   public static PlayerManager getInstance()
+   {
+      if(instance == null) {
+         instance = new PlayerManager();
+      }
+      return instance;
+   }
 
    /**
     * Extracts and stores the extracted players in an arraylist with the help of player extractor.
@@ -62,7 +71,6 @@ public class PlayerManager extends Controller
       }
    }
 
-
    /**
     * Getter for the currently selected player.
     * @return the currently selected player.
@@ -71,12 +79,6 @@ public class PlayerManager extends Controller
    {
       return currentPlayer;
    }
-
-//   public void setCurrentPlayer(Player currentPlayer)
-//   {
-//      this.currentPlayer = currentPlayer;
-//   }
-
 
    /**
     * Getter for all the players in an arraylist.
@@ -87,17 +89,9 @@ public class PlayerManager extends Controller
       return players;
    }
 
-//   public void setPlayers(ArrayList<Player> players)
-//   {
-//      for ( int i = 0; i < players.size(); i++ )
-//      {
-//         this.players.set(i, players.get(i));
-//      }
-//   }
-
    /**
     * Creates a new fresh player with
-    * the given name and adds the player to the players list.
+    * the given name and adds the player to the players list. 
     * @param playerName the given name of the player.
     * @return 0 if creation successful, 1 if the name already exists
     */
@@ -124,8 +118,8 @@ public class PlayerManager extends Controller
       }
       else
       {
-         initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
-         initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
+         initialMusic = SoundManager.getInstance().isThemeSongEnabled();
+         initialSfx = SoundManager.getInstance().isEffectsEnabled();
       }
 
       Settings settings = new Settings(initialMusic, initialSfx);
@@ -134,12 +128,11 @@ public class PlayerManager extends Controller
       players.add(newPlayer);
       currentPlayer = newPlayer;
 
-      ThemeManager.instance.setTheme("minimalistic");
-      VehicleController.instance.setCurrentControl(VehicleController.CONTROL.SLIDE);
+      ThemeManager.getInstance().setTheme("minimalistic");
+      VehicleController.getInstance().setCurrentControl(VehicleController.CONTROL.SLIDE);
 
       return 0;
    }
-
 
    /**
     * Deletes all the data of the given user and removes it from the players list.
@@ -197,9 +190,9 @@ public class PlayerManager extends Controller
       }
       if ( selected )
       {
-         GameEngine.instance.soundManager.setThemeSong(currentPlayer.getSettings().getMusic());
-         GameEngine.instance.soundManager.setEffects(currentPlayer.getSettings().getSfx());
-         GameEngine.instance.themeManager.setTheme(currentPlayer.getSettings().getActiveTheme());
+         SoundManager.getInstance().setThemeSong(currentPlayer.getSettings().getMusic());
+         SoundManager.getInstance().setEffects(currentPlayer.getSettings().getSfx());
+         ThemeManager.getInstance().setTheme(currentPlayer.getSettings().getActiveTheme());
          playerDao.saveLastActivePlayer(name);
          return true;
       }
@@ -292,7 +285,7 @@ public class PlayerManager extends Controller
    {
       setLevelStatus(levelNo, "inProgress");
 
-      String map = MapController.instance.mapToString();
+      String map = MapController.getInstance().mapToString();
       currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(moveAmount);
       currentPlayer.getLevels().get(levelNo - 1).setMap(map);
 

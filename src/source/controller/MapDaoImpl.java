@@ -14,7 +14,6 @@ import java.util.Scanner;
  */
 class MapDaoImpl implements MapDao
 {
-
    private Gson gson = new Gson();
    private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
@@ -36,7 +35,6 @@ class MapDaoImpl implements MapDao
       String mapStr;
       if ( !original )
       {
-         //System.out.println("Inside inprogress if");
          mapStr = player.getLevels().get(level - 1).getMap();
       }
       else
@@ -51,7 +49,7 @@ class MapDaoImpl implements MapDao
       Scanner scan = new Scanner(mapStr);
       scan.useDelimiter(" ");
 
-         //Object Codes are TU TD TR TL CU CD CR CL SS OO
+      //Object Codes are TU TD TR TL CU CD CR CL SS OO
       while ( scan.hasNext() )
       {
          String objectCode = scan.next();
@@ -105,10 +103,6 @@ class MapDaoImpl implements MapDao
          {
             gameObjects.add(new Obstacle(x, y, 1, "Right"));
          }
-//         else if (objectCode.equals("SS"))
-//         {
-//            gameObjects.add(new Space(x, y, 1, "Right"));
-//         }
          x++;
       }
 
@@ -116,34 +110,4 @@ class MapDaoImpl implements MapDao
       map.formMap(gameObjects);
       return map;
    }
-
-//   private void printVehicleArray()
-//   {
-//      int i = 0;
-//      for ( GameObject gameObject : gameObjects )
-//      {
-//         System.out.println("Vehicle " + ++i);
-//         System.out.println("Type: " + gameObject.getType());
-//         System.out.println("X Coordinate: " + gameObject.transform.position.x);
-//         System.out.println("Y Coordinate: " + gameObject.transform.position.y);
-//         System.out.println("Direction:  " + gameObject.transform.direction);
-//         System.out.println("Axis:  " + gameObject.transform.axis);
-//         //System.out.println("Color: " + vehicle.getColor());
-//         System.out.println("Length: " + gameObject.transform.length);
-//         System.out.print("Occupied Cells: ");
-//
-//         for ( int a = 0; a < gameObject.transform.length; a++ )
-//         {
-//            System.out.print(gameObject.getOccupiedCells()[a] + " ");
-//         }
-//
-//         System.out.print("\nOccupied Coordinates: ");
-//
-//         for ( int a = 0; a < gameObject.transform.length; a++ )
-//         {
-//            System.out.print("(" + gameObject.getOccupiedTransforms()[a].position.x + "," + gameObject.getOccupiedTransforms()[a].position.y + ")" + " ");
-//         }
-//      }
-//   }
-
 }
