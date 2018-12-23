@@ -190,20 +190,14 @@ public class TutorialPanel extends JPanel {
 
     private void createComponents() {
 
-        left = LoadMediaToLabel("/image/icons/left.gif");
-        right = LoadMediaToLabel("/image/icons/right.gif");
-        up = LoadMediaToLabel("/image/icons/up.gif");
-        down = LoadMediaToLabel("/image/icons/down.gif");
+
         forwardButton = UIFactory.createButton(next, nextH, "square", actionListener);
         backButton = UIFactory.createButton(back, backH, "square", actionListener);
         backButton.setDisabledIcon(new ImageIcon(backD));
         cancelButton = UIFactory.createButton(cancel, cancelH, "square", actionListener);
 
         labelBackground = LoadMediaToLabel("/image/icons/tutorialBG.png");
-        add(left);
-        add(right);
-        add(up);
-        add(down);
+
         add(forwardButton);
         add(backButton);
         add(cancelButton);
@@ -256,21 +250,29 @@ public class TutorialPanel extends JPanel {
         add(labelBackground);
 
         add(coverPage);
+
         for (int i = 1; i <= 10; i++) {
 
             if (LoadMediaToLabel("/image/tutorial_Backgrounds/" + i + ".gif") != null) {
                 backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/" + i + ".gif"));
-                add(backgrounds.get(i - 1));
-                backgrounds.get(i - 1).setVisible(false);
-                System.out.println(backgrounds.size());
             } else {
                 backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/" + i + ".png"));
-                add(backgrounds.get(i - 1));
-                backgrounds.get(i - 1).setVisible(false);
-                System.out.println(backgrounds.size());
             }
         }
+        down = LoadMediaToLabel("/image/tutorial_Backgrounds/down.gif");
+        left = LoadMediaToLabel("/image/tutorial_Backgrounds/left.gif");
+        right = LoadMediaToLabel("/image/tutorial_Backgrounds/right.gif");
+        up = LoadMediaToLabel("/image/tutorial_Backgrounds/up.gif");
 
+
+        add(left);
+        add(right);
+        add(up);
+        add(down);
+        for (int i = 1; i <= 10; i++) {
+            add(backgrounds.get(i - 1));
+            backgrounds.get(i - 1).setVisible(false);
+        }
         background = GameEngine.getInstance().themeManager.getGamePanelBackgroundImage();
         Image scaledImage = background.getScaledInstance(guiManager.panelWidth, guiManager.panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
@@ -281,6 +283,7 @@ public class TutorialPanel extends JPanel {
 
     private JLabel LoadMediaToLabel(String fileName) {
         URL url = this.getClass().getResource(fileName);
+        System.out.println(url);
         ImageIcon icon = new ImageIcon(url);
         JLabel label = new JLabel(icon);
         label.setHorizontalAlignment(JLabel.CENTER);
