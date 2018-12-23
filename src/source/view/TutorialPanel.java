@@ -259,10 +259,10 @@ public class TutorialPanel extends JPanel {
                 backgrounds.add(LoadMediaToLabel("/image/tutorial_Backgrounds/" + i + ".png"));
             }
         }
-        down = LoadMediaToLabel("/image/tutorial_Backgrounds/down.gif");
-        left = LoadMediaToLabel("/image/tutorial_Backgrounds/left.gif");
-        right = LoadMediaToLabel("/image/tutorial_Backgrounds/right.gif");
-        up = LoadMediaToLabel("/image/tutorial_Backgrounds/up.gif");
+        down = LoadMediaToLabel("/image/tutorial_Backgrounds/Down.gif");
+        left = LoadMediaToLabel("/image/tutorial_Backgrounds/Left.gif");
+        right = LoadMediaToLabel("/image/tutorial_Backgrounds/Right.gif");
+        up = LoadMediaToLabel("/image/tutorial_Backgrounds/Up.gif");
 
 
         add(left);
