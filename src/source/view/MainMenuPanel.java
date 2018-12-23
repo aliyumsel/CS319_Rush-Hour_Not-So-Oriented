@@ -54,8 +54,8 @@ public class MainMenuPanel extends JPanel {
         super(null);
 
         guiManager = _guiManager;
-        gameManager = GameManager.instance;
-        playerManager = GameEngine.instance.playerManager;
+        gameManager = GameManager.getInstance();
+        playerManager = GameEngine.getInstance().playerManager;
         panelWidth = guiManager.panelWidth;
         panelHeight = guiManager.panelHeight;
 
@@ -70,7 +70,7 @@ public class MainMenuPanel extends JPanel {
     }
 
     public void loadImages() {
-        background = ThemeManager.instance.getBackgroundImage();
+        background = ThemeManager.getInstance().getBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
@@ -211,9 +211,9 @@ public class MainMenuPanel extends JPanel {
 
     private ActionListener actionListener = e ->
     {
-        GameEngine.instance.soundManager.buttonClick();
+        GameEngine.getInstance().soundManager.buttonClick();
         if (e.getSource() == play) {
-            GameEngine.instance.gameManager.loadLastLevel();
+            GameEngine.getInstance().gameManager.loadLastLevel();
             guiManager.setPanelVisible("Game");
         }
         if (e.getSource() == credits) {

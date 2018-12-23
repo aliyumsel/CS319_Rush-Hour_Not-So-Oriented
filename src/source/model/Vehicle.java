@@ -112,18 +112,18 @@ public class Vehicle extends GameObject// implements Drawable
    {
       if ( !player && transform.length == 2 )
       {
-         image = ThemeManager.instance.getShortVehicleImage();
-         blackedOutImage = ThemeManager.instance.getDisabledImage("short");
+         image = ThemeManager.getInstance().getShortVehicleImage();
+         blackedOutImage = ThemeManager.getInstance().getDisabledImage("short");
       }
       else if ( !player && transform.length == 3 )
       {
-         image = ThemeManager.instance.getLongVehicleImage();
-         blackedOutImage = ThemeManager.instance.getDisabledImage("long");
+         image = ThemeManager.getInstance().getLongVehicleImage();
+         blackedOutImage = ThemeManager.getInstance().getDisabledImage("long");
       }
       else if ( player )
       {
-         image = ThemeManager.instance.getPlayerImage();
-         blackedOutImage = ThemeManager.instance.getDisabledImage("short");
+         image = ThemeManager.getInstance().getPlayerImage();
+         blackedOutImage = ThemeManager.getInstance().getDisabledImage("short");
       }
    }
 

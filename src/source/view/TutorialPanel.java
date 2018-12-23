@@ -1,14 +1,12 @@
 package source.view;
 
+import source.controller.GameEngine;
 import source.controller.SoundManager;
-import source.controller.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ public class TutorialPanel extends JPanel {
     private JButton cancelButton;
     private JLabel currentArrow;
     private GuiPanelManager guiManager;
-    public int index; //for activating current tutorial
+    private int index; //for activating current tutorial
     private boolean isTutorialActive; //will be accessed from guiManager
     private ArrayList<JLabel> tutorials = new ArrayList<>();
     private ArrayList<JLabel> backgrounds = new ArrayList<>(); //for images and gifs
@@ -38,21 +36,31 @@ public class TutorialPanel extends JPanel {
     private JLabel coverInfo = LoadMediaToLabel("/image/tutorial_Labels/coverInfo.png");
 
     private BufferedImage background;
-    private BufferedImage next = GuiPanelManager.instance.LoadImage("image/icons/nextO.png");
-    private BufferedImage nextH = GuiPanelManager.instance.LoadImage("image/icons/nextOH.png");
-    private BufferedImage back = GuiPanelManager.instance.LoadImage("image/icons/backO.png");
-    private BufferedImage backH = GuiPanelManager.instance.LoadImage("image/icons/backOH.png");
-    private BufferedImage backD = GuiPanelManager.instance.LoadImage("image/icons/back_OD.png");
-    private BufferedImage cancel = GuiPanelManager.instance.LoadImage("image/icons/quitO.png");
-    private BufferedImage cancelH = GuiPanelManager.instance.LoadImage("image/icons/quitOH.png");
+    private BufferedImage next ;
+    private BufferedImage nextH;
+    private BufferedImage back ;
+    private BufferedImage backH;
+    private BufferedImage backD;
+    private BufferedImage cancel;
+    private BufferedImage cancelH;
 
 
     TutorialPanel(boolean isTutorialActive, GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
         setLayout(null);
 
+        guiManager = _guiManager;
+
+        next = GuiPanelManager.getInstance().LoadImage("image/icons/nextO.png");
+        nextH = GuiPanelManager.getInstance().LoadImage("image/icons/nextOH.png");
+        back = GuiPanelManager.getInstance().LoadImage("image/icons/backO.png");
+        backH = GuiPanelManager.getInstance().LoadImage("image/icons/backOH.png");
+        backD = GuiPanelManager.getInstance().LoadImage("image/icons/back_OD.png");
+        cancel = GuiPanelManager.getInstance().LoadImage("image/icons/quitO.png");
+        cancelH = GuiPanelManager.getInstance().LoadImage("image/icons/quitOH.png");
+
         index = -1;
         this.isTutorialActive = isTutorialActive;
-        guiManager = _guiManager;
+
         setPreferredSize(new Dimension(guiManager.panelWidth, guiManager.panelHeight));
         createComponents();
         setBoundsOfComponents();
@@ -264,7 +272,7 @@ public class TutorialPanel extends JPanel {
             }
         }
 
-        background = ThemeManager.instance.getGamePanelBackgroundImage();
+        background = GameEngine.getInstance().themeManager.getGamePanelBackgroundImage();
         Image scaledImage = background.getScaledInstance(guiManager.panelWidth, guiManager.panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
@@ -324,7 +332,7 @@ public class TutorialPanel extends JPanel {
         return isTutorialActive;
     }
 
-    public void setIndex(int index) {
+    void setIndex(int index) {
         this.index = index;
         setLabels();
     }
@@ -346,7 +354,7 @@ public class TutorialPanel extends JPanel {
                 index = tutorials.size();
 
             }
-            SoundManager.instance.buttonClick();
+            SoundManager.getInstance().buttonClick();
             update();
         }
     };

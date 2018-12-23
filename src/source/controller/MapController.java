@@ -7,20 +7,27 @@ import java.util.ArrayList;
 
 public class MapController extends Controller
 {
-   public static MapController instance;
+   private static MapController instance = null;
 
    private MapDao mapDao;
    private Map map;
 
-   MapController()
+   private MapController()
    {
-      instance = this;
       mapDao = new MapDaoImpl();
+   }
+
+   public static MapController getInstance()
+   {
+      if(instance == null) {
+         instance = new MapController();
+      }
+      return instance;
    }
 
    void loadLevel(int level)
    {
-      Player currentPlayer = PlayerManager.instance.getCurrentPlayer();
+      Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
       map = mapDao.extractMap(level, currentPlayer, false);
    }
 

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @SuppressWarnings({"serial", "Duplicates"})
 public class GuiPanelManager extends JFrame
 {
-   public static GuiPanelManager instance;
+   private static GuiPanelManager instance = null;
 
    //   private int currentPanelIndex;
    private ArrayList<JPanel> panels;
@@ -34,11 +34,12 @@ public class GuiPanelManager extends JFrame
 
 //   private BufferedImage cursorImage;
 
-   public GuiPanelManager()
+   private GuiPanelManager()
    {
       super("Rush Hour");
-      setUndecorated(true);
       instance = this;
+      setUndecorated(true);
+
       Toolkit toolkit = Toolkit.getDefaultToolkit();
       //Image image = toolkit.getImage("src/image/icons/cursor.png");
       Image image = null;
@@ -90,6 +91,14 @@ public class GuiPanelManager extends JFrame
       setVisible(true);
       pack();
 
+   }
+
+   public static GuiPanelManager getInstance()
+   {
+      if(instance == null) {
+         instance = new GuiPanelManager();
+      }
+      return instance;
    }
 
    private void addPanels()
