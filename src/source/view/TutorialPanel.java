@@ -25,17 +25,18 @@ public class TutorialPanel extends JPanel {
     private boolean isTutorialActive; //will be accessed from guiManager
     private ArrayList<JLabel> tutorials = new ArrayList<>();
     private ArrayList<JLabel> backgrounds = new ArrayList<>(); //for images and gifs
+    private ArrayList<Point> arrowCooardinates = new ArrayList<>();
+
     private JLabel labelBackground;
     private JLabel left;
     private JLabel right;
     private JLabel up;
     private JLabel down;
-
-    private ArrayList<Point> arrowCooardinates = new ArrayList<>();
     private JLabel activeBackground = null;
     private JLabel activeLabel = null;
     private JLabel coverPage = LoadMediaToLabel("/image/tutorial_Backgrounds/cover.png");
     private JLabel coverInfo = LoadMediaToLabel("/image/tutorial_Labels/coverInfo.png");
+
     private BufferedImage background;
     private BufferedImage next = GuiPanelManager.instance.LoadImage("image/icons/nextO.png");
     private BufferedImage nextH = GuiPanelManager.instance.LoadImage("image/icons/nextOH.png");
@@ -48,7 +49,7 @@ public class TutorialPanel extends JPanel {
 
     TutorialPanel(boolean isTutorialActive, GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
         setLayout(null);
-        this.addMouseListener(mouseListener);
+
         index = -1;
         this.isTutorialActive = isTutorialActive;
         guiManager = _guiManager;
@@ -303,7 +304,7 @@ public class TutorialPanel extends JPanel {
         for (int i = 0; i < backgrounds.size(); i++) {
             setBounds(backgrounds.get(i), 0, 0);
         }
-        setBounds(coverPage,0,0);
+        setBounds(coverPage, 0, 0);
     }
 
     public void paintComponent(Graphics g) {
@@ -350,35 +351,4 @@ public class TutorialPanel extends JPanel {
         }
     };
 
-    private MouseListener mouseListener = new MouseListener() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            System.out.println(e.getX() + " , " + e.getY() + " , " + index);
-           // updateLabelBackground(e.getX(),e.getY());
-            System.out.println(coverPage.isVisible());
-//            index++;
-//            update();
-            //setBounds(currentArrow,e.getX(), e.getY());
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    };
 }
