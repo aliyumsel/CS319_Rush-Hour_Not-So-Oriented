@@ -15,4 +15,4 @@ Group Members:
 - Ali Yümsel 21601841
 - Kaan Gönç 21602670
 
-https://drive.google.com/drive/folders/1uNj-_B_aHopx0Ke7FK3beET0uh7FovGI?usp=sharing
+Rush Hour.exe download link: https://drive.google.com/drive/folders/1uNj-_B_aHopx0Ke7FK3beET0uh7FovGI?usp=sharing
