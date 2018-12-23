@@ -16,3 +16,4 @@ Group Members:
 - Kaan Gönç 21602670
 
 Rush Hour.exe download link: https://drive.google.com/drive/folders/1uNj-_B_aHopx0Ke7FK3beET0uh7FovGI?usp=sharing
+Rush Hour trailer video link: https://www.youtube.com/watch?v=HJOTIWJIaok&lc=z23qhrugpr3icru2qacdp43b03hu5abo3jwlprdff0pw03c010c
