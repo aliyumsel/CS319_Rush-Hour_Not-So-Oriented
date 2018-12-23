@@ -7,16 +7,24 @@ import source.model.Settings;
 
 import java.util.ArrayList;
 
+
+/**
+ * PlayerManager is responsible for handling the updates of
+ * player information, creating, changing and deleting users
+ */
 public class PlayerManager extends Controller
 {
    public static PlayerManager instance;
 
-   private Player currentPlayer;
-   private ArrayList<Player> players;
-   public int numberOfPlayers;
+   private Player currentPlayer; // Represents the currently active user,
+   private ArrayList<Player> players; //Holds every player that is created for the game.
+   public int numberOfPlayers; //Holds the number of players.
 
    private PlayerDao playerDao;
 
+   /**
+    *  Empty constructor that initializes values to their specified initial values.
+    */
    public PlayerManager()
    {
       instance = this;
@@ -24,6 +32,10 @@ public class PlayerManager extends Controller
       extractPlayers();
    }
 
+
+   /**
+    * Extracts and stores the extracted players in an arraylist with the help of player extractor.
+    */
    private void extractPlayers()
    {
       players = playerDao.extractPlayers();
@@ -50,6 +62,11 @@ public class PlayerManager extends Controller
       }
    }
 
+
+   /**
+    * Getter for the currently selected player.
+    * @return the currently selected player.
+    */
    public Player getCurrentPlayer()
    {
       return currentPlayer;
@@ -60,6 +77,11 @@ public class PlayerManager extends Controller
 //      this.currentPlayer = currentPlayer;
 //   }
 
+
+   /**
+    * Getter for all the players in an arraylist.
+    * @return all the players in an arraylist.
+    */
    public ArrayList<Player> getPlayers()
    {
       return players;
@@ -73,8 +95,11 @@ public class PlayerManager extends Controller
 //      }
 //   }
 
-   /* returns 0 if creation successful
-    * returns 1 if the name already exists
+   /**
+    * Creates a new fresh player with
+    * the given name and adds the player to the players list.
+    * @param playerName the given name of the player.
+    * @return 0 if creation successful, 1 if the name already exists
     */
    public int createPlayer(String playerName)
    {
@@ -115,6 +140,12 @@ public class PlayerManager extends Controller
       return 0;
    }
 
+
+   /**
+    * Deletes all the data of the given user and removes it from the players list.
+    * @param name the name of the player.
+    * @return the index of the deleted player.
+    */
    public int deletePlayer(String name)
    {
       if ( players.size() == 1 )
@@ -146,6 +177,12 @@ public class PlayerManager extends Controller
       return -1;
    }
 
+
+   /**
+    * Selects desired player among other players by considering the name input
+    * @param name the name of the player.
+    * @return a boolean to understand whether the operation is successful or not.
+    */
    public boolean selectPlayer(String name)
    {
       boolean selected = false;
@@ -170,6 +207,13 @@ public class PlayerManager extends Controller
 
    }
 
+
+   /**
+    * Edits the desired player's name with the new one.
+    * @param oldName the old name of the player
+    * @param newName desired name to be replaced with the old one.
+    * @return an integer to indicate whether the operation is successful or not.
+    */
    public int editPlayer(String oldName, String newName)
    {
       if (checkIfPlayerExistsByName(newName))
@@ -193,6 +237,13 @@ public class PlayerManager extends Controller
       }
       return -1;
    }
+
+
+   /**
+    * Checks the condition whether the player with a given name exists or not
+    * @param playerName the name of the checked player
+    * @return a boolean to check whether the player exists or not.
+    */
    private boolean checkIfPlayerExistsByName(String playerName)
    {
       for ( int i = 0; i < players.size(); i++ )
@@ -205,6 +256,12 @@ public class PlayerManager extends Controller
       return false;
    }
 
+
+   /**
+    * Updates the last level that is played by the player as finished.
+    * @param levelNo the last level that is played by the player.
+    * @param starAmount the star that is earned on that level.
+    */
    //These 2 methods will have to change with gameManager to not include other controllers
    void updateLevelAtTheEnd(int levelNo, int starAmount)
    {
@@ -224,6 +281,12 @@ public class PlayerManager extends Controller
 
    }
 
+
+   /**
+    * Updates the level that is played by the player as in progress.
+    * @param levelNo the level that is played by the player.
+    * @param moveAmount number of moves that took action in that level.
+    */
    //saveMape kadar oln k�sm� MapController da bir methodla �a�r�labilir
    void updateLevelDuringGame(int levelNo, int moveAmount)
    {
@@ -237,6 +300,11 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+
+   /**
+    * Updates the level when player wants to restart the level .
+    * @param levelNo the level that is played by the player.
+    */
    void  updateLevelAtReset(int levelNo)
    {
       if (currentPlayer.getLevels().get(levelNo - 1).getStars() > 0)
@@ -251,6 +319,11 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+   /**
+    * Setter for the status of specific level.
+    * @param levelNo the level that is played by the player.
+    * @param status the status of the player.
+    */
    private void setLevelStatus(int levelNo, String status)
    {
       if ( !currentPlayer.getLevels().get(levelNo - 1).getStatus().equals(status) )
@@ -267,6 +340,11 @@ public class PlayerManager extends Controller
 //
 //   }
 
+
+   /**
+    * It unlocks the desired level.
+    * @param levelNo the level that is played by the player.
+    */
    void unlockLevel(int levelNo)
    {
       currentPlayer.getLevels().get(levelNo - 1).unlock();
@@ -274,16 +352,30 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+
+   /**
+    * Increases the last unlocked level of the player by 1.
+    */
    void incrementLastUnlockedLevelNo()
    {
       currentPlayer.incrementLastUnlockedLevelNo();
    }
 
+
+   /**
+    * Checks whether the desired level is locked or not.
+    * @param levelNo the level to be checked.
+    * @return a boolean to indicate whether the desired level is locked or not.
+    */
    public boolean isLevelLocked(int levelNo)
    {
       return !currentPlayer.getLevels().get(levelNo - 1).isUnlocked();
    }
 
+
+   /**
+    * Toggles music.
+    */
    public void toggleMusic()
    {
       currentPlayer.getSettings().toggleMusic();
@@ -291,6 +383,10 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+
+   /**
+    * Toggles sfx.
+    */
    public void toggleSfx()
    {
       currentPlayer.getSettings().toggleSfx();
@@ -298,6 +394,11 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+
+   /**
+    * Changes to the desired theme.
+    * @param theme the desired theme.
+    */
    void changeTheme(String theme)
    {
       //commented case will be added after testing is done
@@ -309,6 +410,11 @@ public class PlayerManager extends Controller
       }
    }
 
+
+   /**
+    * Unlocks the theme with given theme name.
+    * @param themeName the given theme name.
+    */
    void unlockTheme(String themeName)
    {
       //check out this
@@ -316,6 +422,10 @@ public class PlayerManager extends Controller
       changeTheme(themeName);
    }
 
+
+   /**
+    * Decreases the remaining shrink power ups.
+    */
    void decrementRemainingShrinkPowerup()
    {
       currentPlayer.decrementRemainingShrinkPowerup();
@@ -323,6 +433,10 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+
+   /**
+    * Decreases the remaining space power ups.
+    */
    void decrementRemainingSpacePowerup()
    {
       currentPlayer.decrementRemainingSpacePowerup();
@@ -330,6 +444,9 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+   /**
+    * Adds shrink power ups.
+    */
    void addShrinkPowerup(int amountToBeAdded)
    {
       currentPlayer.addShrinkPowerup(amountToBeAdded);
@@ -337,6 +454,10 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+
+   /**
+    * Adds space power ups.
+    */
    void addSpacePowerup(int amountToBeAdded)
    {
       currentPlayer.addSpacePowerup(amountToBeAdded);
@@ -344,6 +465,10 @@ public class PlayerManager extends Controller
       playerDao.savePlayer(currentPlayer);
    }
 
+
+   /**
+    * Saves toggle control preferences of the player.
+    */
    void  toggleControlPreference()
    {
       currentPlayer.getSettings().toggleControlPreference();

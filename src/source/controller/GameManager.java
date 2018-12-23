@@ -3,6 +3,10 @@ package source.controller;
 import source.model.LevelInformation;
 import source.view.GuiPanelManager;
 
+
+/**
+ * GameManager is a generic class that handles higher aspects of the game.
+ */
 public class GameManager extends Controller
 {
    public static GameManager instance;
@@ -15,6 +19,10 @@ public class GameManager extends Controller
 
    boolean isGameActive = false;
 
+
+   /**
+    * Empty constructor that initializes values to their specified initial values.
+    */
    GameManager()
    {
       playerManager = PlayerManager.instance;
@@ -23,6 +31,10 @@ public class GameManager extends Controller
       isLevelBonus = false;
    }
 
+
+   /**
+    * Updates the game.
+    */
    public void update()
    {
       if ( isLevelBonus & isGameActive)
@@ -40,18 +52,31 @@ public class GameManager extends Controller
       }
    }
 
+
+   /**
+    * Auto saves the game.
+    */
    void autoSave()
    {
       int moveAmount = VehicleController.instance.getNumberOfMoves();
       PlayerManager.instance.updateLevelDuringGame(level, moveAmount);
    }
 
+
+   /**
+    * It stops the map.
+    */
    public void stopMap()
    {
       isGameActive = false;
       PowerUpManager.instance.deactivatePowerUps();
    }
 
+
+   /**
+    * This is called when the level is finished
+    * and handles all the action of level being completed.
+    */
    void endMap()
    {
 
@@ -79,6 +104,10 @@ public class GameManager extends Controller
       GuiPanelManager.instance.getGamePanel().showEndOfLevelPopUp(starsCollected);
    }
 
+
+   /**
+    * It indicates time over after time lapses.
+    */
    private void timeOver()
    {
       System.out.println("Time Over!");
@@ -88,6 +117,12 @@ public class GameManager extends Controller
       GuiPanelManager.instance.getGamePanel().showTimeOverPopUp();
    }
 
+
+   /**
+    * It calculates the stars with considering the moves of the player.
+    * @param _level the level that is played.
+    * @return an integer between 1-3.
+    */
    private int calculateStars(int _level)
    {
       LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(_level - 1);
@@ -106,12 +141,22 @@ public class GameManager extends Controller
       }
    }
 
+
+   /**
+    * Loads the last level that is played but not finished.
+    */
    public void loadLastLevel()
    {
       level = PlayerManager.instance.getCurrentPlayer().getLastUnlockedLevelNo();
       loadLevel(level, false);
    }
 
+
+   /**
+    * Loads the given level.
+    * @param _level desired level.
+    * @param reset a boolean that indicates the reset
+    */
    public void loadLevel(int _level, boolean reset)
    {
 //      System.out.println("Loaded level: " + _level);
@@ -149,12 +194,20 @@ public class GameManager extends Controller
       isGameActive = true;
    }
 
+
+   /**
+    *  Loads the next level.
+    */
    public void nextLevel()
    {
       level++;
       loadLevel(level, false);
    }
 
+
+   /**
+    * Resets level.
+    */
    public void resetLevel()
    {
       PlayerManager.instance.updateLevelAtReset(level);
@@ -162,56 +215,108 @@ public class GameManager extends Controller
       PowerUpManager.instance.deactivatePowerUps();
    }
 
+   /**
+    * Checks whether it is last level or not
+    * @return true for last level.
+    */
    public boolean isLastLevel()
    {
       return level == PlayerManager.instance.getCurrentPlayer().getLevels().size();
    }
 
+
+   /**
+    * Getter for level
+    * @return the level
+    */
    public int getLevel()
    {
       return level;
    }
 
+
+   /**
+    * Checks whether the next level is locked or not.
+    * @return true if it is locked, false otherwise.
+    */
    private boolean isNextLevelLocked()
    {
       return level < PlayerManager.instance.getCurrentPlayer().getLevels().size() && PlayerManager.instance.isLevelLocked(level + 1);
    }
 
+
+   /**
+    * Unlocks the next level.
+    */
    private void unlockNextLevel()
    {
       PlayerManager.instance.unlockLevel(level + 1);
    }
 
+
+   /**
+    * Checks whether shrink power up is usable or not.
+    * @return true if it is usable, false otherwise.
+    */
    public boolean isShrinkPowerUpUsable()
    {
       return playerManager.getCurrentPlayer().getRemainingShrinkPowerup() > 0;
    }
 
+
+   /**
+    * Checks whether space power up is usable or not.
+    * @return true if it is usable, false otherwise.
+    */
    public boolean isSpacePowerUpUsable()
    {
       return playerManager.getCurrentPlayer().getRemainingSpacePowerup() > 0;
    }
 
+
+   /**
+    * Getter for remaining time.
+    * @return the reaining time.
+    */
    public int getRemainingTime()
    {
       return remainingTime;
    }
 
+
+   /**
+    * Getter for the start value of timer.
+    * @return timer's start value.
+    */
    public int getTimerStartValue()
    {
       return timerStartValue;
    }
 
+
+   /**
+    * Checks if there is a level bonus or not.
+    * @return the boolean isLevelBonus, true if it exists, false otherwise.
+    */
    public boolean isLevelBonus()
    {
       return isLevelBonus;
    }
 
+
+   /**
+    * Checks if the game is active or not.
+    * @return true if it is active, false otherwise.
+    */
    public boolean isGameActive()
    {
       return isGameActive;
    }
 
+
+   /**
+    * Toggles control type.
+    */
    public void toggleControlType()
    {
       PlayerManager.instance.toggleControlPreference();

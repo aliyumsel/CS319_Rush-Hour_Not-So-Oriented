@@ -9,11 +9,21 @@ import source.model.*;
 import java.io.*;
 import java.util.ArrayList;
 
+
+/**
+ * It is responsible for extracting the player data
+ * from the local directory in to the game.
+ */
 @SuppressWarnings("Duplicates")
 public class PlayerDaoImpl implements PlayerDao{
 
     private Gson gson = new Gson();
 
+
+    /**
+     * Extracts the player information from local directory, creates player arraylist.
+     * @return  a Player array to save the extracted information.
+     */
     @Override
     public ArrayList<Player> extractPlayers()
     {
@@ -49,12 +59,25 @@ public class PlayerDaoImpl implements PlayerDao{
         }
         return players;
     }
+
+
+    /**
+     * Extracts the last selected players name.
+     * @return last selected players name.
+     */
     @Override
     public String extractLastPlayerName()
     {
         return GameInfo.lastActivePlayer;
     }
 
+
+    /**
+     * Creates a folder and an info text for the new player.
+     * @param playerName Name of the player.
+     * @param settings Settings of the player.
+     * @return the new player that is added to the game system.
+     */
     @Override
     public Player createPlayer(String playerName, Settings settings) {
         OriginalLevel originalLevel;
@@ -85,6 +108,12 @@ public class PlayerDaoImpl implements PlayerDao{
         return newPlayer;
     }
 
+
+    /**
+     * Deletes the folder of the player.
+     * @param player the player that is wanted to be deleted.
+     * @return a boolean to check whether the operation is successful.
+     */
     @Override
     public boolean deletePlayer(Player player){
         File file = new File(player.getPath() + "/playerInfo.json");
@@ -97,12 +126,22 @@ public class PlayerDaoImpl implements PlayerDao{
         return false;
     }
 
+
+    /**
+     * Saves last active player to make it comfortable to start.
+     * @param playerName the name of the last active player.
+     */
     @Override
     public void saveLastActivePlayer(String playerName)
     {
         GameInfo.instance.updateInfo(playerName);
     }
 
+
+    /**
+     * Saves all the information about a player to the representative folder.
+     * @param player the player wanted to be saved.
+     */
     @Override
     public void savePlayer(Player player)
     {
@@ -110,6 +149,11 @@ public class PlayerDaoImpl implements PlayerDao{
         writeFile(player.getPath() + "/playerInfo.json", text);
     }
 
+
+    /**
+     * Changes players name.
+     * @param player the player to be changed by name.
+     */
     @Override
     public void changePlayerName(Player player){
         File folder = new File(player.getPath());
@@ -118,6 +162,12 @@ public class PlayerDaoImpl implements PlayerDao{
         savePlayer(player);
     }
 
+
+    /**
+     * Writes a file
+     * @param path the desired path
+     * @param text the desired tect
+     */
     private void writeFile(String path, String text) {
 
         //text = decrypt(text);
@@ -132,6 +182,13 @@ public class PlayerDaoImpl implements PlayerDao{
         }
     }
 
+
+    /**
+     * Creates reader to for path.
+     * @param path the desired path.
+     * @param name the desired name.
+     * @return the file.
+     */
     private FileReader createReader(String path, String name)
     {
         try {
@@ -144,6 +201,11 @@ public class PlayerDaoImpl implements PlayerDao{
         return null;
     }
 
+
+    /**
+     * Creates file for the path.
+     * @param path the desired path.
+     */
     private void createFile(String path)
     {
         File newFile = new File(path);
@@ -154,6 +216,9 @@ public class PlayerDaoImpl implements PlayerDao{
         }
     }
 
+    /**
+     * Private class for the info of last active player.
+     */
     private static class Info {
         private  String lastActivePlayer;
         private  int numberOfMaps;
