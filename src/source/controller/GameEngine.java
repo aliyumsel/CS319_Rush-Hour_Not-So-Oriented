@@ -2,6 +2,10 @@ package source.controller;
 
 import java.util.ArrayList;
 
+
+/**
+ * GameEngine class is responsible for handling the game loop and every class that is related to the game logic.
+ */
 public class GameEngine
 {
    public static GameEngine instance;
@@ -16,7 +20,7 @@ public class GameEngine
 
 
    /**
-    * ffjh
+    * Empty constructor that initializes values to their specified initial values.
     */
    public GameEngine()
    {
@@ -44,6 +48,10 @@ public class GameEngine
       }
    }
 
+
+   /**
+    * Calls the update methods of every Manager object that is inside managers array.
+    */
    // this method is executed over and over from main
    // calls the update method of other classes that needs to be updated
    public void run()

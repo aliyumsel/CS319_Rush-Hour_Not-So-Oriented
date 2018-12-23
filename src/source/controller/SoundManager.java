@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+
+/**
+ * SoundManager class is responsible for all the sounds
+ * that can be heard in the game.
+ */
 public class SoundManager extends Controller
 {
    public static SoundManager instance;
@@ -20,6 +25,10 @@ public class SoundManager extends Controller
    private boolean isThemeEnabled;
    private boolean isEffectsEnabled;
 
+
+   /**
+    * Empty constructor that initializes values to their specified initial values.
+    */
    SoundManager()
    {
       //isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
@@ -27,6 +36,10 @@ public class SoundManager extends Controller
       instance = this;
    }
 
+
+   /**
+    * It initializes the clip.
+    */
    private void initializeClip()
    {
       try
@@ -44,6 +57,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Plays the background music
+    */
    public void background()
    {
       if ( isThemeEnabled )
@@ -52,6 +69,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Plays the vehicle horn sound effect
+    */
    void vehicleHorn()
    {
       if ( isEffectsEnabled )
@@ -69,6 +90,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Updates the theme for the sounds.
+    */
    public void updateTheme()
    {
       if ( clip != null )
@@ -78,6 +103,10 @@ public class SoundManager extends Controller
       background();
    }
 
+
+   /**
+    * Plays the button click sound.
+    */
    public void buttonClick()
    {
       if ( isEffectsEnabled )
@@ -94,6 +123,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Plays poof sound after the poof effect.
+    */
    public void poofSound()
    {
       if ( isEffectsEnabled )
@@ -110,6 +143,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Plays shrink sound after the shrink effect.
+    */
    public void shrinkSound()
    {
       if ( isEffectsEnabled )
@@ -126,6 +163,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Plays the success sound.
+    */
    public void successSound()
    {
       if ( isEffectsEnabled )
@@ -143,6 +184,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Toggles the state of the theme song, on or off.
+    */
    public void themeSongToggle()
    {
       isThemeEnabled = !isThemeEnabled;
@@ -165,21 +210,40 @@ public class SoundManager extends Controller
 
    }
 
+
+   /**
+    * Toggles the state of the sound effects, on or off.
+    */
    public void effectsToggle()
    {
       isEffectsEnabled = !isEffectsEnabled;
    }
 
+
+   /**
+    * Checks whether theme song is enabled or not.
+    * @return true if it is enabled, false otherwise.
+    */
    boolean isThemeSongEnabled()
    {
       return isThemeEnabled;
    }
 
+
+   /**
+    * Checks whether effects is enabled or not.
+    * @return true if it is enabled, false otherwise.
+    */
    boolean isEffectsEnabled()
    {
       return isEffectsEnabled;
    }
 
+
+   /**
+    * Setter for theme song
+    * @param themeEnabled Sets if the theme enabled.
+    */
    void setThemeSong(boolean themeEnabled)
    {
       if ( this.isThemeEnabled != themeEnabled )
@@ -189,6 +253,11 @@ public class SoundManager extends Controller
 
    }
 
+
+   /**
+    * Setter for effects.
+    * @param effectsEnabled Sets if the effects enabled.
+    */
    void setEffects(boolean effectsEnabled)
    {
       if ( this.isEffectsEnabled != effectsEnabled )
@@ -197,6 +266,10 @@ public class SoundManager extends Controller
       }
    }
 
+
+   /**
+    * Starter for sound manager.
+    */
    public void start()
    {
       isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();

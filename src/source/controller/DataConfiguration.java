@@ -6,6 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+
+/**
+ * It is class for data configuration.
+ */
 public class DataConfiguration {
 
     static String dataPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour";
@@ -14,6 +18,10 @@ public class DataConfiguration {
     public DataErrorHandler handler;
     public static DataConfiguration instance;
 
+
+    /**
+     * Empty constructor that initializes values to their specified initial values.
+     */
     public DataConfiguration()
     {
         instance = this;
@@ -23,6 +31,10 @@ public class DataConfiguration {
         gameInfo.extractInfo();
 
     }
+
+    /**
+     * It is to confirm the data.
+     */
     private void confirmData()
     {
         File file;
@@ -44,6 +56,11 @@ public class DataConfiguration {
             handler.handleInfoDamagedError();
         }
     }
+
+
+    /**
+     * It is for setup new file.
+     */
     void setup()
     {
         File folder = new File(dataPath);
@@ -56,6 +73,10 @@ public class DataConfiguration {
         gameOpenedFirstTime = true;
     }
 
+
+    /**
+     * Creates information file.
+     */
     private void createInfoFile()
     {
         File infoFile = new File(dataPath + "\\info.json");

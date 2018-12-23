@@ -8,12 +8,24 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * It is responsible for extracting the map data from the local directory into the game.
+ */
 class MapDaoImpl implements MapDao
 {
 
    private Gson gson = new Gson();
    private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
+
+   /**
+    * Extracts the map of the given level from the directory of the given player if it is original.
+    * @param level the given level
+    * @param player the given player
+    * @param original a boolean that indicates whether the map is original or not.
+    * @return the map of the game.
+    */
    @SuppressWarnings("StatementWithEmptyBody")
    @Override
    public Map extractMap(int level, Player player, boolean original)

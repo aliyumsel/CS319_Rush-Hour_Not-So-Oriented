@@ -6,6 +6,10 @@ import source.model.Theme;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+
+/**
+ * It is a class to manage themes.
+ */
 public class ThemeManager extends Controller
 {
    public static ThemeManager instance;
@@ -21,6 +25,10 @@ public class ThemeManager extends Controller
 
    private String themes[] = {"minimalistic", "classic" , "safari", "space"};
 
+
+   /**
+    * Empty constructor that initializes values to their specified initial values.
+    */
    public ThemeManager()
    { //String theme parametresi ekleyip aşağıda hangi themese current theme o olucak oyun başlarken
       instance = this;
@@ -30,6 +38,12 @@ public class ThemeManager extends Controller
       space = new Theme("space");
    }
 
+
+   /**
+    * Finds theme by the specific name.
+    * @param theme a theme that is desired as string.
+    * @return the desired theme.
+    */
    private Theme findThemeByName(String theme)
    {
       if ( theme.equals("classic") )
@@ -55,36 +69,70 @@ public class ThemeManager extends Controller
       }
    }
 
+   /**
+    * Getter for long vehicle image.
+    * @return the image of the long vehicle.
+    */
    public BufferedImage getLongVehicleImage()
    {
       return currentTheme.getLongVehicleImage();
    }
 
+
+   /**
+    * Getter for the short vehicle image.
+    * @return the image of short vehicle.
+    */
    public BufferedImage getShortVehicleImage()
    {
       return currentTheme.getShortVehicleImage();
    }
 
+
+   /**
+    * Getter for the background image.
+    * @return the image of background.
+    */
    public BufferedImage getBackgroundImage()
    {
       return currentTheme.getBackgroundImage();
    }
 
+
+   /**
+    * Getter for the game panel's background image.
+    * @return the image game panel's of background.
+    */
    public BufferedImage getGamePanelBackgroundImage()
    {
       return currentTheme.getGamePanelBackgroundImage();
    }
 
+
+   /**
+    * Getter for the pop-up's background image.
+    * @return the image pop-up's of background.
+    */
    public BufferedImage getPopupBackgroundImage()
    {
       return currentTheme.getPopupBackgroundImage();
    }
 
+
+   /**
+    * Getter for the obstacle image.
+    * @return the image of obstacle.
+    */
    public BufferedImage getObstacleImage()
    {
       return currentTheme.getObstacleImage();
    }
 
+
+   /**
+    * Getter for the disabled image.
+    * @return the image of disabled.
+    */
    public BufferedImage getDisabledImage(String type)
    {
       if (type.equals("obstacle")){
@@ -101,35 +149,78 @@ public class ThemeManager extends Controller
       }
    }
 
+   /**
+    * Getter for the current theme's player image.
+    * @return the image of current theme's player.
+    */
    public BufferedImage getPlayerImage()
    {
       return currentTheme.getPlayerImage();
    }
 
+
+   /**
+    * Getter for the current theme's special player image.
+    * @return the image of current theme's special player.
+    */
    public BufferedImage getSpecialPlayerImage()
    {
       return currentTheme.getSpecialPlayerImage();
    }
 
+
+   /**
+    * Getter for the button's click sound.
+    * @return the button's click sound.
+    */
    String getButtonClickSound()
    {
       return currentTheme.getButtonClickSound();
    }
 
+
+   /**
+    * Getter for the theme song.
+    * @return the theme song.
+    */
    String getThemeSong()
    {
       return currentTheme.getThemeSong();
    }
+
+
+   /**
+    * Getter for the current theme's end of level sound.
+    * @return the current theme's end of level sound.
+    */
    String getEndOfLevelSound(){
    return currentTheme.getEndOfLevelSound();
 }
+
+
+   /**
+    * Getter for the current theme's selection sound.
+    * @return the current theme's selection sound.
+    */
    String getSelectionSound()
    {
       return currentTheme.getSelectionSound();
    }
+
+
+   /**
+    * Getter for the current theme's "poof" sound.
+    * @return the current theme's "poof" sound.
+    */
    String getPoofSound(){
       return currentTheme.getPoofSound();
    }
+
+
+   /**
+    * Getter for the current theme's shrink sound.
+    * @return the current theme's shrink sound.
+    */
    String getShrinkSound()
    {
       return currentTheme.getShrinkSound();
@@ -140,6 +231,10 @@ public class ThemeManager extends Controller
 //      return currentTheme;
 //   }
 
+   /**
+    * Finds the required stars to unlock the themes.
+    * @return required stars to unlock the themes.
+    */
    public int findRequiredStars()
    {
       int requiredStars = 100;
@@ -162,6 +257,13 @@ public class ThemeManager extends Controller
       return requiredStars;
    }
 
+   /**
+    * Getter for the theme's status
+    * @param themeName the desired theme's name
+    * @return 0 if the theme is locked and not unlockable,
+    * 1 if the theme is locked but unlockable,
+    * 2 if the the theme is already unlocked
+    */
    //Should be used in Settings Panel for the icons od theme buttons
    //returns 0 if the theme is locked and not unlockable
    //returns 1 if the theme is locked but unlockable
@@ -187,16 +289,30 @@ public class ThemeManager extends Controller
       }
    }
 
+
+   /**
+    * Starts themes.
+    */
    public void start(){
       update();
    }
 
+
+   /**
+    * Changes the theme with considering the themeName.
+    * @param themeName the desired theme.
+    */
    public void changeTheme(String themeName)
    {
       GameEngine.instance.playerManager.changeTheme(themeName);
       setTheme(themeName);
    }
 
+
+   /**
+    * Sets the theme with considering the given theme.
+    * @param theme the desired theme.
+    */
    //This will be called from gameManager
    void setTheme(String theme)
    {
@@ -223,6 +339,10 @@ public class ThemeManager extends Controller
 //      GuiPanelManager.instance.updateImages();
    }
 
+   /**
+    * Unlocks the desired theme.
+    * @param themeName the desired theme.
+    */
    public void unlockTheme(String themeName)
    {
       Theme theme = findThemeByName(themeName);
@@ -232,6 +352,10 @@ public class ThemeManager extends Controller
       setTheme(themeName);
    }
 
+
+   /**
+    * Updates themes.
+    */
    public void update()
    {
       HashMap themes = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getThemes();

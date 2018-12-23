@@ -7,22 +7,40 @@ import com.google.gson.JsonSyntaxException;
 
 import java.io.*;
 
-public class GameInfo {
+
+/**
+ * The class for giving information of the game.
+ */
+public class GameInfo
+{
     final static int numberOfMaps = 50;
     static String lastActivePlayer;
     static GameInfo instance;
 
+    /**
+     * The inner class which holds last active player's info.
+     */
     private class Info
     {
          String lastActivePlayer;
     }
     private Info info;
 
+
+    /**
+     * Empty constructor that initializes values to their specified initial values.
+     */
     public GameInfo()
     {
         instance = this;
         info = new Info();
     }
+
+
+    /**
+     * Extracts info.
+     * @return true if it is extractad, false otherwise.
+     */
     boolean extractInfo()
     {
         Gson gson = new Gson();
@@ -55,6 +73,11 @@ public class GameInfo {
 
     }
 
+
+    /**
+     * Updates the last players info.
+     * @param lastPlayer the last player who played the game.
+     */
     void updateInfo(String lastPlayer)
     {
         Gson gson = new Gson();

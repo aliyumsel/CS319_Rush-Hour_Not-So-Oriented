@@ -4,6 +4,9 @@ import source.model.Car;
 import source.model.Obstacle;
 import source.model.Vehicle;
 
+/**
+ * It is class for managing power ups.
+ */
 public class PowerUpManager extends Controller
 {
    public static PowerUpManager instance;
@@ -38,6 +41,9 @@ public class PowerUpManager extends Controller
       poofDuration = 27;
    }
 
+   /**
+    * Updates the power-up activities.
+    */
    public void update()
    {
       if ( shrinkActive )
@@ -132,6 +138,11 @@ public class PowerUpManager extends Controller
       }
    }
 
+
+   /**
+    * Toggles the power ups.
+    * @param powerUp The desired power-up.
+    */
    public void togglePowerUp(PowerUp powerUp)
    {
       if ( powerUp == PowerUp.Space )
@@ -158,37 +169,69 @@ public class PowerUpManager extends Controller
       }
    }
 
+   /**
+    * Getter for the obstacle that is going to be removed from x axis
+    * @return obstacle to be removed
+    */
    public int getObstacleToRemoveX()
    {
       return obstacleToRemoveX;
    }
 
+
+   /**
+    * Getter for the obstacle that is going to be removed from y axis
+    * @return obstacle to be removed
+    */
    public int getObstacleToRemoveY()
    {
       return obstacleToRemoveY;
    }
 
+
+   /**
+    * Getter for the vehicle that is going to shrink.
+    * @return the vehicle.
+    */
    public int[] getVehicleToShrinkCells()
    {
       return vehicleToShrinkCells;
    }
 
+
+   /**
+    * Getter for the current count.
+    * @return the number of count.
+    */
    public int getCurrentCount()
    {
       return counter;
    }
 
+
+   /**
+    * Getter for the poof duration
+    * @return the duration of the "poof" effect
+    */
    public int getPoofDuration()
    {
       return poofDuration;
    }
 
+
+   /**
+    * Deactivates the power-ups.
+    */
    void deactivatePowerUps()
    {
       deactivateShrink();
       deactivateSpace();
    }
 
+
+   /**
+    * It initializes the theme of space.
+    */
    private void initializeSpace()
    {
       System.out.println("Activated Space");
@@ -197,6 +240,10 @@ public class PowerUpManager extends Controller
       MapController.instance.highlightObstacles();
    }
 
+
+   /**
+    * It initializes the theme of shrink.
+    */
    private void initializeShrink()
    {
       System.out.println("Activated Shrink");
@@ -205,6 +252,10 @@ public class PowerUpManager extends Controller
       MapController.instance.highlightLongs();
    }
 
+
+   /**
+    * Deactivates the space theme.
+    */
    private void deactivateSpace()
    {
       System.out.println("Deactivated Space");
@@ -212,6 +263,10 @@ public class PowerUpManager extends Controller
       MapController.instance.clearHighlights();
    }
 
+
+   /**
+    * Deactivates the shrink theme.
+    */
    private void deactivateShrink()
    {
       System.out.println("Deactivated Shrink");
@@ -219,6 +274,11 @@ public class PowerUpManager extends Controller
       MapController.instance.clearHighlights();
    }
 
+
+   /**
+    * Checks whether the power up is active or not.
+    * @return true if active, false otherwise.
+    */
    public boolean isPowerUpActive()
    {
       return ( shrinkActive || spaceActive );
