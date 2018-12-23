@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Player
 {
-   //private String theme;
    private String playerName;
    private ArrayList<LevelInformation> levels;
    private int starAmount;
@@ -66,17 +65,6 @@ public class Player
       return levels;
    }
 
-//	public void setLevels(ArrayList<LevelInformation> levels) {
-//		for (int i = 0; i < levels.size(); i++)
-//		{
-//			this.levels.set(i, levels.get(i));
-//		}
-//	}
-
-//	public void setSettings(Settings settings) {
-//		this.settings = settings;
-//	}
-
    public int getLastUnlockedLevelNo()
    {
       return lastUnlockedLevelNo;
@@ -91,18 +79,6 @@ public class Player
    {
       lastUnlockedLevelNo++;
    }
-
-//   public void configureLastUnlockedLevelNo()
-//   {
-//      for ( int i = levels.size() - 1; i >= 0; i-- )
-//      {
-//         if ( levels.get(i).isUnlocked() )
-//         {
-//            lastUnlockedLevelNo = i + 1;
-//            break;
-//         }
-//      }
-//   }
 
    public int getRemainingShrinkPowerup()
    {

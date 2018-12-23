@@ -7,9 +7,11 @@ import java.util.TimerTask;
 
 public class Main {
 
-    public static void main(String[] args) {
-        GameEngine gameEngine = new GameEngine();
-        GuiPanelManager guiManager = new GuiPanelManager();
+    public static void main(String[] args)
+    {
+        GameEngine gameEngine = GameEngine.getInstance();
+
+        GuiPanelManager guiManager = GuiPanelManager.getInstance();
         MyThread myThread = new MyThread(guiManager, gameEngine);
 
         Timer timer = new Timer();

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class GameEngine
 {
-   public static GameEngine instance;
+   private static GameEngine instance = null;
+
    private ArrayList<Controller> controllers;
    public ThemeManager themeManager;
    public SoundManager soundManager;
@@ -14,16 +15,20 @@ public class GameEngine
    public GameManager gameManager;
    public PowerUpManager powerUpManager;
 
-   public GameEngine()
+
+   /**
+    * ffjh
+    */
+   private GameEngine()
    {
-      instance = this;
-      themeManager = new ThemeManager();
-      soundManager = new SoundManager();
-      mapController = new MapController();
-      powerUpManager = new PowerUpManager();
-      vehicleController = new VehicleController();
-      playerManager = new PlayerManager();
-      gameManager = new GameManager();
+      themeManager = ThemeManager.getInstance();
+      soundManager = SoundManager.getInstance();
+      mapController = MapController.getInstance();
+      powerUpManager = PowerUpManager.getInstance();
+      vehicleController = VehicleController.getInstance();
+      playerManager = PlayerManager.getInstance();
+      gameManager = GameManager.getInstance();
+
       controllers = new ArrayList<>();
 
       controllers.add(themeManager);
@@ -40,6 +45,14 @@ public class GameEngine
       }
    }
 
+   public static GameEngine getInstance()
+   {
+      if(instance == null) {
+         instance = new GameEngine();
+      }
+      return instance;
+   }
+
    // this method is executed over and over from main
    // calls the update method of other classes that needs to be updated
    public void run()
@@ -51,5 +64,4 @@ public class GameEngine
 
       Input.reset();
    }
-
 }

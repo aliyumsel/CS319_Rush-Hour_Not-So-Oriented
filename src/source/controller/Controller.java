@@ -1,6 +1,6 @@
 package source.controller;
 
-public abstract class Controller
+abstract class Controller
 {
    void start(){
 
@@ -9,4 +9,5 @@ public abstract class Controller
    void update(){
 
    }
+
 }

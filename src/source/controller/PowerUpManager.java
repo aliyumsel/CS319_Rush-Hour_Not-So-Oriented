@@ -6,7 +6,7 @@ import source.model.Vehicle;
 
 public class PowerUpManager extends Controller
 {
-   public static PowerUpManager instance;
+   private static PowerUpManager instance = null;
 
    public enum PowerUp
    {
@@ -27,9 +27,8 @@ public class PowerUpManager extends Controller
    private int counter = 0;
    private boolean shouldCount;
 
-   PowerUpManager()
+   private PowerUpManager()
    {
-      instance = this;
       obstacleToRemove = null;
       shouldCount = false;
       obstacleToRemoveX = -1;
@@ -38,34 +37,36 @@ public class PowerUpManager extends Controller
       poofDuration = 27;
    }
 
+   public static PowerUpManager getInstance()
+   {
+      if(instance == null) {
+         instance = new PowerUpManager();
+      }
+      return instance;
+   }
+
    public void update()
    {
       if ( shrinkActive )
       {
          if ( Input.getMouseButtonPressed(0) )
          {
-            Vehicle temp = MapController.instance.getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+            Vehicle temp = MapController.getInstance().getVehicleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
             if ( temp != null )
             {
                if ( temp.transform.length == 3 )
                {
-                  SoundManager.instance.shrinkSound();
+                  SoundManager.getInstance().shrinkSound();
 
                   vehicleToShrink = temp;
                   vehicleToShrinkCells = vehicleToShrink.getOccupiedCells();
-
-//                  MapController.instance.removeGameObject(temp);
-//                  Vehicle newVehicle = new Car(temp);
-//                  MapController.instance.addGameObject(newVehicle);
-//                  MapController.instance.updateMap();
-//                  GameManager.instance.autoSave();
 
                   deactivateShrink();
                   shouldCount = true;
 
                   //this decrement method will be put inside the game manager
-                  PlayerManager.instance.decrementRemainingShrinkPowerup();
+                  PlayerManager.getInstance().decrementRemainingShrinkPowerup();
                }
             }
          }
@@ -74,11 +75,11 @@ public class PowerUpManager extends Controller
       {
          if ( Input.getMouseButtonPressed(0) )
          {
-            Obstacle temp = MapController.instance.getObstacleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
+            Obstacle temp = MapController.getInstance().getObstacleBySelectedCell(Input.getMouseMatrixPosition()[0], Input.getMouseMatrixPosition()[1]);
 
             if ( temp != null )
             {
-               SoundManager.instance.poofSound();
+               SoundManager.getInstance().poofSound();
                obstacleToRemove = temp;
                obstacleToRemoveX = obstacleToRemove.transform.position.gridX;
                obstacleToRemoveY = obstacleToRemove.transform.position.gridY;
@@ -86,7 +87,7 @@ public class PowerUpManager extends Controller
                shouldCount = true;
 
                //this decrement method will be put inside the game manager
-               PlayerManager.instance.decrementRemainingSpacePowerup();
+               PlayerManager.getInstance().decrementRemainingSpacePowerup();
             }
          }
       }
@@ -102,11 +103,11 @@ public class PowerUpManager extends Controller
          //shrink the gameobject
          if ( vehicleToShrink != null)
          {
-            MapController.instance.removeGameObject(vehicleToShrink);
+            MapController.getInstance().removeGameObject(vehicleToShrink);
             Vehicle newVehicle = new Car(vehicleToShrink);
-            MapController.instance.addGameObject(newVehicle);
-            MapController.instance.updateMap();
-            GameManager.instance.autoSave();
+            MapController.getInstance().addGameObject(newVehicle);
+            MapController.getInstance().updateMap();
+            GameManager.getInstance().autoSave();
             vehicleToShrink = null;
          }
 
@@ -114,9 +115,9 @@ public class PowerUpManager extends Controller
          if ( obstacleToRemove != null)
          {
             System.out.println("Removed game object");
-            MapController.instance.removeGameObject(obstacleToRemove);
-            MapController.instance.updateMap();
-            GameManager.instance.autoSave();
+            MapController.getInstance().removeGameObject(obstacleToRemove);
+            MapController.getInstance().updateMap();
+            GameManager.getInstance().autoSave();
             obstacleToRemove = null;
          }
       }
@@ -194,7 +195,7 @@ public class PowerUpManager extends Controller
       System.out.println("Activated Space");
       spaceActive = true;
       deactivateShrink();
-      MapController.instance.highlightObstacles();
+      MapController.getInstance().highlightObstacles();
    }
 
    private void initializeShrink()
@@ -202,21 +203,21 @@ public class PowerUpManager extends Controller
       System.out.println("Activated Shrink");
       shrinkActive = true;
       deactivateSpace();
-      MapController.instance.highlightLongs();
+      MapController.getInstance().highlightLongs();
    }
 
    private void deactivateSpace()
    {
       System.out.println("Deactivated Space");
       spaceActive = false;
-      MapController.instance.clearHighlights();
+      MapController.getInstance().clearHighlights();
    }
 
    private void deactivateShrink()
    {
       System.out.println("Deactivated Shrink");
       shrinkActive = false;
-      MapController.instance.clearHighlights();
+      MapController.getInstance().clearHighlights();
    }
 
    public boolean isPowerUpActive()

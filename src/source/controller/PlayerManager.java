@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class PlayerManager extends Controller
 {
-   public static PlayerManager instance;
+   private static PlayerManager instance = null;
 
    private Player currentPlayer;
    private ArrayList<Player> players;
@@ -17,11 +17,18 @@ public class PlayerManager extends Controller
 
    private PlayerDao playerDao;
 
-   public PlayerManager()
+   private PlayerManager()
    {
-      instance = this;
       playerDao = new PlayerDaoImpl();
       extractPlayers();
+   }
+
+   public static PlayerManager getInstance()
+   {
+      if(instance == null) {
+         instance = new PlayerManager();
+      }
+      return instance;
    }
 
    private void extractPlayers()
@@ -55,23 +62,10 @@ public class PlayerManager extends Controller
       return currentPlayer;
    }
 
-//   public void setCurrentPlayer(Player currentPlayer)
-//   {
-//      this.currentPlayer = currentPlayer;
-//   }
-
    public ArrayList<Player> getPlayers()
    {
       return players;
    }
-
-//   public void setPlayers(ArrayList<Player> players)
-//   {
-//      for ( int i = 0; i < players.size(); i++ )
-//      {
-//         this.players.set(i, players.get(i));
-//      }
-//   }
 
    /* returns 0 if creation successful
     * returns 1 if the name already exists
@@ -99,8 +93,8 @@ public class PlayerManager extends Controller
       }
       else
       {
-         initialMusic = GameEngine.instance.soundManager.isThemeSongEnabled();
-         initialSfx = GameEngine.instance.soundManager.isEffectsEnabled();
+         initialMusic = SoundManager.getInstance().isThemeSongEnabled();
+         initialSfx = SoundManager.getInstance().isEffectsEnabled();
       }
 
       Settings settings = new Settings(initialMusic, initialSfx);
@@ -109,8 +103,8 @@ public class PlayerManager extends Controller
       players.add(newPlayer);
       currentPlayer = newPlayer;
 
-      ThemeManager.instance.setTheme("minimalistic");
-      VehicleController.instance.setCurrentControl(VehicleController.CONTROL.SLIDE);
+      ThemeManager.getInstance().setTheme("minimalistic");
+      VehicleController.getInstance().setCurrentControl(VehicleController.CONTROL.SLIDE);
 
       return 0;
    }
@@ -160,9 +154,9 @@ public class PlayerManager extends Controller
       }
       if ( selected )
       {
-         GameEngine.instance.soundManager.setThemeSong(currentPlayer.getSettings().getMusic());
-         GameEngine.instance.soundManager.setEffects(currentPlayer.getSettings().getSfx());
-         GameEngine.instance.themeManager.setTheme(currentPlayer.getSettings().getActiveTheme());
+         SoundManager.getInstance().setThemeSong(currentPlayer.getSettings().getMusic());
+         SoundManager.getInstance().setEffects(currentPlayer.getSettings().getSfx());
+         ThemeManager.getInstance().setTheme(currentPlayer.getSettings().getActiveTheme());
          playerDao.saveLastActivePlayer(name);
          return true;
       }
@@ -229,7 +223,7 @@ public class PlayerManager extends Controller
    {
       setLevelStatus(levelNo, "inProgress");
 
-      String map = MapController.instance.mapToString();
+      String map = MapController.getInstance().mapToString();
       currentPlayer.getLevels().get(levelNo - 1).setCurrentNumberOfMoves(moveAmount);
       currentPlayer.getLevels().get(levelNo - 1).setMap(map);
 

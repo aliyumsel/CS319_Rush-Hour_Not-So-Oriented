@@ -48,7 +48,7 @@ public class EndOfLevelPanel extends JPanel
 
    public void loadImages()
    {
-      background = ThemeManager.instance.getPopupBackgroundImage();
+      background = ThemeManager.getInstance().getPopupBackgroundImage();
 
       menuButtonImage = guiManager.LoadImage("image/icons/menu.png");
       menuButtonHighlightedImage = guiManager.LoadImage("image/icons/menuH.png");
@@ -168,10 +168,10 @@ public class EndOfLevelPanel extends JPanel
       @Override
       public void actionPerformed(ActionEvent e)
       {
-         GameEngine.instance.soundManager.buttonClick();
+         GameEngine.getInstance().soundManager.buttonClick();
          if ( e.getSource() == retry )
          {
-            GameEngine.instance.gameManager.resetLevel();
+            GameEngine.getInstance().gameManager.resetLevel();
          }
 
          if ( e.getSource() == menu )
@@ -181,13 +181,13 @@ public class EndOfLevelPanel extends JPanel
 
          if ( e.getSource() == nextLevel )
          {
-            if (GameEngine.instance.gameManager.isLastLevel())
+            if (GameEngine.getInstance().gameManager.isLastLevel())
             {
                guiManager.setPanelVisible("Credits");
             }
             else
             {
-               GameEngine.instance.gameManager.nextLevel();
+               GameEngine.getInstance().gameManager.nextLevel();
             }
          }
          guiManager.getGamePanel().hideBlackBackground();

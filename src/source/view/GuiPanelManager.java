@@ -1,5 +1,6 @@
 package source.view;
 
+import source.controller.DataConfiguration;
 import source.controller.Input;
 
 import javax.imageio.ImageIO;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 @SuppressWarnings({"serial", "Duplicates"})
 public class GuiPanelManager extends JFrame
 {
-   public static GuiPanelManager instance;
+   private static GuiPanelManager instance = null;
 
    //   private int currentPanelIndex;
    private ArrayList<JPanel> panels;
@@ -33,11 +34,12 @@ public class GuiPanelManager extends JFrame
 
 //   private BufferedImage cursorImage;
 
-   public GuiPanelManager()
+   private GuiPanelManager()
    {
       super("Rush Hour");
-      setUndecorated(true);
       instance = this;
+      setUndecorated(true);
+
       Toolkit toolkit = Toolkit.getDefaultToolkit();
       //Image image = toolkit.getImage("src/image/icons/cursor.png");
       Image image = null;
@@ -79,13 +81,24 @@ public class GuiPanelManager extends JFrame
       pack();
       setLocationRelativeTo(null);
 
-      //gamepanel managerdan çekilen bilgiye göre ya tutorial ya da main menu açılacak
-      //setPanelVisible("Tutorial");
-      setPanelVisible("MainMenu");
+      if (DataConfiguration.getInstance().gameOpenedFirstTime) {
+         setPanelVisible("Tutorial");
+      }
+      else {
+         setPanelVisible("MainMenu");
+      }
 
       setVisible(true);
       pack();
 
+   }
+
+   public static GuiPanelManager getInstance()
+   {
+      if(instance == null) {
+         instance = new GuiPanelManager();
+      }
+      return instance;
    }
 
    private void addPanels()
@@ -132,7 +145,7 @@ public class GuiPanelManager extends JFrame
       }
       else if (panelName.equals("Tutorial")){
          tutorialPanel.update();
-         tutorialPanel.setIndex(0);
+         tutorialPanel.setIndex(-1);
          targetPanel = tutorialPanel;
       }
       else if ( panelName.equals("Game") )

@@ -2,6 +2,7 @@
 package source.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import interfaces.PlayerDao;
 import source.model.*;
 
@@ -17,27 +18,47 @@ public class PlayerDaoImpl implements PlayerDao{
     public ArrayList<Player> extractPlayers()
     {
         ArrayList<Player> players = new ArrayList<>();
-        File folder = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players");
+        File folder = new File(DataConfiguration.getInstance().dataPath + "\\players");
         File[] list = folder.listFiles();
-
+        FileReader reader;
+        Player player;
         for (int i = 0; i < list.length; i++)
         {
-            players.add(gson.fromJson(createReader(list[i].getPath() + "/playerInfo.json"), Player.class));
+            if (!list[i].isDirectory())
+            {
+                continue;
+            }
+            reader = createReader(list[i].getPath() + "/playerInfo.json", list[i].getName());
+            if (reader == null)
+            {
+                continue;
+            }
+            try {
+                player = gson.fromJson(reader, Player.class);
+                players.add(player);
+            } catch (JsonParseException e)
+            {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                DataErrorHandler.handlePlayerDamagedError(list[i].getName());
+            }
+
         }
         return players;
     }
     @Override
     public String extractLastPlayerName()
     {
-        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
-        return info.lastActivePlayer;
+        return GameInfo.getInstance().lastActivePlayer;
     }
 
     @Override
     public Player createPlayer(String playerName, Settings settings) {
-        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
         OriginalLevel originalLevel;
-        String playerPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players\\" + playerName;
+        String playerPath = DataConfiguration.getInstance().dataPath + "\\players\\" + playerName;
 
         //creates player folder
         File newFolder = new File(playerPath);
@@ -49,8 +70,8 @@ public class PlayerDaoImpl implements PlayerDao{
 
         boolean unlocked;
         ArrayList<LevelInformation> levels = new ArrayList<>();
-        System.out.println(info.numberOfMaps);
-        for (int i = 1; i <= info.numberOfMaps; i++)
+        System.out.println(GameInfo.getInstance().numberOfMaps);
+        for (int i = 1; i <= GameInfo.getInstance().numberOfMaps; i++)
         {
             InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + i + ".json");
             InputStreamReader reader = new InputStreamReader(input);
@@ -79,10 +100,7 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public void saveLastActivePlayer(String playerName)
     {
-        Info info = gson.fromJson(createReader("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json"), Info.class);
-        info.lastActivePlayer = playerName;
-        String text = gson.toJson(info);
-        writeFile("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\info.json", text);
+        GameInfo.getInstance().updateInfo(playerName);
     }
 
     @Override
@@ -96,7 +114,7 @@ public class PlayerDaoImpl implements PlayerDao{
     public void changePlayerName(Player player){
         File folder = new File(player.getPath());
         folder.renameTo(new File(folder.getParent() + "/" + player.getPlayerName()));
-        player.setPath("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour\\players\\"+  player.getPlayerName());
+        player.setPath(DataConfiguration.getInstance().dataPath + "\\players\\"+  player.getPlayerName());
         savePlayer(player);
     }
 
@@ -114,14 +132,16 @@ public class PlayerDaoImpl implements PlayerDao{
         }
     }
 
-    private FileReader createReader(String path)
+    private FileReader createReader(String path, String name)
     {
         try {
             return new FileReader(path);
 
         } catch (FileNotFoundException e) {
-            return null;
+            DataErrorHandler.handlePlayerDamagedError(name);
+            //createReader(path, name);
         }
+        return null;
     }
 
     private void createFile(String path)
@@ -156,7 +176,7 @@ public class PlayerDaoImpl implements PlayerDao{
             movesForTwoStars = 0;
             map = "";
             try {
-                scan = new Scanner (new File("src/data/levels/level" + i + ".txt"));
+                scan = new Scanner(new File("src/data/levels/level" + i + ".txt"));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
