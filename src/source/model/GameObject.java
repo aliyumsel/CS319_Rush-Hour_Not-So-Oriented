@@ -4,12 +4,11 @@ import interfaces.Drawable;
 
 import java.awt.*;
 
+/**
+ * GameObject class is used to represent every possible object that is inside the game.
+ */
 public class GameObject implements Drawable
 {
-   /**
-    * GameObject class is used to represent every possible object that is inside the game.
-    */
-
    public Transform transform; /*  Represents all attributes that is related to 2d space.*/
    private int[] occupiedCellNumbers; /* Holds all the cells that this game object currently occupies. */
    boolean isBlackedOut; /* Boolean that checks whether the object is blacked out or not*/
@@ -30,6 +29,8 @@ public class GameObject implements Drawable
 
    /**
     *Updates the cells that is occupied  by this game object.
+    * When a game object is moved it needs to recalculate the positions of
+    * its other parts.
     */
    void findOccupiedCells()
    {
@@ -80,6 +81,9 @@ public class GameObject implements Drawable
 
    }
 
+   /**
+    * Updates the images of the game object according to the current theme.
+    */
    public void updateImages()
    {
    }

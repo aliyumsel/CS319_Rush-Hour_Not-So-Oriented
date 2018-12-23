@@ -2,15 +2,12 @@ package source.model;
 
 import java.util.ArrayList;
 
+/**
+ * Map class is used to represent the map that the game is played on.
+ * It holds the vehicles that are part of the level.
+ */
 public class Map
 {
-
-   /**
-    * Map class is used to represent the map that the game is played on.
-    * It holds the vehicles that are part of the level.
-    */
-
-
    private ArrayList<GameObject> gameObjects; //Holds the gameObjects that are currently part of the level.
    private String[][] grid; //Representation of the map in textual form.
    private int mapSize = 8; /* Represents the size of the map.

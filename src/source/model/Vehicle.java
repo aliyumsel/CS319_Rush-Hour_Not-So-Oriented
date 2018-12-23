@@ -6,12 +6,12 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+/**
+ * Vehicle class is used to represent the vehicles in our game.
+ * They are the main game object in the game Rush Hour.
+ */
 public class Vehicle extends GameObject// implements Drawable
 {
-   /**
-    * Vehicle class is used to represent the vehicles in our game.
-    * They are the main game object in the game Rush Hour.
-    */
    private String type; // we may not need this
    public boolean isMoving; // we may not need this
    private boolean player;
@@ -139,7 +139,6 @@ public class Vehicle extends GameObject// implements Drawable
       transform.position.gridY = y;
       findOccupiedCells();
    }
-
 
    /**
     * Getter for a type of a vehicle

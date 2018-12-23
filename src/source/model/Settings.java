@@ -2,26 +2,17 @@ package source.model;
 
 import java.util.HashMap;
 
+/**
+ * Settings class is used to hold settings information of a player
+ */
 public class Settings
 {
-   /**
-    * Settings class is used to hold settings information of a player
-    */
-
    private boolean music; //  To determine whether the music is on or off.
    private boolean sfx; // To determine whether the sound effects are on or off.
    private String controlPreference; // Represents the selected theme by the player.
 
    private HashMap<String, Boolean> themes; // Represents the collection off the themes.
    private String activeTheme; // Represents the active theme.
-
-//   public Settings(boolean music, boolean sfx, HashMap<String, Boolean> themes, String activeTheme, String controlPreference) {
-//      this.music = music;
-//      this.sfx = sfx;
-//      this.themes = themes;
-//      this.activeTheme = activeTheme;
-//      this.controlPreference = controlPreference;
-//   }
 
    /**
     * Constructor that initializes values to their specified initial values.
@@ -50,10 +41,6 @@ public class Settings
       return themes;
    }
 
-//   public void setThemes(HashMap<String,Boolean> themes) {
-//      this.themes = themes;
-//   }
-
    /**
     * Getter for an active theme
     * @return the active theme of the game.
@@ -78,9 +65,6 @@ public class Settings
       return music;
    }
 
-//   public void setMusic(boolean music) {
-//      this.music = music;
-//   }
 
    /**
     * Getter for the sfx of the game.
@@ -89,10 +73,6 @@ public class Settings
    public boolean getSfx() {
       return sfx;
    }
-
-//   public void setSfx(boolean sfx) {
-//      this.sfx = sfx;
-//   }
 
    /**
     * It toggles the state of the music.
@@ -131,35 +111,4 @@ public class Settings
    {
       return controlPreference;
    }
-
-//   public String settingsToString() {
-//      return "\t<Music>\n" +
-//              "\t\t" + music + "\n" +
-//              "\t<Music/>\n" +
-//              "\t<Sfx>\n" +
-//              "\t\t" + sfx + "\n" +
-//              "\t<Sfx/>\n" +
-//              "\t<ControlPreference>\n" +
-//              "\t\t" + controlPreference + "\n" +
-//              "\t<ControlPreference/>\n" +
-//              "\t<Theme>\n" +
-//              "\t\t<Active>\n" +
-//              "\t\t\t" + activeTheme + "\n" +
-//              "\t\t<Active>\n" +
-//              "\t\t<MinimalisticUnlocked>\n" +
-//              "\t\t\t" + themes.get("minimalistic") + "\n" +
-//              "\t\t<MinimalisticUnlocked/>\n" +
-//              "\t\t<ClassicUnlocked>\n" +
-//              "\t\t\t" + themes.get("classic") + "\n" +
-//              "\t\t<ClassicUnlocked/>\n" +
-//              "\t\t<SafariUnlocked>\n" +
-//              "\t\t\t" + themes.get("safari") + "\n" +
-//              "\t\t<SafariUnlocked/>\n" +
-//              "\t\t<SpaceUnlocked>\n" +
-//              "\t\t\t" + themes.get("space") + "\n" +
-//              "\t\t<SpaceUnlocked/>\n" +
-//              "\t<Theme/>\n";
-//
-//   }
-
 }

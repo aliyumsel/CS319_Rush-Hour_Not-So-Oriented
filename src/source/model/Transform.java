@@ -1,13 +1,13 @@
 package source.model;
 
+/**
+ *  Transform class is used to hold every possible information that
+ *  every 2 dimensional object could have.
+ *  We use position, length and direction to represent the
+ *  2d object's position, rotation and scale respectively.
+ */
 public class Transform
 {
-   /**
-    *  Transform class is used to hold every possible information that
-    *  every 2 dimensional object could have.
-    *  We use position, length and direction to represent the
-    *  2d object's position, rotation and scale respectively.
-    */
    public class Position
    {
       /**
@@ -32,12 +32,6 @@ public class Transform
          gridX = (int)x;
          gridY = (int)y;
       }
-
-//      Position()
-//      {
-//         this.x = 0;
-//         this.y = 0;
-//      }
    }
 
    public Position position; /* Represents the position of the object in 2d space. */
@@ -75,25 +69,6 @@ public class Transform
       this.direction = direction;
    }
 
-//   Transform()
-//   {
-//      position = new Position();
-//      length = 1;
-//      axis = "Vertical";
-//      direction = "Upwards";
-//   }
-
-//   public void setPosition(int x, int y)
-//   {
-//      position.x = x;
-//      position.y = y;
-//   }
-
-//   public Position getPosition()
-//   {
-//      return position;
-//   }
-
    /**
     * getter for the length attribute.
     * @return an integer represents length.
@@ -102,11 +77,6 @@ public class Transform
    {
       return length;
    }
-
-//   public String getAxis()
-//   {
-//      return axis;
-//   }
 
    /**
     * getter for the direction attribute

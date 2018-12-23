@@ -227,7 +227,7 @@ public class VehicleController extends Controller
 
             }
          }
-         System.out.println(isMoving + "," + isPlayerMoving);
+//         System.out.println(isMoving + "," + isPlayerMoving);
          if ( selectedVehicle != null && !isMoving && !isPlayerMoving )
          {
 

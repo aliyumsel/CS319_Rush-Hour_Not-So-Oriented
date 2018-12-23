@@ -6,13 +6,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Theme class is used to hold information of a theme.
+ */
 public class Theme
 {
-    /**
-     * Theme class is used to hold information of a theme.
-     */
-
-    private ArrayList<BufferedImage> shortVehicleImageArray; //Short ve Longu ayırdım hani zaten theme calssındayız ayrı dursunlar bari babında
+    private ArrayList<BufferedImage> shortVehicleImageArray;
     private ArrayList<BufferedImage> longVehicleImageArray;
     private BufferedImage playerImage;
     private BufferedImage specialPlayer;
@@ -23,7 +22,6 @@ public class Theme
     private BufferedImage obstacleDisabled;
     private BufferedImage longDisabled;
     private BufferedImage shortDisabled;
-//    private ArrayList<String> vehicleSoundArray;
     private String themeSong;
     private String buttonClick;
     private String selectionSound;
@@ -341,7 +339,4 @@ public class Theme
         this.unlocked = unlocked;
     }
 
-//    public String getActiveTheme() {
-//        return activeTheme;
-//    }
 }
