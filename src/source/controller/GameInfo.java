@@ -1,21 +1,21 @@
 package source.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+
 
 /**
  * The class for giving information of the game.
  */
-class GameInfo {
-    private static GameInfo instance = null;
-
-    final int numberOfMaps = 50;
-    String lastActivePlayer;
+public class GameInfo
+{
+    final static int numberOfMaps = 50;
+    static String lastActivePlayer;
+    static GameInfo instance;
 
     /**
      * The inner class which holds last active player's info.
@@ -26,26 +26,16 @@ class GameInfo {
     }
     private Info info;
 
+
     /**
      * Empty constructor that initializes values to their specified initial values.
      */
-    private GameInfo()
+    public GameInfo()
     {
         instance = this;
         info = new Info();
     }
 
-    /**
-     * Returns a new instance of the class
-     * @return new GameInfo object
-     */
-    public static GameInfo getInstance()
-    {
-        if(instance == null) {
-            instance = new GameInfo();
-        }
-        return instance;
-    }
 
     /**
      * Extracts info.
@@ -56,23 +46,23 @@ class GameInfo {
         Gson gson = new Gson();
         FileReader reader = null;
         try {
-            reader = new FileReader(DataConfiguration.getInstance().dataPath + "\\info.json");
+            reader = new FileReader(DataConfiguration.dataPath + "\\info.json");
 
             try {
                 info = gson.fromJson(reader, Info.class);
             }
             catch (JsonParseException e)
             {
-                DataErrorHandler.getInstance().handleInfoDamagedError();
+                DataErrorHandler.instance.handleInfoDamagedError();
             }
             if (info == null)
             {
-                DataErrorHandler.getInstance().handleInfoDamagedError();
+                DataErrorHandler.instance.handleInfoDamagedError();
             }
             lastActivePlayer = info.lastActivePlayer;
             if (lastActivePlayer == null)
             {
-                DataErrorHandler.getInstance().handleInfoDamagedError();
+                DataErrorHandler.instance.handleInfoDamagedError();
             }
 
             return true;
@@ -83,6 +73,7 @@ class GameInfo {
 
     }
 
+
     /**
      * Updates the last players info.
      * @param lastPlayer the last player who played the game.
@@ -92,16 +83,11 @@ class GameInfo {
         Gson gson = new Gson();
         lastActivePlayer = lastPlayer;
 
-        if (info == null)
-        {
-            info = new Info();
-        }
-
         info.lastActivePlayer = lastPlayer;
 
         FileWriter fileOut = null;
         try {
-            fileOut = new FileWriter(DataConfiguration.getInstance().dataPath + "\\info.json");
+            fileOut = new FileWriter(DataConfiguration.dataPath + "\\info.json");
             fileOut.write(gson.toJson(info));
             fileOut.flush();
             fileOut.close();
