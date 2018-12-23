@@ -1,14 +1,12 @@
 package source.view;
 
+import source.controller.GameEngine;
 import source.controller.SoundManager;
-import source.controller.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,19 +23,22 @@ public class TutorialPanel extends JPanel {
     private boolean isTutorialActive; //will be accessed from guiManager
     private ArrayList<JLabel> tutorials = new ArrayList<>();
     private ArrayList<JLabel> backgrounds = new ArrayList<>(); //for images and gifs
+    private ArrayList<Point> arrowCooardinates = new ArrayList<>();
+
     private JLabel labelBackground;
     private JLabel left;
     private JLabel right;
     private JLabel up;
     private JLabel down;
-    private BufferedImage background;
-    private ArrayList<Point> arrowCooardinates = new ArrayList<>();
     private JLabel activeBackground = null;
     private JLabel activeLabel = null;
-    private BufferedImage coreBackground;
-    private BufferedImage next;
+    private JLabel coverPage = LoadMediaToLabel("/image/tutorial_Backgrounds/cover.png");
+    private JLabel coverInfo = LoadMediaToLabel("/image/tutorial_Labels/coverInfo.png");
+
+    private BufferedImage background;
+    private BufferedImage next ;
     private BufferedImage nextH;
-    private BufferedImage back;
+    private BufferedImage back ;
     private BufferedImage backH;
     private BufferedImage backD;
     private BufferedImage cancel;
@@ -49,16 +50,15 @@ public class TutorialPanel extends JPanel {
 
         guiManager = _guiManager;
 
-        next = guiManager.LoadImage("image/icons/nextO.png");
-        nextH = guiManager.LoadImage("image/icons/nextOH.png");
-        back = guiManager.LoadImage("image/icons/backO.png");
-        backH = guiManager.LoadImage("image/icons/backOH.png");
-        backD = guiManager.LoadImage("image/icons/back_OD.png");
-        cancel = guiManager.LoadImage("image/icons/quitO.png");
-        cancelH = guiManager.LoadImage("image/icons/quitOH.png");
+        next = GuiPanelManager.getInstance().LoadImage("image/icons/nextO.png");
+        nextH = GuiPanelManager.getInstance().LoadImage("image/icons/nextOH.png");
+        back = GuiPanelManager.getInstance().LoadImage("image/icons/backO.png");
+        backH = GuiPanelManager.getInstance().LoadImage("image/icons/backOH.png");
+        backD = GuiPanelManager.getInstance().LoadImage("image/icons/back_OD.png");
+        cancel = GuiPanelManager.getInstance().LoadImage("image/icons/quitO.png");
+        cancelH = GuiPanelManager.getInstance().LoadImage("image/icons/quitOH.png");
 
-        this.addMouseListener(mouseListener);
-        index = 0;
+        index = -1;
         this.isTutorialActive = isTutorialActive;
 
         setPreferredSize(new Dimension(guiManager.panelWidth, guiManager.panelHeight));
@@ -72,12 +72,11 @@ public class TutorialPanel extends JPanel {
         if (index == tutorials.size()) {
             backButton.setEnabled(false);
             guiManager.setPanelVisible("MainMenu");
+            index = -1;
         } else {
-            backButton.setEnabled(index != 0);
+            backButton.setEnabled(index != -1);
             setLabels();
         }
-        System.out.println(backButton.isEnabled());
-        System.out.println(backButton.isVisible());
 
     }
 
@@ -86,21 +85,26 @@ public class TutorialPanel extends JPanel {
         for (int i = 0; i < backgrounds.size(); i++) {
             backgrounds.get(i).setVisible(false);
         }
-
+        coverInfo.setVisible(false);
+        coverPage.setVisible(false);
         left.setVisible(false);
         right.setVisible(false);
         up.setVisible(false);
         down.setVisible(false);
+        if (index == -1) {
+            coverInfo.setVisible(true);
+            activeBackground = coverPage;
+            activeLabel = coverInfo;
+            updateLabelBackground(-195, 130);
+        } else if (index >= 0 && index < 5) {
+            if (index == 2) {
 
-        if (index >= 0 && index < 5) {
-            if (index == 2){
-                down.setVisible(true);
-                currentArrow=down;}
-            else if (index == 4){
-                right.setVisible(true);
-            currentArrow = right;}
-            else{
-                up.setVisible(true);
+                currentArrow = down;
+            } else if (index == 4) {
+
+                currentArrow = right;
+            } else {
+
                 currentArrow = up;
             }
             activeBackground = backgrounds.get(0);
@@ -116,11 +120,10 @@ public class TutorialPanel extends JPanel {
             activeBackground = backgrounds.get(0);
             updateLabelBackground(50, -22);
         } else if (index >= 11 && index < 13) {
-            if(index == 11){
+            if (index == 11) {
 
-            currentArrow = down;
-            }
-            else{
+                currentArrow = down;
+            } else {
 
                 currentArrow = left;
             }
@@ -133,13 +136,13 @@ public class TutorialPanel extends JPanel {
             updateLabelBackground(50, -22);
         } else if (index >= 14 && index < 18) {
             activeBackground = backgrounds.get(3);
-            if (index == 16){
+            if (index == 16) {
 
                 currentArrow = right;
-            }
-            else{
+            } else {
 
-            currentArrow = up;}
+                currentArrow = up;
+            }
             updateLabelBackground(50, 70);
         } else if (index == 18) {
 
@@ -151,7 +154,7 @@ public class TutorialPanel extends JPanel {
             currentArrow = up;
             activeBackground = backgrounds.get(4);
             updateLabelBackground(-51, -190);
-            //updateLabelBackground(50,50);
+
         } else if (index == 20) {
             activeBackground = backgrounds.get(5);
         } else if (index == 21) {
@@ -171,19 +174,23 @@ public class TutorialPanel extends JPanel {
             currentArrow = down;
             activeBackground = backgrounds.get(9);
         }
+
         activeBackground.setVisible(true);
-        if (index != 20)
+        if (index != 20 && index != -1)
             currentArrow.setVisible(true);
         for (int i = 0; i < tutorials.size(); i++) {
             tutorials.get(i).setVisible(false);
         }
-        tutorials.get(index).setVisible(true); //labellar için bunu açın
-        currentArrow.setBounds(arrowCooardinates.get(index).x,arrowCooardinates.get(index).y,currentArrow.getPreferredSize().width,currentArrow.getPreferredSize().height);
-        activeLabel = tutorials.get(index);
+        if (index != -1) {
+            tutorials.get(index).setVisible(true); //labellar için bunu açın
+            currentArrow.setBounds(arrowCooardinates.get(index).x, arrowCooardinates.get(index).y, currentArrow.getPreferredSize().width, currentArrow.getPreferredSize().height);
+            activeLabel = tutorials.get(index);
+        }
     }
 
 
     private void createComponents() {
+
         left = LoadMediaToLabel("/image/icons/left.gif");
         right = LoadMediaToLabel("/image/icons/right.gif");
         up = LoadMediaToLabel("/image/icons/up.gif");
@@ -213,7 +220,7 @@ public class TutorialPanel extends JPanel {
         arrowCooardinates.add(new Point(285, 127));
         arrowCooardinates.add(new Point(166, 295));
         arrowCooardinates.add(new Point(20, 100));
-        arrowCooardinates.add(new Point(367,300));
+        arrowCooardinates.add(new Point(367, 300));
         arrowCooardinates.add(new Point(300, 83));
         arrowCooardinates.add(new Point(251, 252));
         arrowCooardinates.add(new Point(593, 295));
@@ -230,12 +237,10 @@ public class TutorialPanel extends JPanel {
         arrowCooardinates.add(new Point(694, 52));
 
 
-
-
         for (int i = 1; i <= 25; i++) { // change size !!!!
             if (LoadMediaToLabel("/image/tutorial_Labels/" + i + ".png") != null) {
                 tutorials.add(LoadMediaToLabel("/image/tutorial_Labels/" + i + ".png"));
-                tutorials.get(i-1).setPreferredSize(new Dimension( labelBackground.getPreferredSize().width,labelBackground.getPreferredSize().height));
+                tutorials.get(i - 1).setPreferredSize(new Dimension(labelBackground.getPreferredSize().width, labelBackground.getPreferredSize().height));
                 add(tutorials.get(i - 1));
                 tutorials.get(i - 1).setVisible(false);
             } else {
@@ -246,7 +251,12 @@ public class TutorialPanel extends JPanel {
 
 
         }
+        coverInfo.setPreferredSize(new Dimension(labelBackground.getPreferredSize().width, labelBackground.getPreferredSize().height));
+        coverInfo.setVisible(false);
+        add(coverInfo);
         add(labelBackground);
+
+        add(coverPage);
         for (int i = 1; i <= 10; i++) {
 
             if (LoadMediaToLabel("/image/tutorial_Backgrounds/" + i + ".gif") != null) {
@@ -262,7 +272,7 @@ public class TutorialPanel extends JPanel {
             }
         }
 
-        background = ThemeManager.getInstance().getGamePanelBackgroundImage();
+        background = GameEngine.getInstance().themeManager.getGamePanelBackgroundImage();
         Image scaledImage = background.getScaledInstance(guiManager.panelWidth, guiManager.panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
@@ -282,12 +292,12 @@ public class TutorialPanel extends JPanel {
     private void updateLabelBackground(int x, int y) {
         labelBackground.setBounds(guiManager.findCenter(guiManager.panelWidth, labelBackground) + 200 + x, 200 + y, labelBackground.getPreferredSize().width, labelBackground.getPreferredSize().height);
         for (int i = 0; i < tutorials.size(); i++) {
-            setBounds(tutorials.get(i), labelBackground.getX() , labelBackground.getY()); //label background coordinates
+            setBounds(tutorials.get(i), labelBackground.getX(), labelBackground.getY()); //label background coordinates
         }
         forwardButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) + 75 + 200 + x, 275 + y, forwardButton.getPreferredSize().width, forwardButton.getPreferredSize().height);
         backButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) - 75 + 200 + x, 275 + y, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
         cancelButton.setBounds(guiManager.findCenter(guiManager.panelWidth, cancelButton) + 200 + x, 275 + y, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
-
+        setBounds(coverInfo, labelBackground.getX(), labelBackground.getY());
     }
 
     private void setBoundsOfComponents() {
@@ -295,13 +305,14 @@ public class TutorialPanel extends JPanel {
         backButton.setBounds(guiManager.findCenter(guiManager.panelWidth, backButton) - 75 + 200, 275, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
         cancelButton.setBounds(guiManager.findCenter(guiManager.panelWidth, cancelButton) + 200, 275, backButton.getPreferredSize().width, backButton.getPreferredSize().height);
         labelBackground.setBounds(guiManager.findCenter(guiManager.panelWidth, labelBackground) + 200, 200, labelBackground.getPreferredSize().width, labelBackground.getPreferredSize().height);
-
+        setBounds(coverInfo, labelBackground.getX(), labelBackground.getY());
         for (int i = 0; i < tutorials.size(); i++) {
-            setBounds(tutorials.get(i), labelBackground.getX() + 10, labelBackground.getY() + 20); //label background coordinates
+            setBounds(tutorials.get(i), labelBackground.getX(), labelBackground.getY()); //label background coordinates
         }
         for (int i = 0; i < backgrounds.size(); i++) {
             setBounds(backgrounds.get(i), 0, 0);
         }
+        setBounds(coverPage, 0, 0);
     }
 
     public void paintComponent(Graphics g) {
@@ -310,7 +321,7 @@ public class TutorialPanel extends JPanel {
     }
 
     private void setBounds(JLabel label, int x, int y) {
-        label.setBounds(x, y, label.getPreferredSize().width , label.getPreferredSize().height);
+        label.setBounds(x, y, label.getPreferredSize().width, label.getPreferredSize().height);
     }
 
     public int getIndex() {
@@ -321,7 +332,7 @@ public class TutorialPanel extends JPanel {
         return isTutorialActive;
     }
 
-    public void setIndex(int index) {
+    void setIndex(int index) {
         this.index = index;
         setLabels();
     }
@@ -348,31 +359,4 @@ public class TutorialPanel extends JPanel {
         }
     };
 
-    private MouseListener mouseListener = new MouseListener() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            System.out.println(e.getX() + " , " + e.getY() + " , "+index);
-            //setBounds(currentArrow,e.getX(), e.getY());
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    };
 }
