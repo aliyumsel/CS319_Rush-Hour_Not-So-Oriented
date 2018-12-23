@@ -8,7 +8,8 @@ import java.util.HashMap;
 
 public class ThemeManager extends Controller
 {
-   public static ThemeManager instance;
+   private static ThemeManager instance = null;
+
    public Theme currentTheme;
    public Theme classic;
    public Theme minimalistic;
@@ -21,13 +22,21 @@ public class ThemeManager extends Controller
 
    private String themes[] = {"minimalistic", "classic" , "safari", "space"};
 
-   public ThemeManager()
+   private ThemeManager()
    { //String theme parametresi ekleyip aşağıda hangi themese current theme o olucak oyun başlarken
       instance = this;
       minimalistic = new Theme("minimalistic");
       classic = new Theme("classic");
       safari = new Theme("safari");
       space = new Theme("space");
+   }
+
+   public static ThemeManager getInstance()
+   {
+      if(instance == null) {
+         instance = new ThemeManager();
+      }
+      return instance;
    }
 
    private Theme findThemeByName(String theme)
@@ -176,7 +185,7 @@ public class ThemeManager extends Controller
       }
       else
       {
-         if ( GameEngine.instance.playerManager.getCurrentPlayer().getStarAmount() >= findRequiredStars() )
+         if ( PlayerManager.getInstance().getCurrentPlayer().getStarAmount() >= findRequiredStars() )
          {
             return 1;
          }
@@ -193,7 +202,7 @@ public class ThemeManager extends Controller
 
    public void changeTheme(String themeName)
    {
-      GameEngine.instance.playerManager.changeTheme(themeName);
+      PlayerManager.getInstance().changeTheme(themeName);
       setTheme(themeName);
    }
 
@@ -205,11 +214,11 @@ public class ThemeManager extends Controller
       {
          //Map controller updateMapImages diye bi method olmasi lazim
          // BU methoduda gamemanegerda cagirilcak
-         if ( MapController.instance.getMap() != null ) //settings panelin previousunu da check edebiliriz
+         if ( MapController.getInstance().getMap() != null ) //settings panelin previousunu da check edebiliriz
          {
-            if ( MapController.instance.getMap().getGameObjects() != null )
+            if ( MapController.getInstance().getMap().getGameObjects() != null )
             {
-               for ( GameObject gameObject : MapController.instance.getMap().getGameObjects() )
+               for ( GameObject gameObject : MapController.getInstance().getMap().getGameObjects() )
                {
                   gameObject.updateImages();
                }
@@ -219,7 +228,7 @@ public class ThemeManager extends Controller
       {
          //e.printStackTrace(); bunun commentini açmayın exception alması doğal halledicem burayı
       }
-      SoundManager.instance.updateTheme();
+      SoundManager.getInstance().updateTheme();
 //      GuiPanelManager.instance.updateImages();
    }
 
@@ -228,19 +237,19 @@ public class ThemeManager extends Controller
       Theme theme = findThemeByName(themeName);
 
       theme.setUnlocked(true);
-      GameEngine.instance.playerManager.unlockTheme(themeName);
+      PlayerManager.getInstance().unlockTheme(themeName);
       setTheme(themeName);
    }
 
    public void update()
    {
-      HashMap themes = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getThemes();
+      HashMap themes = PlayerManager.getInstance().getCurrentPlayer().getSettings().getThemes();
       minimalistic.setUnlocked((boolean) themes.get("minimalistic"));
       classic.setUnlocked((boolean) themes.get("classic"));
       safari.setUnlocked((boolean) themes.get("safari"));
       space.setUnlocked((boolean) themes.get("space"));
 
-      currentTheme = findThemeByName(GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getActiveTheme());
+      currentTheme = findThemeByName(PlayerManager.getInstance().getCurrentPlayer().getSettings().getActiveTheme());
       findRequiredStars();
    }
 }

@@ -6,13 +6,12 @@ import sun.audio.AudioStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
 public class SoundManager extends Controller
 {
-   public static SoundManager instance;
+   private static SoundManager instance = null;
 
    private AudioStream audioStream = null;
    private InputStream inputStream = null;
@@ -20,18 +19,25 @@ public class SoundManager extends Controller
    private boolean isThemeEnabled;
    private boolean isEffectsEnabled;
 
-   SoundManager()
+   private SoundManager()
    {
-      //isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
-      //isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
-      instance = this;
+      //isThemeEnabled = GameEngine.getInstance().playerManager.getCurrentPlayer().getSettings().getMusic();
+      //isEffectsEnabled = GameEngine.getInstance().playerManager.getCurrentPlayer().getSettings().getSfx();
+   }
+
+   public static SoundManager getInstance()
+   {
+      if(instance == null) {
+         instance = new SoundManager();
+      }
+      return instance;
    }
 
    private void initializeClip()
    {
       try
       {
-         String themeSong = ThemeManager.instance.getThemeSong();
+         String themeSong = ThemeManager.getInstance().getThemeSong();
          clip = AudioSystem.getClip();
          URL url = this.getClass().getResource(themeSong);
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
@@ -58,7 +64,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            String selectionSound = ThemeManager.instance.getSelectionSound();
+            String selectionSound = ThemeManager.getInstance().getSelectionSound();
             inputStream = SoundManager.class.getClassLoader().getResourceAsStream(selectionSound); //buralar değişicek folderlarda ve theme classına eklenicek
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
@@ -84,7 +90,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getButtonClickSound());
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.getInstance().getButtonClickSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (Exception a)
@@ -100,7 +106,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getPoofSound());
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.getInstance().getPoofSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (Exception a)
@@ -116,7 +122,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getShrinkSound());
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.getInstance().getShrinkSound());
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
          } catch (Exception a)
@@ -132,7 +138,7 @@ public class SoundManager extends Controller
       {
          try
          {
-            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.instance.getEndOfLevelSound()); // getSuccess sound olacak
+            inputStream = SoundManager.class.getClassLoader().getResourceAsStream(ThemeManager.getInstance().getEndOfLevelSound()); // getSuccess sound olacak
 
             audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
@@ -199,8 +205,8 @@ public class SoundManager extends Controller
 
    public void start()
    {
-      isThemeEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
-      isEffectsEnabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
+      isThemeEnabled = PlayerManager.getInstance().getCurrentPlayer().getSettings().getMusic();
+      isEffectsEnabled = PlayerManager.getInstance().getCurrentPlayer().getSettings().getSfx();
       background();
    }
 }

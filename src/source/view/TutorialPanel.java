@@ -21,7 +21,7 @@ public class TutorialPanel extends JPanel {
     private JButton cancelButton;
     private JLabel currentArrow;
     private GuiPanelManager guiManager;
-    public int index; //for activating current tutorial
+    private int index; //for activating current tutorial
     private boolean isTutorialActive; //will be accessed from guiManager
     private ArrayList<JLabel> tutorials = new ArrayList<>();
     private ArrayList<JLabel> backgrounds = new ArrayList<>(); //for images and gifs
@@ -35,21 +35,32 @@ public class TutorialPanel extends JPanel {
     private JLabel activeBackground = null;
     private JLabel activeLabel = null;
     private BufferedImage coreBackground;
-    private BufferedImage next = GuiPanelManager.instance.LoadImage("image/icons/nextO.png");
-    private BufferedImage nextH = GuiPanelManager.instance.LoadImage("image/icons/nextOH.png");
-    private BufferedImage back = GuiPanelManager.instance.LoadImage("image/icons/backO.png");
-    private BufferedImage backH = GuiPanelManager.instance.LoadImage("image/icons/backOH.png");
-    private BufferedImage backD = GuiPanelManager.instance.LoadImage("image/icons/back_OD.png");
-    private BufferedImage cancel = GuiPanelManager.instance.LoadImage("image/icons/quitO.png");
-    private BufferedImage cancelH = GuiPanelManager.instance.LoadImage("image/icons/quitOH.png");
+    private BufferedImage next;
+    private BufferedImage nextH;
+    private BufferedImage back;
+    private BufferedImage backH;
+    private BufferedImage backD;
+    private BufferedImage cancel;
+    private BufferedImage cancelH;
 
 
     TutorialPanel(boolean isTutorialActive, GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
         setLayout(null);
+
+        guiManager = _guiManager;
+
+        next = guiManager.LoadImage("image/icons/nextO.png");
+        nextH = guiManager.LoadImage("image/icons/nextOH.png");
+        back = guiManager.LoadImage("image/icons/backO.png");
+        backH = guiManager.LoadImage("image/icons/backOH.png");
+        backD = guiManager.LoadImage("image/icons/back_OD.png");
+        cancel = guiManager.LoadImage("image/icons/quitO.png");
+        cancelH = guiManager.LoadImage("image/icons/quitOH.png");
+
         this.addMouseListener(mouseListener);
         index = 0;
         this.isTutorialActive = isTutorialActive;
-        guiManager = _guiManager;
+
         setPreferredSize(new Dimension(guiManager.panelWidth, guiManager.panelHeight));
         createComponents();
         setBoundsOfComponents();
@@ -251,7 +262,7 @@ public class TutorialPanel extends JPanel {
             }
         }
 
-        background = ThemeManager.instance.getGamePanelBackgroundImage();
+        background = ThemeManager.getInstance().getGamePanelBackgroundImage();
         Image scaledImage = background.getScaledInstance(guiManager.panelWidth, guiManager.panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
@@ -332,7 +343,7 @@ public class TutorialPanel extends JPanel {
                 index = tutorials.size();
 
             }
-            SoundManager.instance.buttonClick();
+            SoundManager.getInstance().buttonClick();
             update();
         }
     };

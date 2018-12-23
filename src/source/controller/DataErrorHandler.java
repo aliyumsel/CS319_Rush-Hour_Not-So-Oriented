@@ -3,13 +3,20 @@ package source.controller;
 import javax.swing.*;
 import java.io.File;
 
-public class DataErrorHandler {
+class DataErrorHandler {
 
-    static DataErrorHandler instance;
+    private static DataErrorHandler instance = null;
 
-    public DataErrorHandler()
+    private DataErrorHandler()
     {
-        instance = this;
+        //It exists to make the constructor private
+    }
+
+    public static DataErrorHandler getInstance() {
+        if(instance == null) {
+            instance = new DataErrorHandler();
+        }
+        return instance;
     }
 
     void handlePlayersNotFoundError()
@@ -63,7 +70,7 @@ public class DataErrorHandler {
     {
         File gameFolder = new File(DataConfiguration.dataPath);
         deleteFiles(gameFolder.listFiles());
-        DataConfiguration.instance.setup();
+        DataConfiguration.getInstance().setup();
     }
 
     private static void deleteFiles(File[] files)

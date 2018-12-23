@@ -100,7 +100,7 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public void saveLastActivePlayer(String playerName)
     {
-        GameInfo.instance.updateInfo(playerName);
+        GameInfo.getInstance().updateInfo(playerName);
     }
 
     @Override

@@ -1,16 +1,19 @@
 package source.controller;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class GameInfo {
+class GameInfo {
+    private static GameInfo instance = null;
+
     final static int numberOfMaps = 50;
     static String lastActivePlayer;
-    static GameInfo instance;
+
 
     private class Info
     {
@@ -18,11 +21,19 @@ public class GameInfo {
     }
     private Info info;
 
-    public GameInfo()
+    private GameInfo()
     {
-        instance = this;
         info = new Info();
     }
+
+    public static GameInfo getInstance()
+    {
+        if(instance == null) {
+            instance = new GameInfo();
+        }
+        return instance;
+    }
+
     boolean extractInfo()
     {
         Gson gson = new Gson();
@@ -35,16 +46,16 @@ public class GameInfo {
             }
             catch (JsonParseException e)
             {
-                DataErrorHandler.instance.handleInfoDamagedError();
+                DataErrorHandler.getInstance().handleInfoDamagedError();
             }
             if (info == null)
             {
-                DataErrorHandler.instance.handleInfoDamagedError();
+                DataErrorHandler.getInstance().handleInfoDamagedError();
             }
             lastActivePlayer = info.lastActivePlayer;
             if (lastActivePlayer == null)
             {
-                DataErrorHandler.instance.handleInfoDamagedError();
+                DataErrorHandler.getInstance().handleInfoDamagedError();
             }
 
             return true;
