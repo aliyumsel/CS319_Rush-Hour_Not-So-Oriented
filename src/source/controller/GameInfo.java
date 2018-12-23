@@ -11,7 +11,6 @@ import java.io.IOException;
 /**
  * The class for giving information of the game.
  */
-    static GameInfo instance;
 class GameInfo {
     private static GameInfo instance = null;
 
