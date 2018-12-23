@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * The panel that holds the Settings Screen Layout for our game
+ */
 public class SettingsPanel extends JPanel {
     private GuiPanelManager guiManager;
 
@@ -68,6 +71,9 @@ public class SettingsPanel extends JPanel {
     private int panelWidth;
     private int panelHeight;
 
+    /**
+     * Initializes and configures the panel.
+     */
     SettingsPanel(GuiPanelManager _guiManager) {
         super(null);
 
@@ -85,6 +91,9 @@ public class SettingsPanel extends JPanel {
         this.setVisible(false);
     }
 
+    /**
+     * Loads the images from the images directory into the memory.
+     */
     public void loadImages() {
         background = ThemeManager.getInstance().getBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
@@ -122,6 +131,9 @@ public class SettingsPanel extends JPanel {
         selectedImage = guiManager.LoadImage("image/icons/checkmark.png");
     }
 
+    /**
+     * Creates the components from the loaded images.
+     */
     @SuppressWarnings("Duplicates")
     private void createComponents() {
         music = UIFactory.createButton(musicImage, musicHighlightedImage, "square", actionListener);
@@ -172,6 +184,9 @@ public class SettingsPanel extends JPanel {
         theme.setForeground(Color.white);
     }
 
+    /**
+     * Adds the components to the panel.
+     */
     private void addComponents() {
         add(back);
 
@@ -196,6 +211,9 @@ public class SettingsPanel extends JPanel {
         add(space);
     }
 
+    /**
+     * Sets the sizes and positions of the components in the panel. Parameter page controls the current page number.
+     */
     private void setBoundsOfComponents() {
         heading.setBounds(guiManager.findCenter(panelWidth, heading), 25, heading.getPreferredSize().width, heading.getPreferredSize().height);
 
@@ -229,6 +247,9 @@ public class SettingsPanel extends JPanel {
 //        keyboard.setBounds(645, 175, mouse.getPreferredSize().width, mouse.getPreferredSize().height);
     }
 
+    /**
+     * Updates the panel to display the latest changes to the components.
+     */
     void updatePanel(String previousPanel) {
         this.previousPanel = previousPanel;
         updateSoundButtons("SFX");
@@ -238,6 +259,9 @@ public class SettingsPanel extends JPanel {
         updateControlButton();
     }
 
+    /**
+     * Updates the theme labels to reflect the current state of the themes in game.
+     */
     private void updateThemeLabels() {
 
         for (int i = 0; i < 3; i++) {
@@ -265,6 +289,10 @@ public class SettingsPanel extends JPanel {
         }
     }
 
+    /**
+     * Updates the sound buttons to reflect the current state of the sounds in game.
+     * @param type The type of the button (music/sfx)
+     */
     @SuppressWarnings("Duplicates")
     private void updateSoundButtons(String type) {
         boolean enabled;
@@ -304,6 +332,9 @@ public class SettingsPanel extends JPanel {
 
     }
 
+    /**
+     * Updates the control preference buttons to reflect the current state of the control schemes in game.
+     */
     private void updateControlButton() {
         if (PlayerManager.getInstance().getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
             controlPreference.setIcon(new ImageIcon(mouseControlImage));
@@ -324,7 +355,11 @@ public class SettingsPanel extends JPanel {
         }
     }
 
-    //can be used in updateThemeButtons method below
+    /**
+     * Method to get the theme name by button.
+     * @param button The button to get the theme name by it
+     * @return The name of the theme
+     */
     private String getThemeNameByButton(JButton button) {
         if (button == minimalistic) {
             return "minimalistic";
@@ -341,6 +376,9 @@ public class SettingsPanel extends JPanel {
         return ""; //should return null
     }
 
+    /**
+     * Updates the theme buttons to reflect the current state of the themes in game.
+     */
     private void updateThemeButtons() {
         ThemeManager themeManager = GameEngine.getInstance().themeManager;
         if (!themeManager.minimalistic.isUnlocked()) {
@@ -422,11 +460,17 @@ public class SettingsPanel extends JPanel {
         }
     };
 
+    /**
+     * The method that paints the panel to the screen.
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawBackground(g);
     }
 
+    /**
+     * The method that draws the background image to the background of the panel.
+     */
     private void drawBackground(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D) graphics;
         graphics2d.drawImage(background, 0, 0, null);
