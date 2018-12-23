@@ -10,6 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
+
+/**
+ * The panel that holds the Layout for the Play Game Screen.
+ * The actual gameplay is in the innerGamePanel panel
+ * which is held inside this panel as the game attribute.
+ */
 @SuppressWarnings("Duplicates")
 public class GamePanel extends JPanel
 {
@@ -76,6 +82,12 @@ public class GamePanel extends JPanel
    private int moveCountForegroundStartPosition;
    private int timerBottomPosition;
 
+
+   /**
+    * Constructor that initializes regarding values
+    * and creates desired user interface of total game.
+    * @param _guiManager The GuiPanelManager instance for easy access to its functions.
+    */
    GamePanel(GuiPanelManager _guiManager)
    {
       super(null);
@@ -95,6 +107,9 @@ public class GamePanel extends JPanel
       setOpaque(false);
    }
 
+   /**
+    * Updates the panel to display the latest changes to the components.
+    */
    public void updatePanel()
    {
       if ( !isShowing() )
@@ -115,9 +130,13 @@ public class GamePanel extends JPanel
       repaint();
    }
 
+
+   /**
+    * Updates the power-up buttons.
+    */
    private void updatePowerUpButtons()
    {
-      if ( !GameEngine.instance.gameManager.isShrinkPowerUpUsable() )
+      if ( !GameEngine.getInstance().gameManager.isShrinkPowerUpUsable() )
       {
          disableButton(shrink, shrinkButtonHighlightedImage);
       }
@@ -129,7 +148,7 @@ public class GamePanel extends JPanel
          }
       }
 
-      if ( !GameEngine.instance.gameManager.isSpacePowerUpUsable() )
+      if ( !GameEngine.getInstance().gameManager.isSpacePowerUpUsable() )
       {
          disableButton(space, spaceButtonHighlightedImage);
       }
@@ -142,12 +161,22 @@ public class GamePanel extends JPanel
       }
    }
 
+
+   /**
+    * Updates the labels to display the latest changes to the components after power-up.
+    */
    private void updatePowerUpLabels()
    {
-      shrinkAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingShrinkPowerup() + "");
-      spaceAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingSpacePowerup() + "");
+      shrinkAmountLabel.setText(GameEngine.getInstance().playerManager.getCurrentPlayer().getRemainingShrinkPowerup() + "");
+      spaceAmountLabel.setText(GameEngine.getInstance().playerManager.getCurrentPlayer().getRemainingSpacePowerup() + "");
    }
 
+
+   /**
+    * Disables the button as an image
+    * @param button the button to be disabled
+    * @param lockedImage to show that button is disabled.
+    */
    private void disableButton(JButton button, BufferedImage lockedImage)
    {
       button.setIcon(new ImageIcon(lockedImage));
@@ -155,6 +184,13 @@ public class GamePanel extends JPanel
       button.setEnabled(false);
    }
 
+
+   /**
+    * Enables the button as an image
+    * @param button the button to be enabled
+    * @param normalImage normal image of the button
+    * @param highlightedImage image after the button is pressed.
+    */
    private void enableButton(JButton button, BufferedImage normalImage, BufferedImage highlightedImage)
    {
       button.setIcon(new ImageIcon(normalImage));
@@ -162,9 +198,13 @@ public class GamePanel extends JPanel
       button.setEnabled(true);
    }
 
+
+   /**
+    * Loads the images from the images directory into the memory.
+    */
    public void loadImages()
    {
-      background = ThemeManager.instance.getGamePanelBackgroundImage();
+      background = ThemeManager.getInstance().getGamePanelBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
@@ -199,6 +239,10 @@ public class GamePanel extends JPanel
       secondStarBackgroundImage = guiManager.LoadImage("image/icons/miniStarLocked.png");
    }
 
+
+   /**
+    * Creates the components from the loaded images.
+    */
    private void createComponents()
    {
       blackBackground = new JLabel()
@@ -261,6 +305,10 @@ public class GamePanel extends JPanel
       remainingTimeLabel.setForeground(Color.white);
    }
 
+
+   /**
+    * Adds the components to the panel.
+    */
    private void addComponents()
    {
       add(blackBackground);
@@ -276,6 +324,10 @@ public class GamePanel extends JPanel
       add(settings);
    }
 
+
+   /**
+    * Sets the sizes and positions of the components in the panel.
+    */
    private void setBoundsOfComponents()
    {
       blackBackground.setBounds(0, 0, panelWidth, panelHeight);
@@ -332,38 +384,65 @@ public class GamePanel extends JPanel
 
    }
 
+
+   /**
+    * Method to make visible the end of level panel and
+    * demonstrate the earned stars  with considering the number of moves.
+    * @param visible indicates if i visible or not as a boolean.
+    * @param starAmount the earned stars.
+    */
    private void setEndOfLevelPanelVisible(boolean visible, int starAmount)
    {
       if ( visible )
       {
-         GameEngine.instance.soundManager.successSound();
+         GameEngine.getInstance().soundManager.successSound();
       }
       endOfLevelPanel.showStars(starAmount);
       endOfLevelPanel.setVisible(visible);
    }
 
+
+   /**
+    * Shows the end of level pop up with considering the earned stars.
+    * @param starAmount the earned stars.
+    */
    public void showEndOfLevelPopUp(int starAmount)
    {
       setEndOfLevelPanelVisible(true, starAmount);
       showBlackBackground();
    }
 
+   /**
+    * Shows time over pop up.
+    */
    public void showTimeOverPopUp()
    {
       setTimeOverPopUpVisible(true);
       showBlackBackground();
    }
 
+
+   /**
+    * Shows black background.
+    */
    private void showBlackBackground()
    {
       blackBackground.setVisible(true);
    }
 
+
+   /**
+    * Hides the black background.
+    */
    void hideBlackBackground()
    {
       blackBackground.setVisible(false);
    }
 
+
+   /**
+    * Method to set visible the inner game panel which is a panel that game is played.
+    */
    public void setInnerGamePanelVisible()
    {
       innerGamePanel.setVisible(true);
@@ -371,16 +450,30 @@ public class GamePanel extends JPanel
       setTimeOverPopUpVisible(false);
    }
 
+   /**
+    * Gets the end of level panel.
+    * @return end of level panel.
+    */
    EndOfLevelPanel getEndOfLevelPanel()
    {
       return endOfLevelPanel;
    }
 
+
+   /**
+    * Gets time over pop up.
+    * @return time over pop up.
+    */
    TimeOverPopUp getTimeOverPopUp()
    {
       return timeOverPopUp;
    }
 
+
+   /**
+    * Sets time over pop up as visible
+    * @param visible indicates if it is visible or not.
+    */
    private void setTimeOverPopUpVisible(boolean visible)
    {
 //      if ( visible )
@@ -390,6 +483,9 @@ public class GamePanel extends JPanel
       timeOverPopUp.setVisible(visible);
    }
 
+   /**
+    * Method to set visible the inner game panel which is a panel that game is played.
+    */
    private void createInnerGamePanel()
    {
       try
@@ -403,6 +499,10 @@ public class GamePanel extends JPanel
       setVisible(false);
    }
 
+
+   /**
+    * Creates time over pop up.
+    */
    private void createTimeOverPopUp()
    {
       timeOverPopUp = new TimeOverPopUp(guiManager);
@@ -414,6 +514,9 @@ public class GamePanel extends JPanel
    }
 
 
+   /**
+    * Creates end of level panel.
+    */
    private void createEndOfLevelPanel()
    {
       endOfLevelPanel = new EndOfLevelPanel(guiManager);
@@ -424,6 +527,9 @@ public class GamePanel extends JPanel
       endOfLevelPanel.setBounds(guiManager.findCenter(panelWidth, endOfLevelPanel), guiManager.findCenterVertical(panelHeight, endOfLevelPanel), size.width, size.height);
    }
 
+   /**
+    * It is a action listener to visualize game panel.
+    */
    private ActionListener actionListener = new ActionListener()
    {
       @Override
@@ -434,16 +540,16 @@ public class GamePanel extends JPanel
             return;
          }
 
-         GameEngine.instance.soundManager.buttonClick();
+         GameEngine.getInstance().soundManager.buttonClick();
          if ( e.getSource() == reset )
          {
-            GameEngine.instance.gameManager.resetLevel();
+            GameEngine.getInstance().gameManager.resetLevel();
             guiManager.setPanelVisible("Game");
          }
          else if ( e.getSource() == menu )
          {
             guiManager.setPanelVisible("MainMenu");
-            GameEngine.instance.gameManager.stopMap();
+            GameEngine.getInstance().gameManager.stopMap();
          }
          else if ( e.getSource() == settings )
          {
@@ -451,11 +557,11 @@ public class GamePanel extends JPanel
          }
          else if ( e.getSource() == shrink )
          {
-            GameEngine.instance.powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Shrink);
+            GameEngine.getInstance().powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Shrink);
          }
          else if ( e.getSource() == space )
          {
-            GameEngine.instance.powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Space);
+            GameEngine.getInstance().powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Space);
          }
          else if ( e.getSource() == settings )
          {
@@ -464,30 +570,40 @@ public class GamePanel extends JPanel
       }
    };
 
+
+   /**
+    * The method that paints the panel to the screen.
+    * @param g An instance of the graphics.
+    */
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
 
       drawBackground(g);
-      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive() )
+      if ( GameEngine.getInstance().gameManager.isLevelBonus() && GameEngine.getInstance().gameManager.isGameActive() )
       {
          drawTimerForeground(g);
       }
       drawMoveCountForeground(g);
    }
 
+
+   /**
+    * The method that draws the background image to the background of the panel.
+    * @param graphics An instance of the graphics.
+    */
    private void drawBackground(Graphics graphics)
    {
       graphics.drawImage(background, 0, 0, null);
 
-      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive() )
+      if ( GameEngine.getInstance().gameManager.isLevelBonus() && GameEngine.getInstance().gameManager.isGameActive() )
       {
          graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
          graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
       }
       graphics.drawImage(background, 0, 0, null);
 
-      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive() )
+      if ( GameEngine.getInstance().gameManager.isLevelBonus() && GameEngine.getInstance().gameManager.isGameActive() )
       {
          graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
          graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
@@ -498,40 +614,44 @@ public class GamePanel extends JPanel
       graphics.drawImage(firstStarForegroundImage, panelWidth - 30 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45, null);
    }
 
+   /**
+    * The method that paints move count foreground.
+    * @param g An instance of the graphics.
+    */
    private void drawMoveCountForeground(Graphics g)
    {
       Graphics2D graphics2d = (Graphics2D) g;
       BufferedImage subImage = null;
-      LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(GameManager.instance.level - 1);
+      LevelInformation currentLevel = PlayerManager.getInstance().getCurrentPlayer().getLevels().get(GameManager.getInstance().level - 1);
 
       //For the first star
-      if ( GameEngine.instance.vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars() )
+      if ( GameEngine.getInstance().vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars() )
       {
-         int remainingMoves = currentLevel.getMaxNumberOfMovesForThreeStars() - ( GameEngine.instance.vehicleController.getNumberOfMoves() );
+         int remainingMoves = currentLevel.getMaxNumberOfMovesForThreeStars() - ( GameEngine.getInstance().vehicleController.getNumberOfMoves() );
          int moveCountStartValue = currentLevel.getMaxNumberOfMovesForThreeStars();
          double f = remainingMoves / (double) moveCountStartValue;
          int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f); //26 yı değikene atcam da anlamadım ahmet kodunu
-         if ( currentLevel.getMaxNumberOfMovesForThreeStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0 )
+         if ( currentLevel.getMaxNumberOfMovesForThreeStars() - GameEngine.getInstance().vehicleController.getNumberOfMoves() > 0 )
          {
-            //System.out.println(currentLevel.getMaxNumberOfMovesForThreeStars() -GameEngine.instance.vehicleController.getNumberOfMoves() + "  ,  " + starHeight);
+            //System.out.println(currentLevel.getMaxNumberOfMovesForThreeStars() -GameEngine.getInstance().vehicleController.getNumberOfMoves() + "  ,  " + starHeight);
             subImage = firstStarForegroundImage.getSubimage(0, firstStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
             graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }
       }
-      else if ( currentLevel.getMaxNumberOfMovesForThreeStars() < GameEngine.instance.vehicleController.getNumberOfMoves() )
+      else if ( currentLevel.getMaxNumberOfMovesForThreeStars() < GameEngine.getInstance().vehicleController.getNumberOfMoves() )
       {
          graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height, null);
       }
       //For the second star
-      if ( GameEngine.instance.vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForTwoStars() )
+      if ( GameEngine.getInstance().vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForTwoStars() )
       {
-         if ( GameEngine.instance.vehicleController.getNumberOfMoves() > currentLevel.getMaxNumberOfMovesForThreeStars() )
+         if ( GameEngine.getInstance().vehicleController.getNumberOfMoves() > currentLevel.getMaxNumberOfMovesForThreeStars() )
          {
-            int remainingMoves = currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.instance.vehicleController.getNumberOfMoves();
+            int remainingMoves = currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.getInstance().vehicleController.getNumberOfMoves();
             int moveCountStartValue = currentLevel.getMaxNumberOfMovesForTwoStars() - currentLevel.getMaxNumberOfMovesForThreeStars();
             double f = remainingMoves / (double) moveCountStartValue;
             int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f);
-            if ( currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0 )
+            if ( currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.getInstance().vehicleController.getNumberOfMoves() > 0 )
             {
                subImage = secondStarForegroundImage.getSubimage(0, secondStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
             }
@@ -547,10 +667,14 @@ public class GamePanel extends JPanel
       }
    }
 
+   /**
+    * The method that paints the timer foreground.
+    * @param g An instance of the graphics.
+    */
    private void drawTimerForeground(Graphics g)
    {
-      int remainingTime = GameEngine.instance.gameManager.getRemainingTime();
-      int timerStartValue = GameEngine.instance.gameManager.getTimerStartValue();
+      int remainingTime = GameEngine.getInstance().gameManager.getRemainingTime();
+      int timerStartValue = GameEngine.getInstance().gameManager.getTimerStartValue();
       double f = remainingTime / (double) timerStartValue;
       int timerHeight = timerForegroundStartHeight - (int) lerp(0, timerForegroundStartHeight, f);
       int timerPosition = (int) lerp(timerForegroundStartPosition, timerForegroundStartPosition + timerForegroundLabel.getPreferredSize().height, f);
@@ -561,15 +685,22 @@ public class GamePanel extends JPanel
       graphics2d.drawImage(subImage, 40, timerPosition, null);
    }
 
+   /**
+    * Getter for inner game panel.
+    * @return inner game panel.
+    */
    InnerGamePanel getInnerGamePanel()
    {
       return innerGamePanel;
    }
 
 
+   /**
+    * Updateds the number of the moves on the game panel.
+    */
    private void updateNumberOfMoves()
    {
-      numberLabel.setText(GameEngine.instance.vehicleController.getNumberOfMoves() + "");
+      numberLabel.setText(GameEngine.getInstance().vehicleController.getNumberOfMoves() + "");
    }
 
    private double lerp(double a, double b, double f)

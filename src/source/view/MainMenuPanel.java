@@ -10,7 +10,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public class MainMenuPanel extends JPanel {
+
+/**
+ * The panel that holds the Main Menu Layout for our game.
+ */
+public class MainMenuPanel extends JPanel
+{
 
     private GuiPanelManager guiManager;
     private GameManager gameManager;
@@ -50,12 +55,18 @@ public class MainMenuPanel extends JPanel {
     private int panelWidth;
     private int panelHeight;
 
-    MainMenuPanel(GuiPanelManager _guiManager) {
+
+    /**
+     * Initializes and configures the panel.
+     * @param _guiManager The GuiPanelManager instance for easy access to its functions.
+     */
+    MainMenuPanel(GuiPanelManager _guiManager)
+    {
         super(null);
 
         guiManager = _guiManager;
-        gameManager = GameManager.instance;
-        playerManager = GameEngine.instance.playerManager;
+        gameManager = GameManager.getInstance();
+        playerManager = GameEngine.getInstance().playerManager;
         panelWidth = guiManager.panelWidth;
         panelHeight = guiManager.panelHeight;
 
@@ -69,8 +80,13 @@ public class MainMenuPanel extends JPanel {
         this.setVisible(true);
     }
 
-    public void loadImages() {
-        background = ThemeManager.instance.getBackgroundImage();
+
+    /**
+     * Loads the images from the images directory into the memory.
+     */
+    public void loadImages()
+    {
+        background = ThemeManager.getInstance().getBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
@@ -103,6 +119,10 @@ public class MainMenuPanel extends JPanel {
         starAmountImage = guiManager.LoadImage("image/icons/numberOfStars.png");
     }
 
+
+    /**
+     * Creates the components from the loaded images.
+     */
     private void createComponents() {
         heading = new JLabel();
         heading.setIcon(new ImageIcon(title));
@@ -136,6 +156,10 @@ public class MainMenuPanel extends JPanel {
         exit = UIFactory.createButton(exitButtonImage, exitButtonHighlightedImage, "square", actionListener);
     }
 
+
+    /**
+     *  Adds the components to the panel.
+     */
     private void addComponents() {
         this.add(heading);
         this.add(player);
@@ -150,30 +174,49 @@ public class MainMenuPanel extends JPanel {
         this.add(exit);
     }
 
+
+    /**
+     *  Updates the panel to display the latest changes to the components.
+     */
     void updatePanel() {
         updatePlayerName();
         updateLastLevel();
         updateNumberOfStars();
     }
 
+    /**
+     * Updates the lastLevel label.
+     */
     private void updateLastLevel() {
         String lastLevelString = Integer.toString(playerManager.getCurrentPlayer().getLastUnlockedLevelNo());
         lastLevel.setText(lastLevelString);
 //        System.out.println(lastLevelString);
     }
 
+
+    /**
+     * Updates the player label.
+     */
     private void updatePlayerName() {
         String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
         player.setText(playerName);
-        System.out.println("Player selected and Player Name Updated " + playerName);
+//        System.out.println("Player selected and Player Name Updated " + playerName);
     }
 
+
+    /**
+     * Updates the starAmount label.
+     */
     private void updateNumberOfStars() {
         String numberOfStars = "    " + gameManager.playerManager.getCurrentPlayer().getStarAmount() + "/150"; //need to find a fix for formatting
         starAmount.setText(numberOfStars);
 //        System.out.println("Number of stars Updated " + numberOfStars);
     }
 
+
+    /**
+     * Sets the sizes and positions of the components in the panel.
+     */
     private void setBoundsOfComponents() {
         help.setBounds(30, 30, help.getPreferredSize().width, help.getPreferredSize().height);
 
@@ -198,22 +241,36 @@ public class MainMenuPanel extends JPanel {
         settings.setBounds(guiManager.findCenter(panelWidth, settings) + 225, 430, settings.getPreferredSize().width, settings.getPreferredSize().height);
     }
 
+
+    /**
+     * The method that paints the panel to the screen.
+     * @param g Instance of the Graphics.
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         drawBackground(g);
     }
 
+
+    /**
+     * The method that draws the background image to the background of the panel.
+     * @param graphics Instance of the Graphics.
+     */
     private void drawBackground(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D) graphics;
         graphics2d.drawImage(background, 0, 0, null);
     }
 
+
+    /**
+     * Action listener to visualize main menu panel.
+     */
     private ActionListener actionListener = e ->
     {
-        GameEngine.instance.soundManager.buttonClick();
+        GameEngine.getInstance().soundManager.buttonClick();
         if (e.getSource() == play) {
-            GameEngine.instance.gameManager.loadLastLevel();
+            GameEngine.getInstance().gameManager.loadLastLevel();
             guiManager.setPanelVisible("Game");
         }
         if (e.getSource() == credits) {

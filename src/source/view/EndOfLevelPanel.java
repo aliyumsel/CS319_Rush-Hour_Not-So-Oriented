@@ -9,6 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+
+/**
+ * EndOfLevel panel is to demonstrate a User Interface at the end of levels,
+ * it has particular buttons and labels and
+ * with their pictures to form the end of level’s interface.
+ */
 public class EndOfLevelPanel extends JPanel
 {
    private GuiPanelManager guiManager;
@@ -33,6 +39,11 @@ public class EndOfLevelPanel extends JPanel
    private int panelWidth = 400;
    private int panelHeight = 250;
 
+
+   /**
+    * Constructor that initializes regarding values and creates desired user interface of end of a level.
+    * @param _guiManager Represents the instance of GuiManagerPanel in order to form the user interface.
+    */
    EndOfLevelPanel(GuiPanelManager _guiManager)
    {
       super(null);
@@ -46,9 +57,13 @@ public class EndOfLevelPanel extends JPanel
       setOpaque(false);
    }
 
+
+   /**
+    * Loads the images from the images directory into the memory.
+    */
    public void loadImages()
    {
-      background = ThemeManager.instance.getPopupBackgroundImage();
+      background = ThemeManager.getInstance().getPopupBackgroundImage();
 
       menuButtonImage = guiManager.LoadImage("image/icons/menu.png");
       menuButtonHighlightedImage = guiManager.LoadImage("image/icons/menuH.png");
@@ -63,6 +78,10 @@ public class EndOfLevelPanel extends JPanel
       starLockedImage = guiManager.LoadImage("image/icons/starLocked.png");
    }
 
+
+   /**
+    * Updates the panel to display the latest changes to the components.
+    */
    void updatePanel()
    {
       if ( !isShowing() )
@@ -72,6 +91,11 @@ public class EndOfLevelPanel extends JPanel
       repaint();
    }
 
+
+   /**
+    * The method that paints the panel to the screen.
+    * @param g An instance of graphics.
+    */
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
@@ -79,6 +103,11 @@ public class EndOfLevelPanel extends JPanel
       drawBackground(g);
    }
 
+
+   /**
+    * Paints the background.
+    * @param graphics An instance of graphics.
+    */
    private void drawBackground(Graphics graphics)
    {
 
@@ -88,6 +117,10 @@ public class EndOfLevelPanel extends JPanel
 
    }
 
+
+   /**
+    * Creates the components from the loaded images.
+    */
    private void createComponents()
    {
       heading = new JLabel("Level Completed!", SwingConstants.CENTER);
@@ -107,6 +140,10 @@ public class EndOfLevelPanel extends JPanel
       nextLevel = UIFactory.createButton(nextLevelButtonImage, nextLevelButtonHighlightedImage, "square", actionListener);
    }
 
+
+   /**
+    * Adds the components to the panel.
+    */
    private void addComponents()
    {
       add(retry);
@@ -120,6 +157,10 @@ public class EndOfLevelPanel extends JPanel
       }
    }
 
+
+   /**
+    *  Sets the sizes and positions of the components in the panel.
+    */
    private void setBoundsOfComponents()
    {
       heading.setBounds(50, 0, heading.getPreferredSize().width,
@@ -136,6 +177,11 @@ public class EndOfLevelPanel extends JPanel
 
    }
 
+
+   /**
+    * It shows the earned stars at end of the level.
+    * @param starAmount the stars that are earned.
+    */
    void showStars(int starAmount)
    {
       if ( starAmount == -1 )
@@ -163,15 +209,19 @@ public class EndOfLevelPanel extends JPanel
 //      heading.setText(text);
 //   }
 
+
+   /**
+    * It visualizes the end of level panel.
+    */
    private ActionListener actionListener = new ActionListener()
    {
       @Override
       public void actionPerformed(ActionEvent e)
       {
-         GameEngine.instance.soundManager.buttonClick();
+         GameEngine.getInstance().soundManager.buttonClick();
          if ( e.getSource() == retry )
          {
-            GameEngine.instance.gameManager.resetLevel();
+            GameEngine.getInstance().gameManager.resetLevel();
          }
 
          if ( e.getSource() == menu )
@@ -181,13 +231,13 @@ public class EndOfLevelPanel extends JPanel
 
          if ( e.getSource() == nextLevel )
          {
-            if (GameEngine.instance.gameManager.isLastLevel())
+            if (GameEngine.getInstance().gameManager.isLastLevel())
             {
                guiManager.setPanelVisible("Credits");
             }
             else
             {
-               GameEngine.instance.gameManager.nextLevel();
+               GameEngine.getInstance().gameManager.nextLevel();
             }
          }
          guiManager.getGamePanel().hideBlackBackground();

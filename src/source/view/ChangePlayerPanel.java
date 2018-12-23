@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * The panel that holds the Change Player Screen Layout for our game.
+ */
 public class ChangePlayerPanel extends JPanel
 {
    private GuiPanelManager guiManager;
@@ -55,12 +58,17 @@ public class ChangePlayerPanel extends JPanel
    private int numberOfPlayers;
    private int limit;
 
+
+   /**
+    * Initializes and configures the panel.
+    * @param _guiManager  The GuiPanelManager instance for easy access to its functions.
+    */
    ChangePlayerPanel(GuiPanelManager _guiManager)
    {
       super(null);
 
       guiManager = _guiManager;
-      gameManager = GameManager.instance;
+      gameManager = GameManager.getInstance();
       panelWidth = guiManager.panelWidth;
       panelHeight = guiManager.panelHeight;
       numberOfPlayers = gameManager.playerManager.numberOfPlayers;
@@ -77,9 +85,13 @@ public class ChangePlayerPanel extends JPanel
       this.setVisible(false);
    }
 
+
+   /**
+    * Loads the images from the images directory into the memory.
+    */
    public void loadImages()
    {
-      background = ThemeManager.instance.getBackgroundImage();
+      background = ThemeManager.getInstance().getBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
@@ -104,6 +116,10 @@ public class ChangePlayerPanel extends JPanel
       popUp.loadImages();
    }
 
+
+   /**
+    * Creates the components from the loaded images.
+    */
    @SuppressWarnings("Duplicates")
    private void createComponents()
    {
@@ -137,7 +153,7 @@ public class ChangePlayerPanel extends JPanel
       editButton3 = UIFactory.createButton(edit, editH, "square", actionListener);
 
       buttonArray = new ArrayList<>();
-      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
+      numberOfPlayers = GameEngine.getInstance().playerManager.getPlayers().size();
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          JButton temp = UIFactory.createPlayerButton(levelBackground, levelBackgroundH, gameManager.playerManager.getPlayers().get(i).getPlayerName(), actionListener);
@@ -147,6 +163,10 @@ public class ChangePlayerPanel extends JPanel
       }
    }
 
+
+   /**
+    * Adds the components to the panel.
+    */
    private void addComponents()
    {
       this.add(leftArrowButton);
@@ -161,11 +181,16 @@ public class ChangePlayerPanel extends JPanel
       add(editButton3);
    }
 
+
+   /**
+    * Sets the sizes and positions of the components in the panel.
+    * @param page controls the current page number.
+    */
    private void setBoundsOfComponents(int page)
    {
       blackBackground.setBounds(0,0,panelWidth,panelHeight);
 
-      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
+      numberOfPlayers = GameEngine.getInstance().playerManager.getPlayers().size();
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          buttonArray.get(i).setVisible(false);
@@ -187,7 +212,7 @@ public class ChangePlayerPanel extends JPanel
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          showDelete = true;
-         if (buttonArray.get(i).getText().equals(GameEngine.instance.playerManager.getCurrentPlayer().getPlayerName()))
+         if (buttonArray.get(i).getText().equals(GameEngine.getInstance().playerManager.getCurrentPlayer().getPlayerName()))
          {
             showDelete = false;
          }
@@ -256,12 +281,21 @@ public class ChangePlayerPanel extends JPanel
    }
 
 
+   /**
+    * Selects the player with the given name as the active player.
+    * @param name the given name.
+    */
    private void selectPlayer(String name)
    {
       gameManager.playerManager.selectPlayer(name);
-      ThemeManager.instance.update();
+      ThemeManager.getInstance().update();
    }
 
+
+   /**
+    * Creates a new player with the given name and adds it to the game.
+    * @param name the given name.
+    */
    void addPlayer(String name)
    {
       if ( gameManager.playerManager.createPlayer(name) == 0 )
@@ -273,10 +307,15 @@ public class ChangePlayerPanel extends JPanel
          add(temp);
 
          guiManager.updateImages();
-         ThemeManager.instance.update();
+         ThemeManager.getInstance().update();
       }
    }
 
+
+   /**
+    * Deletes the player with the given name from the game.
+    * @param name the given name.
+    */
    private void deletePlayer(String name)
    {
       int deleteIndex = gameManager.playerManager.deletePlayer(name);
@@ -290,9 +329,15 @@ public class ChangePlayerPanel extends JPanel
       updatePages();
    }
 
+
+   /**
+    * Edits the player with new name instead of old name
+    * @param name old name.
+    * @param newName desired name.
+    */
    void editPlayer(String name, String newName)
    {
-      int index = GameEngine.instance.playerManager.editPlayer(name, newName);
+      int index = GameEngine.getInstance().playerManager.editPlayer(name, newName);
       if(index > -1)
       {
          playerNameArray.set(index, newName);
@@ -300,16 +345,27 @@ public class ChangePlayerPanel extends JPanel
       }
    }
 
+   /**
+    * Shows background.
+    */
    private void showBlackBackground()
    {
       blackBackground.setVisible(true);
    }
 
+
+   /**
+    * Hides background
+    */
    void hideBlackBackground()
    {
       blackBackground.setVisible(false);
    }
 
+
+   /**
+    * ActionListener to be able to change player.
+    */
    private ActionListener actionListener = e ->
    {
       if (blackBackground.isVisible())
@@ -317,7 +373,7 @@ public class ChangePlayerPanel extends JPanel
          return;
       }
 
-      GameEngine.instance.soundManager.buttonClick();
+      GameEngine.getInstance().soundManager.buttonClick();
 
       if ( e.getSource() == leftArrowButton )
       {
@@ -417,15 +473,23 @@ public class ChangePlayerPanel extends JPanel
       }
    };
 
+
+   /**
+    * Updates the panel to display the latest changes to the components.
+    */
    public void updatePanel()
    {
       this.currentPage = 0;
       setBoundsOfComponents(currentPage);
    }
 
+
+   /**
+    * Updates the pages of the panel.
+    */
    private void updatePages()
    {
-      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
+      numberOfPlayers = GameEngine.getInstance().playerManager.getPlayers().size();
       updateButtons();
 
       if ( numberOfPlayers % 3 == 0 )
@@ -451,6 +515,10 @@ public class ChangePlayerPanel extends JPanel
       repaint();
    }
 
+
+   /**
+    * Updates the buttons of the panel.
+    */
    private void updateButtons()
    {
       for ( int i = 0; i < numberOfPlayers; i++ )
@@ -459,6 +527,11 @@ public class ChangePlayerPanel extends JPanel
       }
    }
 
+
+   /**
+    * The method that paints the panel to the screen.
+    * @param g an instance of graphics.
+    */
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
@@ -466,6 +539,11 @@ public class ChangePlayerPanel extends JPanel
       drawBackground(g); // change the background png for changing the background
    }
 
+
+   /**
+    * The method that draws the background image to the background of the panel.
+    * @param graphics
+    */
    private void drawBackground(Graphics graphics)
    {
       Graphics2D graphics2d = (Graphics2D) graphics;

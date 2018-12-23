@@ -11,6 +11,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
+
+/**
+ * The panel that the actual game is running
+ */
 @SuppressWarnings("serial")
 public class InnerGamePanel extends JPanel
 {
@@ -29,13 +33,19 @@ public class InnerGamePanel extends JPanel
    private BufferedImage poof7;
    private BufferedImage poof8;
 
+
+   /**
+    * Initializes and configures the panel.
+    * @param guiManager The GuiPanelManager instance for easy access to its functions.
+    * @throws FileNotFoundException file not found exception
+    */
    InnerGamePanel(GuiPanelManager guiManager) throws FileNotFoundException
    {
       super(null);
       this.guiManager = guiManager;
       setPreferredSize(new Dimension(480, 480));
 
-      blackedOutImage = GameEngine.instance.themeManager.getDisabledImage("obstacle");
+      blackedOutImage = GameEngine.getInstance().themeManager.getDisabledImage("obstacle");
 
       poofImages = new ArrayList<>();
 
@@ -46,16 +56,24 @@ public class InnerGamePanel extends JPanel
       setVisible(true);
    }
 
+
+   /**
+    * Updates the panel to display the latest changes to the components.
+    */
    void updatePanel()
    {
       if ( !isShowing() )
       {
          return;
       }
-      map = GameEngine.instance.mapController.getMap();
+      map = GameEngine.getInstance().mapController.getMap();
       repaint();
    }
 
+
+   /**
+    * Loads the images from memory.
+    */
    public void loadImages()
    {
 //      poof0 = guiManager.LoadImage("image/poof/poof0.png");
@@ -79,6 +97,10 @@ public class InnerGamePanel extends JPanel
       poof8 = guiManager.LoadImage("image/poof2/poof8.png");
    }
 
+
+   /**
+    * Adds images of the poof effect to the inner game panel.
+    */
    private void addPoofImages()
    {
       poofImages.add(poof0);
@@ -92,6 +114,11 @@ public class InnerGamePanel extends JPanel
       poofImages.add(poof8);
    }
 
+
+   /**
+    * The method that paints the panel to the screen.
+    * @param g An instance of the Graphics.
+    */
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
@@ -114,12 +141,12 @@ public class InnerGamePanel extends JPanel
          //do nothing
       }
 
-      if ( GameEngine.instance.powerUpManager.isPowerUpActive() )
+      if ( GameEngine.getInstance().powerUpManager.isPowerUpActive() )
       {
          Graphics2D temp = (Graphics2D) g.create();
          Composite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
          temp.setComposite(composite);
-         String[][] grid = GameEngine.instance.mapController.getMap().getGrid();
+         String[][] grid = GameEngine.getInstance().mapController.getMap().getGrid();
          for ( int i = 0; i < grid.length; i++ )
          {
             for ( int j = 0; j < grid.length; j++ )
@@ -132,13 +159,13 @@ public class InnerGamePanel extends JPanel
          }
       }
 
-      int counter = GameEngine.instance.powerUpManager.getCurrentCount();
+      int counter = GameEngine.getInstance().powerUpManager.getCurrentCount();
       if ( counter > 0 )
       {
          Graphics2D temp = (Graphics2D) g.create();
-         int obstacleX = GameEngine.instance.powerUpManager.getObstacleToRemoveX();
-         int obstacleY = GameEngine.instance.powerUpManager.getObstacleToRemoveY();
-         int[] vehicleCells = GameEngine.instance.powerUpManager.getVehicleToShrinkCells();
+         int obstacleX = GameEngine.getInstance().powerUpManager.getObstacleToRemoveX();
+         int obstacleY = GameEngine.getInstance().powerUpManager.getObstacleToRemoveY();
+         int[] vehicleCells = GameEngine.getInstance().powerUpManager.getVehicleToShrinkCells();
 
          if (obstacleX == -1 || obstacleY == - 1)
          {
@@ -147,15 +174,15 @@ public class InnerGamePanel extends JPanel
             //vehicle
             for (int i : vehicleCells)
             {
-               x = i % GameEngine.instance.mapController.getMap().getMapSize();
-               y = i / GameEngine.instance.mapController.getMap().getMapSize();
-               temp.drawImage(poofImages.get(counter / ( GameEngine.instance.powerUpManager.getPoofDuration() / poofImages.size() )), x * 60, y * 60, null);
+               x = i % GameEngine.getInstance().mapController.getMap().getMapSize();
+               y = i / GameEngine.getInstance().mapController.getMap().getMapSize();
+               temp.drawImage(poofImages.get(counter / ( GameEngine.getInstance().powerUpManager.getPoofDuration() / poofImages.size() )), x * 60, y * 60, null);
             }
          }
          else
          {
             //obstacle
-            temp.drawImage(poofImages.get(counter / ( GameEngine.instance.powerUpManager.getPoofDuration() / poofImages.size() )), obstacleX * 60, obstacleY * 60, null);
+            temp.drawImage(poofImages.get(counter / ( GameEngine.getInstance().powerUpManager.getPoofDuration() / poofImages.size() )), obstacleX * 60, obstacleY * 60, null);
          }
 
       }
