@@ -1,8 +1,7 @@
 package source.view;
 
-import source.controller.GameEngine;
-import source.controller.PlayerManager;
-import source.controller.ThemeManager;
+import source.controller.*;
+import source.model.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -86,7 +85,7 @@ public class SettingsPanel extends JPanel {
     }
 
     public void loadImages() {
-        background = ThemeManager.getInstance().getBackgroundImage();
+        background = ThemeManager.instance.getBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
@@ -129,7 +128,7 @@ public class SettingsPanel extends JPanel {
         back = UIFactory.createButton(backButtonImage, backButtonHighlightedImage, "square", actionListener);
 //        mouse = UIFactory.createButton(mouseControlImage, mouseControlHighlightedImage, "square", actionListener);
 //        keyboard = UIFactory.createButton(keyboardControlImage, keyboardControlHighlightedImage, "square", actionListener);
-        if (PlayerManager.getInstance().getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
+        if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
             controlPreference = UIFactory.createButton(mouseControlImage, mouseControlHighlightedImage, "square", actionListener);
         } else {
             controlPreference = UIFactory.createButton(keyboardControlImage, keyboardControlHighlightedImage, "square", actionListener);
@@ -146,7 +145,7 @@ public class SettingsPanel extends JPanel {
             JLabel temp = UIFactory.createLabelIcon(starActive, "miniStar");
             starActiveLabel.add(temp);
             starAmount.add(new JLabel());
-            starAmount.get(i).setText(ThemeManager.getInstance().findRequiredStars() + "");
+            starAmount.get(i).setText(ThemeManager.instance.findRequiredStars() + "");
             starAmount.get(i).setPreferredSize(new Dimension(26, 26));
             starAmount.get(i).setFont(new Font("Odin Rounded", Font.PLAIN, 20));
             starAmount.get(i).setForeground(Color.white);
@@ -241,26 +240,26 @@ public class SettingsPanel extends JPanel {
     private void updateThemeLabels() {
 
         for (int i = 0; i < 3; i++) {
-            if (PlayerManager.getInstance().getCurrentPlayer().getSettings().getThemes().get(ThemeManager.getInstance().getThemes()[i + 1])) {
-                System.out.println(ThemeManager.getInstance().findRequiredStars());
+            if (PlayerManager.instance.getCurrentPlayer().getSettings().getThemes().get(ThemeManager.instance.getThemes()[i + 1])) {
+                System.out.println(ThemeManager.instance.findRequiredStars());
                 starAmount.get(i).setVisible(false);
                 starActiveLabel.get(i).setVisible(false);
             } else {
-                starAmount.get(i).setText(ThemeManager.getInstance().findRequiredStars() + "");
+                starAmount.get(i).setText(ThemeManager.instance.findRequiredStars() + "");
                 starAmount.get(i).setVisible(true);
                 starActiveLabel.get(i).setVisible(true);
             }
 
         }
 
-        if (ThemeManager.getInstance().currentTheme.name.equals("minimalistic")) {
+        if (ThemeManager.instance.currentTheme.name.equals("minimalistic")) {
             selectedLabel.setBounds(72, 370, minimalistic.getPreferredSize().width, minimalistic.getPreferredSize().height);
-        } else if (ThemeManager.getInstance().currentTheme.name.equals("classic")) {
+        } else if (ThemeManager.instance.currentTheme.name.equals("classic")) {
             selectedLabel.setBounds(172, 370, classic.getPreferredSize().width, classic.getPreferredSize().height);
-        } else if (ThemeManager.getInstance().currentTheme.name.equals("safari")) {
+        } else if (ThemeManager.instance.currentTheme.name.equals("safari")) {
 
             selectedLabel.setBounds(272, 370, safari.getPreferredSize().width, safari.getPreferredSize().height);
-        } else if (ThemeManager.getInstance().currentTheme.name.equals("space")) {
+        } else if (ThemeManager.instance.currentTheme.name.equals("space")) {
             selectedLabel.setBounds(372, 370, space.getPreferredSize().width, space.getPreferredSize().height);
         }
     }
@@ -271,9 +270,9 @@ public class SettingsPanel extends JPanel {
         JButton button;
 
         if (type.equals("Music")) {
-            enabled = GameEngine.getInstance().playerManager.getCurrentPlayer().getSettings().getMusic();
+            enabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getMusic();
         } else if (type.equals("SFX")) {
-            enabled = GameEngine.getInstance().playerManager.getCurrentPlayer().getSettings().getSfx();
+            enabled = GameEngine.instance.playerManager.getCurrentPlayer().getSettings().getSfx();
         } else {
             enabled = false;
         }
@@ -305,7 +304,7 @@ public class SettingsPanel extends JPanel {
     }
 
     private void updateControlButton() {
-        if (PlayerManager.getInstance().getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
+        if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
             controlPreference.setIcon(new ImageIcon(mouseControlImage));
             controlPreference.setRolloverIcon(new ImageIcon(mouseControlHighlightedImage));
         } else {
@@ -315,7 +314,7 @@ public class SettingsPanel extends JPanel {
     }
 
     private void toggleControlButton() {
-        if (PlayerManager.getInstance().getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
+        if (PlayerManager.instance.getCurrentPlayer().getSettings().getControlPreference().equals("Slide")) {
             controlPreference.setIcon(new ImageIcon(keyboardControlImage));
             controlPreference.setRolloverIcon(new ImageIcon(keyboardControlHighlightedImage));
         } else {
@@ -342,7 +341,7 @@ public class SettingsPanel extends JPanel {
     }
 
     private void updateThemeButtons() {
-        ThemeManager themeManager = GameEngine.getInstance().themeManager;
+        ThemeManager themeManager = GameEngine.instance.themeManager;
         if (!themeManager.minimalistic.isUnlocked()) {
             minimalistic.setIcon(new ImageIcon(simpleImage));
         } else {
@@ -390,32 +389,32 @@ public class SettingsPanel extends JPanel {
 
     private ActionListener actionListener = e ->
     {
-        GameEngine.getInstance().soundManager.buttonClick();
+        GameEngine.instance.soundManager.buttonClick();
         if (e.getSource() == back) {
             guiManager.setPanelVisible(previousPanel);
         } else if (e.getSource() == music) {
-            GameEngine.getInstance().playerManager.toggleMusic();
+            GameEngine.instance.playerManager.toggleMusic();
             updateSoundButtons("Music");
-            GameEngine.getInstance().soundManager.themeSongToggle();
-            GameEngine.getInstance().soundManager.updateTheme();
+            GameEngine.instance.soundManager.themeSongToggle();
+            GameEngine.instance.soundManager.updateTheme();
         } else if (e.getSource() == sfx) {
-            GameEngine.getInstance().playerManager.toggleSfx();
+            GameEngine.instance.playerManager.toggleSfx();
             updateSoundButtons("SFX");
-            GameEngine.getInstance().soundManager.effectsToggle();
+            GameEngine.instance.soundManager.effectsToggle();
         } else if (e.getSource() == controlPreference) {
             //Sırasıyla oynadım hızı değişmedi
             toggleControlButton();
-            GameEngine.getInstance().gameManager.toggleControlType();
+            GameEngine.instance.gameManager.toggleControlType();
         } else {
             // This will call game managers change / unlock theme methods
             String themeName = getThemeNameByButton((JButton) e.getSource());
-            int themeStatus = GameEngine.getInstance().themeManager.getThemeStatus(themeName);
+            int themeStatus = GameEngine.instance.themeManager.getThemeStatus(themeName);
             if (themeStatus == 1) {
-                GameEngine.getInstance().themeManager.unlockTheme(themeName);
+                GameEngine.instance.themeManager.unlockTheme(themeName);
             } else if (themeStatus == 2) {
-                GameEngine.getInstance().themeManager.changeTheme(themeName);
+                GameEngine.instance.themeManager.changeTheme(themeName);
             }
-            ThemeManager.getInstance().update();
+            ThemeManager.instance.update();
             updatePanel(previousPanel);
             guiManager.updateImages();
             repaint();

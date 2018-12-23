@@ -19,7 +19,7 @@ class UIFactory {
 
 
     static LevelButton createLevelButton(ActionListener actionListener) {
-        LevelButton _button = new LevelButton(GuiPanelManager.getInstance());
+        LevelButton _button = new LevelButton(GuiPanelManager.instance);
         _button.addActionListener(actionListener);
         return _button;
     }

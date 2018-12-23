@@ -48,7 +48,7 @@ public class TimeOverPopUp extends JPanel
 
    public void loadImages()
    {
-      background = ThemeManager.getInstance().getPopupBackgroundImage();
+      background = ThemeManager.instance.getPopupBackgroundImage();
 
       menuButtonImage = guiManager.LoadImage("image/icons/menu.png");
       menuButtonHighlightedImage = guiManager.LoadImage("image/icons/menuH.png");
@@ -116,10 +116,10 @@ public class TimeOverPopUp extends JPanel
       @Override
       public void actionPerformed(ActionEvent e)
       {
-         GameEngine.getInstance().soundManager.buttonClick();
+         GameEngine.instance.soundManager.buttonClick();
          if ( e.getSource() == retry )
          {
-            GameEngine.getInstance().gameManager.resetLevel();
+            GameEngine.instance.gameManager.resetLevel();
          }
 
          if ( e.getSource() == menu )

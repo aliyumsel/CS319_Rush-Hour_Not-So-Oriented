@@ -4,14 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-
-/**
- * The the special type of button in LevelSelectionPanel
- * which holds the level number;
- * number of stars earned in that level; active and inactive star images;
- * locked, unlocked and highlighted unlocked background images;
- * and its own dimensions.
- */
 //Test
 class LevelButton extends JButton {
     private GuiPanelManager guiManager;
@@ -34,11 +26,6 @@ class LevelButton extends JButton {
     private boolean isLocked;
     private boolean isInProgress;
 
-
-    /**
-     * Constructor that initializes regarding values and creates desired user interface of level button.
-     * @param _guiManager The GuiPanelManager instance for easy access to its functions.
-     */
     LevelButton(GuiPanelManager _guiManager) {
         super();
         guiManager = _guiManager;
@@ -54,10 +41,6 @@ class LevelButton extends JButton {
         setBoundsOfComponents();
     }
 
-
-    /**
-     * Method to create setup button.
-     */
     private void setupButton() {
         setPreferredSize(levelButtonDimension);
 
@@ -75,9 +58,6 @@ class LevelButton extends JButton {
         revalidate();
     }
 
-    /**
-     * Loads the images from the images directory into the memory.
-     */
     private void loadImages() {
 
         levelBackground = guiManager.LoadImage("image/icons/levelbackground.png");
@@ -90,10 +70,6 @@ class LevelButton extends JButton {
         inProgressHighlighted = guiManager.LoadImage("image/icons/levelButton_inProgressH.png");
     }
 
-
-    /**
-     * Creates the components from the loaded images.
-     */
     private void createComponents() {
         stars = new JLabel[3];
         for (int i = 0; i < stars.length; i++) {
@@ -104,9 +80,6 @@ class LevelButton extends JButton {
             timerIconLabel.setVisible(false);
     }
 
-    /**
-     * Adds the components to the panel.
-     */
     private void addComponents() {
         for (int i = 0; i < stars.length; i++) {
             add(stars[i]);
@@ -114,10 +87,6 @@ class LevelButton extends JButton {
         add(timerIconLabel);
     }
 
-
-    /**
-     * Sets the sizes and positions of the components in the panel.
-     */
     private void setBoundsOfComponents() {
         for (int i = 0; i < stars.length; i++) {
             stars[i].setBounds(guiManager.findCenter(levelButtonDimension.width, stars[i]) + (30 * (i - 1)), 15, stars[i].getPreferredSize().width, stars[i].getPreferredSize().height);
@@ -125,21 +94,11 @@ class LevelButton extends JButton {
         timerIconLabel.setBounds(52, 55, timerIconLabel.getPreferredSize().width, timerIconLabel.getPreferredSize().height);
     }
 
-
-    /**
-     * Method to set the specific levels number.
-     * @param _levelNo the specific levels number.
-     */
     void setLevelNo(int _levelNo) {
         levelNo = _levelNo;
         setText("" + (levelNo + 1));
     }
 
-
-    /**
-     * Method to display the stars on desired level.
-     * @param starAmount the stars on desired level.
-     */
     void showStars(int starAmount) {
         if (starAmount == -1) {
             for (int i = 0; i < stars.length; i++) {
@@ -158,19 +117,10 @@ class LevelButton extends JButton {
 
     }
 
-
-    /**
-     * Shows timer icon if it is bonus level.
-     * @param isBonusLevel indicates if it is bonus level or not.
-     */
     void showTimerIcon(boolean isBonusLevel) {
         timerIconLabel.setVisible(isBonusLevel);
     }
 
-    /**
-     * Toggles lock.
-     * @param state in specific state.
-     */
     void toggleLock(boolean state) {
         isLocked = state;
         BufferedImage temp;
@@ -191,10 +141,6 @@ class LevelButton extends JButton {
         setDisabledIcon(new ImageIcon(lockedBackground));
     }
 
-    /**
-     * Toggles in progress.
-     * @param state in specific state.
-     */
     void toggleInProgress(boolean state) {
         isInProgress = state;
         BufferedImage temp;

@@ -48,7 +48,7 @@ public class CreditsPanel extends JPanel {
     }
 
     public void loadImages() {
-        background = ThemeManager.getInstance().getBackgroundImage();
+        background = ThemeManager.instance.getBackgroundImage();
         Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
         background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = background.createGraphics();
@@ -129,7 +129,7 @@ public class CreditsPanel extends JPanel {
     }
 
     private ActionListener actionListener = e -> {
-        GameEngine.getInstance().soundManager.buttonClick();
+        GameEngine.instance.soundManager.buttonClick();
         if (e.getSource() == back) {
             guiManager.setPanelVisible("MainMenu");
         }

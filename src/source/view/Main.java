@@ -1,5 +1,6 @@
 package source.view;
 
+import source.controller.DataConfiguration;
 import source.controller.GameEngine;
 
 import java.util.Timer;
@@ -7,11 +8,10 @@ import java.util.TimerTask;
 
 public class Main {
 
-    public static void main(String[] args)
-    {
-        GameEngine gameEngine = GameEngine.getInstance();
-
-        GuiPanelManager guiManager = GuiPanelManager.getInstance();
+    public static void main(String[] args) {
+        DataConfiguration dataConfiguration= new DataConfiguration();
+        GameEngine gameEngine = new GameEngine();
+        GuiPanelManager guiManager = new GuiPanelManager();
         MyThread myThread = new MyThread(guiManager, gameEngine);
 
         Timer timer = new Timer();

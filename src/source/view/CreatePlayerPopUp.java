@@ -55,7 +55,7 @@ public class CreatePlayerPopUp extends JPanel
 
    public void loadImages()
    {
-      background = ThemeManager.getInstance().getPopupBackgroundImage();
+      background = ThemeManager.instance.getPopupBackgroundImage();
 
       closeImage = guiManager.LoadImage("image/icons/quit.png");
       closeHighlightedImage = guiManager.LoadImage("image/icons/quitH.png");
@@ -161,7 +161,7 @@ public class CreatePlayerPopUp extends JPanel
 
    private ActionListener actionListener = e ->
    {
-      GameEngine.getInstance().soundManager.buttonClick();
+      GameEngine.instance.soundManager.buttonClick();
       if ( e.getSource() == close )
       {
          setVisible(false);
