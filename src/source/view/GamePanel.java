@@ -117,7 +117,7 @@ public class GamePanel extends JPanel
 
    private void updatePowerUpButtons()
    {
-      if ( !GameEngine.instance.gameManager.isShrinkPowerUpUsable() )
+      if ( !GameEngine.getInstance().gameManager.isShrinkPowerUpUsable() )
       {
          disableButton(shrink, shrinkButtonHighlightedImage);
       }
@@ -129,7 +129,7 @@ public class GamePanel extends JPanel
          }
       }
 
-      if ( !GameEngine.instance.gameManager.isSpacePowerUpUsable() )
+      if ( !GameEngine.getInstance().gameManager.isSpacePowerUpUsable() )
       {
          disableButton(space, spaceButtonHighlightedImage);
       }
@@ -144,8 +144,8 @@ public class GamePanel extends JPanel
 
    private void updatePowerUpLabels()
    {
-      shrinkAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingShrinkPowerup() + "");
-      spaceAmountLabel.setText(GameEngine.instance.playerManager.getCurrentPlayer().getRemainingSpacePowerup() + "");
+      shrinkAmountLabel.setText(GameEngine.getInstance().playerManager.getCurrentPlayer().getRemainingShrinkPowerup() + "");
+      spaceAmountLabel.setText(GameEngine.getInstance().playerManager.getCurrentPlayer().getRemainingSpacePowerup() + "");
    }
 
    private void disableButton(JButton button, BufferedImage lockedImage)
@@ -164,7 +164,7 @@ public class GamePanel extends JPanel
 
    public void loadImages()
    {
-      background = ThemeManager.instance.getGamePanelBackgroundImage();
+      background = ThemeManager.getInstance().getGamePanelBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
@@ -336,7 +336,7 @@ public class GamePanel extends JPanel
    {
       if ( visible )
       {
-         GameEngine.instance.soundManager.successSound();
+         GameEngine.getInstance().soundManager.successSound();
       }
       endOfLevelPanel.showStars(starAmount);
       endOfLevelPanel.setVisible(visible);
@@ -434,16 +434,16 @@ public class GamePanel extends JPanel
             return;
          }
 
-         GameEngine.instance.soundManager.buttonClick();
+         GameEngine.getInstance().soundManager.buttonClick();
          if ( e.getSource() == reset )
          {
-            GameEngine.instance.gameManager.resetLevel();
+            GameEngine.getInstance().gameManager.resetLevel();
             guiManager.setPanelVisible("Game");
          }
          else if ( e.getSource() == menu )
          {
             guiManager.setPanelVisible("MainMenu");
-            GameEngine.instance.gameManager.stopMap();
+            GameEngine.getInstance().gameManager.stopMap();
          }
          else if ( e.getSource() == settings )
          {
@@ -451,11 +451,11 @@ public class GamePanel extends JPanel
          }
          else if ( e.getSource() == shrink )
          {
-            GameEngine.instance.powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Shrink);
+            GameEngine.getInstance().powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Shrink);
          }
          else if ( e.getSource() == space )
          {
-            GameEngine.instance.powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Space);
+            GameEngine.getInstance().powerUpManager.togglePowerUp(PowerUpManager.PowerUp.Space);
          }
          else if ( e.getSource() == settings )
          {
@@ -469,7 +469,7 @@ public class GamePanel extends JPanel
       super.paintComponent(g);
 
       drawBackground(g);
-      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive() )
+      if ( GameEngine.getInstance().gameManager.isLevelBonus() && GameEngine.getInstance().gameManager.isGameActive() )
       {
          drawTimerForeground(g);
       }
@@ -480,14 +480,14 @@ public class GamePanel extends JPanel
    {
       graphics.drawImage(background, 0, 0, null);
 
-      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive() )
+      if ( GameEngine.getInstance().gameManager.isLevelBonus() && GameEngine.getInstance().gameManager.isGameActive() )
       {
          graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
          graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
       }
       graphics.drawImage(background, 0, 0, null);
 
-      if ( GameEngine.instance.gameManager.isLevelBonus() && GameEngine.instance.gameManager.isGameActive() )
+      if ( GameEngine.getInstance().gameManager.isLevelBonus() && GameEngine.getInstance().gameManager.isGameActive() )
       {
          graphics.drawImage(timerBackgroundImage, 40, timerForegroundStartPosition, null);
          graphics.drawImage(timerBottomImage, 40, timerBottomPosition, null);
@@ -502,36 +502,36 @@ public class GamePanel extends JPanel
    {
       Graphics2D graphics2d = (Graphics2D) g;
       BufferedImage subImage = null;
-      LevelInformation currentLevel = PlayerManager.instance.getCurrentPlayer().getLevels().get(GameManager.instance.level - 1);
+      LevelInformation currentLevel = PlayerManager.getInstance().getCurrentPlayer().getLevels().get(GameManager.getInstance().level - 1);
 
       //For the first star
-      if ( GameEngine.instance.vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars() )
+      if ( GameEngine.getInstance().vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForThreeStars() )
       {
-         int remainingMoves = currentLevel.getMaxNumberOfMovesForThreeStars() - ( GameEngine.instance.vehicleController.getNumberOfMoves() );
+         int remainingMoves = currentLevel.getMaxNumberOfMovesForThreeStars() - ( GameEngine.getInstance().vehicleController.getNumberOfMoves() );
          int moveCountStartValue = currentLevel.getMaxNumberOfMovesForThreeStars();
          double f = remainingMoves / (double) moveCountStartValue;
          int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f); //26 yı değikene atcam da anlamadım ahmet kodunu
-         if ( currentLevel.getMaxNumberOfMovesForThreeStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0 )
+         if ( currentLevel.getMaxNumberOfMovesForThreeStars() - GameEngine.getInstance().vehicleController.getNumberOfMoves() > 0 )
          {
-            //System.out.println(currentLevel.getMaxNumberOfMovesForThreeStars() -GameEngine.instance.vehicleController.getNumberOfMoves() + "  ,  " + starHeight);
+            //System.out.println(currentLevel.getMaxNumberOfMovesForThreeStars() -GameEngine.getInstance().vehicleController.getNumberOfMoves() + "  ,  " + starHeight);
             subImage = firstStarForegroundImage.getSubimage(0, firstStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
             graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height - starHeight, null);
          }
       }
-      else if ( currentLevel.getMaxNumberOfMovesForThreeStars() < GameEngine.instance.vehicleController.getNumberOfMoves() )
+      else if ( currentLevel.getMaxNumberOfMovesForThreeStars() < GameEngine.getInstance().vehicleController.getNumberOfMoves() )
       {
          graphics2d.drawImage(subImage, panelWidth - 90 - firstStarBackgroundLabel.getPreferredSize().width, 15 + moveCountForegroundStartPosition - 45 + firstStarBackgroundLabel.getPreferredSize().height, null);
       }
       //For the second star
-      if ( GameEngine.instance.vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForTwoStars() )
+      if ( GameEngine.getInstance().vehicleController.getNumberOfMoves() <= currentLevel.getMaxNumberOfMovesForTwoStars() )
       {
-         if ( GameEngine.instance.vehicleController.getNumberOfMoves() > currentLevel.getMaxNumberOfMovesForThreeStars() )
+         if ( GameEngine.getInstance().vehicleController.getNumberOfMoves() > currentLevel.getMaxNumberOfMovesForThreeStars() )
          {
-            int remainingMoves = currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.instance.vehicleController.getNumberOfMoves();
+            int remainingMoves = currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.getInstance().vehicleController.getNumberOfMoves();
             int moveCountStartValue = currentLevel.getMaxNumberOfMovesForTwoStars() - currentLevel.getMaxNumberOfMovesForThreeStars();
             double f = remainingMoves / (double) moveCountStartValue;
             int starHeight = moveCountForegroundStartHeight - (int) lerp(0, moveCountForegroundStartHeight, f);
-            if ( currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.instance.vehicleController.getNumberOfMoves() > 0 )
+            if ( currentLevel.getMaxNumberOfMovesForTwoStars() - GameEngine.getInstance().vehicleController.getNumberOfMoves() > 0 )
             {
                subImage = secondStarForegroundImage.getSubimage(0, secondStarBackgroundLabel.getPreferredSize().height - starHeight, moveCountForegroundStartHeight, starHeight);
             }
@@ -549,8 +549,8 @@ public class GamePanel extends JPanel
 
    private void drawTimerForeground(Graphics g)
    {
-      int remainingTime = GameEngine.instance.gameManager.getRemainingTime();
-      int timerStartValue = GameEngine.instance.gameManager.getTimerStartValue();
+      int remainingTime = GameEngine.getInstance().gameManager.getRemainingTime();
+      int timerStartValue = GameEngine.getInstance().gameManager.getTimerStartValue();
       double f = remainingTime / (double) timerStartValue;
       int timerHeight = timerForegroundStartHeight - (int) lerp(0, timerForegroundStartHeight, f);
       int timerPosition = (int) lerp(timerForegroundStartPosition, timerForegroundStartPosition + timerForegroundLabel.getPreferredSize().height, f);
@@ -569,7 +569,7 @@ public class GamePanel extends JPanel
 
    private void updateNumberOfMoves()
    {
-      numberLabel.setText(GameEngine.instance.vehicleController.getNumberOfMoves() + "");
+      numberLabel.setText(GameEngine.getInstance().vehicleController.getNumberOfMoves() + "");
    }
 
    private double lerp(double a, double b, double f)

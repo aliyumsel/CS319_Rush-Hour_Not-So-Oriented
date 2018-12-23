@@ -63,7 +63,7 @@ public class HelpPanel extends JPanel
 
    public void loadImages()
    {
-      background = ThemeManager.instance.getBackgroundImage();
+      background = ThemeManager.getInstance().getBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
@@ -180,7 +180,7 @@ public class HelpPanel extends JPanel
 
    private ActionListener actionListener = e ->
    {
-      GameEngine.instance.soundManager.buttonClick();
+      GameEngine.getInstance().soundManager.buttonClick();
       int noOfPages = helpLabels.length / pageLength;
       if ( helpLabels.length % pageLength == 0 )
       {

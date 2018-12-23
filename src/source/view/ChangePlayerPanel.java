@@ -60,7 +60,7 @@ public class ChangePlayerPanel extends JPanel
       super(null);
 
       guiManager = _guiManager;
-      gameManager = GameManager.instance;
+      gameManager = GameManager.getInstance();
       panelWidth = guiManager.panelWidth;
       panelHeight = guiManager.panelHeight;
       numberOfPlayers = gameManager.playerManager.numberOfPlayers;
@@ -79,7 +79,7 @@ public class ChangePlayerPanel extends JPanel
 
    public void loadImages()
    {
-      background = ThemeManager.instance.getBackgroundImage();
+      background = ThemeManager.getInstance().getBackgroundImage();
       Image scaledImage = background.getScaledInstance(panelWidth, panelHeight, Image.SCALE_DEFAULT);
       background = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
       Graphics2D bGr = background.createGraphics();
@@ -137,7 +137,7 @@ public class ChangePlayerPanel extends JPanel
       editButton3 = UIFactory.createButton(edit, editH, "square", actionListener);
 
       buttonArray = new ArrayList<>();
-      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
+      numberOfPlayers = GameEngine.getInstance().playerManager.getPlayers().size();
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          JButton temp = UIFactory.createPlayerButton(levelBackground, levelBackgroundH, gameManager.playerManager.getPlayers().get(i).getPlayerName(), actionListener);
@@ -165,7 +165,7 @@ public class ChangePlayerPanel extends JPanel
    {
       blackBackground.setBounds(0,0,panelWidth,panelHeight);
 
-      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
+      numberOfPlayers = GameEngine.getInstance().playerManager.getPlayers().size();
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          buttonArray.get(i).setVisible(false);
@@ -187,7 +187,7 @@ public class ChangePlayerPanel extends JPanel
       for ( int i = 0; i < numberOfPlayers; i++ )
       {
          showDelete = true;
-         if (buttonArray.get(i).getText().equals(GameEngine.instance.playerManager.getCurrentPlayer().getPlayerName()))
+         if (buttonArray.get(i).getText().equals(GameEngine.getInstance().playerManager.getCurrentPlayer().getPlayerName()))
          {
             showDelete = false;
          }
@@ -259,7 +259,7 @@ public class ChangePlayerPanel extends JPanel
    private void selectPlayer(String name)
    {
       gameManager.playerManager.selectPlayer(name);
-      ThemeManager.instance.update();
+      ThemeManager.getInstance().update();
    }
 
    void addPlayer(String name)
@@ -273,7 +273,7 @@ public class ChangePlayerPanel extends JPanel
          add(temp);
 
          guiManager.updateImages();
-         ThemeManager.instance.update();
+         ThemeManager.getInstance().update();
       }
    }
 
@@ -292,7 +292,7 @@ public class ChangePlayerPanel extends JPanel
 
    void editPlayer(String name, String newName)
    {
-      int index = GameEngine.instance.playerManager.editPlayer(name, newName);
+      int index = GameEngine.getInstance().playerManager.editPlayer(name, newName);
       if(index > -1)
       {
          playerNameArray.set(index, newName);
@@ -317,7 +317,7 @@ public class ChangePlayerPanel extends JPanel
          return;
       }
 
-      GameEngine.instance.soundManager.buttonClick();
+      GameEngine.getInstance().soundManager.buttonClick();
 
       if ( e.getSource() == leftArrowButton )
       {
@@ -425,7 +425,7 @@ public class ChangePlayerPanel extends JPanel
 
    private void updatePages()
    {
-      numberOfPlayers = GameEngine.instance.playerManager.getPlayers().size();
+      numberOfPlayers = GameEngine.getInstance().playerManager.getPlayers().size();
       updateButtons();
 
       if ( numberOfPlayers % 3 == 0 )
