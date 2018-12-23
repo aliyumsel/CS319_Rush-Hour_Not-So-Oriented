@@ -8,6 +8,10 @@ import java.awt.image.BufferedImage;
 
 public class Vehicle extends GameObject// implements Drawable
 {
+   /**
+    * Vehicle class is used to represent the vehicles in our game.
+    * They are the main game object in the game Rush Hour.
+    */
    private String type; // we may not need this
    public boolean isMoving; // we may not need this
    private boolean player;
@@ -16,6 +20,14 @@ public class Vehicle extends GameObject// implements Drawable
    public boolean isSliding = false;
    public double velocity;
 
+   /**
+    * Constructor that initializes values to their specified initial values
+    * @param x the position on x axis
+    * @param y the position on y axis
+    * @param length an integer that represents the length of the object
+    * @param direction a string that represents the direction of the object.
+    * @param player a boolean that checks whether it is a player's vehicle or not.
+    */
    Vehicle(int x, int y, int length, String direction, boolean player) //theme i sil burdan
    {
       super(x, y, length, direction);
@@ -25,6 +37,11 @@ public class Vehicle extends GameObject// implements Drawable
       updateImages();
    }
 
+   /**
+    * Moves the amount that is given according to its axis inside the Transform property.
+    * Moves backwards when the value is negative.
+    * @param moveAxis the amount which is given to transform.
+    */
    public void move(double moveAxis)
    {
       if ( transform.axis.equals("Vertical") )
@@ -44,6 +61,12 @@ public class Vehicle extends GameObject// implements Drawable
       findOccupiedCells();
    }
 
+
+   /**
+    * Slides the vehicle to the given point instantly.
+    * @param x the position on x axis
+    * @param y the position on y axis
+    */
    public void slideToPoint(int x, int y) // tam sayılara gitmesini istiyoruz, eğer başka bir feature gelirse double la değiştirin
    {
       if ( transform.axis.equals("Vertical") )
@@ -79,6 +102,11 @@ public class Vehicle extends GameObject// implements Drawable
          }
       }
    }
+
+
+   /**
+    * Updates the images of the vehicle according to the current theme.
+    */
    @Override
    public void updateImages()
    {
@@ -99,6 +127,12 @@ public class Vehicle extends GameObject// implements Drawable
       }
    }
 
+
+   /**
+    * Moves the vehicle to the given point instantly.
+    * @param x the position on x axis
+    * @param y the position on y axis
+    */
    public void moveToPoint(int x, int y)
    {
       transform.position.gridX = x;
@@ -106,21 +140,41 @@ public class Vehicle extends GameObject// implements Drawable
       findOccupiedCells();
    }
 
+
+   /**
+    * Getter for a type of a vehicle
+    * @return the type of a vehicle
+    */
    public String getType()
    {
       return type;
    }
 
+
+   /**
+    * Setter for a type of a vehicle.
+    * @param type its for setting to the desired type of vehicle
+    */
    void setType(String type)
    {
       this.type = type;
    }
 
+
+   /**
+    * Returns whether this vehicle is the player vehicle.
+    * @return confirms if it is player's vehicle
+    */
    public boolean isPlayer()
    {
       return player;
    }
 
+
+   /**
+    * It is method to draw the vehicles.
+    * @param graphics the representation of the graphics
+    */
    @Override
    public void draw(Graphics2D graphics)
    {

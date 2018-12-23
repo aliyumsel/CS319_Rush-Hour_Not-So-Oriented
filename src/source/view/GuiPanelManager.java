@@ -1,5 +1,6 @@
 package source.view;
 
+import source.controller.DataConfiguration;
 import source.controller.Input;
 
 import javax.imageio.ImageIO;
@@ -79,9 +80,12 @@ public class GuiPanelManager extends JFrame
       pack();
       setLocationRelativeTo(null);
 
-      //gamepanel managerdan çekilen bilgiye göre ya tutorial ya da main menu açılacak
-      //setPanelVisible("Tutorial");
-      setPanelVisible("MainMenu");
+      if (DataConfiguration.gameOpenedFirstTime) {
+         setPanelVisible("Tutorial");
+      }
+      else {
+         setPanelVisible("MainMenu");
+      }
 
       setVisible(true);
       pack();
