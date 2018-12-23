@@ -8,7 +8,7 @@ import com.google.gson.JsonSyntaxException;
 import java.io.*;
 
 public class GameInfo {
-    final static int numberOfMaps = 50;
+    final static int numberOfMaps = 60;
     static String lastActivePlayer;
     static GameInfo instance;
 

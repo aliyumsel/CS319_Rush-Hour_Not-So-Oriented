@@ -87,7 +87,7 @@ public class TutorialPanel extends JPanel {
             coverInfo.setVisible(true);
             activeBackground = coverPage;
             activeLabel = coverInfo;
-            updateLabelBackground(-195, 130);
+            updateLabelBackground(-200, 130);
         } else if (index >= 0 && index < 5) {
             if (index == 2) {
 
