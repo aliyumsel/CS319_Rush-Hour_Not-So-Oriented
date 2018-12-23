@@ -63,7 +63,7 @@ public class Obstacle extends GameObject
    @Override
    public void updateImages()
    {
-      image = ThemeManager.instance.getObstacleImage();
-      blackedOutImage = ThemeManager.instance.getDisabledImage("obstacle");
+      image = ThemeManager.getInstance().getObstacleImage();
+      blackedOutImage = ThemeManager.getInstance().getDisabledImage("obstacle");
    }
 }

@@ -6,18 +6,24 @@ import java.io.File;
 /**
  * It is class to handle data errors.
  */
-public class DataErrorHandler {
+class DataErrorHandler {
 
-    static DataErrorHandler instance;
+    private static DataErrorHandler instance = null;
 
     /**
      * Empty constructor that initializes values to their specified initial values.
      */
-    public DataErrorHandler()
+    private DataErrorHandler()
     {
-        instance = this;
+        //It exists to make the constructor private
     }
 
+    public static DataErrorHandler getInstance() {
+        if(instance == null) {
+            instance = new DataErrorHandler();
+        }
+        return instance;
+    }
 
     /**
      * Handles the problem when the player is not found.
@@ -51,7 +57,6 @@ public class DataErrorHandler {
         }
     }
 
-
     /**
      * Handles the problem of any specific player when
      * there are any damages in players's info.
@@ -62,14 +67,14 @@ public class DataErrorHandler {
         int reply = JOptionPane.showConfirmDialog(null, "Player " + playerName + " is damaged. Do you accept to delete it?", "ERROR LOADING THE GAME", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (reply == JOptionPane.YES_OPTION)
         {
-            File file = new File(DataConfiguration.dataPath + "\\players\\" + playerName + "\\playerInfo.json");
+            File file = new File(DataConfiguration.getInstance().dataPath + "\\players\\" + playerName + "\\playerInfo.json");
             if (file.exists())
             {
                 System.out.println("inside delte if");
                 System.out.println(file.delete());
             }
 
-            file = new File(DataConfiguration.dataPath + "\\players\\" + playerName);
+            file = new File(DataConfiguration.getInstance().dataPath + "\\players\\" + playerName);
             file.delete();
         }
         else
@@ -78,17 +83,15 @@ public class DataErrorHandler {
         }
     }
 
-
     /**
      * Recreates the files.
      */
     private void recreate()
     {
-        File gameFolder = new File(DataConfiguration.dataPath);
+        File gameFolder = new File(DataConfiguration.getInstance().dataPath);
         deleteFiles(gameFolder.listFiles());
-        DataConfiguration.instance.setup();
+        DataConfiguration.getInstance().setup();
     }
-
 
     /**
      * Deletes the desired files

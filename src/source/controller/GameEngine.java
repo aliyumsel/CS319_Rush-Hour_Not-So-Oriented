@@ -1,14 +1,14 @@
 package source.controller;
 
 import java.util.ArrayList;
-
-
 /**
  * GameEngine class is responsible for handling the game loop and every class that is related to the game logic.
  */
 public class GameEngine
 {
-   public static GameEngine instance;
+   
+   private static GameEngine instance = null;
+
    private ArrayList<Controller> controllers;
    public ThemeManager themeManager;
    public SoundManager soundManager;
@@ -22,16 +22,16 @@ public class GameEngine
    /**
     * Empty constructor that initializes values to their specified initial values.
     */
-   public GameEngine()
+   private GameEngine()
    {
-      instance = this;
-      themeManager = new ThemeManager();
-      soundManager = new SoundManager();
-      mapController = new MapController();
-      powerUpManager = new PowerUpManager();
-      vehicleController = new VehicleController();
-      playerManager = new PlayerManager();
-      gameManager = new GameManager();
+      themeManager = ThemeManager.getInstance();
+      soundManager = SoundManager.getInstance();
+      mapController = MapController.getInstance();
+      powerUpManager = PowerUpManager.getInstance();
+      vehicleController = VehicleController.getInstance();
+      playerManager = PlayerManager.getInstance();
+      gameManager = GameManager.getInstance();
+
       controllers = new ArrayList<>();
 
       controllers.add(themeManager);
@@ -48,14 +48,22 @@ public class GameEngine
       }
    }
 
+   public static GameEngine getInstance()
+   {
+      if(instance == null) {
+         instance = new GameEngine();
+      }
+      return instance;
+   }
 
+   
    /**
     * Calls the update methods of every Manager object that is inside managers array.
     */
-   // this method is executed over and over from main
-   // calls the update method of other classes that needs to be updated
    public void run()
    {
+      // this method is executed over and over from main
+      // calls the update method of other classes that needs to be updated
       for ( Controller controller : controllers )
       {
          controller.update();
@@ -63,5 +71,4 @@ public class GameEngine
 
       Input.reset();
    }
-
 }
