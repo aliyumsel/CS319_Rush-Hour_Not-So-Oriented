@@ -7,13 +7,14 @@ public class DataConfiguration {
 
     private static DataConfiguration instance = null;
 
-    static String dataPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour";
-    public static boolean gameOpenedFirstTime = false;
+    String dataPath = "C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\RushHour";
+    public boolean gameOpenedFirstTime = false;
     private GameInfo gameInfo;
     private DataErrorHandler handler;
 
     private DataConfiguration()
     {
+        instance = this;
         handler = DataErrorHandler.getInstance();
         gameInfo = GameInfo.getInstance();
         confirmData();

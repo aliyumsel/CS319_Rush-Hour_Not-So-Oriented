@@ -81,7 +81,7 @@ public class GuiPanelManager extends JFrame
       pack();
       setLocationRelativeTo(null);
 
-      if (DataConfiguration.gameOpenedFirstTime) {
+      if (DataConfiguration.getInstance().gameOpenedFirstTime) {
          setPanelVisible("Tutorial");
       }
       else {

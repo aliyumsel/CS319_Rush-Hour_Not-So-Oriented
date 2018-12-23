@@ -9,11 +9,8 @@ public class Main {
 
     public static void main(String[] args)
     {
-//        DataConfiguration dataConfiguration = DataConfiguration.getInstance();
-        System.out.print("Whaaat");
         GameEngine gameEngine = GameEngine.getInstance();
 
-        System.out.print(gameEngine + "gameenid");
         GuiPanelManager guiManager = GuiPanelManager.getInstance();
         MyThread myThread = new MyThread(guiManager, gameEngine);
 

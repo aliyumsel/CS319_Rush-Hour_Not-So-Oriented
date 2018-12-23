@@ -44,7 +44,6 @@ public class TutorialPanel extends JPanel {
     private BufferedImage cancel;
     private BufferedImage cancelH;
 
-
     TutorialPanel(boolean isTutorialActive, GuiPanelManager _guiManager) { //yeni playersa true olcak ve oyun ilk defa açılıyosa
         setLayout(null);
 

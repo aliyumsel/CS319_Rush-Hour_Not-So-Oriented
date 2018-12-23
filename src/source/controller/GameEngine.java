@@ -21,7 +21,6 @@ public class GameEngine
     */
    private GameEngine()
    {
-      System.out.println("Inside game engine construcotr");
       themeManager = ThemeManager.getInstance();
       soundManager = SoundManager.getInstance();
       mapController = MapController.getInstance();

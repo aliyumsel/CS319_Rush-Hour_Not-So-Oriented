@@ -165,7 +165,7 @@ public class MainMenuPanel extends JPanel {
     private void updatePlayerName() {
         String playerName = gameManager.playerManager.getCurrentPlayer().getPlayerName();
         player.setText(playerName);
-        System.out.println("Player selected and Player Name Updated " + playerName);
+//        System.out.println("Player selected and Player Name Updated " + playerName);
     }
 
     private void updateNumberOfStars() {

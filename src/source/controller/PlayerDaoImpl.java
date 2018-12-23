@@ -18,7 +18,7 @@ public class PlayerDaoImpl implements PlayerDao{
     public ArrayList<Player> extractPlayers()
     {
         ArrayList<Player> players = new ArrayList<>();
-        File folder = new File(DataConfiguration.dataPath + "\\players");
+        File folder = new File(DataConfiguration.getInstance().dataPath + "\\players");
         File[] list = folder.listFiles();
         FileReader reader;
         Player player;
@@ -52,13 +52,13 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public String extractLastPlayerName()
     {
-        return GameInfo.lastActivePlayer;
+        return GameInfo.getInstance().lastActivePlayer;
     }
 
     @Override
     public Player createPlayer(String playerName, Settings settings) {
         OriginalLevel originalLevel;
-        String playerPath = DataConfiguration.dataPath + "\\players\\" + playerName;
+        String playerPath = DataConfiguration.getInstance().dataPath + "\\players\\" + playerName;
 
         //creates player folder
         File newFolder = new File(playerPath);
@@ -70,8 +70,8 @@ public class PlayerDaoImpl implements PlayerDao{
 
         boolean unlocked;
         ArrayList<LevelInformation> levels = new ArrayList<>();
-        System.out.println(GameInfo.numberOfMaps);
-        for (int i = 1; i <= GameInfo.numberOfMaps; i++)
+        System.out.println(GameInfo.getInstance().numberOfMaps);
+        for (int i = 1; i <= GameInfo.getInstance().numberOfMaps; i++)
         {
             InputStream input = PlayerDaoImpl.class.getClassLoader().getResourceAsStream("data/levels/level" + i + ".json");
             InputStreamReader reader = new InputStreamReader(input);
@@ -114,7 +114,7 @@ public class PlayerDaoImpl implements PlayerDao{
     public void changePlayerName(Player player){
         File folder = new File(player.getPath());
         folder.renameTo(new File(folder.getParent() + "/" + player.getPlayerName()));
-        player.setPath(DataConfiguration.dataPath + "\\players\\"+  player.getPlayerName());
+        player.setPath(DataConfiguration.getInstance().dataPath + "\\players\\"+  player.getPlayerName());
         savePlayer(player);
     }
 

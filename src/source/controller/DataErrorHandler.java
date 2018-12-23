@@ -50,14 +50,14 @@ class DataErrorHandler {
         int reply = JOptionPane.showConfirmDialog(null, "Player " + playerName + " is damaged. Do you accept to delete it?", "ERROR LOADING THE GAME", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (reply == JOptionPane.YES_OPTION)
         {
-            File file = new File(DataConfiguration.dataPath + "\\players\\" + playerName + "\\playerInfo.json");
+            File file = new File(DataConfiguration.getInstance().dataPath + "\\players\\" + playerName + "\\playerInfo.json");
             if (file.exists())
             {
                 System.out.println("inside delte if");
                 System.out.println(file.delete());
             }
 
-            file = new File(DataConfiguration.dataPath + "\\players\\" + playerName);
+            file = new File(DataConfiguration.getInstance().dataPath + "\\players\\" + playerName);
             file.delete();
         }
         else
@@ -68,7 +68,7 @@ class DataErrorHandler {
 
     private void recreate()
     {
-        File gameFolder = new File(DataConfiguration.dataPath);
+        File gameFolder = new File(DataConfiguration.getInstance().dataPath);
         deleteFiles(gameFolder.listFiles());
         DataConfiguration.getInstance().setup();
     }

@@ -11,9 +11,8 @@ import java.io.IOException;
 class GameInfo {
     private static GameInfo instance = null;
 
-    final static int numberOfMaps = 50;
-    static String lastActivePlayer;
-
+    final int numberOfMaps = 60;
+    String lastActivePlayer;
 
     private class Info
     {
@@ -23,6 +22,7 @@ class GameInfo {
 
     private GameInfo()
     {
+        instance = this;
         info = new Info();
     }
 
@@ -39,7 +39,7 @@ class GameInfo {
         Gson gson = new Gson();
         FileReader reader = null;
         try {
-            reader = new FileReader(DataConfiguration.dataPath + "\\info.json");
+            reader = new FileReader(DataConfiguration.getInstance().dataPath + "\\info.json");
 
             try {
                 info = gson.fromJson(reader, Info.class);
@@ -71,11 +71,16 @@ class GameInfo {
         Gson gson = new Gson();
         lastActivePlayer = lastPlayer;
 
+        if (info == null)
+        {
+            info = new Info();
+        }
+
         info.lastActivePlayer = lastPlayer;
 
         FileWriter fileOut = null;
         try {
-            fileOut = new FileWriter(DataConfiguration.dataPath + "\\info.json");
+            fileOut = new FileWriter(DataConfiguration.getInstance().dataPath + "\\info.json");
             fileOut.write(gson.toJson(info));
             fileOut.flush();
             fileOut.close();
