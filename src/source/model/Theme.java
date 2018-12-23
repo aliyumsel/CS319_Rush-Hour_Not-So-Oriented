@@ -57,12 +57,12 @@ public class Theme
      *  Sets the sounds for this theme.
      */
    private void setSounds() {
-      buttonClick = path + "buttonClick.wav";
+      buttonClick ="/"+ path + "buttonClick.wav";
       themeSong = "/" +path + "theme.wav";
-      selectionSound = path + "selectionSound.wav";
-      endOfLevelSound = path + "success.wav";
-      poof = path + "poof.wav";
-      shrink = path + "shrink.wav";
+      selectionSound = "/"+path + "selectionSound.wav";
+      endOfLevelSound ="/"+ path + "success.wav";
+      poof = "/"+ path + "poof.wav";
+      shrink = "/"+path + "shrink.wav";
    }
 
     /**
